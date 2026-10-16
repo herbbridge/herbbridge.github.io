@@ -1,0 +1,128 @@
+{
+  "_note": "Expected results are listed in the order the Results screen must show them: high → moderate → low → none_reported → not_in_database, then herb order, then drug order. entry is the interaction id, or null when the pair is not in the database. Keep tests/test-cases.md in step with this file.",
+  "cases": [
+    {
+      "id": "1-mrs-wong",
+      "name": "Mrs Wong (demo case)",
+      "story": "Fictional 72-year-old with atrial fibrillation, on warfarin and amlodipine, who buys danshen.",
+      "herbs": ["danshen"],
+      "drugs": ["warfarin", "amlodipine"],
+      "expected": [
+        { "herb": "danshen", "drug": "warfarin", "status": "moderate", "entry": "danshen-warfarin" },
+        { "herb": "danshen", "drug": "amlodipine", "status": "not_in_database", "entry": null }
+      ]
+    },
+    {
+      "id": "2-nothing-in-database",
+      "name": "Nothing in our database",
+      "story": "Goji, sanqi and safflower with blood pressure medicine. We have no records, so every card must say 'not in database', never 'safe'.",
+      "herbs": ["goji", "sanqi", "safflower"],
+      "drugs": ["amlodipine"],
+      "expected": [
+        { "herb": "goji", "drug": "amlodipine", "status": "not_in_database", "entry": null },
+        { "herb": "sanqi", "drug": "amlodipine", "status": "not_in_database", "entry": null },
+        { "herb": "safflower", "drug": "amlodipine", "status": "not_in_database", "entry": null }
+      ]
+    },
+    {
+      "id": "3-statin-red-yeast-rice",
+      "name": "Statin + red yeast rice",
+      "story": "Takes simvastatin for cholesterol and adds red yeast rice 'to help naturally'. Matches through the statin class.",
+      "herbs": ["red_yeast_rice"],
+      "drugs": ["simvastatin", "amlodipine"],
+      "expected": [
+        { "herb": "red_yeast_rice", "drug": "simvastatin", "status": "high", "entry": "red_yeast_rice-statin" },
+        { "herb": "red_yeast_rice", "drug": "amlodipine", "status": "not_in_database", "entry": null }
+      ]
+    },
+    {
+      "id": "4-several-flagged",
+      "name": "Several flagged pairs",
+      "story": "Heart failure and atrial fibrillation: warfarin, aspirin, digoxin and furosemide, plus dong quai, ginkgo and liquorice.",
+      "herbs": ["dong_quai", "ginkgo", "liquorice"],
+      "drugs": ["warfarin", "aspirin", "digoxin", "furosemide"],
+      "expected": [
+        { "herb": "dong_quai", "drug": "warfarin", "status": "high", "entry": "dong_quai-warfarin" },
+        { "herb": "liquorice", "drug": "digoxin", "status": "moderate", "entry": "liquorice-digoxin" },
+        { "herb": "liquorice", "drug": "furosemide", "status": "moderate", "entry": "liquorice-diuretic" },
+        { "herb": "ginkgo", "drug": "warfarin", "status": "low", "entry": "ginkgo-warfarin" },
+        { "herb": "ginkgo", "drug": "aspirin", "status": "low", "entry": "ginkgo-aspirin" },
+        { "herb": "dong_quai", "drug": "aspirin", "status": "not_in_database", "entry": null },
+        { "herb": "dong_quai", "drug": "digoxin", "status": "not_in_database", "entry": null },
+        { "herb": "dong_quai", "drug": "furosemide", "status": "not_in_database", "entry": null },
+        { "herb": "ginkgo", "drug": "digoxin", "status": "not_in_database", "entry": null },
+        { "herb": "ginkgo", "drug": "furosemide", "status": "not_in_database", "entry": null },
+        { "herb": "liquorice", "drug": "warfarin", "status": "not_in_database", "entry": null },
+        { "herb": "liquorice", "drug": "aspirin", "status": "not_in_database", "entry": null }
+      ]
+    },
+    {
+      "id": "5-american-ginseng",
+      "name": "American ginseng with warfarin",
+      "story": "Drinks 花旗參 tea daily and is on warfarin after a heart valve operation.",
+      "herbs": ["american_ginseng"],
+      "drugs": ["warfarin"],
+      "expected": [
+        { "herb": "american_ginseng", "drug": "warfarin", "status": "moderate", "entry": "american_ginseng-warfarin" }
+      ]
+    },
+    {
+      "id": "6-asian-ginseng-two-blood-thinners",
+      "name": "Asian ginseng with warfarin and clopidogrel",
+      "story": "Takes Korean ginseng with warfarin and clopidogrel after a stent. Clopidogrel has no record and must not look safe.",
+      "herbs": ["asian_ginseng"],
+      "drugs": ["warfarin", "clopidogrel"],
+      "expected": [
+        { "herb": "asian_ginseng", "drug": "warfarin", "status": "low", "entry": "asian_ginseng-warfarin" },
+        { "herb": "asian_ginseng", "drug": "clopidogrel", "status": "not_in_database", "entry": null }
+      ]
+    },
+    {
+      "id": "7-liquorice-diuretic-class",
+      "name": "Liquorice with furosemide only",
+      "story": "On furosemide for swollen ankles, takes a herbal tea containing 甘草. Matches through the diuretic class.",
+      "herbs": ["liquorice"],
+      "drugs": ["furosemide"],
+      "expected": [
+        { "herb": "liquorice", "drug": "furosemide", "status": "moderate", "entry": "liquorice-diuretic" }
+      ]
+    },
+    {
+      "id": "8-two-statins",
+      "name": "Red yeast rice with two statins",
+      "story": "Switched from atorvastatin to rosuvastatin and still has both on the list, plus red yeast rice. Both statins must match.",
+      "herbs": ["red_yeast_rice"],
+      "drugs": ["atorvastatin", "rosuvastatin"],
+      "expected": [
+        { "herb": "red_yeast_rice", "drug": "atorvastatin", "status": "high", "entry": "red_yeast_rice-statin" },
+        { "herb": "red_yeast_rice", "drug": "rosuvastatin", "status": "high", "entry": "red_yeast_rice-statin" }
+      ]
+    },
+    {
+      "id": "9-ginkgo-antiplatelets",
+      "name": "Ginkgo with aspirin and clopidogrel",
+      "story": "Takes ginkgo for memory, on aspirin and clopidogrel. Only ginkgo + aspirin has a record; ginkgo + clopidogrel must show 'not in database'.",
+      "herbs": ["ginkgo"],
+      "drugs": ["aspirin", "clopidogrel"],
+      "expected": [
+        { "herb": "ginkgo", "drug": "aspirin", "status": "low", "entry": "ginkgo-aspirin" },
+        { "herb": "ginkgo", "drug": "clopidogrel", "status": "not_in_database", "entry": null }
+      ]
+    },
+    {
+      "id": "10-blood-circulation-mix",
+      "name": "Danshen, sanqi and safflower with warfarin and aspirin",
+      "story": "A 'blood circulation' herbal mix (丹參, 三七, 紅花) taken with warfarin and aspirin. Only danshen + warfarin has a record; every other pair must show 'not in database', never 'safe'.",
+      "herbs": ["danshen", "sanqi", "safflower"],
+      "drugs": ["warfarin", "aspirin"],
+      "expected": [
+        { "herb": "danshen", "drug": "warfarin", "status": "moderate", "entry": "danshen-warfarin" },
+        { "herb": "danshen", "drug": "aspirin", "status": "not_in_database", "entry": null },
+        { "herb": "sanqi", "drug": "warfarin", "status": "not_in_database", "entry": null },
+        { "herb": "sanqi", "drug": "aspirin", "status": "not_in_database", "entry": null },
+        { "herb": "safflower", "drug": "warfarin", "status": "not_in_database", "entry": null },
+        { "herb": "safflower", "drug": "aspirin", "status": "not_in_database", "entry": null }
+      ]
+    }
+  ]
+}

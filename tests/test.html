@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HerbSafe tests</title>
+  <style>
+    body { font: 16px/1.5 system-ui, sans-serif; margin: 0 auto; max-width: 860px; padding: 16px; background: #fff; color: #1a1a1a; }
+    h1 { font-size: 1.4rem; }
+    h2 { font-size: 1.05rem; margin-top: 1.5rem; }
+    .summary { padding: 12px 16px; border-radius: 8px; font-weight: 600; }
+    .ok { background: #e7f5ec; color: #145c32; }
+    .fail { background: #fdeaea; color: #8a1c1c; }
+    li { margin: 2px 0; }
+    li.fail, li.ok { background: none; }
+    pre { white-space: pre-wrap; font-size: 0.85rem; background: #f5f5f5; padding: 8px; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <h1>HerbSafe tests</h1>
+  <p>Runs the same tests as <code>node tests/run-tests.js</code>. Open this page through a local server
+     (e.g. <code>python3 -m http.server</code> in the project folder, then
+     <a href="http://localhost:8000/tests/test.html">localhost:8000/tests/test.html</a>).</p>
+  <div id="summary" class="summary">Running…</div>
+  <div id="out"></div>
+  <script src="../js/lookup.js"></script>
+  <script src="test-suite.js"></script>
+  <script>
+    (function () {
+      function get(url) {
+        return fetch(url, { cache: 'no-store' }).then(function (r) {
+          if (!r.ok) throw new Error(url + ': ' + r.status);
+          return r.json();
+        });
+      }
+      function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text) e.textContent = text; return e; }
+      var summary = document.getElementById('summary'), out = document.getElementById('out');
+      Promise.all(['../data/herbs.json', '../data/drugs.json', '../data/interactions.json', 'test-cases.json'].map(get))
+        .then(function (d) {
+          var results = HerbSafeTests.runAll(HerbSafeLookup, { herbs: d[0], drugs: d[1], interactions: d[2], cases: d[3] });
+          var failed = results.filter(function (r) { return !r.pass; }).length, group = null, ul;
+          results.forEach(function (r) {
+            if (r.group !== group) { group = r.group; out.appendChild(el('h2', '', group)); ul = out.appendChild(el('ul')); }
+            var li = ul.appendChild(el('li', r.pass ? 'ok' : 'fail', (r.pass ? '✓ ' : '✗ ') + r.name));
+            if (!r.pass && r.detail) li.appendChild(el('pre', '', r.detail));
+          });
+          summary.textContent = (results.length - failed) + ' passed, ' + failed + ' failed';
+          summary.className = 'summary ' + (failed ? 'fail' : 'ok');
+        })
+        .catch(function (err) {
+          summary.className = 'summary fail';
+          summary.textContent = 'Could not load the data files (' + err.message + '). ' +
+            (location.protocol === 'file:' ? 'This page was opened as a file. Start a local server and open it via http://localhost:8000/tests/test.html.' : '');
+        });
+    })();
+  </script>
+</body>
+</html>
