@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>HerbSafe 中西通</title>
+  <meta name="description" content="Check Chinese herbs and Western medicines together. Chinese and Western medicine, safely together.">
+  <meta name="theme-color" content="#FAFAF7">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231D3F8F'/%3E%3Cpath d='M9 16h14M16 9v14' stroke='white' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#/check" aria-label="HerbSafe 中西通, home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-name">HerbSafe <span class="brand-zh" lang="zh-HK">中西通</span></span>
+      </a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="#/check" data-route-link="check" data-i18n="nav_check">Check</a>
+        <a href="#/summary" data-route-link="summary" data-i18n="nav_summary">Doctor summary</a>
+        <a href="#/about" data-route-link="about" data-i18n="nav_about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap" tabindex="-1">
+    <div id="app" aria-live="polite">
+      <p class="loading" data-i18n="loading">Loading…</p>
+    </div>
+    <noscript>
+      <p class="notice">HerbSafe needs JavaScript to look up your herbs and medicines. Please turn JavaScript on.</p>
+    </noscript>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p data-i18n="footer_disclaimer">HerbSafe gives information, not medical advice. Never stop or change a medicine without talking to your doctor or pharmacist.</p>
+      <p class="muted" data-i18n="footer_privacy">No accounts, no tracking. Your list stays on this device.</p>
+    </div>
+  </footer>
+
+  <script src="js/lookup.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
