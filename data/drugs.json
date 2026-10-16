@@ -6,7 +6,7 @@
       "name_en": "Warfarin",
       "name_zh": "華法林",
       "classes": ["anticoagulant"],
-      "aliases": ["Marevan", "Coumadin", "薄血丸", "华法林", "wah faat lam"],
+      "aliases": ["Marevan", "Coumadin", "华法林"],
       "zh_reviewed": false
     },
     {
@@ -22,7 +22,7 @@
       "name_en": "Clopidogrel",
       "name_zh": "氯吡格雷",
       "classes": ["antiplatelet"],
-      "aliases": ["Plavix", "波立維", "氯吡格雷"],
+      "aliases": ["Plavix", "氯吡格雷"],
       "zh_reviewed": false
     },
     {
@@ -30,7 +30,7 @@
       "name_en": "Atorvastatin",
       "name_zh": "阿托伐他汀",
       "classes": ["statin"],
-      "aliases": ["Lipitor", "立普妥", "statin", "他汀", "降膽固醇藥"],
+      "aliases": ["Lipitor", "statin", "他汀"],
       "zh_reviewed": false
     },
     {
@@ -38,7 +38,7 @@
       "name_en": "Simvastatin",
       "name_zh": "辛伐他汀",
       "classes": ["statin"],
-      "aliases": ["Zocor", "舒降之", "statin", "他汀", "降膽固醇藥"],
+      "aliases": ["Zocor", "statin", "他汀"],
       "zh_reviewed": false
     },
     {
@@ -46,7 +46,7 @@
       "name_en": "Rosuvastatin",
       "name_zh": "瑞舒伐他汀",
       "classes": ["statin"],
-      "aliases": ["Crestor", "冠脂妥", "statin", "他汀", "降膽固醇藥"],
+      "aliases": ["Crestor", "statin", "他汀"],
       "zh_reviewed": false
     },
     {
@@ -54,7 +54,7 @@
       "name_en": "Digoxin",
       "name_zh": "地高辛",
       "classes": ["cardiac_glycoside"],
-      "aliases": ["Lanoxin", "毛地黃"],
+      "aliases": ["Lanoxin"],
       "zh_reviewed": false
     },
     {
@@ -62,7 +62,7 @@
       "name_en": "Furosemide",
       "name_zh": "呋塞米",
       "classes": ["diuretic"],
-      "aliases": ["frusemide", "Lasix", "速尿", "去水丸", "water tablet", "利尿藥"],
+      "aliases": ["frusemide", "Lasix"],
       "zh_reviewed": false
     },
     {
@@ -70,7 +70,7 @@
       "name_en": "Amlodipine",
       "name_zh": "氨氯地平",
       "classes": ["calcium_channel_blocker"],
-      "aliases": ["Norvasc", "絡活喜"],
+      "aliases": ["Norvasc"],
       "zh_reviewed": false
     }
   ]

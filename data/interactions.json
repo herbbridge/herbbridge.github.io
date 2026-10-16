@@ -11,12 +11,12 @@
       "rating_source": "HA",
       "effect_en": "Raises INR (warfarin works more strongly), with a risk of bleeding.",
       "effect_zh": "會令INR（凝血指數）升高，即係華法林藥力變強，有出血風險。",
-      "why_en": "Danshen thins the blood a little on its own. It also slows down how fast your liver clears warfarin, and frees up more active warfarin in your blood. Together, these make warfarin work more strongly.",
-      "why_zh": "丹參本身有輕微「薄血」作用；亦會減慢肝臟分解華法林嘅速度，同埋令血液入面有效嘅華法林增加。兩樣加埋，華法林藥力就會變強。",
-      "why_pro_en": "Three mechanisms: (1) intrinsic anti-platelet activity of danshen; (2) tanshinones inhibit CYP2C9 and CYP1A2, reducing warfarin metabolism; (3) tanshinone IIA displaces warfarin from albumin, raising the free (unbound) warfarin fraction.",
+      "why_en": "Danshen can thin the blood a little on its own. Studies also suggest it may slow down how fast your body clears warfarin, and free up more active warfarin in your blood. Together, these can make warfarin work more strongly.",
+      "why_zh": "丹參本身有輕微「薄血」作用。研究亦顯示，佢可能減慢身體清除華法林嘅速度，同埋令血液入面有效嘅華法林增加。兩樣加埋，可以令華法林藥力變強。",
+      "why_pro_en": "(1) Danshen inhibits platelet aggregation and affects other parts of coagulation (Chan 2001). (2) In rats, danshen reduced warfarin clearance and raised warfarin levels (Chan 2001); tanshinones may inhibit CYP2C9 and CYP1A2, which metabolise warfarin, based mainly on rat data (Zhuang 2021). (3) In laboratory studies, tanshinone IIA (as sodium tanshinone IIA sulfonate) and Salvia extracts may displace warfarin from albumin, raising free warfarin (Zhuang 2021).",
       "action_en": "Avoid this combination where possible. If it cannot be avoided, clotting (INR) tests 2–3 times a week. Tell your doctor that you take danshen.",
       "action_zh": "盡量避免同時服用。如果無法避免，每星期要驗2至3次凝血指數（INR）。請話俾醫生知你有食丹參。",
-      "evidence_level": ["case_reports", "review", "human_trial"],
+      "evidence_level": ["case_reports", "review", "lab_animal"],
       "sources": [
         { "label": "Yu, Chan & Sanderson. J Intern Med 1997", "url": "https://doi.org/10.1046/j.1365-2796.1997.134137000.x" },
         { "label": "Izzat et al. Ann Thorac Surg 1998", "url": "https://pubmed.ncbi.nlm.nih.gov/9768962/" },
@@ -33,11 +33,11 @@
       "risk": "high",
       "watch": false,
       "rating_source": "team",
-      "effect_en": "INR more than doubled in a case report (warfarin worked much more strongly).",
-      "effect_zh": "有病例報告指，INR（凝血指數）升高超過一倍（華法林藥力大增）。",
-      "why_en": "Dong quai contains natural substances similar to warfarin (coumarin-like compounds). Its ferulic acid also thins the blood.",
-      "why_zh": "當歸含有類似華法林嘅天然成分（香豆素類物質），而入面嘅阿魏酸亦有「薄血」作用。",
-      "why_pro_en": "Contains coumarin-like constituents that may add to warfarin's anticoagulant effect; ferulic acid has anti-platelet activity.",
+      "effect_en": "INR more than doubled in a case report.",
+      "effect_zh": "有病例報告指，INR（凝血指數）升高超過一倍。",
+      "why_en": "Dong quai contains coumarin-like compounds, which may reduce blood clotting. The exact mechanism of this interaction is not known.",
+      "why_zh": "當歸含有香豆素類物質，可能有「薄血」作用。呢個相互作用嘅確實原理仲未清楚。",
+      "why_pro_en": "Contains coumarin-like constituents that may inhibit platelet aggregation; a single-dose animal study found no change in PT or warfarin pharmacokinetics (Zhuang 2021). The case report authors state that the mechanism is unknown (Page & Lawrence 1999).",
       "action_en": "Avoid this combination. Ask your doctor about an INR (clotting) test.",
       "action_zh": "避免同時服用。問醫生需唔需要驗INR（凝血指數）。",
       "evidence_level": ["case_reports", "review"],
@@ -54,11 +54,11 @@
       "risk": "moderate",
       "watch": false,
       "rating_source": "team",
-      "effect_en": "Lowers warfarin's effect (INR goes down), so there is a risk of blood clots.",
-      "effect_zh": "會減弱華法林藥力（INR下降），有血栓（血塊）風險。",
-      "why_en": "American ginseng may make your body break down warfarin faster, so warfarin works less well.",
-      "why_zh": "花旗參可能令身體加快分解華法林，令華法林效果變差。",
-      "why_pro_en": "Ginsenosides may induce CYP3A4, speeding up warfarin metabolism. In a human trial of 20 volunteers, American ginseng reduced warfarin's effect on INR.",
+      "effect_en": "Lowers warfarin's effect (INR goes down), so warfarin may protect you less well against blood clots.",
+      "effect_zh": "會減弱華法林藥力（INR下降），即係華法林預防血栓（血塊）嘅效果可能變差。",
+      "why_en": "In a trial, people taking American ginseng had less warfarin in their blood, so warfarin worked less well.",
+      "why_zh": "有研究發現，食花旗參嘅人血液入面嘅華法林減少咗，所以華法林效果變差。",
+      "why_pro_en": "Randomised, double-blind, placebo-controlled trial in 20 healthy volunteers: after 2 weeks of American ginseng, peak INR, INR AUC, peak plasma warfarin and warfarin AUC were all significantly lower than with placebo (Yuan 2004). The mechanism is not established in our sources.",
       "action_en": "Tell your doctor that you take American ginseng. An INR (clotting) check may be needed.",
       "action_zh": "話俾醫生知你有食花旗參。可能需要驗INR（凝血指數）。",
       "evidence_level": ["human_trial"],
@@ -84,7 +84,7 @@
       "evidence_level": ["human_trial", "case_reports"],
       "sources": [
         { "label": "Lim et al. Singapore Med J 2018", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5966631/" },
-        { "label": "Cleveland Clinic review, 2001", "url": "https://www.clevelandclinicmeded.com/medicalpubs/pharmacy/MarApr2001/herbs_cardiac.htm" }
+        { "label": "Cleveland Clinic Pharmacotherapy Update, Mar/Apr 2001", "url": "https://www.clevelandclinicmeded.com/medicalpubs/pharmacy/MarApr2001/herbs_cardiac.htm" }
       ],
       "zh_reviewed": false
     },
@@ -104,8 +104,7 @@
       "action_zh": "話俾醫生知。留意有冇唔尋常嘅瘀傷或者出血。",
       "evidence_level": ["case_reports", "human_trial"],
       "sources": [
-        { "label": "Lim et al. Singapore Med J 2018", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5966631/" },
-        { "label": "Zhuang et al. Front Pharmacol 2021", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8489681/" }
+        { "label": "Lim et al. Singapore Med J 2018", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5966631/" }
       ],
       "zh_reviewed": false
     },
@@ -125,8 +124,7 @@
       "action_zh": "話俾醫生知。留意有冇唔尋常嘅瘀傷或者出血。",
       "evidence_level": ["case_reports", "human_trial"],
       "sources": [
-        { "label": "Lim et al. Singapore Med J 2018", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5966631/" },
-        { "label": "Zhuang et al. Front Pharmacol 2021", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8489681/" }
+        { "label": "Lim et al. Singapore Med J 2018", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5966631/" }
       ],
       "zh_reviewed": false
     },
@@ -137,17 +135,17 @@
       "risk": "moderate",
       "watch": false,
       "rating_source": "team",
-      "effect_en": "Lowers potassium, which raises the risk of digoxin toxicity.",
-      "effect_zh": "會令鉀質下降，增加地高辛中毒嘅風險。",
+      "effect_en": "Lowers potassium, which can increase digoxin's effect.",
+      "effect_zh": "會令血鉀下降，可能增強地高辛嘅藥力。",
       "why_en": "Liquorice makes your kidneys lose potassium, in a similar way to the hormone aldosterone.",
       "why_zh": "甘草會令腎臟流失鉀質，作用類似荷爾蒙「醛固酮」。",
-      "why_pro_en": "Glycyrrhizin breakdown products (glycyrrhetinic acid) inhibit 11β-hydroxysteroid dehydrogenase type 2 (11β-HSD2), causing aldosterone-like (mineralocorticoid) potassium loss. Hypokalaemia increases the risk of digoxin toxicity.",
+      "why_pro_en": "Glycyrrhizin metabolites inhibit 11β-hydroxysteroid dehydrogenase type 2 (11β-HSD2) in the kidney, increasing mineralocorticoid receptor activity (pseudoaldosteronism) and causing potassium loss (Yoshino 2021). The Cleveland Clinic interaction table lists liquorice with digoxin as causing loss of serum potassium, and as potentiating cardiac glycosides.",
       "action_en": "Tell your doctor. A potassium blood test may be needed.",
       "action_zh": "話俾醫生知。可能需要驗血檢查鉀質水平。",
       "evidence_level": ["review"],
       "sources": [
         { "label": "Yoshino et al. Front Nutr 2021", "url": "https://pubmed.ncbi.nlm.nih.gov/34604277/" },
-        { "label": "Cleveland Clinic review, 2001", "url": "https://www.clevelandclinicmeded.com/medicalpubs/pharmacy/MarApr2001/herbs_cardiac.htm" }
+        { "label": "Cleveland Clinic Pharmacotherapy Update, Mar/Apr 2001", "url": "https://www.clevelandclinicmeded.com/medicalpubs/pharmacy/MarApr2001/herbs_cardiac.htm" }
       ],
       "zh_reviewed": false
     },
@@ -158,17 +156,17 @@
       "risk": "moderate",
       "watch": false,
       "rating_source": "team",
-      "effect_en": "Lowers potassium. This diuretic can also lower potassium, so levels may drop further. Low potassium raises the risk of digoxin toxicity.",
-      "effect_zh": "會令鉀質下降。呢種利尿藥本身都可能令鉀質下降，兩樣一齊可能跌得更低。鉀質過低會增加地高辛中毒嘅風險。",
+      "effect_en": "Lowers potassium. Potassium-losing diuretics such as furosemide also lower it, so the effects add up.",
+      "effect_zh": "會令血鉀下降。呋塞米呢類利尿藥本身都會令血鉀下降，兩樣加埋效果會疊加。",
       "why_en": "Liquorice makes your kidneys lose potassium, in a similar way to the hormone aldosterone.",
       "why_zh": "甘草會令腎臟流失鉀質，作用類似荷爾蒙「醛固酮」。",
-      "why_pro_en": "Glycyrrhizin breakdown products (glycyrrhetinic acid) inhibit 11β-hydroxysteroid dehydrogenase type 2 (11β-HSD2), causing aldosterone-like (mineralocorticoid) potassium loss, additive to diuretic-induced potassium loss.",
+      "why_pro_en": "Glycyrrhizin metabolites inhibit 11β-hydroxysteroid dehydrogenase type 2 (11β-HSD2) in the kidney, increasing mineralocorticoid receptor activity (pseudoaldosteronism) and causing potassium loss; concurrent diuretic use is a listed risk factor (Yoshino 2021). The Cleveland Clinic interaction table lists additive effects with potassium-depleting diuretics.",
       "action_en": "Tell your doctor. A potassium blood test may be needed.",
       "action_zh": "話俾醫生知。可能需要驗血檢查鉀質水平。",
       "evidence_level": ["review"],
       "sources": [
         { "label": "Yoshino et al. Front Nutr 2021", "url": "https://pubmed.ncbi.nlm.nih.gov/34604277/" },
-        { "label": "Cleveland Clinic review, 2001", "url": "https://www.clevelandclinicmeded.com/medicalpubs/pharmacy/MarApr2001/herbs_cardiac.htm" }
+        { "label": "Cleveland Clinic Pharmacotherapy Update, Mar/Apr 2001", "url": "https://www.clevelandclinicmeded.com/medicalpubs/pharmacy/MarApr2001/herbs_cardiac.htm" }
       ],
       "zh_reviewed": false
     },
@@ -179,11 +177,11 @@
       "risk": "high",
       "watch": false,
       "rating_source": "team",
-      "effect_en": "A hidden extra statin dose, with a risk of muscle, liver and kidney damage.",
-      "effect_zh": "等於額外食多一份他汀類降膽固醇藥，有損害肌肉、肝臟同腎臟嘅風險。",
-      "why_en": "Red yeast rice contains monacolin K, which is chemically the same as the statin medicine lovastatin.",
-      "why_zh": "紅麴含有莫納可林K（monacolin K），化學結構同他汀類藥物「洛伐他汀」一模一樣。",
-      "why_pro_en": "Monacolin K is structurally identical to lovastatin. Taken with a prescribed statin, it adds further HMG-CoA reductase inhibition and raises the risk of statin adverse effects (myopathy, rhabdomyolysis, liver injury and kidney injury).",
+      "effect_en": "Can act as a hidden extra statin dose, raising the risk of statin side effects such as muscle and liver problems.",
+      "effect_zh": "可能等於額外食多一份他汀類藥物，增加肌肉同肝臟問題等副作用嘅風險。",
+      "why_en": "Some red yeast rice products contain monacolin K, which is chemically the same as the statin medicine lovastatin.",
+      "why_zh": "部分紅麴產品含有莫納可林K（monacolin K），化學上同他汀類藥物「洛伐他汀」一樣。",
+      "why_pro_en": "Monacolin K is chemically identical to lovastatin, so products containing substantial amounts can cause the same side effects and drug interactions as lovastatin. Separately, some products are contaminated with citrinin, which may cause kidney damage (NCCIH).",
       "action_en": "Do not combine without asking your doctor.",
       "action_zh": "未問過醫生之前，唔好同時服用。",
       "evidence_level": ["official_guidance"],
