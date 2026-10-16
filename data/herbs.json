@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "herbs": [
+    {
+      "id": "danshen",
+      "name_en": "Danshen",
+      "name_zh": "丹參",
+      "latin": "Salvia miltiorrhiza",
+      "aliases": ["dan shen", "daan sam", "daan1 sam1", "丹参", "red sage", "Chinese sage"],
+      "zh_reviewed": false
+    },
+    {
+      "id": "dong_quai",
+      "name_en": "Dong quai",
+      "name_zh": "當歸",
+      "latin": "Angelica sinensis",
+      "aliases": ["danggui", "dang gui", "dong gwai", "dong1 gwai1", "tang kuei", "当归", "female ginseng"],
+      "zh_reviewed": false
+    },
+    {
+      "id": "american_ginseng",
+      "name_en": "American ginseng",
+      "name_zh": "花旗參",
+      "latin": "Panax quinquefolius",
+      "aliases": ["huaqishen", "hua qi shen", "fa kei sam", "faa1 kei4 sam1", "xiyangshen", "xi yang shen", "西洋參", "花旗参", "西洋参"],
+      "zh_reviewed": false
+    },
+    {
+      "id": "asian_ginseng",
+      "name_en": "Asian ginseng",
+      "name_zh": "人參",
+      "latin": "Panax ginseng",
+      "aliases": ["renshen", "ren shen", "yan sam", "jan4 sam1", "Korean ginseng", "Chinese ginseng", "red ginseng", "高麗參", "gou lai sam", "gou1 lai6 sam1", "人参", "高丽参"],
+      "zh_reviewed": false
+    },
+    {
+      "id": "ginkgo",
+      "name_en": "Ginkgo",
+      "name_zh": "銀杏",
+      "latin": "Ginkgo biloba",
+      "aliases": ["yinxing", "yin xing", "ngan hang", "ngan4 hang6", "ginkgo biloba", "ginkgo leaf", "银杏", "銀杏葉"],
+      "zh_reviewed": false
+    },
+    {
+      "id": "liquorice",
+      "name_en": "Liquorice",
+      "name_zh": "甘草",
+      "latin": "Glycyrrhiza uralensis / G. glabra",
+      "aliases": ["licorice", "gancao", "gan cao", "gam chou", "gam1 cou2", "liquorice root"],
+      "zh_reviewed": false
+    },
+    {
+      "id": "red_yeast_rice",
+      "name_en": "Red yeast rice",
+      "name_zh": "紅麴",
+      "latin": "Monascus purpureus",
+      "aliases": ["hongqu", "hong qu", "hung kuk", "hung4 kuk1", "紅曲", "红曲", "红麴", "red rice yeast"],
+      "zh_reviewed": false
+    },
+    {
+      "id": "goji",
+      "name_en": "Goji",
+      "name_zh": "枸杞",
+      "latin": "Lycium barbarum",
+      "aliases": ["gouqi", "gou qi", "gau gei", "gau2 gei2", "goji berry", "wolfberry", "枸杞子", "杞子"],
+      "zh_reviewed": false
+    },
+    {
+      "id": "sanqi",
+      "name_en": "Sanqi",
+      "name_zh": "三七",
+      "latin": "Panax notoginseng",
+      "aliases": ["san qi", "saam chat", "saam1 cat1", "tianqi", "tin chat", "tin4 cat1", "田七", "notoginseng", "pseudoginseng"],
+      "zh_reviewed": false
+    },
+    {
+      "id": "safflower",
+      "name_en": "Safflower",
+      "name_zh": "紅花",
+      "latin": "Carthamus tinctorius",
+      "aliases": ["honghua", "hong hua", "hung fa", "hung4 faa1", "红花"],
+      "zh_reviewed": false
+    }
+  ]
+}
