@@ -23,14 +23,16 @@
   function normalise(text) {
     return String(text == null ? '' : text)
       .normalize('NFKD')
-      .replace(/[̀-ͯ]/g, '')
+      .replace(/[\u0300-\u036f]/g, '')
       .toLowerCase()
-      .replace(/[\s\-_'’.,()\/·]+/g, '')
+      .replace(/[\s\-_'\u2019.,()\/\u00b7]+/g, '')
       .replace(/[0-9]/g, '');
   }
 
   function searchTerms(item) {
-    return [item.name_en, item.name_zh, item.latin].concat(item.aliases || [])
+    // "Glycyrrhiza uralensis / G. glabra" is searchable as each part and as a whole.
+    var latin = item.latin ? [item.latin].concat(String(item.latin).split('/')) : [];
+    return [item.name_en, item.name_zh].concat(latin, item.aliases || [])
       .filter(Boolean)
       .map(normalise)
       .filter(Boolean);
@@ -78,7 +80,7 @@
     db.interactions.forEach(function (e) {
       if (e.herb_id !== herbId) return;
       if (e.drug_id === drugId && !exact) exact = e;
-      else if (e.drug_class && (drug.classes || []).indexOf(e.drug_class) !== -1 && !byClass) byClass = e;
+      else if (e.drug_class && Array.isArray(drug.classes) && drug.classes.indexOf(e.drug_class) !== -1 && !byClass) byClass = e;
     });
     return exact || byClass;
   }
@@ -123,6 +125,8 @@
     var problems = [];
     function problem(msg) { problems.push(msg); }
     function isText(v) { return typeof v === 'string' && v.trim() !== ''; }
+    function classesOf(d) { return Array.isArray(d.classes) ? d.classes : []; }
+    var CLASS_NAME = /^[a-z][a-z0-9_]*$/;
 
     [['herb', db.herbs], ['drug', db.drugs]].forEach(function (pair) {
       var kind = pair[0], seen = {};
@@ -135,12 +139,17 @@
         if (!isText(item.name_zh)) problem(where + ': missing name_zh');
         if (!Array.isArray(item.aliases)) problem(where + ': aliases must be a list');
         if (typeof item.zh_reviewed !== 'boolean') problem(where + ': zh_reviewed must be true or false');
-        if (kind === 'drug' && !Array.isArray(item.classes)) problem(where + ': classes must be a list');
+        if (kind === 'drug') {
+          if (!Array.isArray(item.classes)) problem(where + ': classes must be a list, e.g. ["statin"]');
+          else item.classes.forEach(function (c) {
+            if (typeof c !== 'string' || !CLASS_NAME.test(c)) problem(where + ': class "' + c + '" must be lower-case letters, digits and _ (e.g. "statin")');
+          });
+        }
       });
     });
 
     var classes = {};
-    db.drugs.forEach(function (d) { (d.classes || []).forEach(function (c) { classes[c] = true; }); });
+    db.drugs.forEach(function (d) { classesOf(d).forEach(function (c) { classes[c] = true; }); });
 
     var ids = {}, pairKeys = {};
     db.interactions.forEach(function (e, i) {
@@ -148,7 +157,10 @@
       if (!isText(e.id)) problem(where + ': missing id');
       if (ids[e.id]) problem(where + ': duplicate id');
       ids[e.id] = true;
-      if (!db.herbById[e.herb_id]) problem(where + ': unknown herb_id "' + e.herb_id + '"');
+      ['herb_id', 'drug_id', 'drug_class'].forEach(function (f) {
+        if (e[f] != null && typeof e[f] !== 'string') problem(where + ': ' + f + ' must be plain text, not a list');
+      });
+      if (typeof e.herb_id !== 'string' || !db.herbById[e.herb_id]) problem(where + ': unknown herb_id "' + e.herb_id + '"');
       if (!!e.drug_id === !!e.drug_class) problem(where + ': needs exactly one of drug_id or drug_class');
       if (e.drug_id && !db.drugById[e.drug_id]) problem(where + ': unknown drug_id "' + e.drug_id + '"');
       if (e.drug_class && !classes[e.drug_class]) problem(where + ': no drug has class "' + e.drug_class + '"');
@@ -181,7 +193,7 @@
     db.herbs.forEach(function (h) {
       db.drugs.forEach(function (d) {
         var classHits = db.interactions.filter(function (e) {
-          return e.herb_id === h.id && e.drug_class && (d.classes || []).indexOf(e.drug_class) !== -1;
+          return e.herb_id === h.id && e.drug_class && classesOf(d).indexOf(e.drug_class) !== -1;
         });
         if (classHits.length > 1) problem(h.id + ' × ' + d.id + ': matches several class entries (' +
           classHits.map(function (e) { return e.id; }).join(', ') + ')');

@@ -36,6 +36,12 @@
       function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text) e.textContent = text; return e; }
       var summary = document.getElementById('summary'), out = document.getElementById('out');
       Promise.all(['../data/herbs.json', '../data/drugs.json', '../data/interactions.json', 'test-cases.json'].map(get))
+        .catch(function (err) {
+          summary.className = 'summary fail';
+          summary.textContent = 'Could not load the data files (' + err.message + '). ' +
+            (location.protocol === 'file:' ? 'This page was opened as a file. Start a local server and open it via http://localhost:8000/tests/test.html.' : '');
+          throw null;
+        })
         .then(function (d) {
           var results = HerbSafeTests.runAll(HerbSafeLookup, { herbs: d[0], drugs: d[1], interactions: d[2], cases: d[3] });
           var failed = results.filter(function (r) { return !r.pass; }).length, group = null, ul;
@@ -48,9 +54,9 @@
           summary.className = 'summary ' + (failed ? 'fail' : 'ok');
         })
         .catch(function (err) {
+          if (err === null) return; // already reported as a loading problem
           summary.className = 'summary fail';
-          summary.textContent = 'Could not load the data files (' + err.message + '). ' +
-            (location.protocol === 'file:' ? 'This page was opened as a file. Start a local server and open it via http://localhost:8000/tests/test.html.' : '');
+          summary.textContent = 'The tests themselves crashed: ' + (err && err.message);
         });
     })();
   </script>
