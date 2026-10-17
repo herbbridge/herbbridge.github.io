@@ -97,22 +97,43 @@
     return rows.filter(function (r) { return r.entry && r.entry.risk !== 'none_reported'; });
   }
 
-  /* The warning shown straight after adding something that clashes. Not saved. */
+  /* Warnings for clashes found while adding items. They build up until the user closes them,
+     each pair keeps its own rating, and they are not saved. */
   var alertState = null;
+  function pairKey(r) { return r.herb.id + '|' + r.drug.id; }
 
   function addOrRemove(kind, id) {
     var added = toggle(kind, id);
     if (added) {
       var clashes = clashesFor(kind, id);
-      alertState = clashes.length ? { kind: kind, id: id, rows: clashes } : null;
+      if (clashes.length) {
+        var rows = (alertState ? alertState.rows : []).slice();
+        var known = {};
+        rows.forEach(function (r) { known[pairKey(r)] = true; });
+        clashes.forEach(function (r) { if (!known[pairKey(r)]) rows.push(r); });
+        rows.sort(function (a, b) { return L.STATUS_ORDER.indexOf(a.status) - L.STATUS_ORDER.indexOf(b.status); });
+        alertState = { rows: rows };
+        announce(clashes);
+      }
     } else if (alertState) {
-      // Drop the warning if it was about the item just removed or no longer applies.
+      // Drop warnings about pairs that are no longer both in the cabinet.
       alertState.rows = alertState.rows.filter(function (r) {
         return state.herbs.indexOf(r.herb.id) !== -1 && state.drugs.indexOf(r.drug.id) !== -1;
       });
       if (!alertState.rows.length) alertState = null;
     }
     refreshCheck();
+  }
+
+  /* Short spoken message for screen readers when new clashes appear (once, not on every redraw). */
+  function announce(rows) {
+    var live = document.getElementById('sr-alert');
+    if (!live) return;
+    live.textContent = '';
+    var msg = rows.map(function (r) {
+      return t('warn_sr', { herb: primaryName(r.herb), drug: primaryName(r.drug), risk: t(r.status === 'low' && r.entry.watch ? 'risk_low_watch' : 'risk_' + r.status) });
+    }).join(' ');
+    window.setTimeout(function () { live.textContent = msg; }, 50);
   }
 
   /* ---------- Check screen ---------- */
@@ -140,7 +161,8 @@
         var item = byId[id];
         chips.appendChild(el('li', null, [
           el('button', {
-            type: 'button', class: 'chip', 'aria-label': t('remove_item', { name: item.name_en + ' ' + item.name_zh }),
+            type: 'button', class: 'chip', 'data-key': 'chip-' + kind + '-' + id,
+            'aria-label': t('remove_item', { name: primaryName(item) + ' ' + secondaryName(item) }),
             onclick: function () { addOrRemove(kind, id); }
           }, [nameNode(item), icon('close', 'chip-x')])
         ]));
@@ -160,10 +182,11 @@
         options.appendChild(el('li', null, [
           el('button', {
             type: 'button', class: 'option' + (on ? ' is-on' : ''), 'aria-pressed': on ? 'true' : 'false',
+            'data-key': 'opt-' + kind + '-' + item.id,
             onclick: function () { addOrRemove(kind, item.id); }
           }, [
             nameNode(item),
-            el('span', { class: 'option-state' }, [icon(on ? 'tick' : 'plus'), el('span', { text: on ? t('added') : t('add') })])
+            el('span', { class: 'option-state', 'aria-hidden': 'true' }, [icon(on ? 'tick' : 'plus'), el('span', { text: on ? t('added') : t('add') })])
           ])
         ]));
       });
@@ -195,9 +218,18 @@
   var cabinetPanel = null;
 
   function refreshCheck() {
+    var active = document.activeElement;
+    var key = active && active.getAttribute ? active.getAttribute('data-key') : null;
     pickerRefreshers.forEach(function (fn) { fn(); });
     renderCabinet();
+    renderWarning();
     updateCheckBar();
+    if (key) {
+      var target = app.querySelector('[data-key="' + key + '"]');
+      // A removed chip disappears: move focus to the same item in the list instead.
+      if (!target && key.indexOf('chip-') === 0) target = app.querySelector('[data-key="opt-' + key.slice(5) + '"]');
+      if (target) target.focus({ preventScroll: true });
+    }
   }
 
   function startDemo() {
@@ -247,34 +279,53 @@
     } else {
       cabinetPanel.appendChild(el('p', { class: 'cabinet-clear', text: t('cabinet_no_rated') }));
     }
-    if (unknown) cabinetPanel.appendChild(el('p', { class: 'cabinet-unknown', text: I.tn('cabinet_unknown', unknown) }));
+    if (unknown) cabinetPanel.appendChild(el('p', { class: 'cabinet-unknown' }, [icon('not_in_database'), el('span', { text: I.tn('cabinet_unknown', unknown) })]));
     cabinetPanel.appendChild(el('a', { class: 'btn btn-secondary btn-small', href: '#/results', text: t('cabinet_see_all') }));
   }
 
-  function renderAlert(box) {
-    box.textContent = '';
-    if (!alertState) { box.hidden = true; return; }
-    box.hidden = false;
-    var byId = alertState.kind === 'herbs' ? db.herbById : db.drugById;
-    var item = byId[alertState.id];
-    var top = alertState.rows[0];
-    var others = alertState.rows.map(function (r) { return primaryName(alertState.kind === 'herbs' ? r.drug : r.herb); });
-    box.appendChild(el('div', { class: 'alert-body' }, [
-      badge(top.status, top.entry.watch),
-      el('p', { class: 'alert-text', text: t('alert_clash', { item: primaryName(item), others: others.join(t('list_sep')) }) })
-    ]));
-    box.appendChild(el('div', { class: 'alert-actions' }, [
+  var warningPanel = null;
+  function renderWarning() {
+    if (!warningPanel) return;
+    warningPanel.textContent = '';
+    warningPanel.hidden = !alertState;
+    if (!alertState) return;
+    var list = el('ul', { class: 'warning-list' });
+    alertState.rows.forEach(function (r) {
+      list.appendChild(el('li', { class: 'clash-row' }, [
+        badge(r.status, r.entry.watch),
+        el('span', { class: 'clash-pair' }, [
+          el('span', { text: primaryName(r.herb) }), ' ', el('span', { class: 'pair-plus', 'aria-hidden': 'true', text: '+' }), ' ',
+          el('span', { class: 'visually-hidden', text: t('and_sr') + ' ' }), el('span', { text: primaryName(r.drug) })
+        ])
+      ]));
+    });
+    warningPanel.appendChild(el('h2', { id: 'h-warning', text: I.tn('warn_title', alertState.rows.length) }));
+    warningPanel.appendChild(list);
+    warningPanel.appendChild(el('div', { class: 'alert-actions' }, [
       el('a', { class: 'btn btn-primary btn-small', href: '#/results', text: t('alert_details') }),
       el('button', {
-        type: 'button', class: 'btn btn-quiet btn-small', onclick: function () { alertState = null; renderAlert(box); }
+        type: 'button', class: 'btn btn-secondary btn-small',
+        onclick: function () { alertState = null; renderWarning(); updateCheckBar(); }
       }, [el('span', { text: t('alert_dismiss') })])
     ]));
+  }
+
+  function showWarning() {
+    if (!warningPanel) return;
+    warningPanel.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    warningPanel.focus({ preventScroll: true });
   }
 
   var checkBar = null;
   function updateCheckBar() {
     if (!checkBar) return;
-    renderAlert(checkBar.alert);
+    checkBar.notice.hidden = !alertState;
+    if (alertState) {
+      var top = alertState.rows[0];
+      checkBar.notice.textContent = '';
+      checkBar.notice.appendChild(icon(top.status));
+      checkBar.notice.appendChild(el('span', { text: I.tn('bar_notice', alertState.rows.length) }));
+    }
     var ready = state.herbs.length > 0 && state.drugs.length > 0;
     checkBar.button.disabled = !ready;
     checkBar.button.setAttribute('aria-describedby', 'check-status');
@@ -289,8 +340,8 @@
       type: 'button', class: 'btn btn-primary btn-check',
       onclick: function () { if (!button.disabled) location.hash = '#/results'; }
     }, [el('span', { text: t('check_button') })]);
-    var alertBox = el('div', { class: 'clash-alert', role: 'alert', hidden: true });
-    checkBar = { button: button, status: status, alert: alertBox };
+    var notice = el('button', { type: 'button', class: 'bar-notice', hidden: true, onclick: showWarning });
+    checkBar = { button: button, status: status, notice: notice };
 
     var clear = el('button', {
       type: 'button', class: 'btn btn-quiet',
@@ -327,16 +378,18 @@
         ])
       ]));
     }
+    warningPanel = el('section', { class: 'clash-alert', tabindex: '-1', 'aria-labelledby': 'h-warning', hidden: true });
+    app.appendChild(warningPanel);
     cabinetPanel = el('section', { class: 'cabinet', 'aria-labelledby': 'h-cabinet' });
     app.appendChild(cabinetPanel);
     app.appendChild(picker('herbs', '01'));
     app.appendChild(picker('drugs', '02'));
     app.appendChild(el('div', { class: 'check-bar' }, [
-      alertBox,
-      el('div', { class: 'check-bar-inner' }, [status, button])
+      el('div', { class: 'check-bar-inner' }, [notice, status, button])
     ]));
     app.appendChild(el('div', { class: 'below-bar' }, [clear, ' ', demo]));
     renderCabinet();
+    renderWarning();
     updateCheckBar();
   }
 
@@ -363,7 +416,7 @@
   function card(r) {
     if (!r.entry) {
       return el('article', { class: 'card card-unknown' }, [
-        el('header', { class: 'card-head' }, [badge('not_in_database'), pairTitle(r)]),
+        el('header', { class: 'card-head' }, [pairTitle(r), badge('not_in_database')]),
         el('p', { class: 'unknown-text', text: t('not_in_db_text') }),
         el('p', { class: 'card-disclaimer', text: t('card_disclaimer') })
       ]);
@@ -378,20 +431,12 @@
         state.lang === 'zh' ? el('p', { class: 'muted', text: t('pro_english_only') }) : null
       ]));
     }
-    var sources = el('ol', { class: 'sources' });
-    e.sources.forEach(function (s) {
-      sources.appendChild(el('li', null, [
-        el('a', { href: s.url, target: '_blank', rel: 'noopener noreferrer' }, [
-          el('span', { text: s.label }), icon('external', 'ext'),
-          el('span', { class: 'visually-hidden', text: ' ' + t('opens_new_tab') })
-        ])
-      ]));
-    });
+    var sources = sourceList(e.sources);
     var evidence = el('ul', { class: 'evidence' });
     e.evidence_level.forEach(function (lvl) { evidence.appendChild(el('li', { text: t('ev_' + lvl) })); });
 
     return el('article', { class: 'card card-' + e.risk }, [
-      el('header', { class: 'card-head' }, [badge(e.risk, e.watch), pairTitle(r)]),
+      el('header', { class: 'card-head' }, [pairTitle(r), badge(e.risk, e.watch)]),
       el('p', { class: 'effect', text: field(e, 'effect') }),
       block(t('label_why'), whyBlock),
       block(t('label_what_to_do'), [el('p', { class: 'action', text: field(e, 'action') })], 'block-action'),
@@ -540,6 +585,7 @@
     }
 
     page.appendChild(el('p', { class: 'disclaimer-box summary-disclaimer', text: t('card_disclaimer') }));
+    if (state.lang === 'zh' && zhUnreviewed()) page.appendChild(el('p', { class: 'muted zh-note', text: t('zh_unreviewed_note') }));
   }
 
   /* ---------- About ---------- */
@@ -641,14 +687,18 @@
       node.textContent = t(node.getAttribute('data-i18n'));
     });
     var toggleBtn = document.getElementById('lang-toggle');
-    toggleBtn.textContent = t('lang_toggle');
+    toggleBtn.textContent = '';
+    toggleBtn.appendChild(el('span', { lang: zh ? 'en-GB' : 'zh-HK', text: t('lang_toggle') }));
     toggleBtn.setAttribute('aria-label', t('lang_toggle_label'));
-    toggleBtn.setAttribute('lang', zh ? 'en-GB' : 'zh-HK');
     // Chinese drafts are flagged until a native speaker has reviewed them.
     var note = document.getElementById('zh-note');
-    var unreviewed = zh && (!I.zhReviewed || db.herbs.concat(db.drugs, db.interactions).some(function (x) { return x.zh_reviewed !== true; }));
+    var unreviewed = zh && zhUnreviewed();
     note.hidden = !unreviewed;
     note.textContent = unreviewed ? t('zh_unreviewed_note') : '';
+  }
+
+  function zhUnreviewed() {
+    return !I.zhReviewed || db.herbs.concat(db.drugs, db.interactions).some(function (x) { return x.zh_reviewed !== true; });
   }
 
   function switchLanguage() {
@@ -665,6 +715,7 @@
     var route = currentRoute();
     checkBar = null;
     cabinetPanel = null;
+    warningPanel = null;
     if (route !== 'check') alertState = null;
     applyStaticText();
     Array.prototype.forEach.call(document.querySelectorAll('[data-route-link]'), function (a) {
@@ -672,6 +723,7 @@
       else a.removeAttribute('aria-current');
     });
     document.body.setAttribute('data-route', route);
+    document.documentElement.setAttribute('data-route', route);
     if (route === 'results') renderResults();
     else if (route === 'summary') renderSummary();
     else if (route === 'about') renderAbout();
@@ -697,6 +749,10 @@
       I.setLang(state.lang);
       window.addEventListener('hashchange', function () { render(true); });
       document.getElementById('lang-toggle').addEventListener('click', switchLanguage);
+      document.querySelector('.skip-link').addEventListener('click', function (ev) {
+        ev.preventDefault();
+        document.getElementById('main').focus();
+      });
       render(false);
     })
     .catch(function (err) {

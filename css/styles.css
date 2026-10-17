@@ -103,7 +103,7 @@ h1, h2, h3, h4 { margin: 0; line-height: 1.2; }
 .brand-mark::after { width: 14%; height: 56%; }
 .brand-zh { font-weight: 500; color: var(--ink-2); margin-left: 0.15em; white-space: nowrap; }
 
-.site-nav { display: flex; gap: 0.25rem; margin-right: -0.75rem; }
+.site-nav { display: flex; flex-wrap: wrap; gap: 0.25rem; margin-right: -0.75rem; }
 .site-nav a {
   display: inline-flex; align-items: center; min-height: 3rem; padding: 0 0.75rem;
   color: var(--ink); text-decoration: none; font-weight: 500; font-size: 1rem;
@@ -194,7 +194,7 @@ body[data-route="check"] #app { display: grid; grid-template-columns: minmax(0, 
   -webkit-appearance: none; appearance: none;
 }
 .search::placeholder { color: #767B83; }
-.search:focus { border-color: var(--accent); outline: 3px solid var(--accent-soft); outline-offset: 0; }
+.search:focus { border-color: var(--accent); outline: 3px solid var(--accent); outline-offset: 2px; }
 
 .options { list-style: none; margin: 0.75rem 0 0; padding: 0; border-top: 1px solid var(--line); }
 .options li { border-bottom: 1px solid var(--line); }
@@ -276,6 +276,7 @@ body[data-route="check"] #app { display: grid; grid-template-columns: minmax(0, 
 .card-none_reported { border-left-color: var(--none); }
 
 .card-head { display: grid; gap: 0.75rem; margin-bottom: 1rem; }
+.card-head .badge { order: -1; } /* shown first, but read after the pair name */
 .pair { font-size: clamp(1.25rem, 1.1rem + 0.8vw, 1.625rem); font-weight: 700; letter-spacing: -0.01em; }
 .pair .name-secondary { font-weight: 500; color: var(--ink-2); }
 .pair-plus { color: var(--ink-2); font-weight: 400; margin: 0 0.15em; }
@@ -296,7 +297,7 @@ body[data-route="check"] #app { display: grid; grid-template-columns: minmax(0, 
 .block { padding-top: 0.875rem; margin-top: 0.875rem; border-top: 1px solid var(--line); }
 .block p:last-child { margin-bottom: 0; }
 .block-label {
-  font-size: 0.8125rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+  font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
   color: var(--ink-2); margin-bottom: 0.375rem;
 }
 :lang(zh-HK) .block-label { text-transform: none; letter-spacing: 0.06em; font-size: 0.875rem; }
@@ -332,7 +333,7 @@ body[data-route="check"] #app { display: grid; grid-template-columns: minmax(0, 
 
 .card-disclaimer {
   margin: 1rem 0 0; padding-top: 0.75rem; border-top: 1px solid var(--line);
-  font-size: 0.875rem; color: var(--ink-2);
+  font-size: 0.9375rem; color: var(--ink-2);
 }
 
 /* "Not in our database": neutral grey, dashed, its own icon, no rating colours at all. */
@@ -366,6 +367,7 @@ body[data-route="check"] #app { display: grid; grid-template-columns: minmax(0, 
 .cabinet-alert-title { font-weight: 700; font-size: 1.125rem; margin: 1rem 0 0.5rem; }
 .cabinet-clear { margin: 1rem 0 0.5rem; }
 .cabinet-unknown {
+  display: flex; gap: 0.5rem; align-items: flex-start;
   background: var(--sunken); border: 1.5px dashed var(--unknown-line); border-radius: var(--radius);
   padding: 0.75rem 1rem; font-size: 1rem; margin: 0.75rem 0 1rem;
 }
@@ -378,16 +380,33 @@ body[data-route="check"] #app { display: grid; grid-template-columns: minmax(0, 
 .btn-small { min-height: 3rem; padding: 0 1.25rem; font-size: 1rem; }
 .where-tip { color: var(--ink-2); font-size: 0.9375rem; margin: 0.875rem 0 0; }
 
-/* Instant clash warning, inside the sticky bar so it is always in view. Stays until closed. */
+/* Clash warning: in the page above the cabinet, one line per pair with its own rating.
+   It builds up as clashes are found and stays until closed. The sticky bar only points to it. */
 .clash-alert {
-  max-width: 72rem; margin: 0 auto 0.75rem; padding: 0.875rem 1rem;
+  margin: 0 0 1.25rem; padding: 1rem 1.25rem;
   background: var(--surface); border: 2px solid var(--ink); border-radius: var(--radius);
-  box-shadow: 0 6px 24px rgba(14, 17, 22, 0.12);
+  box-shadow: 0 6px 24px rgba(14, 17, 22, 0.10);
+  scroll-margin-top: 1rem;
 }
 .clash-alert[hidden] { display: none; }
-.alert-body { display: grid; gap: 0.5rem; }
-.alert-text { margin: 0; font-weight: 700; font-size: 1.0625rem; }
+.clash-alert h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.25rem; }
+.warning-list { list-style: none; margin: 0; padding: 0; }
+.warning-list .clash-row:last-child { border-bottom: 0; }
 .alert-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem; margin-top: 0.75rem; }
+body[data-route="check"] .clash-alert { grid-column: 1 / -1; }
+
+.bar-notice {
+  flex: 1 1 100%; display: flex; align-items: center; gap: 0.5rem; min-height: 2.75rem;
+  padding: 0.25rem 0; background: none; border: 0; color: var(--ink); cursor: pointer;
+  font: inherit; font-weight: 700; font-size: 1rem; text-align: left;
+  text-decoration: underline; text-underline-offset: 0.2em;
+}
+.bar-notice[hidden] { display: none; }
+.bar-notice .icon { color: var(--ink); }
+/* Keep focused items visible above the sticky bar when tabbing through the lists. */
+html[data-route="check"] { scroll-padding-bottom: 9rem; }
+/* Short screens (or very large text): the bar stops being sticky so it never covers the page. */
+@media (max-height: 34em) { .check-bar { position: static; } }
 
 /* ---------- language toggle ---------- */
 
@@ -435,7 +454,7 @@ body[data-route="check"] #app { display: grid; grid-template-columns: minmax(0, 
 .summary-row-head { display: grid; gap: 0.5rem; margin-bottom: 0.5rem; }
 .summary-pair { font-size: 1.125rem; font-weight: 700; margin: 0; }
 .summary-dl { display: grid; grid-template-columns: minmax(0, 1fr); margin: 0; }
-.summary-dl dt { font-size: 0.8125rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-2); margin-top: 0.625rem; }
+.summary-dl dt { font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-2); margin-top: 0.625rem; }
 :lang(zh-HK) .summary-dl dt { text-transform: none; letter-spacing: 0.04em; font-size: 0.875rem; }
 .summary-dl dd { margin: 0.125rem 0 0; }
 @media (min-width: 40rem) {
