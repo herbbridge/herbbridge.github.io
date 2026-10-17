@@ -70,10 +70,10 @@ h1, h2, h3, h4 { margin: 0; line-height: 1.2; }
 }
 
 .skip-link {
-  position: absolute; left: 8px; top: -100px; z-index: 10;
+  position: absolute; left: 8px; top: 8px; z-index: 10; transform: translateY(-300%);
   background: var(--ink); color: #fff; padding: 0.75rem 1rem; border-radius: var(--radius);
 }
-.skip-link:focus { top: 8px; color: #fff; }
+.skip-link:focus { transform: none; color: #fff; }
 
 .muted { color: var(--ink-2); }
 
@@ -101,7 +101,7 @@ h1, h2, h3, h4 { margin: 0; line-height: 1.2; }
 }
 .brand-mark::before { width: 56%; height: 14%; }
 .brand-mark::after { width: 14%; height: 56%; }
-.brand-zh { font-weight: 500; color: var(--ink-2); margin-left: 0.15em; }
+.brand-zh { font-weight: 500; color: var(--ink-2); margin-left: 0.15em; white-space: nowrap; }
 
 .site-nav { display: flex; gap: 0.25rem; margin-right: -0.75rem; }
 .site-nav a {
@@ -223,7 +223,7 @@ body[data-route="check"] #app { display: grid; grid-template-columns: minmax(0, 
   -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
   border-top: 1px solid var(--line);
 }
-.check-bar-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; max-width: 72rem; margin: 0 auto; }
+.check-bar-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.5rem 1rem; max-width: 72rem; margin: 0 auto; }
 .check-status { margin: 0; font-size: 1rem; line-height: 1.35; color: var(--ink-2); }
 .below-bar { padding: 1.25rem 0 0; }
 
@@ -245,7 +245,7 @@ body[data-route="check"] #app { display: grid; grid-template-columns: minmax(0, 
   font-weight: 500; font-size: 1rem; text-decoration: underline; text-underline-offset: 0.2em;
 }
 .btn-quiet:hover { color: var(--high); }
-.btn-check { min-width: 9rem; font-size: 1.25rem; }
+.btn-check { min-width: min(9rem, 100%); font-size: 1.25rem; }
 
 /* ---------- Results screen ---------- */
 
@@ -264,7 +264,7 @@ body[data-route="check"] #app { display: grid; grid-template-columns: minmax(0, 
   padding: 0.875rem 1rem; border-radius: 0 var(--radius) var(--radius) 0; max-width: 46rem; font-size: 1rem;
 }
 
-.cards { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; }
+.cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 1rem; }
 
 .card {
   background: var(--surface); border: 1px solid var(--line); border-left: 6px solid var(--line-strong);
@@ -278,7 +278,7 @@ body[data-route="check"] #app { display: grid; grid-template-columns: minmax(0, 
 .card-head { display: grid; gap: 0.75rem; margin-bottom: 1rem; }
 .pair { font-size: clamp(1.25rem, 1.1rem + 0.8vw, 1.625rem); font-weight: 700; letter-spacing: -0.01em; }
 .pair .name-secondary { font-weight: 500; color: var(--ink-2); }
-.pair-plus { color: var(--ink-2); font-weight: 400; margin: 0 0.4em; }
+.pair-plus { color: var(--ink-2); font-weight: 400; margin: 0 0.15em; }
 
 .badge {
   display: inline-flex; align-items: center; gap: 0.5rem; justify-self: start; margin: 0;
@@ -401,9 +401,11 @@ body[data-route="check"] #app { display: grid; grid-template-columns: minmax(0, 
 @media (min-width: 34.01rem) {
   .brand { margin-right: auto; }
 }
+/* Phones: logo and language button on the first row, menu on the second. Nothing overlaps at large text sizes. */
 @media (max-width: 34rem) {
-  .header-inner { position: relative; }
-  .lang-toggle { position: absolute; top: 0.5rem; right: max(var(--gutter), env(safe-area-inset-right)); min-height: 2.75rem; }
+  .header-inner { column-gap: 0.75rem; padding-top: 0.5rem; }
+  .lang-toggle { order: 2; margin-left: auto; min-height: 2.75rem; }
+  .site-nav { order: 3; }
 }
 .zh-note { font-size: 0.9375rem; }
 
@@ -512,3 +514,9 @@ body[data-route="check"] #app { display: grid; grid-template-columns: minmax(0, 
 .demo-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem; }
 body[data-route="check"] .demo-banner { grid-column: 1 / -1; }
 .demo-start { margin-top: 1rem; }
+
+/* Very large text (older users often zoom to 200%): let everything wrap instead of spilling sideways. */
+.option { flex-wrap: wrap; }
+.pair, .clash-pair, .summary-pair, .sources a, .source-pairs, .chip { overflow-wrap: anywhere; }
+.sources a { max-width: 100%; }
+.card { min-width: 0; overflow-wrap: anywhere; }

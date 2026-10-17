@@ -238,7 +238,7 @@
         list.appendChild(el('li', { class: 'clash-row clash-' + r.status }, [
           badge(r.status, r.entry.watch),
           el('span', { class: 'clash-pair' }, [
-            el('span', { text: primaryName(r.herb) }), el('span', { class: 'pair-plus', 'aria-hidden': 'true', text: '+' }),
+            el('span', { text: primaryName(r.herb) }), ' ', el('span', { class: 'pair-plus', 'aria-hidden': 'true', text: '+' }), ' ',
             el('span', { class: 'visually-hidden', text: ' ' + t('and_sr') + ' ' }), el('span', { text: primaryName(r.drug) })
           ])
         ]));
@@ -350,7 +350,7 @@
   function pairTitle(r) {
     return el('h3', { class: 'pair' }, [
       nameNode(r.herb),
-      el('span', { class: 'pair-plus', 'aria-hidden': 'true', text: '+' }),
+      ' ', el('span', { class: 'pair-plus', 'aria-hidden': 'true', text: '+' }), ' ',
       el('span', { class: 'visually-hidden', text: ' ' + t('and_sr') + ' ' }),
       nameNode(r.drug)
     ]);
@@ -475,7 +475,7 @@
   function bilingualPair(r) {
     return el('h4', { class: 'summary-pair' }, [
       el('span', { lang: 'en-GB', text: r.herb.name_en + ' ' }), el('span', { lang: 'zh-HK', text: r.herb.name_zh }),
-      el('span', { class: 'pair-plus', 'aria-hidden': 'true', text: '+' }),
+      ' ', el('span', { class: 'pair-plus', 'aria-hidden': 'true', text: '+' }), ' ',
       el('span', { class: 'visually-hidden', text: ' ' + t('and_sr') + ' ' }),
       el('span', { lang: 'en-GB', text: r.drug.name_en + ' ' }), el('span', { lang: 'zh-HK', text: r.drug.name_zh })
     ]);
