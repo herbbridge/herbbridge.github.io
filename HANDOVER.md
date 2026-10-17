@@ -8,9 +8,10 @@ Paste the original project brief into the new session together with this file.
 2. Data files (`data/`): done, cleaned to source-verified claims only
 3. Lookup logic + tests: done (`node tests/run-tests.js`, or tests/test.html via a local server)
 4. Check → Results: done, reshaped as "My medicine cabinet" (see below)
-5. Language toggle: not started
-6. Doctor summary (print): not started
-7. About page: not started
+5. Language toggle: done (Chinese drafted, flagged unreviewed: ZH_REVIEWED in js/i18n.js)
+6. Doctor summary (print): done (#/summary; Mrs Wong prints on one A4 page)
+7. About page: done (#/about; scale, evidence levels, privacy, all sources, roadmap)
+   Extra: "Demo: Mrs Wong" button (warfarin + amlodipine preloaded; tap "Add danshen" on camera)
 8. GitHub Pages deploy: not started
 
 ## Decisions already made by the owner

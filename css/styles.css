@@ -406,3 +406,109 @@ body[data-route="check"] #app { display: grid; grid-template-columns: minmax(0, 
   .lang-toggle { position: absolute; top: 0.5rem; right: max(var(--gutter), env(safe-area-inset-right)); min-height: 2.75rem; }
 }
 .zh-note { font-size: 0.9375rem; }
+
+/* ---------- Doctor summary ---------- */
+
+.summary { padding: clamp(2rem, 5vw, 3.5rem) 0 0; max-width: 52rem; }
+.summary-kicker { font-size: 0.875rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+.summary-head h1 { font-size: clamp(1.75rem, 1.3rem + 2.2vw, 2.75rem); font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; margin-bottom: 0.75rem; }
+.summary-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 1.5rem 0 0.5rem; }
+@media (max-width: 34rem) { .summary-actions .btn { flex: 1 1 100%; } }
+.summary h2 { font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.25rem; }
+.summary-lists {
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.25rem;
+  border-top: 1px solid var(--ink); margin-top: 1.5rem; padding-top: 1.25rem;
+}
+@media (min-width: 40rem) { .summary-lists { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.summary-items { margin: 0; padding-left: 1.25rem; }
+.summary-items li { margin: 0.25rem 0; }
+.si-en { font-weight: 700; }
+.si-latin { display: block; font-style: italic; color: var(--ink-2); font-size: 0.9375rem; }
+.summary-section { border-top: 1px solid var(--ink); margin-top: 1.5rem; padding-top: 1.25rem; }
+.summary-row { border: 1px solid var(--line); border-left: 6px solid var(--line-strong); border-radius: var(--radius); background: var(--surface); padding: 1rem; margin-bottom: 0.75rem; }
+.summary-high { border-left-color: var(--high); }
+.summary-moderate { border-left-color: var(--moderate); }
+.summary-low { border-left-color: var(--low); }
+.summary-none_reported { border-left-color: var(--none); }
+.summary-row-head { display: grid; gap: 0.5rem; margin-bottom: 0.5rem; }
+.summary-pair { font-size: 1.125rem; font-weight: 700; margin: 0; }
+.summary-dl { display: grid; grid-template-columns: minmax(0, 1fr); margin: 0; }
+.summary-dl dt { font-size: 0.8125rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-2); margin-top: 0.625rem; }
+:lang(zh-HK) .summary-dl dt { text-transform: none; letter-spacing: 0.04em; font-size: 0.875rem; }
+.summary-dl dd { margin: 0.125rem 0 0; }
+@media (min-width: 40rem) {
+  .summary-dl { grid-template-columns: 9rem minmax(0, 1fr); column-gap: 1rem; }
+  .summary-dl dt { margin-top: 0.5rem; }
+  .summary-dl dd { margin-top: 0.4rem; }
+}
+.summary-unknown { background: var(--sunken); border: 1.5px dashed var(--unknown-line); border-radius: var(--radius); padding: 1rem; }
+.summary-unknown-list { margin: 0; padding-left: 1.25rem; }
+.summary-unknown-list .summary-pair { font-size: 1rem; }
+.summary-disclaimer { margin-top: 1.5rem; }
+.print-url { display: none; }
+
+/* ---------- About ---------- */
+
+.about { max-width: 46rem; }
+.about-section { border-top: 1px solid var(--ink); padding: 1.5rem 0 0.5rem; }
+.about-section h2 { font-size: clamp(1.375rem, 1.15rem + 1vw, 1.875rem); font-weight: 700; letter-spacing: -0.015em; margin-bottom: 0.75rem; }
+.scale { list-style: none; margin: 0 0 1.25rem; padding: 0; display: grid; gap: 0.5rem; counter-reset: lvl; }
+.scale li { display: flex; align-items: center; gap: 0.75rem; counter-increment: lvl; }
+.scale li::before { content: counter(lvl); font-weight: 700; color: var(--ink-2); width: 1.25rem; }
+.strong { font-weight: 700; }
+.about-dl { margin: 0; }
+.about-dl dt { font-weight: 700; margin-top: 0.75rem; }
+.about-dl dd { margin: 0.125rem 0 0; color: var(--ink-2); }
+.about-sources li { margin-bottom: 0.5rem; }
+.source-pairs { display: block; color: var(--ink-2); font-size: 0.9375rem; }
+.about-next { padding-left: 1.25rem; }
+.about-next li { margin: 0.375rem 0; }
+
+/* ---------- Print: one clean page for the doctor ---------- */
+
+@page { size: A4; margin: 14mm 14mm 16mm; }
+
+@media print {
+  html { font-size: 10pt; }
+  body { background: #fff; color: #000; }
+  .site-header, .skip-link, .no-print, .check-bar, .below-bar, .site-footer, .ext, .visually-hidden { display: none !important; }
+  .wrap { max-width: none; padding: 0; }
+  main { padding: 0; }
+  a { color: #000; text-decoration: none; }
+  .summary { max-width: none; padding: 0; }
+  .summary-head h1 { font-size: 16pt; margin-bottom: 2pt; }
+  .summary-kicker { color: #000; margin-bottom: 2pt; }
+  .summary-lists, .summary-section { border-top: 1pt solid #000; margin-top: 8pt; padding-top: 6pt; }
+  .summary-lists { grid-template-columns: 1fr 1fr; gap: 12pt; }
+  .summary h2 { font-size: 11pt; margin-bottom: 3pt; }
+  .summary-row { break-inside: avoid; page-break-inside: avoid; padding: 6pt 8pt; margin-bottom: 6pt; border: 1pt solid #999; border-left-width: 4pt; }
+  .summary-row-head { display: flex; flex-wrap: wrap; align-items: center; gap: 4pt 8pt; margin-bottom: 2pt; }
+  .summary-pair { font-size: 10.5pt; }
+  .summary-dl { grid-template-columns: 22mm minmax(0, 1fr); column-gap: 6pt; }
+  .summary-dl dt { font-size: 7.5pt; margin-top: 3pt; color: #333; }
+  .summary-dl dd { margin-top: 2.5pt; }
+  .badge { font-size: 8.5pt; padding: 1pt 6pt 1pt 4pt; border: 1pt solid #000;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .sources { padding-left: 12pt; font-size: 8pt; }
+  .sources li { margin: 0; }
+  .sources a { display: inline; min-height: 0; padding: 0; }
+  .print-url { display: block; color: #333; word-break: break-all; }
+  .summary-unknown { background: #fff; border: 1pt dashed #666; padding: 6pt 8pt; break-inside: avoid; }
+  .summary-unknown .icon { display: none; }
+  .summary-unknown-list { columns: 2; column-gap: 16pt; }
+  .summary-unknown-list li { break-inside: avoid; }
+  .disclaimer-box { background: #fff; border: 1pt solid #000; border-left-width: 3pt; padding: 5pt 8pt; font-size: 9pt; }
+  .summary-row, .summary-unknown, .disclaimer-box { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* ---------- Demo: Mrs Wong ---------- */
+
+.demo-banner {
+  border: 2px solid var(--accent); background: var(--accent-soft); border-radius: var(--radius);
+  padding: 1rem 1.25rem; margin: 0 0 1.25rem;
+}
+.demo-banner h2 { font-size: 1.125rem; font-weight: 700; margin-bottom: 0.375rem; color: var(--accent); }
+.demo-banner p { margin-bottom: 0.75rem; }
+.demo-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem; }
+body[data-route="check"] .demo-banner { grid-column: 1 / -1; }
+.demo-start { margin-top: 1rem; }

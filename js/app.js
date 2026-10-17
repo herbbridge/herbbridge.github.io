@@ -12,7 +12,7 @@
   var STORAGE_KEY = 'herbsafe.v1';
 
   var db = null;
-  var state = { herbs: [], drugs: [], lang: 'en' };
+  var state = { herbs: [], drugs: [], lang: 'en', demo: false };
   var app = document.getElementById('app');
 
   /* ---------- small helpers ---------- */
@@ -75,6 +75,7 @@
         if (Array.isArray(saved.herbs)) state.herbs = saved.herbs.filter(function (id) { return db.herbById[id]; });
         if (Array.isArray(saved.drugs)) state.drugs = saved.drugs.filter(function (id) { return db.drugById[id]; });
         if (I.languages.indexOf(saved.lang) !== -1) state.lang = saved.lang;
+        state.demo = saved.demo === true;
       }
     } catch (e) { /* private mode or blocked storage: start empty */ }
   }
@@ -199,6 +200,12 @@
     updateCheckBar();
   }
 
+  function startDemo() {
+    if ((state.herbs.length || state.drugs.length) && !state.demo && !window.confirm(t('demo_confirm'))) return;
+    state.herbs = []; state.drugs = ['warfarin', 'amlodipine']; state.demo = true; alertState = null;
+    save(); render(true);
+  }
+
   /* Dashboard: what is in the cabinet and which combinations need attention. */
   function renderCabinet() {
     if (!cabinetPanel) return;
@@ -211,6 +218,7 @@
     var nH = state.herbs.length, nD = state.drugs.length;
     if (!nH && !nD) {
       cabinetPanel.appendChild(el('p', { class: 'cabinet-empty', text: t('cabinet_empty') }));
+      cabinetPanel.appendChild(el('button', { type: 'button', class: 'btn btn-secondary btn-small demo-start', onclick: startDemo }, [el('span', { text: t('demo_button') })]));
       return;
     }
     cabinetPanel.appendChild(el('p', { class: 'cabinet-counts', text: I.tn('count_herbs', nH) + ' · ' + I.tn('count_drugs', nD) }));
@@ -288,9 +296,12 @@
       type: 'button', class: 'btn btn-quiet',
       onclick: function () {
         if (!state.herbs.length && !state.drugs.length) return;
-        if (window.confirm(t('clear_confirm'))) { state.herbs = []; state.drugs = []; alertState = null; save(); render(); }
+        if (window.confirm(t('clear_confirm'))) { state.herbs = []; state.drugs = []; state.demo = false; alertState = null; save(); render(); }
       }
     }, [el('span', { text: t('clear_all') })]);
+
+    // Demo for the video: Mrs Wong already takes warfarin and amlodipine; danshen is added on camera.
+    var demo = el('button', { type: 'button', class: 'btn btn-quiet', onclick: startDemo }, [el('span', { text: t('demo_button') })]);
 
     app.textContent = '';
     var hasItems = state.herbs.length + state.drugs.length > 0;
@@ -299,6 +310,23 @@
       el('p', { class: 'lede', text: t('hero_lede') })
     ]));
     pickerRefreshers = [];
+    if (state.demo) {
+      var hasDanshen = state.herbs.indexOf('danshen') !== -1;
+      app.appendChild(el('section', { class: 'demo-banner', 'aria-labelledby': 'h-demo' }, [
+        el('h2', { id: 'h-demo', text: t('demo_title') }),
+        el('p', { text: t('demo_story') }),
+        el('div', { class: 'demo-actions' }, [
+          hasDanshen ? null : el('button', {
+            type: 'button', class: 'btn btn-primary btn-small',
+            onclick: function (ev) { ev.currentTarget.remove(); addOrRemove('herbs', 'danshen'); }
+          }, [el('span', { text: t('demo_add') })]),
+          el('button', {
+            type: 'button', class: 'btn btn-quiet btn-small',
+            onclick: function () { state.herbs = []; state.drugs = []; state.demo = false; alertState = null; save(); render(true); }
+          }, [el('span', { text: t('demo_end') })])
+        ])
+      ]));
+    }
     cabinetPanel = el('section', { class: 'cabinet', 'aria-labelledby': 'h-cabinet' });
     app.appendChild(cabinetPanel);
     app.appendChild(picker('herbs', '01'));
@@ -307,7 +335,7 @@
       alertBox,
       el('div', { class: 'check-bar-inner' }, [status, button])
     ]));
-    app.appendChild(el('div', { class: 'below-bar' }, [clear]));
+    app.appendChild(el('div', { class: 'below-bar' }, [clear, ' ', demo]));
     renderCabinet();
     updateCheckBar();
   }
@@ -409,16 +437,187 @@
     ]));
   }
 
-  /* ---------- placeholder and error screens ---------- */
+  /* ---------- Doctor summary (printable) ---------- */
 
-  function renderComingSoon(titleKey) {
-    app.textContent = '';
-    app.appendChild(el('section', { class: 'results-head' }, [
-      el('h1', { tabindex: '-1', text: t(titleKey) }),
-      el('p', { class: 'lede', text: t('coming_soon_text') }),
-      el('a', { class: 'btn btn-secondary', href: '#/check', text: t('back_to_check') })
-    ]));
+  function formatDate(d) {
+    try {
+      return d.toLocaleDateString(state.lang === 'zh' ? 'zh-HK' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+    } catch (e) { return d.toISOString().slice(0, 10); }
   }
+
+  function sourceList(sources) {
+    var ol = el('ol', { class: 'sources' });
+    sources.forEach(function (s) {
+      ol.appendChild(el('li', null, [
+        el('a', { href: s.url, target: '_blank', rel: 'noopener noreferrer' }, [
+          el('span', { text: s.label }), icon('external', 'ext'),
+          el('span', { class: 'visually-hidden', text: ' ' + t('opens_new_tab') })
+        ]),
+        el('span', { class: 'print-url', text: s.url })
+      ]));
+    });
+    return ol;
+  }
+
+  function itemList(items) {
+    if (!items.length) return el('p', { class: 'muted', text: t('summary_none_listed') });
+    var ul = el('ul', { class: 'summary-items' });
+    items.forEach(function (item) {
+      ul.appendChild(el('li', null, [
+        el('span', { class: 'si-en', lang: 'en-GB', text: item.name_en }), ' ',
+        el('span', { class: 'si-zh', lang: 'zh-HK', text: item.name_zh }),
+        item.latin ? el('span', { class: 'si-latin', lang: 'la', text: item.latin }) : null
+      ]));
+    });
+    return ul;
+  }
+
+  function bilingualPair(r) {
+    return el('h4', { class: 'summary-pair' }, [
+      el('span', { lang: 'en-GB', text: r.herb.name_en + ' ' }), el('span', { lang: 'zh-HK', text: r.herb.name_zh }),
+      el('span', { class: 'pair-plus', 'aria-hidden': 'true', text: '+' }),
+      el('span', { class: 'visually-hidden', text: ' ' + t('and_sr') + ' ' }),
+      el('span', { lang: 'en-GB', text: r.drug.name_en + ' ' }), el('span', { lang: 'zh-HK', text: r.drug.name_zh })
+    ]);
+  }
+
+  function renderSummary() {
+    app.textContent = '';
+    var page = el('article', { class: 'summary' });
+    app.appendChild(page);
+    page.appendChild(el('header', { class: 'summary-head' }, [
+      el('p', { class: 'summary-kicker', text: 'HerbSafe 中西通 · ' + t('summary_title') }),
+      el('h1', { tabindex: '-1', text: t('summary_headline') }),
+      el('p', { class: 'muted', text: t('summary_generated', { date: formatDate(new Date()) }) })
+    ]));
+
+    if (!state.herbs.length && !state.drugs.length) {
+      page.appendChild(el('p', { class: 'lede', text: t('summary_empty') }));
+      page.appendChild(el('a', { class: 'btn btn-primary no-print', href: '#/check', text: t('back_to_check') }));
+      return;
+    }
+
+    page.appendChild(el('div', { class: 'no-print summary-actions' }, [
+      el('button', { type: 'button', class: 'btn btn-primary', onclick: function () { window.print(); } }, [el('span', { text: t('summary_print') })]),
+      el('a', { class: 'btn btn-secondary', href: '#/check', text: t('edit_list') })
+    ]));
+
+    page.appendChild(el('section', { class: 'summary-lists' }, [
+      el('div', null, [el('h2', { text: t('summary_herbs') }), itemList(state.herbs.map(function (id) { return db.herbById[id]; }))]),
+      el('div', null, [el('h2', { text: t('summary_drugs') }), itemList(state.drugs.map(function (id) { return db.drugById[id]; }))])
+    ]));
+
+    var rows = L.checkPairs(db, state.herbs, state.drugs);
+    var rated = rows.filter(function (r) { return r.entry; });
+    var unknown = rows.filter(function (r) { return !r.entry; });
+
+    var flaggedSection = el('section', { class: 'summary-section' }, [el('h2', { text: t('summary_flagged') })]);
+    if (!rated.length) flaggedSection.appendChild(el('p', { text: state.herbs.length && state.drugs.length ? t('summary_flagged_none') : t('cabinet_need_both') }));
+    rated.forEach(function (r) {
+      var e = r.entry;
+      var evidence = e.evidence_level.map(function (l) { return t('ev_' + l); }).join(' · ');
+      flaggedSection.appendChild(el('div', { class: 'summary-row summary-' + e.risk }, [
+        el('div', { class: 'summary-row-head' }, [badge(e.risk, e.watch), bilingualPair(r)]),
+        el('dl', { class: 'summary-dl' }, [
+          el('dt', { text: t('label_rated_by') }), el('dd', { text: e.rating_source === 'HA' ? t('rated_by_ha') : t('rated_by_team') }),
+          el('dt', { text: t('col_effect') }), el('dd', { text: field(e, 'effect') }),
+          el('dt', { text: t('label_what_to_do') }), el('dd', { text: field(e, 'action') }),
+          el('dt', { text: t('label_evidence') }), el('dd', { text: evidence }),
+          el('dt', { text: t('label_sources') }), el('dd', null, [sourceList(e.sources)])
+        ])
+      ]));
+    });
+    page.appendChild(flaggedSection);
+
+    if (unknown.length) {
+      var ul = el('ul', { class: 'summary-unknown-list' });
+      unknown.forEach(function (r) { ul.appendChild(el('li', null, [bilingualPair(r)])); });
+      page.appendChild(el('section', { class: 'summary-section summary-unknown' }, [
+        el('h2', null, [icon('not_in_database'), el('span', { text: ' ' + t('summary_unknown') })]),
+        el('p', { text: t('summary_unknown_text') }),
+        ul
+      ]));
+    }
+
+    page.appendChild(el('p', { class: 'disclaimer-box summary-disclaimer', text: t('card_disclaimer') }));
+  }
+
+  /* ---------- About ---------- */
+
+  function pairLabel(e) {
+    var herb = db.herbById[e.herb_id];
+    var other = e.drug_id ? primaryName(db.drugById[e.drug_id]) : t('class_' + e.drug_class);
+    return primaryName(herb) + ' + ' + other;
+  }
+
+  function renderAbout() {
+    app.textContent = '';
+    var page = el('article', { class: 'about' });
+    app.appendChild(page);
+    function section(titleKey, children) {
+      return el('section', { class: 'about-section' }, [el('h2', { text: t(titleKey) })].concat(children));
+    }
+
+    page.appendChild(el('header', { class: 'results-head' }, [
+      el('h1', { tabindex: '-1', text: t('about_title') }),
+      el('p', { class: 'lede', text: t('about_intro') })
+    ]));
+
+    page.appendChild(section('about_how_title', [el('p', { text: t('about_how') })]));
+
+    var scale = el('ol', { class: 'scale' });
+    L.RISKS.forEach(function (risk) { scale.appendChild(el('li', null, [badge(risk)])); });
+    page.appendChild(section('about_ratings_title', [
+      el('p', { text: t('about_ratings_intro') }),
+      scale,
+      el('p', null, [badge('low', true)]),
+      el('p', { text: t('about_low_watch') }),
+      el('p', null, [badge('not_in_database')]),
+      el('p', { class: 'strong', text: t('about_not_in_db') }),
+      el('p', { text: t('about_rating_source') })
+    ]));
+
+    var ev = el('dl', { class: 'about-dl' });
+    L.EVIDENCE_LEVELS.forEach(function (lvl) {
+      ev.appendChild(el('dt', { text: t('ev_' + lvl) }));
+      ev.appendChild(el('dd', { text: t('ev_' + lvl + '_desc') }));
+    });
+    page.appendChild(section('about_evidence_title', [ev]));
+
+    page.appendChild(section('about_disclaimer_title', [el('p', { class: 'disclaimer-box', text: t('card_disclaimer') })]));
+    page.appendChild(section('about_privacy_title', [el('p', { text: t('about_privacy') })]));
+
+    // Every source in the database, once, with the combinations that cite it.
+    var byUrl = {}, order = [];
+    db.interactions.forEach(function (e) {
+      e.sources.forEach(function (s) {
+        if (!byUrl[s.url]) { byUrl[s.url] = { source: s, pairs: [] }; order.push(s.url); }
+        byUrl[s.url].pairs.push(pairLabel(e));
+      });
+    });
+    var list = el('ol', { class: 'sources about-sources' });
+    order.forEach(function (url) {
+      var x = byUrl[url];
+      list.appendChild(el('li', null, [
+        el('a', { href: url, target: '_blank', rel: 'noopener noreferrer' }, [
+          el('span', { text: x.source.label }), icon('external', 'ext'),
+          el('span', { class: 'visually-hidden', text: ' ' + t('opens_new_tab') })
+        ]),
+        el('span', { class: 'source-pairs', text: x.pairs.join(t('list_sep')) })
+      ]));
+    });
+    page.appendChild(section('about_sources_title', [
+      el('p', { text: t('about_sources_intro') }),
+      list,
+      db.lastUpdated ? el('p', { class: 'muted', text: t('about_updated', { date: formatDate(new Date(db.lastUpdated + 'T00:00:00')) }) }) : null
+    ]));
+
+    var next = el('ul', { class: 'about-next' });
+    ['about_next_1', 'about_next_2', 'about_next_3', 'about_next_4'].forEach(function (k) { next.appendChild(el('li', { text: t(k) })); });
+    page.appendChild(section('about_next_title', [next, el('p', { class: 'muted', text: t('about_team') })]));
+  }
+
+  /* ---------- error screen ---------- */
 
   function renderError() {
     app.textContent = '';
@@ -474,8 +673,8 @@
     });
     document.body.setAttribute('data-route', route);
     if (route === 'results') renderResults();
-    else if (route === 'summary') renderComingSoon('nav_summary');
-    else if (route === 'about') renderComingSoon('nav_about');
+    else if (route === 'summary') renderSummary();
+    else if (route === 'about') renderAbout();
     else renderCheck();
     if (focus) {
       window.scrollTo(0, 0);
