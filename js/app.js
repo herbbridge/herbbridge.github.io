@@ -686,6 +686,9 @@
     Array.prototype.forEach.call(document.querySelectorAll('[data-i18n]'), function (node) {
       node.textContent = t(node.getAttribute('data-i18n'));
     });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-i18n-label]'), function (node) {
+      node.setAttribute('aria-label', t(node.getAttribute('data-i18n-label')));
+    });
     var toggleBtn = document.getElementById('lang-toggle');
     toggleBtn.textContent = '';
     toggleBtn.appendChild(el('span', { lang: zh ? 'en-GB' : 'zh-HK', text: t('lang_toggle') }));

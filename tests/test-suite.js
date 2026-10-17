@@ -267,6 +267,12 @@
         });
         return { pass: bad.length === 0, detail: bad.join(', ') };
       });
+      check('Languages', 'Chinese never says 同時服用 (reads as timing advice) or 中風險 (reads as "stroke risk")', function () {
+        var texts = Object.keys(S.zh).map(function (k) { return S.zh[k]; });
+        db.interactions.forEach(function (e) { ['effect_zh', 'why_zh', 'action_zh'].forEach(function (f) { if (e[f]) texts.push(e[f]); }); });
+        var bad = texts.filter(function (x) { return /同時服用|中風險/.test(x); });
+        return { pass: bad.length === 0, detail: bad.join('\n') };
+      });
       check('Languages', 'the required disclaimer and "not in database" wording are exact in English', function () {
         return S.en.card_disclaimer === 'HerbSafe gives information, not medical advice. Never stop or change a medicine without talking to your doctor or pharmacist.' &&
           S.en.not_in_db_text === 'We have no record of this combination. This does not mean it is safe. Please ask your pharmacist or doctor.';
