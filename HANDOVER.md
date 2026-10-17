@@ -1,13 +1,13 @@
 # HerbSafe 中西通: handover notes
 
-Status as of 16 Oct 2026. Deadline: working app by Sunday 18 Oct (demo video).
+Status as of 17 Oct 2026. Deadline: working app by Sunday 18 Oct (demo video).
 Paste the original project brief into the new session together with this file.
 
 ## Progress (order of work from the brief)
 1. Folder structure + JSON schema: done
 2. Data files (`data/`): done, cleaned to source-verified claims only
-3. Lookup logic + tests: **not started (owner said wait)**
-4. Check → Results: not started
+3. Lookup logic + tests: done (`node tests/run-tests.js`, or tests/test.html via a local server)
+4. Check → Results: done, reshaped as "My medicine cabinet" (see below)
 5. Language toggle: not started
 6. Doctor summary (print): not started
 7. About page: not started
@@ -47,3 +47,25 @@ Still to do with full-text access:
 3. Page & Lawrence 1999: the abstract says ">2-fold" rise in PT and INR. Check the raw
    numbers in the full text.
 4. Cleveland Clinic 2001 page: check it is still live.
+
+## Hackathon version: "My medicine cabinet" (decided 17 Oct)
+The owner wants the app to feel like a personal dashboard that warns about clashes.
+For Sunday this is done WITHOUT accounts, a server or scanning:
+- The Check screen is "My medicine cabinet": the list is saved only on the device
+  (localStorage), with a summary of flagged pairs and "not in database" pairs at the top.
+- Adding an item that clashes with something already in the cabinet shows an instant
+  warning in the sticky bar. It stays until closed. Only rated pairs (High/Moderate/Low)
+  trigger it; "not in database" pairs are reported in the cabinet summary, never as safe.
+- Users find names on the pharmacy label, medicine box or 藥方 and pick them from the list.
+
+## Future full app (owner's long-term plan; pitch as roadmap, do not build now)
+- Accounts (username + password) and a private, secure database of each person's
+  medicine history. Needs: a proper auth service (never store plain passwords), encryption,
+  explicit consent, and compliance with Hong Kong's Personal Data (Privacy) Ordinance.
+  The "no accounts, no tracking" promise in the UI must be rewritten when this happens.
+- Scanning: HK registration numbers on packs (HK-… Western, HKC-… proprietary Chinese
+  medicines) or a label photo, ALWAYS followed by a user confirmation step before saving.
+  Needs a verified registration-number → product database. Manual search stays as fallback.
+- Push notifications for new clashes or database updates (needs a server).
+- Keep the current data model (cabinet = lists of herb/drug ids; curated JSON database)
+  so it can be synced to an account later without rewriting the lookup logic.

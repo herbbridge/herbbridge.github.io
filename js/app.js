@@ -87,6 +87,31 @@
     var i = list.indexOf(id);
     if (i === -1) list.push(id); else list.splice(i, 1);
     save();
+    return i === -1;
+  }
+
+  /* Rated pairs (High, Moderate or Low) between one item and the rest of the cabinet. */
+  function clashesFor(kind, id) {
+    var rows = kind === 'herbs' ? L.checkPairs(db, [id], state.drugs) : L.checkPairs(db, state.herbs, [id]);
+    return rows.filter(function (r) { return r.entry && r.entry.risk !== 'none_reported'; });
+  }
+
+  /* The warning shown straight after adding something that clashes. Not saved. */
+  var alertState = null;
+
+  function addOrRemove(kind, id) {
+    var added = toggle(kind, id);
+    if (added) {
+      var clashes = clashesFor(kind, id);
+      alertState = clashes.length ? { kind: kind, id: id, rows: clashes } : null;
+    } else if (alertState) {
+      // Drop the warning if it was about the item just removed or no longer applies.
+      alertState.rows = alertState.rows.filter(function (r) {
+        return state.herbs.indexOf(r.herb.id) !== -1 && state.drugs.indexOf(r.drug.id) !== -1;
+      });
+      if (!alertState.rows.length) alertState = null;
+    }
+    refreshCheck();
   }
 
   /* ---------- Check screen ---------- */
@@ -115,7 +140,7 @@
         chips.appendChild(el('li', null, [
           el('button', {
             type: 'button', class: 'chip', 'aria-label': t('remove_item', { name: item.name_en + ' ' + item.name_zh }),
-            onclick: function () { toggle(kind, id); refresh(); }
+            onclick: function () { addOrRemove(kind, id); }
           }, [nameNode(item), icon('close', 'chip-x')])
         ]));
       });
@@ -134,7 +159,7 @@
         options.appendChild(el('li', null, [
           el('button', {
             type: 'button', class: 'option' + (on ? ' is-on' : ''), 'aria-pressed': on ? 'true' : 'false',
-            onclick: function () { toggle(kind, item.id); refresh(); }
+            onclick: function () { addOrRemove(kind, item.id); }
           }, [
             nameNode(item),
             el('span', { class: 'option-state' }, [icon(on ? 'tick' : 'plus'), el('span', { text: on ? t('added') : t('add') })])
@@ -143,7 +168,7 @@
       });
     }
 
-    function refresh() { renderChips(); renderOptions(); updateCheckBar(); }
+    pickerRefreshers.push(function () { renderChips(); renderOptions(); });
 
     input.addEventListener('input', function () { query = input.value; renderOptions(); });
 
@@ -160,13 +185,88 @@
       el('label', { class: 'search-label', for: inputId, text: kind === 'herbs' ? t('search_herbs') : t('search_drugs') }),
       el('p', { class: 'search-hint', id: 'hint-' + kind, text: t('search_hint') }),
       input,
-      options
+      options,
+      el('p', { class: 'where-tip', text: t(kind === 'herbs' ? 'where_herbs' : 'where_drugs') })
     ]);
+  }
+
+  var pickerRefreshers = [];
+  var cabinetPanel = null;
+
+  function refreshCheck() {
+    pickerRefreshers.forEach(function (fn) { fn(); });
+    renderCabinet();
+    updateCheckBar();
+  }
+
+  /* Dashboard: what is in the cabinet and which combinations need attention. */
+  function renderCabinet() {
+    if (!cabinetPanel) return;
+    cabinetPanel.textContent = '';
+    cabinetPanel.appendChild(el('div', { class: 'section-head' }, [
+      el('h2', { id: 'h-cabinet', text: t('cabinet_title') })
+    ]));
+    cabinetPanel.appendChild(el('p', { class: 'cabinet-lede', text: t('cabinet_lede') }));
+
+    var nH = state.herbs.length, nD = state.drugs.length;
+    if (!nH && !nD) {
+      cabinetPanel.appendChild(el('p', { class: 'cabinet-empty', text: t('cabinet_empty') }));
+      return;
+    }
+    cabinetPanel.appendChild(el('p', { class: 'cabinet-counts', text: I.tn('count_herbs', nH) + ' · ' + I.tn('count_drugs', nD) }));
+    if (!nH || !nD) {
+      cabinetPanel.appendChild(el('p', { class: 'cabinet-empty', text: t('cabinet_need_both') }));
+      return;
+    }
+
+    var rows = L.checkPairs(db, state.herbs, state.drugs);
+    var flagged = rows.filter(function (r) { return r.entry && r.entry.risk !== 'none_reported'; });
+    var unknown = rows.filter(function (r) { return !r.entry; }).length;
+
+    if (flagged.length) {
+      cabinetPanel.appendChild(el('p', { class: 'cabinet-alert-title', text: I.tn('cabinet_clashes', flagged.length) }));
+      var list = el('ul', { class: 'clash-list' });
+      flagged.forEach(function (r) {
+        list.appendChild(el('li', { class: 'clash-row clash-' + r.status }, [
+          badge(r.status, r.entry.watch),
+          el('span', { class: 'clash-pair' }, [
+            el('span', { text: primaryName(r.herb) }), el('span', { class: 'pair-plus', 'aria-hidden': 'true', text: '+' }),
+            el('span', { class: 'visually-hidden', text: ' and ' }), el('span', { text: primaryName(r.drug) })
+          ])
+        ]));
+      });
+      cabinetPanel.appendChild(list);
+    } else {
+      cabinetPanel.appendChild(el('p', { class: 'cabinet-clear', text: t('cabinet_no_rated') }));
+    }
+    if (unknown) cabinetPanel.appendChild(el('p', { class: 'cabinet-unknown', text: I.tn('cabinet_unknown', unknown) }));
+    cabinetPanel.appendChild(el('a', { class: 'btn btn-secondary btn-small', href: '#/results', text: t('cabinet_see_all') }));
+  }
+
+  function renderAlert(box) {
+    box.textContent = '';
+    if (!alertState) { box.hidden = true; return; }
+    box.hidden = false;
+    var byId = alertState.kind === 'herbs' ? db.herbById : db.drugById;
+    var item = byId[alertState.id];
+    var top = alertState.rows[0];
+    var others = alertState.rows.map(function (r) { return primaryName(alertState.kind === 'herbs' ? r.drug : r.herb); });
+    box.appendChild(el('div', { class: 'alert-body' }, [
+      badge(top.status, top.entry.watch),
+      el('p', { class: 'alert-text', text: t('alert_clash', { item: primaryName(item), others: others.join(', ') }) })
+    ]));
+    box.appendChild(el('div', { class: 'alert-actions' }, [
+      el('a', { class: 'btn btn-primary btn-small', href: '#/results', text: t('alert_details') }),
+      el('button', {
+        type: 'button', class: 'btn btn-quiet btn-small', onclick: function () { alertState = null; renderAlert(box); }
+      }, [el('span', { text: t('alert_dismiss') })])
+    ]));
   }
 
   var checkBar = null;
   function updateCheckBar() {
     if (!checkBar) return;
+    renderAlert(checkBar.alert);
     var ready = state.herbs.length > 0 && state.drugs.length > 0;
     checkBar.button.disabled = !ready;
     checkBar.button.setAttribute('aria-describedby', 'check-status');
@@ -181,27 +281,34 @@
       type: 'button', class: 'btn btn-primary btn-check',
       onclick: function () { if (!button.disabled) location.hash = '#/results'; }
     }, [el('span', { text: t('check_button') })]);
-    checkBar = { button: button, status: status };
+    var alertBox = el('div', { class: 'clash-alert', role: 'alert', hidden: true });
+    checkBar = { button: button, status: status, alert: alertBox };
 
     var clear = el('button', {
       type: 'button', class: 'btn btn-quiet',
       onclick: function () {
         if (!state.herbs.length && !state.drugs.length) return;
-        if (window.confirm(t('clear_confirm'))) { state.herbs = []; state.drugs = []; save(); render(); }
+        if (window.confirm(t('clear_confirm'))) { state.herbs = []; state.drugs = []; alertState = null; save(); render(); }
       }
     }, [el('span', { text: t('clear_all') })]);
 
     app.textContent = '';
-    app.appendChild(el('section', { class: 'hero' }, [
+    var hasItems = state.herbs.length + state.drugs.length > 0;
+    app.appendChild(el('section', { class: 'hero' + (hasItems ? ' hero-compact' : '') }, [
       el('h1', { class: 'display', tabindex: '-1', text: t('hero_title') }),
       el('p', { class: 'lede', text: t('hero_lede') })
     ]));
+    pickerRefreshers = [];
+    cabinetPanel = el('section', { class: 'cabinet', 'aria-labelledby': 'h-cabinet' });
+    app.appendChild(cabinetPanel);
     app.appendChild(picker('herbs', '01'));
     app.appendChild(picker('drugs', '02'));
     app.appendChild(el('div', { class: 'check-bar' }, [
+      alertBox,
       el('div', { class: 'check-bar-inner' }, [status, button])
     ]));
     app.appendChild(el('div', { class: 'below-bar' }, [clear]));
+    renderCabinet();
     updateCheckBar();
   }
 
@@ -338,6 +445,8 @@
   function render(focus) {
     var route = currentRoute();
     checkBar = null;
+    cabinetPanel = null;
+    if (route !== 'check') alertState = null;
     applyStaticText();
     Array.prototype.forEach.call(document.querySelectorAll('[data-route-link]'), function (a) {
       if (a.getAttribute('data-route-link') === route) a.setAttribute('aria-current', 'page');

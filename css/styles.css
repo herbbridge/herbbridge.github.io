@@ -114,8 +114,11 @@ h1, h2, h3, h4 { margin: 0; line-height: 1.2; }
 
 @media (max-width: 34rem) {
   .header-inner { padding-top: 0.25rem; }
-  .site-nav { width: 100%; margin: 0 0 0 -0.75rem; justify-content: flex-start; }
+  .site-nav { width: 100%; margin: 0 0 0 -0.5rem; justify-content: flex-start; gap: 0; flex-wrap: wrap; }
+  .site-nav a { font-size: 0.9375rem; }
+  .site-nav a { padding: 0 0.5rem; }
 }
+.site-nav a { white-space: nowrap; }
 
 .site-footer {
   margin-top: 4rem; padding: 2rem 0 calc(2rem + env(safe-area-inset-bottom));
@@ -148,6 +151,10 @@ main:focus { outline: none; }
 /* ---------- Check screen ---------- */
 
 .hero { padding: clamp(2.5rem, 6vw, 5.5rem) 0 clamp(2rem, 4vw, 3.5rem); }
+/* Returning users with a saved cabinet: smaller headline so the dashboard is on the first screen. */
+.hero-compact { padding: 1.5rem 0 1.25rem; }
+.hero-compact .display { font-size: clamp(1.625rem, 1.2rem + 2vw, 2.75rem); max-width: none; margin-bottom: 0; }
+.hero-compact .lede { display: none; }
 
 .picker { border-top: 1px solid var(--ink); padding: 1.5rem 0 2rem; }
 .picker-count { color: var(--ink-2); font-size: 1rem; margin: 0.25rem 0 0.75rem; }
@@ -156,6 +163,7 @@ body[data-route="check"] #app { display: grid; grid-template-columns: minmax(0, 
 @media (min-width: 56rem) {
   body[data-route="check"] #app { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
   body[data-route="check"] .hero,
+  body[data-route="check"] .cabinet,
   body[data-route="check"] .check-bar,
   body[data-route="check"] .below-bar { grid-column: 1 / -1; }
 }
@@ -344,3 +352,39 @@ body[data-route="check"] #app { display: grid; grid-template-columns: minmax(0, 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
 }
+
+/* ---------- My medicine cabinet (dashboard) ---------- */
+
+.cabinet {
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 1.25rem; margin: 0 0 2.5rem;
+}
+.cabinet .section-head h2 { font-size: clamp(1.375rem, 1.15rem + 1vw, 1.875rem); }
+.cabinet-lede { color: var(--ink-2); font-size: 1rem; margin-top: 0.25rem; }
+.cabinet-counts { font-weight: 700; margin: 0.75rem 0 0.5rem; }
+.cabinet-empty { margin: 0.75rem 0 0; font-weight: 500; }
+.cabinet-alert-title { font-weight: 700; font-size: 1.125rem; margin: 1rem 0 0.5rem; }
+.cabinet-clear { margin: 1rem 0 0.5rem; }
+.cabinet-unknown {
+  background: var(--sunken); border: 1.5px dashed var(--unknown-line); border-radius: var(--radius);
+  padding: 0.75rem 1rem; font-size: 1rem; margin: 0.75rem 0 1rem;
+}
+.clash-list { list-style: none; margin: 0 0 1rem; padding: 0; border-top: 1px solid var(--line); }
+.clash-row {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.875rem;
+  padding: 0.75rem 0; border-bottom: 1px solid var(--line);
+}
+.clash-pair { font-weight: 700; font-size: 1.0625rem; }
+.btn-small { min-height: 3rem; padding: 0 1.25rem; font-size: 1rem; }
+.where-tip { color: var(--ink-2); font-size: 0.9375rem; margin: 0.875rem 0 0; }
+
+/* Instant clash warning, inside the sticky bar so it is always in view. Stays until closed. */
+.clash-alert {
+  max-width: 72rem; margin: 0 auto 0.75rem; padding: 0.875rem 1rem;
+  background: var(--surface); border: 2px solid var(--ink); border-radius: var(--radius);
+  box-shadow: 0 6px 24px rgba(14, 17, 22, 0.12);
+}
+.clash-alert[hidden] { display: none; }
+.alert-body { display: grid; gap: 0.5rem; }
+.alert-text { margin: 0; font-weight: 700; font-size: 1.0625rem; }
+.alert-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem; margin-top: 0.75rem; }
