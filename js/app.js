@@ -72,15 +72,27 @@
     try {
       var saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
       if (saved && typeof saved === 'object') {
-        if (Array.isArray(saved.herbs)) state.herbs = saved.herbs.filter(function (id) { return db.herbById[id]; });
-        if (Array.isArray(saved.drugs)) state.drugs = saved.drugs.filter(function (id) { return db.drugById[id]; });
+        state.herbs = cleanIds(saved.herbs, db.herbById);
+        state.drugs = cleanIds(saved.drugs, db.drugById);
         if (I.languages.indexOf(saved.lang) !== -1) state.lang = saved.lang;
         state.demo = saved.demo === true;
+        if (state.demo && saved.demoBackup && typeof saved.demoBackup === 'object') {
+          state.demoBackup = { herbs: cleanIds(saved.demoBackup.herbs, db.herbById), drugs: cleanIds(saved.demoBackup.drugs, db.drugById) };
+        }
       }
     } catch (e) { /* private mode or blocked storage: start empty */ }
   }
+  // Known ids only, each once (old or hand-edited saved lists can contain anything).
+  function cleanIds(list, byId) {
+    if (!Array.isArray(list)) return [];
+    return list.filter(function (id, i) { return typeof id === 'string' && byId[id] && list.indexOf(id) === i; });
+  }
+
+  var storageOk = true;
   function save() {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) { /* ignore */ }
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); storageOk = true; }
+    catch (e) { storageOk = false; /* private mode or blocked storage: the cabinet says so */ }
+    return storageOk;
   }
 
   function toggle(kind, id) {
@@ -102,7 +114,9 @@
   var alertState = null;
   function pairKey(r) { return r.herb.id + '|' + r.drug.id; }
 
-  function addOrRemove(kind, id) {
+  function addOrRemove(kind, id, sourceEl) {
+    var anchorKey = sourceEl && sourceEl.getAttribute('data-key');
+    var anchorTop = anchorKey ? sourceEl.getBoundingClientRect().top : null;
     var added = toggle(kind, id);
     if (added) {
       var clashes = clashesFor(kind, id);
@@ -123,6 +137,20 @@
       if (!alertState.rows.length) alertState = null;
     }
     refreshCheck();
+    // The warning and cabinet above the lists grow or shrink; scroll so the tapped row stays
+    // where the finger is, and a quick second tap cannot land on a different item.
+    if (anchorKey) {
+      var again = findByKey(anchorKey);
+      if (again) window.scrollBy(0, again.getBoundingClientRect().top - anchorTop);
+    }
+    return added;
+  }
+
+  function findByKey(key) {
+    var target = app.querySelector('[data-key="' + key + '"]');
+    // A removed chip disappears: use the same item in the list instead.
+    if (!target && key.indexOf('chip-') === 0) target = app.querySelector('[data-key="opt-' + key.slice(5) + '"]');
+    return target;
   }
 
   /* Short spoken message for screen readers when new clashes appear (once, not on every redraw). */
@@ -143,7 +171,7 @@
     var byId = kind === 'herbs' ? db.herbById : db.drugById;
     var titleKey = kind === 'herbs' ? 'herbs_title' : 'drugs_title';
     var inputId = 'search-' + kind;
-    var query = '';
+    var query = queries[kind];
 
     var chips = el('ul', { class: 'chips', 'aria-label': t(titleKey) });
     var count = el('p', { class: 'picker-count' });
@@ -163,7 +191,7 @@
           el('button', {
             type: 'button', class: 'chip', 'data-key': 'chip-' + kind + '-' + id,
             'aria-label': t('remove_item', { name: primaryName(item) + ' ' + secondaryName(item) }),
-            onclick: function () { addOrRemove(kind, id); }
+            onclick: function (ev) { addOrRemove(kind, id, ev.currentTarget); }
           }, [nameNode(item), icon('close', 'chip-x')])
         ]));
       });
@@ -183,7 +211,7 @@
           el('button', {
             type: 'button', class: 'option' + (on ? ' is-on' : ''), 'aria-pressed': on ? 'true' : 'false',
             'data-key': 'opt-' + kind + '-' + item.id,
-            onclick: function () { addOrRemove(kind, item.id); }
+            onclick: function (ev) { addOrRemove(kind, item.id, ev.currentTarget); }
           }, [
             nameNode(item),
             el('span', { class: 'option-state', 'aria-hidden': 'true' }, [icon(on ? 'tick' : 'plus'), el('span', { text: on ? t('added') : t('add') })])
@@ -194,7 +222,8 @@
 
     pickerRefreshers.push(function () { renderChips(); renderOptions(); });
 
-    input.addEventListener('input', function () { query = input.value; renderOptions(); });
+    input.value = query;
+    input.addEventListener('input', function () { query = queries[kind] = input.value; renderOptions(); });
 
     renderChips();
     renderOptions();
@@ -214,28 +243,58 @@
     ]);
   }
 
+  var queries = { herbs: '', drugs: '' };
   var pickerRefreshers = [];
   var cabinetPanel = null;
+  var demoBox = null;
 
   function refreshCheck() {
     var active = document.activeElement;
     var key = active && active.getAttribute ? active.getAttribute('data-key') : null;
     pickerRefreshers.forEach(function (fn) { fn(); });
+    renderDemo();
     renderCabinet();
     renderWarning();
     updateCheckBar();
     if (key) {
-      var target = app.querySelector('[data-key="' + key + '"]');
-      // A removed chip disappears: move focus to the same item in the list instead.
-      if (!target && key.indexOf('chip-') === 0) target = app.querySelector('[data-key="opt-' + key.slice(5) + '"]');
+      var target = findByKey(key);
       if (target) target.focus({ preventScroll: true });
     }
   }
 
+  /* Demo for the video: Mrs Wong already takes warfarin and amlodipine; danshen is added on camera.
+     The user's own list is put aside and comes back when the demo ends. */
   function startDemo() {
-    if ((state.herbs.length || state.drugs.length) && !state.demo && !window.confirm(t('demo_confirm'))) return;
+    if (!state.demo) state.demoBackup = { herbs: state.herbs.slice(), drugs: state.drugs.slice() };
     state.herbs = []; state.drugs = ['warfarin', 'amlodipine']; state.demo = true; alertState = null;
     save(); render(true);
+  }
+
+  function endDemo() {
+    var backup = state.demoBackup || { herbs: [], drugs: [] };
+    state.herbs = backup.herbs; state.drugs = backup.drugs;
+    state.demo = false; delete state.demoBackup; alertState = null;
+    save(); render(true);
+  }
+
+  function renderDemo() {
+    if (!demoBox) return;
+    demoBox.textContent = '';
+    demoBox.hidden = !state.demo;
+    if (!state.demo) return;
+    var hasDanshen = state.herbs.indexOf('danshen') !== -1;
+    demoBox.appendChild(el('h2', { id: 'h-demo', text: t('demo_title') }));
+    demoBox.appendChild(el('p', { text: t('demo_story') }));
+    demoBox.appendChild(el('div', { class: 'demo-actions' }, [
+      hasDanshen ? null : el('button', {
+        type: 'button', class: 'btn btn-primary btn-small',
+        onclick: function () {
+          if (state.herbs.indexOf('danshen') === -1) addOrRemove('herbs', 'danshen');
+          showWarning();
+        }
+      }, [el('span', { text: t('demo_add') })]),
+      el('button', { type: 'button', class: 'btn btn-quiet btn-small', onclick: endDemo }, [el('span', { text: t('demo_end') })])
+    ]));
   }
 
   /* Dashboard: what is in the cabinet and which combinations need attention. */
@@ -243,9 +302,11 @@
     if (!cabinetPanel) return;
     cabinetPanel.textContent = '';
     cabinetPanel.appendChild(el('div', { class: 'section-head' }, [
-      el('h2', { id: 'h-cabinet', text: t('cabinet_title') })
+      el('h2', { id: 'h-cabinet', tabindex: '-1', text: t('cabinet_title') })
     ]));
-    cabinetPanel.appendChild(el('p', { class: 'cabinet-lede', text: t('cabinet_lede') }));
+    cabinetPanel.appendChild(storageOk
+      ? el('p', { class: 'cabinet-lede', text: t('cabinet_lede') })
+      : el('p', { class: 'cabinet-storage-off', role: 'status', text: t('storage_off') }));
 
     var nH = state.herbs.length, nD = state.drugs.length;
     if (!nH && !nD) {
@@ -305,7 +366,11 @@
       el('a', { class: 'btn btn-primary btn-small', href: '#/results', text: t('alert_details') }),
       el('button', {
         type: 'button', class: 'btn btn-secondary btn-small',
-        onclick: function () { alertState = null; renderWarning(); updateCheckBar(); }
+        onclick: function () {
+          alertState = null; renderWarning(); updateCheckBar();
+          var h = document.getElementById('h-cabinet');
+          if (h) h.focus();
+        }
       }, [el('span', { text: t('alert_dismiss') })])
     ]));
   }
@@ -347,11 +412,14 @@
       type: 'button', class: 'btn btn-quiet',
       onclick: function () {
         if (!state.herbs.length && !state.drugs.length) return;
-        if (window.confirm(t('clear_confirm'))) { state.herbs = []; state.drugs = []; state.demo = false; alertState = null; save(); render(); }
+        if (window.confirm(t('clear_confirm'))) {
+          state.herbs = []; state.drugs = []; state.demo = false; delete state.demoBackup; alertState = null;
+          queries = { herbs: '', drugs: '' };
+          save(); render(true);
+        }
       }
     }, [el('span', { text: t('clear_all') })]);
 
-    // Demo for the video: Mrs Wong already takes warfarin and amlodipine; danshen is added on camera.
     var demo = el('button', { type: 'button', class: 'btn btn-quiet', onclick: startDemo }, [el('span', { text: t('demo_button') })]);
 
     app.textContent = '';
@@ -361,23 +429,8 @@
       el('p', { class: 'lede', text: t('hero_lede') })
     ]));
     pickerRefreshers = [];
-    if (state.demo) {
-      var hasDanshen = state.herbs.indexOf('danshen') !== -1;
-      app.appendChild(el('section', { class: 'demo-banner', 'aria-labelledby': 'h-demo' }, [
-        el('h2', { id: 'h-demo', text: t('demo_title') }),
-        el('p', { text: t('demo_story') }),
-        el('div', { class: 'demo-actions' }, [
-          hasDanshen ? null : el('button', {
-            type: 'button', class: 'btn btn-primary btn-small',
-            onclick: function (ev) { ev.currentTarget.remove(); addOrRemove('herbs', 'danshen'); }
-          }, [el('span', { text: t('demo_add') })]),
-          el('button', {
-            type: 'button', class: 'btn btn-quiet btn-small',
-            onclick: function () { state.herbs = []; state.drugs = []; state.demo = false; alertState = null; save(); render(true); }
-          }, [el('span', { text: t('demo_end') })])
-        ])
-      ]));
-    }
+    demoBox = el('section', { class: 'demo-banner', 'aria-labelledby': 'h-demo', hidden: true });
+    app.appendChild(demoBox);
     warningPanel = el('section', { class: 'clash-alert', tabindex: '-1', 'aria-labelledby': 'h-warning', hidden: true });
     app.appendChild(warningPanel);
     cabinetPanel = el('section', { class: 'cabinet', 'aria-labelledby': 'h-cabinet' });
@@ -388,6 +441,7 @@
       el('div', { class: 'check-bar-inner' }, [notice, status, button])
     ]));
     app.appendChild(el('div', { class: 'below-bar' }, [clear, ' ', demo]));
+    renderDemo();
     renderCabinet();
     renderWarning();
     updateCheckBar();
@@ -406,6 +460,26 @@
       ' ', el('span', { class: 'pair-plus', 'aria-hidden': 'true', text: '+' }), ' ',
       el('span', { class: 'visually-hidden', text: ' ' + t('and_sr') + ' ' }),
       nameNode(r.drug)
+    ]);
+  }
+
+  // One plain-language line explaining a level (app wording; the card's own advice is in "What to do").
+  function levelMeaning(status) {
+    return el('p', { class: 'level-meaning level-' + status, text: t('level_' + status) });
+  }
+
+  function mainEvidence(e) {
+    var s = e.sources[e.main_source];
+    return el('div', { class: 'main-evidence' }, [
+      el('h4', { class: 'block-label', text: t('label_main_evidence') }),
+      el('p', { class: 'main-finding', text: field(e, 'main_finding') }),
+      el('p', { class: 'main-source' }, [
+        el('a', { href: s.url, target: '_blank', rel: 'noopener noreferrer' }, [
+          el('span', { text: s.label }), icon('external', 'ext'),
+          el('span', { class: 'visually-hidden', text: ' ' + t('opens_new_tab') })
+        ]),
+        el('span', { class: 'print-url', text: s.url })
+      ])
     ]);
   }
 
@@ -436,8 +510,9 @@
     e.evidence_level.forEach(function (lvl) { evidence.appendChild(el('li', { text: t('ev_' + lvl) })); });
 
     return el('article', { class: 'card card-' + e.risk }, [
-      el('header', { class: 'card-head' }, [pairTitle(r), badge(e.risk, e.watch)]),
+      el('header', { class: 'card-head' }, [pairTitle(r), badge(e.risk, e.watch), levelMeaning(e.risk)]),
       el('p', { class: 'effect', text: field(e, 'effect') }),
+      mainEvidence(e),
       block(t('label_why'), whyBlock),
       block(t('label_what_to_do'), [el('p', { class: 'action', text: field(e, 'action') })], 'block-action'),
       el('div', { class: 'meta' }, [
@@ -565,6 +640,7 @@
         el('div', { class: 'summary-row-head' }, [badge(e.risk, e.watch), bilingualPair(r)]),
         el('dl', { class: 'summary-dl' }, [
           el('dt', { text: t('label_rated_by') }), el('dd', { text: e.rating_source === 'HA' ? t('rated_by_ha') : t('rated_by_team') }),
+          el('dt', { text: t('label_main_evidence') }), el('dd', { text: field(e, 'main_finding') + ' (' + e.sources[e.main_source].label + ')' }),
           el('dt', { text: t('col_effect') }), el('dd', { text: field(e, 'effect') }),
           el('dt', { text: t('label_what_to_do') }), el('dd', { text: field(e, 'action') }),
           el('dt', { text: t('label_evidence') }), el('dd', { text: evidence }),
@@ -612,7 +688,7 @@
     page.appendChild(section('about_how_title', [el('p', { text: t('about_how') })]));
 
     var scale = el('ol', { class: 'scale' });
-    L.RISKS.forEach(function (risk) { scale.appendChild(el('li', null, [badge(risk)])); });
+    L.RISKS.forEach(function (risk) { scale.appendChild(el('li', null, [badge(risk), levelMeaning(risk)])); });
     page.appendChild(section('about_ratings_title', [
       el('p', { text: t('about_ratings_intro') }),
       scale,
@@ -666,6 +742,7 @@
   /* ---------- error screen ---------- */
 
   function renderError() {
+    applyStaticText();
     app.textContent = '';
     app.appendChild(el('section', { class: 'notice notice-error', role: 'alert' }, [
       el('h1', { text: t('error_title') }),
@@ -695,7 +772,7 @@
     toggleBtn.setAttribute('aria-label', t('lang_toggle_label'));
     // Chinese drafts are flagged until a native speaker has reviewed them.
     var note = document.getElementById('zh-note');
-    var unreviewed = zh && zhUnreviewed();
+    var unreviewed = zh && (!db || zhUnreviewed());
     note.hidden = !unreviewed;
     note.textContent = unreviewed ? t('zh_unreviewed_note') : '';
   }
@@ -709,6 +786,7 @@
     I.setLang(state.lang);
     save();
     var y = window.scrollY;
+    if (!db) { renderError(); return; }
     render(false);
     window.scrollTo(0, y);
     document.getElementById('lang-toggle').focus();
@@ -719,6 +797,7 @@
     checkBar = null;
     cabinetPanel = null;
     warningPanel = null;
+    demoBox = null;
     if (route !== 'check') alertState = null;
     applyStaticText();
     Array.prototype.forEach.call(document.querySelectorAll('[data-route-link]'), function (a) {
@@ -745,13 +824,19 @@
     });
   }
 
+  // Use the saved language straight away, so even the "could not load" page is in the right language.
+  try {
+    var early = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+    if (early && I.languages.indexOf(early.lang) !== -1) { state.lang = early.lang; I.setLang(state.lang); }
+  } catch (e) { /* ignore */ }
+  document.getElementById('lang-toggle').addEventListener('click', switchLanguage);
+
   Promise.all(['data/herbs.json', 'data/drugs.json', 'data/interactions.json'].map(getJson))
     .then(function (d) {
       db = L.createDb(d[0], d[1], d[2]);
       load();
       I.setLang(state.lang);
       window.addEventListener('hashchange', function () { render(true); });
-      document.getElementById('lang-toggle').addEventListener('click', switchLanguage);
       document.querySelector('.skip-link').addEventListener('click', function (ev) {
         ev.preventDefault();
         document.getElementById('main').focus();

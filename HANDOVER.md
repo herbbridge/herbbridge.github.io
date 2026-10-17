@@ -58,6 +58,19 @@ For Sunday this is done WITHOUT accounts, a server or scanning:
   warning in the sticky bar. It stays until closed. Only rated pairs (High/Moderate/Low)
   trigger it; "not in database" pairs are reported in the cabinet summary, never as safe.
 - Users find names on the pharmacy label, medicine box or 藥方 and pick them from the list.
+- Warnings build up until closed, one line per pair with its own rating (17 Oct review).
+
+## Decided 17 Oct (after the full review)
+- "Avoid this combination" reworded to "Talk to your doctor before taking these together"
+  (danshen and dong quai). Owner approved.
+- Colours: keep the HA four levels + grey (owner chose this over a 3-colour traffic light).
+  Each badge has a plain-language line under it (app wording, in js/i18n.js level_*).
+- Every rated card shows "Main evidence": data fields main_source (index into sources) and
+  main_finding_en/zh, written only from findings confirmed in the source check.
+- Green ("No reported risk") is used only when a verified source reports no interaction.
+  No pair qualifies yet, so nothing is green.
+- Chinese: no 同時服用 (reads as timing advice) and no 中風險 (reads as 'stroke risk');
+  levels are 高度/中度/低度風險. A test guards this.
 
 ## Future full app (owner's long-term plan; pitch as roadmap, do not build now)
 - Accounts (username + password) and a private, secure database of each person's

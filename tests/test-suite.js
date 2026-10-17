@@ -71,7 +71,7 @@
     var e = {
       id: 'e', herb_id: 'h', drug_id: 'd', risk: 'low', watch: false, rating_source: 'team',
       effect_en: 'x', effect_zh: 'x', why_en: null, why_zh: null, why_pro_en: null,
-      action_en: 'x', action_zh: 'x', evidence_level: ['review'],
+      action_en: 'x', action_zh: 'x', evidence_level: ['review'], main_source: 0, main_finding_en: 'x', main_finding_zh: 'x',
       sources: [{ label: 'x', url: 'https://example.org' }], zh_reviewed: false
     };
     Object.keys(over).forEach(function (k) {
@@ -173,6 +173,9 @@
       var r = lookup.checkPairs(db, ['danshen', 'no_such_herb'], ['warfarin', 'no_such_drug']);
       return r.length === 1 && r[0].status === 'moderate';
     });
+    check('Edge cases', 'ids like "constructor" or "__proto__" never match anything', function () {
+      return lookup.checkPairs(db, ['constructor', '__proto__', 'toString'], ['warfarin', 'hasOwnProperty']).length === 0;
+    });
     check('Edge cases', 'the same item chosen twice is counted once', function () {
       return lookup.checkPairs(db, ['danshen', 'danshen'], ['warfarin', 'warfarin']).length === 1;
     });
@@ -225,6 +228,8 @@
       { name: 'why_en filled but why_zh null', drugs: [drug('d')], entries: [entry({ why_en: 'x' })], expect: 'both be filled or both be null' },
       { name: 'unknown evidence level', drugs: [drug('d')], entries: [entry({ evidence_level: ['anecdote'] })], expect: 'unknown evidence level' },
       { name: 'no sources', drugs: [drug('d')], entries: [entry({ sources: [] })], expect: 'at least one source' },
+      { name: 'main_source pointing past the list', drugs: [drug('d')], entries: [entry({ main_source: 3 })], expect: 'main_source must be' },
+      { name: 'missing main finding', drugs: [drug('d')], entries: [entry({ main_finding_zh: '' })], expect: 'missing main_finding_zh' },
       { name: 'http (not https) source', drugs: [drug('d')], entries: [entry({ sources: [{ label: 'x', url: 'http://example.org' }] })], expect: 'must start with https' },
       { name: 'zh_reviewed not true/false', drugs: [drug('d')], entries: [entry({ zh_reviewed: 'no' })], expect: 'zh_reviewed' },
       { name: 'same pair entered twice', drugs: [drug('d')], entries: [entry({ id: 'a' }), entry({ id: 'b', risk: 'high' })], expect: 'same pair as' },

@@ -16,6 +16,9 @@
       "why_pro_en": "(1) Danshen inhibits platelet aggregation and affects other parts of coagulation (Chan 2001). (2) In rats, danshen reduced warfarin clearance and raised warfarin levels (Chan 2001); tanshinones may inhibit CYP2C9 and CYP1A2, which metabolise warfarin, based mainly on rat data (Zhuang 2021). (3) In laboratory studies, tanshinone IIA (as sodium tanshinone IIA sulfonate) and Salvia extracts may displace warfarin from albumin, raising free warfarin (Zhuang 2021).",
       "action_en": "Talk to your doctor before taking these together. If you do take both, clotting (INR) tests 2–3 times a week are advised. Tell your doctor that you take danshen.",
       "action_zh": "兩樣一齊食之前，請先同醫生傾。如果兩樣都要食，建議每星期驗2至3次凝血指數（INR）。請話俾醫生知你有食丹參。",
+      "main_source": 4,
+      "main_finding_en": "The Hospital Authority rates this combination Moderate.",
+      "main_finding_zh": "醫院管理局將呢個配搭評為中度風險。",
       "evidence_level": ["case_reports", "review", "lab_animal"],
       "sources": [
         { "label": "Yu, Chan & Sanderson. J Intern Med 1997", "url": "https://doi.org/10.1046/j.1365-2796.1997.134137000.x" },
@@ -40,6 +43,9 @@
       "why_pro_en": "Contains coumarin-like constituents that may inhibit platelet aggregation; a single-dose animal study found no change in PT or warfarin pharmacokinetics (Zhuang 2021). The case report authors state that the mechanism is unknown (Page & Lawrence 1999).",
       "action_en": "Talk to your doctor before taking these together. Ask your doctor about an INR (clotting) test.",
       "action_zh": "兩樣一齊食之前，請先同醫生傾。問醫生需唔需要驗INR（凝血指數）。",
+      "main_source": 0,
+      "main_finding_en": "Case report: INR more than doubled after 4 weeks of dong quai.",
+      "main_finding_zh": "病例報告：食咗當歸4個星期之後，INR升高超過一倍。",
       "evidence_level": ["case_reports", "review"],
       "sources": [
         { "label": "Page & Lawrence. Pharmacotherapy 1999", "url": "https://pubmed.ncbi.nlm.nih.gov/10417036/" },
@@ -61,6 +67,9 @@
       "why_pro_en": "Randomised, double-blind, placebo-controlled trial in 20 healthy volunteers: after 2 weeks of American ginseng, peak INR, INR AUC, peak plasma warfarin and warfarin AUC were all significantly lower than with placebo (Yuan 2004). The mechanism is not established in our sources.",
       "action_en": "Tell your doctor that you take American ginseng. An INR (clotting) check may be needed.",
       "action_zh": "話俾醫生知你有食花旗參。可能需要驗INR（凝血指數）。",
+      "main_source": 0,
+      "main_finding_en": "Randomised trial in 20 healthy volunteers: American ginseng lowered warfarin’s effect on INR.",
+      "main_finding_zh": "隨機對照試驗（20名健康志願者）：花旗參減弱咗華法林對INR嘅作用。",
       "evidence_level": ["human_trial"],
       "sources": [
         { "label": "Yuan et al. Ann Intern Med 2004", "url": "https://pubmed.ncbi.nlm.nih.gov/15238367/" }
@@ -81,6 +90,9 @@
       "why_pro_en": null,
       "action_en": "Tell your doctor that you take Asian ginseng.",
       "action_zh": "話俾醫生知你有食人參。",
+      "main_source": 0,
+      "main_finding_en": "Review: clinical trials found that Asian ginseng did not change INR.",
+      "main_finding_zh": "文獻綜述：臨床試驗發現人參冇改變INR。",
       "evidence_level": ["human_trial", "case_reports"],
       "sources": [
         { "label": "Lim et al. Singapore Med J 2018", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5966631/" },
@@ -102,6 +114,9 @@
       "why_pro_en": null,
       "action_en": "Mention it to your doctor. Watch for unusual bruising or bleeding.",
       "action_zh": "話俾醫生知。留意有冇唔尋常嘅瘀傷或者出血。",
+      "main_source": 0,
+      "main_finding_en": "Review: despite case reports of bleeding, controlled trials found no significant effect on clotting.",
+      "main_finding_zh": "文獻綜述：雖然有出血嘅病例報告，但有對照嘅臨床試驗未有發現對凝血有明顯影響。",
       "evidence_level": ["case_reports", "human_trial"],
       "sources": [
         { "label": "Lim et al. Singapore Med J 2018", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5966631/" }
@@ -122,6 +137,9 @@
       "why_pro_en": null,
       "action_en": "Mention it to your doctor. Watch for unusual bruising or bleeding.",
       "action_zh": "話俾醫生知。留意有冇唔尋常嘅瘀傷或者出血。",
+      "main_source": 0,
+      "main_finding_en": "Review: a controlled trial of ginkgo with aspirin found no significant increase in bleeding.",
+      "main_finding_zh": "文獻綜述：一項銀杏同阿士匹靈一齊用嘅對照試驗，未有發現出血明顯增加。",
       "evidence_level": ["case_reports", "human_trial"],
       "sources": [
         { "label": "Lim et al. Singapore Med J 2018", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5966631/" }
@@ -142,6 +160,9 @@
       "why_pro_en": "Glycyrrhizin metabolites inhibit 11β-hydroxysteroid dehydrogenase type 2 (11β-HSD2) in the kidney, increasing mineralocorticoid receptor activity (pseudoaldosteronism) and causing potassium loss (Yoshino 2021). The Cleveland Clinic interaction table lists liquorice with digoxin as causing loss of serum potassium, and as potentiating cardiac glycosides.",
       "action_en": "Tell your doctor. A potassium blood test may be needed.",
       "action_zh": "話俾醫生知。可能需要驗血檢查鉀質水平。",
+      "main_source": 1,
+      "main_finding_en": "Interaction table: liquorice with digoxin causes loss of potassium and can strengthen digoxin.",
+      "main_finding_zh": "相互作用表：甘草同地高辛一齊用會令血鉀流失，亦可能增強地高辛嘅藥力。",
       "evidence_level": ["review"],
       "sources": [
         { "label": "Yoshino et al. Front Nutr 2021", "url": "https://pubmed.ncbi.nlm.nih.gov/34604277/" },
@@ -163,6 +184,9 @@
       "why_pro_en": "Glycyrrhizin metabolites inhibit 11β-hydroxysteroid dehydrogenase type 2 (11β-HSD2) in the kidney, increasing mineralocorticoid receptor activity (pseudoaldosteronism) and causing potassium loss; concurrent diuretic use is a listed risk factor (Yoshino 2021). The Cleveland Clinic interaction table lists additive effects with potassium-depleting diuretics.",
       "action_en": "Tell your doctor. A potassium blood test may be needed.",
       "action_zh": "話俾醫生知。可能需要驗血檢查鉀質水平。",
+      "main_source": 1,
+      "main_finding_en": "Interaction table: liquorice with potassium-losing diuretics has an additive effect.",
+      "main_finding_zh": "相互作用表：甘草同排鉀利尿藥一齊用，效果會疊加。",
       "evidence_level": ["review"],
       "sources": [
         { "label": "Yoshino et al. Front Nutr 2021", "url": "https://pubmed.ncbi.nlm.nih.gov/34604277/" },
@@ -184,6 +208,9 @@
       "why_pro_en": "Monacolin K is chemically identical to lovastatin, so products containing substantial amounts can cause the same side effects and drug interactions as lovastatin. Separately, some products are contaminated with citrinin, which may cause kidney damage (NCCIH).",
       "action_en": "Do not combine without asking your doctor.",
       "action_zh": "未問過醫生之前，唔好紅麴同他汀類藥物兩樣都食。",
+      "main_source": 0,
+      "main_finding_en": "US NIH (NCCIH): monacolin K is chemically identical to lovastatin, so products containing it can cause the same side effects and drug interactions.",
+      "main_finding_zh": "美國國家衞生研究院（NCCIH）：莫納可林K同洛伐他汀化學上一樣，所以含有佢嘅產品可以引起同樣嘅副作用同藥物相互作用。",
       "evidence_level": ["official_guidance"],
       "sources": [
         { "label": "US NIH National Center for Complementary and Integrative Health (NCCIH): Red yeast rice", "url": "https://www.nccih.nih.gov/health/red-yeast-rice" }

@@ -492,7 +492,8 @@ html[data-route="check"] { scroll-padding-bottom: 9rem; }
 @media print {
   html { font-size: 10pt; }
   body { background: #fff; color: #000; }
-  .site-header, .skip-link, .no-print, .check-bar, .below-bar, .site-footer, .ext, .visually-hidden { display: none !important; }
+  .site-header, .skip-link, .no-print, .check-bar, .below-bar, .site-footer, .ext, .visually-hidden,
+  .actions, .pro summary, .clash-alert, .demo-banner { display: none !important; }
   .wrap { max-width: none; padding: 0; }
   main { padding: 0; }
   a { color: #000; text-decoration: none; }
@@ -515,7 +516,6 @@ html[data-route="check"] { scroll-padding-bottom: 9rem; }
   .sources a { display: inline; min-height: 0; padding: 0; }
   .print-url { display: block; color: #333; word-break: break-all; }
   .summary-unknown { background: #fff; border: 1pt dashed #666; padding: 6pt 8pt; break-inside: avoid; }
-  .summary-unknown .icon { display: none; }
   .summary-unknown-list { columns: 2; column-gap: 16pt; }
   .summary-unknown-list li { break-inside: avoid; }
   .disclaimer-box { background: #fff; border: 1pt solid #000; border-left-width: 3pt; padding: 5pt 8pt; font-size: 9pt; }
@@ -539,3 +539,28 @@ body[data-route="check"] .demo-banner { grid-column: 1 / -1; }
 .pair, .clash-pair, .summary-pair, .sources a, .source-pairs, .chip { overflow-wrap: anywhere; }
 .sources a { max-width: 100%; }
 .card { min-width: 0; overflow-wrap: anywhere; }
+
+/* ---------- Level meaning and main evidence ---------- */
+
+.level-meaning { margin: 0; font-weight: 500; font-size: 1rem; color: var(--ink); }
+.card-head .level-meaning { order: 0; }
+.scale li { flex-wrap: wrap; }
+.scale .level-meaning { flex: 1 1 14rem; color: var(--ink-2); font-weight: 400; }
+.main-evidence {
+  border-left: 3px solid var(--ink); padding: 0.125rem 0 0.125rem 0.875rem; margin: 0 0 1rem;
+}
+.main-evidence .block-label { margin-bottom: 0.25rem; }
+.main-finding { font-weight: 500; margin-bottom: 0.25rem; }
+.main-source { margin: 0; font-size: 1rem; }
+.main-source a { display: inline-flex; align-items: baseline; gap: 0.35rem; min-height: 2.75rem; padding: 0.5rem 0; overflow-wrap: anywhere; }
+.main-source .ext { width: 0.9em; height: 0.9em; align-self: center; }
+.cabinet-storage-off {
+  font-weight: 700; border-left: 3px solid var(--high); padding-left: 0.75rem; margin-top: 0.5rem;
+}
+.cabinet h2:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+@media print {
+  .level-meaning { font-size: 8.5pt; }
+  .main-evidence { border-left-width: 2pt; padding-left: 6pt; margin-bottom: 4pt; }
+  .main-source a { display: inline; min-height: 0; padding: 0; }
+}
+.cabinet-unknown span { min-width: 0; overflow-wrap: anywhere; }

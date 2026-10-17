@@ -1,0 +1,110 @@
+# HerbSafe 中西通
+
+*Chinese and Western medicine, safely together.*
+
+HerbSafe lets patients in Hong Kong check the Chinese herbs they take against their Western
+medicines. Each herb × medicine pair is shown with a rating on the Hong Kong Hospital
+Authority's four-level scale (High, Moderate, Low, No reported risk), a plain-language reason,
+what to do, the evidence level and the sources.
+
+Built for the Imperial College London Hackathon (Hong Kong & Macau 2026), Challenge 4.
+
+## Safety rules (more important than any feature)
+
+1. **No generated answers.** Every result comes from the hand-checked files in `data/`.
+   The app only looks things up.
+2. **"Not in our database" is never "safe".** Missing pairs get a grey card with their own
+   icon and the text: "We have no record of this combination. This does not mean it is
+   safe. Please ask your pharmacist or doctor."
+3. **Every rated pair shows its sources** (clickable) and an evidence level.
+4. **Advice is about monitoring and talking to a professional.** No dosing or timing advice
+   unless the source states it.
+5. **A disclaimer on every result.**
+6. **British spelling** in English text.
+7. **Only verified content.** Every sentence in a pair must be supported by its cited sources.
+
+## Run it
+
+Browsers block pages opened straight from a file from reading the data, so use a tiny
+local server:
+
+```
+cd herbsafe
+python3 -m http.server
+```
+
+Then open <http://localhost:8000>. (Opening `index.html` by double-click shows a message
+explaining this.)
+
+No build step, no frameworks, no backend. Plain HTML, CSS and JavaScript.
+
+## Test it
+
+```
+node tests/run-tests.js
+```
+
+or open <http://localhost:8000/tests/test.html>. The tests check the data files, the
+10 medicine lists in `tests/test-cases.md`, search, the safety rules, and that every
+interface text exists in English and Chinese.
+
+## How to add an interaction pair
+
+You only edit `data/interactions.json`. No code changes.
+
+1. Copy an existing entry and give it a new `id` such as `"sanqi-warfarin"`.
+2. Fill in every field:
+
+| Field | What to write |
+|---|---|
+| `herb_id` | An `id` from `data/herbs.json` |
+| `drug_id` **or** `drug_class` | One of them, never both. `drug_class` matches every drug with that class in `data/drugs.json` (e.g. `"statin"`, `"diuretic"`). An entry for the drug itself wins over a class entry. |
+| `risk` | `"high"`, `"moderate"`, `"low"` or `"none_reported"` (lower case) |
+| `watch` | `true` shows "Low risk · watch"; otherwise `false` |
+| `rating_source` | `"HA"` only if the Hospital Authority rated this pair; otherwise `"team"` |
+| `effect_en`, `effect_zh` | One line: what happens |
+| `why_en`, `why_zh` | Plain-language mechanism, or `null` for both if no source establishes one |
+| `why_pro_en` | Technical detail for professionals, or `null` |
+| `action_en`, `action_zh` | What to do: monitoring and talking to a professional |
+| `main_source` | Which source the rating mainly rests on: `0` = first in `sources`, `1` = second… |
+| `main_finding_en`, `main_finding_zh` | One sentence: what that main source found |
+| `evidence_level` | A list from `"case_reports"`, `"human_trial"`, `"review"`, `"lab_animal"`, `"official_guidance"` |
+| `sources` | A list of `{ "label": "...", "url": "https://..." }` |
+| `zh_reviewed` | `false` until a Chinese speaker has checked the Chinese text |
+
+3. Run `node tests/run-tests.js`. The validator tells you exactly what is wrong if a field
+   is missing or mistyped.
+4. The test "every rating, watch flag and rating source matches the brief" will list your
+   new entry. Once the team agrees its rating, add it to `BRIEF_RATINGS` in
+   `tests/test-suite.js`. This stops ratings being changed by accident later.
+
+To add a herb or a medicine, add it to `data/herbs.json` or `data/drugs.json` with its
+English and Chinese names and search `aliases` (pinyin, Cantonese romanisation, brand
+names). Only add names you have checked.
+
+Chinese text is drafted in Cantonese-style written Chinese. When a native speaker has
+reviewed everything, set every `zh_reviewed` to `true` and `ZH_REVIEWED` in `js/i18n.js`
+to `true`. This removes the "not yet reviewed" note shown in Chinese mode.
+
+## Files
+
+```
+index.html            one page; screens switch by #/check, #/results, #/summary, #/about
+css/styles.css        styles, including @media print for the doctor summary
+js/lookup.js          lookup logic (no DOM), shared by the app and the tests
+js/i18n.js            interface text in English and 繁體中文
+js/app.js             cabinet, clash warnings, results, summary, About, demo
+data/*.json           the hand-checked database
+tests/                test cases and runners
+HANDOVER.md           decisions made so far and what still needs checking
+```
+
+## Privacy
+
+No accounts and no tracking. A person's list is saved only in their own browser
+(localStorage) and never leaves the device. The only outside request is Google Fonts.
+
+## Medical disclaimer
+
+HerbSafe gives information, not medical advice. Never stop or change a medicine without
+talking to your doctor or pharmacist.

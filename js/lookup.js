@@ -44,8 +44,9 @@
       drugs: drugsJson.drugs,
       interactions: interactionsJson.interactions,
       lastUpdated: interactionsJson.last_updated || null,
-      herbById: {},
-      drugById: {}
+      // Plain maps (no prototype), so ids like "constructor" can never match anything.
+      herbById: Object.create(null),
+      drugById: Object.create(null)
     };
     db.herbs.forEach(function (h) { db.herbById[h.id] = h; });
     db.drugs.forEach(function (d) { db.drugById[d.id] = d; });
@@ -86,7 +87,7 @@
   }
 
   function unique(ids) {
-    var seen = {};
+    var seen = Object.create(null);
     return (ids || []).filter(function (id) {
       if (seen[id]) return false;
       seen[id] = true;
@@ -180,6 +181,12 @@
       if (!Array.isArray(e.evidence_level) || !e.evidence_level.length) problem(where + ': evidence_level must be a non-empty list');
       else e.evidence_level.forEach(function (lvl) {
         if (EVIDENCE_LEVELS.indexOf(lvl) === -1) problem(where + ': unknown evidence level "' + lvl + '"');
+      });
+      if (Array.isArray(e.sources) && e.sources.length &&
+          !(typeof e.main_source === 'number' && e.main_source % 1 === 0 && e.main_source >= 0 && e.main_source < e.sources.length))
+        problem(where + ': main_source must be the number of a source in its list (0 = first)');
+      ['main_finding_en', 'main_finding_zh'].forEach(function (f) {
+        if (!isText(e[f])) problem(where + ': missing ' + f);
       });
       if (!Array.isArray(e.sources) || !e.sources.length) problem(where + ': needs at least one source');
       else e.sources.forEach(function (s, si) {
