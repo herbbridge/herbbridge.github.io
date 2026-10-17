@@ -231,7 +231,7 @@
           badge(r.status, r.entry.watch),
           el('span', { class: 'clash-pair' }, [
             el('span', { text: primaryName(r.herb) }), el('span', { class: 'pair-plus', 'aria-hidden': 'true', text: '+' }),
-            el('span', { class: 'visually-hidden', text: ' and ' }), el('span', { text: primaryName(r.drug) })
+            el('span', { class: 'visually-hidden', text: ' ' + t('and_sr') + ' ' }), el('span', { text: primaryName(r.drug) })
           ])
         ]));
       });
@@ -253,7 +253,7 @@
     var others = alertState.rows.map(function (r) { return primaryName(alertState.kind === 'herbs' ? r.drug : r.herb); });
     box.appendChild(el('div', { class: 'alert-body' }, [
       badge(top.status, top.entry.watch),
-      el('p', { class: 'alert-text', text: t('alert_clash', { item: primaryName(item), others: others.join(', ') }) })
+      el('p', { class: 'alert-text', text: t('alert_clash', { item: primaryName(item), others: others.join(t('list_sep')) }) })
     ]));
     box.appendChild(el('div', { class: 'alert-actions' }, [
       el('a', { class: 'btn btn-primary btn-small', href: '#/results', text: t('alert_details') }),
@@ -323,7 +323,7 @@
     return el('h3', { class: 'pair' }, [
       nameNode(r.herb),
       el('span', { class: 'pair-plus', 'aria-hidden': 'true', text: '+' }),
-      el('span', { class: 'visually-hidden', text: ' and ' }),
+      el('span', { class: 'visually-hidden', text: ' ' + t('and_sr') + ' ' }),
       nameNode(r.drug)
     ]);
   }
@@ -436,10 +436,30 @@
   }
 
   function applyStaticText() {
-    document.documentElement.lang = state.lang === 'zh' ? 'zh-HK' : 'en-GB';
+    var zh = state.lang === 'zh';
+    document.documentElement.lang = zh ? 'zh-HK' : 'en-GB';
     Array.prototype.forEach.call(document.querySelectorAll('[data-i18n]'), function (node) {
       node.textContent = t(node.getAttribute('data-i18n'));
     });
+    var toggleBtn = document.getElementById('lang-toggle');
+    toggleBtn.textContent = t('lang_toggle');
+    toggleBtn.setAttribute('aria-label', t('lang_toggle_label'));
+    toggleBtn.setAttribute('lang', zh ? 'en-GB' : 'zh-HK');
+    // Chinese drafts are flagged until a native speaker has reviewed them.
+    var note = document.getElementById('zh-note');
+    var unreviewed = zh && (!I.zhReviewed || db.herbs.concat(db.drugs, db.interactions).some(function (x) { return x.zh_reviewed !== true; }));
+    note.hidden = !unreviewed;
+    note.textContent = unreviewed ? t('zh_unreviewed_note') : '';
+  }
+
+  function switchLanguage() {
+    state.lang = state.lang === 'zh' ? 'en' : 'zh';
+    I.setLang(state.lang);
+    save();
+    var y = window.scrollY;
+    render(false);
+    window.scrollTo(0, y);
+    document.getElementById('lang-toggle').focus();
   }
 
   function render(focus) {
@@ -477,6 +497,7 @@
       load();
       I.setLang(state.lang);
       window.addEventListener('hashchange', function () { render(true); });
+      document.getElementById('lang-toggle').addEventListener('click', switchLanguage);
       render(false);
     })
     .catch(function (err) {

@@ -245,6 +245,34 @@
       return { pass: problems.length === 0, detail: problems.join('\n') };
     });
 
+    // 7. Every interface text exists in both languages (only when the i18n module is passed in).
+    if (data.i18n) {
+      var S = data.i18n.strings;
+      var base = function (k) { return k.replace(/_(one|other)$/, ''); };
+      check('Languages', 'every English interface text has a Chinese version', function () {
+        var missing = Object.keys(S.en).map(base).filter(function (k) { return !(k in S.zh); });
+        return { pass: missing.length === 0, detail: 'missing in zh: ' + missing.join(', ') };
+      });
+      check('Languages', 'no Chinese text without an English version', function () {
+        var en = Object.keys(S.en).map(base);
+        var extra = Object.keys(S.zh).filter(function (k) { return en.indexOf(k) === -1; });
+        return { pass: extra.length === 0, detail: 'only in zh: ' + extra.join(', ') };
+      });
+      check('Languages', 'every herb, drug and rated pair has Chinese text', function () {
+        var bad = [];
+        db.herbs.concat(db.drugs).forEach(function (x) { if (!x.name_zh) bad.push(x.id); });
+        db.interactions.forEach(function (e) {
+          ['effect_zh', 'action_zh'].forEach(function (f) { if (!e[f]) bad.push(e.id + '.' + f); });
+          if (e.why_en && !e.why_zh) bad.push(e.id + '.why_zh');
+        });
+        return { pass: bad.length === 0, detail: bad.join(', ') };
+      });
+      check('Languages', 'the required disclaimer and "not in database" wording are exact in English', function () {
+        return S.en.card_disclaimer === 'HerbSafe gives information, not medical advice. Never stop or change a medicine without talking to your doctor or pharmacist.' &&
+          S.en.not_in_db_text === 'We have no record of this combination. This does not mean it is safe. Please ask your pharmacist or doctor.';
+      });
+    }
+
     return results;
   }
 

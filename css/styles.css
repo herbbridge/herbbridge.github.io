@@ -388,3 +388,21 @@ body[data-route="check"] #app { display: grid; grid-template-columns: minmax(0, 
 .alert-body { display: grid; gap: 0.5rem; }
 .alert-text { margin: 0; font-weight: 700; font-size: 1.0625rem; }
 .alert-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem; margin-top: 0.75rem; }
+
+/* ---------- language toggle ---------- */
+
+.lang-toggle {
+  min-height: 3rem; padding: 0 1rem; border-radius: 999px;
+  border: 1.5px solid var(--ink); background: transparent; color: var(--ink);
+  font: inherit; font-size: 1rem; font-weight: 700; cursor: pointer; white-space: nowrap;
+}
+.lang-toggle:hover { border-color: var(--accent); color: var(--accent); }
+.header-inner { row-gap: 0; }
+@media (min-width: 34.01rem) {
+  .brand { margin-right: auto; }
+}
+@media (max-width: 34rem) {
+  .header-inner { position: relative; }
+  .lang-toggle { position: absolute; top: 0.5rem; right: max(var(--gutter), env(safe-area-inset-right)); min-height: 2.75rem; }
+}
+.zh-note { font-size: 0.9375rem; }

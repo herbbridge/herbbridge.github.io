@@ -14,7 +14,8 @@ var data = {
   herbs: load('data/herbs.json'),
   drugs: load('data/drugs.json'),
   interactions: load('data/interactions.json'),
-  cases: load('tests/test-cases.json')
+  cases: load('tests/test-cases.json'),
+  i18n: require('../js/i18n.js').HerbSafeI18n
 };
 
 var results = suite.runAll(lookup, data);

@@ -24,6 +24,7 @@
   <div id="summary" class="summary">Running…</div>
   <div id="out"></div>
   <script src="../js/lookup.js"></script>
+  <script src="../js/i18n.js"></script>
   <script src="test-suite.js"></script>
   <script>
     (function () {
@@ -43,7 +44,7 @@
           throw null;
         })
         .then(function (d) {
-          var results = HerbSafeTests.runAll(HerbSafeLookup, { herbs: d[0], drugs: d[1], interactions: d[2], cases: d[3] });
+          var results = HerbSafeTests.runAll(HerbSafeLookup, { herbs: d[0], drugs: d[1], interactions: d[2], cases: d[3], i18n: HerbSafeI18n });
           var failed = results.filter(function (r) { return !r.pass; }).length, group = null, ul;
           results.forEach(function (r) {
             if (r.group !== group) { group = r.group; out.appendChild(el('h2', '', group)); ul = out.appendChild(el('ul')); }
