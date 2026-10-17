@@ -19,6 +19,15 @@ var data = {
 };
 
 var results = suite.runAll(lookup, data);
+
+// Installable app: every file the offline copy needs must exist (Node only: reads sw.js).
+var sw = fs.readFileSync(path.join(__dirname, '..', 'sw.js'), 'utf8');
+var appFiles = JSON.parse(sw.match(/APP_FILES = (\[[\s\S]*?\]);/)[1].replace(/'/g, '"'));
+var missingFiles = appFiles.filter(function (f) { return f !== './' && !fs.existsSync(path.join(__dirname, '..', f)); });
+results.push({ group: 'Installable app', name: 'every file in sw.js APP_FILES exists', pass: missingFiles.length === 0, detail: 'missing: ' + missingFiles.join(', ') });
+var manifest = load('manifest.webmanifest');
+var badIcons = manifest.icons.filter(function (i) { return !fs.existsSync(path.join(__dirname, '..', i.src)); });
+results.push({ group: 'Installable app', name: 'manifest icons exist', pass: badIcons.length === 0, detail: badIcons.map(function (i) { return i.src; }).join(', ') });
 var group = null, failed = 0;
 results.forEach(function (r) {
   if (r.group !== group) { group = r.group; console.log('\n' + group); }

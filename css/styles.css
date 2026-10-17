@@ -564,3 +564,4 @@ body[data-route="check"] .demo-banner { grid-column: 1 / -1; }
   .main-source a { display: inline; min-height: 0; padding: 0; }
 }
 .cabinet-unknown span { min-width: 0; overflow-wrap: anywhere; }
+.install-steps { padding-left: 1.25rem; } .install-steps li { margin: 0.375rem 0; }

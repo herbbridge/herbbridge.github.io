@@ -1,0 +1,16 @@
+{
+  "name": "HerbSafe 中西通",
+  "short_name": "HerbSafe",
+  "description": "Check Chinese herbs and Western medicines together. Chinese and Western medicine, safely together.",
+  "lang": "en-GB",
+  "start_url": "./#/check",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#FAFAF7",
+  "theme_color": "#FAFAF7",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

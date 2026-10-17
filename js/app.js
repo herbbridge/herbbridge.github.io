@@ -708,6 +708,7 @@
 
     page.appendChild(section('about_disclaimer_title', [el('p', { class: 'disclaimer-box', text: t('card_disclaimer') })]));
     page.appendChild(section('about_privacy_title', [el('p', { text: t('about_privacy') })]));
+    page.appendChild(installSection());
 
     // Every source in the database, once, with the combinations that cite it.
     var byUrl = {}, order = [];
@@ -737,6 +738,49 @@
     var next = el('ul', { class: 'about-next' });
     ['about_next_1', 'about_next_2', 'about_next_3', 'about_next_4'].forEach(function (k) { next.appendChild(el('li', { text: t(k) })); });
     page.appendChild(section('about_next_title', [next, el('p', { class: 'muted', text: t('about_team') })]));
+  }
+
+  /* ---------- Installable app ---------- */
+
+  // Chrome and Edge on Android offer their own install prompt; we keep it for the About page button.
+  var installPrompt = null;
+  window.addEventListener('beforeinstallprompt', function (ev) {
+    ev.preventDefault();
+    installPrompt = ev;
+    if (currentRoute() === 'about') render(false);
+  });
+  window.addEventListener('appinstalled', function () {
+    installPrompt = null;
+    if (currentRoute() === 'about') render(false);
+  });
+
+  function isInstalled() {
+    return (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true;
+  }
+
+  function installSection() {
+    var children = [el('h2', { text: t('install_title') })];
+    if (isInstalled()) {
+      children.push(el('p', { class: 'strong', text: t('install_done') }));
+    } else {
+      children.push(el('p', { text: t('install_text') }));
+      if (installPrompt) {
+        children.push(el('button', {
+          type: 'button', class: 'btn btn-primary',
+          onclick: function () {
+            var prompt = installPrompt;
+            installPrompt = null;
+            prompt.prompt();
+            prompt.userChoice.then(function () { render(false); }, function () { render(false); });
+          }
+        }, [el('span', { text: t('install_button') })]));
+      }
+      children.push(el('ul', { class: 'install-steps' }, [
+        el('li', { text: t('install_iphone') }),
+        el('li', { text: t('install_android') })
+      ]));
+    }
+    return el('section', { class: 'about-section', id: 'install' }, children);
   }
 
   /* ---------- error screen ---------- */
@@ -830,6 +874,13 @@
     if (early && I.languages.indexOf(early.lang) !== -1) { state.lang = early.lang; I.setLang(state.lang); }
   } catch (e) { /* ignore */ }
   document.getElementById('lang-toggle').addEventListener('click', switchLanguage);
+
+  // Offline support for the installed app. Never on file:// (browsers do not allow it there).
+  if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('sw.js').catch(function () { /* the app still works online */ });
+    });
+  }
 
   Promise.all(['data/herbs.json', 'data/drugs.json', 'data/interactions.json'].map(getJson))
     .then(function (d) {

@@ -38,6 +38,14 @@ explaining this.)
 
 No build step, no frameworks, no backend. Plain HTML, CSS and JavaScript.
 
+## Install it on a phone
+
+Once HerbSafe is online (e.g. GitHub Pages), open it on the phone and choose
+"Add to Home Screen" (iPhone: Safari → Share; Android: menu → Install app). It opens
+full-screen like an app and works without the internet. Database files are always
+fetched fresh when online; the saved copy is used only offline. If you add or rename
+app files, list them in `APP_FILES` in `sw.js` and bump `VERSION`.
+
 ## Test it
 
 ```
