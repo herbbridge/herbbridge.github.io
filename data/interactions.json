@@ -174,8 +174,8 @@
       "action_en": "Tell your doctor. A potassium blood test may be needed.",
       "action_zh": "話俾醫生知。可能需要驗血檢查鉀質水平。",
       "main_source": 1,
-      "main_finding_en": "Interaction table: liquorice with digoxin causes loss of potassium and can strengthen digoxin.",
-      "main_finding_zh": "相互作用表：甘草同地高辛一齊用會令血鉀流失，亦可能增強地高辛嘅藥力。",
+      "main_finding_en": "Interaction table: lists liquorice with digoxin (loss of serum potassium) and with cardiac glycosides, the group digoxin belongs to (strengthens their action).",
+      "main_finding_zh": "藥物相互作用表：列出甘草同地高辛（血鉀流失），同埋同強心苷類藥物，即係地高辛所屬嘅類別（加強藥效）。",
       "evidence_level": ["review"],
       "sources": [
         { "label": "Yoshino et al. Front Nutr 2021", "url": "https://pubmed.ncbi.nlm.nih.gov/34604277/" },
