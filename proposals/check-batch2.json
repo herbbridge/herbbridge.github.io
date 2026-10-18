@@ -1,0 +1,97 @@
+{
+  "about": "Independent source check (step 2 of 3) for proposals/candidates-batch2.json. Not approved, not live.",
+  "access_note": "No source page could be opened. WebFetch failed with DNS errors (getaddrinfo ENOTFOUND) for www.drugs.com, www.merckmanuals.com, www.msdmanuals.com and www.frontiersin.org; curl through the egress proxy was refused (CONNECT 403) for drugs.com and merckmanuals.com. Everything below rests on WebSearch result titles, URLs and search-engine summaries of the pages ('snippet only'). No abstract or full text was seen for either source.",
+  "pairs": [
+    {
+      "id": "liquorice-amlodipine",
+      "verdict": "confirmed_with_fixes",
+      "rating_comment": "'Moderate' is defensible but borderline, and rests entirely on tertiary references. For: Drugs.com's professional monograph names this exact pair and rates it Moderate (search snippet: 'A Moderate Drug Interaction exists between amlodipine and licorice'); Merck Manual Professional lists reduced effectiveness of antihypertensives with a stated mechanism; and, unlike dong quai's bleeding effect, liquorice's blood-pressure-raising effect is well documented in people (the Drugs.com monograph is summarised as citing systolic rises of 3.1-14.4 mmHg in volunteers taking 50-200 g/day; I saw that only in a search summary, so it is not used in the entry). The interaction is a direct pharmacodynamic opposition, not a level change. Against: no pair-specific study or interaction case report exists; the sources are a drug-interaction checker and a general reference, neither of which I could open; and the house precedent dong_quai-clopidogrel was kept 'low' when its only source was a drug guide's class-level caution. Compared with liquorice-diuretic and liquorice-digoxin (Moderate), those rest on a primary narrative review (Yoshino 2021) plus a table, whereas this one has no primary source at all. I would accept Moderate if the owner accepts Drugs.com as a source; if not, the only remaining source is a class-level general reference and 'low' would be more consistent with dong_quai-clopidogrel. 'High' is not justified: the Drugs.com professional page apparently carries a 'Generally avoid' tag, but Drugs.com is not a regulator or the Hospital Authority (same reasoning as Davis's Drug Guide for dong quai + aspirin), and no serious harm from the pair was found. rating_source 'team' is correct; no HA rating was found. watch=false is fine.",
+      "unsupported_claims_removed": [
+        "why_en/why_zh: 'Liquorice makes the body hold on to salt and water' stated as a general effect. Merck (the cited source) ties sodium and water retention to high doses (>1 oz/day real liquorice, or glycyrrhizin). Softened to 'especially in large amounts, can make... which may push blood pressure up' (ZH: 尤其係食得多 ... 可能).",
+        "main_finding_en/zh: 'liquorice can raise blood pressure' is stronger than the Drugs.com wording seen ('licorice use has been associated with hypertension'). Softened to 'has been linked to high blood pressure' (ZH: 同血壓高有關連), and the source is named as a drug interaction checker (Drugs.com) rather than a generic 'reference'.",
+        "why_pro_en: 'No study or case report on this specific pair was found' was imprecise: case reports exist of liquorice-induced hypertension in patients who were taking or were then given amlodipine (e.g. PMC11533832, CMAJ 2019). They do not describe an interaction, so reworded to 'No study of this specific pair, and no case report describing an interaction between the two, was found.' Also added Merck's own high-dose qualifier, which is in the source and limits rather than extends the claim."
+      ],
+      "sources_checked": [
+        {
+          "label": "Drugs.com professional interaction report: amlodipine and licorice",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "yes",
+          "note": "Search only; WebFetch failed (DNS) and curl was refused by the egress proxy, so the page itself was not seen. Search returned this exact URL with the title 'Amlodipine and licorice Interactions - Drugs.com', plus the companion interactions-check.php report (drug_list=172-0,2383-0). Search summaries quoted: 'A Moderate Drug Interaction exists between amlodipine and licorice'; 'licorice use has been associated with hypertension and may antagonize the effects of antihypertensive agents or effects of agents with hypotensive properties'; 'Glycyrrhizic acid, a component of licorice, is hydrolyzed in the intestine to a metabolite (glycyrrhetinic acid) that causes mineralocorticoid and renin-suppressing effects'. This supports effect_en, why_pro_en, main_finding and the Moderate label. Two things the entry does not say but the owner should know: summaries say the professional page carries a 'GENERALLY AVOID' tag and advises patients on antihypertensives to 'avoid or limit' licorice (left out under the advice rule); and one summary said a Drugs.com report recommends 'monitoring for development of hypotension', which looks like the generic additive-hypotension monograph and contradicts the direction here. I could not tell which report that came from, so it is not used. Drugs.com pages for felodipine, nimodipine and clevidipine with licorice are also rated Moderate with the same mechanism, which supports that this is a standard monograph."
+        },
+        {
+          "label": "Merck Manual Professional Edition: Licorice",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "yes",
+          "note": "Search only; merckmanuals.com and the msdmanuals.com mirror both failed to load (DNS). Search returned this exact URL with the title 'Licorice - Special Subjects - Merck Manual Professional Edition'. Search summary of the page: licorice 'may decrease effectiveness of antihypertensive medications due to an increase in salt and water retention', and 'high doses of real licorice (> 1 oz per day) and glycyrrhizin cause renal sodium and water retention, possibly leading to high blood pressure, and potassium excretion'. A second, narrower search did not re-surface the exact wording, so this is one search summary only. The page is class-level (antihypertensives) and does not name amlodipine. The msdmanuals copy credits Laura Shane-McWhorter, PharmD (University of Utah); not seen on the Merck page itself. The Merck high-dose qualifier was carried into why_en/zh."
+        }
+      ],
+      "owner_notes": [
+        "No primary evidence for this pair: both sources are reference pages (an interaction checker and a medical manual), neither could be opened, and everything was confirmed from search summaries.",
+        "Decision on source types: Drugs.com professional monographs are an established clinical interaction database (similar standing to the Cleveland Clinic table used for liquorice-diuretic/digoxin) and I could confirm the pair-specific rating and mechanism wording, so I think it is acceptable as a source. It is not the same as HelloPharmacist, which was kept out because its quoted wording could not be confirmed and it is a secondary aggregator. Merck Manual Professional is a reputable, named-author general reference and acceptable for a class-level statement. Neither should be the only basis for 'high'.",
+        "Drugs.com tags this pair 'Generally avoid' and suggests avoiding or limiting liquorice on blood pressure medicines. The entry leaves this out (advice rule). Tell me if you want that reflected.",
+        "If you want a primary source behind the 'liquorice raises blood pressure' part, Yoshino 2021 (already live) or a meta-analysis such as Penninkilampi 2017 (PubMed 28660884, seen in search only) could be added in a later round. That would need its own check; I have not added it."
+      ],
+      "recommendation_before_approval": "call",
+      "checked_entry": {
+        "id": "liquorice-amlodipine",
+        "herb_id": "liquorice",
+        "drug_id": "amlodipine",
+        "risk": "moderate",
+        "watch": false,
+        "rating_source": "team",
+        "effect_en": "Liquorice can raise blood pressure and may work against blood pressure medicines such as amlodipine.",
+        "effect_zh": "甘草可能令血壓上升，亦可能減弱氨氯地平呢類降血壓藥嘅效果。",
+        "heart_impact_en": "Amlodipine controls your blood pressure. If liquorice works against it, your blood pressure may be less well controlled.",
+        "heart_impact_zh": "氨氯地平用嚟控制血壓。如果甘草減弱咗佢嘅效果，血壓可能控制得冇咁好。",
+        "why_en": "Liquorice, especially in large amounts, can make the body hold on to salt and water, which may push blood pressure up.",
+        "why_zh": "甘草（尤其係食得多）可能令身體積聚鹽分同水分，令血壓上升。",
+        "why_pro_en": "Drugs.com professional interaction monograph (amlodipine + licorice, rated Moderate): glycyrrhizic acid is hydrolysed in the intestine to glycyrrhetinic acid, which has mineralocorticoid and renin-suppressing effects; licorice use has been associated with hypertension and may antagonise the effects of antihypertensive agents. Merck Manual Professional (Licorice) lists reduced effectiveness of antihypertensive drugs as a drug interaction, attributed to increased salt and water retention; it says high doses cause renal sodium and water retention, possibly leading to high blood pressure. No study of this specific pair, and no case report describing an interaction between the two, was found.",
+        "action_en": "Tell your doctor or pharmacist that you take liquorice, so they can keep an eye on your blood pressure.",
+        "action_zh": "話俾醫生或者藥劑師知你有食甘草，等佢哋留意你嘅血壓。",
+        "main_source": 0,
+        "main_finding_en": "Drug interaction checker (Drugs.com): liquorice has been linked to high blood pressure and may work against blood pressure medicines; it rates the pair with amlodipine as Moderate.",
+        "main_finding_zh": "藥物相互作用查詢（Drugs.com）：甘草同血壓高有關連，亦可能減弱降血壓藥嘅效果；佢將甘草同氨氯地平呢個配搭評為中度。",
+        "evidence_level": [
+          "review"
+        ],
+        "sources": [
+          {
+            "label": "Drugs.com professional interaction report: amlodipine and licorice",
+            "url": "https://www.drugs.com/drug-interactions/amlodipine-with-licorice-172-0-2383-0.html?professional=1"
+          },
+          {
+            "label": "Merck Manual Professional Edition: Licorice",
+            "url": "https://www.merckmanuals.com/professional/special-subjects/dietary-supplements/licorice"
+          }
+        ],
+        "zh_reviewed": false
+      }
+    }
+  ],
+  "no_evidence_crosscheck": [
+    {
+      "pair": "danshen + furosemide",
+      "found_anything": false,
+      "note": "English and Chinese searches (Salvia miltiorrhiza/danshen furosemide pharmacokinetics; 丹參 呋塞米 相互作用) found no pair-specific study or case report. Nearest: a danshen HDI review naming OAT1/OAT3 among in vitro targets (furosemide is an OAT substrate, but that link is inference), and a red ginseng + furosemide study in horses (different herb, animals). Agrees with the researcher."
+    },
+    {
+      "pair": "goji + digoxin",
+      "found_anything": false,
+      "note": "No pair-specific study or case report found. Digoxin appears only as a co-medication in the Lam 2001 goji-warfarin case. A 2016 in vitro goji study on CYP enzymes does not mention digoxin. I could not open the Zhuang 2023 Front Pharmacol digoxin review (DOI 10.3389/fphar.2023.1040778) and no snippet showed Lycium in it, so that gap remains."
+    },
+    {
+      "pair": "goji + amlodipine",
+      "found_anything": false,
+      "note": "Only HelloPharmacist pages (goji-with-amlodipine; goji-with-amlodipine-celecoxib), summarised as Moderate/'possible', theoretical (in vitro CYP3A4 inhibition by goji juice; goji fruit juice did not lower BP in humans). No study or case report. A goji + flecainide toxicity case report exists but is not one of the app's medicines. Agrees with the researcher."
+    },
+    {
+      "pair": "goji + furosemide",
+      "found_anything": false,
+      "note": "No furosemide-specific source found; only HelloPharmacist pages for other diuretics (torsemide, amiloride) with generic theoretical notes. Agrees with the researcher."
+    }
+  ]
+}
