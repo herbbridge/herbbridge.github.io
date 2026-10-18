@@ -890,6 +890,18 @@
     return primaryName(herb) + ' + ' + other;
   }
 
+  // Background facts on the About page (not used for any rating).
+  var BACKGROUND_SOURCES = [
+    { label: 'Hong Kong Government press release (Department of Health), 2024: deaths from cardiovascular diseases in 2023', url: 'https://www.info.gov.hk/gia/general/202409/29/P2024092700490.htm' },
+    { label: 'Lam et al. Hong Kong Med J 2020: INR control in warfarin patients in Hong Kong', url: 'https://www.hkmj.org/node/10340' }
+  ];
+
+  function sourceLinkInline(src, text) {
+    return el('a', { href: src.url, target: '_blank', rel: 'noopener noreferrer', class: 'inline-source' }, [
+      el('span', { text: state.lang === 'zh' ? '（' + text + '）' : '(' + text + ')' }), el('span', { class: 'visually-hidden', text: ' ' + t('opens_new_tab') })
+    ]);
+  }
+
   function renderAbout() {
     app.textContent = '';
     var page = el('article', { class: 'about' });
@@ -902,6 +914,14 @@
       el('h1', { tabindex: '-1', text: t('about_title') }),
       el('p', { class: 'lede', text: t('about_intro') })
     ]));
+
+    // Why HerbSafe focuses on heart patients (Challenge 4: cardiovascular disease).
+    var why = el('ul', { class: 'about-heart' });
+    why.appendChild(el('li', { text: t('about_heart_1') }));
+    why.appendChild(el('li', { text: t('about_heart_2') }));
+    why.appendChild(el('li', null, [el('span', { text: t('about_heart_3') + ' ' }), sourceLinkInline(BACKGROUND_SOURCES[0], t('about_heart_3_src'))]));
+    why.appendChild(el('li', null, [el('span', { text: t('about_heart_4') + ' ' }), sourceLinkInline(BACKGROUND_SOURCES[1], t('about_heart_4_src'))]));
+    page.appendChild(section('about_heart_title', [why]));
 
     page.appendChild(section('about_how_title', [el('p', { text: t('about_how') })]));
 
@@ -947,9 +967,21 @@
         el('span', { class: 'source-pairs', text: x.pairs.join(t('list_sep')) })
       ]));
     });
+    var background = el('ol', { class: 'sources about-sources' });
+    BACKGROUND_SOURCES.forEach(function (src) {
+      background.appendChild(el('li', null, [
+        el('a', { href: src.url, target: '_blank', rel: 'noopener noreferrer' }, [
+          el('span', { text: src.label }), icon('external', 'ext'),
+          el('span', { class: 'visually-hidden', text: ' ' + t('opens_new_tab') })
+        ]),
+        el('span', { class: 'source-pairs', text: t('about_background_used') })
+      ]));
+    });
     page.appendChild(section('about_sources_title', [
       el('p', { text: t('about_sources_intro') }),
       list,
+      el('h3', { class: 'about-subhead', text: t('about_background_title') }),
+      background,
       db.lastUpdated ? el('p', { class: 'muted', text: t('about_updated', { date: formatDate(new Date(db.lastUpdated + 'T00:00:00')) }) }) : null
     ]));
 

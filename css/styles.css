@@ -707,3 +707,7 @@ h1, h2, h3, .display { hyphens: auto; -webkit-hyphens: auto; overflow-wrap: brea
 .heart-impact p { margin: 0; font-size: 1.0556rem; line-height: 1.5; }
 .heart-impact .heart-icon { width: 1.375rem; height: 1.375rem; flex: none; margin-top: 0.1em; color: var(--ink); }
 @media print { .heart-impact { border-left-width: 2pt; padding: 3pt 6pt; margin-bottom: 4pt; } .heart-impact .heart-icon { display: none; } }
+.about-heart { padding-left: 1.25rem; margin: 0; }
+.about-heart li { margin: 0.5rem 0; }
+.inline-source { white-space: normal; }
+.about-subhead { font-size: 1.0556rem; font-weight: 700; margin: 1.25rem 0 0.5rem; }
