@@ -1,0 +1,358 @@
+{
+  "status": "CANDIDATE herb-level warnings from official sources (step 1 of 3). Not checked, not approved, not live.",
+  "access_note": "Researched 18 Oct 2026. NO official page could be opened: the build machine's proxy refuses CONNECT (403) to nccih.nih.gov, ema.europa.eu, medlineplus.gov, mskcc.org, ods.od.nih.gov, webprod.hc-sc.gc.ca and fitoterapia.net (WebFetch: ENOTFOUND; curl: CONNECT 403). Everything below comes from WebSearch result snippets and the search tool's summaries, so every source is 'snippet only'. Quotes marked as verbatim came back inside quotation in the search result; others are the search summary's paraphrase and are labelled so. The checker must confirm each quote against the real page/PDF before anything goes live. Also found but not used as a herb warning: an HA calcium-channel-blocker leaflet (https://www.ha.org.hk/hadf/Content/uploads/docs/svKrKpYzA7773874.pdf) telling patients to consult their doctor before using Traditional Chinese Medicine or Proprietary Chinese Medicines - a general HA statement for that medicine class covering all herbs, which the owner may want as a generic note on amlodipine grey cards. MedlinePlus herb monographs (Natural Medicines content) for these herbs did not appear in any search, so MedlinePlus is not cited except via NCCIH.",
+  "warnings": [
+    {
+      "id": "ginkgo-anticoagulant",
+      "herb_id": "ginkgo",
+      "drug_class": "anticoagulant",
+      "official_statement_quote": "Ginkgo leaf may increase the effects of anticoagulants such as coumarin derivatives [warfarin, phenprocoumon] ... In patients with ... concomitant anticoagulant and antiplatelet treatment, the medicinal product should only be used after consultation with a doctor. (Search-snippet fragments of sections 4.5 and 4.4; exact full sentences not seen.)",
+      "source": {
+        "label": "European Union herbal monograph on Ginkgo biloba L., folium (final, HMPC, 2015)",
+        "url": "https://www.ema.europa.eu/en/documents/herbal-monograph/final-european-union-herbal-monograph-ginkgo-biloba-l-folium_en.pdf",
+        "body": "European Medicines Agency (HMPC)",
+        "seen": "snippet only"
+      },
+      "other_official_sources": [
+        {
+          "label": "NCCIH: Ginkgo: Usefulness and Safety",
+          "url": "https://www.nccih.nih.gov/health/ginkgo",
+          "body": "US NIH NCCIH",
+          "seen": "snippet only",
+          "quote": "Ginkgo may increase the risk of bleeding in people who are taking anticoagulant drugs, such as warfarin. If you take any type of medicine, talk with your health care provider before using ginkgo or other herbal products."
+        },
+        {
+          "label": "NCCIH Clinical Digest: Herb-Drug Interactions: What the Science Says",
+          "url": "https://www.nccih.nih.gov/health/providers/digest/herb-drug-interactions-science",
+          "body": "US NIH NCCIH",
+          "seen": "snippet only",
+          "quote": "Taking Ginkgo biloba with warfarin is associated with increased risk for major bleeding events compared to warfarin alone."
+        },
+        {
+          "label": "Health Canada Natural Health Product monograph: Ginkgo biloba (NHPID)",
+          "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/atReq?atid=ginkgo.biloba2&lang=eng",
+          "body": "Health Canada (NNHPD)",
+          "seen": "snippet only",
+          "quote": "Do not use if you are taking blood thinners or other health products that affect blood coagulation (reported by search summary as the monograph's contraindication; an exact-phrase search returned only Canadian product labels carrying this wording, not the monograph itself)."
+        },
+        {
+          "label": "MSKCC About Herbs: Ginkgo",
+          "url": "https://www.mskcc.org/cancer-care/integrative-medicine/herbs/ginkgo",
+          "body": "Memorial Sloan Kettering Cancer Center",
+          "seen": "snippet only",
+          "quote": "Talk with your healthcare provider if you're taking blood thinners such as warfarin (Coumadin®, Jantoven®). Ginkgo may increase your risk of bleeding."
+        },
+        {
+          "label": "EMA product page: Ginkgo folium – herbal medicinal product (lists the monograph and assessment report)",
+          "url": "https://www.ema.europa.eu/en/medicines/herbal/ginkgo-folium",
+          "body": "European Medicines Agency (HMPC)",
+          "seen": "snippet only"
+        }
+      ],
+      "warning_en": "The European Medicines Agency says ginkgo leaf may increase the effect of blood thinners such as warfarin. The US National Institutes of Health (NCCIH) says ginkgo may increase the risk of bleeding in people taking warfarin.",
+      "warning_zh": "歐洲藥品管理局話，銀杏葉可能會加強華法林呢類薄血藥嘅作用。美國國家衞生研究院（NCCIH）話，食緊華法林嘅人食銀杏，可能會增加出血風險。",
+      "action_en": "If you take warfarin, talk to your doctor or pharmacist before taking ginkgo. Tell them about any unusual bleeding or bruising. Do not stop or change your medicine without talking to them first.",
+      "action_zh": "如果你食緊華法林，食銀杏之前請先同醫生或者藥劑師傾。如果有唔尋常嘅出血或者瘀傷，要話俾佢哋知。未同佢哋傾過之前，唔好自己停藥或者改藥。",
+      "zh_reviewed": false,
+      "notes": "Strongest of the batch: four official bodies agree (EMA, NCCIH x2, Health Canada, MSKCC). None could be opened (proxy blocks all these hosts); every quote is from search-engine snippets/summaries. NCCIH sentence appeared as a quoted snippet and is the most reliable verbatim text; consider making NCCIH the primary source if the checker cannot confirm EMA wording. EMA snippet text is fragmentary. EMA drafts also reportedly say available warfarin studies did not clearly show an interaction; the final monograph still carries the warning. HMPC Nov 2024 minutes list the Ginkgo folium monograph revision as 'postponed', so 2015 text appears current. Health Canada contraindication wording needs confirming against the monograph itself. Ginkgo is already rated with warfarin in the app if a direct pair exists; this herb-level warning is for grey cards only."
+    },
+    {
+      "id": "ginkgo-antiplatelet",
+      "herb_id": "ginkgo",
+      "drug_class": "antiplatelet",
+      "official_statement_quote": "... or antiplatelet drugs (e.g. clopidogrel, acetylsalicylic acid and other non-steroidal anti-inflammatory drugs), their effect may be influenced. ... concomitant anticoagulant and antiplatelet treatment, the medicinal product should only be used after consultation with a doctor. (Search-snippet fragments of sections 4.5 and 4.4.)",
+      "source": {
+        "label": "European Union herbal monograph on Ginkgo biloba L., folium (final, HMPC, 2015)",
+        "url": "https://www.ema.europa.eu/en/documents/herbal-monograph/final-european-union-herbal-monograph-ginkgo-biloba-l-folium_en.pdf",
+        "body": "European Medicines Agency (HMPC)",
+        "seen": "snippet only"
+      },
+      "other_official_sources": [
+        {
+          "label": "EMA HMPC Assessment report on Ginkgo biloba L., folium",
+          "url": "https://www.ema.europa.eu/en/documents/herbal-report/draft-assessment-report-ginkgo-biloba-l-folium_en.pdf",
+          "body": "European Medicines Agency (HMPC)",
+          "seen": "snippet only",
+          "quote": "Concomitant use with anticoagulant or antiplatelet medicines increases risks of bleeding (snippet; URL found is the draft report, final report also exists on the EMA ginkgo-folium page)."
+        },
+        {
+          "label": "EMA product page: Ginkgo folium – herbal medicinal product (lists the monograph and assessment report)",
+          "url": "https://www.ema.europa.eu/en/medicines/herbal/ginkgo-folium",
+          "body": "European Medicines Agency (HMPC)",
+          "seen": "snippet only"
+        }
+      ],
+      "warning_en": "The European Medicines Agency says that when ginkgo leaf is taken with antiplatelet medicines such as aspirin or clopidogrel, their effect may be changed, and that people on these medicines should only use ginkgo after talking to a doctor.",
+      "warning_zh": "歐洲藥品管理局話，銀杏葉同阿士匹靈、氯吡格雷呢類抗血小板藥一齊食，可能會影響藥物嘅作用；食緊呢類藥嘅人，要同醫生傾過先好用銀杏。",
+      "action_en": "If you take aspirin or clopidogrel, talk to your doctor before taking ginkgo. Tell your doctor or pharmacist about any unusual bleeding or bruising. Do not stop or change your medicine without talking to them first.",
+      "action_zh": "如果你食緊阿士匹靈或者氯吡格雷，食銀杏之前請先同醫生傾。如果有唔尋常嘅出血或者瘀傷，要話俾醫生或者藥劑師知。未同佢哋傾過之前，唔好自己停藥或者改藥。",
+      "zh_reviewed": false,
+      "notes": "Only EMA names antiplatelets explicitly. NCCIH ginkgo page (as seen in snippets) names anticoagulants/warfarin only, so it is NOT cited here. Health Canada's 'other health products that affect blood coagulation' may cover aspirin but the monograph text naming aspirin was not seen (only Canadian product labels name aspirin), so it is not cited. 'Talk to a doctor before use' is in the EMA text, so it is not added advice. Snippet only; EMA wording fragmentary."
+    },
+    {
+      "id": "ginkgo-blood_pressure",
+      "herb_id": "ginkgo",
+      "drug_class": "blood_pressure_all",
+      "official_statement_quote": "Ask a health care practitioner before use if you are taking medications for diabetes, high blood pressure or seizures. (Health Canada ginkgo monograph, cited there to Brinker 2010; reported by search summary, and the same wording appears on Health Canada-licensed product labels, e.g. NPN 80022257.)",
+      "source": {
+        "label": "Health Canada Natural Health Product monograph: Ginkgo biloba (NHPID)",
+        "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/atReq?atid=ginkgo.biloba2&lang=eng",
+        "body": "Health Canada (NNHPD)",
+        "seen": "snippet only"
+      },
+      "other_official_sources": [
+        {
+          "label": "Health Canada Natural Health Product monograph: Ginkgo biloba (PDF)",
+          "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/dbImages/mono_ginkgo-biloba_english.pdf",
+          "body": "Health Canada (NNHPD)",
+          "seen": "snippet only"
+        },
+        {
+          "label": "Health Canada Licensed Natural Health Products Database: product licence 80022257 (ginkgo)",
+          "url": "https://health-products.canada.ca/lnhpd-bdpsnh/info?licence=80022257",
+          "body": "Health Canada (LNHPD)",
+          "seen": "snippet only",
+          "quote": "Consult a health care practitioner prior to use if you are taking medications for diabetes, high blood pressure, or seizures."
+        }
+      ],
+      "warning_en": "Health Canada says to ask a health professional before taking ginkgo if you take medicine for high blood pressure.",
+      "warning_zh": "加拿大衞生部話，如果你食緊降血壓藥，食銀杏之前要先問醫護人員。",
+      "action_en": "If you take medicine for blood pressure, ask your doctor or pharmacist before taking ginkgo. Do not stop or change your medicine without talking to them first.",
+      "action_zh": "如果你食緊降血壓藥，食銀杏之前請先問醫生或者藥劑師。未同佢哋傾過之前，唔好自己停藥或者改藥。",
+      "zh_reviewed": false,
+      "notes": "This is the 'applies to all blood-pressure medicines' statement. It does not name a drug class. In the app it would map to the blood_pressure group (amlodipine; furosemide). Checker should decide whether furosemide counts as 'medication for high blood pressure' (it is in the app's 'Blood pressure and fluid' group). The source does not say what the effect is, so the warning must not claim one. Snippet only; not opened."
+    },
+    {
+      "id": "dong_quai-anticoagulant",
+      "herb_id": "dong_quai",
+      "drug_class": "anticoagulant",
+      "official_statement_quote": "Do not take any Traditional Chinese Medicines (TCM), Proprietary Chinese Medicines, herbal drinks, or food that contains TCM, such as Guilinggao. Many TCM such as ginseng, Dong quai, Danshen, Chishao can interact with warfarin.",
+      "source": {
+        "label": "Hospital Authority patient drug leaflet: Warfarin",
+        "url": "https://www.ha.org.hk/hadf/Content/uploads/docs/mcfDfgqUQ5320084.pdf",
+        "body": "Hong Kong Hospital Authority",
+        "seen": "snippet only"
+      },
+      "other_official_sources": [
+        {
+          "label": "Hospital Authority patient drug leaflet: Warfarin (second version found)",
+          "url": "https://www.ha.org.hk/hadf/Content/uploads/docs/rSsaWpQuu7075624.pdf",
+          "body": "Hong Kong Hospital Authority",
+          "seen": "snippet only"
+        },
+        {
+          "label": "NCCIH: Menopausal Symptoms: In Depth",
+          "url": "https://www.nccih.nih.gov/health/menopausal-symptoms-in-depth",
+          "body": "US NIH NCCIH",
+          "seen": "snippet only",
+          "quote": "Dong quai may interact with the anticoagulant (blood-thinning) drug warfarin (Coumadin)."
+        },
+        {
+          "label": "Health Canada Natural Health Product monograph: Dong quai (Angelica sinensis) (PDF)",
+          "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/dbImages/mono_dong-quai--angelica-sinensis_english.pdf",
+          "body": "Health Canada (NNHPD)",
+          "seen": "snippet only",
+          "quote": "Ask a health care practitioner before use if you are taking any medications including blood thinners, birth control pills or hormone therapy. (Seen once in a search summary; a second search could not confirm the exact phrase.)"
+        },
+        {
+          "label": "MSKCC About Herbs: Dong Quai",
+          "url": "https://www.mskcc.org/cancer-care/integrative-medicine/herbs/dong-quai",
+          "body": "Memorial Sloan Kettering Cancer Center",
+          "seen": "snippet only",
+          "quote": "Patient section (paraphrased in snippet): talk with your healthcare provider if you take blood thinners such as warfarin; dong quai may increase your risk of bleeding. Professional section notes the additive anticoagulant effect 'appears to be limited in a human study'."
+        }
+      ],
+      "warning_en": "The Hong Kong Hospital Authority's warfarin leaflet names dong quai as a Chinese medicine that can interact with warfarin. The US National Institutes of Health (NCCIH) also says dong quai may interact with warfarin.",
+      "warning_zh": "香港醫院管理局嘅華法林單張指出，當歸係可能同華法林有相互作用嘅中藥。美國國家衞生研究院（NCCIH）都話，當歸可能會同華法林有相互作用。",
+      "action_en": "If you take warfarin, talk to your doctor or pharmacist before taking dong quai. Tell them about any unusual bleeding or bruising. Do not stop or change your medicine without talking to them first.",
+      "action_zh": "如果你食緊華法林，食當歸之前請先同醫生或者藥劑師傾。如果有唔尋常嘅出血或者瘀傷，要話俾佢哋知。未同佢哋傾過之前，唔好自己停藥或者改藥。",
+      "zh_reviewed": false,
+      "notes": "HA leaflet is the local, most relevant source; its sentence came back as a quoted snippet. Note the HA leaflet says 'Do not take any TCM' - the app's action text is softer (talk to doctor/pharmacist); checker may prefer to quote HA's own wording. Two HA warfarin PDFs found; not opened, so which is current is unknown. NCCIH menopause page is old (search metadata ~8 years). MSKCC says the human evidence for an added effect is limited. HA/NCCIH/Health Canada do not say bleeding; only MSKCC mentions bleeding risk, so warning_en avoids claiming bleeding."
+    },
+    {
+      "id": "danshen-anticoagulant",
+      "herb_id": "danshen",
+      "drug_class": "anticoagulant",
+      "official_statement_quote": "Do not take any Traditional Chinese Medicines (TCM), Proprietary Chinese Medicines, herbal drinks, or food that contains TCM, such as Guilinggao. Many TCM such as ginseng, Dong quai, Danshen, Chishao can interact with warfarin.",
+      "source": {
+        "label": "Hospital Authority patient drug leaflet: Warfarin",
+        "url": "https://www.ha.org.hk/hadf/Content/uploads/docs/mcfDfgqUQ5320084.pdf",
+        "body": "Hong Kong Hospital Authority",
+        "seen": "snippet only"
+      },
+      "other_official_sources": [
+        {
+          "label": "Hospital Authority patient drug leaflet: Warfarin (second version found)",
+          "url": "https://www.ha.org.hk/hadf/Content/uploads/docs/rSsaWpQuu7075624.pdf",
+          "body": "Hong Kong Hospital Authority",
+          "seen": "snippet only"
+        },
+        {
+          "label": "EMA HMPC Assessment report on Salvia miltiorrhiza Bunge, radix et rhizoma (EMA/HMPC/509932/2019)",
+          "url": "https://www.ema.europa.eu/en/documents/herbal-report/draft-assessment-report-salvia-miltiorrhiza-bunge-radix-et-rhizoma-first-version_en.pdf",
+          "body": "European Medicines Agency (HMPC)",
+          "seen": "snippet only",
+          "quote": "Interactions section reportedly describes rat studies (Lo et al., 1992) and quotes: 'The pharmacokinetic and pharmacodynamic interactions observed in this study indicate a clinically important interaction between Danshen and warfarin if these two agents are taken together.' Also reportedly cites case reports incl. INR rising to 5.6. (Snippet; this is the report quoting a study, not necessarily the HMPC's own conclusion. URL found is the draft/first version; final AR EMA/HMPC/509932/2019 published 3 Aug 2022 on https://www.ema.europa.eu/en/medicines/herbal/salviae-miltiorrhizae-radix-et-rhizoma .)"
+        }
+      ],
+      "warning_en": "The Hong Kong Hospital Authority's warfarin leaflet names danshen as a Chinese medicine that can interact with warfarin.",
+      "warning_zh": "香港醫院管理局嘅華法林單張指出，丹參係可能同華法林有相互作用嘅中藥。",
+      "action_en": "If you take warfarin, talk to your doctor or pharmacist before taking danshen. Tell them about any unusual bleeding or bruising. Do not stop or change your medicine without talking to them first.",
+      "action_zh": "如果你食緊華法林，食丹參之前請先同醫生或者藥劑師傾。如果有唔尋常嘅出血或者瘀傷，要話俾佢哋知。未同佢哋傾過之前，唔好自己停藥或者改藥。",
+      "zh_reviewed": false,
+      "notes": "Only one official body (HA) confirmed by a quoted snippet. EMA assessment report content is second-hand from a search summary and quotes a rat study; do not cite EMA as saying danshen interacts unless the checker can open the PDF. EMA did NOT publish a danshen monograph (public statement 30 Mar 2022: monograph 'cannot be established'). No NCCIH or MSKCC danshen page was found by search. Danshen + warfarin may already be a rated pair in data/interactions.json; check before using this as a grey-card fallback."
+    }
+  ],
+  "nothing_official": [
+    {
+      "herb_id": "ginkgo",
+      "drug_class": "statin",
+      "searched": "WebSearch only (all official hosts blocked for fetch): EMA HMPC, NCCIH, MedlinePlus, Health Canada NHPID, MSKCC About Herbs, HK Hospital Authority, HK DH/CMRO. No official statement found. Ginkgo + simvastatin claims seen only on Mayo Clinic/GoodRx/review articles (not acceptable)."
+    },
+    {
+      "herb_id": "ginkgo",
+      "drug_class": "cardiac_glycoside",
+      "searched": "WebSearch only (all official hosts blocked for fetch): EMA HMPC, NCCIH, MedlinePlus, Health Canada NHPID, MSKCC About Herbs, HK Hospital Authority, HK DH/CMRO. No official statement found. An HA conference slide deck (Peggy Cheung, HATS 2011, www26.ha.org.hk) says ginkgo may increase digoxin AUC from a small volunteer study; that is a staff presentation, not official guidance, so not used."
+    },
+    {
+      "herb_id": "ginkgo",
+      "drug_class": "calcium_channel_blocker",
+      "searched": "WebSearch only (all official hosts blocked for fetch): EMA HMPC, NCCIH, MedlinePlus, Health Canada NHPID, MSKCC About Herbs, HK Hospital Authority, HK DH/CMRO. No class-specific official statement found (nifedipine claims only in GoodRx/studies; amlodipine is the app's drug). Covered only by the general Health Canada blood-pressure statement (ginkgo-blood_pressure)."
+    },
+    {
+      "herb_id": "ginkgo",
+      "drug_class": "diuretic",
+      "searched": "WebSearch only (all official hosts blocked for fetch): EMA HMPC, NCCIH, MedlinePlus, Health Canada NHPID, MSKCC About Herbs, HK Hospital Authority, HK DH/CMRO. No class-specific official statement found. Covered only by the general Health Canada blood-pressure statement if the checker accepts furosemide as a blood-pressure medicine."
+    },
+    {
+      "herb_id": "dong_quai",
+      "drug_class": "antiplatelet",
+      "searched": "WebSearch only (all official hosts blocked for fetch): EMA HMPC, NCCIH, MedlinePlus, Health Canada NHPID, MSKCC About Herbs, HK Hospital Authority, HK DH/CMRO. HA leaflet, NCCIH and MSKCC snippets mention warfarin/blood thinners only. Health Canada 'blood thinners' wording (unconfirmed) might cover antiplatelets, but no source names aspirin/clopidogrel; not inferred."
+    },
+    {
+      "herb_id": "dong_quai",
+      "drug_class": "statin",
+      "searched": "WebSearch only (all official hosts blocked for fetch): EMA HMPC, NCCIH, MedlinePlus, Health Canada NHPID, MSKCC About Herbs, HK Hospital Authority, HK DH/CMRO. MSKCC reportedly says prolonged use may induce CYP3A4 (could lower levels of drugs it metabolises) but names no heart-medicine class; not inferred."
+    },
+    {
+      "herb_id": "dong_quai",
+      "drug_class": "cardiac_glycoside",
+      "searched": "WebSearch only (all official hosts blocked for fetch): EMA HMPC, NCCIH, MedlinePlus, Health Canada NHPID, MSKCC About Herbs, HK Hospital Authority, HK DH/CMRO. MSKCC reportedly says prolonged use may induce CYP3A4 (could lower levels of drugs it metabolises) but names no heart-medicine class; not inferred."
+    },
+    {
+      "herb_id": "dong_quai",
+      "drug_class": "calcium_channel_blocker",
+      "searched": "WebSearch only (all official hosts blocked for fetch): EMA HMPC, NCCIH, MedlinePlus, Health Canada NHPID, MSKCC About Herbs, HK Hospital Authority, HK DH/CMRO. MSKCC reportedly says prolonged use may induce CYP3A4 (could lower levels of drugs it metabolises) but names no heart-medicine class; not inferred."
+    },
+    {
+      "herb_id": "dong_quai",
+      "drug_class": "diuretic",
+      "searched": "WebSearch only (all official hosts blocked for fetch): EMA HMPC, NCCIH, MedlinePlus, Health Canada NHPID, MSKCC About Herbs, HK Hospital Authority, HK DH/CMRO. MSKCC reportedly says prolonged use may induce CYP3A4 (could lower levels of drugs it metabolises) but names no heart-medicine class; not inferred."
+    },
+    {
+      "herb_id": "dong_quai",
+      "drug_class": "blood_pressure_all",
+      "searched": "WebSearch only (all official hosts blocked for fetch): EMA HMPC, NCCIH, MedlinePlus, Health Canada NHPID, MSKCC About Herbs, HK Hospital Authority, HK DH/CMRO. MSKCC reportedly says prolonged use may induce CYP3A4 (could lower levels of drugs it metabolises) but names no heart-medicine class; not inferred."
+    },
+    {
+      "herb_id": "danshen",
+      "drug_class": "antiplatelet",
+      "searched": "WebSearch only (all official hosts blocked for fetch): EMA HMPC, NCCIH, MedlinePlus, Health Canada NHPID, MSKCC About Herbs, HK Hospital Authority, HK DH/CMRO. Danshen + aspirin/clopidogrel statements found only on Mayo Clinic (not acceptable) and studies. EMA AR snippet mentions salicylate lowering measured free danshen (assay chemistry), not a clinical warning."
+    },
+    {
+      "herb_id": "danshen",
+      "drug_class": "cardiac_glycoside",
+      "searched": "WebSearch only (all official hosts blocked for fetch): EMA HMPC, NCCIH, MedlinePlus, Health Canada NHPID, MSKCC About Herbs, HK Hospital Authority, HK DH/CMRO. EMA assessment report reference list reportedly cites Dasgupta et al. on danshen interfering with serum digoxin immunoassays (digoxin-like immunoreactivity). Exact EMA wording/conclusion not seen. If the checker can open the EMA AR PDF, this may support an official 'danshen can affect digoxin blood test results' statement; until then, nothing official."
+    },
+    {
+      "herb_id": "danshen",
+      "drug_class": "statin",
+      "searched": "WebSearch only (all official hosts blocked for fetch): EMA HMPC, NCCIH, MedlinePlus, Health Canada NHPID, MSKCC About Herbs, HK Hospital Authority, HK DH/CMRO. Only rat studies (Danshen tablets with atorvastatin, amlodipine) and Mayo Clinic; no official statement."
+    },
+    {
+      "herb_id": "danshen",
+      "drug_class": "calcium_channel_blocker",
+      "searched": "WebSearch only (all official hosts blocked for fetch): EMA HMPC, NCCIH, MedlinePlus, Health Canada NHPID, MSKCC About Herbs, HK Hospital Authority, HK DH/CMRO. Only rat studies (Danshen tablets with atorvastatin, amlodipine) and Mayo Clinic; no official statement."
+    },
+    {
+      "herb_id": "danshen",
+      "drug_class": "diuretic",
+      "searched": "WebSearch only (all official hosts blocked for fetch): EMA HMPC, NCCIH, MedlinePlus, Health Canada NHPID, MSKCC About Herbs, HK Hospital Authority, HK DH/CMRO. Only rat studies (Danshen tablets with atorvastatin, amlodipine) and Mayo Clinic; no official statement."
+    },
+    {
+      "herb_id": "danshen",
+      "drug_class": "blood_pressure_all",
+      "searched": "WebSearch only (all official hosts blocked for fetch): EMA HMPC, NCCIH, MedlinePlus, Health Canada NHPID, MSKCC About Herbs, HK Hospital Authority, HK DH/CMRO. Only rat studies (Danshen tablets with atorvastatin, amlodipine) and Mayo Clinic; no official statement."
+    },
+    {
+      "herb_id": "sanqi",
+      "drug_class": "anticoagulant",
+      "searched": "WebSearch only (all official hosts blocked for fetch): EMA HMPC, NCCIH, MedlinePlus, Health Canada NHPID, MSKCC About Herbs, HK Hospital Authority, HK DH/CMRO. No EMA document on Panax notoginseng (only Panax ginseng). No NCCIH, MedlinePlus or MSKCC sanqi page found. MSKCC Yunnan Baiyao page says notoginseng 'may also have blood-thinning properties' but names no medicine group. Health Canada TCMI monograph lists TCM ingredients but its per-herb risk text was not retrievable. Warfarin/aspirin statements found only on HelloPharmacist/vital.ly/reviews (not acceptable). Not in HA warfarin leaflet's named list (ginseng, dong quai, danshen, chishao)."
+    },
+    {
+      "herb_id": "sanqi",
+      "drug_class": "antiplatelet",
+      "searched": "WebSearch only (all official hosts blocked for fetch): EMA HMPC, NCCIH, MedlinePlus, Health Canada NHPID, MSKCC About Herbs, HK Hospital Authority, HK DH/CMRO. No EMA document on Panax notoginseng (only Panax ginseng). No NCCIH, MedlinePlus or MSKCC sanqi page found. MSKCC Yunnan Baiyao page says notoginseng 'may also have blood-thinning properties' but names no medicine group. Health Canada TCMI monograph lists TCM ingredients but its per-herb risk text was not retrievable. Warfarin/aspirin statements found only on HelloPharmacist/vital.ly/reviews (not acceptable). Not in HA warfarin leaflet's named list (ginseng, dong quai, danshen, chishao)."
+    },
+    {
+      "herb_id": "sanqi",
+      "drug_class": "statin",
+      "searched": "WebSearch only (all official hosts blocked for fetch): EMA HMPC, NCCIH, MedlinePlus, Health Canada NHPID, MSKCC About Herbs, HK Hospital Authority, HK DH/CMRO. No EMA document on Panax notoginseng (only Panax ginseng). No NCCIH, MedlinePlus or MSKCC sanqi page found. MSKCC Yunnan Baiyao page says notoginseng 'may also have blood-thinning properties' but names no medicine group. Health Canada TCMI monograph lists TCM ingredients but its per-herb risk text was not retrievable. Warfarin/aspirin statements found only on HelloPharmacist/vital.ly/reviews (not acceptable). Not in HA warfarin leaflet's named list (ginseng, dong quai, danshen, chishao)."
+    },
+    {
+      "herb_id": "sanqi",
+      "drug_class": "cardiac_glycoside",
+      "searched": "WebSearch only (all official hosts blocked for fetch): EMA HMPC, NCCIH, MedlinePlus, Health Canada NHPID, MSKCC About Herbs, HK Hospital Authority, HK DH/CMRO. No EMA document on Panax notoginseng (only Panax ginseng). No NCCIH, MedlinePlus or MSKCC sanqi page found. MSKCC Yunnan Baiyao page says notoginseng 'may also have blood-thinning properties' but names no medicine group. Health Canada TCMI monograph lists TCM ingredients but its per-herb risk text was not retrievable. Warfarin/aspirin statements found only on HelloPharmacist/vital.ly/reviews (not acceptable). Not in HA warfarin leaflet's named list (ginseng, dong quai, danshen, chishao)."
+    },
+    {
+      "herb_id": "sanqi",
+      "drug_class": "calcium_channel_blocker",
+      "searched": "WebSearch only (all official hosts blocked for fetch): EMA HMPC, NCCIH, MedlinePlus, Health Canada NHPID, MSKCC About Herbs, HK Hospital Authority, HK DH/CMRO. No EMA document on Panax notoginseng (only Panax ginseng). No NCCIH, MedlinePlus or MSKCC sanqi page found. MSKCC Yunnan Baiyao page says notoginseng 'may also have blood-thinning properties' but names no medicine group. Health Canada TCMI monograph lists TCM ingredients but its per-herb risk text was not retrievable. Warfarin/aspirin statements found only on HelloPharmacist/vital.ly/reviews (not acceptable). Not in HA warfarin leaflet's named list (ginseng, dong quai, danshen, chishao)."
+    },
+    {
+      "herb_id": "sanqi",
+      "drug_class": "diuretic",
+      "searched": "WebSearch only (all official hosts blocked for fetch): EMA HMPC, NCCIH, MedlinePlus, Health Canada NHPID, MSKCC About Herbs, HK Hospital Authority, HK DH/CMRO. No EMA document on Panax notoginseng (only Panax ginseng). No NCCIH, MedlinePlus or MSKCC sanqi page found. MSKCC Yunnan Baiyao page says notoginseng 'may also have blood-thinning properties' but names no medicine group. Health Canada TCMI monograph lists TCM ingredients but its per-herb risk text was not retrievable. Warfarin/aspirin statements found only on HelloPharmacist/vital.ly/reviews (not acceptable). Not in HA warfarin leaflet's named list (ginseng, dong quai, danshen, chishao)."
+    },
+    {
+      "herb_id": "sanqi",
+      "drug_class": "blood_pressure_all",
+      "searched": "WebSearch only (all official hosts blocked for fetch): EMA HMPC, NCCIH, MedlinePlus, Health Canada NHPID, MSKCC About Herbs, HK Hospital Authority, HK DH/CMRO. No EMA document on Panax notoginseng (only Panax ginseng). No NCCIH, MedlinePlus or MSKCC sanqi page found. MSKCC Yunnan Baiyao page says notoginseng 'may also have blood-thinning properties' but names no medicine group. Health Canada TCMI monograph lists TCM ingredients but its per-herb risk text was not retrievable. Warfarin/aspirin statements found only on HelloPharmacist/vital.ly/reviews (not acceptable). Not in HA warfarin leaflet's named list (ginseng, dong quai, danshen, chishao)."
+    },
+    {
+      "herb_id": "safflower",
+      "drug_class": "anticoagulant",
+      "searched": "WebSearch only (all official hosts blocked for fetch): EMA HMPC, NCCIH, MedlinePlus, Health Canada NHPID, MSKCC About Herbs, HK Hospital Authority, HK DH/CMRO. No EMA HMPC document on Carthamus tinctorius flos. No NCCIH, MedlinePlus (only safflower cooking oil) or MSKCC safflower page found. Interaction claims seen only on HelloPharmacist, WebMD, Drugs.com, vital.ly (not acceptable). Not named in HA warfarin leaflet snippet."
+    },
+    {
+      "herb_id": "safflower",
+      "drug_class": "antiplatelet",
+      "searched": "WebSearch only (all official hosts blocked for fetch): EMA HMPC, NCCIH, MedlinePlus, Health Canada NHPID, MSKCC About Herbs, HK Hospital Authority, HK DH/CMRO. No EMA HMPC document on Carthamus tinctorius flos. No NCCIH, MedlinePlus (only safflower cooking oil) or MSKCC safflower page found. Interaction claims seen only on HelloPharmacist, WebMD, Drugs.com, vital.ly (not acceptable). Not named in HA warfarin leaflet snippet."
+    },
+    {
+      "herb_id": "safflower",
+      "drug_class": "statin",
+      "searched": "WebSearch only (all official hosts blocked for fetch): EMA HMPC, NCCIH, MedlinePlus, Health Canada NHPID, MSKCC About Herbs, HK Hospital Authority, HK DH/CMRO. No EMA HMPC document on Carthamus tinctorius flos. No NCCIH, MedlinePlus (only safflower cooking oil) or MSKCC safflower page found. Interaction claims seen only on HelloPharmacist, WebMD, Drugs.com, vital.ly (not acceptable). Not named in HA warfarin leaflet snippet."
+    },
+    {
+      "herb_id": "safflower",
+      "drug_class": "cardiac_glycoside",
+      "searched": "WebSearch only (all official hosts blocked for fetch): EMA HMPC, NCCIH, MedlinePlus, Health Canada NHPID, MSKCC About Herbs, HK Hospital Authority, HK DH/CMRO. No EMA HMPC document on Carthamus tinctorius flos. No NCCIH, MedlinePlus (only safflower cooking oil) or MSKCC safflower page found. Interaction claims seen only on HelloPharmacist, WebMD, Drugs.com, vital.ly (not acceptable). Not named in HA warfarin leaflet snippet."
+    },
+    {
+      "herb_id": "safflower",
+      "drug_class": "calcium_channel_blocker",
+      "searched": "WebSearch only (all official hosts blocked for fetch): EMA HMPC, NCCIH, MedlinePlus, Health Canada NHPID, MSKCC About Herbs, HK Hospital Authority, HK DH/CMRO. No EMA HMPC document on Carthamus tinctorius flos. No NCCIH, MedlinePlus (only safflower cooking oil) or MSKCC safflower page found. Interaction claims seen only on HelloPharmacist, WebMD, Drugs.com, vital.ly (not acceptable). Not named in HA warfarin leaflet snippet."
+    },
+    {
+      "herb_id": "safflower",
+      "drug_class": "diuretic",
+      "searched": "WebSearch only (all official hosts blocked for fetch): EMA HMPC, NCCIH, MedlinePlus, Health Canada NHPID, MSKCC About Herbs, HK Hospital Authority, HK DH/CMRO. No EMA HMPC document on Carthamus tinctorius flos. No NCCIH, MedlinePlus (only safflower cooking oil) or MSKCC safflower page found. Interaction claims seen only on HelloPharmacist, WebMD, Drugs.com, vital.ly (not acceptable). Not named in HA warfarin leaflet snippet."
+    },
+    {
+      "herb_id": "safflower",
+      "drug_class": "blood_pressure_all",
+      "searched": "WebSearch only (all official hosts blocked for fetch): EMA HMPC, NCCIH, MedlinePlus, Health Canada NHPID, MSKCC About Herbs, HK Hospital Authority, HK DH/CMRO. No EMA HMPC document on Carthamus tinctorius flos. No NCCIH, MedlinePlus (only safflower cooking oil) or MSKCC safflower page found. Interaction claims seen only on HelloPharmacist, WebMD, Drugs.com, vital.ly (not acceptable). Not named in HA warfarin leaflet snippet."
+    }
+  ]
+}
