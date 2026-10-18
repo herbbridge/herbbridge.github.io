@@ -1,0 +1,128 @@
+{
+  "status": "OFFICIAL SOURCES VERIFIED by a person-directed check on 18 Oct 2026 (pages and PDFs opened; quotes copied from the documents). App wording and how these are shown still need the owner's approval. NOT LIVE.",
+  "how_verified": "Another AI, run by the owner, opened each official page/PDF and copied the text. The build machine could not open these sites.",
+  "warnings": [
+    {
+      "id": "ginkgo-antiplatelet",
+      "herb_id": "ginkgo",
+      "drug_class": "antiplatelet",
+      "fills_grey": [
+        "ginkgo + clopidogrel"
+      ],
+      "backs_live": [
+        "ginkgo-aspirin"
+      ],
+      "source": {
+        "label": "European Medicines Agency: EU herbal monograph on Ginkgo biloba L., folium (EMA/HMPC/321097/2012, final, 2015)",
+        "url": "https://www.ema.europa.eu/en/documents/herbal-monograph/final-european-union-herbal-monograph-ginkgo-biloba-l-folium_en.pdf"
+      },
+      "section": "4.5 (well-established use)",
+      "verified_quote": "If the medicinal product is taken concomitantly with anticoagulants (e.g. phenprocoumon and warfarin) or antiplatelet drugs (e.g. clopidogrel, acetylsalicylic acid and other non-steroidal anti-inflammatory drugs), their effect may be influenced.",
+      "also_on_page": [
+        "4.4: In patients with a pathologically increased bleeding tendency (haemorrhagic diathesis) and concomitant anticoagulant and antiplatelet treatment, the medicinal product should only be used after consultation with a doctor.",
+        "4.5 (traditional use): Ginkgo leaf may increase the effects of anticoagulants such as coumarin derivatives."
+      ],
+      "warning_en": "The European Medicines Agency says ginkgo leaf may change the effect of antiplatelet medicines such as clopidogrel and aspirin.",
+      "warning_zh": "歐洲藥品管理局話，銀杏葉可能會影響氯吡格雷同阿士匹靈呢類抗血小板藥嘅效果。",
+      "note": "The 'only after consultation with a doctor' sentence (4.4) applies only to people with a bleeding tendency on BOTH anticoagulant and antiplatelet treatment, so it is not used in warning_en.",
+      "action_en": "Talk to your doctor or pharmacist.",
+      "action_zh": "同醫生或者藥劑師傾吓。",
+      "zh_reviewed": false
+    },
+    {
+      "id": "ginkgo-blood_pressure",
+      "herb_id": "ginkgo",
+      "drug_class": "calcium_channel_blocker",
+      "fills_grey": [
+        "ginkgo + amlodipine",
+        "(owner to decide) ginkgo + furosemide"
+      ],
+      "source": {
+        "label": "Health Canada: Ginkgo (Ginkgo biloba) natural health product monograph (25 Jul 2025)",
+        "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/atReq?atid=ginkgo.biloba2&lang=eng"
+      },
+      "section": "Risk information: Caution(s) and warning(s)",
+      "verified_quote": "Ask a health care practitioner/health care provider/health care professional/doctor/physician before use if you are taking diabetes, high blood pressure or seizure medications (Brinker 2010).",
+      "also_on_page": [
+        "Contraindication(s): Do not use if you are taking blood thinners or other health products that affect blood coagulation (Gardner and McGuffin 2013; Brinker 2010; Bent 2005)."
+      ],
+      "warning_en": "Health Canada says to ask a health professional before taking ginkgo if you take medicine for high blood pressure.",
+      "warning_zh": "加拿大衞生部話，如果你食緊降血壓藥，食銀杏之前要先問醫護人員。",
+      "note": "Owner to decide whether furosemide counts as 'high blood pressure medication'. The contraindication about blood thinners is stricter than the live ginkgo-warfarin rating (Low · watch); reported to the owner, rating not changed.",
+      "action_en": "Talk to your doctor or pharmacist.",
+      "action_zh": "同醫生或者藥劑師傾吓。",
+      "zh_reviewed": false
+    },
+    {
+      "id": "american_ginseng-cardiac_glycoside",
+      "herb_id": "american_ginseng",
+      "drug_class": "cardiac_glycoside",
+      "fills_grey": [
+        "American ginseng + digoxin"
+      ],
+      "backs_live": [
+        "american_ginseng-warfarin"
+      ],
+      "source": {
+        "label": "Health Canada: American ginseng (Panax quinquefolius) monograph (30 Jan 2026)",
+        "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/dbImages/mono_ginseng-american_english.pdf"
+      },
+      "section": "Risk information: Caution(s) and warning(s), All products",
+      "verified_quote": "Ask a health care practitioner/health care provider/health care professional/doctor/physician before use if you are taking blood thinners or digoxin (Brinker 2010; Dasgupta et al. 2007; Elmer et al. 2007; Yuan et al. 2004).",
+      "warning_en": "Health Canada says to ask a health professional before using American ginseng if you take digoxin.",
+      "warning_zh": "加拿大衞生部話，如果你食緊地高辛，用花旗參之前要先問醫護人員。",
+      "action_en": "Talk to your doctor or pharmacist.",
+      "action_zh": "同醫生或者藥劑師傾吓。",
+      "zh_reviewed": false
+    },
+    {
+      "id": "asian_ginseng-cardiac_glycoside",
+      "herb_id": "asian_ginseng",
+      "drug_class": "cardiac_glycoside",
+      "fills_grey": [
+        "Asian ginseng + digoxin"
+      ],
+      "backs_live": [
+        "asian_ginseng-warfarin"
+      ],
+      "source": {
+        "label": "Health Canada: Panax ginseng monograph (27 Jun 2025)",
+        "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/dbImages/mono_ginseng-panax_english.pdf"
+      },
+      "section": "Risk information: Caution(s) and warning(s)",
+      "verified_quote": "Ask a health care practitioner/health care provider/health care professional/doctor/physician before use if you are taking antidepressant medication, blood thinners or digoxin (Brinker 2010; Lee et al. 2008a; Dasgupta and Reyes 2005; Janetzki and Morreale 1997; Gonzalez-Seijo et al. 1995; Shader and Greenblatt 1988; Jones and Runikis 1987; Shader and Greenblatt 1985).",
+      "warning_en": "Health Canada says to ask a health professional before using Asian ginseng if you take digoxin.",
+      "warning_zh": "加拿大衞生部話，如果你食緊地高辛，用人參之前要先問醫護人員。",
+      "action_en": "Talk to your doctor or pharmacist.",
+      "action_zh": "同醫生或者藥劑師傾吓。",
+      "zh_reviewed": false
+    },
+    {
+      "id": "liquorice-blood_pressure",
+      "herb_id": "liquorice",
+      "drug_class": "calcium_channel_blocker",
+      "fills_grey": [
+        "liquorice + amlodipine"
+      ],
+      "backs_live": [
+        "liquorice-diuretic",
+        "liquorice-digoxin"
+      ],
+      "source": {
+        "label": "European Medicines Agency: EU herbal monograph on liquorice root (Glycyrrhizae radix), Revision 1 (EMA/HMPC/108399/2024, final, adopted 4 Mar 2026)",
+        "url": "https://www.ema.europa.eu/en/documents/herbal-monograph/final-european-union-herbal-monograph-glycyrrhiza-glabra-l-glycyrrhiza-inflata-bat-glycyrrhiza-uralensis-fisch-radix-revision-1_en.pdf"
+      },
+      "section": "4.5 (traditional use)",
+      "verified_quote": "Liquorice root may counteract antihypertensive action of prescribed medications.",
+      "also_on_page": [
+        "4.5: Not to be used concomitantly with diuretics, cardiac glycosides, corticosteroids, stimulant laxatives or other medications which may aggravate electrolyte imbalance (see section with 4.4)."
+      ],
+      "warning_en": "The European Medicines Agency says liquorice root may work against blood pressure medicines.",
+      "warning_zh": "歐洲藥品管理局話，甘草根可能會減弱降血壓藥嘅效果。",
+      "note": "Replaces the Drugs.com-based round-2 proposal for liquorice + amlodipine, which stays on hold.",
+      "action_en": "Talk to your doctor or pharmacist.",
+      "action_zh": "同醫生或者藥劑師傾吓。",
+      "zh_reviewed": false
+    }
+  ]
+}
