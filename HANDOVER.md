@@ -1,6 +1,6 @@
 # HerbSafe 中西通: handover notes
 
-Status as of 17 Oct 2026. Deadline: working app by Sunday 18 Oct (demo video).
+Status as of 18 Oct 2026. Deadline: working app by Sunday 18 Oct (demo video).
 Paste the original project brief into the new session together with this file.
 
 ## Progress (order of work from the brief)
@@ -71,6 +71,16 @@ For Sunday this is done WITHOUT accounts, a server or scanning:
   No pair qualifies yet, so nothing is green.
 - Chinese: no 同時服用 (reads as timing advice) and no 中風險 (reads as 'stroke risk');
   levels are 高度/中度/低度風險. A test guards this.
+
+## Decided 18 Oct
+- Interface: owner chose design C, "Calm dashboard" (from three prototypes A/B/C).
+  Home = status tile + two cards (Chinese herbs / Western medicines) with chips and a big
+  "+ Add" button that opens a full-screen picker (phone Back and Esc close it).
+  Results are grouped under level headings with counts; each card shows badge, effect,
+  evidence level, main source and disclaimer, with the rest behind "Details and sources".
+- Installable app (PWA): manifest + sw.js; bump VERSION in sw.js when app files change.
+- Bigger database: research runs into a separate proposed file; nothing goes live until the
+  owner approves each pair.
 
 ## Future full app (owner's long-term plan; pitch as roadmap, do not build now)
 - Accounts (username + password) and a private, secure database of each person's

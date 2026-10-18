@@ -165,6 +165,15 @@
       and_sr: 'and',
       zh_unreviewed_note: '',
 
+      status_empty: 'Add your medicines to start',
+      add_herbs: 'Add Chinese herbs',
+      add_drugs: 'Add Western medicines',
+      done: 'Done',
+      details_open: 'Details and sources',
+      details_close: 'Hide details',
+      group_count_one: '1 combination',
+      group_count_other: '{n} combinations',
+
       error_title: 'HerbSafe could not load its database',
       error_file: 'This page was opened straight from a file, and browsers block that. Open a terminal in the HerbSafe folder, run “python3 -m http.server”, then visit http://localhost:8000.',
       error_network: 'Please check your connection and reload the page.'
@@ -317,6 +326,14 @@
       lang_toggle_label: '切換語言至英文 (Switch language to English)',
       and_sr: '同',
       zh_unreviewed_note: '中文內容仲未經專人審閱，如有疑問請以英文版本為準，並請教醫生或藥劑師。',
+
+      status_empty: '加入你嘅藥，就可以開始',
+      add_herbs: '加入中藥',
+      add_drugs: '加入西藥',
+      done: '完成',
+      details_open: '詳情同資料來源',
+      details_close: '收起詳情',
+      group_count: '{n} 個配搭',
 
       error_title: 'HerbSafe 載入唔到資料庫',
       error_file: '呢個網頁係直接由檔案開啟，瀏覽器會阻止。請喺 HerbSafe 資料夾開終端機，執行「python3 -m http.server」，然後去 http://localhost:8000。',

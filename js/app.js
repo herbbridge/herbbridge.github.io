@@ -1,5 +1,5 @@
 /*
- * HerbSafe app: pick lists, results cards and routing.
+ * HerbSafe app: cabinet dashboard, picker sheets, results cards and routing.
  * All medical content comes from data/*.json via js/lookup.js. Nothing is generated.
  * Data text is always inserted with textContent, never as HTML.
  */
@@ -44,6 +44,8 @@
     close: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 7l10 10M17 7 7 17" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>',
     plus: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 6v12M6 12h12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>',
     tick: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5.5 12.5l4 4 9-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    chevron: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    arrow: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h13M13 6.5 18.5 12 13 17.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     external: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
   };
   function icon(name, cls) {
@@ -115,7 +117,9 @@
   function pairKey(r) { return r.herb.id + '|' + r.drug.id; }
 
   function addOrRemove(kind, id, sourceEl) {
-    var anchorKey = sourceEl && sourceEl.getAttribute('data-key');
+    // In the picker sheet the list never moves; on the dashboard, keep the tapped spot under the finger.
+    var inSheet = !!(sourceEl && sourceEl.closest && sourceEl.closest('.sheet'));
+    var anchorKey = !inSheet && sourceEl ? sourceEl.getAttribute('data-key') : null;
     var anchorTop = anchorKey ? sourceEl.getBoundingClientRect().top : null;
     var added = toggle(kind, id);
     if (added) {
@@ -137,8 +141,6 @@
       if (!alertState.rows.length) alertState = null;
     }
     refreshCheck();
-    // The warning and cabinet above the lists grow or shrink; scroll so the tapped row stays
-    // where the finger is, and a quick second tap cannot land on a different item.
     if (anchorKey) {
       var again = findByKey(anchorKey);
       if (again) window.scrollBy(0, again.getBoundingClientRect().top - anchorTop);
@@ -147,9 +149,9 @@
   }
 
   function findByKey(key) {
-    var target = app.querySelector('[data-key="' + key + '"]');
-    // A removed chip disappears: use the same item in the list instead.
-    if (!target && key.indexOf('chip-') === 0) target = app.querySelector('[data-key="opt-' + key.slice(5) + '"]');
+    var target = document.querySelector('[data-key="' + key + '"]');
+    // A removed chip disappears: use the Add button of the same card instead.
+    if (!target && key.indexOf('chip-') === 0) target = document.querySelector('[data-key="add-' + key.split('-')[1] + '"]');
     return target;
   }
 
@@ -164,101 +166,31 @@
     window.setTimeout(function () { live.textContent = msg; }, 50);
   }
 
-  /* ---------- Check screen ---------- */
-
-  function picker(kind, number) {
-    var items = kind === 'herbs' ? db.herbs : db.drugs;
-    var byId = kind === 'herbs' ? db.herbById : db.drugById;
-    var titleKey = kind === 'herbs' ? 'herbs_title' : 'drugs_title';
-    var inputId = 'search-' + kind;
-    var query = queries[kind];
-
-    var chips = el('ul', { class: 'chips', 'aria-label': t(titleKey) });
-    var count = el('p', { class: 'picker-count' });
-    var options = el('ul', { class: 'options' });
-    var input = el('input', {
-      id: inputId, class: 'search', type: 'search', autocomplete: 'off', autocapitalize: 'off',
-      spellcheck: 'false', enterkeyhint: 'search',
-      'aria-controls': 'options-' + kind, 'aria-describedby': 'hint-' + kind
-    });
-    options.id = 'options-' + kind;
-
-    function renderChips() {
-      chips.textContent = '';
-      state[kind].forEach(function (id) {
-        var item = byId[id];
-        chips.appendChild(el('li', null, [
-          el('button', {
-            type: 'button', class: 'chip', 'data-key': 'chip-' + kind + '-' + id,
-            'aria-label': t('remove_item', { name: primaryName(item) + ' ' + secondaryName(item) }),
-            onclick: function (ev) { addOrRemove(kind, id, ev.currentTarget); }
-          }, [nameNode(item), icon('close', 'chip-x')])
-        ]));
-      });
-      count.textContent = state[kind].length ? t('selected_count', { n: state[kind].length }) : t('selected_none');
-    }
-
-    function renderOptions() {
-      options.textContent = '';
-      var found = L.search(items, query);
-      if (!found.length) {
-        options.appendChild(el('li', { class: 'no-match', text: t('no_matches', { q: query }) }));
-        return;
-      }
-      found.forEach(function (item) {
-        var on = state[kind].indexOf(item.id) !== -1;
-        options.appendChild(el('li', null, [
-          el('button', {
-            type: 'button', class: 'option' + (on ? ' is-on' : ''), 'aria-pressed': on ? 'true' : 'false',
-            'data-key': 'opt-' + kind + '-' + item.id,
-            onclick: function (ev) { addOrRemove(kind, item.id, ev.currentTarget); }
-          }, [
-            nameNode(item),
-            el('span', { class: 'option-state', 'aria-hidden': 'true' }, [icon(on ? 'tick' : 'plus'), el('span', { text: on ? t('added') : t('add') })])
-          ])
-        ]));
-      });
-    }
-
-    pickerRefreshers.push(function () { renderChips(); renderOptions(); });
-
-    input.value = query;
-    input.addEventListener('input', function () { query = queries[kind] = input.value; renderOptions(); });
-
-    renderChips();
-    renderOptions();
-
-    return el('section', { class: 'picker', 'aria-labelledby': 'h-' + kind }, [
-      el('div', { class: 'section-head' }, [
-        el('span', { class: 'section-no', text: number, 'aria-hidden': 'true' }),
-        el('h2', { id: 'h-' + kind, text: t(titleKey) })
-      ]),
-      count,
-      chips,
-      el('label', { class: 'search-label', for: inputId, text: kind === 'herbs' ? t('search_herbs') : t('search_drugs') }),
-      el('p', { class: 'search-hint', id: 'hint-' + kind, text: t('search_hint') }),
-      input,
-      options,
-      el('p', { class: 'where-tip', text: t(kind === 'herbs' ? 'where_herbs' : 'where_drugs') })
-    ]);
-  }
+  /* ---------- Check screen: a calm dashboard ----------
+     Status tile (what needs attention) → two cards (herbs, medicines) with chips and "+ Add".
+     "+ Add" opens a full-screen picker sheet: search, one big list, Done. */
 
   var queries = { herbs: '', drugs: '' };
-  var pickerRefreshers = [];
-  var cabinetPanel = null;
+  var cards = {};
+  var statusTile = null;
   var demoBox = null;
+  var warningPanel = null;
+  var checkBar = null;
+  var sheet = null;
 
   function refreshCheck() {
     var active = document.activeElement;
     var key = active && active.getAttribute ? active.getAttribute('data-key') : null;
-    pickerRefreshers.forEach(function (fn) { fn(); });
+    renderCard('herbs');
+    renderCard('drugs');
     renderDemo();
-    renderCabinet();
+    renderStatus();
     renderWarning();
     updateCheckBar();
+    renderSheet();
     if (key) {
       var target = findByKey(key);
-      if (target) target.focus({ preventScroll: true });
+      if (target && target !== document.activeElement) target.focus({ preventScroll: true });
     }
   }
 
@@ -292,59 +224,215 @@
           if (state.herbs.indexOf('danshen') === -1) addOrRemove('herbs', 'danshen');
           showWarning();
         }
-      }, [el('span', { text: t('demo_add') })]),
+      }, [icon('plus'), el('span', { text: t('demo_add') })]),
       el('button', { type: 'button', class: 'btn btn-quiet btn-small', onclick: endDemo }, [el('span', { text: t('demo_end') })])
     ]));
   }
 
-  /* Dashboard: what is in the cabinet and which combinations need attention. */
-  function renderCabinet() {
-    if (!cabinetPanel) return;
-    cabinetPanel.textContent = '';
-    cabinetPanel.appendChild(el('div', { class: 'section-head' }, [
-      el('h2', { id: 'h-cabinet', tabindex: '-1', text: t('cabinet_title') })
-    ]));
-    cabinetPanel.appendChild(storageOk
-      ? el('p', { class: 'cabinet-lede', text: t('cabinet_lede') })
-      : el('p', { class: 'cabinet-storage-off', role: 'status', text: t('storage_off') }));
-
-    var nH = state.herbs.length, nD = state.drugs.length;
-    if (!nH && !nD) {
-      cabinetPanel.appendChild(el('p', { class: 'cabinet-empty', text: t('cabinet_empty') }));
-      cabinetPanel.appendChild(el('button', { type: 'button', class: 'btn btn-secondary btn-small demo-start', onclick: startDemo }, [el('span', { text: t('demo_button') })]));
-      return;
-    }
-    cabinetPanel.appendChild(el('p', { class: 'cabinet-counts', text: I.tn('count_herbs', nH) + ' · ' + I.tn('count_drugs', nD) }));
-    if (!nH || !nD) {
-      cabinetPanel.appendChild(el('p', { class: 'cabinet-empty', text: t('cabinet_need_both') }));
-      return;
-    }
-
-    var rows = L.checkPairs(db, state.herbs, state.drugs);
-    var flagged = rows.filter(function (r) { return r.entry && r.entry.risk !== 'none_reported'; });
-    var unknown = rows.filter(function (r) { return !r.entry; }).length;
-
-    if (flagged.length) {
-      cabinetPanel.appendChild(el('p', { class: 'cabinet-alert-title', text: I.tn('cabinet_clashes', flagged.length) }));
-      var list = el('ul', { class: 'clash-list' });
-      flagged.forEach(function (r) {
-        list.appendChild(el('li', { class: 'clash-row clash-' + r.status }, [
-          badge(r.status, r.entry.watch),
-          el('span', { class: 'clash-pair' }, [
-            el('span', { text: primaryName(r.herb) }), ' ', el('span', { class: 'pair-plus', 'aria-hidden': 'true', text: '+' }), ' ',
-            el('span', { class: 'visually-hidden', text: ' ' + t('and_sr') + ' ' }), el('span', { text: primaryName(r.drug) })
-          ])
-        ]));
-      });
-      cabinetPanel.appendChild(list);
-    } else {
-      cabinetPanel.appendChild(el('p', { class: 'cabinet-clear', text: t('cabinet_no_rated') }));
-    }
-    if (unknown) cabinetPanel.appendChild(el('p', { class: 'cabinet-unknown' }, [icon('not_in_database'), el('span', { text: I.tn('cabinet_unknown', unknown) })]));
-    cabinetPanel.appendChild(el('a', { class: 'btn btn-secondary btn-small', href: '#/results', text: t('cabinet_see_all') }));
+  function pairText(r) {
+    return el('span', { class: 'clash-pair' }, [
+      el('span', { text: primaryName(r.herb) }), ' ', el('span', { class: 'pair-plus', 'aria-hidden': 'true', text: '+' }), ' ',
+      el('span', { class: 'visually-hidden', text: t('and_sr') + ' ' }), el('span', { text: primaryName(r.drug) })
+    ]);
   }
 
-  var warningPanel = null;
+  /* Status tile: one sentence saying what needs attention, then the pairs behind it. */
+  function renderStatus() {
+    if (!statusTile) return;
+    statusTile.textContent = '';
+    var nH = state.herbs.length, nD = state.drugs.length;
+    var tone = 'neutral', title, rest = [];
+
+    if (!nH && !nD) {
+      title = t('status_empty');
+      rest.push(el('button', { type: 'button', class: 'btn btn-secondary btn-small demo-start', onclick: startDemo }, [el('span', { text: t('demo_button') })]));
+    } else if (!nH || !nD) {
+      title = t('cabinet_need_both');
+    } else {
+      var rows = L.checkPairs(db, state.herbs, state.drugs);
+      var flagged = rows.filter(function (r) { return r.entry && r.entry.risk !== 'none_reported'; });
+      var unknown = rows.filter(function (r) { return !r.entry; }).length;
+      if (flagged.length) {
+        tone = flagged[0].status;
+        title = I.tn('cabinet_clashes', flagged.length);
+        var list = el('ul', { class: 'status-list' });
+        flagged.forEach(function (r) {
+          list.appendChild(el('li', null, [
+            el('a', { class: 'status-row', href: '#/results', onclick: function () { pendingOpen = pairKey(r); } }, [
+              badge(r.status, r.entry.watch, 'span'), pairText(r), icon('chevron', 'row-go')
+            ])
+          ]));
+        });
+        rest.push(list);
+      } else {
+        title = t('cabinet_no_rated');
+      }
+      if (unknown) rest.push(el('p', { class: 'status-unknown' }, [icon('not_in_database'), el('span', { text: I.tn('cabinet_unknown', unknown) })]));
+      rest.push(el('a', { class: 'btn btn-secondary btn-small status-more', href: '#/results' }, [el('span', { text: t('cabinet_see_all') }), icon('arrow')]));
+    }
+
+    statusTile.className = 'status status-' + tone;
+    statusTile.appendChild(el('div', { class: 'status-head' }, [
+      tone === 'neutral' ? null : icon(tone, 'status-icon tone-' + tone),
+      el('h2', { id: 'h-status', tabindex: '-1', text: title })
+    ]));
+    rest.forEach(function (node) { statusTile.appendChild(node); });
+    if (!storageOk) statusTile.appendChild(el('p', { class: 'storage-off', role: 'status', text: t('storage_off') }));
+  }
+
+  /* One card per kind: what is in the cabinet (tap a chip to remove it) and a big "+ Add". */
+  function renderCard(kind) {
+    var box = cards[kind];
+    if (!box) return;
+    var byId = kind === 'herbs' ? db.herbById : db.drugById;
+    var ids = state[kind];
+    box.textContent = '';
+    box.appendChild(el('div', { class: 'cab-head' }, [
+      el('h2', { id: 'h-' + kind, text: t(kind === 'herbs' ? 'summary_herbs' : 'summary_drugs') }),
+      el('p', { class: 'cab-count', text: ids.length ? t('selected_count', { n: ids.length }) : t('selected_none') })
+    ]));
+    if (ids.length) {
+      var chips = el('ul', { class: 'chips', 'aria-labelledby': 'h-' + kind });
+      ids.forEach(function (id) {
+        var item = byId[id];
+        chips.appendChild(el('li', null, [
+          el('button', {
+            type: 'button', class: 'chip', 'data-key': 'chip-' + kind + '-' + id,
+            'aria-label': t('remove_item', { name: primaryName(item) + ' ' + secondaryName(item) }),
+            onclick: function (ev) { addOrRemove(kind, id, ev.currentTarget); }
+          }, [nameNode(item), icon('close', 'chip-x')])
+        ]));
+      });
+      box.appendChild(chips);
+    }
+    box.appendChild(el('button', {
+      type: 'button', class: 'btn btn-add', 'data-key': 'add-' + kind, 'aria-haspopup': 'dialog',
+      onclick: function () { openSheet(kind); }
+    }, [icon('plus'), el('span', { text: t(kind === 'herbs' ? 'add_herbs' : 'add_drugs') })]));
+  }
+
+  /* ---------- Picker sheet (full screen on phones) ---------- */
+
+  var skipPop = false;
+
+  function openSheet(kind) {
+    if (sheet) closeSheet(true);
+    var input = el('input', {
+      id: 'sheet-search', class: 'search', type: 'search', autocomplete: 'off', autocapitalize: 'off',
+      spellcheck: 'false', enterkeyhint: 'search', 'aria-controls': 'sheet-options', 'aria-describedby': 'sheet-hint'
+    });
+    input.value = queries[kind];
+    var count = el('p', { class: 'sheet-count' });
+    var list = el('ul', { class: 'options', id: 'sheet-options', 'aria-labelledby': 'sheet-title' });
+    var notice = el('button', { type: 'button', class: 'bar-notice', hidden: true, onclick: function () { closeSheet(); showWarning(); } });
+    var done = el('button', { type: 'button', class: 'btn btn-primary btn-done', onclick: function () { closeSheet(); } }, [el('span', { text: t('done') })]);
+    var body = el('div', { class: 'sheet-body' }, [
+      el('div', { class: 'sheet-head' }, [
+        el('h2', { id: 'sheet-title', tabindex: '-1', text: t(kind === 'herbs' ? 'herbs_title' : 'drugs_title') }),
+        count
+      ]),
+      el('label', { class: 'search-label', for: 'sheet-search', text: t(kind === 'herbs' ? 'search_herbs' : 'search_drugs') }),
+      el('p', { class: 'search-hint', id: 'sheet-hint', text: t('search_hint') }),
+      input,
+      list,
+      el('p', { class: 'where-tip', text: t(kind === 'herbs' ? 'where_herbs' : 'where_drugs') })
+    ]);
+    var root = el('div', { class: 'sheet', role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': 'sheet-title', lang: state.lang === 'zh' ? 'zh-HK' : 'en-GB' }, [
+      el('div', { class: 'sheet-panel' }, [body, el('div', { class: 'sheet-foot' }, [notice, done])])
+    ]);
+    root.addEventListener('keydown', sheetKeys);
+    root.addEventListener('click', function (ev) { if (ev.target === root) closeSheet(); });
+    input.addEventListener('input', function () { queries[kind] = input.value; renderSheetList(); });
+
+    sheet = { kind: kind, root: root, list: list, count: count, notice: notice };
+    document.body.appendChild(root);
+    setBackground(true);
+    renderSheet();
+    // The phone's Back button closes the sheet instead of leaving the page.
+    try { history.pushState({ hsSheet: true }, ''); sheet.pushed = true; } catch (e) { /* ignore */ }
+    document.getElementById('sheet-title').focus();
+  }
+
+  function closeSheet(fromHistory) {
+    if (!sheet) return;
+    var s = sheet;
+    sheet = null;
+    if (s.root.parentNode) s.root.parentNode.removeChild(s.root);
+    setBackground(false);
+    if (s.pushed && !fromHistory) { skipPop = true; history.back(); }
+    var back = document.querySelector('[data-key="add-' + s.kind + '"]');
+    if (back) back.focus();
+  }
+
+  window.addEventListener('popstate', function () {
+    if (skipPop) { skipPop = false; return; }
+    if (sheet) closeSheet(true);
+  });
+
+  // Everything behind the sheet is out of reach for keyboard and screen readers while it is open.
+  function setBackground(open) {
+    ['.skip-link', '.site-header', '#main', '.site-footer'].forEach(function (sel) {
+      var node = document.querySelector(sel);
+      if (!node) return;
+      if (open) { node.setAttribute('inert', ''); node.setAttribute('aria-hidden', 'true'); }
+      else { node.removeAttribute('inert'); node.removeAttribute('aria-hidden'); }
+    });
+    document.documentElement.classList.toggle('sheet-open', open);
+  }
+
+  function sheetKeys(ev) {
+    if (!sheet) return;
+    if (ev.key === 'Escape') { ev.preventDefault(); closeSheet(); return; }
+    if (ev.key !== 'Tab') return;
+    var focusable = Array.prototype.filter.call(sheet.root.querySelectorAll('button, input, a[href]'), function (n) {
+      return !n.disabled && n.offsetParent !== null;
+    });
+    if (!focusable.length) return;
+    var first = focusable[0], last = focusable[focusable.length - 1], now = document.activeElement;
+    if (ev.shiftKey && (now === first || now.id === 'sheet-title')) { ev.preventDefault(); last.focus(); }
+    else if (!ev.shiftKey && now === last) { ev.preventDefault(); first.focus(); }
+  }
+
+  function renderSheet() {
+    if (!sheet) return;
+    var n = state[sheet.kind].length;
+    sheet.count.textContent = n ? t('selected_count', { n: n }) : t('selected_none');
+    renderSheetList();
+    sheet.notice.hidden = !alertState;
+    sheet.notice.textContent = '';
+    if (alertState) {
+      var top = alertState.rows[0];
+      sheet.notice.appendChild(badge(top.status, top.entry.watch, 'span'));
+      sheet.notice.appendChild(el('span', { class: 'bar-notice-text', text: I.tn('bar_notice', alertState.rows.length) }));
+    }
+  }
+
+  function renderSheetList() {
+    if (!sheet) return;
+    var kind = sheet.kind, query = queries[kind], list = sheet.list;
+    list.textContent = '';
+    var found = L.search(kind === 'herbs' ? db.herbs : db.drugs, query);
+    if (!found.length) {
+      list.appendChild(el('li', { class: 'no-match', text: t('no_matches', { q: query }) }));
+      return;
+    }
+    found.forEach(function (item) {
+      var on = state[kind].indexOf(item.id) !== -1;
+      list.appendChild(el('li', null, [
+        el('button', {
+          type: 'button', class: 'option' + (on ? ' is-on' : ''), 'aria-pressed': on ? 'true' : 'false',
+          'data-key': 'opt-' + kind + '-' + item.id,
+          onclick: function (ev) { addOrRemove(kind, item.id, ev.currentTarget); }
+        }, [
+          nameNode(item),
+          el('span', { class: 'option-state', 'aria-hidden': 'true' }, [icon(on ? 'tick' : 'plus'), el('span', { text: on ? t('added') : t('add') })])
+        ])
+      ]));
+    });
+  }
+
+  /* ---------- clash warning (builds up until closed) ---------- */
+
   function renderWarning() {
     if (!warningPanel) return;
     warningPanel.textContent = '';
@@ -352,13 +440,7 @@
     if (!alertState) return;
     var list = el('ul', { class: 'warning-list' });
     alertState.rows.forEach(function (r) {
-      list.appendChild(el('li', { class: 'clash-row' }, [
-        badge(r.status, r.entry.watch),
-        el('span', { class: 'clash-pair' }, [
-          el('span', { text: primaryName(r.herb) }), ' ', el('span', { class: 'pair-plus', 'aria-hidden': 'true', text: '+' }), ' ',
-          el('span', { class: 'visually-hidden', text: t('and_sr') + ' ' }), el('span', { text: primaryName(r.drug) })
-        ])
-      ]));
+      list.appendChild(el('li', { class: 'clash-row' }, [badge(r.status, r.entry.watch, 'span'), pairText(r)]));
     });
     warningPanel.appendChild(el('h2', { id: 'h-warning', text: I.tn('warn_title', alertState.rows.length) }));
     warningPanel.appendChild(list);
@@ -368,7 +450,7 @@
         type: 'button', class: 'btn btn-secondary btn-small',
         onclick: function () {
           alertState = null; renderWarning(); updateCheckBar();
-          var h = document.getElementById('h-cabinet');
+          var h = document.getElementById('h-status');
           if (h) h.focus();
         }
       }, [el('span', { text: t('alert_dismiss') })])
@@ -376,12 +458,11 @@
   }
 
   function showWarning() {
-    if (!warningPanel) return;
+    if (!warningPanel || warningPanel.hidden) return;
     warningPanel.scrollIntoView({ block: 'start', behavior: 'smooth' });
     warningPanel.focus({ preventScroll: true });
   }
 
-  var checkBar = null;
   function updateCheckBar() {
     if (!checkBar) return;
     checkBar.notice.hidden = !alertState;
@@ -389,7 +470,7 @@
       var top = alertState.rows[0];
       checkBar.notice.textContent = '';
       checkBar.notice.appendChild(icon(top.status));
-      checkBar.notice.appendChild(el('span', { text: I.tn('bar_notice', alertState.rows.length) }));
+      checkBar.notice.appendChild(el('span', { class: 'bar-notice-text', text: I.tn('bar_notice', alertState.rows.length) }));
     }
     var ready = state.herbs.length > 0 && state.drugs.length > 0;
     checkBar.button.disabled = !ready;
@@ -397,14 +478,24 @@
     checkBar.status.textContent = ready
       ? I.tn('count_herbs', state.herbs.length) + ' · ' + I.tn('count_drugs', state.drugs.length)
       : t('check_need_both');
+    fitCheckBar();
   }
+
+  // With very large text the sticky bar would cover too much of the screen: then it simply sits in the page.
+  function fitCheckBar() {
+    if (!checkBar || !checkBar.bar) return;
+    var bar = checkBar.bar;
+    bar.classList.remove('is-static');
+    if (bar.offsetHeight > window.innerHeight * 0.28) bar.classList.add('is-static');
+  }
+  window.addEventListener('resize', fitCheckBar);
 
   function renderCheck() {
     var status = el('p', { id: 'check-status', class: 'check-status' });
     var button = el('button', {
       type: 'button', class: 'btn btn-primary btn-check',
       onclick: function () { if (!button.disabled) location.hash = '#/results'; }
-    }, [el('span', { text: t('check_button') })]);
+    }, [el('span', { text: t('check_button') }), icon('arrow')]);
     var notice = el('button', { type: 'button', class: 'bar-notice', hidden: true, onclick: showWarning });
     checkBar = { button: button, status: status, notice: notice };
 
@@ -419,43 +510,51 @@
         }
       }
     }, [el('span', { text: t('clear_all') })]);
-
     var demo = el('button', { type: 'button', class: 'btn btn-quiet', onclick: startDemo }, [el('span', { text: t('demo_button') })]);
 
     app.textContent = '';
-    var hasItems = state.herbs.length + state.drugs.length > 0;
-    app.appendChild(el('section', { class: 'hero' + (hasItems ? ' hero-compact' : '') }, [
-      el('h1', { class: 'display', tabindex: '-1', text: t('hero_title') }),
-      el('p', { class: 'lede', text: t('hero_lede') })
-    ]));
-    pickerRefreshers = [];
     demoBox = el('section', { class: 'demo-banner', 'aria-labelledby': 'h-demo', hidden: true });
-    app.appendChild(demoBox);
     warningPanel = el('section', { class: 'clash-alert', tabindex: '-1', 'aria-labelledby': 'h-warning', hidden: true });
-    app.appendChild(warningPanel);
-    cabinetPanel = el('section', { class: 'cabinet', 'aria-labelledby': 'h-cabinet' });
-    app.appendChild(cabinetPanel);
-    app.appendChild(picker('herbs', '01'));
-    app.appendChild(picker('drugs', '02'));
-    app.appendChild(el('div', { class: 'check-bar' }, [
-      el('div', { class: 'check-bar-inner' }, [notice, status, button])
+    statusTile = el('section', { class: 'status', 'aria-labelledby': 'h-status' });
+    cards = {
+      herbs: el('section', { class: 'cab-card', 'aria-labelledby': 'h-herbs' }),
+      drugs: el('section', { class: 'cab-card', 'aria-labelledby': 'h-drugs' })
+    };
+    app.appendChild(el('div', { class: 'dash' }, [
+      el('div', { class: 'dash-main' }, [
+        el('header', { class: 'page-head' }, [
+          el('h1', { tabindex: '-1', text: t('cabinet_title') }),
+          el('p', { class: 'lede', text: t('cabinet_lede') })
+        ]),
+        demoBox, warningPanel, statusTile
+      ]),
+      el('div', { class: 'dash-side' }, [cards.herbs, cards.drugs])
     ]));
+    checkBar.bar = el('div', { class: 'check-bar' }, [
+      el('div', { class: 'check-bar-inner' }, [notice, status, button])
+    ]);
+    app.appendChild(checkBar.bar);
     app.appendChild(el('div', { class: 'below-bar' }, [clear, ' ', demo]));
+    renderCard('herbs');
+    renderCard('drugs');
     renderDemo();
-    renderCabinet();
+    renderStatus();
     renderWarning();
     updateCheckBar();
   }
 
-  /* ---------- Results screen ---------- */
+  /* ---------- Results screen: grouped by level, each card opens for details ---------- */
 
-  function badge(status, watch) {
+  var openCards = {};     // pair key → true while that card is open (kept across language switches)
+  var pendingOpen = null; // pair tapped on the dashboard: open it on the results screen
+
+  function badge(status, watch, tag) {
     var key = status === 'low' && watch ? 'risk_low_watch' : 'risk_' + status;
-    return el('p', { class: 'badge badge-' + status }, [icon(status), el('span', { text: t(key) })]);
+    return el(tag || 'p', { class: 'badge badge-' + status }, [icon(status), el('span', { text: t(key) })]);
   }
 
   function pairTitle(r) {
-    return el('h3', { class: 'pair' }, [
+    return el('h3', { class: 'pair', tabindex: '-1' }, [
       nameNode(r.herb),
       ' ', el('span', { class: 'pair-plus', 'aria-hidden': 'true', text: '+' }), ' ',
       el('span', { class: 'visually-hidden', text: ' ' + t('and_sr') + ' ' }),
@@ -468,18 +567,10 @@
     return el('p', { class: 'level-meaning level-' + status, text: t('level_' + status) });
   }
 
-  function mainEvidence(e) {
-    var s = e.sources[e.main_source];
-    return el('div', { class: 'main-evidence' }, [
-      el('h4', { class: 'block-label', text: t('label_main_evidence') }),
-      el('p', { class: 'main-finding', text: field(e, 'main_finding') }),
-      el('p', { class: 'main-source' }, [
-        el('a', { href: s.url, target: '_blank', rel: 'noopener noreferrer' }, [
-          el('span', { text: s.label }), icon('external', 'ext'),
-          el('span', { class: 'visually-hidden', text: ' ' + t('opens_new_tab') })
-        ]),
-        el('span', { class: 'print-url', text: s.url })
-      ])
+  function sourceLink(s) {
+    return el('a', { href: s.url, target: '_blank', rel: 'noopener noreferrer' }, [
+      el('span', { text: s.label }), icon('external', 'ext'),
+      el('span', { class: 'visually-hidden', text: ' ' + t('opens_new_tab') })
     ]);
   }
 
@@ -488,14 +579,22 @@
   }
 
   function card(r) {
+    var key = pairKey(r);
     if (!r.entry) {
-      return el('article', { class: 'card card-unknown' }, [
+      return el('article', { class: 'card card-unknown', 'data-pair': key }, [
         el('header', { class: 'card-head' }, [pairTitle(r), badge('not_in_database')]),
         el('p', { class: 'unknown-text', text: t('not_in_db_text') }),
         el('p', { class: 'card-disclaimer', text: t('card_disclaimer') })
       ]);
     }
     var e = r.entry;
+    var open = !!openCards[key];
+    var detailsId = 'det-' + r.herb.id + '-' + r.drug.id;
+
+    var evidence = el('ul', { class: 'evidence' });
+    e.evidence_level.forEach(function (lvl) { evidence.appendChild(el('li', { text: t('ev_' + lvl) })); });
+    var main = e.sources[e.main_source];
+
     var why = field(e, 'why');
     var whyBlock = [el('p', { text: why || t('why_none') })];
     if (e.why_pro_en) {
@@ -505,38 +604,61 @@
         state.lang === 'zh' ? el('p', { class: 'muted', text: t('pro_english_only') }) : null
       ]));
     }
-    var sources = sourceList(e.sources);
-    var evidence = el('ul', { class: 'evidence' });
-    e.evidence_level.forEach(function (lvl) { evidence.appendChild(el('li', { text: t('ev_' + lvl) })); });
 
-    return el('article', { class: 'card card-' + e.risk }, [
-      el('header', { class: 'card-head' }, [pairTitle(r), badge(e.risk, e.watch), levelMeaning(e.risk)]),
-      el('p', { class: 'effect', text: field(e, 'effect') }),
-      mainEvidence(e),
+    var details = el('div', { class: 'card-details', id: detailsId, hidden: !open }, [
+      levelMeaning(e.risk),
+      block(t('label_main_evidence'), [el('p', { class: 'main-finding', text: field(e, 'main_finding') })]),
       block(t('label_why'), whyBlock),
       block(t('label_what_to_do'), [el('p', { class: 'action', text: field(e, 'action') })], 'block-action'),
-      el('div', { class: 'meta' }, [
-        block(t('label_evidence'), [evidence]),
-        block(t('label_rated_by'), [el('p', { text: e.rating_source === 'HA' ? t('rated_by_ha') : t('rated_by_team') })])
+      block(t('label_rated_by'), [el('p', { text: e.rating_source === 'HA' ? t('rated_by_ha') : t('rated_by_team') })]),
+      block(t('label_sources'), [sourceList(e.sources)])
+    ]);
+
+    var art;
+    var label = el('span', { text: t(open ? 'details_close' : 'details_open') });
+    var toggleBtn = el('button', {
+      type: 'button', class: 'card-toggle', 'aria-expanded': open ? 'true' : 'false', 'aria-controls': detailsId,
+      onclick: function () {
+        var nowOpen = details.hidden;
+        details.hidden = !nowOpen;
+        toggleBtn.setAttribute('aria-expanded', nowOpen ? 'true' : 'false');
+        label.textContent = t(nowOpen ? 'details_close' : 'details_open');
+        art.classList.toggle('is-open', nowOpen);
+        if (nowOpen) openCards[key] = true; else delete openCards[key];
+      }
+    }, [label, icon('chevron', 'toggle-chev')]);
+
+    art = el('article', { class: 'card card-' + e.risk + (open ? ' is-open' : ''), 'data-pair': key }, [
+      el('header', { class: 'card-head' }, [pairTitle(r), badge(e.risk, e.watch)]),
+      el('p', { class: 'effect', text: field(e, 'effect') }),
+      el('dl', { class: 'facts' }, [
+        el('div', null, [el('dt', { text: t('label_evidence') }), el('dd', null, [evidence])]),
+        el('div', null, [el('dt', { text: t('label_main_evidence') }), el('dd', { class: 'main-source' }, [sourceLink(main), el('span', { class: 'print-url', text: main.url })])])
       ]),
-      block(t('label_sources'), [sources]),
+      toggleBtn,
+      details,
       el('p', { class: 'card-disclaimer', text: t('card_disclaimer') })
     ]);
+    return art;
   }
 
   function renderResults() {
     app.textContent = '';
     var results = L.checkPairs(db, state.herbs, state.drugs);
-    var head = el('section', { class: 'results-head' }, [
+    var head = el('header', { class: 'page-head results-head' }, [
       el('h1', { tabindex: '-1', text: t('results_title') })
     ]);
     app.appendChild(head);
 
     if (!results.length) {
       head.appendChild(el('p', { class: 'lede', text: t('results_empty') }));
-      head.appendChild(el('a', { class: 'btn btn-primary', href: '#/check', text: t('back_to_check') }));
-      return;
+      head.appendChild(el('a', { class: 'btn btn-primary head-action', href: '#/check', text: t('back_to_check') }));
+      return null;
     }
+
+    var target = pendingOpen;
+    pendingOpen = null;
+    if (target) openCards[target] = true;
 
     var flagged = results.filter(function (r) { return r.entry && r.entry.risk !== 'none_reported'; }).length;
     var unknown = results.filter(function (r) { return !r.entry; }).length;
@@ -547,14 +669,32 @@
     head.appendChild(tally);
     head.appendChild(el('p', { class: 'disclaimer-box', text: t('card_disclaimer') }));
 
-    var list = el('ol', { class: 'cards' });
-    results.forEach(function (r) { list.appendChild(el('li', null, [card(r)])); });
-    app.appendChild(list);
+    // Groups in the fixed order High → Moderate → Low → No reported risk → Not in our database.
+    L.STATUS_ORDER.forEach(function (status) {
+      var rows = results.filter(function (r) { return r.status === status; });
+      if (!rows.length) return;
+      var list = el('ol', { class: 'cards' });
+      rows.forEach(function (r) { list.appendChild(el('li', null, [card(r)])); });
+      app.appendChild(el('section', { class: 'group group-' + status, 'aria-labelledby': 'g-' + status }, [
+        el('h2', { class: 'group-head', id: 'g-' + status }, [
+          el('span', { class: 'group-mark', 'aria-hidden': 'true' }),
+          el('span', { class: 'group-name', text: t('risk_' + status) }),
+          el('span', { class: 'group-count' }, [
+            el('span', { 'aria-hidden': 'true', text: String(rows.length) }),
+            el('span', { class: 'visually-hidden', text: ' ' + I.tn('group_count', rows.length) })
+          ])
+        ]),
+        list
+      ]));
+    });
 
     app.appendChild(el('div', { class: 'actions' }, [
       el('a', { class: 'btn btn-secondary', href: '#/check', text: t('edit_list') }),
       el('a', { class: 'btn btn-primary', href: '#/summary', text: t('to_summary') })
     ]));
+
+    var opened = target ? app.querySelector('[data-pair="' + target + '"] .pair') : null;
+    return opened;
   }
 
   /* ---------- Doctor summary (printable) ---------- */
@@ -568,13 +708,7 @@
   function sourceList(sources) {
     var ol = el('ol', { class: 'sources' });
     sources.forEach(function (s) {
-      ol.appendChild(el('li', null, [
-        el('a', { href: s.url, target: '_blank', rel: 'noopener noreferrer' }, [
-          el('span', { text: s.label }), icon('external', 'ext'),
-          el('span', { class: 'visually-hidden', text: ' ' + t('opens_new_tab') })
-        ]),
-        el('span', { class: 'print-url', text: s.url })
-      ]));
+      ol.appendChild(el('li', null, [sourceLink(s), el('span', { class: 'print-url', text: s.url })]));
     });
     return ol;
   }
@@ -680,7 +814,7 @@
       return el('section', { class: 'about-section' }, [el('h2', { text: t(titleKey) })].concat(children));
     }
 
-    page.appendChild(el('header', { class: 'results-head' }, [
+    page.appendChild(el('header', { class: 'page-head results-head' }, [
       el('h1', { tabindex: '-1', text: t('about_title') }),
       el('p', { class: 'lede', text: t('about_intro') })
     ]));
@@ -838,8 +972,10 @@
 
   function render(focus) {
     var route = currentRoute();
+    closeSheet(true);
     checkBar = null;
-    cabinetPanel = null;
+    statusTile = null;
+    cards = {};
     warningPanel = null;
     demoBox = null;
     if (route !== 'check') alertState = null;
@@ -850,12 +986,19 @@
     });
     document.body.setAttribute('data-route', route);
     document.documentElement.setAttribute('data-route', route);
-    if (route === 'results') renderResults();
+    var target = null;
+    if (route === 'results') target = renderResults();
     else if (route === 'summary') renderSummary();
     else if (route === 'about') renderAbout();
     else renderCheck();
     if (focus) {
       window.scrollTo(0, 0);
+      // From a dashboard row: go straight to that pair's (opened) card.
+      if (target) {
+        target.scrollIntoView({ block: 'start' });
+        target.focus({ preventScroll: true });
+        return;
+      }
       var h1 = app.querySelector('h1');
       if (h1) h1.focus({ preventScroll: true });
     }
@@ -874,6 +1017,8 @@
     if (early && I.languages.indexOf(early.lang) !== -1) { state.lang = early.lang; I.setLang(state.lang); }
   } catch (e) { /* ignore */ }
   document.getElementById('lang-toggle').addEventListener('click', switchLanguage);
+  // Screens are redrawn on every visit; the app decides where to scroll (and Back closes the picker sheet).
+  try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (e) { /* ignore */ }
 
   // Offline support for the installed app. Never on file:// (browsers do not allow it there).
   if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
