@@ -42,6 +42,7 @@
     low: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="12" cy="7.6" r="1.3" fill="currentColor"/><path d="M12 11v6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
     none_reported: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M7.5 12h9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
     not_in_database: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="3 2.6"/><path d="M9.4 9.3a2.7 2.7 0 1 1 3.8 2.5c-.8.4-1.2 1-1.2 1.8v.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17.2" r="1.2" fill="currentColor"/></svg>',
+    heart: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 20.5s-7.5-4.6-9.2-9.4C1.6 7.6 3.9 4.5 7.2 4.5c2 0 3.6 1.1 4.8 2.8 1.2-1.7 2.8-2.8 4.8-2.8 3.3 0 5.6 3.1 4.4 6.6-1.7 4.8-9.2 9.4-9.2 9.4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>',
     close: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 7l10 10M17 7 7 17" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>',
     plus: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 6v12M6 12h12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>',
     tick: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5.5 12.5l4 4 9-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
@@ -707,6 +708,10 @@
     art = el('article', { class: 'card card-' + e.risk + (open ? ' is-open' : ''), 'data-pair': key }, [
       el('header', { class: 'card-head' }, [pairTitle(r), badge(e.risk, e.watch)]),
       el('p', { class: 'effect', text: field(e, 'effect') }),
+      field(e, 'heart_impact') ? el('div', { class: 'heart-impact' }, [
+        icon('heart', 'heart-icon'),
+        el('p', null, [el('strong', { text: t('label_heart_impact') + ' ' }), el('span', { text: field(e, 'heart_impact') })])
+      ]) : null,
       el('dl', { class: 'facts' }, [
         el('div', null, [el('dt', { text: t('label_evidence') }), el('dd', null, [evidence])]),
         el('div', null, [el('dt', { text: t('label_main_evidence') }), el('dd', { class: 'main-source' }, [sourceLink(main), el('span', { class: 'print-url', text: main.url })])])
@@ -852,6 +857,8 @@
         el('dl', { class: 'summary-dl' }, [
           el('dt', { text: t('label_rated_by') }), el('dd', { text: e.rating_source === 'HA' ? t('rated_by_ha') : t('rated_by_team') }),
           el('dt', { text: t('label_main_evidence') }), el('dd', { text: field(e, 'main_finding') + ' (' + e.sources[e.main_source].label + ')' }),
+          field(e, 'heart_impact') ? el('dt', { text: t('label_heart_impact_short') }) : null,
+          field(e, 'heart_impact') ? el('dd', { text: field(e, 'heart_impact') }) : null,
           el('dt', { text: t('col_effect') }), el('dd', { text: field(e, 'effect') }),
           el('dt', { text: t('label_what_to_do') }), el('dd', { text: field(e, 'action') }),
           el('dt', { text: t('label_evidence') }), el('dd', { text: evidence }),

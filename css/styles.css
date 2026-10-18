@@ -698,3 +698,12 @@ h1, h2, h3, .display { hyphens: auto; -webkit-hyphens: auto; overflow-wrap: brea
 }
 .option-group:first-child .option-group-head { margin-top: 0.5rem; }
 .option-group-list { margin: 0; border-top: 0; }
+.heart-impact {
+  display: flex; gap: 0.625rem; align-items: flex-start;
+  background: var(--surface-2, #F7F7F4); border-left: 3px solid var(--ink);
+  border-radius: 0 var(--radius-sm, 6px) var(--radius-sm, 6px) 0;
+  padding: 0.75rem 0.875rem; margin: 0 0 1rem;
+}
+.heart-impact p { margin: 0; font-size: 1.0556rem; line-height: 1.5; }
+.heart-impact .heart-icon { width: 1.375rem; height: 1.375rem; flex: none; margin-top: 0.1em; color: var(--ink); }
+@media print { .heart-impact { border-left-width: 2pt; padding: 3pt 6pt; margin-bottom: 4pt; } .heart-impact .heart-icon { display: none; } }

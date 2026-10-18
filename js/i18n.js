@@ -81,6 +81,8 @@
       risk_not_in_database: 'Not in our database',
 
       label_main_evidence: 'Main evidence',
+      label_heart_impact: 'Why this matters for your heart:',
+      label_heart_impact_short: 'Heart impact',
       level_high: 'Strongest warning on our scale. Talk to your doctor before taking these together.',
       level_moderate: 'May cause problems. Tell your doctor that you take both.',
       level_low: 'Small or uncertain risk. Mention it to your doctor.',
@@ -247,6 +249,8 @@
       risk_not_in_database: '資料庫未有記錄',
 
       label_main_evidence: '主要證據',
+      label_heart_impact: '對心臟有咩影響：',
+      label_heart_impact_short: '對心臟嘅影響',
       level_high: '我哋評級入面最強嘅警告。兩樣一齊食之前，請先同醫生傾。',
       level_moderate: '可能會有問題。請話俾醫生知你兩樣都有食。',
       level_low: '風險細或者未確定。請同醫生提一提。',
