@@ -541,6 +541,7 @@
       el('div', { class: 'dash-main' }, [
         el('header', { class: 'page-head' }, [
           el('h1', { tabindex: '-1', text: t('cabinet_title') }),
+          el('p', { class: 'subtitle', text: t('cabinet_for') }),
           el('p', { class: 'lede', text: t('cabinet_lede') })
         ]),
         demoBox, warningPanel, statusTile

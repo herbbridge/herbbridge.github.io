@@ -686,3 +686,6 @@ h1, h2, h3, .display { hyphens: auto; -webkit-hyphens: auto; overflow-wrap: brea
   .site-nav a { min-height: 2.75rem; padding: 0 0.375rem; font-size: 0.9375rem; }
   #app h1, .display { font-size: 1.75rem; line-height: 1.15; }
 }
+
+/* ---------- Heart-disease focus (Challenge 4: cardiovascular disease) ---------- */
+.subtitle { font-size: 1.125rem; font-weight: 500; color: var(--ink); margin: 0.375rem 0 0.5rem; max-width: 38rem; }
