@@ -160,6 +160,7 @@
     var live = document.getElementById('sr-alert');
     if (!live) return;
     live.textContent = '';
+    rows = rows.slice().sort(function (a, b) { return L.STATUS_ORDER.indexOf(a.status) - L.STATUS_ORDER.indexOf(b.status); });
     var msg = rows.map(function (r) {
       return t('warn_sr', { herb: primaryName(r.herb), drug: primaryName(r.drug), risk: t(r.status === 'low' && r.entry.watch ? 'risk_low_watch' : 'risk_' + r.status) });
     }).join(' ');
@@ -499,17 +500,33 @@
     var notice = el('button', { type: 'button', class: 'bar-notice', hidden: true, onclick: showWarning });
     checkBar = { button: button, status: status, notice: notice };
 
-    var clear = el('button', {
-      type: 'button', class: 'btn btn-quiet',
-      onclick: function () {
-        if (!state.herbs.length && !state.drugs.length) return;
-        if (window.confirm(t('clear_confirm'))) {
+    var clearBox = el('div', { class: 'clear-box' });
+    function showClear(asking) {
+      clearBox.textContent = '';
+      if (!asking) {
+        clearBox.appendChild(el('button', {
+          type: 'button', class: 'btn btn-quiet',
+          onclick: function () { if (state.herbs.length || state.drugs.length) showClear(true); }
+        }, [el('span', { text: t('clear_all') })]));
+        return;
+      }
+      clearBox.appendChild(el('p', { class: 'clear-question', role: 'status', text: t('clear_confirm') }));
+      var yes = el('button', {
+        type: 'button', class: 'btn btn-danger btn-small',
+        onclick: function () {
           state.herbs = []; state.drugs = []; state.demo = false; delete state.demoBackup; alertState = null;
           queries = { herbs: '', drugs: '' };
           save(); render(true);
         }
-      }
-    }, [el('span', { text: t('clear_all') })]);
+      }, [el('span', { text: t('clear_yes') })]);
+      clearBox.appendChild(el('div', { class: 'clear-actions' }, [
+        yes,
+        el('button', { type: 'button', class: 'btn btn-secondary btn-small', onclick: function () { showClear(false); clearBox.querySelector('button').focus(); } }, [el('span', { text: t('clear_cancel') })])
+      ]));
+      yes.focus();
+    }
+    showClear(false);
+    var clear = clearBox;
     var demo = el('button', { type: 'button', class: 'btn btn-quiet', onclick: startDemo }, [el('span', { text: t('demo_button') })]);
 
     app.textContent = '';
@@ -576,6 +593,26 @@
 
   function block(label, content, cls) {
     return el('div', { class: 'block ' + (cls || '') }, [el('h4', { class: 'block-label', text: label })].concat(content));
+  }
+
+  // All "not in our database" pairs in one grey box: same icon, the exact required wording, the disclaimer.
+  function unknownGroupCard(rows) {
+    var pairs = el('ul', { class: 'unknown-pairs' });
+    rows.forEach(function (r) {
+      pairs.appendChild(el('li', { 'data-pair': pairKey(r) }, [
+        icon('not_in_database', 'unknown-mark'),
+        el('span', { class: 'unknown-pair' }, [
+          nameNode(r.herb), ' ', el('span', { class: 'pair-plus', 'aria-hidden': 'true', text: '+' }), ' ',
+          el('span', { class: 'visually-hidden', text: t('and_sr') + ' ' }), nameNode(r.drug)
+        ])
+      ]));
+    });
+    return el('article', { class: 'card card-unknown card-unknown-group' }, [
+      el('header', { class: 'card-head' }, [badge('not_in_database')]),
+      el('p', { class: 'unknown-text', text: t('not_in_db_text') }),
+      pairs,
+      el('p', { class: 'card-disclaimer', text: t('card_disclaimer') })
+    ]);
   }
 
   function card(r) {
@@ -674,7 +711,8 @@
       var rows = results.filter(function (r) { return r.status === status; });
       if (!rows.length) return;
       var list = el('ol', { class: 'cards' });
-      rows.forEach(function (r) { list.appendChild(el('li', null, [card(r)])); });
+      if (status === L.NOT_IN_DATABASE && rows.length > 1) list.appendChild(el('li', null, [unknownGroupCard(rows)]));
+      else rows.forEach(function (r) { list.appendChild(el('li', null, [card(r)])); });
       app.appendChild(el('section', { class: 'group group-' + status, 'aria-labelledby': 'g-' + status }, [
         el('h2', { class: 'group-head', id: 'g-' + status }, [
           el('span', { class: 'group-mark', 'aria-hidden': 'true' }),
@@ -960,6 +998,8 @@
   }
 
   function switchLanguage() {
+    var live = document.getElementById('sr-alert');
+    if (live) live.textContent = '';
     state.lang = state.lang === 'zh' ? 'en' : 'zh';
     I.setLang(state.lang);
     save();

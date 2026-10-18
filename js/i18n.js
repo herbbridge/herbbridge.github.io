@@ -60,6 +60,8 @@
       check_need_both: 'Choose a herb and a medicine.',
       clear_all: 'Clear my list',
       clear_confirm: 'Remove all herbs and medicines from your list?',
+      clear_yes: 'Yes, clear my list',
+      clear_cancel: 'Cancel',
 
       results_title: 'Your results',
       results_intro: 'Each Chinese herb is checked against each Western medicine you chose. The most serious appear first.',
@@ -222,6 +224,8 @@
       check_need_both: '請揀一種中藥同一種西藥。',
       clear_all: '清除我嘅清單',
       clear_confirm: '確定要移除清單上所有中藥同西藥？',
+      clear_yes: '係，清除我嘅清單',
+      clear_cancel: '取消',
 
       results_title: '你嘅結果',
       results_intro: '每種中藥都會同你揀咗嘅每種西藥逐一對照。最嚴重嘅排喺最前。',
