@@ -1,0 +1,669 @@
+{
+  "about": "Audit trail for proposals/approved-pairs.json: what an independent checker confirmed for every source (web search only; full texts could not be opened) and which claims were removed because they could not be confirmed.",
+  "pairs": [
+    {
+      "id": "goji-warfarin",
+      "verdict": "confirmed_with_fixes",
+      "rating_comment": "'high' is justified under the guide on two counts. First, serious harm is reported: Rivera 2012 describes hospital admission with PT >120 s and bleeding, Naranjo probable, and Zhang 2015 reports bleeding. Second, the Lam 2001 authors say the combination should be avoided, and the CUHK review (Ge 2014) grades lycium as a major-severity interaction. All human evidence is case reports, and the entry states this. rating_source 'team' is correct because no Hospital Authority rating was shown.",
+      "unsupported_claims_removed": [
+        "Zhang 2015: 'INR 3.84 with haematuria' and 'Naranjo 6' were not seen in any search result (the abstract seen says only raised INR with bleeding and a probable interaction)",
+        "Zhang 2015: '3 patients, 6 g/day goji tea for 3 days, INR barely changed' was not found even by a targeted search; dropped from rating_reason and why_pro_en",
+        "Leung 2008: second INR value 3.86 not seen; 4.97 confirmed via secondary summary",
+        "MSKCC: exact wording 'juice, water and ethanol extracts' not seen; softened to 'extracts and juice'"
+      ],
+      "sources_checked": [
+        {
+          "label": "Rivera 2012 Pharmacotherapy 32(3):e50-e53 (main source)",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "yes",
+          "note": "Search showed the PubMed record 22392461 under this exact title, plus an Ovid full-text URL carrying DOI 10.1002/j.1875-9114.2012.01018.x. The abstract text matches every claim: a 71-year-old woman on warfarin, admitted with a markedly raised, indeterminate INR (PT >120 s) after goji juice, with epistaxis, bruising and rectal bleeding. INR fell to 2.6 after phytonadione. Naranjo 6, probable. The main finding is fully supported."
+        },
+        {
+          "label": "Lam 2001 Ann Pharmacother 35:1199-1201",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "yes",
+          "note": "Authors, title, journal and pages confirmed. Content confirmed: a 61-year-old woman with INR 4.1 after several days of concentrated goji tea; weak in-vitro CYP2C9 inhibition (Ki 3.4 mg/mL); authors say other factors may explain it and that the combination should be avoided. I did not see PMID 11675844 or DOI 10.1345/aph.1Z442 directly in search output, but they match my knowledge of this record."
+        },
+        {
+          "label": "Leung 2008 Food Chem Toxicol 46(5):1860-1862 (Hong Kong)",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "partly",
+          "note": "Search confirmed the citation, DOI 10.1016/j.fct.2008.01.008 and PMID 18281140. Secondary sources tie the 2008 report to INR 4.97 after concentrated lycium herbal tea. One also describes an 80-year-old Chinese woman, and another notes a Hong Kong report. The second INR value (3.86) was not seen, so the fix says 'two episodes of raised INR (up to 4.97)'."
+        },
+        {
+          "label": "Zhang 2015 Toxicol Rep 2:1209-1212",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "partly",
+          "note": "Search confirmed the title, authors, volume/pages and DOI 10.1016/j.toxrep.2015.08.011. The abstract confirms a 65-year-old Chinese man on maintenance warfarin with raised INR and bleeding after goji wine, a 'probable' interaction (title), and the conclusion that large doses (>6-12 g) significantly enhance warfarin. Four details were not seen in any search result: INR 3.84, haematuria, Naranjo 6, and the 3-patient 6 g/day test with its INR values (a targeted search found nothing). These were softened or dropped. PMCID PMC5598317 and PMID 28962463 were not directly confirmed, so the DOI was added to the id."
+        },
+        {
+          "label": "Ge 2014 EBCAM 2014:957362 (CUHK)",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "yes",
+          "note": "The PMC3976951 record was confirmed, with DOI 10.1155/2014/957362 and the CUHK authors Ge, Zhang and Zuo. The text lists Lycium among nine herbs with a major-severity interaction with warfarin."
+        },
+        {
+          "label": "Tan & Lee 2021 Br J Clin Pharmacol 87(2):352-374",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "yes",
+          "note": "An NHS medicines-resources summary of this BJCP systematic review says staff should be aware of increased bleeding risk with warfarin when Chinese wolfberry is taken. Epistemonikos confirms the scope. The authors and DOI match my knowledge but were not printed in the search output."
+        },
+        {
+          "label": "MSKCC About Herbs: Lycium",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "partly",
+          "note": "The URL appeared in search results, but the page text was not shown. A secondary interaction summary says goji tincture/juice inhibits CYP2C9/2C19 in vitro, not confirmed in humans. That matches the claim, so the wording was softened to 'lycium extracts and juice'. Lam 2001 alone already supports the lay 'why' sentence."
+        }
+      ],
+      "owner_notes": [
+        "Four published cases, one of them in Hong Kong, plus two reviews. The strongest of the 15."
+      ],
+      "recommendation_before_approval": "ready"
+    },
+    {
+      "id": "safflower-warfarin",
+      "verdict": "confirmed_with_fixes",
+      "rating_comment": "'Moderate' fits the guide. There is one human case with a clinically meaningful change (INR 5.31 with haematuria, and the INR returned to target once safflower was stopped), backed by rat data. No source describes major bleeding, admission or toxicity, and no authority says to avoid the combination. A search snippet also said a separate systematic review rates this pair as moderate on the basis of the single case. Keeping watch=true is reasonable because haematuria on warfarin could be read as 'high'. rating_source 'team' is correct; I saw no HA rating.",
+      "unsupported_claims_removed": [
+        "why_pro_en: 'The review notes this exceeded the recommended daily amount of 10 g' did not appear in any snippet I saw; I removed it, and the matching phrase in rating_reason.",
+        "why_pro_en: 'safflower injection raised Cmax, t1/2 and AUC of both S- and R-warfarin' (2018 study): I only saw that it increased the anticoagulant effect and affected PK parameters, so I softened it.",
+        "why_en/why_zh: 'In animal studies, safflower on its own...' describes what injectable safflower products (safflower yellow for injection) did in rats, not oral honghua, so I narrowed it to 'rat studies using injectable safflower products'.",
+        "main_finding: the review says 'strongest evidence of potential interaction'; I added 'potential' (EN) and 潛在 (ZH)."
+      ],
+      "sources_checked": [
+        {
+          "label": "Interaction between warfarin and Chinese herbal medicines. Singapore Med J 2015;56(1):11-18 (PMID 25640094; PMC4325561; DOI 10.11622/smedj.2015004)",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "yes",
+          "note": "Search results matched the smj.org.sg PDF (SMJ-56-11), PMC4325561, the dx.doi.org/10.11622/smedj.2015004 record and PMID 25640094 to this review. They confirm it covers 44 Chinese herbal products used in Singapore, that safflower is one of the 11 herbs with the 'strongest evidence of potential interaction', and the case: a 74-year-old on warfarin 1.25 mg/day with a therapeutic INR developed haematuria after 14 days of safflower 20 g (INR 5.31). On rechallenge with the same warfarin dose and no safflower, his INR was 1.64-2.57. A secondary site (hellopharmacist) independently describes the same 74-year-old, 20 g/day, 14-day case. I did not see the 'exceeded recommended 10 g daily' sentence myself, so I took it out of the entry."
+        },
+        {
+          "label": "Liu Y et al. Effects of safflower injection on the pharmacodynamics and pharmacokinetics of warfarin in rats. Xenobiotica 2018;48(8):818-823",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "partly",
+          "note": "The PubMed record exists (PMID 28783419), and a Thieme reference list confirms the authors, journal, volume and pages. The summary I saw says safflower injection 'significantly increases the anticoagulant effect of warfarin by affecting its pharmacodynamic and pharmacokinetic parameters'. I did not see the specific claim that Cmax, t1/2 and AUC rose for both S- and R-warfarin, so I softened that wording. I added the PMID and switched the URL to PubMed; I could not check the DOI independently, but it fits."
+        },
+        {
+          "label": "Liu et al. Safflower yellow for injection enhances anti-coagulation of warfarin in rats. Xenobiotica 2024;54(2):75-82 (PMID 38445636; DOI 10.1080/00498254.2024.2326987)",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "yes",
+          "note": "Search results matched the PubMed 38445636 page and the tandfonline DOI page to this title. Rats received SYI 9 mg/kg IP plus oral warfarin. SYI alone or with warfarin significantly raised PT, INR and APTT. At steady dosing, R- and S-warfarin concentrations also rose. The authors conclude that SYI enhances warfarin's anticoagulation and slows its metabolism. I added pages 75-82 to the label."
+        }
+      ],
+      "owner_notes": [
+        "One case report (INR 5.31 with blood in the urine, after 20 g a day for 14 days) plus rat studies.",
+        "The checker said 'High' could also be argued because of the bleeding. I kept 'Moderate' as checked."
+      ],
+      "recommendation_before_approval": "ready"
+    },
+    {
+      "id": "safflower-aspirin",
+      "verdict": "confirmed_with_fixes",
+      "rating_comment": "'low' fits the guide. For aspirin specifically, the evidence is lab/animal only (rat antiplatelet data, in vitro human platelets) and conflicting: the one rat combination study found no change to aspirin's pharmacokinetics or antiplatelet effect, apart from a further fall in TXB2. No human case reports or trials were found, and no authority 'avoid' statement. A safflower–warfarin human case exists (haematuria, INR 5.31, Singapore warfarin review), but it concerns warfarin, not aspirin, so it does not raise this pair. rating_source 'team' is correct because no HA rating is shown. watch=false is reasonable.",
+      "unsupported_claims_removed": [
+        "effect_en/effect_zh: 'this has only been seen in lab and animal studies' implies that an extra effect on top of aspirin was actually seen in animals. The sources show safflower's own antiplatelet effect (rats; human platelets in vitro) and potentiation of clopidogrel in rats, not of aspirin. The only aspirin combination study (Shen 2024, rats) concluded the combination did not affect aspirin's antiplatelet effect. Reworded to say the evidence is lab/animal only, mixed, and that no reports in people were found.",
+        "main_finding_en: 'found that safflower reduces platelet clumping in rats'. A review reports other studies' findings, so 'found' changed to 'reported' (the ZH 指出 is already fine).",
+        "Lim et al.'s exact sentences (rat models, clopidogrel potentiation, GPIIb/IIIa ex vivo, 'cannot yet provide definitive proof') were not seen word for word in my searches. The core content (safflower covered with platelet-inhibition evidence; caution) was confirmed. why_pro_en already softens clopidogrel to 'possible potentiation', which is acceptable."
+      ],
+      "sources_checked": [
+        {
+          "label": "Lim JW et al. Traditional Chinese medicine: herb-drug interactions with aspirin. Singapore Med J 2018;59(5):230-239",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "partly",
+          "note": "Searches confirmed the article exists, with the journal, year, volume, issue, pages, DOI 10.11622/smedj.2018051 and PMC5966631 (URL matches). They also confirmed that it covers safflower (Carthamus tinctorius) as one of the four herbs with in vivo or clinical-trial evidence of platelet inhibition or aspirin interaction, that a fragment mentions caution with safflower and aspirin, and that a secondary review table cites Lim as saying safflower potentiates aspirin. I did not see the exact quoted sentences myself (rat models, clopidogrel, GPIIb/IIIa, 'cannot yet provide definitive proof'). They come from the proposer's smj.org.sg snippets and agree with what I did see. I did not see PMID 29796686 or the full author list directly, but both fit."
+        },
+        {
+          "label": "Lu PH et al. Safflower Extract Inhibits ADP-Induced Human Platelet Aggregation. Plants 2021;10(6):1192",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "yes",
+          "note": "Confirmed: Plants, June 2021, 10(6):1192, DOI 10.3390/plants10061192, PMC8230796 (URL matches). The abstract says safflower extract inhibited ADP-induced human platelet aggregation, and that hydroxysafflor yellow A, safflower yellow A and luteolin had the same effect. This was in vitro. The Tzu Chi affiliation fits the authors listed."
+        },
+        {
+          "label": "Shen DD, Yang ZH, Huang J, et al. 注射用红花黄色素对阿司匹林的药动学和抗凝作用的影响研究. J China Pharm Univ 2024;55(6):795-800",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "yes",
+          "note": "Confirmed: authors Shen Dandan, Yang Zhonghui, Huang Ji et al., J China Pharm Univ 2024, 55(6):795-800, DOI 10.11665/j.issn.1000-5048.2024031902 (URL matches). This rat study found no significant change in salicylic acid pharmacokinetics (P>0.05). TXB2 fell significantly in the combination group (P<0.01), 6-keto-PGF1α did not change, and liver and kidney markers did not change. The authors conclude the combination does not markedly change salicylic acid levels and does not affect aspirin's antiplatelet effect. The product is an injection, not oral safflower."
+        }
+      ],
+      "owner_notes": [
+        "Lab and animal evidence only, and it is mixed. Low fits."
+      ],
+      "recommendation_before_approval": "ready"
+    },
+    {
+      "id": "safflower-clopidogrel",
+      "verdict": "confirmed_with_fixes",
+      "rating_comment": "'low' is correct under the guide: the evidence is animal and lab only, and it conflicts (Li & Wang found no added antithrombotic effect, while Lim's review says safflower potentiated clopidogrel). No human bleeding case or authority 'avoid' statement was found, so 'high' and 'moderate' are not justified. rating_source 'team' is correct because no HA rating was shown. watch=false is acceptable.",
+      "unsupported_claims_removed": [
+        "effect_en/effect_zh 'In rats' / '大鼠研究': the Li & Wang abstract does not name the species; changed to 'In animal studies' / '動物研究'.",
+        "why_pro_en 'No human data found': Lim 2018 describes a human study of safflower injection added to aspirin + clopidogrel in ACS patients (efficacy, not bleeding); changed to 'No human reports of bleeding with this combination were found.' The same fix was made in rating_reason.",
+        "why_pro_en 'The authors note that in Asian countries clopidogrel is often used together with Danggui or Honghua': not seen in any search result; dropped.",
+        "why_pro_en 'Lim et al. ... suggesting safflower may potentiate clopidogrel': accurate as a quote, but it describes potentiation against thrombosis, which contradicts the primary study; reworded to state the conflict.",
+        "why_en 'makes blood slower to clot': the PT prolongation in Li & Wang was shown with clopidogrel, not for safflower alone; softened to 'showed anti-clotting effects'.",
+        "Lim and Lu author initials were not confirmed; labels shortened to 'et al.'"
+      ],
+      "sources_checked": [
+        {
+          "label": "Li Y, Wang N. Antithrombotic effects of Danggui, Honghua and potential drug interaction with clopidogrel. J Ethnopharmacol 2010",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "yes",
+          "note": "PubMed record found at pubmed.ncbi.nlm.nih.gov/20176099 (J Ethnopharmacol 2010 Apr 21;128(3):623-8, DOI 10.1016/j.jep.2010.02.003). AGRIS lists the authors as Li Yanhong and Wang Ningsheng. The abstract confirms three experimental models, antithrombotic activity of Honghua against venous thrombosis and pulmonary embolism, no significant gain in clopidogrel's antithrombotic effect, and a significantly longer clopidogrel-induced tail bleeding time and PT. The species is not stated in the snippets I saw, so 'In rats' is unverified ('rodent'/'animal' is safe). I did not see the sentence 'in Asian countries clopidogrel is frequently used with Danggui or Honghua', so it was dropped."
+        },
+        {
+          "label": "Lim JW, et al. Traditional Chinese medicine: herb-drug interactions with aspirin. Singapore Med J 2018;59(5):230-239",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "partly",
+          "note": "PMID 29796686, PMCID PMC5966631 and DOI 10.11622/smedj.2018051 are confirmed. The full author list was not shown, so the label is shortened to 'Lim JW, et al.' The review says: 'In rat models, safflower has been found to display antiplatelet properties and potentiate clopidogrel in preventing thrombosis.' This conflicts with Li & Wang's finding of no added antithrombotic benefit, so the conflict is now stated. The review also mentions a human study in acute coronary syndrome patients where safflower injection was added to standard therapy including aspirin and clopidogrel, so the blanket line 'No human data found' was wrong."
+        },
+        {
+          "label": "Lu PH, et al. Safflower Extract Inhibits ADP-Induced Human Platelet Aggregation. Plants 2021;10(6):1192",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "yes",
+          "note": "PMC8230796 and DOI 10.3390/plants10061192 are confirmed (Plants, June 2021, Taipei Tzu Chi Hospital group). Safflower extract inhibited ADP-induced human platelet aggregation in vitro. The first author's initials were not shown, so the label is 'Lu et al.' It supports the mechanism only, not the drug interaction."
+        }
+      ],
+      "owner_notes": [
+        "Animal and lab evidence only. Low fits."
+      ],
+      "recommendation_before_approval": "ready"
+    },
+    {
+      "id": "sanqi-warfarin",
+      "verdict": "confirmed_with_fixes",
+      "rating_comment": "'low' with watch=true fits the guide. There is no human case report or human study showing a clinically meaningful change. The direct evidence is rat and cell data that conflict: Qian 2022 shows PT/INR rising, Yang 2024 shows warfarin weakened, and the 2009 study shows only non-significant PK trends. The only human data are observational and point to LESS bleeding (Hsu 2022), and Yang 2024 mentions an unquantified clinical observation of antagonism. No authority 'avoid' statement or HA rating was found, so rating_source 'team' is correct. watch=true is still justified because Qian 2022 showed PT/INR more than doubling in rats. The owner should know that SMJ 2015 counts notoginseng among the 11 herbs with the strongest evidence of potential interaction. Moderate would be a policy choice, not something the guide requires.",
+      "unsupported_claims_removed": [
+        "Chin J Clin Pharmacol 2018 rat study and all its figures (INR 1.40 vs 2.49/3.34/4.46 at 48 h; rises in AUC, AUMC, MRT, t1/2 and Cmax): I could not confirm the article exists.",
+        "rating_reason: 'Three rat studies found a stronger warfarin effect (higher warfarin exposure, PT and INR)'. One of the three is unconfirmed (Chin J 2018). The 5-week study cited by SMJ found only non-significant trends and did not measure PT/INR. Only Qian 2022 showed a PT/INR rise.",
+        "why_pro: Eur J 2022 'CL/F by 10%, 23% and 33%'. Only the 33% high-dose figure was seen.",
+        "SMJ 2015 / main_finding: 'in rats, notoginseng raised warfarin levels'. The original 2009 study reports only a non-significant trend after IV injection. The wording is softened to 'in one rat study'.",
+        "effect_en/zh: 'some found sanqi made warfarin work more strongly (INR went up)'. After the unconfirmed Chin J 2018 is dropped, only one rat study shows an INR rise. Reworded.",
+        "rating_reason: the TRC 'Moderate' rating comes only from a search summary. Unconfirmed.",
+        "rating_reason: Hsu 2022 'does not name the anticoagulants'. Not checked. Reworded to 'results are not warfarin-specific'.",
+        "PMC4325561 as the PMC ID for the SMJ 2015 article was not confirmed. The DOI URL is used instead."
+      ],
+      "sources_checked": [
+        {
+          "label": "Singapore Med J 2015 (Interaction between warfarin and Chinese herbal medicines)",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": false,
+          "supports": "partly",
+          "note": "The search confirmed DOI 10.11622/smedj.2015004 and the abstract listing notoginseng among the 11 herbs with the 'strongest evidence'. I could not confirm PMC4325561 as this article's PMC ID, so the corrected entry uses the DOI URL. I did not see the notoginseng section text ('not located', and the 5-week rat study). The rat claim is backed by its original source, the 2009 Chin J Clin Pharmacol Ther study (IV PNS injection at 20 mg/kg/d for 5 weeks). That abstract says there were NO marked PK changes, only a TREND toward higher warfarin Tmax, t1/2 and AUC. The review's word 'increased' overstates this, and the corrected why_pro and rating_reason say so."
+        },
+        {
+          "label": "Eur J Drug Metab Pharmacokinet 2022 (PMID 35138605)",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "yes",
+          "note": "Confirmed as Qian et al., 'Effects and Mechanism of Action of Panax notoginseng Saponins on the Pharmacokinetics of Warfarin', 47(3):331-342, DOI 10.1007/s13318-022-00753-0. At 72 h, PT rose 110-126% and INR about 111-128% compared with warfarin alone. CL/F was 33% lower at the high dose, systemic exposure rose, and CYP3A4 expression was downregulated with no effect on CYP2C9. I could not confirm the 10% and 23% CL/F figures for the low and medium doses. A correction notice exists (PMID 35192182) that fixes figures."
+        },
+        {
+          "label": "Chin J Clin Pharmacol 2018 (三七對大鼠體內華法林的藥代動力學影響, ccj.pku.edu.cn aid=217233192)",
+          "exists": false,
+          "citation_ok": false,
+          "id_matches_url": false,
+          "supports": "unknown",
+          "note": "Two searches (by Chinese title, and by keywords plus journal and year) did not find this article. Only the 2009 study came up. I could not confirm that it exists or that its INR figures (1.40 vs 2.49/3.34/4.46) are right, so it is dropped."
+        },
+        {
+          "label": "Yang et al. J Ginseng Res 2024 (PMID 39263307)",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "yes",
+          "note": "Confirmed as 48(5):494-503, PMC11385396, DOI 10.1016/j.jgr.2024.05.003. In SD rats and HepG2 cells, PNS sped up warfarin metabolism and reduced its efficacy, with higher NR1I3 and CYP2C9 and lower miR-214-3p. The authors report an unexpected clinical observation of antagonism."
+        },
+        {
+          "label": "Hsu et al. PLoS ONE 2022 (PMC9398017)",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "yes",
+          "note": "Confirmed: 'Concurrent use of Chinese herbal medicine and anticoagulants may reduce major bleeding events', DOI 10.1371/journal.pone.0271965. It used the Taiwan NHIRD, 4,470 anticoagulant users matched 1:1 by propensity score. Panax notoginseng was among the single herbs linked to lower major bleeding. The design is observational, and the results are for anticoagulant users in general, not warfarin specifically."
+        },
+        {
+          "label": "Natural Medicines (TRC) consumer monograph: Panax notoginseng",
+          "exists": true,
+          "citation_ok": false,
+          "id_matches_url": false,
+          "supports": "unknown",
+          "note": "The proposer never opened it and relied on a search summary. I did not see the 'Moderate' rating. A WebMD/TRC-type notoginseng monograph and HelloPharmacist mention animal data showing higher warfarin levels, PT and INR, but that is secondary. It is dropped as a source, and rating_reason now says the rating is unconfirmed."
+        }
+      ],
+      "owner_notes": [
+        "The evidence points both ways: one rat study made warfarin stronger, another made it weaker.",
+        "A Taiwan database study in people found less bleeding, not more. Low with 'watch' is the checker's choice; Moderate would also be defensible."
+      ],
+      "recommendation_before_approval": "call"
+    },
+    {
+      "id": "sanqi-aspirin",
+      "verdict": "confirmed_with_fixes",
+      "rating_comment": "'Moderate' fits the guide. A meta-analysis of 20 RCTs in people found measurable changes on blood tests: more platelet inhibition, and PT and INR lengthened with PTS. Natural Medicines (TRC) separately rates aspirin with Panax notoginseng as Moderate ('Be cautious with this combination'). Two things argue against: no extra bleeding was found, and the INR change was small (WMD 0.22). The owner could reasonably choose 'low', as the entry already says. 'High' is not justified: no serious harm was reported and no authority says to avoid the combination. rating_source 'team' is correct because no HK Hospital Authority rating was shown.",
+      "unsupported_claims_removed": [
+        "why_pro_en: Xie & Wang 2023 review statement ('saponins in P. notoginseng could enhance antiplatelet drug activity'). The source could not be found, so I removed it.",
+        "PMID 36569332 for Dai 2022 could not be confirmed, so I removed it (the PMC id and DOI are confirmed).",
+        "why_pro_en / rating_reason: the named preparations (Xuesaitong tablets and soft capsules, Xuesaitong and Xueshuantong injections, Sanqi Tongshu capsules) and 'some by injection' were not seen, so I generalised them to PNS/PTS saponin preparations.",
+        "why_en/why_zh: 'In rats, sanqi also helped more aspirin get into the blood', and in why_pro_en 'markedly increased salicylic acid Cmax ... attributed to increased GI absorption'. I could not see the rat paper's abstract (only its title), so I softened this to 'a rat study suggested sanqi may raise aspirin levels in the blood'. TRC backs up the direction."
+      ],
+      "sources_checked": [
+        {
+          "label": "Dai et al. Front Pharmacol 2022",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "yes",
+          "note": "Confirmed: Dai, Zhang, Jiang, Chen. Front Pharmacol 13:1015048, 7 Dec 2022. DOI and PMC9768032 match. Search results show 20 RCTs with 2,216 patients, CHD or ischaemic stroke, and a subgroup analysis by saponin type. PTS plus ASA prolonged PT (WMD 1.90) and PT-INR (WMD 0.22). The conclusion reads: stronger antiplatelet aggregation and anticoagulation 'without increasing bleeding risk, gastrointestinal side effects, and urticaria'. PMID 36569332 could not be confirmed (a search for the PMID returned nothing), so I removed it from the id. The named product list (Xuesaitong, Xueshuantong, Sanqi Tongshu) and 'some by injection' did not appear in my results, so I generalised them to PNS/PTS preparations."
+        },
+        {
+          "label": "J Chromatogr B 2017 (PNS and aspirin pharmacokinetics, rats)",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "partly",
+          "note": "Search found the title 'Effect of Panax notoginseng saponins on the pharmacokinetics of aspirin in rats' in J Chromatogr B 2017, in an index listing that also gave PubMed ID 27978468 (not added to the entry; the owner may want to check it). The PII prefix 1570-0232 is J Chromatogr B's ISSN, which fits. I could not see the abstract myself, so the Cmax and GI-absorption details are unverified. The direction (higher aspirin levels) is backed up by the TRC monograph. I softened the wording to 'suggested ... may raise' and added the full title to the label."
+        },
+        {
+          "label": "Sun et al. Molecules 2018",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "yes",
+          "note": "PMC6016969 is 'Inhibitory Influence of Panax notoginseng Saponins on Aspirin Hydrolysis in Human Intestinal Caco-2 Cells', Molecules 2018;23(2):455 (MDPI 1420-3049/23/2/455; ESTHER lists it as Sun_2018_Molecules_23). The title itself supports the claim that PNS inhibited aspirin hydrolysis in Caco-2 cells."
+        },
+        {
+          "label": "Xie & Wang. J Ethnopharmacol 2023 (PMID 36754189)",
+          "exists": false,
+          "citation_ok": false,
+          "id_matches_url": false,
+          "supports": "unknown",
+          "note": "Two targeted searches (DOI/title and a key phrase) did not find this review, so its existence, PMID and quoted highlight are unverified. Not shown to be wrong, but under the 'verified only' rule I dropped it from sources and why_pro_en. The owner can re-add it after checking PubMed 36754189."
+        },
+        {
+          "label": "Natural Medicines (TRC) consumer monograph: Panax notoginseng",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "yes",
+          "note": "The vital.ly monograph=996 page came up in search. Its aspirin entry reads: 'Interaction Rating=Moderate Be cautious with this combination. Taking Panax notoginseng with aspirin might increase how much aspirin and Panax notoginseng is in the blood.' Confirmed, so I removed 'reportedly' from the rating_reason. This is not an HK HA rating, so rating_source stays 'team'."
+        }
+      ],
+      "owner_notes": [
+        "Moderate rests on a review of 20 trials (stronger anti-clotting effect, no extra bleeding) and the Natural Medicines database.",
+        "The Natural Medicines page is hosted on a supplement shop's website (vital.ly), not the publisher's.",
+        "Because no extra bleeding was found, Low would also be reasonable."
+      ],
+      "recommendation_before_approval": "call"
+    },
+    {
+      "id": "sanqi-clopidogrel",
+      "verdict": "confirmed_with_fixes",
+      "rating_comment": "The 'low' rating is right. The evidence is one rat pharmacokinetic study plus a review statement. I saw no human study, case report, bleeding event, or authority advice to avoid the combination. rating_source 'team' is correct because no HA rating was found. watch=true is reasonable since every finding points towards a stronger clopidogrel/antiplatelet effect, but the owner may choose watch=false. Ma 2018 contradicts itself (the abstract conclusion says CAMD fell, the results say it rose), which makes this weak evidence even weaker. That is one more reason not to go above 'low'.",
+      "unsupported_claims_removed": [
+        "why_pro_en / why_en / why_zh: 'Molecular simulation suggested partial inhibition of CES1A' and 'may partly block a liver enzyme'. Ma 2018 reports lower hepatic CES1A mRNA and a simulated 'good interaction', not partial inhibition. The 'partially inhibited' wording seems to come from a different (FDDP) study. Reworded to 'appeared to reduce a liver enzyme'.",
+        "The entry left out that Ma 2018's own abstract conclusion says 'reduced plasma levels of active CAMD', which conflicts with its results (higher Cmax, AUC and MRT). A caution is now in why_pro_en and rating_reason.",
+        "J Stroke Cerebrovasc Dis 2022: the PII/URL and the quoted conclusion about platelet inhibition and the fibrinolytic pathway were not verified. Source and claim dropped.",
+        "why_pro_en: 'All data are preclinical' could not be checked for the studies behind Hu & Wang's pharmacodynamic claim. Replaced with 'No human study or case report was found.'"
+      ],
+      "sources_checked": [
+        {
+          "label": "Ma et al. Evid Based Complement Alternat Med 2018",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "partly",
+          "note": "The title is 'The Herb-Drug Interaction of Clopidogrel and Xuesaitong Dispersible Tablet by Modulation of the Pharmacodynamics and Liver Carboxylesterase 1A Metabolism'. PMC6220743 and DOI 10.1155/2018/5651989 both match this paper (PMID 30498515). The design holds up: 30 male SD rats, clopidogrel 30 mg/kg alone or with XST 50 mg/kg, once daily for 30 days. The results say co-administration appreciably increased the Cmax, AUC and MRT of CAMD. Two problems. (1) The paper reports that hepatic CES1A mRNA expression fell and that molecular simulation showed a 'good interaction' with CES1A. The 'partially inhibited based on molecular simulation' wording seems to describe a different study, the one on Fufang Danshen Dripping Pills, so I reworded it. (2) The abstract's conclusion says the combination 'resulted in reduced plasma levels of active CAMD', which contradicts the paper's own results. The entry now carries a caution about this."
+        },
+        {
+          "label": "Hu & Wang. J Thromb Thrombolysis 2019",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "yes",
+          "note": "Confirmed: Hu Y, Wang J. J Thromb Thrombolysis. 2019 Oct;48(3):491-499, 'Interactions between clopidogrel and traditional Chinese medicine'. The DOI matches the Springer URL. The abstract says word for word: 'The pharmacodynamics of Panax notoginseng ... increased the antiplatelet activity compared with clopidogrel alone'. I could not see what kinds of studies (human or animal) this claim rests on."
+        },
+        {
+          "label": "J Stroke Cerebrovasc Dis 2022 (PNS with dual antiplatelet drugs, rats)",
+          "exists": true,
+          "citation_ok": false,
+          "id_matches_url": false,
+          "supports": "unknown",
+          "note": "The only trace of this paper is a reference in WebMD's reference list: Wu Y, Wang W, Kou N, et al. 'Panax Notoginseng Saponins Combined with Dual Antiplatelet Drugs Potentiates Anti-Thrombotic Effect with Alleviated Gastric Injury in A Carotid Artery Thrombosis Rat Model', J Stroke Cerebrovasc Dis 2022;31(8):106597. Four searches failed to find the abstract, a PubMed record, or the PII S1052305722002919. The quoted sentence about the mechanism (platelet inhibition and the fibrinolytic pathway) could not be checked. Under the no-risk rule I dropped it. It was only supporting evidence."
+        }
+      ],
+      "owner_notes": [
+        "The only real study contradicts itself: its results say the active clopidogrel went up, its summary says it went down.",
+        "I suggest leaving this as 'not in our database' for now."
+      ],
+      "recommendation_before_approval": "hold"
+    },
+    {
+      "id": "danshen-aspirin",
+      "verdict": "confirmed_with_fixes",
+      "rating_comment": "'low' with watch=true and rating_source 'team' can be defended under the guide, but it is borderline. On one side there is one small trial in healthy volunteers, it used a two-herb combination product, it measured only PK and a surrogate marker (thromboxane B2) with no bleeding outcomes, and the observational signal was not significant. On the other side, the authors themselves concluded there are 'significant pharmacokinetic and pharmacodynamic interactions in healthy human subjects'. That could be read as a 'clinically meaningful change in human studies', which would make it moderate. The owner should make this call explicitly. Given the 'no risks' rule, the owner may prefer moderate. I did not find any Hospital Authority rating.",
+      "unsupported_claims_removed": [
+        "why_en/why_zh (original): 'The researchers linked the change to higher aspirin levels...' is circular. In context 'the change' is the rise in aspirin levels, but the authors gave this cause for the thromboxane B2 drop, not for the aspirin rise. Reworded to name the thromboxane B2 drop.",
+        "COX mechanism (danshensu + aspirin + salicylic acid acting together on COX) is only partly verified. The abstract snippet seen says 'a synergistic effect' and is truncated, and only a search-engine summary names COX. I kept it, hedged as 'per search summaries of the abstract (full text not seen)'. Separate rat/in vitro work (PMC4222847) suggests danshensu mainly inhibits COX-2 rather than COX-1, so the wording is softened to 'same type of body enzyme (COX)'.",
+        "Source 1 identifier: the ScienceDirect PII S0378874112004989 could not be matched to the article. Replaced with the confirmed PMID 22867637.",
+        "'no bleeding outcomes appear in the abstract' was not directly verified, but nothing seen contradicts it."
+      ],
+      "sources_checked": [
+        {
+          "label": "Zhang Y et al. Is it safe to take Radix Salvia Miltiorrhiza - Radix Pueraria Lobate product with warfarin and aspirin? A pilot study in healthy human subjects. J Ethnopharmacol 2020;262:113151 (PMID 32736050)",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "yes",
+          "note": "Search shows PMID 32736050 is this 2020 J Ethnopharmacol pilot (vol 262, art. 113151), with an HKU repository copy at hub.hku.hk/handle/10722/343313. Abstract text seen in search: 5-day, multiple-dose, five-session trial, n=14, 2-week washouts; 'moderately increased AUC0->t of aspirin'; 'reduction in systemic thromboxane B2 concentration ... after administration of DG with aspirin'. The snippet that gives the cause cuts off at 'higher aspirin exposure and a synergistic effect'. Only one search summary says this synergistic effect is COX inhibition by danshensu, aspirin and salicylic acid, so I count the mechanism as partly verified and kept it hedged. The original label had no authors; I added Zhang Y, Yang M, Ho NJ et al., which comes from a secondary database citation."
+        },
+        {
+          "label": "Zhou L, Wang S, Zhang Z, Lau BS, Fung KP, Leung PC, Zuo Z. Pharmacokinetic and pharmacodynamic interaction of Danshen-Gegen extract with warfarin and aspirin. J Ethnopharmacol 2012;143(2):648-55 (rats)",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": false,
+          "supports": "yes",
+          "note": "Authors, journal, year, volume and pages are confirmed by a reference listing. The PubMed record is PMID 22867637: SD rats, n=6 per group, DG 0.15 g/kg twice daily for 5 days with aspirin 10.3 mg/kg. The quote matches the abstract text in search: 'Co-administration of DG with aspirin could significantly increase the C(max) and AUC of both aspirin (p<0.01) and its metabolite salicylic acid (p<0.01)'. I could not confirm that the ScienceDirect PII S0378874112004989 belongs to this article, and the entry says the PMID was not retrieved. Fix: use PMID 22867637 and its PubMed URL instead."
+        },
+        {
+          "label": "Tsai HH, Lin HW. Relationship between major bleeding and concurrent use of antiplatelet drugs with Chinese medications. ISPOR 18th Annual International Meeting; Value Health 2013;16(3):A271",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "yes",
+          "note": "The ISPOR URL resolves to this exact title in search, and it is also indexed as Value in Health vol 16 issue 3, A271 (May 2013). The study is a nested case-control and case-crossover design in Taiwan NHIRD 2007 data (92,046 antiplatelet users). The increased risk with single Chinese medicines (danshen and Asian ginseng named, about 28-152% higher) was not statistically significant, and the authors say the link was 'not ascertained'. This matches the entry. A fuller 2017 paper also exists (PMC5558644, 'Uncertain Associations...'), but I did not check its results."
+        }
+      ],
+      "owner_notes": [
+        "One small trial (14 healthy people) of a product that also contains gegen, plus rat data.",
+        "The authors call it a significant interaction, so the checker said Low is borderline. You choose Low (as proposed) or Moderate."
+      ],
+      "recommendation_before_approval": "call"
+    },
+    {
+      "id": "danshen-clopidogrel",
+      "verdict": "confirmed_with_fixes",
+      "rating_comment": "'low' with watch=true fits the guide. Evidence: the review says danshen inhibits CES1/CYP enzymes. One rat PK study found no change in clopidogrel exposure, while a multi-herb Danshen Yin rat study did change clopidogrel AUC, so the evidence conflicts. Two Taiwanese human database studies (2013 abstract, 2017 EBCAM paper) found no statistically significant rise in major bleeding with antiplatelets plus danshen or other prespecified Chinese medicines. No case report, no human PK study and no 'avoid' advice from an authority were found. A 2026 self-controlled case series (Ther Adv Drug Saf; PMC13169102) did find a strong danshen bleeding signal, but only with oral anticoagulants, not antiplatelets, so it does not raise this pair. That study is relevant to the danshen-warfarin entry. No HA rating was found, so rating_source 'team' is correct.",
+      "unsupported_claims_removed": [
+        "why_en/why_zh call carboxylesterase 1 and the CYP450 enzymes 'liver enzymes' (肝臟酵素). The verified review sentence says only that danshen 'inhibited carboxylesterase 1 and most enzyme of cytochrome P450'. Softened to 'enzymes the body uses to process medicines'.",
+        "effect_en/effect_zh say 'Lab studies suggest...' (化驗室研究顯示), and rating_reason says 'in vitro'. The only verified source for this mechanism is the review's own statement; the underlying lab studies were not checked. Reworded to 'A review suggests...'.",
+        "rating_reason says 'No human interaction study or case report was found', but the same entry cites human observational data from Taiwan (antiplatelet users, bleeding admissions). Changed to 'No human pharmacokinetic study or case report was found', with the Taiwanese database studies described.",
+        "Source 2 and source 3 labels have no authors, journal or year (Lee et al., Int J Pharm 2011; Tsai HH, Lin HW, Value Health 2013;16(3)). Added them."
+      ],
+      "sources_checked": [
+        {
+          "label": "Zhang et al. A Review of Danshen Combined with Clopidogrel in the Treatment of Coronary Heart Disease. Evid Based Complement Alternat Med 2019:2721413 (PMC6399523; DOI 10.1155/2019/2721413)",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "yes",
+          "note": "Search for the exact title returns PMC6399523 as this article, with the journal (EBCAM), year (2019) and DOI 10.1155/2019/2721413. The search confirms: 22 articles with 2,587 patients; danshen plus clopidogrel was more effective than clopidogrel alone; and 'Danshen inhibited carboxylesterase 1 and most enzyme of cytochrome P450, especially cytochrome P450 1A2, which may affect the metabolism of clopidogrel'. The quoted sentence does not say these enzymes are 'liver' enzymes, and it does not say the finding comes from lab studies."
+        },
+        {
+          "label": "Lee et al. Danshen extract does not alter pharmacokinetics of docetaxel and clopidogrel... (rat study), University of Minnesota Experts record",
+          "exists": true,
+          "citation_ok": false,
+          "id_matches_url": true,
+          "supports": "yes",
+          "note": "The UMN Experts URL resolves to this title. It is Lee et al., Int J Pharm 2011. In rats, oral danshen extract at 400 mg/kg did not change clopidogrel (30 mg/kg oral) plasma profiles or PK parameters. Cyclosporine A did change them. The authors concluded danshen has negligible potential for P-gp/CYP3A-mediated interactions. The label has no authors, journal or year, so I added them. I could not get a PMID. Note: a separate rat study of Danshen Yin, a multi-herb formula, did change clopidogrel AUC. The 'conflicting' framing in the entry covers this."
+        },
+        {
+          "label": "Tsai HH, Lin HW. ISPOR 18th Annual International Meeting abstract: Relationship between major bleeding and concurrent use of antiplatelet drugs with Chinese medications (Value Health 2013;16(3))",
+          "exists": true,
+          "citation_ok": false,
+          "id_matches_url": true,
+          "supports": "yes",
+          "note": "The ISPOR presentation URL matches the title. Design: nested case-control plus case-crossover in Taiwan NHIRD 2007 data. Danshen was one of the CMs studied, alongside aspirin and clopidogrel among the antiplatelets. The search confirms 'increased risk of hospitalization due to major bleeding in both studies but was not statistically significant' and that the relationship was 'not ascertained'. The label has no authors or Value in Health citation, so I added them."
+        },
+        {
+          "label": "ADDED: Tsai et al. Uncertain Associations of Major Bleeding and Concurrent Use of Antiplatelet Agents and Chinese Medications: A Nested Case-Crossover Study. Evid Based Complement Alternat Med 2017:9417186 (PMC5558644; PMID 28831288)",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "yes",
+          "note": "The full peer-reviewed paper from the same Taiwanese group. It used 79,463 antiplatelet outpatients (aspirin, clopidogrel) and 1,209 bleeding admissions in 2012-2013. Danshen was one of the prespecified CMs. Concurrent use with the prespecified CMs did not significantly raise bleeding risk (OR 1.00, 95% CI 0.51-1.95; OR 1.13, 95% CI 0.65-1.97). The estimates are pooled; I did not see a danshen-only OR. I added this source because it backs the 'not significant' claim more strongly than the conference abstract does."
+        }
+      ],
+      "owner_notes": [
+        "Weak and mixed evidence. Two Taiwan database studies found no clear rise in bleeding. Low with 'watch' fits."
+      ],
+      "recommendation_before_approval": "ready"
+    },
+    {
+      "id": "danshen-digoxin",
+      "verdict": "confirmed_with_fixes",
+      "rating_comment": "Low is correct. The evidence is in vitro and mouse only, and it shows interference with a lab assay, not a pharmacological interaction or reported clinical harm. A falsely low reading could in theory lead to digoxin being over-dosed, but I found no human case for this. rating_source 'team' is correct because no Hospital Authority rating was found. watch=false is acceptable.",
+      "unsupported_claims_removed": [
+        "why_pro_en: Chow et al. 2003 found modest digoxin-like immunoreactivity with FPIA but none with the Roche Tina-quant and Beckman Synchron LX assays (abstract not seen; PMC6807998 not confirmed)",
+        "rating_reason: some assays (Roche Tina-quant, Beckman Synchron LX) showed no interference (unverified; only CLIA is confirmed)",
+        "rating_reason: RxList rates the pair 'major' (not checked; removed)",
+        "why_pro_en: assigning FPIA-high / MEIA-low specifically to Wahed 2001, and the explanation that this is 'because danshen components are highly protein-bound' (not seen in Wahed 2001's abstract; the FPIA/MEIA pattern is confirmed only in Dasgupta 2002; reworded)",
+        "why_en/why_zh: 'tests mistake [danshen substances] for digoxin' explains only false-high results, not the false-low MEIA results (reworded to 'interfere with')",
+        "action_en/action_zh: telling 'the staff who take your blood tests' goes beyond the allowed doctor/pharmacist advice (changed to doctor or pharmacist)"
+      ],
+      "sources_checked": [
+        {
+          "label": "Wahed A, Dasgupta A. Am J Clin Pathol 2001;116(3):403-408 (main source)",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "partly",
+          "note": "Several reference lists confirm the authors, title, journal, year and pages 403-408, and the OUP path 116/3/403 matches. I could not confirm the OUP article number 1758326. No PMID was retrieved. The title confirms both positive and negative in vitro interference and that monitoring free digoxin eliminated it, which supports the main finding. I did not see this paper's abstract, so its exact assay pairing (FPIA high, MEIA low) and the protein-binding explanation are unverified for this paper. The FPIA/MEIA pattern is confirmed in Dasgupta 2002, from the same group. A related 2003 Wahed paper says danshen is moderately to strongly protein bound."
+        },
+        {
+          "label": "Dasgupta A, Actor JK, Olsen M, Wells A, Datta P. Clin Chim Acta 2002;317(1-2):231",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "yes",
+          "note": "A title search returned a WikiGenes reference record numbered 11814480, which fits PMID 11814480. A library catalogue reproduces the abstract: digoxin-like immunoreactivity in sera of mice fed danshen, falsely low on MEIA, falsely high on FPIA, no interference with CLIA. Fully supports the claims made for this source."
+        },
+        {
+          "label": "Chow L, Johnson M, Wells A, Dasgupta A. J Clin Lab Anal 2003;17(1):22-7",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": false,
+          "supports": "unknown",
+          "note": "The citation is confirmed (DOI 10.1002/jcla.10064). Searching PMC6807998 returned nothing linking it to this paper, so the PMCID/URL is unverified. I never saw the abstract, so the claim of 'modest' FPIA immunoreactivity and no interference on the Roche Tina-quant and Beckman Synchron LX assays is unverified. Dropped from the corrected entry."
+        }
+      ],
+      "owner_notes": [
+        "About blood-test errors, not a change in how digoxin works. Lab and mouse studies from 2001–2002.",
+        "The main source was confirmed from its title and listing only; its abstract could not be opened."
+      ],
+      "recommendation_before_approval": "ready"
+    },
+    {
+      "id": "danshen-rosuvastatin",
+      "verdict": "confirmed_with_fixes",
+      "rating_comment": "Low is right. The only human evidence is a pharmacokinetic study in 6 healthy men, with a modest fall in exposure (AUC about 19%, Cmax about 27%). That is within the 'weak' range of exposure change, and the study had no lipid or clinical endpoints. A meta-analysis of human trials found better lipid results when Salvia miltiorrhiza was added to statins, which conflicts with any loss of effect. There are no reports of serious harm and no authority advice to avoid the combination. No Hospital Authority rating was shown, so rating_source 'team' is correct.",
+      "unsupported_claims_removed": [
+        "why_en/why_zh say the researchers found less rosuvastatin was absorbed from the gut, with no mention of species. The gut-absorption finding came from the rat in situ intestinal model, not from the human volunteers. Fixed to say 'In rat experiments' (老鼠實驗).",
+        "why_pro_en says 'compared with placebo'. The comparison was rosuvastatin plus placebo against rosuvastatin plus tanjin. Fixed.",
+        "effect_en 'about a fifth to a quarter' slightly understates the 26.85% Cmax fall and does not match the ZH '約兩成至近三成'. Changed EN to 'roughly 20% to 27%'.",
+        "PMID 30962748 is confirmed only through a search summary. An exact-number search found nothing, but the PMC ID and the title match."
+      ],
+      "sources_checked": [
+        {
+          "label": "Yang J, et al. Pharmacokinetic Drug Interaction Between Rosuvastatin and Tanjin in Healthy Volunteers and Rats. Yonago Acta Med 2019;62(1):77-84",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "yes",
+          "note": "PMC6437397 confirmed by search. The first author is Jie Yang, the journal is Yonago Acta Medica 2019;62(1):77-84, and J-STAGE carries a matching DOI suffix. A search summary tied PMID 30962748 to this paper, but an exact-number search turned up nothing, so the PMID is confirmed only indirectly. Confirmed content: a randomised, single-blind, two-period crossover in 6 healthy men taking rosuvastatin with placebo or a tanjin-containing drug; Cmax down 26.85% and AUC0-12 down 19.43%; BCRP and OATP mRNA up in human lymphocytes; a rat in situ intestinal model placing the interaction at least in the small-intestine absorption phase, through enhanced efflux. The figure legend gives GMRs of AUC 0.77 and Cmax 0.70, which differ slightly from the abstract's percentages. The comparator is rosuvastatin plus placebo, not placebo alone."
+        },
+        {
+          "label": "Salvia miltiorrhiza and Its Compounds as Complementary Therapy for Dyslipidemia: A Meta-Analysis of Clinical Efficacy and In Silico Mechanistic Insights (2024)",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "yes",
+          "note": "Pharmaceuticals (Basel) 2024;17(11):1426, DOI 10.3390/ph17111426, PMC11597782. It confirms that adding Salvia miltiorrhiza to statins improved TC, LDL-C, TG and HDL-C compared with statins alone. It covers statins in general, not rosuvastatin specifically. The label was missing the journal and DOI, so I added them."
+        }
+      ],
+      "owner_notes": [
+        "One small study in 6 healthy men. Low fits."
+      ],
+      "recommendation_before_approval": "ready"
+    },
+    {
+      "id": "danshen-atorvastatin",
+      "verdict": "confirmed_with_fixes",
+      "rating_comment": "'low' is right. The only evidence is two rat pharmacokinetic studies, and they disagree: the multi-herb Danshen tablets lowered atorvastatin exposure, while danshensu alone raised it. They also used different products and doses. No human data or harm reports were found. rating_source 'team' is correct because no HA rating was found.",
+      "unsupported_claims_removed": [
+        "The entry calls the product 'danshen tablets' without saying the source describes it as a multi-herbal formula. Users could read the finding as being about danshen alone. Fixed by adding 'a multi-herb formula'.",
+        "No claim is false. The 42.5 to 25.7 microsomal values have no units in what I saw, and the entry also gives none, so they are left unitless."
+      ],
+      "sources_checked": [
+        {
+          "label": "Effects of Danshen tablets on pharmacokinetics of atorvastatin calcium in rats and its potential mechanism. Pharm Biol 2018",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "yes",
+          "note": "Sun et al., Pharm Biol 2018;56(1):104-108, doi 10.1080/13880209.2018.1424209. The search returned PMC6130457 under this exact title. Rats got atorvastatin calcium 1 mg/kg with or without Danshen tablet (DST) pretreatment at 100 mg/kg. Cmax 23.87 vs 38.94 ng/mL, AUC0-t 41.01 vs 77.28 ng·h/mL and t1/2 1.91 vs 2.74 h, all p<0.05. The microsomal t1/2 dropped from 42.5 to 25.7, and the authors say this means faster metabolism. One caveat: the abstract calls DST 'a traditional Chinese multi-herbal formula', not danshen alone. The entry did not say this."
+        },
+        {
+          "label": "The Pharmacokinetic Effects and Drug-Drug Interaction of Atorvastatin With Danshensu in Rats (2025)",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "yes",
+          "note": "Mei et al., Int J Pharmacol 2025;21(8), doi 10.31083/IJP45265. The search found it at both the imrpress.com URL and journal.hep.com.cn. Design: 12 SD rats, danshensu 150 mg/kg/day for 2 weeks, then atorvastatin 10 mg/kg. Compared with controls, AUC, Cmax and t1/2 rose and CLz/F fell (p<0.05). This supports the 'opposite direction' claim. The label leaves out the journal and authors."
+        }
+      ],
+      "owner_notes": [
+        "Two rat studies that disagree. Low fits."
+      ],
+      "recommendation_before_approval": "ready"
+    },
+    {
+      "id": "danshen-amlodipine",
+      "verdict": "confirmed_with_fixes",
+      "rating_comment": "The pair-specific evidence is one small rat study plus a microsome test, with no human studies or case reports found, so 'low' fits the guide. rating_source 'team' is correct; no HA rating was found. One background point: danshen induces CYP3A4 in humans with repeated dosing (midazolam studies), so the mechanism is plausible in people. That is not direct evidence for this pair, so it does not justify raising the rating. watch=false is reasonable.",
+      "unsupported_claims_removed": [
+        "why_pro_en: 'A secondary database attributes the effect to CYP3A4 induction and notes it has not been reported in humans' - I could not confirm the quoted wording on the amlodipine page. Search suggests that page cites human midazolam data showing CYP3A4 induction, and that 'not reported in humans' wording belongs to a different (celecoxib) page. Dropped.",
+        "effect_en 'this has not been reported in people' says more than we can verify. All we can say is that no human reports were found. Softened to 'no reports of this in people were found' (ZH: 暫時搵唔到人體報告)."
+      ],
+      "sources_checked": [
+        {
+          "label": "Zhang et al. Effects of Danshen tablets on pharmacokinetics of amlodipine in rats. Pharm Biol 2019;57(1):306-309 (PMC6507817)",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "yes",
+          "note": "Search confirms the title, journal, volume and pages (57(1):306-309), DOI 10.1080/13880209.2019.1604768, first author Haixia Zhang (Weifang Medical University), and the PMC6507817 URL. The design matches the entry: male SD rats, n=6, amlodipine 1 mg/kg with or without DST 100 mg/kg for 7 days, LC-MS/MS. Search snippets show the exact figures: Cmax 16.25 vs 22.79, AUC0-t 222.87 vs 468.32, t1/2 10.60 vs 14.15 h, all decreased significantly; microsomal metabolic stability 23.6 vs 38.9. The authors' conclusion that DST accelerates ALDP metabolism also matches. AUC ratio 0.476, so 'roughly halved' holds. The authors also suggest raising the amlodipine dose; the entry correctly leaves that out."
+        },
+        {
+          "label": "Secondary database (hellopharmacist.com danshen-with-amlodipine), cited only in why_pro and support, not in sources",
+          "exists": true,
+          "citation_ok": false,
+          "id_matches_url": true,
+          "supports": "partly",
+          "note": "The page exists, rates the interaction as possible, and cites the rat study as about a 52% drop. I could not confirm the quoted wording ('demonstrated in vitro', 'has not been reported in humans'). Search suggested 'not reported in humans' is on the danshen-celecoxib (CYP2C9) page, and that the amlodipine page cites human midazolam data showing danshen induces intestinal CYP3A4 after 10-14 days. That conflicts with the 'in vitro only' framing. The sentence was dropped from why_pro."
+        }
+      ],
+      "owner_notes": [
+        "One rat study (6 rats per group). Low fits.",
+        "This changes the Mrs Wong demo: her danshen + amlodipine card turns from grey to yellow (Low)."
+      ],
+      "recommendation_before_approval": "ready"
+    },
+    {
+      "id": "dong_quai-aspirin",
+      "verdict": "confirmed_with_fixes",
+      "rating_comment": "'Low' holds up under the guide. 'High' needs serious harm reported or an authority saying avoid. No bleeding case was found, the trial reported no significant bleeding, and Davis's Drug Guide is a nursing handbook rather than a regulator or the Hospital Authority. 'Moderate' needs a clinically meaningful change in human data, and the human RCT found none. 'none_reported' could technically be argued because a study found no interaction. The trial was small, short and in healthy volunteers, though, and a drug reference still warns against the combination, so 'low' is the cautious choice. The 'FOR THE OWNER' note correctly flags the Davis 'avoid' wording for the owner to decide. rating_source 'team' is correct because no Hospital Authority rating was found.",
+      "unsupported_claims_removed": [
+        "why_pro_en: 'Dong quai alone impaired arachidonic-acid-induced aggregation in 2 subjects'. The abstract says 'Dong Quai in 2' subjects but does not say these were the herb-only (no aspirin) phase. The word 'alone' is an inference, so I removed it.",
+        "Source ids said 'DOI and PMID not confirmed' for the Phytomedicine paper. Its DOI is now confirmed (10.1016/j.phymed.2017.04.004), so the id was updated. This is a citation fix, not a content problem."
+      ],
+      "sources_checked": [
+        {
+          "label": "Blood ASH meeting abstract: A Randomized, Double Blind, Placebo-Controlled, Cross-over Study to Evaluate the Haemostatic Effects of Three Commonly Used Traditional Herbal Medicines (Curcuma Longa, Angelicae Sinensis and Panax Ginseng) and Their Interactions with Aspirin",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "yes",
+          "note": "A search with the exact title returned ScienceDirect PII S0006497118493020 under this title, and the same abstract on ashpublications.org as Blood 2015;126(23):2323. The ash.confex.com snippet says: 'Aspirin, as expected suppressed platelet aggregation to AA, Epinephrine, collagen and ADP but this was not further suppressed by concomitant administration of any of the 3 herbs', 'Tumeric resulted in impaired AA-induced aggregation in 5, Dong Quai in 2 and Ginseng in 1 subjects' and 'Overall, there was no meaningful nor severe suppression of PFTs'. It also says 75 volunteers were recruited, 25 per herb group. The label had no year or volume, so I added Blood 2015;126(23):2323. The abstract does not say the 2 dong quai subjects were off aspirin, so I removed the word 'alone'."
+        },
+        {
+          "label": "Phytomedicine 2017: A randomized, double-blind, placebo-controlled study on the anti-haemostatic effects of Curcuma longa, Angelica sinensis and Panax ginseng",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "yes",
+          "note": "The search returned PII S0944711317300545 under this title. Two reference lists (the NUS publications page and the ouci.dntb.gov.ua dong quai chapter) give Fung FY, Wong WH, Ang SK, Koh HL, Kun MC, Lee LH, et al. Phytomedicine 2017;32:88-96, DOI 10.1016/j.phymed.2017.04.004. The abstract snippet says that combining the herbs with aspirin 'did not further aggravate platelet inhibition caused by aspirin' and that there was 'no significant bleeding manifestation'. The DOI is now confirmed, so I added it. No PMID was found."
+        },
+        {
+          "label": "Davis's Drug Guide: dong quai (Unbound Medicine), monograph 51239",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "yes",
+          "note": "The monograph appears at the cited URL, with mirrors on several unboundmedicine subdomains. The snippet says that dong quai with anticoagulant and antiplatelet drugs, thrombolytics or NSAIDs may increase the risk of bleeding, and that patients should be told not to take aspirin or other NSAIDs at the same time. This is a nursing handbook warning based on theory, not a regulator's ruling."
+        }
+      ],
+      "owner_notes": [
+        "A trial in healthy volunteers found no added effect on platelets and no significant bleeding.",
+        "But Davis's Drug Guide (a nursing handbook) tells patients not to take aspirin with dong quai. If you count that guide as an authority, the rating would be High."
+      ],
+      "recommendation_before_approval": "call"
+    },
+    {
+      "id": "dong_quai-clopidogrel",
+      "verdict": "confirmed_with_fixes",
+      "rating_comment": "'low' fits the guide. The evidence is a class-level drug-guide caution plus animal (rat) data only, with no clopidogrel-specific case report or human study and no authority 'avoid' statement for clopidogrel. rating_source 'team' is correct because no Hospital Authority rating was found.",
+      "unsupported_claims_removed": [
+        "why_pro_en: 'no clopidogrel-specific data were found' is inaccurate. MSK About Herbs and a review of herb-clopidogrel interactions both describe a rat/murine study (Xiao et al., J Ethnopharmacol 2019;235:100-110, PMID 30710735) where danggui given with clopidogrel plus aspirin changed clopidogrel pharmacokinetics and reportedly lengthened bleeding time. Corrected to 'no clopidogrel-specific human data were found'.",
+        "rating_reason: 'Theoretical only' and 'No clopidogrel-specific ... animal study was found' are wrong for the same reason. Corrected to describe the class warning plus animal data. The rat study was seen only in secondary snippets, so it is mentioned for the owner but not cited."
+      ],
+      "sources_checked": [
+        {
+          "label": "Davis's Drug Guide: dong quai (Unbound Medicine)",
+          "exists": true,
+          "citation_ok": true,
+          "id_matches_url": true,
+          "supports": "yes",
+          "note": "Search returned this exact URL (/51239/all/dong_quai) plus mirrors of the same monograph 51239. Snippet text: 'Use of dong quai with anticoagulant and antiplatelet drugs, thrombolytics, NSAIDs, some cephalosporins, and valproates may increase risk of bleeding.' This supports effect, why_pro and main_finding as a class-level caution. The patient-teaching line about avoiding aspirin/NSAIDs does not name clopidogrel. No PMID/DOI is expected for a drug-guide monograph."
+        }
+      ],
+      "owner_notes": [
+        "The only source is Davis's Drug Guide, and its warning covers the whole antiplatelet group, not clopidogrel by name.",
+        "Approve as Low, or leave it as 'not in our database'."
+      ],
+      "recommendation_before_approval": "call"
+    }
+  ]
+}

@@ -92,6 +92,9 @@ For Sunday this is done WITHOUT accounts, a server or scanning:
 - Red yeast rice wording now follows NIH/NCCIH: "structurally identical", not
   "chemically identical".
 - Service-worker cache is now herbsafe-v4, so installed phones pick up the update.
+- 15 new pairs approved by the owner (all of them) and saved in proposals/ with their
+  verification notes. Not live yet; see proposals/README.md for the steps and
+  proposals/NEXT-SESSION-PROMPT.md for the hand-over prompt.
 
 ## Future full app (owner's long-term plan; pitch as roadmap, do not build now)
 - Accounts (username + password) and a private, secure database of each person's
