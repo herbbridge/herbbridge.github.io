@@ -72,3 +72,11 @@ No published evidence on the pair itself, so these stay "not in database": asian
 clopidogrel; american ginseng + aspirin, clopidogrel; danshen + furosemide; goji + digoxin,
 amlodipine, furosemide; sanqi + digoxin, amlodipine, furosemide; safflower + digoxin,
 amlodipine, furosemide.
+
+### Update 19 Oct 2026
+
+Round 2 stays on hold (sources were snippet-only). Two of its pairs are now covered instead by
+**official cautions** quoting verified documents (`data/official.json`):
+ginkgo + clopidogrel (EMA ginkgo monograph; Health Canada) and liquorice + amlodipine (EMA
+liquorice monograph, Revision 1, 2026). The Drugs.com-based liquorice proposal is no longer
+needed. Asian ginseng + aspirin is still only in round 2.

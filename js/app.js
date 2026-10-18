@@ -1083,9 +1083,34 @@
         el('span', { class: 'source-pairs', text: t('about_background_used') })
       ]));
     });
+    // Official documents quoted on "Official caution" cards, one line per document.
+    var docs = [], docByUrl = {};
+    db.cautions.forEach(function (c) {
+      var pairName = primaryName(db.herbById[c.herb_id]) + ' + ' + (c.drug_id ? primaryName(db.drugById[c.drug_id]) : t('class_' + c.drug_class));
+      c.statements.forEach(function (id) {
+        var s = db.statementById[id], zh = state.lang === 'zh';
+        if (!docByUrl[s.url]) {
+          docByUrl[s.url] = { url: zh && s.url_zh ? s.url_zh : s.url, label: zh ? s.body_zh + '：' + s.document_zh + '，' + s.date_zh : s.body_en + ': ' + s.document_en + ', ' + s.date_en, pairs: [] };
+          docs.push(docByUrl[s.url]);
+        }
+        if (docByUrl[s.url].pairs.indexOf(pairName) === -1) docByUrl[s.url].pairs.push(pairName);
+      });
+    });
+    var official = el('ol', { class: 'sources about-sources' });
+    docs.forEach(function (d) {
+      official.appendChild(el('li', null, [
+        el('a', { href: d.url, target: '_blank', rel: 'noopener noreferrer' }, [
+          el('span', { text: d.label }), icon('external', 'ext'),
+          el('span', { class: 'visually-hidden', text: ' ' + t('opens_new_tab') })
+        ]),
+        el('span', { class: 'source-pairs', text: d.pairs.join(t('list_sep')) })
+      ]));
+    });
     page.appendChild(section('about_sources_title', [
       el('p', { text: t('about_sources_intro') }),
       list,
+      docs.length ? el('h3', { class: 'about-subhead', text: t('about_official_sources_title') }) : null,
+      docs.length ? official : null,
       el('h3', { class: 'about-subhead', text: t('about_background_title') }),
       background,
       db.lastUpdated ? el('p', { class: 'muted', text: t('about_updated', { date: formatDate(new Date(db.lastUpdated + 'T00:00:00')) }) }) : null
