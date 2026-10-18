@@ -1,0 +1,38 @@
+{
+  "status": "CANDIDATES from research (step 1 of 3). Not checked, not approved, not live.",
+  "batch": 3,
+  "access_note": "Every literature host was blocked from the build machine (proxy 403 / DNS failure for pubmed.ncbi.nlm.nih.gov, pmc.ncbi.nlm.nih.gov, www.ncbi.nlm.nih.gov, eutils, europepmc.org, frontiersin.org, mskcc.org, researchgate.net, api.crossref.org). No abstract or full text could be opened. All findings below come from web-search result snippets and summaries only.",
+  "candidates": [],
+  "no_evidence_found": [
+    {
+      "pair": "sanqi + digoxin",
+      "searched": "Web search (snippets only): 'Panax notoginseng digoxin interaction'; 'Xuesaitong OR Panax notoginseng saponins digoxin pharmacokinetics'; 'Zhuang 2023 Frontiers Pharmacology Chinese medicine digoxin review ... Panax notoginseng'; 'Interaction between Chinese medicine and digoxin: Clinical and research update notoginseng OR safflower OR Xuesaitong'; Chinese '三七 地高辛 相互作用 大鼠 药代动力学'; 'Dasgupta digoxin immunoassay interference Asian ginseng Siberian ginseng notoginseng'; 'ginsenoside notoginsenoside P-glycoprotein digoxin transport Caco-2'; 'safflower OR notoginseng case report digoxin toxicity'. Tried to open the Zhuang et al. 2023 review (Front Pharmacol 14:1040778, PMC9941676, PMID 36825153) and the MSKCC Panax notoginseng page directly; both blocked.",
+      "nearest_evidence": "(1) Zhuang et al. 2023 Front Pharmacol review of Chinese medicine and digoxin (49 articles). Snippets did not show whether sanqi is covered; the full text needs checking (https://www.frontiersin.org/journals/pharmacology/articles/10.3389/fphar.2023.1040778/full). (2) Dasgupta group: Asian, Siberian and American ginseng (Panax ginseng / P. quinquefolius / Eleutherococcus, not P. notoginseng) interfere with some digoxin immunoassays (FPIA, MEIA, Digoxin III) but not newer chemiluminescent/turbidimetric ones (e.g. PMID 17425395; PMC6649030; PMC6807190). Same genus as sanqi, but notoginseng itself was not tested in what I saw. Do not extrapolate. (3) In vitro: intestinal-bacterial ginsenoside metabolites (CK, PPD, PPT) lowered the digoxin efflux ratio in Caco-2 cells (search summary only; study not identified well enough to cite). (4) A Hello Pharmacist checker says 'no interactions found' but adds this does not mean none exist; not usable as a none_reported source."
+    },
+    {
+      "pair": "sanqi + amlodipine",
+      "searched": "Web search (snippets only): 'notoginsenoside amlodipine pharmacokinetics rats'; '\"notoginseng\" \"amlodipine\" interaction study'; Chinese '三七 OR 血塞通 氨氯地平 药物相互作用 药代动力学'; MSKCC Panax notoginseng page (blocked).",
+      "nearest_evidence": "(1) A Chinese abstract (summarised by search): 5 weeks of IV Panax notoginseng saponin injection in rats showed non-significant trends towards higher AUC and lower clearance of nimodipine (a different calcium channel blocker); the authors suggested possible CYP3A4/2C9/1A2 inhibition. Injection, different drug, non-significant, so not usable. (2) Red ginseng (Panax ginseng, not sanqi) had a negligible pharmacokinetic interaction with amlodipine in rats (PMID 25343287). Different herb. (3) Hello Pharmacist checker: 'no interactions found', with a caveat; not usable."
+    },
+    {
+      "pair": "sanqi + furosemide",
+      "searched": "Web search (snippets only): 'Panax notoginseng furosemide OR safflower furosemide interaction'; '\"furosemide\" \"notoginseng\" OR \"safflower\" OR \"Carthamus tinctorius\" pharmacokinetic interaction'; 'safflower OR notoginseng case report ... hypokalaemia furosemide herbal'.",
+      "nearest_evidence": "Red ginseng (Panax ginseng) raised furosemide Cmax and AUC in horses (Front Vet Sci 2023, PMC10704239). There is also an older case of reduced diuretic response with a ginseng-germanium product, which the authors attributed mainly to germanium. Both concern other herbs/products, not sanqi. Rat CYP studies of notoginseng total saponins plus safflower flavonoids exist (e.g. Biomed Chromatogr 2021, doi 10.1002/bmc.5171), but furosemide is not a CYP-dependent drug and these do not address it."
+    },
+    {
+      "pair": "safflower + digoxin",
+      "searched": "Web search (snippets only): 'Carthamus tinctorius safflower digoxin interaction P-glycoprotein'; '\"hydroxysafflor yellow A\" OR \"safflor yellow\" digoxin'; Chinese '红花 地高辛 药代动力学 相互作用'; 'Carthami Flos extract P-glycoprotein inhibition digoxin OR rhodamine 123 Caco-2'; the Zhuang 2023 digoxin review (full text blocked); MSKCC safflower page (blocked).",
+      "nearest_evidence": "(1) Zhuang et al. 2023 Chinese medicine–digoxin review: snippets did not show whether safflower is covered. Check the full text. (2) Hydroxysafflor yellow A altered CYP isozyme activity/expression in rats (PMID 24373810, abstract findings not seen); not about digoxin, which is mainly cleared unchanged. (3) Flos carthami injection inhibited CYP2D6 and slowed metoprolol metabolism in rats (PMC2994065); a different drug. (4) Hello Pharmacist checker: 'no interactions found between Digoxin and Safflower', with a caveat that this does not mean none exist; not usable as a none_reported source."
+    },
+    {
+      "pair": "safflower + amlodipine",
+      "searched": "Web search (snippets only): 'safflower honghua amlodipine interaction pharmacokinetics'; '\"safflower\" OR \"Carthamus\" OR \"Honghua\" \"amlodipine\" herb-drug interaction rats'; Chinese '红花 OR 红花黄色素 氨氯地平 OR 呋塞米 相互作用'.",
+      "nearest_evidence": "No safflower–amlodipine study found. Related: Danshen tablets lowered amlodipine exposure in rats (PMC6507817, already the source for danshen-amlodipine; a different herb). Flos carthami inhibited CYP2D6 in rats (PMC2994065); amlodipine is mainly a CYP3A4 substrate, so this does not apply. A 2014 Chinese review (Chin J Clin Pharmacol Ther 19(6):701) on amlodipine interactions came up in searches, but the snippet did not mention safflower."
+    },
+    {
+      "pair": "safflower + furosemide",
+      "searched": "Web search (snippets only): 'Panax notoginseng furosemide OR safflower furosemide interaction'; '\"furosemide\" \"notoginseng\" OR \"safflower\" OR \"Carthamus tinctorius\" pharmacokinetic interaction'; Chinese '红花 OR 红花黄色素 氨氯地平 OR 呋塞米 相互作用'.",
+      "nearest_evidence": null
+    }
+  ]
+}
