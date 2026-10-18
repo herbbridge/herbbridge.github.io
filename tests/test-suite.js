@@ -15,7 +15,11 @@
 
   // Official cautions approved by the owner on 18 Oct 2026, written out by hand.
   var OFFICIAL_CAUTIONS = {
-    'ginkgo|warfarin':           { kind: 'disagree', statements: ['hc-ginkgo-contraindication', 'ema-ginkgo-4.5', 'ema-ginkgo-4.5-traditional'] },
+    'ginkgo|warfarin':           { kind: 'disagree', statements: ['hc-ginkgo-contraindication', 'ema-ginkgo-4.5-warfarin-studies', 'ema-ginkgo-4.5', 'ema-ginkgo-4.5-traditional'] },
+    // Hospital Authority warfarin leaflet (019Ev10 / 019Cv10, Oct 2025), verified 19 Oct 2026.
+    'danshen|warfarin':          { kind: 'official', statements: ['ha-warfarin-leaflet-tcm'] },
+    'dong_quai|warfarin':        { kind: 'official', statements: ['ha-warfarin-leaflet-tcm'] },
+    'asian_ginseng|warfarin':    { kind: 'disagree', statements: ['ha-warfarin-leaflet-tcm'] },
     'ginkgo|aspirin':            { kind: 'disagree', statements: ['hc-ginkgo-contraindication', 'ema-ginkgo-4.5'] },
     'ginkgo|clopidogrel':        { kind: 'official', statements: ['ema-ginkgo-4.5', 'hc-ginkgo-contraindication'] },
     'ginkgo|amlodipine':         { kind: 'official', statements: ['hc-ginkgo-blood-pressure'] },
@@ -29,6 +33,8 @@
   // changing a quote must be a deliberate edit here too, after re-checking the document.
   var VERIFIED_QUOTES = {
     'ema-ginkgo-4.5': 'If the medicinal product is taken concomitantly with anticoagulants (e.g. phenprocoumon and warfarin) or antiplatelet drugs (e.g. clopidogrel, acetylsalicylic acid and other non-steroidal anti-inflammatory drugs), their effect may be influenced.',
+    'ema-ginkgo-4.5-warfarin-studies': 'Available studies with warfarin do not indicate that there is an interaction between warfarin and G. biloba products, but adequate monitoring is advised when starting, when changing G. biloba dose, when ending G. biloba intake or if changing product.',
+    'ha-warfarin-leaflet-tcm': 'Do not take any Traditional Chinese Medicines (TCM), Proprietary Chinese Medicines, herbal drinks, or food that contains TCM, such as Guilinggao. Many TCM such as ginseng, Dong quai, Danshen, Chishao can interact with warfarin.',
     'ema-ginkgo-4.5-traditional': 'Ginkgo leaf may increase the effects of anticoagulants such as coumarin derivatives.',
     'hc-ginkgo-contraindication': 'Do not use if you are taking blood thinners or other health products that affect blood coagulation (Gardner and McGuffin 2013; Brinker 2010; Bent 2005).',
     'hc-ginkgo-blood-pressure': 'Ask a health care practitioner/health care provider/health care professional/doctor/physician before use if you are taking diabetes, high blood pressure or seizure medications (Brinker 2010).',
@@ -36,6 +42,10 @@
     'hc-panax-ginseng': 'Ask a health care practitioner/health care provider/health care professional/doctor/physician before use if you are taking antidepressant medication, blood thinners or digoxin (Brinker 2010; Lee et al. 2008a; Dasgupta and Reyes 2005; Janetzki and Morreale 1997; Gonzalez-Seijo et al. 1995; Shader and Greenblatt 1988; Jones and Runikis 1987; Shader and Greenblatt 1985).',
     'ema-liquorice-blood-pressure': 'Liquorice root may counteract antihypertensive action of prescribed medications.',
     'ema-liquorice-electrolytes': 'Not to be used concomitantly with diuretics, cardiac glycosides, corticosteroids, stimulant laxatives or other medications which may aggravate electrolyte imbalance (see section with 4.4).'
+  };
+  // Where the agency publishes its own Chinese version, that text is locked too.
+  var VERIFIED_QUOTES_ZH = {
+    'ha-warfarin-leaflet-tcm': '不可隨便服用中藥材，中成藥，藥材湯或涼茶，或含中藥成份的食品如龜苓膏，因為很多中藥 ( 如人參、當歸、丹參、赤芍 )，會與「華法林」產生相互作用，影響抗凝血藥的功效。'
   };
 
   // The ratings given in the brief. Changing a rating must be a deliberate edit here too.
@@ -230,6 +240,10 @@
       var bad = [];
       db.statements.forEach(function (s) { if (VERIFIED_QUOTES[s.id] !== s.quote_en) bad.push(s.id + ': quote differs from the verified text (or is not on the verified list)'); });
       Object.keys(VERIFIED_QUOTES).forEach(function (id) { if (!db.statementById[id]) bad.push(id + ': verified statement missing from data/official.json'); });
+      db.statements.forEach(function (s) {
+        if (s.quote_zh_is_original && VERIFIED_QUOTES_ZH[s.id] !== s.quote_zh) bad.push(s.id + ': official Chinese text differs from the verified text');
+        if (!s.quote_zh_is_original && VERIFIED_QUOTES_ZH[s.id]) bad.push(s.id + ': has a verified official Chinese text but is not marked quote_zh_is_original');
+      });
       return { pass: bad.length === 0, detail: bad.join('\n') };
     });
     check('Safety rules', 'an official caution never hides a High team rating', function () {
@@ -249,7 +263,7 @@
     });
     check('Edge cases', 'unknown ids (e.g. from an old saved list) are skipped', function () {
       var r = lookup.checkPairs(db, ['danshen', 'no_such_herb'], ['warfarin', 'no_such_drug']);
-      return r.length === 1 && r[0].status === 'moderate';
+      return r.length === 1 && r[0].entry && r[0].entry.id === 'danshen-warfarin';
     });
     check('Edge cases', 'ids like "constructor" or "__proto__" never match anything', function () {
       return lookup.checkPairs(db, ['constructor', '__proto__', 'toString'], ['warfarin', 'hasOwnProperty']).length === 0;

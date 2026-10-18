@@ -128,9 +128,20 @@ For Sunday this is done WITHOUT accounts, a server or scanning:
   ginkgo + amlodipine, American/Asian ginseng + digoxin, liquorice + amlodipine, liquorice +
   furosemide and + digoxin (EMA "not to be used concomitantly"). Ginkgo + furosemide stays
   grey (Health Canada names only high blood pressure medications). Ratings unchanged.
-  Open: the EMA ginkgo sentence "Available studies with warfarin do not indicate that there
-  is an interaction" was quoted by the owner but not in the checker's report; verify it in
-  the EMA PDF before adding it to the ginkgo + warfarin card. Cache herbsafe-v9.
+  Cache herbsafe-v9.
+- 19 Oct: two more statements verified in the documents and added. (1) EMA ginkgo 4.5:
+  "Available studies with warfarin do not indicate that there is an interaction…, but
+  adequate monitoring is advised…" (on the ginkgo + warfarin "sources disagree" card).
+  (2) Hospital Authority warfarin leaflet 019Ev10/019Cv10 (Oct 2025, current per the HA Drug
+  Education page): "Do not take any TCM… Many TCM such as ginseng, Dong quai, Danshen,
+  Chishao can interact with warfarin." Its Chinese text is the HA's own (quote_zh_is_original)
+  and is locked in VERIFIED_QUOTES_ZH. Applied to danshen + warfarin (Mrs Wong; Moderate kept
+  underneath), dong quai + warfarin (High kept as the badge) and Asian ginseng (人參) +
+  warfarin ("sources disagree" with team Low). The leaflet does NOT give a rating, so it does
+  not confirm the "HA rated Moderate" claim (still SCMP-only; open Task 2 item 1).
+  OPEN for the owner: the leaflet says "Do not take ANY TCM" with warfarin; should this quote
+  also go on every other herb + warfarin (strict reading)? And should Health Canada's verified
+  "blood thinners" sentences be added to American/Asian ginseng + warfarin? Cache herbsafe-v10.
 
 ## Future full app (owner's long-term plan; pitch as roadmap, do not build now)
 - Accounts (username + password) and a private, secure database of each person's

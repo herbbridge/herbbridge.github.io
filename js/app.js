@@ -702,10 +702,13 @@
       var zh = state.lang === 'zh';
       box.appendChild(el('figure', { class: 'official-statement' }, [
         el('blockquote', { class: 'official-quote', lang: zh ? 'zh-HK' : 'en-GB', text: '“' + (zh ? s.quote_zh : s.quote_en) + '”' }),
-        zh ? el('p', { class: 'official-original' }, [el('span', { text: t('official_translation_note') + ' ' }), el('span', { lang: 'en-GB', text: '“' + s.quote_en + '”' })]) : null,
+        zh ? el('p', { class: 'official-original' }, [
+          el('span', { text: t(s.quote_zh_is_original ? 'official_zh_original_note' : 'official_translation_note') + ' ' }),
+          el('span', { lang: 'en-GB', text: '“' + s.quote_en + '”' })
+        ]) : null,
         el('figcaption', { class: 'official-source' }, [
           el('span', { class: 'official-body', text: (zh ? s.body_zh + '：' : s.body_en + ': ') }),
-          sourceLink({ url: s.url, label: zh ? s.document_zh + '，' + s.date_zh + '，' + s.section_zh : s.document_en + ', ' + s.date_en + ', ' + s.section_en })
+          sourceLink({ url: zh && s.url_zh ? s.url_zh : s.url, label: zh ? s.document_zh + '，' + s.date_zh + '，' + s.section_zh : s.document_en + ', ' + s.date_en + ', ' + s.section_en })
         ])
       ]));
     });
@@ -772,9 +775,11 @@
     }, [label, icon('chevron', 'toggle-chev')]);
 
     // With an official caution on top, the team's own rating and evidence follow under their own heading.
-    var withOfficial = !!r.official && r.status === L.OFFICIAL;
-    art = el('article', { class: 'card card-' + (withOfficial ? 'official' : e.risk) + (open ? ' is-open' : ''), 'data-pair': key }, [
-      el('header', { class: 'card-head' }, [pairTitle(r), withOfficial ? badgeFor(r) : badge(e.risk, e.watch)]),
+    // A High team rating keeps its own badge and colour, with the official words added under it.
+    var withOfficial = !!r.official;
+    var shownAsOfficial = r.status === L.OFFICIAL;
+    art = el('article', { class: 'card card-' + (shownAsOfficial ? 'official' : e.risk) + (open ? ' is-open' : ''), 'data-pair': key }, [
+      el('header', { class: 'card-head' }, [pairTitle(r), shownAsOfficial ? badgeFor(r) : badge(e.risk, e.watch)]),
       withOfficial ? officialBlock(r) : null,
       withOfficial ? el('div', { class: 'studies-head' }, [
         el('h4', { class: 'block-label', text: t('label_studies') }),
@@ -947,11 +952,14 @@
       }
       var evidence = e.evidence_level.map(function (l) { return t('ev_' + l); }).join(' · ');
       flaggedSection.appendChild(el('div', { class: 'summary-row summary-' + (r.status === L.OFFICIAL ? 'official' : e.risk) }, [
-        el('div', { class: 'summary-row-head' }, [badgeFor(r), bilingualPair(r)]),
+        el('div', { class: 'summary-row-head' }, [r.status === L.OFFICIAL ? badgeFor(r) : badge(e.risk, e.watch), bilingualPair(r)]),
         el('dl', { class: 'summary-dl' }, officialRows.concat([
-          r.official ? el('dt', { text: t('label_team_rating') }) : null,
-          r.official ? el('dd', null, [badge(e.risk, e.watch, 'span')]) : null,
-          el('dt', { text: t('label_rated_by') }), el('dd', { text: e.rating_source === 'HA' ? t('rated_by_ha') : t('rated_by_team') }),
+          el('dt', { text: t('label_rated_by') }),
+          // Under an official caution, the database rating goes on this same line (saves print space).
+          el('dd', null, [
+            r.status === L.OFFICIAL ? badge(e.risk, e.watch, 'span') : null, r.status === L.OFFICIAL ? ' ' : null,
+            el('span', { text: e.rating_source === 'HA' ? t('rated_by_ha') : t('rated_by_team') })
+          ]),
           el('dt', { text: t('label_main_evidence') }), el('dd', { text: field(e, 'main_finding') + ' (' + e.sources[e.main_source].label + ')' }),
           field(e, 'heart_impact') ? el('dt', { text: t('label_heart_impact_short') }) : null,
           field(e, 'heart_impact') ? el('dd', { text: field(e, 'heart_impact') }) : null,

@@ -21,7 +21,7 @@ Fictional 72-year-old with atrial fibrillation, on warfarin and amlodipine, who 
 
 | Herb | Medicine | Expected result | Entry | Why this matters for your heart |
 |---|---|---|---|---|
-| Danshen | Warfarin | Moderate | `danshen-warfarin` | Too much bleeding, including bleeding in the brain. |
+| Danshen | Warfarin | Official caution | `danshen-warfarin` + `danshen-warfarin-official` | Too much bleeding, including bleeding in the brain. |
 | Danshen | Amlodipine | Low | `danshen-amlodipine` | Amlodipine controls your blood pressure. Whether danshen weakens it in people is not known. |
 
 ## 2. Nothing in our database
@@ -58,7 +58,7 @@ Heart failure and atrial fibrillation: warfarin, aspirin, digoxin and furosemide
 
 | Herb | Medicine | Expected result | Entry | Why this matters for your heart |
 |---|---|---|---|---|
-| Dong quai | Warfarin | High | `dong_quai-warfarin` | Too much bleeding, including bleeding in the brain. |
+| Dong quai | Warfarin | High | `dong_quai-warfarin` + `dong_quai-warfarin-official` | Too much bleeding, including bleeding in the brain. |
 | Ginkgo | Warfarin | Official caution · sources disagree | `ginkgo-warfarin` + `ginkgo-warfarin-official` | Watch for unusual bruising or bleeding. |
 | Ginkgo | Aspirin | Official caution · sources disagree | `ginkgo-aspirin` + `ginkgo-aspirin-official` | Watch for unusual bruising or bleeding. |
 | Liquorice | Digoxin | Official caution | `liquorice-digoxin` + `liquorice-digoxin-official` | Low potassium can lead to a dangerous heart rhythm. |
@@ -84,14 +84,14 @@ Drinks 花旗參 tea daily and is on warfarin after a heart valve operation.
 
 ## 6. Asian ginseng with warfarin and clopidogrel
 
-Takes Korean ginseng with warfarin and clopidogrel after a stent. Clopidogrel has no record and must not look safe.
+Takes Korean ginseng with warfarin and clopidogrel after a stent. Warfarin shows the Hospital Authority's caution over the team's Low rating (sources disagree). Clopidogrel has no record and must not look safe.
 
 - **Chinese herbs:** Asian ginseng 人參
 - **Western medicines:** Warfarin – Blood thinners (stroke and heart valve protection), Clopidogrel – Blood thinners (stroke and heart valve protection)
 
 | Herb | Medicine | Expected result | Entry | Why this matters for your heart |
 |---|---|---|---|---|
-| Asian ginseng | Warfarin | Low | `asian_ginseng-warfarin` | Warfarin may work less well, raising the risk of clots and stroke. |
+| Asian ginseng | Warfarin | Official caution · sources disagree | `asian_ginseng-warfarin` + `asian_ginseng-warfarin-official` | Warfarin may work less well, raising the risk of clots and stroke. |
 | Asian ginseng | Clopidogrel | Not in database | none | (not shown on grey cards) |
 
 ## 7. Liquorice with furosemide only
@@ -131,14 +131,14 @@ Takes ginkgo for memory, on aspirin and clopidogrel. Both show an official cauti
 
 ## 10. Danshen, sanqi and safflower with warfarin and aspirin
 
-A 'blood circulation' herbal mix (丹參, 三七, 紅花) taken with warfarin and aspirin. Every pair now has a record: three Moderate and three Low.
+A 'blood circulation' herbal mix (丹參, 三七, 紅花) taken with warfarin and aspirin. Every pair now has a record: danshen + warfarin shows the Hospital Authority's official caution (team rating Moderate kept underneath), then two Moderate and three Low.
 
 - **Chinese herbs:** Danshen 丹參, Sanqi 三七, Safflower 紅花
 - **Western medicines:** Warfarin – Blood thinners (stroke and heart valve protection), Aspirin – Blood thinners (stroke and heart valve protection)
 
 | Herb | Medicine | Expected result | Entry | Why this matters for your heart |
 |---|---|---|---|---|
-| Danshen | Warfarin | Moderate | `danshen-warfarin` | Too much bleeding, including bleeding in the brain. |
+| Danshen | Warfarin | Official caution | `danshen-warfarin` + `danshen-warfarin-official` | Too much bleeding, including bleeding in the brain. |
 | Sanqi | Aspirin | Moderate | `sanqi-aspirin` | A stronger anti-clotting effect could raise the chance of bleeding. |
 | Safflower | Warfarin | Moderate | `safflower-warfarin` | Too much bleeding, including bleeding in the brain. |
 | Danshen | Aspirin | Low (watch) | `danshen-aspirin` | Watch for unusual bruising or bleeding. |

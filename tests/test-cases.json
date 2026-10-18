@@ -8,7 +8,7 @@
       "herbs": ["danshen"],
       "drugs": ["warfarin", "amlodipine"],
       "expected": [
-        { "herb": "danshen", "drug": "warfarin", "status": "moderate", "entry": "danshen-warfarin" },
+        { "herb": "danshen", "drug": "warfarin", "status": "official", "entry": "danshen-warfarin", "official": "danshen-warfarin-official" },
         { "herb": "danshen", "drug": "amlodipine", "status": "low", "entry": "danshen-amlodipine" }
       ]
     },
@@ -42,7 +42,7 @@
       "herbs": ["dong_quai", "ginkgo", "liquorice"],
       "drugs": ["warfarin", "aspirin", "digoxin", "furosemide"],
       "expected": [
-        { "herb": "dong_quai", "drug": "warfarin", "status": "high", "entry": "dong_quai-warfarin" },
+        { "herb": "dong_quai", "drug": "warfarin", "status": "high", "entry": "dong_quai-warfarin", "official": "dong_quai-warfarin-official" },
         { "herb": "ginkgo", "drug": "warfarin", "status": "official", "entry": "ginkgo-warfarin", "official": "ginkgo-warfarin-official" },
         { "herb": "ginkgo", "drug": "aspirin", "status": "official", "entry": "ginkgo-aspirin", "official": "ginkgo-aspirin-official" },
         { "herb": "liquorice", "drug": "digoxin", "status": "official", "entry": "liquorice-digoxin", "official": "liquorice-digoxin-official" },
@@ -69,11 +69,11 @@
     {
       "id": "6-asian-ginseng-two-blood-thinners",
       "name": "Asian ginseng with warfarin and clopidogrel",
-      "story": "Takes Korean ginseng with warfarin and clopidogrel after a stent. Clopidogrel has no record and must not look safe.",
+      "story": "Takes Korean ginseng with warfarin and clopidogrel after a stent. Warfarin shows the Hospital Authority's caution over the team's Low rating (sources disagree). Clopidogrel has no record and must not look safe.",
       "herbs": ["asian_ginseng"],
       "drugs": ["warfarin", "clopidogrel"],
       "expected": [
-        { "herb": "asian_ginseng", "drug": "warfarin", "status": "low", "entry": "asian_ginseng-warfarin" },
+        { "herb": "asian_ginseng", "drug": "warfarin", "status": "official", "entry": "asian_ginseng-warfarin", "official": "asian_ginseng-warfarin-official" },
         { "herb": "asian_ginseng", "drug": "clopidogrel", "status": "not_in_database", "entry": null }
       ]
     },
@@ -112,11 +112,11 @@
     {
       "id": "10-blood-circulation-mix",
       "name": "Danshen, sanqi and safflower with warfarin and aspirin",
-      "story": "A 'blood circulation' herbal mix (丹參, 三七, 紅花) taken with warfarin and aspirin. Every pair now has a record: three Moderate and three Low.",
+      "story": "A 'blood circulation' herbal mix (丹參, 三七, 紅花) taken with warfarin and aspirin. Every pair now has a record: danshen + warfarin shows the Hospital Authority's official caution (team rating Moderate kept underneath), then two Moderate and three Low.",
       "herbs": ["danshen", "sanqi", "safflower"],
       "drugs": ["warfarin", "aspirin"],
       "expected": [
-        { "herb": "danshen", "drug": "warfarin", "status": "moderate", "entry": "danshen-warfarin" },
+        { "herb": "danshen", "drug": "warfarin", "status": "official", "entry": "danshen-warfarin", "official": "danshen-warfarin-official" },
         { "herb": "sanqi", "drug": "aspirin", "status": "moderate", "entry": "sanqi-aspirin" },
         { "herb": "safflower", "drug": "warfarin", "status": "moderate", "entry": "safflower-warfarin" },
         { "herb": "danshen", "drug": "aspirin", "status": "low", "entry": "danshen-aspirin" },

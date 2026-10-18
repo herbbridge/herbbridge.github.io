@@ -237,6 +237,8 @@
         if (!isText(s[f])) problem(where + ': missing ' + f);
       });
       if (!/^https:\/\/[^\s]+$/.test(s.url || '')) problem(where + ': url must start with https://');
+      if (s.url_zh != null && !/^https:\/\/[^\s]+$/.test(s.url_zh)) problem(where + ': url_zh must start with https://');
+      if (s.quote_zh_is_original != null && typeof s.quote_zh_is_original !== 'boolean') problem(where + ': quote_zh_is_original must be true or false');
     });
     var cIds = {}, cKeys = {};
     db.cautions.forEach(function (c, i) {
