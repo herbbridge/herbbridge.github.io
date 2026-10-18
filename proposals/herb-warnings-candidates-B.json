@@ -1,0 +1,508 @@
+{
+  "status": "CANDIDATE herb-level warnings from official sources (step 1 of 3). Not checked, not approved, not live.",
+  "access_note": "No official page could be opened from this machine. WebFetch failed (DNS) and curl got a policy 403 from the egress proxy for ema.europa.eu, nccih.nih.gov, medlineplus.gov and mskcc.org; the proxy status lists these as connect_rejected. Every quote below therefore comes from WebSearch result snippets or search-tool summaries ('snippet only'). Quotes marked near-verbatim or reconstructed may differ from the live text. Chinese HA slide quotes come from a text extraction of a PDF table that was partly garbled. The checker must open each source and confirm the wording before anything goes live.",
+  "warnings": [
+    {
+      "id": "american_ginseng-anticoagulant",
+      "herb_id": "american_ginseng",
+      "drug_class": "anticoagulant",
+      "already_live_pair": true,
+      "official_statement_quote": "Ask a health care practitioner/health care provider/health care professional/doctor/physician before use if you are taking blood thinners or digoxin.",
+      "source": {
+        "label": "Health Canada NHP monograph: Panax quinquefolius (American ginseng)",
+        "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/dbImages/mono_ginseng-american_english.pdf",
+        "body": "Health Canada (Natural and Non-prescription Health Products Directorate)",
+        "seen": "snippet only"
+      },
+      "other_official_sources": [
+        {
+          "label": "NCCIH: Colds, Flu, and Complementary Health Approaches",
+          "url": "https://www.nccih.nih.gov/health/colds-flu-and-complementary-health-approaches",
+          "body": "US NIH NCCIH",
+          "seen": "snippet only",
+          "quote": "American ginseng may interact with the anticoagulant (blood thinning) drug warfarin."
+        },
+        {
+          "label": "MSKCC About Herbs: Ginseng (American)",
+          "url": "https://www.mskcc.org/cancer-care/integrative-medicine/herbs/ginseng-american",
+          "body": "Memorial Sloan Kettering Cancer Center (owner-accepted)",
+          "seen": "snippet only",
+          "quote": "Patient section: talk with your healthcare provider if you are taking blood thinners such as warfarin (Coumadin, Jantoven); 'American ginseng may increase your risk of bleeding.' Professional section: 'American ginseng has been shown to antagonize warfarin's effects in humans' (Yuan 2004, Ann Intern Med); 'Reductions in PT, PTT, and INR and blood glucose may occur.'"
+        },
+        {
+          "label": "Health Canada: Warfarin (consumer page)",
+          "url": "https://www.canada.ca/en/health-canada/services/drugs-medical-devices/warfarin.html",
+          "body": "Health Canada",
+          "seen": "snippet only",
+          "quote": "Research has shown that the popular herbal product ginseng can reduce the effects of warfarin. (Ginseng not specified by species.)"
+        }
+      ],
+      "warning_en": "Health Canada says to ask a health professional before using American ginseng if you take blood thinners. The US NIH (NCCIH) says American ginseng may interact with warfarin.",
+      "warning_zh": "加拿大衞生部話，如果你食緊薄血藥，用西洋參之前要先問醫護人員。美國國家衞生研究院（NCCIH）話，西洋參可能同華法林有相互作用。",
+      "action_en": "If you take this medicine and want to use this herb, talk to your doctor or pharmacist first. Tell them about every herb and supplement you use. If you take warfarin, your doctor may want to check your INR more closely.",
+      "action_zh": "如果你食緊呢類藥，又想用呢種藥材，請先話俾醫生或者藥劑師知。記得講埋你用緊嘅所有藥材同補充品。 如果你食緊華法林，醫生可能要密啲幫你驗INR。",
+      "zh_reviewed": false,
+      "notes": "Already live as american_ginseng-warfarin. 'Blood thinners' in Health Canada wording is not defined; I have NOT extended it to antiplatelets (see nothing_official). MSKCC wording conflicts internally as seen in snippets: patient text says 'may increase your risk of bleeding' while the professional text says it antagonises warfarin (lowers INR). Checker should open the MSKCC page before using its wording. Health Canada warfarin page is old (search index age ~14 years)."
+    },
+    {
+      "id": "american_ginseng-cardiac_glycoside",
+      "herb_id": "american_ginseng",
+      "drug_class": "cardiac_glycoside",
+      "already_live_pair": false,
+      "official_statement_quote": "Ask a health care practitioner/health care provider/health care professional/doctor/physician before use if you are taking blood thinners or digoxin.",
+      "source": {
+        "label": "Health Canada NHP monograph: Panax quinquefolius (American ginseng)",
+        "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/dbImages/mono_ginseng-american_english.pdf",
+        "body": "Health Canada (Natural and Non-prescription Health Products Directorate)",
+        "seen": "snippet only"
+      },
+      "other_official_sources": [],
+      "warning_en": "Health Canada says to ask a health professional before using American ginseng if you take digoxin.",
+      "warning_zh": "加拿大衞生部話，如果你食緊地高辛（Digoxin），用西洋參之前要先問醫護人員。",
+      "action_en": "If you take this medicine and want to use this herb, talk to your doctor or pharmacist first. Tell them about every herb and supplement you use.",
+      "action_zh": "如果你食緊呢類藥，又想用呢種藥材，請先話俾醫生或者藥劑師知。記得講埋你用緊嘅所有藥材同補充品。",
+      "zh_reviewed": false,
+      "notes": "New (not live). Health Canada gives no reason in the caution line. Its reference list (seen in snippet) includes a study on ginseng effects on serum digoxin immunoassay measurement, so the concern may be partly lab-test interference rather than a direct effect; do not state a mechanism. Monograph is label guidance for licensing; snippet index age 142-688 days, check it is the current version."
+    },
+    {
+      "id": "asian_ginseng-anticoagulant",
+      "herb_id": "asian_ginseng",
+      "drug_class": "anticoagulant",
+      "already_live_pair": true,
+      "official_statement_quote": "Consult a health care practitioner/health care provider/health care professional/doctor/physician prior to use if you are taking antidepressant medication, blood thinners or digoxin.",
+      "source": {
+        "label": "Health Canada NHP monograph: Panax ginseng (Asian ginseng)",
+        "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/dbImages/mono_ginseng-panax_english.pdf",
+        "body": "Health Canada (Natural and Non-prescription Health Products Directorate)",
+        "seen": "snippet only"
+      },
+      "other_official_sources": [
+        {
+          "label": "NCCIH: Herb-Drug Interactions: What the Science Says (provider digest)",
+          "url": "https://www.nccih.nih.gov/health/providers/digest/herb-drug-interactions-science",
+          "body": "US NIH NCCIH",
+          "seen": "snippet only",
+          "quote": "Studies of the effect of Asian ginseng on the anticoagulant warfarin have had mixed results."
+        },
+        {
+          "label": "MSKCC About Herbs: Ginseng (Asian)",
+          "url": "https://www.mskcc.org/cancer-care/integrative-medicine/herbs/ginseng-asian",
+          "body": "Memorial Sloan Kettering Cancer Center (owner-accepted)",
+          "seen": "snippet only",
+          "quote": "Patient section: talk with your healthcare provider if you take blood thinners such as warfarin (Coumadin, Jantoven); Asian ginseng may raise bleeding risk. Professional section: 'Studies on whether P. ginseng can antagonize the effects of anticoagulants are mixed.'"
+        },
+        {
+          "label": "Hospital Authority Smart Patient 智友集 talk slides: 當中藥師遇見藥劑師 — 認識中西藥相互作用 (崔俊明藥劑師, 林潔茹中藥師, 6 Jul 2024)",
+          "url": "https://www.smartpatient.ha.org.hk/docs/default-source/default-document-library/%E7%95%B6%E4%B8%AD%E8%97%A5%E5%B8%AB%E9%81%87%E8%A6%8B%E8%97%A5%E5%8A%91%E5%B8%AB_final(for-posting).pdf?sfvrsn=eb4858f8_1",
+          "body": "Hong Kong Hospital Authority (Smart Patient Website)",
+          "seen": "snippet only",
+          "quote": "人參補氣，促進華法林代謝，降低華法林藥效，增加血液在血管內凝血的風險。 (text extracted from slide table; last phrase partly truncated in snippet)"
+        },
+        {
+          "label": "Health Canada: Warfarin (consumer page)",
+          "url": "https://www.canada.ca/en/health-canada/services/drugs-medical-devices/warfarin.html",
+          "body": "Health Canada",
+          "seen": "snippet only",
+          "quote": "Research has shown that the popular herbal product ginseng can reduce the effects of warfarin."
+        }
+      ],
+      "warning_en": "Health Canada says to ask a health professional before using Asian ginseng if you take blood thinners. The Hong Kong Hospital Authority says ginseng may make warfarin work less well; US NIH (NCCIH) says studies on ginseng and warfarin have mixed results.",
+      "warning_zh": "加拿大衞生部話，如果你食緊薄血藥，用人參之前要先問醫護人員。香港醫院管理局話，人參可能令華法林藥效減弱；美國國家衞生研究院（NCCIH）就話，人參同華法林嘅研究結果唔一致。",
+      "action_en": "If you take this medicine and want to use this herb, talk to your doctor or pharmacist first. Tell them about every herb and supplement you use. If you take warfarin, your doctor may want to check your INR more closely.",
+      "action_zh": "如果你食緊呢類藥，又想用呢種藥材，請先話俾醫生或者藥劑師知。記得講埋你用緊嘅所有藥材同補充品。 如果你食緊華法林，醫生可能要密啲幫你驗INR。",
+      "zh_reviewed": false,
+      "notes": "Already live as asian_ginseng-warfarin. IMPORTANT for checker: the EMA HMPC Ginseng radix monograph (draft Revision 1 and superseded 2013 version, snippet only) states section 4.5 Interactions: 'None reported.' So official bodies disagree; EMA is not cited as support. HA slide says 人參 without species; assumed Panax ginseng (Asian) because 西洋參 is listed separately in the same slides. HA slide quote comes from a garbled text extraction; checker must confirm. Antiplatelets not covered (see nothing_official)."
+    },
+    {
+      "id": "asian_ginseng-cardiac_glycoside",
+      "herb_id": "asian_ginseng",
+      "drug_class": "cardiac_glycoside",
+      "already_live_pair": false,
+      "official_statement_quote": "Consult a health care practitioner/health care provider/health care professional/doctor/physician prior to use if you are taking antidepressant medication, blood thinners or digoxin.",
+      "source": {
+        "label": "Health Canada NHP monograph: Panax ginseng (Asian ginseng)",
+        "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/dbImages/mono_ginseng-panax_english.pdf",
+        "body": "Health Canada (Natural and Non-prescription Health Products Directorate)",
+        "seen": "snippet only"
+      },
+      "other_official_sources": [],
+      "warning_en": "Health Canada says to ask a health professional before using Asian ginseng if you take digoxin.",
+      "warning_zh": "加拿大衞生部話，如果你食緊地高辛（Digoxin），用人參之前要先問醫護人員。",
+      "action_en": "If you take this medicine and want to use this herb, talk to your doctor or pharmacist first. Tell them about every herb and supplement you use.",
+      "action_zh": "如果你食緊呢類藥，又想用呢種藥材，請先話俾醫生或者藥劑師知。記得講埋你用緊嘅所有藥材同補充品。",
+      "zh_reviewed": false,
+      "notes": "New (not live). No mechanism stated by Health Canada; supporting references reportedly include digoxin-assay interference studies. Do not state a mechanism."
+    },
+    {
+      "id": "asian_ginseng-calcium_channel_blocker",
+      "herb_id": "asian_ginseng",
+      "drug_class": "calcium_channel_blocker",
+      "already_live_pair": false,
+      "official_statement_quote": "There are uncertainties about whether ginseng might interact with certain medications, such as calcium channel blockers and other high blood pressure medications, as well as statin medications and some antidepressants. (near-verbatim, reconstructed from search snippets)",
+      "source": {
+        "label": "NCCIH: Herb-Drug Interactions: What the Science Says (provider digest)",
+        "url": "https://www.nccih.nih.gov/health/providers/digest/herb-drug-interactions-science",
+        "body": "US NIH NCCIH",
+        "seen": "snippet only"
+      },
+      "other_official_sources": [],
+      "warning_en": "The US NIH (NCCIH) says it is uncertain whether Asian ginseng interacts with calcium channel blockers such as amlodipine and other blood pressure medicines.",
+      "warning_zh": "美國國家衞生研究院（NCCIH）話，暫時未確定人參會唔會同鈣離子通道阻斷劑（例如氨氯地平）同其他降血壓藥有相互作用。",
+      "action_en": "If you take this medicine and want to use this herb, talk to your doctor or pharmacist first. Tell them about every herb and supplement you use.",
+      "action_zh": "如果你食緊呢類藥，又想用呢種藥材，請先話俾醫生或者藥劑師知。記得講埋你用緊嘅所有藥材同補充品。",
+      "zh_reviewed": false,
+      "notes": "UNCERTAINTY STATEMENT ONLY, not a warning that harm occurs. Checker should decide whether an 'officially uncertain' message is worth showing. Exact wording not confirmed; one snippet indicated the NCCIH page exists in two versions with different wording. The same sentence names 'other high blood pressure medications', so it would also cover the diuretic group (furosemide) if the owner accepts it. Not attributed to American ginseng."
+    },
+    {
+      "id": "asian_ginseng-statin",
+      "herb_id": "asian_ginseng",
+      "drug_class": "statin",
+      "already_live_pair": false,
+      "official_statement_quote": "There are uncertainties about whether ginseng might interact with certain medications, such as calcium channel blockers and other high blood pressure medications, as well as statin medications and some antidepressants. (near-verbatim, reconstructed from search snippets)",
+      "source": {
+        "label": "NCCIH: Herb-Drug Interactions: What the Science Says (provider digest)",
+        "url": "https://www.nccih.nih.gov/health/providers/digest/herb-drug-interactions-science",
+        "body": "US NIH NCCIH",
+        "seen": "snippet only"
+      },
+      "other_official_sources": [],
+      "warning_en": "The US NIH (NCCIH) says it is uncertain whether Asian ginseng interacts with statins.",
+      "warning_zh": "美國國家衞生研究院（NCCIH）話，暫時未確定人參會唔會同他汀類降膽固醇藥有相互作用。",
+      "action_en": "If you take this medicine and want to use this herb, talk to your doctor or pharmacist first. Tell them about every herb and supplement you use.",
+      "action_zh": "如果你食緊呢類藥，又想用呢種藥材，請先話俾醫生或者藥劑師知。記得講埋你用緊嘅所有藥材同補充品。",
+      "zh_reviewed": false,
+      "notes": "UNCERTAINTY STATEMENT ONLY; same sentence as asian_ginseng-calcium_channel_blocker. Exact wording unconfirmed."
+    },
+    {
+      "id": "liquorice-diuretic",
+      "herb_id": "liquorice",
+      "drug_class": "diuretic",
+      "already_live_pair": true,
+      "official_statement_quote": "Not to be used concomitantly with diuretics, cardiac glycosides, corticosteroids, stimulant laxatives or other medications which may aggravate electrolyte imbalance (see section 4.4).",
+      "source": {
+        "label": "EMA HMPC: European Union herbal monograph on Glycyrrhiza glabra L.; G. inflata Bat.; G. uralensis Fisch., radix (Liquiritiae radix), Revision 1 (draft for consultation, July 2025; final adopted as EMA/HMPC/108399/2024)",
+        "url": "https://www.ema.europa.eu/en/documents/herbal-monograph/draft-european-union-herbal-monograph-glycyrrhiza-glabra-l-gycyrrhiza-inflata-bat-glycyrrhiza-uralensis-fisch-radix-revision-1_en.pdf",
+        "body": "European Medicines Agency, HMPC",
+        "seen": "snippet only"
+      },
+      "other_official_sources": [
+        {
+          "label": "EMA HMPC: Community herbal monograph on Glycyrrhiza radix, first version (superseded)",
+          "url": "https://www.ema.europa.eu/en/documents/herbal-monograph/superseded-community-herbal-monograph-glycyrrhiza-glabra-l-or-glycyrrhiza-inflata-bat-or-glycyrrhiza-uralensis-fisch-radix-first-version_en.pdf",
+          "body": "European Medicines Agency, HMPC",
+          "seen": "snippet only",
+          "quote": "Same sentence in section 4.5 of the superseded first version."
+        },
+        {
+          "label": "MSKCC About Herbs: Licorice",
+          "url": "https://www.mskcc.org/cancer-care/integrative-medicine/herbs/licorice",
+          "body": "Memorial Sloan Kettering Cancer Center (owner-accepted)",
+          "seen": "snippet only",
+          "quote": "You're taking diuretics (medications that make you urinate often). Licorice may lower your blood potassium level."
+        },
+        {
+          "label": "Health Canada NHP monograph: Licorice",
+          "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/dbImages/mono_licorice_english.pdf",
+          "body": "Health Canada (Natural and Non-prescription Health Products Directorate)",
+          "seen": "snippet only",
+          "quote": "Do not use if you are taking heart medications, corticosteroids, stimulant laxatives, or other health products that may contribute electrolyte imbalance. Also: 'Not more than 1 ingredient with diuretic properties may be combined with the medicinal ingredient licorice due to potential of electrolyte imbalance' (product-formulation rule)."
+        }
+      ],
+      "warning_en": "The European Medicines Agency says liquorice root should not be used together with diuretics (water pills), because it can upset the body's salt and potassium balance. MSKCC says liquorice may lower blood potassium in people taking diuretics.",
+      "warning_zh": "歐洲藥品管理局話，甘草唔應該同利尿藥（去水丸）一齊用，因為可能打亂身體嘅鹽分同鉀平衡。MSKCC話，食緊利尿藥嘅人用甘草，血鉀可能會降低。",
+      "action_en": "If you take this medicine and want to use this herb, talk to your doctor or pharmacist first. Tell them about every herb and supplement you use. Your doctor may check your blood potassium.",
+      "action_zh": "如果你食緊呢類藥，又想用呢種藥材，請先話俾醫生或者藥劑師知。記得講埋你用緊嘅所有藥材同補充品。 醫生可能會幫你驗血鉀。",
+      "zh_reviewed": false,
+      "notes": "Already live. EMA wording taken from the draft Revision 1 (and superseded first version); the final Revision 1 (EMA/HMPC/108399/2024, published 20 Jul 2026 per snippet) could not be opened. Its assessment report says 4.4/4.5 were revised to add CYP interaction information, so the checker must confirm the diuretic sentence survives in the final text. Health Canada 'heart medications' wording: see liquorice-cardiac_glycoside notes. A snippet suggested NCCIH mentions licorice with diuretics, but I could not confirm it; not cited."
+    },
+    {
+      "id": "liquorice-cardiac_glycoside",
+      "herb_id": "liquorice",
+      "drug_class": "cardiac_glycoside",
+      "already_live_pair": true,
+      "official_statement_quote": "Not to be used concomitantly with diuretics, cardiac glycosides, corticosteroids, stimulant laxatives or other medications which may aggravate electrolyte imbalance (see section 4.4).",
+      "source": {
+        "label": "EMA HMPC: European Union herbal monograph on Glycyrrhiza glabra L.; G. inflata Bat.; G. uralensis Fisch., radix (Liquiritiae radix), Revision 1 (draft for consultation, July 2025; final adopted as EMA/HMPC/108399/2024)",
+        "url": "https://www.ema.europa.eu/en/documents/herbal-monograph/draft-european-union-herbal-monograph-glycyrrhiza-glabra-l-gycyrrhiza-inflata-bat-glycyrrhiza-uralensis-fisch-radix-revision-1_en.pdf",
+        "body": "European Medicines Agency, HMPC",
+        "seen": "snippet only"
+      },
+      "other_official_sources": [
+        {
+          "label": "MSKCC About Herbs: Licorice",
+          "url": "https://www.mskcc.org/cancer-care/integrative-medicine/herbs/licorice",
+          "body": "Memorial Sloan Kettering Cancer Center (owner-accepted)",
+          "seen": "snippet only",
+          "quote": "You're taking cardiac glycosides (medications used to treat heart failure and irregular heartbeat). Licorice may increase their effects which can be harmful."
+        },
+        {
+          "label": "Hospital Authority Smart Patient 智友集 talk slides: 當中藥師遇見藥劑師 — 認識中西藥相互作用 (崔俊明藥劑師, 林潔茹中藥師, 6 Jul 2024)",
+          "url": "https://www.smartpatient.ha.org.hk/docs/default-source/default-document-library/%E7%95%B6%E4%B8%AD%E8%97%A5%E5%B8%AB%E9%81%87%E8%A6%8B%E8%97%A5%E5%8A%91%E5%B8%AB_final(for-posting).pdf?sfvrsn=eb4858f8_1",
+          "body": "Hong Kong Hospital Authority (Smart Patient Website)",
+          "seen": "snippet only",
+          "quote": "甘草可能引起低血鉀，更容易引起地高辛對心臟的副作用"
+        },
+        {
+          "label": "Health Canada NHP monograph: Licorice",
+          "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/dbImages/mono_licorice_english.pdf",
+          "body": "Health Canada (Natural and Non-prescription Health Products Directorate)",
+          "seen": "snippet only",
+          "quote": "Do not use if you are taking heart medications, corticosteroids, stimulant laxatives, or other health products that may contribute electrolyte imbalance."
+        }
+      ],
+      "warning_en": "The European Medicines Agency says liquorice root should not be used together with heart medicines such as digoxin. The Hong Kong Hospital Authority says liquorice may cause low potassium, which makes heart side effects of digoxin more likely.",
+      "warning_zh": "歐洲藥品管理局話，甘草唔應該同地高辛（Digoxin）呢類強心藥一齊用。香港醫院管理局話，甘草可能令血鉀過低，令地高辛更容易對心臟產生副作用。",
+      "action_en": "If you take this medicine and want to use this herb, talk to your doctor or pharmacist first. Tell them about every herb and supplement you use. Your doctor may check your blood potassium.",
+      "action_zh": "如果你食緊呢類藥，又想用呢種藥材，請先話俾醫生或者藥劑師知。記得講埋你用緊嘅所有藥材同補充品。 醫生可能會幫你驗血鉀。",
+      "zh_reviewed": false,
+      "notes": "Already live as liquorice-digoxin. Health Canada wording 'Do not use if you are taking heart medications...' is broad and undefined; taken literally it would cover every heart medicine in the app (warfarin, statins, amlodipine etc.). I have NOT used it to create warnings for other groups; checker/owner to decide. Exact HC wording seen only in snippet; an older/other version may say 'thiazide diuretics, cardiac glycosides'. Same EMA final-version caveat as liquorice-diuretic."
+    },
+    {
+      "id": "liquorice-all_blood_pressure_medicines",
+      "herb_id": "liquorice",
+      "drug_class": "all_blood_pressure_medicines",
+      "already_live_pair": false,
+      "official_statement_quote": "Liquorice root may counteract antihypertensive action of prescribed medications.",
+      "source": {
+        "label": "EMA HMPC: European Union herbal monograph on Glycyrrhiza glabra L.; G. inflata Bat.; G. uralensis Fisch., radix (Liquiritiae radix), Revision 1 (draft for consultation, July 2025; final adopted as EMA/HMPC/108399/2024)",
+        "url": "https://www.ema.europa.eu/en/documents/herbal-monograph/draft-european-union-herbal-monograph-glycyrrhiza-glabra-l-gycyrrhiza-inflata-bat-glycyrrhiza-uralensis-fisch-radix-revision-1_en.pdf",
+        "body": "European Medicines Agency, HMPC",
+        "seen": "snippet only"
+      },
+      "other_official_sources": [
+        {
+          "label": "EMA HMPC: Community herbal monograph on Glycyrrhiza radix, first version (superseded)",
+          "url": "https://www.ema.europa.eu/en/documents/herbal-monograph/superseded-community-herbal-monograph-glycyrrhiza-glabra-l-or-glycyrrhiza-inflata-bat-or-glycyrrhiza-uralensis-fisch-radix-first-version_en.pdf",
+          "body": "European Medicines Agency, HMPC",
+          "seen": "snippet only",
+          "quote": "Same sentence in section 4.4 of the superseded first version."
+        },
+        {
+          "label": "Hospital Authority Smart Patient 智友集 talk slides: 當中藥師遇見藥劑師 — 認識中西藥相互作用 (崔俊明藥劑師, 林潔茹中藥師, 6 Jul 2024)",
+          "url": "https://www.smartpatient.ha.org.hk/docs/default-source/default-document-library/%E7%95%B6%E4%B8%AD%E8%97%A5%E5%B8%AB%E9%81%87%E8%A6%8B%E8%97%A5%E5%8A%91%E5%B8%AB_final(for-posting).pdf?sfvrsn=eb4858f8_1",
+          "body": "Hong Kong Hospital Authority (Smart Patient Website)",
+          "seen": "snippet only",
+          "quote": "甘草中的成分有類固醇激素作用，久服較大劑量的甘草可使尿量減少，水份在體內滯留，引起血壓升高，從而減弱降壓藥的效果"
+        }
+      ],
+      "warning_en": "The European Medicines Agency says liquorice root may work against blood pressure medicines. The Hong Kong Hospital Authority says taking larger amounts of liquorice for a long time can raise blood pressure and weaken blood pressure medicines.",
+      "warning_zh": "歐洲藥品管理局話，甘草可能抵消降血壓藥嘅作用。香港醫院管理局話，長期食較大份量嘅甘草，可以令血壓升高，減弱降血壓藥嘅效果。",
+      "action_en": "If you take this medicine and want to use this herb, talk to your doctor or pharmacist first. Tell them about every herb and supplement you use. Keep checking your blood pressure as your doctor advises.",
+      "action_zh": "如果你食緊呢類藥，又想用呢種藥材，請先話俾醫生或者藥劑師知。記得講埋你用緊嘅所有藥材同補充品。 按醫生指示繼續量血壓。",
+      "zh_reviewed": false,
+      "notes": "This is the statement that applies to ALL blood-pressure medicines (amlodipine, furosemide, and any others the app adds). 'Larger amounts for a long time' is in the HA wording itself; no amount is given, so do not add one. EMA wording from draft Revision 1 and superseded first version; confirm in final Revision 1. EMA draft 4.4 also says liquorice is not recommended in patients with hypertension, kidney, liver or cardiovascular disorders or hypokalaemia (not a drug-group statement, but relevant to heart patients)."
+    },
+    {
+      "id": "liquorice-calcium_channel_blocker",
+      "herb_id": "liquorice",
+      "drug_class": "calcium_channel_blocker",
+      "already_live_pair": false,
+      "official_statement_quote": "Liquorice root may counteract antihypertensive action of prescribed medications.",
+      "source": {
+        "label": "EMA HMPC: European Union herbal monograph on Glycyrrhiza glabra L.; G. inflata Bat.; G. uralensis Fisch., radix (Liquiritiae radix), Revision 1 (draft for consultation, July 2025; final adopted as EMA/HMPC/108399/2024)",
+        "url": "https://www.ema.europa.eu/en/documents/herbal-monograph/draft-european-union-herbal-monograph-glycyrrhiza-glabra-l-gycyrrhiza-inflata-bat-glycyrrhiza-uralensis-fisch-radix-revision-1_en.pdf",
+        "body": "European Medicines Agency, HMPC",
+        "seen": "snippet only"
+      },
+      "other_official_sources": [
+        {
+          "label": "Hospital Authority Smart Patient 智友集 talk slides: 當中藥師遇見藥劑師 — 認識中西藥相互作用 (崔俊明藥劑師, 林潔茹中藥師, 6 Jul 2024)",
+          "url": "https://www.smartpatient.ha.org.hk/docs/default-source/default-document-library/%E7%95%B6%E4%B8%AD%E8%97%A5%E5%B8%AB%E9%81%87%E8%A6%8B%E8%97%A5%E5%8A%91%E5%B8%AB_final(for-posting).pdf?sfvrsn=eb4858f8_1",
+          "body": "Hong Kong Hospital Authority (Smart Patient Website)",
+          "seen": "snippet only",
+          "quote": "……引起血壓升高，從而減弱降壓藥的效果"
+        }
+      ],
+      "warning_en": "The European Medicines Agency says liquorice root may work against blood pressure medicines, which include amlodipine.",
+      "warning_zh": "歐洲藥品管理局話，甘草可能抵消降血壓藥嘅作用，氨氯地平都係降血壓藥。",
+      "action_en": "If you take this medicine and want to use this herb, talk to your doctor or pharmacist first. Tell them about every herb and supplement you use. Keep checking your blood pressure as your doctor advises.",
+      "action_zh": "如果你食緊呢類藥，又想用呢種藥材，請先話俾醫生或者藥劑師知。記得講埋你用緊嘅所有藥材同補充品。 按醫生指示繼續量血壓。",
+      "zh_reviewed": false,
+      "notes": "Derived from the all-blood-pressure-medicines statement: neither source names calcium channel blockers or amlodipine. The only step taken is that amlodipine is an antihypertensive (class membership, not an interaction inference). Checker may prefer to show only liquorice-all_blood_pressure_medicines instead of this entry; they are duplicates."
+    },
+    {
+      "id": "goji-anticoagulant",
+      "herb_id": "goji",
+      "drug_class": "anticoagulant",
+      "already_live_pair": true,
+      "official_statement_quote": "A few cases of elevated INR were reported in patients on anticoagulant therapy after consuming Lycium products. (patient-facing point, near-verbatim from snippet)",
+      "source": {
+        "label": "MSKCC About Herbs: Lycium",
+        "url": "https://www.mskcc.org/cancer-care/integrative-medicine/herbs/lycium",
+        "body": "Memorial Sloan Kettering Cancer Center (owner-accepted)",
+        "seen": "snippet only"
+      },
+      "other_official_sources": [
+        {
+          "label": "Hospital Authority Smart Patient 智友集 talk slides: 當中藥師遇見藥劑師 — 認識中西藥相互作用 (崔俊明藥劑師, 林潔茹中藥師, 6 Jul 2024)",
+          "url": "https://www.smartpatient.ha.org.hk/docs/default-source/default-document-library/%E7%95%B6%E4%B8%AD%E8%97%A5%E5%B8%AB%E9%81%87%E8%A6%8B%E8%97%A5%E5%8A%91%E5%B8%AB_final(for-posting).pdf?sfvrsn=eb4858f8_1",
+          "body": "Hong Kong Hospital Authority (Smart Patient Website)",
+          "seen": "snippet only",
+          "quote": "枸杞子會抑制華法林的代謝 (extracted from slide table; snippet text garbled)"
+        }
+      ],
+      "warning_en": "MSKCC reports a few cases of raised INR in people on blood thinners after taking goji (Lycium) products. The Hong Kong Hospital Authority says goji may slow the breakdown of warfarin.",
+      "warning_zh": "MSKCC記錄咗幾個食緊薄血藥嘅人，食咗枸杞產品之後INR升高嘅個案。香港醫院管理局話，枸杞子可能減慢身體分解華法林。",
+      "action_en": "If you take this medicine and want to use this herb, talk to your doctor or pharmacist first. Tell them about every herb and supplement you use. If you take warfarin, your doctor may want to check your INR more closely.",
+      "action_zh": "如果你食緊呢類藥，又想用呢種藥材，請先話俾醫生或者藥劑師知。記得講埋你用緊嘅所有藥材同補充品。 如果你食緊華法林，醫生可能要密啲幫你驗INR。",
+      "zh_reviewed": false,
+      "notes": "Already live as goji-warfarin. No government monograph on goji with any heart medicine was found (NCCIH, Health Canada, EMA searched). HA slide mapping of 枸杞子 to 'inhibits warfarin metabolism' came from a garbled table extraction; checker must confirm. MSKCC also notes CYP 3A4/2C9/2C19 effects in general; not extended to other groups."
+    },
+    {
+      "id": "red_yeast_rice-statin",
+      "herb_id": "red_yeast_rice",
+      "drug_class": "statin",
+      "already_live_pair": true,
+      "official_statement_quote": "Do Not Take if: You are taking cholesterol-lowering drugs. (MSKCC patient section, near-verbatim) / 'Side effects and interactions can be comparable to statin drugs.'",
+      "source": {
+        "label": "MSKCC About Herbs: Red Yeast Rice",
+        "url": "https://www.mskcc.org/cancer-care/integrative-medicine/herbs/red-yeast-rice",
+        "body": "Memorial Sloan Kettering Cancer Center (owner-accepted)",
+        "seen": "snippet only"
+      },
+      "other_official_sources": [
+        {
+          "label": "Commission Regulation (EU) 2022/860 (monacolins from red yeast rice), recital and Annex III Part B conditions",
+          "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32022R0860",
+          "body": "European Commission (EU law, based on EFSA opinion)",
+          "seen": "snippet only",
+          "quote": "As the Authority identified a risk of adverse effects due to interactions with medicinal products, it is necessary to warn persons using cholesterol-lowering medicines, to avoid concomitant use of foods containing monacolins from red yeast rice. (EU law requires a label warning that the product should not be consumed by people taking cholesterol-lowering medication.)"
+        },
+        {
+          "label": "NCCIH: Cholesterol Management at a Glance",
+          "url": "https://www.nccih.nih.gov/health/cholesterol-management-at-a-glance",
+          "body": "US NIH NCCIH",
+          "seen": "snippet only",
+          "quote": "Red yeast rice may lower blood cholesterol levels, but it can also cause the same types of side effects and drug interactions as lovastatin."
+        },
+        {
+          "label": "NCCIH: Red Yeast Rice",
+          "url": "https://www.nccih.nih.gov/health/red-yeast-rice",
+          "body": "US NIH NCCIH",
+          "seen": "snippet only",
+          "quote": "Monacolin K is chemically identical to the cholesterol-lowering drug lovastatin."
+        },
+        {
+          "label": "Hospital Authority Smart Patient 智友集 talk slides: 當中藥師遇見藥劑師 — 認識中西藥相互作用 (崔俊明藥劑師, 林潔茹中藥師, 6 Jul 2024)",
+          "url": "https://www.smartpatient.ha.org.hk/docs/default-source/default-document-library/%E7%95%B6%E4%B8%AD%E8%97%A5%E5%B8%AB%E9%81%87%E8%A6%8B%E8%97%A5%E5%8A%91%E5%B8%AB_final(for-posting).pdf?sfvrsn=eb4858f8_1",
+          "body": "Hong Kong Hospital Authority (Smart Patient Website)",
+          "seen": "snippet only",
+          "quote": "紅麴含有洛伐他汀lovastatin，合用可能增加洛伐他汀的副作用，如腸胃不適、頭痛、肌肉疼痛、肝功能異常"
+        }
+      ],
+      "warning_en": "MSKCC says not to take red yeast rice if you take cholesterol-lowering drugs, and EU law requires red yeast rice products to warn people on cholesterol-lowering medicines not to use them. Red yeast rice contains a substance identical to the statin lovastatin.",
+      "warning_zh": "MSKCC話，如果你食緊降膽固醇藥，就唔好食紅麴。歐盟法例規定紅麴產品要警告食緊降膽固醇藥嘅人唔好用。紅麴含有一種同他汀藥洛伐他汀完全一樣嘅成分。",
+      "action_en": "If you take this medicine and want to use this herb, talk to your doctor or pharmacist first. Tell them about every herb and supplement you use. Tell your doctor straight away if you get unexplained muscle pain or weakness.",
+      "action_zh": "如果你食緊呢類藥，又想用呢種藥材，請先話俾醫生或者藥劑師知。記得講埋你用緊嘅所有藥材同補充品。 如果無啦啦肌肉痛或者無力，要即刻話俾醫生知。",
+      "zh_reviewed": false,
+      "notes": "Already live. European Commission is a regulator but not named in the owner's example list; checker/owner to accept or drop. The muscle-pain line in action_en is not stated by these sources for red yeast rice specifically (HA lists muscle pain as a side effect); checker may remove it. MSKCC page snippet index age ~3.7 years."
+    }
+  ],
+  "nothing_official": [
+    {
+      "herb_id": "american_ginseng",
+      "drug_class": "antiplatelet",
+      "searched": "Searched EMA HMPC, NCCIH, Health Canada NHPID, MSKCC, MedlinePlus, WHO monographs, HK HA/DH/CMRO via web search (snippets only). Health Canada says 'blood thinners' without defining it; MSKCC names warfarin only. Not extended to aspirin/clopidogrel."
+    },
+    {
+      "herb_id": "american_ginseng",
+      "drug_class": "statin",
+      "searched": "Searched EMA HMPC, NCCIH, Health Canada NHPID, MSKCC, MedlinePlus, WHO monographs, HK HA/DH/CMRO via web search (snippets only). Nothing found."
+    },
+    {
+      "herb_id": "american_ginseng",
+      "drug_class": "calcium_channel_blocker",
+      "searched": "Searched EMA HMPC, NCCIH, Health Canada NHPID, MSKCC, MedlinePlus, WHO monographs, HK HA/DH/CMRO via web search (snippets only). NCCIH uncertainty sentence concerns Asian ginseng only."
+    },
+    {
+      "herb_id": "american_ginseng",
+      "drug_class": "diuretic",
+      "searched": "Searched EMA HMPC, NCCIH, Health Canada NHPID, MSKCC, MedlinePlus, WHO monographs, HK HA/DH/CMRO via web search (snippets only). Nothing found."
+    },
+    {
+      "herb_id": "asian_ginseng",
+      "drug_class": "antiplatelet",
+      "searched": "Searched EMA HMPC, NCCIH, Health Canada NHPID, MSKCC, MedlinePlus, WHO monographs, HK HA/DH/CMRO via web search (snippets only). Health Canada 'blood thinners' undefined. MSKCC professional section reportedly notes P. ginseng may increase aspirin bioavailability (snippet only, not a warning); not used."
+    },
+    {
+      "herb_id": "asian_ginseng",
+      "drug_class": "diuretic",
+      "searched": "Searched EMA HMPC, NCCIH, Health Canada NHPID, MSKCC, MedlinePlus, WHO monographs, HK HA/DH/CMRO via web search (snippets only). No diuretic-specific statement. NCCIH's uncertainty sentence covers 'other high blood pressure medications', which would include furosemide; see asian_ginseng-calcium_channel_blocker notes."
+    },
+    {
+      "herb_id": "liquorice",
+      "drug_class": "anticoagulant",
+      "searched": "Searched EMA HMPC, NCCIH, Health Canada NHPID, MSKCC, MedlinePlus, WHO monographs, HK HA/DH/CMRO via web search (snippets only). MSKCC professional section describes one case of INR drop with phenprocoumon after liquorice (case description, not a group statement). EMA Revision 1 adds general CYP interaction text, wording not seen. Health Canada 'heart medications' line is undefined. Not used."
+    },
+    {
+      "herb_id": "liquorice",
+      "drug_class": "antiplatelet",
+      "searched": "Searched EMA HMPC, NCCIH, Health Canada NHPID, MSKCC, MedlinePlus, WHO monographs, HK HA/DH/CMRO via web search (snippets only). Nothing found."
+    },
+    {
+      "herb_id": "liquorice",
+      "drug_class": "statin",
+      "searched": "Searched EMA HMPC, NCCIH, Health Canada NHPID, MSKCC, MedlinePlus, WHO monographs, HK HA/DH/CMRO via web search (snippets only). EMA Revision 1 assessment report mentions general CYP interactions only; no statin wording seen."
+    },
+    {
+      "herb_id": "goji",
+      "drug_class": "antiplatelet",
+      "searched": "Searched EMA HMPC, NCCIH, Health Canada NHPID, MSKCC, MedlinePlus, WHO monographs, HK HA/DH/CMRO via web search (snippets only). Nothing found."
+    },
+    {
+      "herb_id": "goji",
+      "drug_class": "statin",
+      "searched": "Searched EMA HMPC, NCCIH, Health Canada NHPID, MSKCC, MedlinePlus, WHO monographs, HK HA/DH/CMRO via web search (snippets only). Nothing found (MSKCC general CYP note not group-specific)."
+    },
+    {
+      "herb_id": "goji",
+      "drug_class": "cardiac_glycoside",
+      "searched": "Searched EMA HMPC, NCCIH, Health Canada NHPID, MSKCC, MedlinePlus, WHO monographs, HK HA/DH/CMRO via web search (snippets only). Nothing found."
+    },
+    {
+      "herb_id": "goji",
+      "drug_class": "calcium_channel_blocker",
+      "searched": "Searched EMA HMPC, NCCIH, Health Canada NHPID, MSKCC, MedlinePlus, WHO monographs, HK HA/DH/CMRO via web search (snippets only). Nothing found."
+    },
+    {
+      "herb_id": "goji",
+      "drug_class": "diuretic",
+      "searched": "Searched EMA HMPC, NCCIH, Health Canada NHPID, MSKCC, MedlinePlus, WHO monographs, HK HA/DH/CMRO via web search (snippets only). Nothing found."
+    },
+    {
+      "herb_id": "goji",
+      "drug_class": "all_blood_pressure_medicines",
+      "searched": "Searched EMA HMPC, NCCIH, Health Canada NHPID, MSKCC, MedlinePlus, WHO monographs, HK HA/DH/CMRO via web search (snippets only). Nothing found."
+    },
+    {
+      "herb_id": "red_yeast_rice",
+      "drug_class": "anticoagulant",
+      "searched": "Searched EMA HMPC, NCCIH, Health Canada NHPID, MSKCC, MedlinePlus, WHO monographs, HK HA/DH/CMRO via web search (snippets only). NCCIH says interactions are the same as lovastatin's, but names no drug group; not extended."
+    },
+    {
+      "herb_id": "red_yeast_rice",
+      "drug_class": "antiplatelet",
+      "searched": "Searched EMA HMPC, NCCIH, Health Canada NHPID, MSKCC, MedlinePlus, WHO monographs, HK HA/DH/CMRO via web search (snippets only). Nothing found."
+    },
+    {
+      "herb_id": "red_yeast_rice",
+      "drug_class": "cardiac_glycoside",
+      "searched": "Searched EMA HMPC, NCCIH, Health Canada NHPID, MSKCC, MedlinePlus, WHO monographs, HK HA/DH/CMRO via web search (snippets only). Nothing found."
+    },
+    {
+      "herb_id": "red_yeast_rice",
+      "drug_class": "calcium_channel_blocker",
+      "searched": "Searched EMA HMPC, NCCIH, Health Canada NHPID, MSKCC, MedlinePlus, WHO monographs, HK HA/DH/CMRO via web search (snippets only). MSKCC cautions about CYP3A4/P-gp substrate drugs in general; amlodipine is not named. Not extended."
+    },
+    {
+      "herb_id": "red_yeast_rice",
+      "drug_class": "diuretic",
+      "searched": "Searched EMA HMPC, NCCIH, Health Canada NHPID, MSKCC, MedlinePlus, WHO monographs, HK HA/DH/CMRO via web search (snippets only). Nothing found."
+    },
+    {
+      "herb_id": "american_ginseng",
+      "drug_class": "all_blood_pressure_medicines",
+      "searched": "Searched EMA HMPC, NCCIH, Health Canada NHPID, MSKCC, MedlinePlus, WHO monographs, HK HA/DH/CMRO via web search (snippets only). Nothing found."
+    }
+  ]
+}
