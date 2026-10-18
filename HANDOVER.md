@@ -152,8 +152,10 @@ For Sunday this is done WITHOUT accounts, a server or scanning:
     alone; "does not adversely affect the safety…" is the authors' conclusion); Zhuang 2021
     details for danshen and dong quai; About figures (provisional registered deaths;
     40–49% "therapeutic range", one hospital).
-  * Asian ginseng + warfarin: "one case report found a drop in INR" REMOVED for now; restore
-    it citing Leonard (Cleveland Clinic Pharmacotherapy Update 2001) once that page is checked.
+  * Asian ginseng + warfarin: "one case report found a drop in INR" restored after the owner's
+    checker read Leonard, Cleveland Clinic Pharmacotherapy Update, Mar/Apr 2001 ("Oriental
+    ginseng", INR fell to 1.5). Leonard's Table 2 also confirmed for liquorice + digoxin and
+    + potassium-depleting diuretics (two wording points put to the owner).
   * HA leaflet quote now on EVERY herb + warfarin (owner: it covers all TCM); Health Canada
     "blood thinners" sentences added to both ginseng + warfarin cards. Cache herbsafe-v12.
 
