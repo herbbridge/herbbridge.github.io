@@ -1,0 +1,65 @@
+{
+  "status": "CANDIDATES from research (step 1 of 3). Not checked, not approved, not live.",
+  "batch": 2,
+  "research_access_note": "No source page could be opened from the build machine: WebFetch failed with DNS errors and curl was refused by the egress proxy for pubmed.ncbi.nlm.nih.gov, hellopharmacist.com, mskcc.org and others. Everything below rests on web-search result text (snippets and search-engine summaries of the pages). The checker should treat every source as 'snippet only' and re-confirm it.",
+  "candidates": [
+    {
+      "id": "liquorice-amlodipine",
+      "herb_id": "liquorice",
+      "drug_id": "amlodipine",
+      "risk": "moderate",
+      "watch": false,
+      "rating_source": "team",
+      "effect_en": "Liquorice can raise blood pressure and may work against blood pressure medicines such as amlodipine.",
+      "effect_zh": "甘草可能令血壓上升，亦可能減弱氨氯地平呢類降血壓藥嘅效果。",
+      "heart_impact_en": "Amlodipine controls your blood pressure. If liquorice works against it, your blood pressure may be less well controlled.",
+      "heart_impact_zh": "氨氯地平用嚟控制血壓。如果甘草減弱咗佢嘅效果，血壓可能控制得冇咁好。",
+      "why_en": "Liquorice makes the body hold on to salt and water, which can push blood pressure up.",
+      "why_zh": "甘草會令身體積聚鹽分同水分，可能令血壓上升。",
+      "why_pro_en": "Drugs.com professional interaction monograph (amlodipine + licorice, rated Moderate): glycyrrhizic acid is hydrolysed in the intestine to glycyrrhetinic acid, which has mineralocorticoid and renin-suppressing effects; licorice use has been associated with hypertension and may antagonise the effects of antihypertensive agents. Merck Manual Professional (Licorice) lists reduced effectiveness of antihypertensive drugs as a drug interaction, attributed to increased salt and water retention. No study or case report on this specific pair was found.",
+      "action_en": "Tell your doctor or pharmacist that you take liquorice, so they can keep an eye on your blood pressure.",
+      "action_zh": "話俾醫生或者藥劑師知你有食甘草，等佢哋留意你嘅血壓。",
+      "main_source": 0,
+      "main_finding_en": "Drug interaction reference: liquorice can raise blood pressure and may work against blood pressure medicines, including amlodipine (rated Moderate).",
+      "main_finding_zh": "藥物相互作用參考資料：甘草可能令血壓上升，亦可能減弱降血壓藥（包括氨氯地平）嘅效果（評為中度）。",
+      "evidence_level": [
+        "review"
+      ],
+      "sources": [
+        {
+          "label": "Drugs.com professional interaction report: amlodipine and licorice",
+          "url": "https://www.drugs.com/drug-interactions/amlodipine-with-licorice-172-0-2383-0.html?professional=1"
+        },
+        {
+          "label": "Merck Manual Professional Edition: Licorice",
+          "url": "https://www.merckmanuals.com/professional/special-subjects/dietary-supplements/licorice"
+        }
+      ],
+      "zh_reviewed": false,
+      "rating_reason": "Moderate because a drug interaction reference names this exact pair and rates it Moderate, and a second reference (Merck Manual) lists reduced effectiveness of blood pressure medicines (the class amlodipine belongs to) with a stated mechanism. The effect is pharmacodynamic (liquorice raises blood pressure) rather than a change in amlodipine levels. Weaknesses: both are tertiary references, no study or case report of the pair itself was found, and the sources could not be opened, only seen in search results. This matches the house rating for liquorice-diuretic and liquorice-digoxin, which also rest on an interaction table. Low could be argued on evidence quality; the checker should decide. Note: one search summary said a Drugs.com nifedipine + licorice report mentions additive blood pressure effects (the opposite direction); I did not use it and it was not seen for amlodipine.",
+      "research_notes": "Source 0 (Drugs.com professional, amlodipine + licorice): seen only via search-result text, not opened. Search summaries stated: rated Moderate; 'Licorice use has been associated with hypertension and may antagonize the effects of antihypertensive agents or effects of agents with hypotensive properties'; mechanism via glycyrrhizic acid hydrolysed to glycyrrhetinic acid with mineralocorticoid and renin-suppressing effects; patients on antihypertensives should avoid or limit licorice (left out of action text per the advice rule). A related database (mecddi.idrblab.net) carried the same wording for levamlodipine, which supports that the text is a standard monograph. Supports effect_en/zh, heart_impact, why_pro_en, main_finding, the rating. Source 1 (Merck Manual Professional, Licorice): seen only via search-result text. Search text stated that licorice may reduce the effectiveness of antihypertensive drugs because it increases salt and water retention, listed as a drug interaction alongside warfarin and others; also that high doses of glycyrrhizin cause renal sodium and water retention, possibly leading to high blood pressure. Supports why_en/zh and why_pro_en. Not used: case reports (BJMP 2018 liquorice tea; PMC11533832; SMA 2023 abstract) where amlodipine was started for liquorice-induced hypertension; these describe liquorice causing hypertension, not an interaction with amlodipine, so they were left out to avoid extrapolation. Glycyrrhizin modest CYP3A induction with midazolam (PubMed 20393696, 16 men, AUC ratio 0.77) was seen in a search summary; it is not amlodipine-specific and was left out."
+    }
+  ],
+  "no_evidence_found": [
+    {
+      "pair": "danshen + furosemide",
+      "searched": "Web search (English and Chinese): 'danshen Salvia miltiorrhiza furosemide interaction'; 'salvianolic acid OR tanshinone OR danshen furosemide pharmacokinetics OAT1 OAT3 rats'; 'hellopharmacist danshen with furosemide'; '丹参 呋塞米 相互作用'; '丹参注射液 呋塞米 配伍'. No pages could be opened; all from search results.",
+      "nearest_evidence": "No study, case report or database entry naming danshen with furosemide was found. Nearest: HelloPharmacist pages for danshen with torsemide and with chlorthalidone (other diuretics) give a theoretical risk of low blood pressure with antihypertensives based on animal data, plus in vitro CYP2C9 inhibition (relevant to torsemide, not furosemide). Rosmarinic acid (also found in danshen) inhibited OAT3 and raised plasma furosemide in an animal study (PMC7828042), but that is a single compound, not a danshen product, so not used. Tanshinol is a weak inhibitor of human OATs (IC50 98 to 4079 µM). Chinese literature on danshen injection compatibility did not mention furosemide. The live liquorice-diuretic entry is unrelated."
+    },
+    {
+      "pair": "goji + digoxin",
+      "searched": "Web search: 'Lycium barbarum goji digoxin interaction'; 'goji wolfberry Lycium digoxin P-glycoprotein OR cardiac glycoside interaction study'; 'Interaction between Chinese medicine and digoxin: Clinical and research update' (Zhuang et al., Front Pharmacol 2023, PMC9941676) with Lycium/goji/wolfberry; '枸杞 地高辛 相互作用'. No pages could be opened.",
+      "nearest_evidence": "Digoxin appears only as a co-medication in the Lam 2001 goji-warfarin case (61-year-old woman on warfarin, digoxin and others); the report attributes the event to warfarin, not digoxin. MSKCC About Herbs (Lycium) says lycium extract may affect drugs that are CYP3A4, CYP2C9 or CYP2C19 substrates; that is a general statement, not about digoxin. Could not see whether the 2023 Chinese medicine-digoxin review covers Lycium; the checker could look at PMC9941676 full text."
+    },
+    {
+      "pair": "goji + amlodipine",
+      "searched": "Web search: 'Lycium barbarum goji digoxin interaction' (returned a goji-amlodipine page); 'hellopharmacist goji with amlodipine interaction rating'; 'Lycium barbarum fruit extract calcium channel blocker OR amlodipine OR antihypertensive drug interaction case'; 'MSKCC About Herbs Lycium goji herb-drug interactions'; '枸杞 氨氯地平 相互作用'. No pages could be opened.",
+      "nearest_evidence": "No published study or case report on this pair was found. HelloPharmacist (hellopharmacist.com/drug-herbal-interactions/goji-with-amlodipine), seen only via search summaries, rates it Moderate / 'Possible' on theory alone: in vitro goji juice inhibits CYP3A4 (amlodipine is a CYP3A4 substrate) but this 'has not been reported in humans'; and goji root bark (not the fruit) lowered blood pressure in animal/lab work, while goji fruit juice did not lower blood pressure in humans. MSKCC About Herbs (Lycium) makes a general CYP3A4/2C9/2C19 caution. Not entered because the only pair-specific source is a theoretical database entry on a secondary site, and the house verification for danshen-amlodipine kept HelloPharmacist out of `sources`. The owner may wish to revisit if a primary study appears."
+    },
+    {
+      "pair": "goji + furosemide",
+      "searched": "Web search: 'goji Lycium barbarum furosemide OR loop diuretic OR diuretic interaction'; '枸杞 地高辛 OR 呋塞米 OR 氨氯地平 相互作用'. No pages could be opened.",
+      "nearest_evidence": "No source naming goji with furosemide was found. HelloPharmacist pages for goji with torsemide, amiloride, spironolactone and urea give theoretical notes only (in vitro CYP2C9 inhibition; root bark, not fruit, may lower blood pressure; goji fruit juice did not lower blood pressure in humans)."
+    }
+  ]
+}
