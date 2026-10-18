@@ -1,0 +1,183 @@
+{
+  "status": "PROPOSED, round 2 (18 Oct 2026). Checked in three steps; awaiting the owner's approval of each pair. Not live.",
+  "access_note": "All sources were confirmed from search results and abstracts only; PubMed/PMC pages could not be opened from the build machine.",
+  "interactions": [
+    {
+      "id": "ginkgo-clopidogrel",
+      "herb_id": "ginkgo",
+      "drug_id": "clopidogrel",
+      "risk": "low",
+      "watch": true,
+      "rating_source": "team",
+      "effect_en": "A small trial found ginkgo did not add to clopidogrel's effect on platelets.",
+      "effect_zh": "一項小型研究發現，銀杏冇加強氯吡格雷對血小板嘅作用。",
+      "heart_impact_en": "Watch for unusual bruising or bleeding.",
+      "heart_impact_zh": "留意有冇唔尋常嘅瘀傷或者出血。",
+      "why_en": null,
+      "why_zh": null,
+      "why_pro_en": "Randomised, open-label crossover study in 10 healthy men (Aruna & Naidu, Br J Clin Pharmacol 2007;63(3):333-8, PMID 17010102): platelet inhibition with ginkgo plus clopidogrel was not statistically significant compared with either agent alone; the authors concluded that co-administration did not enhance antiplatelet activity. The same study found significant potentiation of bleeding-time prolongation with ginkgo plus cilostazol, not clopidogrel. A 14-volunteer pharmacokinetic study (Wang et al., Med J Chin PAP 2018;29(12):1133-7; 240 mg ginkgo extract daily for 14 days, then a single 100 mg clopidogrel dose) reported significantly higher AUC and Cmax of the active metabolite SR26334; the authors suggested this may be related to P-glycoprotein inhibition. Platelet effects were not reported in the abstract seen. A retrospective Vietnamese hospital study (PLoS One 2025, PMID 40198642) found clopidogrel and aspirin were the commonest ginkgo interaction partners (2.61% of prescriptions each) and that ginkgo interactions overall were associated with bleeding (OR 1.08) and abnormal coagulation (OR 1.49). A review of controlled trials and case reports (Bone, Mol Nutr Food Res 2008, PMID 18214851) found little evidence that ginkgo potentiates anticoagulant or antiplatelet drugs, while an idiosyncratic bleeding risk cannot be ruled out.",
+      "action_en": "Tell your doctor or pharmacist that you take ginkgo. Watch for unusual bruising or bleeding.",
+      "action_zh": "話俾醫生或者藥劑師知你有食銀杏。留意有冇唔尋常嘅瘀傷或者出血。",
+      "main_source": 0,
+      "main_finding_en": "Small trial in 10 healthy men: adding ginkgo to clopidogrel did not significantly increase the effect on platelets.",
+      "main_finding_zh": "10名健康男士嘅小型研究：喺氯吡格雷之外加銀杏，對血小板嘅作用冇明顯增加。",
+      "evidence_level": [
+        "human_trial",
+        "review"
+      ],
+      "sources": [
+        {
+          "label": "Aruna & Naidu. Br J Clin Pharmacol 2007",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/17010102/"
+        },
+        {
+          "label": "Wang et al. Med J Chin People's Armed Police Forces 2018",
+          "url": "https://wjyx.magtechjournal.com/EN/Y2018/V29/I12/1133"
+        },
+        {
+          "label": "PLoS One 2025 (Hai Phong, Vietnam)",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/40198642/"
+        },
+        {
+          "label": "Bone. Mol Nutr Food Res 2008",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/18214851/"
+        }
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "asian_ginseng-aspirin",
+      "herb_id": "asian_ginseng",
+      "drug_id": "aspirin",
+      "risk": "low",
+      "watch": false,
+      "rating_source": "team",
+      "effect_en": "A trial in healthy volunteers found Asian ginseng did not add to aspirin's effect on platelets. Two studies in Taiwan looked at people on antiplatelet medicines (the group aspirin belongs to). They could not show a clear link between Chinese medicines, including Asian ginseng, and serious bleeding.",
+      "effect_zh": "有健康人士嘅研究發現，人參冇加強阿士匹靈對血小板嘅作用。台灣有兩項研究睇食緊抗血小板藥（阿士匹靈屬於呢類藥）嘅人，未能證實包括人參在內嘅中藥同嚴重出血有明確關係。",
+      "heart_impact_en": "Watch for unusual bruising or bleeding.",
+      "heart_impact_zh": "留意有冇唔尋常嘅瘀傷或者出血。",
+      "why_en": null,
+      "why_zh": null,
+      "why_pro_en": "Randomised, double-blind, placebo-controlled crossover study of turmeric, dong quai and ginseng (Panax ginseng 1000 mg daily), each with aspirin 100 mg daily or placebo, in healthy volunteers (75 recruited, 25 per herb group). Aspirin suppressed platelet aggregation to several agonists, and this was not further suppressed by any of the three herbs; ginseng impaired arachidonic-acid-induced aggregation in 1 subject (Blood 2015 ASH abstract; full paper Fung et al., Phytomedicine 2017;32:88-96). In a Taiwanese insurance-database study of 92,046 antiplatelet users (aspirin, clopidogrel, dipyridamole or ticlopidine), current use of Asian ginseng or danshen was associated with 28% to 152% higher risk of major bleeding, but single-herb associations were not statistically significant and the authors said the relationship was not ascertained (Tsai & Lin, ISPOR 2013 abstract). A later nested case-crossover study (Tsai et al., Evid Based Complement Alternat Med 2017) of 1,209 antiplatelet users hospitalised for bleeding, with Asian ginseng among the prespecified Chinese medicines, found no significant increase in bleeding risk for the prespecified medicines (OR 1.00, 95% CI 0.51-1.95; OR 1.13, 95% CI 0.65-1.97). No aspirin-only result for Asian ginseng was seen in either database study.",
+      "action_en": "Tell your doctor or pharmacist that you take Asian ginseng. Tell them about any unusual bruising or bleeding.",
+      "action_zh": "話俾醫生或者藥劑師知你有食人參；如果有唔尋常嘅瘀傷或者出血，要話俾佢哋知。",
+      "main_source": 0,
+      "main_finding_en": "Trial in healthy volunteers: Asian ginseng did not further reduce platelet clumping in people taking aspirin.",
+      "main_finding_zh": "健康人士嘅研究：人參冇令食緊阿士匹靈嘅人血小板凝聚進一步減少。",
+      "evidence_level": [
+        "human_trial"
+      ],
+      "sources": [
+        {
+          "label": "Blood 2015 abstract",
+          "url": "https://www.sciencedirect.com/science/article/pii/S0006497118493020"
+        },
+        {
+          "label": "Fung et al. Phytomedicine 2017",
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0944711317300545"
+        },
+        {
+          "label": "Tsai & Lin. ISPOR abstract 2013",
+          "url": "https://www.ispor.org/heor-resources/presentations-database/presentation/ispor-18th-annual-international-meeting/relationship-between-major-bleeding-and-concurrent-use-of-antiplatelet-drugs-with-chinese-medications"
+        },
+        {
+          "label": "Tsai et al. Evid Based Complement Alternat Med 2017",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5558644/"
+        }
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "liquorice-amlodipine",
+      "herb_id": "liquorice",
+      "drug_id": "amlodipine",
+      "risk": "moderate",
+      "watch": false,
+      "rating_source": "team",
+      "effect_en": "Liquorice has been linked to high blood pressure. It may work against blood pressure medicines such as amlodipine.",
+      "effect_zh": "甘草同血壓高有關連，亦可能減弱氨氯地平呢類降血壓藥嘅效果。",
+      "heart_impact_en": "Amlodipine controls your blood pressure. If liquorice works against it, your blood pressure may be less well controlled.",
+      "heart_impact_zh": "氨氯地平用嚟控制血壓。如果甘草減弱咗佢嘅效果，血壓可能控制得冇咁好。",
+      "why_en": "Liquorice, especially in large amounts, can make the body hold on to salt and water. This may push blood pressure up.",
+      "why_zh": "甘草（尤其係食得多）會令身體積聚鹽分同水分，可能令血壓上升。",
+      "why_pro_en": "Drugs.com professional interaction monograph (amlodipine + licorice, rated Moderate): glycyrrhizic acid is hydrolysed in the intestine to glycyrrhetinic acid, which has mineralocorticoid and renin-suppressing effects; licorice use has been associated with hypertension and may antagonise the effects of antihypertensive agents. Merck Manual Professional (Licorice) lists reduced effectiveness of antihypertensive drugs as a drug interaction, attributed to increased salt and water retention; it says high doses cause renal sodium and water retention, possibly leading to high blood pressure. No study of this specific pair, and no case report describing an interaction between the two, was found.",
+      "action_en": "Tell your doctor or pharmacist that you take liquorice, so they can keep an eye on your blood pressure.",
+      "action_zh": "話俾醫生或者藥劑師知你有食甘草，等佢哋留意你嘅血壓。",
+      "main_source": 0,
+      "main_finding_en": "Drug interaction checker (Drugs.com): liquorice has been linked to high blood pressure and may work against blood pressure medicines; it rates the pair with amlodipine as Moderate.",
+      "main_finding_zh": "藥物相互作用查詢（Drugs.com）：甘草同血壓高有關連，亦可能減弱降血壓藥嘅效果；佢將甘草同氨氯地平呢個配搭評為中度。",
+      "evidence_level": [
+        "review"
+      ],
+      "sources": [
+        {
+          "label": "Drugs.com professional interaction report: amlodipine and licorice",
+          "url": "https://www.drugs.com/drug-interactions/amlodipine-with-licorice-172-0-2383-0.html?professional=1"
+        },
+        {
+          "label": "Merck Manual Professional Edition: Licorice",
+          "url": "https://www.merckmanuals.com/professional/special-subjects/dietary-supplements/licorice"
+        }
+      ],
+      "zh_reviewed": false
+    }
+  ],
+  "review_notes": [
+    {
+      "id": "ginkgo-clopidogrel",
+      "changes": [
+        "why_pro_en: 'the authors attributed this to P-glycoprotein inhibition' changed to 'the authors suggested this may be related to P-glycoprotein inhibition'. The checker saw the abstract wording 'may be related to'; 'attributed' was stronger than the source.",
+        "why_pro_en: Bone 2008 'an idiosyncratic bleeding event cannot be ruled out' changed to 'an idiosyncratic bleeding risk cannot be ruled out', the abstract's own wording as recorded by the checker.",
+        "action_en/zh: 'Mention it to your doctor or pharmacist' changed to 'Tell your doctor or pharmacist that you take ginkgo' (話俾醫生或者藥劑師知你有食銀杏). Plainer for an older reader: says what to mention. No new advice. The live ginkgo-aspirin and ginkgo-warfarin entries still say 'Mention it to your doctor'.",
+        "main_finding_en/zh: 'Crossover study' (交叉研究) changed to 'Small trial' (小型研究) to remove jargon. The design is still described in why_pro_en.",
+        "Checked that the removed Reactions Weekly case report, its effect clause and 'case_reports' did not return. They did not. Rating low, watch true, sources and main_source 0 unchanged."
+      ],
+      "open_questions_for_owner": [
+        "Keep watch=true (consistent with live ginkgo-aspirin/ginkgo-warfarin), or Low without watch, which the checker also found defensible on the pair-specific evidence?",
+        "Do you want the live ginkgo entries' 'Mention it to your doctor' changed to match, or this entry kept in the old wording for consistency?"
+      ]
+    },
+    {
+      "id": "asian_ginseng-aspirin",
+      "changes": [
+        "effect_en: the second sentence did not say what the Taiwan studies linked to bleeding, and 'blood-thinning medicines' did not match effect_zh (抗血小板藥). Rewritten as two short sentences: the studies looked at people on antiplatelet medicines (the group aspirin belongs to) and could not show a clear link between Chinese medicines, including Asian ginseng, and serious bleeding. 'Chinese medicines, including Asian ginseng' is used because the 2017 result was for the prespecified medicines as a group and the 2013 result for Asian ginseng or danshen, as the checker recorded. The wording follows the live dong_quai-clopidogrel style ('antiplatelet medicines (the group clopidogrel belongs to)').",
+        "effect_zh: changed to match: 台灣有兩項研究睇食緊抗血小板藥（阿士匹靈屬於呢類藥）嘅人，未能證實包括人參在內嘅中藥同嚴重出血有明確關係。",
+        "main_finding_en/zh: 'Randomised, placebo-controlled study' (隨機、安慰劑對照研究) shortened to 'Trial' / 研究 to remove jargon; 'ginseng' made 'Asian ginseng' so it cannot be read as American ginseng (the checker warned the trial used Panax ginseng only). The design is still in why_pro_en. Note: the live dong_quai-aspirin main_finding keeps the longer wording.",
+        "Checked that the removed phrase 'no meaningful or severe suppression of platelet function tests' did not return. It did not. Rating low, watch false, sources and main_source 0 unchanged."
+      ],
+      "open_questions_for_owner": [
+        "Low or 'none_reported'? The checker found none_reported at least as consistent with the house standard (no case report, no 'avoid' warning).",
+        "main_finding: keep it short as here, or match dong_quai-aspirin's 'Randomised, placebo-controlled study in healthy volunteers'?"
+      ]
+    },
+    {
+      "id": "liquorice-amlodipine",
+      "changes": [
+        "effect_en/zh: 'Liquorice can raise blood pressure' (甘草可能令血壓上升) changed to 'Liquorice has been linked to high blood pressure' (甘草同血壓高有關連), split into two short sentences. The checker softened the same claim in main_finding because Drugs.com says only that liquorice 'has been associated with hypertension' and Merck ties the rise to high doses; the unqualified version had stayed in effect_en/zh.",
+        "why_en: split into two short sentences. No change in meaning; the checker's high-dose qualifier ('especially in large amounts') is kept.",
+        "why_zh: 可能令身體積聚鹽分同水分，令血壓上升 changed to 會令身體積聚鹽分同水分，可能令血壓上升, so the 'may' sits on the blood pressure rise as in the English ('can ... which may push blood pressure up').",
+        "No 'avoid' or 'limit' advice added, although Drugs.com carries a 'Generally avoid' tag (advice rule; the checker left it out). Rating moderate, watch false, sources and main_source 0 unchanged."
+      ],
+      "open_questions_for_owner": [
+        "Do you accept Drugs.com as a source? If not, the only remaining source is Merck's class-level statement, and the checker would rate Low (as for dong_quai-clopidogrel) rather than Moderate.",
+        "Drugs.com tags this pair 'Generally avoid'. The entry leaves this out under the advice rule. Do you want it reflected?",
+        "Should a primary source for liquorice raising blood pressure (Yoshino 2021, already live, or Penninkilampi 2017) be checked and added in a later round?"
+      ]
+    }
+  ],
+  "no_evidence_found": [
+    "asian_ginseng + clopidogrel",
+    "american_ginseng + aspirin",
+    "american_ginseng + clopidogrel",
+    "danshen + furosemide",
+    "goji + digoxin",
+    "goji + amlodipine",
+    "goji + furosemide",
+    "sanqi + digoxin",
+    "sanqi + amlodipine",
+    "sanqi + furosemide",
+    "safflower + digoxin",
+    "safflower + amlodipine",
+    "safflower + furosemide"
+  ]
+}

@@ -51,3 +51,24 @@ claims were removed, and what the owner was told before approving.
    page. Tighten the print CSS so it fits on one A4 page again.
 5. Bump `VERSION` in `sw.js` (herbsafe-v4 → herbsafe-v5).
 6. Run `node tests/run-tests.js` and check the app in a browser in English and 中文.
+
+## Round 2 (18 Oct 2026): awaiting the owner's approval
+
+16 grey combinations were researched with the same three steps. Sources could be seen only
+as search results and abstracts (PubMed/PMC were blocked from the build machine).
+
+- `candidates-batch1/2/3.json`: research (step 1)
+- `check-batch1/2.json`: independent source check (step 2)
+- `proposed-pairs-round2.json`: after the wording, Chinese and safety review (step 3).
+  **Not live.** Each pair needs the owner's yes before it goes into `data/`.
+
+| Pair | Proposed rating | Open question for the owner |
+|---|---|---|
+| ginkgo + clopidogrel | Low · watch | Keep "watch" now the unconfirmed case report was removed? |
+| Asian ginseng + aspirin | Low | Or "No reported risk": a trial measured this pair and found no added effect |
+| liquorice + amlodipine | Moderate | Accept Drugs.com as a source? If not, the checker would rate it Low |
+
+No published evidence on the pair itself, so these stay "not in database": asian ginseng +
+clopidogrel; american ginseng + aspirin, clopidogrel; danshen + furosemide; goji + digoxin,
+amlodipine, furosemide; sanqi + digoxin, amlodipine, furosemide; safflower + digoxin,
+amlodipine, furosemide.
