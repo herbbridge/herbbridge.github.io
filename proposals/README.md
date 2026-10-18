@@ -1,7 +1,9 @@
 # Proposed pairs (not read by the app)
 
 `approved-pairs.json` holds 15 new herb × medicine pairs. The owner approved all 15 on
-18 Oct 2026. They are **not live yet**: the app only reads `data/`.
+18 Oct 2026. **They went live on 18 Oct 2026**: appended unchanged to
+`data/interactions.json` (cache herbsafe-v5). This file is kept as the record of what was
+approved; its `status` line predates going live.
 
 Each pair went through three steps:
 

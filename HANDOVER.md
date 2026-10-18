@@ -91,10 +91,15 @@ For Sunday this is done WITHOUT accounts, a server or scanning:
   (both found by web search only; neither page could be opened from the build machine).
 - Red yeast rice wording now follows NIH/NCCIH: "structurally identical", not
   "chemically identical".
-- Service-worker cache is now herbsafe-v4, so installed phones pick up the update.
+- Service-worker cache was herbsafe-v4 for this update (now herbsafe-v5, see below).
 - 15 new pairs approved by the owner (all of them) and saved in proposals/ with their
-  verification notes. Not live yet; see proposals/README.md for the steps and
-  proposals/NEXT-SESSION-PROMPT.md for the hand-over prompt.
+  verification notes.
+- 15 approved pairs now LIVE (24 entries in data/interactions.json, all team ratings;
+  danshen + warfarin is still the only HA rating). Tests updated (cases 1, 4, 10; the
+  goji/sanqi/safflower check now lists only medicines still without a record).
+  Mrs Wong's summary fits one A4 page again (print line-height 1.4). Cache herbsafe-v5.
+  Checked in Chromium at 320 and 390 px, EN and 中文: every rated card has its heart line,
+  no sideways overflow, grey cards identical to before.
 
 ## Future full app (owner's long-term plan; pitch as roadmap, do not build now)
 - Accounts (username + password) and a private, secure database of each person's
