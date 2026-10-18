@@ -81,6 +81,17 @@ For Sunday this is done WITHOUT accounts, a server or scanning:
 - Installable app (PWA): manifest + sw.js; bump VERSION in sw.js when app files change.
 - Bigger database: research runs into a separate proposed file; nothing goes live until the
   owner approves each pair.
+- Heart-disease focus made visible (no rating, source or lookup change):
+  home subtitle; medicine picker grouped by condition (`group` in drugs.json, headings in
+  `groups`); "Commonly taken for" under each herb (`used_for_en/zh`); "Why this matters for
+  your heart" on rated cards and in the doctor summary (`heart_impact_en/zh`); About
+  "Why heart patients?" with two background sources (DH press release 29 Sep 2024;
+  Lam et al., HKMJ 2020). All new Chinese is zh_reviewed false.
+- Still to check by hand: the figures quoted from the DH press release and the HKMJ paper
+  (both found by web search only; neither page could be opened from the build machine).
+- Red yeast rice wording now follows NIH/NCCIH: "structurally identical", not
+  "chemically identical".
+- Service-worker cache is now herbsafe-v4, so installed phones pick up the update.
 
 ## Future full app (owner's long-term plan; pitch as roadmap, do not build now)
 - Accounts (username + password) and a private, secure database of each person's
