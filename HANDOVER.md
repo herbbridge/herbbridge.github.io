@@ -100,6 +100,12 @@ For Sunday this is done WITHOUT accounts, a server or scanning:
   Mrs Wong's summary fits one A4 page again (print line-height 1.4). Cache herbsafe-v5.
   Checked in Chromium at 320 and 390 px, EN and 中文: every rated card has its heart line,
   no sideways overflow, grey cards identical to before.
+- First visit simplified (owner, 18 Oct, after "no one knows what to press"): with an empty or
+  half-filled cabinet the status tile shows ONE step and ONE big button ("Step 1: Which
+  Chinese herbs do you take?" → "Step 2: Which Western medicines…"). After picking, focus moves
+  to the next step, then to the result. The demo is a small link under step 1. The grey
+  "Check" bar is hidden until both lists have something. New Chinese strings unreviewed.
+  Cache herbsafe-v6.
 
 ## Future full app (owner's long-term plan; pitch as roadmap, do not build now)
 - Accounts (username + password) and a private, secure database of each person's

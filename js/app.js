@@ -246,11 +246,16 @@
     var nH = state.herbs.length, nD = state.drugs.length;
     var tone = 'neutral', title, rest = [];
 
-    if (!nH && !nD) {
-      title = t('status_empty');
-      rest.push(el('button', { type: 'button', class: 'btn btn-secondary btn-small demo-start', onclick: startDemo }, [el('span', { text: t('demo_button') })]));
-    } else if (!nH || !nD) {
-      title = t('cabinet_need_both');
+    if (!nH || !nD) {
+      // One step at a time, with one big button: herbs first, then medicines.
+      var kind = nH ? 'drugs' : 'herbs';
+      title = t(kind === 'herbs' ? 'step_herbs' : 'step_drugs');
+      rest.push(el('button', {
+        type: 'button', class: 'btn btn-primary btn-step', 'data-key': 'step-' + kind, 'aria-haspopup': 'dialog',
+        onclick: function () { openSheet(kind, true); }
+      }, [icon('plus'), el('span', { text: t(kind === 'herbs' ? 'step_add_herb' : 'step_add_drug') })]));
+      rest.push(el('p', { class: 'step-then', text: t('step_then') }));
+      if (!nH && !nD) rest.push(el('button', { type: 'button', class: 'link-button demo-start', onclick: startDemo }, [el('span', { text: t('demo_try') })]));
     } else {
       var rows = L.checkPairs(db, state.herbs, state.drugs);
       var flagged = rows.filter(function (r) { return r.entry && r.entry.risk !== 'none_reported'; });
@@ -318,7 +323,7 @@
 
   var skipPop = false;
 
-  function openSheet(kind) {
+  function openSheet(kind, fromStep) {
     if (sheet) closeSheet(true);
     var input = el('input', {
       id: 'sheet-search', class: 'search', type: 'search', autocomplete: 'off', autocapitalize: 'off',
@@ -347,7 +352,7 @@
     root.addEventListener('click', function (ev) { if (ev.target === root) closeSheet(); });
     input.addEventListener('input', function () { queries[kind] = input.value; renderSheetList(); });
 
-    sheet = { kind: kind, root: root, list: list, count: count, notice: notice };
+    sheet = { kind: kind, root: root, list: list, count: count, notice: notice, fromStep: fromStep === true };
     document.body.appendChild(root);
     setBackground(true);
     renderSheet();
@@ -363,7 +368,10 @@
     if (s.root.parentNode) s.root.parentNode.removeChild(s.root);
     setBackground(false);
     if (s.pushed && !fromHistory) { skipPop = true; history.back(); }
-    var back = document.querySelector('[data-key="add-' + s.kind + '"]');
+    // Opened from a step: go on to the next step, or to the result once both are chosen.
+    var back = s.fromStep
+      ? document.querySelector('[data-key^="step-"]') || document.getElementById('h-status')
+      : document.querySelector('[data-key="add-' + s.kind + '"]');
     if (back) back.focus();
   }
 
@@ -513,6 +521,7 @@
       checkBar.notice.appendChild(el('span', { class: 'bar-notice-text', text: I.tn('bar_notice', alertState.rows.length) }));
     }
     var ready = state.herbs.length > 0 && state.drugs.length > 0;
+    if (checkBar.bar) checkBar.bar.hidden = !ready && !alertState;
     checkBar.button.disabled = !ready;
     checkBar.button.setAttribute('aria-describedby', 'check-status');
     checkBar.status.textContent = ready
