@@ -6,9 +6,10 @@ HerbSafe is built for **heart patients**: people taking heart, blood pressure, c
 blood-thinning medicines (Challenge 4: cardiovascular disease).
 
 HerbSafe lets patients in Hong Kong check the Chinese herbs they take against their Western
-medicines. Each herb × medicine pair is shown with a rating on the Hong Kong Hospital
-Authority's four-level scale (High, Moderate, Low, No reported risk), a plain-language reason,
-what to do, the evidence level and the sources.
+medicines. Each herb × medicine pair is shown with a rating on a four-level scale (High,
+Moderate, Low, No reported risk), a plain-language reason, what to do, the evidence level and
+the sources. Where a government health agency has written about a pair, its own words are
+quoted as an "Official caution".
 
 Built for the Imperial College London Hackathon (Hong Kong & Macau 2026), Challenge 4.
 

@@ -15,11 +15,18 @@
 
   // Official cautions approved by the owner on 18 Oct 2026, written out by hand.
   var OFFICIAL_CAUTIONS = {
-    'ginkgo|warfarin':           { kind: 'disagree', statements: ['hc-ginkgo-contraindication', 'ema-ginkgo-4.5-warfarin-studies', 'ema-ginkgo-4.5', 'ema-ginkgo-4.5-traditional'] },
+    'ginkgo|warfarin':           { kind: 'disagree', statements: ['hc-ginkgo-contraindication', 'ha-warfarin-leaflet-tcm', 'ema-ginkgo-4.5-warfarin-studies', 'ema-ginkgo-4.5', 'ema-ginkgo-4.5-traditional'] },
     // Hospital Authority warfarin leaflet (019Ev10 / 019Cv10, Oct 2025), verified 19 Oct 2026.
     'danshen|warfarin':          { kind: 'official', statements: ['ha-warfarin-leaflet-tcm'] },
     'dong_quai|warfarin':        { kind: 'official', statements: ['ha-warfarin-leaflet-tcm'] },
-    'asian_ginseng|warfarin':    { kind: 'disagree', statements: ['ha-warfarin-leaflet-tcm'] },
+    'asian_ginseng|warfarin':    { kind: 'disagree', statements: ['ha-warfarin-leaflet-tcm', 'hc-panax-ginseng'] },
+    // Owner, 19 Oct: the HA leaflet ("Do not take any TCM...") applies to every herb + warfarin.
+    'american_ginseng|warfarin': { kind: 'official', statements: ['ha-warfarin-leaflet-tcm', 'hc-american-ginseng'] },
+    'liquorice|warfarin':        { kind: 'official', statements: ['ha-warfarin-leaflet-tcm'] },
+    'red_yeast_rice|warfarin':   { kind: 'official', statements: ['ha-warfarin-leaflet-tcm'] },
+    'goji|warfarin':             { kind: 'official', statements: ['ha-warfarin-leaflet-tcm'] },
+    'sanqi|warfarin':            { kind: 'disagree', statements: ['ha-warfarin-leaflet-tcm'] },
+    'safflower|warfarin':        { kind: 'official', statements: ['ha-warfarin-leaflet-tcm'] },
     'ginkgo|aspirin':            { kind: 'disagree', statements: ['hc-ginkgo-contraindication', 'ema-ginkgo-4.5'] },
     'ginkgo|clopidogrel':        { kind: 'official', statements: ['ema-ginkgo-4.5', 'hc-ginkgo-contraindication'] },
     'ginkgo|amlodipine':         { kind: 'official', statements: ['hc-ginkgo-blood-pressure'] },
@@ -50,7 +57,9 @@
 
   // The ratings given in the brief. Changing a rating must be a deliberate edit here too.
   var BRIEF_RATINGS = {
-    'danshen-warfarin':          { risk: 'moderate', watch: false, rating_source: 'HA' },
+    // 19 Oct 2026: relabelled as a team rating and raised to High by the owner (the SCMP 'HA Moderate'
+    // claim could not be confirmed; two HK case reports with major bleeding).
+    'danshen-warfarin':          { risk: 'high',     watch: false, rating_source: 'team' },
     'dong_quai-warfarin':        { risk: 'high',     watch: false, rating_source: 'team' },
     'american_ginseng-warfarin': { risk: 'moderate', watch: false, rating_source: 'team' },
     'asian_ginseng-warfarin':    { risk: 'low',      watch: false, rating_source: 'team' },

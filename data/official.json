@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-10-18",
+  "last_updated": "2026-10-19",
   "about": "Official cautions: the exact words of government health agencies, quoted, never paraphrased. Each statement was checked against the official document on 18–19 Oct 2026 (see proposals/official-warnings-verified.json). quote_zh is a translation, unless quote_zh_is_original is true (the agency's own Chinese version, e.g. the Hospital Authority leaflet). Approved by the owner on 18–19 Oct 2026.",
   "statements": [
     {
@@ -183,7 +183,8 @@
       "drug_id": "warfarin",
       "kind": "disagree",
       "statements": [
-        "ha-warfarin-leaflet-tcm"
+        "ha-warfarin-leaflet-tcm",
+        "hc-panax-ginseng"
       ],
       "zh_reviewed": false
     },
@@ -194,6 +195,7 @@
       "kind": "disagree",
       "statements": [
         "hc-ginkgo-contraindication",
+        "ha-warfarin-leaflet-tcm",
         "ema-ginkgo-4.5-warfarin-studies",
         "ema-ginkgo-4.5",
         "ema-ginkgo-4.5-traditional"
@@ -279,6 +281,67 @@
       "kind": "official",
       "statements": [
         "ema-liquorice-electrolytes"
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "american_ginseng-warfarin-official",
+      "herb_id": "american_ginseng",
+      "drug_id": "warfarin",
+      "kind": "official",
+      "statements": [
+        "ha-warfarin-leaflet-tcm",
+        "hc-american-ginseng"
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "liquorice-warfarin-official",
+      "herb_id": "liquorice",
+      "drug_id": "warfarin",
+      "kind": "official",
+      "statements": [
+        "ha-warfarin-leaflet-tcm"
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "red_yeast_rice-warfarin-official",
+      "herb_id": "red_yeast_rice",
+      "drug_id": "warfarin",
+      "kind": "official",
+      "statements": [
+        "ha-warfarin-leaflet-tcm"
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "goji-warfarin-official",
+      "herb_id": "goji",
+      "drug_id": "warfarin",
+      "kind": "official",
+      "statements": [
+        "ha-warfarin-leaflet-tcm"
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "sanqi-warfarin-official",
+      "herb_id": "sanqi",
+      "drug_id": "warfarin",
+      "kind": "disagree",
+      "statements": [
+        "ha-warfarin-leaflet-tcm"
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "safflower-warfarin-official",
+      "herb_id": "safflower",
+      "drug_id": "warfarin",
+      "kind": "official",
+      "statements": [
+        "ha-warfarin-leaflet-tcm"
       ],
       "zh_reviewed": false
     }

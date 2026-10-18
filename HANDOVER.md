@@ -142,6 +142,20 @@ For Sunday this is done WITHOUT accounts, a server or scanning:
   OPEN for the owner: the leaflet says "Do not take ANY TCM" with warfarin; should this quote
   also go on every other herb + warfarin (strict reading)? And should Health Canada's verified
   "blood thinners" sentences be added to American/Asian ginseng + warfarin? Cache herbsafe-v10.
+- 19 Oct, owner decisions after a full-text check of the live sources (owner's checker):
+  * SCMP could not be read (paywall), so per the owner's rule danshen + warfarin is now a TEAM
+    rating, raised to HIGH by the owner (two HK case reports: INR >5.6 and >8.4 with major
+    bleeding; Chan 2001). Main evidence: Izzat 1998. SCMP source removed; "INR tests 2–3 times
+    a week" removed; advice now points to the HA warfarin leaflet. No pair is "HA" any more,
+    and About/README no longer call the scale "the Hospital Authority's".
+  * Wording fixed to match the full texts: ginkgo + warfarin (Lim 2018: trials gave ginkgo
+    alone; "does not adversely affect the safety…" is the authors' conclusion); Zhuang 2021
+    details for danshen and dong quai; About figures (provisional registered deaths;
+    40–49% "therapeutic range", one hospital).
+  * Asian ginseng + warfarin: "one case report found a drop in INR" REMOVED for now; restore
+    it citing Leonard (Cleveland Clinic Pharmacotherapy Update 2001) once that page is checked.
+  * HA leaflet quote now on EVERY herb + warfarin (owner: it covers all TCM); Health Canada
+    "blood thinners" sentences added to both ginseng + warfarin cards. Cache herbsafe-v12.
 
 ## Future full app (owner's long-term plan; pitch as roadmap, do not build now)
 - Accounts (username + password) and a private, secure database of each person's

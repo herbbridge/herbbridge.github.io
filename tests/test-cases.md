@@ -21,7 +21,7 @@ Fictional 72-year-old with atrial fibrillation, on warfarin and amlodipine, who 
 
 | Herb | Medicine | Expected result | Entry | Why this matters for your heart |
 |---|---|---|---|---|
-| Danshen | Warfarin | Official caution | `danshen-warfarin` + `danshen-warfarin-official` | Too much bleeding, including bleeding in the brain. |
+| Danshen | Warfarin | High | `danshen-warfarin` + `danshen-warfarin-official` | Too much bleeding, including bleeding in the brain. |
 | Danshen | Amlodipine | Low | `danshen-amlodipine` | Amlodipine controls your blood pressure. Whether danshen weakens it in people is not known. |
 
 ## 2. Nothing in our database
@@ -61,6 +61,7 @@ Heart failure and atrial fibrillation: warfarin, aspirin, digoxin and furosemide
 | Dong quai | Warfarin | High | `dong_quai-warfarin` + `dong_quai-warfarin-official` | Too much bleeding, including bleeding in the brain. |
 | Ginkgo | Warfarin | Official caution · sources disagree | `ginkgo-warfarin` + `ginkgo-warfarin-official` | Watch for unusual bruising or bleeding. |
 | Ginkgo | Aspirin | Official caution · sources disagree | `ginkgo-aspirin` + `ginkgo-aspirin-official` | Watch for unusual bruising or bleeding. |
+| Liquorice | Warfarin | Official caution | `liquorice-warfarin-official` | (official quote shown) |
 | Liquorice | Digoxin | Official caution | `liquorice-digoxin` + `liquorice-digoxin-official` | Low potassium can lead to a dangerous heart rhythm. |
 | Liquorice | Furosemide | Official caution | `liquorice-diuretic` + `liquorice-diuretic-official` | Low potassium can lead to a dangerous heart rhythm. |
 | Dong quai | Aspirin | Low | `dong_quai-aspirin` | Watch for unusual bruising or bleeding. |
@@ -68,7 +69,6 @@ Heart failure and atrial fibrillation: warfarin, aspirin, digoxin and furosemide
 | Dong quai | Furosemide | Not in database | none | (not shown on grey cards) |
 | Ginkgo | Digoxin | Not in database | none | (not shown on grey cards) |
 | Ginkgo | Furosemide | Not in database | none | (not shown on grey cards) |
-| Liquorice | Warfarin | Not in database | none | (not shown on grey cards) |
 | Liquorice | Aspirin | Not in database | none | (not shown on grey cards) |
 
 ## 5. American ginseng with warfarin
@@ -80,7 +80,7 @@ Drinks 花旗參 tea daily and is on warfarin after a heart valve operation.
 
 | Herb | Medicine | Expected result | Entry | Why this matters for your heart |
 |---|---|---|---|---|
-| American ginseng | Warfarin | Moderate | `american_ginseng-warfarin` | Warfarin may work less well, raising the risk of clots and stroke. |
+| American ginseng | Warfarin | Official caution | `american_ginseng-warfarin` + `american_ginseng-warfarin-official` | Warfarin may work less well, raising the risk of clots and stroke. |
 
 ## 6. Asian ginseng with warfarin and clopidogrel
 
@@ -131,16 +131,16 @@ Takes ginkgo for memory, on aspirin and clopidogrel. Both show an official cauti
 
 ## 10. Danshen, sanqi and safflower with warfarin and aspirin
 
-A 'blood circulation' herbal mix (丹參, 三七, 紅花) taken with warfarin and aspirin. Every pair now has a record: danshen + warfarin shows the Hospital Authority's official caution (team rating Moderate kept underneath), then two Moderate and three Low.
+A 'blood circulation' herbal mix (丹參, 三七, 紅花) taken with warfarin and aspirin. Every pair now has a record: danshen + warfarin is High with the Hospital Authority leaflet quoted; sanqi and safflower + warfarin show the leaflet as an official caution (sanqi: sources disagree); then one Moderate and two Low.
 
 - **Chinese herbs:** Danshen 丹參, Sanqi 三七, Safflower 紅花
 - **Western medicines:** Warfarin – Blood thinners (stroke and heart valve protection), Aspirin – Blood thinners (stroke and heart valve protection)
 
 | Herb | Medicine | Expected result | Entry | Why this matters for your heart |
 |---|---|---|---|---|
-| Danshen | Warfarin | Official caution | `danshen-warfarin` + `danshen-warfarin-official` | Too much bleeding, including bleeding in the brain. |
+| Danshen | Warfarin | High | `danshen-warfarin` + `danshen-warfarin-official` | Too much bleeding, including bleeding in the brain. |
+| Sanqi | Warfarin | Official caution · sources disagree | `sanqi-warfarin` + `sanqi-warfarin-official` | If warfarin works too strongly you may bleed; if it works less well, the risk of clots and stroke rises. |
+| Safflower | Warfarin | Official caution | `safflower-warfarin` + `safflower-warfarin-official` | Too much bleeding, including bleeding in the brain. |
 | Sanqi | Aspirin | Moderate | `sanqi-aspirin` | A stronger anti-clotting effect could raise the chance of bleeding. |
-| Safflower | Warfarin | Moderate | `safflower-warfarin` | Too much bleeding, including bleeding in the brain. |
 | Danshen | Aspirin | Low (watch) | `danshen-aspirin` | Watch for unusual bruising or bleeding. |
-| Sanqi | Warfarin | Low (watch) | `sanqi-warfarin` | If warfarin works too strongly you may bleed; if it works less well, the risk of clots and stroke rises. |
 | Safflower | Aspirin | Low | `safflower-aspirin` | Watch for unusual bruising or bleeding. |
