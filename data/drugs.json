@@ -1,10 +1,37 @@
 {
   "schema_version": 1,
+  "groups": [
+    {
+      "id": "blood_thinners",
+      "name_en": "Blood thinners (stroke and heart valve protection)",
+      "name_zh": "薄血藥（預防中風、保護心瓣）",
+      "zh_reviewed": false
+    },
+    {
+      "id": "cholesterol",
+      "name_en": "Cholesterol",
+      "name_zh": "膽固醇",
+      "zh_reviewed": false
+    },
+    {
+      "id": "heart_rhythm",
+      "name_en": "Heart rhythm and heart failure",
+      "name_zh": "心律同心臟衰竭",
+      "zh_reviewed": false
+    },
+    {
+      "id": "blood_pressure",
+      "name_en": "Blood pressure and fluid",
+      "name_zh": "血壓同去水",
+      "zh_reviewed": false
+    }
+  ],
   "drugs": [
     {
       "id": "warfarin",
       "name_en": "Warfarin",
       "name_zh": "華法林",
+      "group": "blood_thinners",
       "classes": ["anticoagulant"],
       "aliases": ["Marevan", "Coumadin", "华法林"],
       "zh_reviewed": false
@@ -13,6 +40,7 @@
       "id": "aspirin",
       "name_en": "Aspirin",
       "name_zh": "阿士匹靈",
+      "group": "blood_thinners",
       "classes": ["antiplatelet"],
       "aliases": ["acetylsalicylic acid", "Cardiprin", "阿司匹林", "阿斯匹靈", "亞士匹靈"],
       "zh_reviewed": false
@@ -21,6 +49,7 @@
       "id": "clopidogrel",
       "name_en": "Clopidogrel",
       "name_zh": "氯吡格雷",
+      "group": "blood_thinners",
       "classes": ["antiplatelet"],
       "aliases": ["Plavix", "氯吡格雷"],
       "zh_reviewed": false
@@ -29,6 +58,7 @@
       "id": "atorvastatin",
       "name_en": "Atorvastatin",
       "name_zh": "阿托伐他汀",
+      "group": "cholesterol",
       "classes": ["statin"],
       "aliases": ["Lipitor", "statin", "他汀"],
       "zh_reviewed": false
@@ -37,6 +67,7 @@
       "id": "simvastatin",
       "name_en": "Simvastatin",
       "name_zh": "辛伐他汀",
+      "group": "cholesterol",
       "classes": ["statin"],
       "aliases": ["Zocor", "statin", "他汀"],
       "zh_reviewed": false
@@ -45,6 +76,7 @@
       "id": "rosuvastatin",
       "name_en": "Rosuvastatin",
       "name_zh": "瑞舒伐他汀",
+      "group": "cholesterol",
       "classes": ["statin"],
       "aliases": ["Crestor", "statin", "他汀"],
       "zh_reviewed": false
@@ -53,24 +85,27 @@
       "id": "digoxin",
       "name_en": "Digoxin",
       "name_zh": "地高辛",
+      "group": "heart_rhythm",
       "classes": ["cardiac_glycoside"],
       "aliases": ["Lanoxin"],
-      "zh_reviewed": false
-    },
-    {
-      "id": "furosemide",
-      "name_en": "Furosemide",
-      "name_zh": "呋塞米",
-      "classes": ["diuretic"],
-      "aliases": ["frusemide", "Lasix"],
       "zh_reviewed": false
     },
     {
       "id": "amlodipine",
       "name_en": "Amlodipine",
       "name_zh": "氨氯地平",
+      "group": "blood_pressure",
       "classes": ["calcium_channel_blocker"],
       "aliases": ["Norvasc"],
+      "zh_reviewed": false
+    },
+    {
+      "id": "furosemide",
+      "name_en": "Furosemide",
+      "name_zh": "呋塞米",
+      "group": "blood_pressure",
+      "classes": ["diuretic"],
+      "aliases": ["frusemide", "Lasix"],
       "zh_reviewed": false
     }
   ]

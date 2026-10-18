@@ -689,3 +689,12 @@ h1, h2, h3, .display { hyphens: auto; -webkit-hyphens: auto; overflow-wrap: brea
 
 /* ---------- Heart-disease focus (Challenge 4: cardiovascular disease) ---------- */
 .subtitle { font-size: 1.125rem; font-weight: 500; color: var(--ink); margin: 0.375rem 0 0.5rem; max-width: 38rem; }
+.option-text { display: flex; flex-direction: column; min-width: 0; flex: 1 1 9rem; }
+.option-sub { font-size: 0.9375rem; font-weight: 400; color: var(--ink-2); margin-top: 0.125rem; }
+.option-group { list-style: none; border: 0; }
+.option-group-head {
+  font-size: 0.9375rem; font-weight: 700; color: var(--ink); letter-spacing: 0.01em;
+  margin: 1.25rem 0 0.25rem; padding-bottom: 0.375rem; border-bottom: 1px solid var(--ink);
+}
+.option-group:first-child .option-group-head { margin-top: 0.5rem; }
+.option-group-list { margin: 0; border-top: 0; }

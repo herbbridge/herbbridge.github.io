@@ -12,6 +12,7 @@
   var STORAGE_KEY = 'herbsafe.v1';
 
   var db = null;
+  var drugGroups = [];   // condition headings for the medicine picker, from data/drugs.json
   var state = { herbs: [], drugs: [], lang: 'en', demo: false };
   var app = document.getElementById('app');
 
@@ -408,6 +409,31 @@
     }
   }
 
+  function groupName(id) {
+    var g = drugGroups.filter(function (x) { return x.id === id; })[0];
+    return g ? (state.lang === 'zh' ? g.name_zh : g.name_en) : '';
+  }
+
+  // One row in the picker: the name, an optional second line, and the Add / Added state.
+  function optionButton(kind, item, sub) {
+    var on = state[kind].indexOf(item.id) !== -1;
+    return el('li', null, [
+      el('button', {
+        type: 'button', class: 'option' + (on ? ' is-on' : ''), 'aria-pressed': on ? 'true' : 'false',
+        'data-key': 'opt-' + kind + '-' + item.id,
+        onclick: function (ev) { addOrRemove(kind, item.id, ev.currentTarget); }
+      }, [
+        el('span', { class: 'option-text' }, [nameNode(item), sub ? el('span', { class: 'option-sub', text: sub }) : null]),
+        el('span', { class: 'option-state', 'aria-hidden': 'true' }, [icon(on ? 'tick' : 'plus'), el('span', { text: on ? t('added') : t('add') })])
+      ])
+    ]);
+  }
+
+  function herbSub(item) {
+    var used = state.lang === 'zh' ? item.used_for_zh : item.used_for_en;
+    return used ? t('used_for', { x: used }) : '';
+  }
+
   function renderSheetList() {
     if (!sheet) return;
     var kind = sheet.kind, query = queries[kind], list = sheet.list;
@@ -417,20 +443,32 @@
       list.appendChild(el('li', { class: 'no-match', text: t('no_matches', { q: query }) }));
       return;
     }
-    found.forEach(function (item) {
-      var on = state[kind].indexOf(item.id) !== -1;
-      list.appendChild(el('li', null, [
-        el('button', {
-          type: 'button', class: 'option' + (on ? ' is-on' : ''), 'aria-pressed': on ? 'true' : 'false',
-          'data-key': 'opt-' + kind + '-' + item.id,
-          onclick: function (ev) { addOrRemove(kind, item.id, ev.currentTarget); }
-        }, [
-          nameNode(item),
-          el('span', { class: 'option-state', 'aria-hidden': 'true' }, [icon(on ? 'tick' : 'plus'), el('span', { text: on ? t('added') : t('add') })])
-        ])
+    if (kind === 'herbs') {
+      found.forEach(function (item) { list.appendChild(optionButton(kind, item, herbSub(item))); });
+      return;
+    }
+    // Medicines: grouped under condition headings when browsing; while searching, a flat list
+    // (best match first) with each medicine's group shown under its name.
+    if (normaliseQuery(query) || !drugGroups.length) {
+      found.forEach(function (item) { list.appendChild(optionButton(kind, item, groupName(item.group))); });
+      return;
+    }
+    drugGroups.forEach(function (g) {
+      var items = found.filter(function (item) { return item.group === g.id; });
+      if (!items.length) return;
+      var inner = el('ul', { class: 'options option-group-list', 'aria-labelledby': 'og-' + g.id });
+      items.forEach(function (item) { inner.appendChild(optionButton(kind, item, '')); });
+      list.appendChild(el('li', { class: 'option-group' }, [
+        el('h3', { class: 'option-group-head', id: 'og-' + g.id, text: groupName(g.id) }),
+        inner
       ]));
     });
+    // Anything without a known group still appears, at the end.
+    var rest = found.filter(function (item) { return !drugGroups.some(function (g) { return g.id === item.group; }); });
+    rest.forEach(function (item) { list.appendChild(optionButton(kind, item, '')); });
   }
+
+  function normaliseQuery(q) { return L.normalise(q || ''); }
 
   /* ---------- clash warning (builds up until closed) ---------- */
 
@@ -995,7 +1033,7 @@
   }
 
   function zhUnreviewed() {
-    return !I.zhReviewed || db.herbs.concat(db.drugs, db.interactions).some(function (x) { return x.zh_reviewed !== true; });
+    return !I.zhReviewed || db.herbs.concat(db.drugs, db.interactions, drugGroups).some(function (x) { return x.zh_reviewed !== true; });
   }
 
   function switchLanguage() {
@@ -1071,6 +1109,7 @@
   Promise.all(['data/herbs.json', 'data/drugs.json', 'data/interactions.json'].map(getJson))
     .then(function (d) {
       db = L.createDb(d[0], d[1], d[2]);
+      drugGroups = Array.isArray(d[1].groups) ? d[1].groups : [];
       load();
       I.setLang(state.lang);
       window.addEventListener('hashchange', function () { render(true); });
