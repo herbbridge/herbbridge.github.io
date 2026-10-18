@@ -284,6 +284,42 @@
       });
     }
 
+    // 8. Heart-disease focus (Challenge 4: cardiovascular disease). None of this may change a rating.
+    var REQUIRED_GROUPS = ['blood_thinners', 'cholesterol', 'heart_rhythm', 'blood_pressure'];
+    var groups = (data.drugs && data.drugs.groups) || [];
+    check('Heart focus', 'every rated pair has "Why this matters for your heart" in English and Chinese', function () {
+      var bad = db.interactions.filter(function (e) {
+        return typeof e.heart_impact_en !== 'string' || !e.heart_impact_en.trim() ||
+               typeof e.heart_impact_zh !== 'string' || !e.heart_impact_zh.trim();
+      }).map(function (e) { return e.id; });
+      return { pass: bad.length === 0, detail: 'missing heart_impact in: ' + bad.join(', ') };
+    });
+    check('Heart focus', 'medicine groups are in the agreed order, each named in English and Chinese', function () {
+      var ids = groups.map(function (g) { return g.id; });
+      var named = groups.every(function (g) { return g.name_en && g.name_zh && typeof g.zh_reviewed === 'boolean'; });
+      return { pass: JSON.stringify(ids) === JSON.stringify(REQUIRED_GROUPS) && named, detail: 'groups: ' + ids.join(', ') };
+    });
+    check('Heart focus', 'every medicine belongs to one of the groups', function () {
+      var bad = db.drugs.filter(function (d) { return REQUIRED_GROUPS.indexOf(d.group) === -1; }).map(function (d) { return d.id + ' (' + d.group + ')'; });
+      return { pass: bad.length === 0, detail: bad.join(', ') };
+    });
+    check('Heart focus', 'every herb has "commonly taken for" in English and Chinese', function () {
+      var bad = db.herbs.filter(function (h) { return !h.used_for_en || !h.used_for_zh; }).map(function (h) { return h.id; });
+      return { pass: bad.length === 0, detail: bad.join(', ') };
+    });
+    check('Heart focus', 'new Chinese text avoids 同時服用 and 中風險', function () {
+      var texts = [];
+      db.interactions.forEach(function (e) { if (e.heart_impact_zh) texts.push(e.heart_impact_zh); });
+      db.herbs.forEach(function (h) { if (h.used_for_zh) texts.push(h.used_for_zh); });
+      groups.forEach(function (g) { texts.push(g.name_zh); });
+      var bad = texts.filter(function (x) { return /同時服用|中風險/.test(x); });
+      return { pass: bad.length === 0, detail: bad.join('\n') };
+    });
+    check('Data files', 'monacolin K is described with the NIH wording ("structurally identical"), never "chemically identical"', function () {
+      var bad = db.interactions.filter(function (e) { return /chemically (identical|the same)/i.test(JSON.stringify(e)); }).map(function (e) { return e.id; });
+      return { pass: bad.length === 0, detail: bad.join(', ') };
+    });
+
     return results;
   }
 

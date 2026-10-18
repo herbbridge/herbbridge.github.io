@@ -2,6 +2,9 @@
 
 *Chinese and Western medicine, safely together.*
 
+HerbSafe is built for **heart patients**: people taking heart, blood pressure, cholesterol or
+blood-thinning medicines (Challenge 4: cardiovascular disease).
+
 HerbSafe lets patients in Hong Kong check the Chinese herbs they take against their Western
 medicines. Each herb × medicine pair is shown with a rating on the Hong Kong Hospital
 Authority's four-level scale (High, Moderate, Low, No reported risk), a plain-language reason,
@@ -74,6 +77,7 @@ You only edit `data/interactions.json`. No code changes.
 | `why_en`, `why_zh` | Plain-language mechanism, or `null` for both if no source establishes one |
 | `why_pro_en` | Technical detail for professionals, or `null` |
 | `action_en`, `action_zh` | What to do: monitoring and talking to a professional |
+| `heart_impact_en`, `heart_impact_zh` | One line: why this pair matters for a heart patient (shown under the effect, and in the doctor summary) |
 | `main_source` | Which source the rating mainly rests on: `0` = first in `sources`, `1` = second… |
 | `main_finding_en`, `main_finding_zh` | One sentence: what that main source found |
 | `evidence_level` | A list from `"case_reports"`, `"human_trial"`, `"review"`, `"lab_animal"`, `"official_guidance"` |
@@ -89,6 +93,12 @@ You only edit `data/interactions.json`. No code changes.
 To add a herb or a medicine, add it to `data/herbs.json` or `data/drugs.json` with its
 English and Chinese names and search `aliases` (pinyin, Cantonese romanisation, brand
 names). Only add names you have checked.
+
+- Herbs also need `used_for_en` / `used_for_zh`: what the herb is commonly taken for,
+  shown under its name in the picker.
+- Medicines also need a `group`: one of the `groups` at the top of `data/drugs.json`
+  (blood thinners, cholesterol, heart rhythm and heart failure, blood pressure and fluid).
+  The picker lists medicines under these condition headings.
 
 Chinese text is drafted in Cantonese-style written Chinese. When a native speaker has
 reviewed everything, set every `zh_reviewed` to `true` and `ZH_REVIEWED` in `js/i18n.js`
