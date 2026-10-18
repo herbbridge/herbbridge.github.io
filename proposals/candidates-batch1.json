@@ -1,0 +1,118 @@
+{
+  "status": "CANDIDATES from research (step 1 of 3). Not checked, not approved, not live.",
+  "batch": 1,
+  "research_method_note": "WebFetch could not open any page from the build machine (every host failed DNS lookup, including pubmed.ncbi.nlm.nih.gov, pmc.ncbi.nlm.nih.gov, sciencedirect, ash.confex.com, clinicaltrials.gov, ispor.org, e-lactancia.org). Everything below rests on WebSearch result snippets and abstract text returned inside search results. No full text was read for any source. The checker should treat every claim as 'seen in search snippet/abstract excerpt' only.",
+  "candidates": [
+    {
+      "id": "ginkgo-clopidogrel",
+      "herb_id": "ginkgo",
+      "drug_id": "clopidogrel",
+      "risk": "low",
+      "watch": true,
+      "rating_source": "team",
+      "effect_en": "A small trial found ginkgo did not add to clopidogrel's effect on platelets, but a case of bleeding has been reported in an older patient taking both.",
+      "effect_zh": "一項小型研究發現，銀杏冇加強氯吡格雷對血小板嘅作用；不過有報告指一位食緊兩樣嘅長者出現出血。",
+      "heart_impact_en": "Watch for unusual bruising or bleeding.",
+      "heart_impact_zh": "留意有冇唔尋常嘅瘀傷或者出血。",
+      "why_en": null,
+      "why_zh": null,
+      "why_pro_en": "Randomised, open-label crossover study in 10 healthy men (Aruna & Naidu, Br J Clin Pharmacol 2007;63(3):333-8, PMID 17010102): platelet inhibition with ginkgo plus clopidogrel was not statistically significant compared with either agent alone; the authors concluded that co-administration did not enhance antiplatelet activity. The same study found significant potentiation of bleeding-time prolongation with ginkgo plus cilostazol, not clopidogrel. A 14-volunteer pharmacokinetic study (Wang et al., Med J Chin PAP 2018;29(12):1133-7; 240 mg ginkgo extract daily for 14 days, then a single 100 mg clopidogrel dose) reported significantly higher AUC and Cmax of the active metabolite SR26334; the authors attributed this to P-glycoprotein inhibition. Platelet effects were not reported in the abstract seen. A Reactions Weekly item (2014, issue 1490) is titled as a clopidogrel/ginkgo interaction with bruising, haematuria and vaginal bleeding in an elderly patient; only the title was seen. A retrospective Vietnamese hospital study (PLoS One 2025, PMID 40198642) found clopidogrel and aspirin were the commonest ginkgo interaction partners (2.61% of prescriptions each) and that ginkgo interactions overall were associated with bleeding (OR 1.08) and abnormal coagulation (OR 1.49). A review of controlled trials and case reports (Bone, Mol Nutr Food Res 2008, PMID 18214851) found little evidence that ginkgo potentiates anticoagulant or antiplatelet drugs, while an idiosyncratic bleeding event cannot be ruled out.",
+      "action_en": "Mention it to your doctor or pharmacist. Watch for unusual bruising or bleeding.",
+      "action_zh": "話俾醫生或者藥劑師知。留意有冇唔尋常嘅瘀傷或者出血。",
+      "main_source": 0,
+      "main_finding_en": "Crossover study in 10 healthy men: adding ginkgo to clopidogrel did not significantly increase the effect on platelets.",
+      "main_finding_zh": "10名健康男士嘅交叉研究：喺氯吡格雷之外加銀杏，對血小板嘅作用冇明顯增加。",
+      "evidence_level": [
+        "human_trial",
+        "case_reports",
+        "review"
+      ],
+      "sources": [
+        {
+          "label": "Aruna & Naidu. Br J Clin Pharmacol 2007",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/17010102/"
+        },
+        {
+          "label": "Wang et al. Med J Chin People's Armed Police Forces 2018",
+          "url": "https://wjyx.magtechjournal.com/EN/Y2018/V29/I12/1133"
+        },
+        {
+          "label": "Reactions Weekly 2014;1490:1 (case report)",
+          "url": "https://www.proquest.com/docview/1628335063"
+        },
+        {
+          "label": "PLoS One 2025 (Hai Phong, Vietnam)",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/40198642/"
+        },
+        {
+          "label": "Bone. Mol Nutr Food Res 2008",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/18214851/"
+        }
+      ],
+      "zh_reviewed": false,
+      "rating_reason": "Low with watch, matching the live ginkgo-aspirin and ginkgo-warfarin entries. The only pharmacodynamic human trial (10 healthy men) found no added antiplatelet effect, and a review of controlled trials found little evidence of potentiation. Against that: one bleeding case report (title only seen), one small PK study showing more of clopidogrel's active metabolite, and an observational association between ginkgo interactions and bleeding. Not Moderate because no human study showed a clinically meaningful change in clopidogrel's effect or bleeding specific to this pair. Watch is set because of the case report and the PK signal in a population (heart patients, often older) at higher bleeding risk than the volunteers studied.",
+      "research_notes": "Source 0 (Aruna & Naidu 2007, PMID 17010102): page could not be opened; seen via several search results returning the PubMed record title, journal listing (BPS, 63(3):333-338, authors D. Aruna, M. U. R. Naidu) and abstract sentences: 'randomized, open-label, crossover study of 10 healthy male volunteers', 'Platelet inhibition with the combination of G. biloba and clopidogrel or cilostazol was not statistically significant compared with individual doses of drugs', 'potentiation of prolongation of bleeding time with the combination of cilostazol and G. biloba', 'coadministration of G. biloba either with cilostazol or clopidogrel did not enhance antiplatelet activity'. Supports effect_en first clause, main_finding, why_pro_en trial sentences. Source 1 (Wang D, Huang Q, Chen L, Chen Z 2018): abstract text returned in search result: 14 healthy male volunteers, 240 mg GBE daily x14 days, single 100 mg clopidogrel, SR26334 AUC and Cmax significantly higher (P<0.05), mechanism 'may be related to' P-gp inhibition. Supports the why_pro_en PK sentence only. Chinese-language journal; abstract only. Source 2 (Reactions Weekly, ProQuest 1628335063): ONLY the bibliographic title was seen ('Clopidogrel/Ginkgo biloba interaction: Bruising, haematuria and vaginal bleeding in an elderly patient: case report', Iss. 1490, 1 Mar 2014). No patient details, causality or outcome seen. Supports effect_en second clause and the why_pro_en case sentence only. Checker: if a title alone is judged insufficient, delete this source, the second clause of effect_en/zh and 'case_reports', and reconsider watch. Source 3 (PLoS One 2025, PMID 40198642, DOI 10.1371/journal.pone.0321804): abstract sentences seen in snippets: 2,647 prescriptions, 342 with ginkgo interactions; clopidogrel and aspirin highest prevalence 2.61% each; interactions correlated with bleeding risk (OR 1.08) and abnormal coagulation (OR 1.49). One search summary said clopidogrel was 'significantly associated' with bleeding, but a second search did not confirm that clopidogrel-specific wording, so it is NOT used. First author name not confirmed (search gave 'Ngo Thi Quynh Mai'), so the label avoids an author name. Source 4 (Bone 2008, PMID 18214851, 52(7):764-771): abstract summarised in search results: controlled studies show ginkgo does not significantly affect haemostasis or the safety of aspirin or warfarin; case reports low quality; idiosyncratic bleeding cannot be ruled out; little evidence ginkgo potentiates anticoagulant or antiplatelet drugs. The abstract does not name clopidogrel; used only as general context in why_pro_en. NOT USED: Deng et al. Phytother Res 2016 rat study (GBE increased clopidogrel active-metabolite conversion in rat microsomes; low/medium doses lowered clopidogrel Cmax/AUC, high dose raised active metabolite) because no PMID/publisher URL was confirmed (only a Sigma-Aldrich listing). NOT USED: EMA community herbal monograph on ginkgo (EMA/HMPC/321097/2012) - a search summary said it names clopidogrel and acetylsalicylic acid as antiplatelet examples whose effect 'may be influenced', but section 4.5 text was never seen directly; a checker able to open the EMA PDF could add it as official_guidance. NOT USED: hellopharmacist.com database 'avoid' advice (commercial, unreferenced)."
+    },
+    {
+      "id": "asian_ginseng-aspirin",
+      "herb_id": "asian_ginseng",
+      "drug_id": "aspirin",
+      "risk": "low",
+      "watch": false,
+      "rating_source": "team",
+      "effect_en": "A trial in healthy volunteers found Asian ginseng did not add to aspirin's effect on platelets. Studies of people on blood-thinning medicines in Taiwan could not show a clear link with serious bleeding.",
+      "effect_zh": "有健康人士嘅研究發現，人參冇加強阿士匹靈對血小板嘅作用。台灣有研究睇食緊抗血小板藥嘅人，未能證實同嚴重出血有明確關係。",
+      "heart_impact_en": "Watch for unusual bruising or bleeding.",
+      "heart_impact_zh": "留意有冇唔尋常嘅瘀傷或者出血。",
+      "why_en": null,
+      "why_zh": null,
+      "why_pro_en": "Randomised, double-blind, placebo-controlled crossover study of turmeric, dong quai and ginseng (Panax ginseng 1000 mg daily), each with aspirin 100 mg daily or placebo, in healthy volunteers (75 recruited, 25 per herb group). Aspirin suppressed platelet aggregation to several agonists, and this was not further suppressed by any of the three herbs; ginseng impaired arachidonic-acid-induced aggregation in 1 subject; overall there was no meaningful or severe suppression of platelet function tests (Blood 2015 ASH abstract; full paper Fung et al., Phytomedicine 2017;32:88-96). In a Taiwanese insurance-database study of 92,046 antiplatelet users (aspirin, clopidogrel, dipyridamole or ticlopidine), current use of Asian ginseng or danshen was associated with 28% to 152% higher risk of major bleeding, but single-herb associations were not statistically significant and the authors said the relationship was not ascertained (Tsai & Lin, ISPOR 2013 abstract). A later nested case-crossover study (Tsai et al., Evid Based Complement Alternat Med 2017) of 1,209 antiplatelet users hospitalised for bleeding, with Asian ginseng among the prespecified Chinese medicines, found no significant increase in bleeding risk for the prespecified medicines (OR 1.00, 95% CI 0.51-1.95; OR 1.13, 95% CI 0.65-1.97). No aspirin-only result for Asian ginseng was seen in either database study.",
+      "action_en": "Tell your doctor or pharmacist that you take Asian ginseng. Tell them about any unusual bruising or bleeding.",
+      "action_zh": "話俾醫生或者藥劑師知你有食人參；如果有唔尋常嘅瘀傷或者出血，要話俾佢哋知。",
+      "main_source": 0,
+      "main_finding_en": "Randomised, placebo-controlled study in healthy volunteers: ginseng did not further reduce platelet clumping in people taking aspirin.",
+      "main_finding_zh": "健康人士嘅隨機、安慰劑對照研究：人參冇令食緊阿士匹靈嘅人血小板凝聚進一步減少。",
+      "evidence_level": [
+        "human_trial"
+      ],
+      "sources": [
+        {
+          "label": "Blood 2015 abstract",
+          "url": "https://www.sciencedirect.com/science/article/pii/S0006497118493020"
+        },
+        {
+          "label": "Fung et al. Phytomedicine 2017",
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0944711317300545"
+        },
+        {
+          "label": "Tsai & Lin. ISPOR abstract 2013",
+          "url": "https://www.ispor.org/heor-resources/presentations-database/presentation/ispor-18th-annual-international-meeting/relationship-between-major-bleeding-and-concurrent-use-of-antiplatelet-drugs-with-chinese-medications"
+        },
+        {
+          "label": "Tsai et al. Evid Based Complement Alternat Med 2017",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5558644/"
+        }
+      ],
+      "zh_reviewed": false,
+      "rating_reason": "Low, mirroring the approved dong_quai-aspirin entry, which rests on the same Singapore trial. A randomised human trial measuring this exact pair found no added platelet effect, so 'none_reported' could be argued under the guide. Low is the cautious choice because the trial was small, short and in healthy volunteers using one product, and the larger Taiwanese database abstract showed a non-significant 28-152% higher bleeding risk with Asian ginseng in antiplatelet users. Not Moderate: no human study showed a clinically meaningful change. Watch not set because the only signal is non-significant and class-level.",
+      "research_notes": "Source 0 (Blood 2015 ASH abstract; ScienceDirect PII S0006497118493020): the ash.confex.com copy (Paper81607) could not be opened, but my own searches returned snippets of it: title naming Curcuma longa, Angelicae sinensis and Panax ginseng with aspirin; randomised, double-blind, placebo-controlled crossover; 75 healthy volunteers, 25 per herb group; 'Ginseng 1000 mg and aspirin 100mg once daily'; aspirin reduced platelet aggregation and none of the three herbs added to that suppression; 'Tumeric resulted in impaired AA-induced aggregation in 5, Dong Quai in 2 and Ginseng in 1 subjects'. The phrase 'no meaningful nor severe suppression of PFTs' and the PII/URL were NOT seen by me directly; they come from proposals/verification-notes.json (checker's notes for dong_quai-aspirin, which confirmed them by search). Supports effect_en sentence 1, main_finding, why_pro_en trial sentence. The abstract does not state the ginseng was Asian ginseng beyond 'Panax ginseng' in the title (Panax ginseng = Asian ginseng). Source 1 (Fung FY, Wong WH, Ang SK, Koh HL, Kun MC, Lee LH et al., Phytomedicine 2017;32:88-96, DOI 10.1016/j.phymed.2017.04.004): citation confirmed by my search in a reference list; I did NOT see its abstract text. The phrases 'did not further aggravate platelet inhibition caused by aspirin' and 'no significant bleeding' come only from the earlier checker's notes, so they are not stated in this entry; it is cited as the full paper only. Source 2 (Tsai HH & Lin HW, ISPOR 18th Annual Meeting 2013; Value in Health 16(3):A271, DOI 10.1016/j.jval.2013.03.1405): abstract text returned in search results: 2007 Taiwan NHIRD, nested case-control and case-crossover; outpatients continuously on aspirin, clopidogrel, dipyridamole or ticlopidine; CMs studied American ginseng, Asian ginseng, danshen, dong quai; 92,046 users, 1,095 cases; single-CM increased risk not statistically significant; '28% to 152% more risk of major bleeding among those who used Asian ginseng or danshen currently'; 'relationship ... was not ascertained'. Supports effect_en sentence 2 and the why_pro_en database sentence. Antiplatelet drugs were analysed as a group, not aspirin alone. Source 3 (Tsai et al. 2017, PMC5558644, DOI 10.1155/2017/9417186, PMID 28831288 per an Unbound Medicine listing): abstract content seen in search results: 79,463 antiplatelet outpatients, 1,209 bleeding admissions 2012-2013; prespecified CMs including Asian ginseng, danshen, dong quai, ginger, licorice, turmeric; OR 1.00 (0.51-1.95) and 1.13 (0.65-1.97); associations not robust. These ORs are for the prespecified CMs as a whole, not Asian ginseng alone; the entry says so. NOT USED: Borneo Post 29 Feb 2016 press report quoting the Singapore team ('none of these three herbs ... increased the risk of bleeding when used alone or in combination with aspirin') because it is a newspaper. NOT USED: NCT02008981 registry (could not open; search showed it as the Singapore trial, completed, 75 enrolled)."
+    }
+  ],
+  "no_evidence_found": [
+    {
+      "pair": "asian_ginseng + clopidogrel",
+      "searched": "WebSearch (standard and extended): 'Panax ginseng clopidogrel interaction pharmacokinetics OR platelet study'; 'Panax ginseng ginsenoside clopidogrel rats platelet aggregation pharmacokinetics carboxylesterase CYP2C19'; 'Interactions of ginseng with therapeutic drugs Arch Pharm Res 2019 aspirin clopidogrel antiplatelet'; Tsai/Lin Taiwanese database studies; Lim Singapore Med J 2018 review (covers aspirin only). Page fetching was unavailable, so only search snippets were seen.",
+      "nearest_evidence": "Only class-level observational data: Tsai & Lin ISPOR 2013 abstract (antiplatelet users including clopidogrel; current Asian ginseng or danshen use associated with 28-152% higher major-bleeding risk, not statistically significant; relationship 'not ascertained') and Tsai et al. EBCAM 2017 (PMC5558644; prespecified CMs including Asian ginseng, no significant increase, OR 1.00 and 1.13). Neither reports a clopidogrel-specific result. The review 'Interactions of ginseng with therapeutic drugs' (Arch Pharm Res 2019;42(10):862-878, PMID 31493264) says it evaluated ginseng with antiplatelets, but its clopidogrel content was not visible. A 2015 Chinese study (j-smu.com 2015;35(1):109) on clopidogrel changing ginsenoside Rg1/Rb1 serum protein binding in rats was seen as a title/aim only. A 2020 J Thromb Thrombolysis review lists Panax notoginseng (sanqi, a different herb) as enhancing clopidogrel; not applicable to Panax ginseng. The team could choose a class-based Low entry like dong_quai-clopidogrel using the Tsai studies, but no source isolates clopidogrel."
+    },
+    {
+      "pair": "american_ginseng + aspirin",
+      "searched": "WebSearch (extended): 'American ginseng Panax quinquefolius aspirin OR clopidogrel interaction platelet study'; MSKCC About Herbs American ginseng (search snippets: only warfarin and CYP3A4 interactions listed); Tsai/Lin Taiwanese database abstract; titles of the Panax quinquefolius saponin rat studies. Page fetching was unavailable.",
+      "nearest_evidence": "No study of American ginseng with aspirin alone. Rat studies from one Chinese group gave Panax quinquefolius saponins (PQS) with dual antiplatelet therapy (aspirin plus clopidogrel together) after induced myocardial infarction: BioMed Res Int 2015 (PMC4452292; platelet aggregation fell in both the DAPT and PQS+DAPT groups, with lower TXB2 and endothelin-1 in the combination); Kou et al. PLoS One 2018;13(3):e0194082 (PMC5870954; combination reduced infarct area, TXB2 and PAI and reduced DAPT-induced gastric injury); Wang et al. BMC Complement Med Ther 2023;23:289 (DOI 10.1186/s12906-023-04112-7; 'PQS+DAPT further decreased platelet aggregation' versus DAPT, and attenuated DAPT-induced gastric injury). These suggest an added antiplatelet effect in rats but cannot be attributed to aspirin alone. Tsai & Lin ISPOR 2013 included American ginseng as an exposure in antiplatelet users but no American-ginseng-specific result was reported in the abstract seen. If the team wants an entry, a Low (lab_animal) entry worded as 'given with aspirin and clopidogrel together' would be the most that these sources support."
+    },
+    {
+      "pair": "american_ginseng + clopidogrel",
+      "searched": "Same searches as american_ginseng + aspirin, plus 'Panax ginseng clopidogrel interaction' (no American-ginseng-specific clopidogrel PK or platelet study found).",
+      "nearest_evidence": "Same rat dual-antiplatelet (aspirin plus clopidogrel) studies of Panax quinquefolius saponins: PMC4452292 (2015), PMC5870954 (PLoS One 2018), BMC Complement Med Ther 2023;23:289 (further decreased platelet aggregation versus DAPT alone, less gastric injury). None separates clopidogrel from aspirin. Tsai & Lin ISPOR 2013 included American ginseng and clopidogrel users within a pooled antiplatelet cohort, without a pair-specific result."
+    }
+  ]
+}
