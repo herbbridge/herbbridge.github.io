@@ -14,6 +14,7 @@ var data = {
   herbs: load('data/herbs.json'),
   drugs: load('data/drugs.json'),
   interactions: load('data/interactions.json'),
+  official: load('data/official.json'),
   cases: load('tests/test-cases.json'),
   i18n: require('../js/i18n.js').HerbSafeI18n
 };

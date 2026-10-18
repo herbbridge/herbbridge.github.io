@@ -11,7 +11,32 @@
 })(typeof self !== 'undefined' ? self : this, function () {
   'use strict';
 
-  var DISPLAY_ORDER = ['high', 'moderate', 'low', 'none_reported', 'not_in_database'];
+  var DISPLAY_ORDER = ['high', 'official', 'moderate', 'low', 'none_reported', 'not_in_database'];
+
+  // Official cautions approved by the owner on 18 Oct 2026, written out by hand.
+  var OFFICIAL_CAUTIONS = {
+    'ginkgo|warfarin':           { kind: 'disagree', statements: ['hc-ginkgo-contraindication', 'ema-ginkgo-4.5', 'ema-ginkgo-4.5-traditional'] },
+    'ginkgo|aspirin':            { kind: 'disagree', statements: ['hc-ginkgo-contraindication', 'ema-ginkgo-4.5'] },
+    'ginkgo|clopidogrel':        { kind: 'official', statements: ['ema-ginkgo-4.5', 'hc-ginkgo-contraindication'] },
+    'ginkgo|amlodipine':         { kind: 'official', statements: ['hc-ginkgo-blood-pressure'] },
+    'american_ginseng|digoxin':  { kind: 'official', statements: ['hc-american-ginseng'] },
+    'asian_ginseng|digoxin':     { kind: 'official', statements: ['hc-panax-ginseng'] },
+    'liquorice|amlodipine':      { kind: 'official', statements: ['ema-liquorice-blood-pressure'] },
+    'liquorice|furosemide':      { kind: 'official', statements: ['ema-liquorice-electrolytes'] },
+    'liquorice|digoxin':         { kind: 'official', statements: ['ema-liquorice-electrolytes'] }
+  };
+  // The regulators' own words, copied from the documents on 18 Oct 2026. Never paraphrase:
+  // changing a quote must be a deliberate edit here too, after re-checking the document.
+  var VERIFIED_QUOTES = {
+    'ema-ginkgo-4.5': 'If the medicinal product is taken concomitantly with anticoagulants (e.g. phenprocoumon and warfarin) or antiplatelet drugs (e.g. clopidogrel, acetylsalicylic acid and other non-steroidal anti-inflammatory drugs), their effect may be influenced.',
+    'ema-ginkgo-4.5-traditional': 'Ginkgo leaf may increase the effects of anticoagulants such as coumarin derivatives.',
+    'hc-ginkgo-contraindication': 'Do not use if you are taking blood thinners or other health products that affect blood coagulation (Gardner and McGuffin 2013; Brinker 2010; Bent 2005).',
+    'hc-ginkgo-blood-pressure': 'Ask a health care practitioner/health care provider/health care professional/doctor/physician before use if you are taking diabetes, high blood pressure or seizure medications (Brinker 2010).',
+    'hc-american-ginseng': 'Ask a health care practitioner/health care provider/health care professional/doctor/physician before use if you are taking blood thinners or digoxin (Brinker 2010; Dasgupta et al. 2007; Elmer et al. 2007; Yuan et al. 2004).',
+    'hc-panax-ginseng': 'Ask a health care practitioner/health care provider/health care professional/doctor/physician before use if you are taking antidepressant medication, blood thinners or digoxin (Brinker 2010; Lee et al. 2008a; Dasgupta and Reyes 2005; Janetzki and Morreale 1997; Gonzalez-Seijo et al. 1995; Shader and Greenblatt 1988; Jones and Runikis 1987; Shader and Greenblatt 1985).',
+    'ema-liquorice-blood-pressure': 'Liquorice root may counteract antihypertensive action of prescribed medications.',
+    'ema-liquorice-electrolytes': 'Not to be used concomitantly with diuretics, cardiac glycosides, corticosteroids, stimulant laxatives or other medications which may aggravate electrolyte imbalance (see section with 4.4).'
+  };
 
   // The ratings given in the brief. Changing a rating must be a deliberate edit here too.
   var BRIEF_RATINGS = {
@@ -113,7 +138,7 @@
       results.push({ group: group, name: name, pass: pass, detail: detail });
     }
 
-    var db = lookup.createDb(data.herbs, data.drugs, data.interactions);
+    var db = lookup.createDb(data.herbs, data.drugs, data.interactions, data.official);
 
     // 1. The data files themselves.
     check('Data files', 'herbs.json, drugs.json and interactions.json are valid', function () {
@@ -139,7 +164,9 @@
     data.cases.cases.forEach(function (c) {
       check('Medicine lists', c.id + ': ' + c.name, function () {
         var got = lookup.checkPairs(db, c.herbs, c.drugs).map(function (r) {
-          return { herb: r.herb.id, drug: r.drug.id, status: r.status, entry: idOf(r.entry) };
+          var row = { herb: r.herb.id, drug: r.drug.id, status: r.status, entry: idOf(r.entry) };
+          if (r.official) row.official = r.official.id;
+          return row;
         });
         return {
           pass: JSON.stringify(got) === JSON.stringify(c.expected),
@@ -165,9 +192,11 @@
     // 4. Safety rules, checked against every possible pair in the real data.
     var hasEntry = {};
     db.interactions.forEach(function (e) { hasEntry[e.herb_id] = true; });
-    check('Safety rules', 'every herb × drug pair without an entry shows "not_in_database", never a rating', function () {
+    check('Safety rules', 'every pair shows its team rating, an official caution, or "not_in_database", never anything else', function () {
       var bad = lookup.checkPairs(db, ids(db.herbs), ids(db.drugs)).filter(function (r) {
-        return r.entry ? r.status !== r.entry.risk || r.entry.herb_id !== r.herb.id : r.status !== 'not_in_database';
+        if (r.entry && r.entry.herb_id !== r.herb.id) return true;
+        if (r.official) return r.status !== (r.entry && r.entry.risk === 'high' ? 'high' : 'official');
+        return r.entry ? r.status !== r.entry.risk : r.status !== 'not_in_database';
       });
       return { pass: bad.length === 0, detail: bad.map(function (r) { return r.herb.id + ' × ' + r.drug.id + ' → ' + r.status; }).join('\n') };
     });
@@ -186,7 +215,28 @@
       });
       return { pass: bad.length === 0, detail: bad.join('\n') };
     });
-    check('Safety rules', 'results are sorted High → Moderate → Low → No reported risk → Not in database', function () {
+    check('Safety rules', 'exactly the approved pairs show an official caution, with the approved statements', function () {
+      var bad = [];
+      lookup.checkPairs(db, ids(db.herbs), ids(db.drugs)).forEach(function (r) {
+        var key = r.herb.id + '|' + r.drug.id, want = OFFICIAL_CAUTIONS[key];
+        if (!want && r.official) bad.push(key + ': has an official caution that is not on the approved list');
+        if (want && !r.official) bad.push(key + ': approved official caution is missing');
+        if (want && r.official && (r.official.kind !== want.kind || JSON.stringify(r.official.statements) !== JSON.stringify(want.statements)))
+          bad.push(key + ': kind or statements differ from the approved list');
+      });
+      return { pass: bad.length === 0, detail: bad.join('\n') };
+    });
+    check('Safety rules', 'every official quote is word for word what was verified in the document', function () {
+      var bad = [];
+      db.statements.forEach(function (s) { if (VERIFIED_QUOTES[s.id] !== s.quote_en) bad.push(s.id + ': quote differs from the verified text (or is not on the verified list)'); });
+      Object.keys(VERIFIED_QUOTES).forEach(function (id) { if (!db.statementById[id]) bad.push(id + ': verified statement missing from data/official.json'); });
+      return { pass: bad.length === 0, detail: bad.join('\n') };
+    });
+    check('Safety rules', 'an official caution never hides a High team rating', function () {
+      var bad = lookup.checkPairs(db, ids(db.herbs), ids(db.drugs)).filter(function (r) { return r.entry && r.entry.risk === 'high' && r.status !== 'high'; });
+      return { pass: bad.length === 0, detail: bad.map(function (r) { return r.herb.id + ' × ' + r.drug.id; }).join('\n') };
+    });
+    check('Safety rules', 'results are sorted High → Official caution → Moderate → Low → No reported risk → Not in database', function () {
       var all = lookup.checkPairs(db, ids(db.herbs), ids(db.drugs));
       var bad = all.filter(function (r, i) {
         return DISPLAY_ORDER.indexOf(r.status) === -1 || (i > 0 && DISPLAY_ORDER.indexOf(all[i - 1].status) > DISPLAY_ORDER.indexOf(r.status));
@@ -209,8 +259,19 @@
     });
 
     // 5. Lookup rules, on small made-up data (not the real database).
-    function fakeDb(drugs, interactions) {
-      return lookup.createDb({ herbs: [herb('h')] }, { drugs: drugs }, { interactions: interactions });
+    function fakeDb(drugs, interactions, official) {
+      return lookup.createDb({ herbs: [herb('h')] }, { drugs: drugs }, { interactions: interactions }, official);
+    }
+    function statement(over) {
+      var s = { id: 's', body_en: 'x', body_zh: 'x', document_en: 'x', document_zh: 'x', date_en: 'x', date_zh: 'x',
+        section_en: 'x', section_zh: 'x', url: 'https://example.org', quote_en: 'x', quote_zh: 'x', verified: '2026-10-18' };
+      Object.keys(over).forEach(function (k) { if (over[k] === undefined) delete s[k]; else s[k] = over[k]; });
+      return s;
+    }
+    function caution(over) {
+      var c = { id: 'c', herb_id: 'h', drug_id: 'd', kind: 'official', statements: ['s'], zh_reviewed: false };
+      Object.keys(over).forEach(function (k) { if (over[k] === undefined) delete c[k]; else c[k] = over[k]; });
+      return c;
     }
     var bothOrders = [
       [entry({ id: 'by-class', drug_id: undefined, drug_class: 'c', risk: 'moderate' }), entry({ id: 'by-drug', drug_id: 'd1', risk: 'low' })],
@@ -238,7 +299,8 @@
         entry({ id: 'd', drug_id: 'd4', risk: 'high' })
       ]);
       var order = lookup.checkPairs(f, ['h'], ['d5', 'd3', 'd1', 'd2', 'd4']).map(function (r) { return r.status; });
-      return { pass: JSON.stringify(order) === JSON.stringify(DISPLAY_ORDER), detail: 'got ' + order.join(', ') };
+      var want = DISPLAY_ORDER.filter(function (s) { return s !== 'official'; });
+      return { pass: JSON.stringify(order) === JSON.stringify(want), detail: 'got ' + order.join(', ') };
     });
 
     // 6. The validator catches the mistakes a teammate is likely to make when adding pairs.
@@ -267,6 +329,27 @@
       { name: 'drug class with a capital ("Statin")', drugs: [drug('d', ['Statin'])], entries: [], expect: 'must be lower-case' },
       { name: 'drug classes written as text, not a list', drugs: [{ id: 'd', name_en: 'd', name_zh: 'd', classes: 'statin', aliases: [], zh_reviewed: false }], entries: [], expect: 'classes must be a list' }
     ];
+    var OFFICIAL_MISTAKES = [
+      { name: 'official caution pointing at a missing statement', official: { statements: [statement({})], cautions: [caution({ statements: ['nope'] })] }, expect: 'unknown statement' },
+      { name: 'official statement without its quote', official: { statements: [statement({ quote_en: '' })], cautions: [caution({})] }, expect: 'missing quote_en' },
+      { name: 'official statement with an http link', official: { statements: [statement({ url: 'http://example.org' })], cautions: [caution({})] }, expect: 'url must start with https' },
+      { name: 'official caution with an unknown kind', official: { statements: [statement({})], cautions: [caution({ kind: 'maybe' })] }, expect: 'kind must be' },
+      { name: '"sources disagree" with no team rating to disagree with', official: { statements: [statement({})], cautions: [caution({ kind: 'disagree' })] }, expect: 'needs a team rating' },
+      { name: 'same official pair twice', official: { statements: [statement({})], cautions: [caution({ id: 'a' }), caution({ id: 'b' })] }, expect: 'same pair as' }
+    ];
+    OFFICIAL_MISTAKES.forEach(function (m) {
+      check('Validator', 'catches: ' + m.name, function () {
+        var problems = lookup.validateData(fakeDb([drug('d')], [], m.official)).join('\n');
+        return { pass: problems.indexOf(m.expect) !== -1, detail: 'expected a problem containing "' + m.expect + '", got:\n' + (problems || '(none)') };
+      });
+    });
+    check('Lookup rules', 'an official caution shows instead of a Moderate rating, but never instead of High', function () {
+      var off = { statements: [statement({})], cautions: [caution({ drug_id: 'd1' }), caution({ id: 'c2', drug_id: 'd2' })] };
+      var f = fakeDb([drug('d1'), drug('d2')], [entry({ id: 'm', drug_id: 'd1', risk: 'moderate' }), entry({ id: 'h', drug_id: 'd2', risk: 'high' })], off);
+      var r = lookup.checkPairs(f, ['h'], ['d1', 'd2']);
+      return r[0].status === 'high' && r[0].official && r[1].status === 'official' && r[1].entry.id === 'm';
+    });
+
     MISTAKES.forEach(function (m) {
       check('Validator', 'catches: ' + m.name, function () {
         var problems = lookup.validateData(fakeDb(m.drugs, m.entries)).join('\n');

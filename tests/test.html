@@ -36,7 +36,7 @@
       }
       function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text) e.textContent = text; return e; }
       var summary = document.getElementById('summary'), out = document.getElementById('out');
-      Promise.all(['../data/herbs.json', '../data/drugs.json', '../data/interactions.json', 'test-cases.json'].map(get))
+      Promise.all(['../data/herbs.json', '../data/drugs.json', '../data/interactions.json', '../data/official.json', 'test-cases.json'].map(get))
         .catch(function (err) {
           summary.className = 'summary fail';
           summary.textContent = 'Could not load the data files (' + err.message + '). ' +
@@ -44,7 +44,7 @@
           throw null;
         })
         .then(function (d) {
-          var results = HerbSafeTests.runAll(HerbSafeLookup, { herbs: d[0], drugs: d[1], interactions: d[2], cases: d[3], i18n: HerbSafeI18n });
+          var results = HerbSafeTests.runAll(HerbSafeLookup, { herbs: d[0], drugs: d[1], interactions: d[2], official: d[3], cases: d[4], i18n: HerbSafeI18n });
           var failed = results.filter(function (r) { return !r.pass; }).length, group = null, ul;
           results.forEach(function (r) {
             if (r.group !== group) { group = r.group; out.appendChild(el('h2', '', group)); ul = out.appendChild(el('ul')); }

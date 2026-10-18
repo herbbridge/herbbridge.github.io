@@ -1,0 +1,223 @@
+{
+  "schema_version": 1,
+  "last_updated": "2026-10-18",
+  "about": "Official cautions: the exact words of government health agencies, quoted, never paraphrased. Each statement was checked against the official document on 18 Oct 2026 (see proposals/official-warnings-verified.json). quote_zh is a translation; the English quote is the original. Approved by the owner on 18 Oct 2026.",
+  "statements": [
+    {
+      "id": "ema-ginkgo-4.5",
+      "body_en": "European Medicines Agency",
+      "body_zh": "歐洲藥品管理局",
+      "document_en": "EU herbal monograph on ginkgo leaf (EMA/HMPC/321097/2012)",
+      "document_zh": "歐盟銀杏葉草藥專論（EMA/HMPC/321097/2012）",
+      "date_en": "2015",
+      "date_zh": "2015年",
+      "section_en": "section 4.5, well-established use",
+      "section_zh": "第4.5節（公認用途）",
+      "url": "https://www.ema.europa.eu/en/documents/herbal-monograph/final-european-union-herbal-monograph-ginkgo-biloba-l-folium_en.pdf",
+      "quote_en": "If the medicinal product is taken concomitantly with anticoagulants (e.g. phenprocoumon and warfarin) or antiplatelet drugs (e.g. clopidogrel, acetylsalicylic acid and other non-steroidal anti-inflammatory drugs), their effect may be influenced.",
+      "quote_zh": "如果呢種藥同抗凝血藥（例如苯丙香豆素同華法林）或者抗血小板藥（例如氯吡格雷、乙醯水楊酸〔阿士匹靈〕同其他非類固醇消炎藥）一齊用，佢哋嘅效果可能會受到影響。",
+      "verified": "2026-10-18"
+    },
+    {
+      "id": "ema-ginkgo-4.5-traditional",
+      "body_en": "European Medicines Agency",
+      "body_zh": "歐洲藥品管理局",
+      "document_en": "EU herbal monograph on ginkgo leaf (EMA/HMPC/321097/2012)",
+      "document_zh": "歐盟銀杏葉草藥專論（EMA/HMPC/321097/2012）",
+      "date_en": "2015",
+      "date_zh": "2015年",
+      "section_en": "section 4.5, traditional use",
+      "section_zh": "第4.5節（傳統用途）",
+      "url": "https://www.ema.europa.eu/en/documents/herbal-monograph/final-european-union-herbal-monograph-ginkgo-biloba-l-folium_en.pdf",
+      "quote_en": "Ginkgo leaf may increase the effects of anticoagulants such as coumarin derivatives.",
+      "quote_zh": "銀杏葉可能會加強香豆素類抗凝血藥嘅效果。",
+      "verified": "2026-10-18"
+    },
+    {
+      "id": "hc-ginkgo-contraindication",
+      "body_en": "Health Canada",
+      "body_zh": "加拿大衞生部",
+      "document_en": "Ginkgo (Ginkgo biloba) monograph",
+      "document_zh": "銀杏（Ginkgo biloba）專論",
+      "date_en": "25 July 2025",
+      "date_zh": "2025年7月25日",
+      "section_en": "Contraindication(s)",
+      "section_zh": "禁忌",
+      "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/atReq?atid=ginkgo.biloba2&lang=eng",
+      "quote_en": "Do not use if you are taking blood thinners or other health products that affect blood coagulation (Gardner and McGuffin 2013; Brinker 2010; Bent 2005).",
+      "quote_zh": "如果你食緊薄血藥，或者其他會影響血液凝固嘅健康產品，就唔好用。",
+      "verified": "2026-10-18"
+    },
+    {
+      "id": "hc-ginkgo-blood-pressure",
+      "body_en": "Health Canada",
+      "body_zh": "加拿大衞生部",
+      "document_en": "Ginkgo (Ginkgo biloba) monograph",
+      "document_zh": "銀杏（Ginkgo biloba）專論",
+      "date_en": "25 July 2025",
+      "date_zh": "2025年7月25日",
+      "section_en": "Caution(s) and warning(s)",
+      "section_zh": "注意事項及警告",
+      "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/atReq?atid=ginkgo.biloba2&lang=eng",
+      "quote_en": "Ask a health care practitioner/health care provider/health care professional/doctor/physician before use if you are taking diabetes, high blood pressure or seizure medications (Brinker 2010).",
+      "quote_zh": "如果你食緊糖尿病、高血壓或者癲癇嘅藥，用之前要先問醫護人員或者醫生。",
+      "verified": "2026-10-18"
+    },
+    {
+      "id": "hc-american-ginseng",
+      "body_en": "Health Canada",
+      "body_zh": "加拿大衞生部",
+      "document_en": "American ginseng (Panax quinquefolius) monograph",
+      "document_zh": "花旗參（Panax quinquefolius）專論",
+      "date_en": "30 January 2026",
+      "date_zh": "2026年1月30日",
+      "section_en": "Caution(s) and warning(s), all products",
+      "section_zh": "注意事項及警告（所有產品）",
+      "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/dbImages/mono_ginseng-american_english.pdf",
+      "quote_en": "Ask a health care practitioner/health care provider/health care professional/doctor/physician before use if you are taking blood thinners or digoxin (Brinker 2010; Dasgupta et al. 2007; Elmer et al. 2007; Yuan et al. 2004).",
+      "quote_zh": "如果你食緊薄血藥或者地高辛，用之前要先問醫護人員或者醫生。",
+      "verified": "2026-10-18"
+    },
+    {
+      "id": "hc-panax-ginseng",
+      "body_en": "Health Canada",
+      "body_zh": "加拿大衞生部",
+      "document_en": "Panax ginseng monograph",
+      "document_zh": "人參（Panax ginseng）專論",
+      "date_en": "27 June 2025",
+      "date_zh": "2025年6月27日",
+      "section_en": "Caution(s) and warning(s)",
+      "section_zh": "注意事項及警告",
+      "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/dbImages/mono_ginseng-panax_english.pdf",
+      "quote_en": "Ask a health care practitioner/health care provider/health care professional/doctor/physician before use if you are taking antidepressant medication, blood thinners or digoxin (Brinker 2010; Lee et al. 2008a; Dasgupta and Reyes 2005; Janetzki and Morreale 1997; Gonzalez-Seijo et al. 1995; Shader and Greenblatt 1988; Jones and Runikis 1987; Shader and Greenblatt 1985).",
+      "quote_zh": "如果你食緊抗抑鬱藥、薄血藥或者地高辛，用之前要先問醫護人員或者醫生。",
+      "verified": "2026-10-18"
+    },
+    {
+      "id": "ema-liquorice-blood-pressure",
+      "body_en": "European Medicines Agency",
+      "body_zh": "歐洲藥品管理局",
+      "document_en": "EU herbal monograph on liquorice root, Revision 1 (EMA/HMPC/108399/2024)",
+      "document_zh": "歐盟甘草根草藥專論第1次修訂（EMA/HMPC/108399/2024）",
+      "date_en": "2026",
+      "date_zh": "2026年",
+      "section_en": "section 4.5, traditional use",
+      "section_zh": "第4.5節（傳統用途）",
+      "url": "https://www.ema.europa.eu/en/documents/herbal-monograph/final-european-union-herbal-monograph-glycyrrhiza-glabra-l-glycyrrhiza-inflata-bat-glycyrrhiza-uralensis-fisch-radix-revision-1_en.pdf",
+      "quote_en": "Liquorice root may counteract antihypertensive action of prescribed medications.",
+      "quote_zh": "甘草根可能會抵消處方降血壓藥嘅作用。",
+      "verified": "2026-10-18"
+    },
+    {
+      "id": "ema-liquorice-electrolytes",
+      "body_en": "European Medicines Agency",
+      "body_zh": "歐洲藥品管理局",
+      "document_en": "EU herbal monograph on liquorice root, Revision 1 (EMA/HMPC/108399/2024)",
+      "document_zh": "歐盟甘草根草藥專論第1次修訂（EMA/HMPC/108399/2024）",
+      "date_en": "2026",
+      "date_zh": "2026年",
+      "section_en": "section 4.5, traditional use",
+      "section_zh": "第4.5節（傳統用途）",
+      "url": "https://www.ema.europa.eu/en/documents/herbal-monograph/final-european-union-herbal-monograph-glycyrrhiza-glabra-l-glycyrrhiza-inflata-bat-glycyrrhiza-uralensis-fisch-radix-revision-1_en.pdf",
+      "quote_en": "Not to be used concomitantly with diuretics, cardiac glycosides, corticosteroids, stimulant laxatives or other medications which may aggravate electrolyte imbalance (see section with 4.4).",
+      "quote_zh": "唔可以同利尿藥、強心苷、類固醇、刺激性瀉藥，或者其他可能令電解質失衡加劇嘅藥物一齊用（見第4.4節）。",
+      "verified": "2026-10-18"
+    }
+  ],
+  "cautions": [
+    {
+      "id": "ginkgo-warfarin-official",
+      "herb_id": "ginkgo",
+      "drug_id": "warfarin",
+      "kind": "disagree",
+      "statements": [
+        "hc-ginkgo-contraindication",
+        "ema-ginkgo-4.5",
+        "ema-ginkgo-4.5-traditional"
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "ginkgo-aspirin-official",
+      "herb_id": "ginkgo",
+      "drug_id": "aspirin",
+      "kind": "disagree",
+      "statements": [
+        "hc-ginkgo-contraindication",
+        "ema-ginkgo-4.5"
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "ginkgo-clopidogrel-official",
+      "herb_id": "ginkgo",
+      "drug_id": "clopidogrel",
+      "kind": "official",
+      "statements": [
+        "ema-ginkgo-4.5",
+        "hc-ginkgo-contraindication"
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "ginkgo-amlodipine-official",
+      "herb_id": "ginkgo",
+      "drug_id": "amlodipine",
+      "kind": "official",
+      "statements": [
+        "hc-ginkgo-blood-pressure"
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "american_ginseng-digoxin-official",
+      "herb_id": "american_ginseng",
+      "drug_id": "digoxin",
+      "kind": "official",
+      "statements": [
+        "hc-american-ginseng"
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "asian_ginseng-digoxin-official",
+      "herb_id": "asian_ginseng",
+      "drug_id": "digoxin",
+      "kind": "official",
+      "statements": [
+        "hc-panax-ginseng"
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "liquorice-amlodipine-official",
+      "herb_id": "liquorice",
+      "drug_id": "amlodipine",
+      "kind": "official",
+      "statements": [
+        "ema-liquorice-blood-pressure"
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "liquorice-diuretic-official",
+      "herb_id": "liquorice",
+      "drug_class": "diuretic",
+      "kind": "official",
+      "statements": [
+        "ema-liquorice-electrolytes"
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "liquorice-digoxin-official",
+      "herb_id": "liquorice",
+      "drug_id": "digoxin",
+      "kind": "official",
+      "statements": [
+        "ema-liquorice-electrolytes"
+      ],
+      "zh_reviewed": false
+    }
+  ]
+}

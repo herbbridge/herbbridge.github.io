@@ -1,5 +1,5 @@
 {
-  "_note": "Expected results are listed in the order the Results screen must show them: high → moderate → low → none_reported → not_in_database, then herb order, then drug order. entry is the interaction id, or null when the pair is not in the database. Keep tests/test-cases.md in step with this file.",
+  "_note": "Expected results are listed in the order the Results screen must show them: high → official → moderate → low → none_reported → not_in_database, then herb order, then drug order. entry is the interaction id, or null when the pair is not in the database. Keep tests/test-cases.md in step with this file.",
   "cases": [
     {
       "id": "1-mrs-wong",
@@ -43,11 +43,11 @@
       "drugs": ["warfarin", "aspirin", "digoxin", "furosemide"],
       "expected": [
         { "herb": "dong_quai", "drug": "warfarin", "status": "high", "entry": "dong_quai-warfarin" },
-        { "herb": "liquorice", "drug": "digoxin", "status": "moderate", "entry": "liquorice-digoxin" },
-        { "herb": "liquorice", "drug": "furosemide", "status": "moderate", "entry": "liquorice-diuretic" },
+        { "herb": "ginkgo", "drug": "warfarin", "status": "official", "entry": "ginkgo-warfarin", "official": "ginkgo-warfarin-official" },
+        { "herb": "ginkgo", "drug": "aspirin", "status": "official", "entry": "ginkgo-aspirin", "official": "ginkgo-aspirin-official" },
+        { "herb": "liquorice", "drug": "digoxin", "status": "official", "entry": "liquorice-digoxin", "official": "liquorice-digoxin-official" },
+        { "herb": "liquorice", "drug": "furosemide", "status": "official", "entry": "liquorice-diuretic", "official": "liquorice-diuretic-official" },
         { "herb": "dong_quai", "drug": "aspirin", "status": "low", "entry": "dong_quai-aspirin" },
-        { "herb": "ginkgo", "drug": "warfarin", "status": "low", "entry": "ginkgo-warfarin" },
-        { "herb": "ginkgo", "drug": "aspirin", "status": "low", "entry": "ginkgo-aspirin" },
         { "herb": "dong_quai", "drug": "digoxin", "status": "not_in_database", "entry": null },
         { "herb": "dong_quai", "drug": "furosemide", "status": "not_in_database", "entry": null },
         { "herb": "ginkgo", "drug": "digoxin", "status": "not_in_database", "entry": null },
@@ -80,11 +80,11 @@
     {
       "id": "7-liquorice-diuretic-class",
       "name": "Liquorice with furosemide only",
-      "story": "On furosemide for swollen ankles, takes a herbal tea containing 甘草. Matches through the diuretic class.",
+      "story": "On furosemide for swollen ankles, takes a herbal tea containing 甘草. Matches through the diuretic class, for both the team rating and the EMA caution.",
       "herbs": ["liquorice"],
       "drugs": ["furosemide"],
       "expected": [
-        { "herb": "liquorice", "drug": "furosemide", "status": "moderate", "entry": "liquorice-diuretic" }
+        { "herb": "liquorice", "drug": "furosemide", "status": "official", "entry": "liquorice-diuretic", "official": "liquorice-diuretic-official" }
       ]
     },
     {
@@ -101,12 +101,12 @@
     {
       "id": "9-ginkgo-antiplatelets",
       "name": "Ginkgo with aspirin and clopidogrel",
-      "story": "Takes ginkgo for memory, on aspirin and clopidogrel. Only ginkgo + aspirin has a record; ginkgo + clopidogrel must show 'not in database'.",
+      "story": "Takes ginkgo for memory, on aspirin and clopidogrel. Both show an official caution: ginkgo + aspirin quotes Health Canada and the EMA over the team rating (sources disagree); ginkgo + clopidogrel has no team rating, only the official quotes.",
       "herbs": ["ginkgo"],
       "drugs": ["aspirin", "clopidogrel"],
       "expected": [
-        { "herb": "ginkgo", "drug": "aspirin", "status": "low", "entry": "ginkgo-aspirin" },
-        { "herb": "ginkgo", "drug": "clopidogrel", "status": "not_in_database", "entry": null }
+        { "herb": "ginkgo", "drug": "aspirin", "status": "official", "entry": "ginkgo-aspirin", "official": "ginkgo-aspirin-official" },
+        { "herb": "ginkgo", "drug": "clopidogrel", "status": "official", "entry": null, "official": "ginkgo-clopidogrel-official" }
       ]
     },
     {

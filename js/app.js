@@ -42,6 +42,7 @@
     low: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="12" cy="7.6" r="1.3" fill="currentColor"/><path d="M12 11v6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
     none_reported: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M7.5 12h9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
     not_in_database: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="3 2.6"/><path d="M9.4 9.3a2.7 2.7 0 1 1 3.8 2.5c-.8.4-1.2 1-1.2 1.8v.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17.2" r="1.2" fill="currentColor"/></svg>',
+    official: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.8 4.5 5.6v5.6c0 4.6 3.1 8.6 7.5 10 4.4-1.4 7.5-5.4 7.5-10V5.6L12 2.8z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/><path d="M12 8v5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="16.2" r="1.25" fill="currentColor"/></svg>',
     heart: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 20.5s-7.5-4.6-9.2-9.4C1.6 7.6 3.9 4.5 7.2 4.5c2 0 3.6 1.1 4.8 2.8 1.2-1.7 2.8-2.8 4.8-2.8 3.3 0 5.6 3.1 4.4 6.6-1.7 4.8-9.2 9.4-9.2 9.4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>',
     close: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 7l10 10M17 7 7 17" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>',
     plus: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 6v12M6 12h12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>',
@@ -110,7 +111,17 @@
   /* Rated pairs (High, Moderate or Low) between one item and the rest of the cabinet. */
   function clashesFor(kind, id) {
     var rows = kind === 'herbs' ? L.checkPairs(db, [id], state.drugs) : L.checkPairs(db, state.herbs, [id]);
-    return rows.filter(function (r) { return r.entry && r.entry.risk !== 'none_reported'; });
+    return rows.filter(isFlagged);
+  }
+
+  // A pair to discuss: a team rating of High, Moderate or Low, or an official caution.
+  function isFlagged(r) { return r.status !== 'none_reported' && r.status !== L.NOT_IN_DATABASE; }
+  function badgeFor(r, tag) {
+    return badge(r.status, r.entry && r.entry.watch, tag, r.official && r.official.kind === 'disagree');
+  }
+  function riskLabel(r) {
+    if (r.status === L.OFFICIAL) return t(r.official.kind === 'disagree' ? 'risk_official_disagree' : 'risk_official');
+    return t(r.status === 'low' && r.entry.watch ? 'risk_low_watch' : 'risk_' + r.status);
   }
 
   /* Warnings for clashes found while adding items. They build up until the user closes them,
@@ -164,7 +175,7 @@
     live.textContent = '';
     rows = rows.slice().sort(function (a, b) { return L.STATUS_ORDER.indexOf(a.status) - L.STATUS_ORDER.indexOf(b.status); });
     var msg = rows.map(function (r) {
-      return t('warn_sr', { herb: primaryName(r.herb), drug: primaryName(r.drug), risk: t(r.status === 'low' && r.entry.watch ? 'risk_low_watch' : 'risk_' + r.status) });
+      return t('warn_sr', { herb: primaryName(r.herb), drug: primaryName(r.drug), risk: riskLabel(r) });
     }).join(' ');
     window.setTimeout(function () { live.textContent = msg; }, 50);
   }
@@ -258,8 +269,8 @@
       if (!nH && !nD) rest.push(el('button', { type: 'button', class: 'link-button demo-start', onclick: startDemo }, [el('span', { text: t('demo_try') })]));
     } else {
       var rows = L.checkPairs(db, state.herbs, state.drugs);
-      var flagged = rows.filter(function (r) { return r.entry && r.entry.risk !== 'none_reported'; });
-      var unknown = rows.filter(function (r) { return !r.entry; }).length;
+      var flagged = rows.filter(isFlagged);
+      var unknown = rows.filter(function (r) { return r.status === L.NOT_IN_DATABASE; }).length;
       if (flagged.length) {
         tone = flagged[0].status;
         title = I.tn('cabinet_clashes', flagged.length);
@@ -267,7 +278,7 @@
         flagged.forEach(function (r) {
           list.appendChild(el('li', null, [
             el('a', { class: 'status-row', href: '#/results', onclick: function () { pendingOpen = pairKey(r); } }, [
-              badge(r.status, r.entry.watch, 'span'), pairText(r), icon('chevron', 'row-go')
+              badgeFor(r, 'span'), pairText(r), icon('chevron', 'row-go')
             ])
           ]));
         });
@@ -413,7 +424,7 @@
     sheet.notice.textContent = '';
     if (alertState) {
       var top = alertState.rows[0];
-      sheet.notice.appendChild(badge(top.status, top.entry.watch, 'span'));
+      sheet.notice.appendChild(badgeFor(top, 'span'));
       sheet.notice.appendChild(el('span', { class: 'bar-notice-text', text: I.tn('bar_notice', alertState.rows.length) }));
     }
   }
@@ -488,7 +499,7 @@
     if (!alertState) return;
     var list = el('ul', { class: 'warning-list' });
     alertState.rows.forEach(function (r) {
-      list.appendChild(el('li', { class: 'clash-row' }, [badge(r.status, r.entry.watch, 'span'), pairText(r)]));
+      list.appendChild(el('li', { class: 'clash-row' }, [badgeFor(r, 'span'), pairText(r)]));
     });
     warningPanel.appendChild(el('h2', { id: 'h-warning', text: I.tn('warn_title', alertState.rows.length) }));
     warningPanel.appendChild(list);
@@ -614,8 +625,9 @@
   var openCards = {};     // pair key → true while that card is open (kept across language switches)
   var pendingOpen = null; // pair tapped on the dashboard: open it on the results screen
 
-  function badge(status, watch, tag) {
-    var key = status === 'low' && watch ? 'risk_low_watch' : 'risk_' + status;
+  function badge(status, watch, tag, disagree) {
+    var key = status === 'low' && watch ? 'risk_low_watch'
+      : status === 'official' && disagree ? 'risk_official_disagree' : 'risk_' + status;
     return el(tag || 'p', { class: 'badge badge-' + status }, [icon(status), el('span', { text: t(key) })]);
   }
 
@@ -679,8 +691,37 @@
     ]);
   }
 
+  /* An official caution: the agency's own words (never reworded), its document, date and section.
+     In Chinese the translation is shown first, then the English original, which is what counts. */
+  function officialBlock(r) {
+    var o = r.official;
+    var intro = !r.entry ? 'official_intro_none' : o.kind === 'disagree' ? 'official_intro_disagree' : 'official_intro_rated';
+    var box = el('div', { class: 'official-box' }, [el('p', { class: 'official-intro', text: t(intro) })]);
+    o.statements.forEach(function (id) {
+      var s = db.statementById[id];
+      var zh = state.lang === 'zh';
+      box.appendChild(el('figure', { class: 'official-statement' }, [
+        el('blockquote', { class: 'official-quote', lang: zh ? 'zh-HK' : 'en-GB', text: '“' + (zh ? s.quote_zh : s.quote_en) + '”' }),
+        zh ? el('p', { class: 'official-original' }, [el('span', { text: t('official_translation_note') + ' ' }), el('span', { lang: 'en-GB', text: '“' + s.quote_en + '”' })]) : null,
+        el('figcaption', { class: 'official-source' }, [
+          el('span', { class: 'official-body', text: (zh ? s.body_zh + '：' : s.body_en + ': ') }),
+          sourceLink({ url: s.url, label: zh ? s.document_zh + '，' + s.date_zh + '，' + s.section_zh : s.document_en + ', ' + s.date_en + ', ' + s.section_en })
+        ])
+      ]));
+    });
+    box.appendChild(el('p', { class: 'official-action' }, [el('strong', { text: t('label_what_to_do') + ': ' }), el('span', { text: t('official_action') })]));
+    return box;
+  }
+
   function card(r) {
     var key = pairKey(r);
+    if (r.official && !r.entry) {
+      return el('article', { class: 'card card-official', 'data-pair': key }, [
+        el('header', { class: 'card-head' }, [pairTitle(r), badgeFor(r)]),
+        officialBlock(r),
+        el('p', { class: 'card-disclaimer' }, disclaimerText())
+      ]);
+    }
     if (!r.entry) {
       return el('article', { class: 'card card-unknown', 'data-pair': key }, [
         el('header', { class: 'card-head' }, [pairTitle(r), badge('not_in_database')]),
@@ -730,8 +771,15 @@
       }
     }, [label, icon('chevron', 'toggle-chev')]);
 
-    art = el('article', { class: 'card card-' + e.risk + (open ? ' is-open' : ''), 'data-pair': key }, [
-      el('header', { class: 'card-head' }, [pairTitle(r), badge(e.risk, e.watch)]),
+    // With an official caution on top, the team's own rating and evidence follow under their own heading.
+    var withOfficial = !!r.official && r.status === L.OFFICIAL;
+    art = el('article', { class: 'card card-' + (withOfficial ? 'official' : e.risk) + (open ? ' is-open' : ''), 'data-pair': key }, [
+      el('header', { class: 'card-head' }, [pairTitle(r), withOfficial ? badgeFor(r) : badge(e.risk, e.watch)]),
+      withOfficial ? officialBlock(r) : null,
+      withOfficial ? el('div', { class: 'studies-head' }, [
+        el('h4', { class: 'block-label', text: t('label_studies') }),
+        el('p', { class: 'team-rating' }, [el('span', { text: t('label_team_rating') + ': ' }), badge(e.risk, e.watch, 'span')])
+      ]) : null,
       el('p', { class: 'effect', text: field(e, 'effect') }),
       field(e, 'heart_impact') ? el('div', { class: 'heart-impact' }, [
         icon('heart', 'heart-icon'),
@@ -766,8 +814,8 @@
     pendingOpen = null;
     if (target) openCards[target] = true;
 
-    var flagged = results.filter(function (r) { return r.entry && r.entry.risk !== 'none_reported'; }).length;
-    var unknown = results.filter(function (r) { return !r.entry; }).length;
+    var flagged = results.filter(isFlagged).length;
+    var unknown = results.filter(function (r) { return r.status === L.NOT_IN_DATABASE; }).length;
     head.appendChild(el('p', { class: 'lede', text: t('results_intro') }));
     var tally = el('ul', { class: 'tally' });
     if (flagged) tally.appendChild(el('li', { class: 'tally-flagged', text: t('results_counts_flagged', { n: flagged }) }));
@@ -869,17 +917,40 @@
     ]));
 
     var rows = L.checkPairs(db, state.herbs, state.drugs);
-    var rated = rows.filter(function (r) { return r.entry; });
-    var unknown = rows.filter(function (r) { return !r.entry; });
+    var rated = rows.filter(function (r) { return r.entry || r.official; });
+    var unknown = rows.filter(function (r) { return r.status === L.NOT_IN_DATABASE; });
 
     var flaggedSection = el('section', { class: 'summary-section' }, [el('h2', { text: t('summary_flagged') })]);
     if (!rated.length) flaggedSection.appendChild(el('p', { text: state.herbs.length && state.drugs.length ? t('summary_flagged_none') : t('cabinet_need_both') }));
     rated.forEach(function (r) {
       var e = r.entry;
+      // Official cautions: each agency's own words with document and date, before any team rating.
+      var officialRows = [];
+      if (r.official) {
+        r.official.statements.forEach(function (id) {
+          var s = db.statementById[id], zh = state.lang === 'zh';
+          officialRows.push(el('dt', { text: t('label_official') }));
+          officialRows.push(el('dd', null, [
+            el('span', { text: '“' + (zh ? s.quote_zh : s.quote_en) + '” ' }),
+            el('span', { class: 'muted', text: zh ? '（' + s.body_zh + '，' + s.document_zh + '，' + s.date_zh + '）' : '(' + s.body_en + ', ' + s.document_en + ', ' + s.date_en + ')' })
+          ]));
+        });
+      }
+      if (!e) {
+        flaggedSection.appendChild(el('div', { class: 'summary-row summary-official' }, [
+          el('div', { class: 'summary-row-head' }, [badgeFor(r), bilingualPair(r)]),
+          el('dl', { class: 'summary-dl' }, officialRows.concat([
+            el('dt', { text: t('label_what_to_do') }), el('dd', { text: t('official_action') })
+          ]))
+        ]));
+        return;
+      }
       var evidence = e.evidence_level.map(function (l) { return t('ev_' + l); }).join(' · ');
-      flaggedSection.appendChild(el('div', { class: 'summary-row summary-' + e.risk }, [
-        el('div', { class: 'summary-row-head' }, [badge(e.risk, e.watch), bilingualPair(r)]),
-        el('dl', { class: 'summary-dl' }, [
+      flaggedSection.appendChild(el('div', { class: 'summary-row summary-' + (r.status === L.OFFICIAL ? 'official' : e.risk) }, [
+        el('div', { class: 'summary-row-head' }, [badgeFor(r), bilingualPair(r)]),
+        el('dl', { class: 'summary-dl' }, officialRows.concat([
+          r.official ? el('dt', { text: t('label_team_rating') }) : null,
+          r.official ? el('dd', null, [badge(e.risk, e.watch, 'span')]) : null,
           el('dt', { text: t('label_rated_by') }), el('dd', { text: e.rating_source === 'HA' ? t('rated_by_ha') : t('rated_by_team') }),
           el('dt', { text: t('label_main_evidence') }), el('dd', { text: field(e, 'main_finding') + ' (' + e.sources[e.main_source].label + ')' }),
           field(e, 'heart_impact') ? el('dt', { text: t('label_heart_impact_short') }) : null,
@@ -888,7 +959,7 @@
           el('dt', { text: t('label_what_to_do') }), el('dd', { text: field(e, 'action') }),
           el('dt', { text: t('label_evidence') }), el('dd', { text: evidence }),
           el('dt', { text: t('label_sources') }), el('dd', null, [sourceList(e.sources)])
-        ])
+        ]))
       ]));
     });
     page.appendChild(flaggedSection);
@@ -957,6 +1028,8 @@
       scale,
       el('p', null, [badge('low', true)]),
       el('p', { text: t('about_low_watch') }),
+      el('p', null, [badge('official')]),
+      el('p', { text: t('about_official') }),
       el('p', null, [badge('not_in_database')]),
       el('p', { class: 'strong', text: t('about_not_in_db') }),
       el('p', { text: t('about_rating_source') })
@@ -1170,9 +1243,9 @@
     });
   }
 
-  Promise.all(['data/herbs.json', 'data/drugs.json', 'data/interactions.json'].map(getJson))
+  Promise.all(['data/herbs.json', 'data/drugs.json', 'data/interactions.json', 'data/official.json'].map(getJson))
     .then(function (d) {
-      db = L.createDb(d[0], d[1], d[2]);
+      db = L.createDb(d[0], d[1], d[2], d[3]);
       drugGroups = Array.isArray(d[1].groups) ? d[1].groups : [];
       load();
       I.setLang(state.lang);

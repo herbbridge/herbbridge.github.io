@@ -13,8 +13,12 @@
 
   var RISKS = ['high', 'moderate', 'low', 'none_reported'];
   var NOT_IN_DATABASE = 'not_in_database';
-  // Results are sorted in this order: High → Moderate → Low → No reported risk → Not in database.
-  var STATUS_ORDER = RISKS.concat([NOT_IN_DATABASE]);
+  // A government health agency's own words about a pair (data/official.json). Never a rating.
+  var OFFICIAL = 'official';
+  var OFFICIAL_KINDS = ['official', 'disagree'];
+  // Results are sorted in this order: High → Official caution → Moderate → Low → No reported risk
+  // → Not in database. An official caution sorts high so a pair never looks safer than an agency says.
+  var STATUS_ORDER = ['high', OFFICIAL, 'moderate', 'low', 'none_reported', NOT_IN_DATABASE];
   var EVIDENCE_LEVELS = ['case_reports', 'human_trial', 'review', 'lab_animal', 'official_guidance'];
   var RATING_SOURCES = ['HA', 'team'];
 
@@ -38,11 +42,14 @@
       .filter(Boolean);
   }
 
-  function createDb(herbsJson, drugsJson, interactionsJson) {
+  function createDb(herbsJson, drugsJson, interactionsJson, officialJson) {
     var db = {
       herbs: herbsJson.herbs,
       drugs: drugsJson.drugs,
       interactions: interactionsJson.interactions,
+      statements: (officialJson && officialJson.statements) || [],
+      cautions: (officialJson && officialJson.cautions) || [],
+      statementById: Object.create(null),
       lastUpdated: interactionsJson.last_updated || null,
       // Plain maps (no prototype), so ids like "constructor" can never match anything.
       herbById: Object.create(null),
@@ -50,6 +57,7 @@
     };
     db.herbs.forEach(function (h) { db.herbById[h.id] = h; });
     db.drugs.forEach(function (d) { db.drugById[d.id] = d; });
+    db.statements.forEach(function (s) { db.statementById[s.id] = s; });
     return db;
   }
 
@@ -86,6 +94,26 @@
     return exact || byClass;
   }
 
+  /* The official caution for one pair, or null. Same matching rule as findInteraction. */
+  function findOfficial(db, herbId, drugId) {
+    var drug = db.drugById[drugId];
+    if (!drug || !db.herbById[herbId]) return null;
+    var exact = null, byClass = null;
+    db.cautions.forEach(function (c) {
+      if (c.herb_id !== herbId) return;
+      if (c.drug_id === drugId && !exact) exact = c;
+      else if (c.drug_class && Array.isArray(drug.classes) && drug.classes.indexOf(c.drug_class) !== -1 && !byClass) byClass = c;
+    });
+    return exact || byClass;
+  }
+
+  /* What a pair shows: the team rating, unless an official caution exists (then that, except
+     when the team rating is already High, which stays). Never makes a pair look safer. */
+  function statusOf(entry, official) {
+    if (official && !(entry && entry.risk === 'high')) return OFFICIAL;
+    return entry ? entry.risk : NOT_IN_DATABASE;
+  }
+
   function unique(ids) {
     var seen = Object.create(null);
     return (ids || []).filter(function (id) {
@@ -104,11 +132,13 @@
     herbs.forEach(function (herbId, hi) {
       drugs.forEach(function (drugId, di) {
         var entry = findInteraction(db, herbId, drugId);
+        var official = findOfficial(db, herbId, drugId);
         results.push({
           herb: db.herbById[herbId],
           drug: db.drugById[drugId],
           entry: entry,
-          status: entry ? entry.risk : NOT_IN_DATABASE,
+          official: official,
+          status: statusOf(entry, official),
           _order: hi * 1000 + di
         });
       });
@@ -196,6 +226,38 @@
       if (typeof e.zh_reviewed !== 'boolean') problem(where + ': zh_reviewed must be true or false');
     });
 
+    // Official cautions: every quote has its source; every caution points at known statements.
+    var stIds = {};
+    db.statements.forEach(function (s, i) {
+      var where = 'official statement #' + (i + 1) + ' (' + (s.id || 'no id') + ')';
+      if (!isText(s.id)) problem(where + ': missing id');
+      if (stIds[s.id]) problem(where + ': duplicate id');
+      stIds[s.id] = true;
+      ['body_en', 'body_zh', 'document_en', 'document_zh', 'date_en', 'date_zh', 'section_en', 'section_zh', 'quote_en', 'quote_zh', 'verified'].forEach(function (f) {
+        if (!isText(s[f])) problem(where + ': missing ' + f);
+      });
+      if (!/^https:\/\/[^\s]+$/.test(s.url || '')) problem(where + ': url must start with https://');
+    });
+    var cIds = {}, cKeys = {};
+    db.cautions.forEach(function (c, i) {
+      var where = 'official caution #' + (i + 1) + ' (' + (c.id || 'no id') + ')';
+      if (!isText(c.id)) problem(where + ': missing id');
+      if (cIds[c.id]) problem(where + ': duplicate id');
+      cIds[c.id] = true;
+      if (typeof c.herb_id !== 'string' || !db.herbById[c.herb_id]) problem(where + ': unknown herb_id "' + c.herb_id + '"');
+      if (!!c.drug_id === !!c.drug_class) problem(where + ': needs exactly one of drug_id or drug_class');
+      if (c.drug_id && !db.drugById[c.drug_id]) problem(where + ': unknown drug_id "' + c.drug_id + '"');
+      if (c.drug_class && !classes[c.drug_class]) problem(where + ': no drug has class "' + c.drug_class + '"');
+      var key = c.herb_id + '|' + (c.drug_id ? 'drug:' + c.drug_id : 'class:' + c.drug_class);
+      if (cKeys[key]) problem(where + ': same pair as ' + cKeys[key]);
+      cKeys[key] = c.id;
+      if (OFFICIAL_KINDS.indexOf(c.kind) === -1) problem(where + ': kind must be one of ' + OFFICIAL_KINDS.join(', '));
+      if (!Array.isArray(c.statements) || !c.statements.length) problem(where + ': needs at least one statement');
+      else c.statements.forEach(function (id) { if (!db.statementById[id]) problem(where + ': unknown statement "' + id + '"'); });
+      if (c.kind === 'disagree' && !findInteraction(db, c.herb_id, c.drug_id || '')) problem(where + ': "disagree" needs a team rating for the same pair');
+      if (typeof c.zh_reviewed !== 'boolean') problem(where + ': zh_reviewed must be true or false');
+    });
+
     // A drug matching two different class entries for the same herb would be ambiguous.
     db.herbs.forEach(function (h) {
       db.drugs.forEach(function (d) {
@@ -212,12 +274,14 @@
   return {
     RISKS: RISKS,
     NOT_IN_DATABASE: NOT_IN_DATABASE,
+    OFFICIAL: OFFICIAL,
     STATUS_ORDER: STATUS_ORDER,
     EVIDENCE_LEVELS: EVIDENCE_LEVELS,
     normalise: normalise,
     createDb: createDb,
     search: search,
     findInteraction: findInteraction,
+    findOfficial: findOfficial,
     checkPairs: checkPairs,
     validateData: validateData
   };

@@ -90,6 +90,24 @@ You only edit `data/interactions.json`. No code changes.
    new entry. Once the team agrees its rating, add it to `BRIEF_RATINGS` in
    `tests/test-suite.js`. This stops ratings being changed by accident later.
 
+## Official cautions (`data/official.json`)
+
+Some pairs have no study but a government health agency (e.g. the European Medicines Agency,
+Health Canada) has written about them. These are shown as **"Official caution"**, quoting the
+agency's own words, never reworded, with the body, document, date and section.
+
+- `statements`: one per quoted sentence: `body_en/zh`, `document_en/zh`, `date_en/zh`,
+  `section_en/zh`, `url`, `quote_en` (exactly as in the document), `quote_zh` (a translation;
+  the English original is always shown under it), `verified` (date it was checked in the
+  document).
+- `cautions`: which herb × drug (or `drug_class`) a set of statements applies to, and `kind`:
+  `"official"`, or `"disagree"` when the agency and the team rating do not agree.
+- An official caution shows instead of a Moderate/Low team rating (the team evidence stays on
+  the card under "What the studies in our database show"), but never instead of High.
+- Every quote is locked in `VERIFIED_QUOTES` and every caution in `OFFICIAL_CAUTIONS` in
+  `tests/test-suite.js`. Only add a statement after a person has opened the official document
+  and copied the sentence.
+
 To add a herb or a medicine, add it to `data/herbs.json` or `data/drugs.json` with its
 English and Chinese names and search `aliases` (pinyin, Cantonese romanisation, brand
 names). Only add names you have checked.

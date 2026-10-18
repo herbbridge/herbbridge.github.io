@@ -2,13 +2,15 @@
 
 Ten realistic medicine lists for heart patients (HerbSafe’s focus for Challenge 4: cardiovascular disease). Every person here is fictional.
 
-The machine-readable copy is `tests/test-cases.json`. Check both with `node tests/run-tests.js`, or open `tests/test.html` through a local server. Results are listed in the order the Results screen shows them: High → Moderate → Low → No reported risk → Not in database.
+The machine-readable copy is `tests/test-cases.json`. Check both with `node tests/run-tests.js`, or open `tests/test.html` through a local server. Results are listed in the order the Results screen shows them: High → Official caution → Moderate → Low → No reported risk → Not in database.
 
 "Not in database" means we have no record. It does **not** mean the pair is safe.
 
 The heart-disease update (18 Oct 2026) added the “Why this matters for your heart” line, medicine groups and herb uses. **No rating changed**: the test “every rating, watch flag and rating source matches the brief” guards this, and every expected result below is unchanged.
 
 The 15 owner-approved pairs went live on 18 Oct 2026. Cases 1, 4 and 10 now expect those ratings where they used to expect "Not in database"; no earlier rating changed.
+
+Official cautions (18 Oct 2026, owner-approved): where a government health agency has written about a pair, the result is "Official caution" and the card quotes the agency word for word (`data/official.json`). Team ratings are unchanged and still shown under the official quotes; a High team rating is never replaced. Cases 4, 7 and 9 changed.
 
 ## 1. Mrs Wong (demo case)
 
@@ -57,11 +59,11 @@ Heart failure and atrial fibrillation: warfarin, aspirin, digoxin and furosemide
 | Herb | Medicine | Expected result | Entry | Why this matters for your heart |
 |---|---|---|---|---|
 | Dong quai | Warfarin | High | `dong_quai-warfarin` | Too much bleeding, including bleeding in the brain. |
-| Liquorice | Digoxin | Moderate | `liquorice-digoxin` | Low potassium can lead to a dangerous heart rhythm. |
-| Liquorice | Furosemide | Moderate | `liquorice-diuretic` | Low potassium can lead to a dangerous heart rhythm. |
+| Ginkgo | Warfarin | Official caution · sources disagree | `ginkgo-warfarin` + `ginkgo-warfarin-official` | Watch for unusual bruising or bleeding. |
+| Ginkgo | Aspirin | Official caution · sources disagree | `ginkgo-aspirin` + `ginkgo-aspirin-official` | Watch for unusual bruising or bleeding. |
+| Liquorice | Digoxin | Official caution | `liquorice-digoxin` + `liquorice-digoxin-official` | Low potassium can lead to a dangerous heart rhythm. |
+| Liquorice | Furosemide | Official caution | `liquorice-diuretic` + `liquorice-diuretic-official` | Low potassium can lead to a dangerous heart rhythm. |
 | Dong quai | Aspirin | Low | `dong_quai-aspirin` | Watch for unusual bruising or bleeding. |
-| Ginkgo | Warfarin | Low (watch) | `ginkgo-warfarin` | Watch for unusual bruising or bleeding. |
-| Ginkgo | Aspirin | Low (watch) | `ginkgo-aspirin` | Watch for unusual bruising or bleeding. |
 | Dong quai | Digoxin | Not in database | none | (not shown on grey cards) |
 | Dong quai | Furosemide | Not in database | none | (not shown on grey cards) |
 | Ginkgo | Digoxin | Not in database | none | (not shown on grey cards) |
@@ -94,14 +96,14 @@ Takes Korean ginseng with warfarin and clopidogrel after a stent. Clopidogrel ha
 
 ## 7. Liquorice with furosemide only
 
-On furosemide for swollen ankles, takes a herbal tea containing 甘草. Matches through the diuretic class.
+On furosemide for swollen ankles, takes a herbal tea containing 甘草. Matches through the diuretic class, for both the team rating and the EMA caution.
 
 - **Chinese herbs:** Liquorice 甘草
 - **Western medicines:** Furosemide – Blood pressure and fluid
 
 | Herb | Medicine | Expected result | Entry | Why this matters for your heart |
 |---|---|---|---|---|
-| Liquorice | Furosemide | Moderate | `liquorice-diuretic` | Low potassium can lead to a dangerous heart rhythm. |
+| Liquorice | Furosemide | Official caution | `liquorice-diuretic` + `liquorice-diuretic-official` | Low potassium can lead to a dangerous heart rhythm. |
 
 ## 8. Red yeast rice with two statins
 
@@ -117,15 +119,15 @@ Switched from atorvastatin to rosuvastatin and still has both on the list, plus 
 
 ## 9. Ginkgo with aspirin and clopidogrel
 
-Takes ginkgo for memory, on aspirin and clopidogrel. Only ginkgo + aspirin has a record; ginkgo + clopidogrel must show 'not in database'.
+Takes ginkgo for memory, on aspirin and clopidogrel. Both show an official caution: ginkgo + aspirin quotes Health Canada and the EMA over the team rating (sources disagree); ginkgo + clopidogrel has no team rating, only the official quotes.
 
 - **Chinese herbs:** Ginkgo 銀杏
 - **Western medicines:** Aspirin – Blood thinners (stroke and heart valve protection), Clopidogrel – Blood thinners (stroke and heart valve protection)
 
 | Herb | Medicine | Expected result | Entry | Why this matters for your heart |
 |---|---|---|---|---|
-| Ginkgo | Aspirin | Low (watch) | `ginkgo-aspirin` | Watch for unusual bruising or bleeding. |
-| Ginkgo | Clopidogrel | Not in database | none | (not shown on grey cards) |
+| Ginkgo | Aspirin | Official caution · sources disagree | `ginkgo-aspirin` + `ginkgo-aspirin-official` | Watch for unusual bruising or bleeding. |
+| Ginkgo | Clopidogrel | Official caution | `ginkgo-clopidogrel-official` | (official quote shown) |
 
 ## 10. Danshen, sanqi and safflower with warfarin and aspirin
 

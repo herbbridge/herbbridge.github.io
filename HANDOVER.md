@@ -121,6 +121,16 @@ For Sunday this is done WITHOUT accounts, a server or scanning:
   NIH, EMA, HK DH/HA, WHO, MSKCC) to reduce grey cards. Candidates go to
   proposals/herb-warnings-*.json; how they are shown in the app is still to be decided.
   Cache herbsafe-v8.
+- Official cautions LIVE (owner approved 18 Oct): data/official.json, 8 statements from the
+  EMA (ginkgo 2015, liquorice Revision 1 2026) and Health Canada (ginkgo, American ginseng,
+  Panax ginseng), verified word for word by the owner's checker. 9 pairs: ginkgo + warfarin
+  and + aspirin ("sources disagree", team Low · watch still shown), ginkgo + clopidogrel,
+  ginkgo + amlodipine, American/Asian ginseng + digoxin, liquorice + amlodipine, liquorice +
+  furosemide and + digoxin (EMA "not to be used concomitantly"). Ginkgo + furosemide stays
+  grey (Health Canada names only high blood pressure medications). Ratings unchanged.
+  Open: the EMA ginkgo sentence "Available studies with warfarin do not indicate that there
+  is an interaction" was quoted by the owner but not in the checker's report; verify it in
+  the EMA PDF before adding it to the ginkgo + warfarin card. Cache herbsafe-v9.
 
 ## Future full app (owner's long-term plan; pitch as roadmap, do not build now)
 - Accounts (username + password) and a private, secure database of each person's
