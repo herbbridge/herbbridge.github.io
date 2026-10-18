@@ -625,7 +625,7 @@ html.sheet-open, html.sheet-open body { overflow: hidden; }
   .wrap { max-width: none; padding: 0; }
   main { padding: 0; }
   a { color: #000; text-decoration: none; }
-  .summary { max-width: none; padding: 0; }
+  .summary { max-width: none; padding: 0; line-height: 1.4; } /* keeps Mrs Wong on one A4 page */
   .summary-head h1 { font-size: 16pt; margin-bottom: 2pt; }
   .summary-kicker { color: #000; margin-bottom: 2pt; }
   .summary-lists, .summary-section { border-top: 1pt solid #000; margin-top: 8pt; padding-top: 6pt; }
