@@ -106,6 +106,13 @@ For Sunday this is done WITHOUT accounts, a server or scanning:
   to the next step, then to the result. The demo is a small link under step 1. The grey
   "Check" bar is hidden until both lists have something. New Chinese strings unreviewed.
   Cache herbsafe-v6.
+- Grey cards (owner, 18 Oct, "grey doesn't solve any problems"): the required wording is
+  unchanged; under it a "What you can do" step with a button to the doctor summary, which
+  lists every not-in-database pair for the pharmacist. No medical claim. Cache herbsafe-v7.
+- More pairs (Task 3) started 18 Oct for 16 grey combinations (antiplatelets with ginkgo and
+  the ginsengs; liquorice + amlodipine; danshen + furosemide; goji/sanqi/safflower with
+  digoxin, amlodipine, furosemide). Research → independent source check → wording/Chinese
+  check → proposals/. Nothing goes live until the owner approves each pair.
 
 ## Future full app (owner's long-term plan; pitch as roadmap, do not build now)
 - Accounts (username + password) and a private, secure database of each person's

@@ -644,6 +644,15 @@
     return el('div', { class: 'block ' + (cls || '') }, [el('h4', { class: 'block-label', text: label })].concat(content));
   }
 
+  // Under the required grey wording: a next step, so the card is not a dead end. No medical claim.
+  function unknownNext() {
+    return el('div', { class: 'unknown-next' }, [
+      el('h4', { class: 'block-label', text: t('unknown_next_title') }),
+      el('p', { text: t('unknown_next_text') }),
+      el('a', { class: 'btn btn-secondary btn-small', href: '#/summary' }, [el('span', { text: t('unknown_next_button') }), icon('arrow')])
+    ]);
+  }
+
   // All "not in our database" pairs in one grey box: same icon, the exact required wording, the disclaimer.
   function unknownGroupCard(rows) {
     var pairs = el('ul', { class: 'unknown-pairs' });
@@ -660,6 +669,7 @@
       el('header', { class: 'card-head' }, [badge('not_in_database')]),
       el('p', { class: 'unknown-text', text: t('not_in_db_text') }),
       pairs,
+      unknownNext(),
       el('p', { class: 'card-disclaimer', text: t('card_disclaimer') })
     ]);
   }
@@ -670,6 +680,7 @@
       return el('article', { class: 'card card-unknown', 'data-pair': key }, [
         el('header', { class: 'card-head' }, [pairTitle(r), badge('not_in_database')]),
         el('p', { class: 'unknown-text', text: t('not_in_db_text') }),
+        unknownNext(),
         el('p', { class: 'card-disclaimer', text: t('card_disclaimer') })
       ]);
     }

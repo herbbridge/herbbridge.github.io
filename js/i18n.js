@@ -99,6 +99,9 @@
       pro_english_only: '',
       opens_new_tab: '(opens in a new tab)',
       not_in_db_text: 'We have no record of this combination. This does not mean it is safe. Please ask your pharmacist or doctor.',
+      unknown_next_title: 'What you can do',
+      unknown_next_text: 'Show your pharmacist or doctor a list of these combinations. HerbSafe makes the list for you.',
+      unknown_next_button: 'Make the list for my pharmacist',
       card_disclaimer: 'HerbSafe gives information, not medical advice. Never stop or change a medicine without talking to your doctor or pharmacist.',
 
       ev_case_reports: 'Case reports',
@@ -281,6 +284,9 @@
       pro_english_only: '只有英文版本。',
       opens_new_tab: '（喺新分頁開啟）',
       not_in_db_text: '我哋冇呢個配搭嘅記錄。咁唔代表安全。請問你嘅藥劑師或者醫生。',
+      unknown_next_title: '你可以點做',
+      unknown_next_text: '將呢啲配搭嘅清單俾藥劑師或者醫生睇。HerbSafe 幫你整好張清單。',
+      unknown_next_button: '整張清單俾藥劑師睇',
       card_disclaimer: 'HerbSafe 只提供資訊，唔係醫療建議。未同醫生或者藥劑師傾過之前，千祈唔好自行停藥或者改藥。',
 
       ev_case_reports: '病例報告',

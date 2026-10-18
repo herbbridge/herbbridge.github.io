@@ -225,6 +225,9 @@ main:focus { outline: none; }
 }
 .link-button:hover { color: var(--accent-hover); }
 .check-bar[hidden] { display: none; }
+/* Grey cards: a next step under the required wording */
+.unknown-next { margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--unknown-line); }
+.unknown-next p { margin: 0.25rem 0 0.75rem; }
 
 .status-list { list-style: none; margin: 1rem 0 0; padding: 0; border-top: 1px solid var(--line); }
 .status-row {
