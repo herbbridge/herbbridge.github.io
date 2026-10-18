@@ -9,7 +9,7 @@
       "drugs": ["warfarin", "amlodipine"],
       "expected": [
         { "herb": "danshen", "drug": "warfarin", "status": "moderate", "entry": "danshen-warfarin" },
-        { "herb": "danshen", "drug": "amlodipine", "status": "not_in_database", "entry": null }
+        { "herb": "danshen", "drug": "amlodipine", "status": "low", "entry": "danshen-amlodipine" }
       ]
     },
     {
@@ -45,9 +45,9 @@
         { "herb": "dong_quai", "drug": "warfarin", "status": "high", "entry": "dong_quai-warfarin" },
         { "herb": "liquorice", "drug": "digoxin", "status": "moderate", "entry": "liquorice-digoxin" },
         { "herb": "liquorice", "drug": "furosemide", "status": "moderate", "entry": "liquorice-diuretic" },
+        { "herb": "dong_quai", "drug": "aspirin", "status": "low", "entry": "dong_quai-aspirin" },
         { "herb": "ginkgo", "drug": "warfarin", "status": "low", "entry": "ginkgo-warfarin" },
         { "herb": "ginkgo", "drug": "aspirin", "status": "low", "entry": "ginkgo-aspirin" },
-        { "herb": "dong_quai", "drug": "aspirin", "status": "not_in_database", "entry": null },
         { "herb": "dong_quai", "drug": "digoxin", "status": "not_in_database", "entry": null },
         { "herb": "dong_quai", "drug": "furosemide", "status": "not_in_database", "entry": null },
         { "herb": "ginkgo", "drug": "digoxin", "status": "not_in_database", "entry": null },
@@ -112,16 +112,16 @@
     {
       "id": "10-blood-circulation-mix",
       "name": "Danshen, sanqi and safflower with warfarin and aspirin",
-      "story": "A 'blood circulation' herbal mix (丹參, 三七, 紅花) taken with warfarin and aspirin. Only danshen + warfarin has a record; every other pair must show 'not in database', never 'safe'.",
+      "story": "A 'blood circulation' herbal mix (丹參, 三七, 紅花) taken with warfarin and aspirin. Every pair now has a record: three Moderate and three Low.",
       "herbs": ["danshen", "sanqi", "safflower"],
       "drugs": ["warfarin", "aspirin"],
       "expected": [
         { "herb": "danshen", "drug": "warfarin", "status": "moderate", "entry": "danshen-warfarin" },
-        { "herb": "danshen", "drug": "aspirin", "status": "not_in_database", "entry": null },
-        { "herb": "sanqi", "drug": "warfarin", "status": "not_in_database", "entry": null },
-        { "herb": "sanqi", "drug": "aspirin", "status": "not_in_database", "entry": null },
-        { "herb": "safflower", "drug": "warfarin", "status": "not_in_database", "entry": null },
-        { "herb": "safflower", "drug": "aspirin", "status": "not_in_database", "entry": null }
+        { "herb": "sanqi", "drug": "aspirin", "status": "moderate", "entry": "sanqi-aspirin" },
+        { "herb": "safflower", "drug": "warfarin", "status": "moderate", "entry": "safflower-warfarin" },
+        { "herb": "danshen", "drug": "aspirin", "status": "low", "entry": "danshen-aspirin" },
+        { "herb": "sanqi", "drug": "warfarin", "status": "low", "entry": "sanqi-warfarin" },
+        { "herb": "safflower", "drug": "aspirin", "status": "low", "entry": "safflower-aspirin" }
       ]
     }
   ]

@@ -8,6 +8,8 @@ The machine-readable copy is `tests/test-cases.json`. Check both with `node test
 
 The heart-disease update (18 Oct 2026) added the “Why this matters for your heart” line, medicine groups and herb uses. **No rating changed**: the test “every rating, watch flag and rating source matches the brief” guards this, and every expected result below is unchanged.
 
+The 15 owner-approved pairs went live on 18 Oct 2026. Cases 1, 4 and 10 now expect those ratings where they used to expect "Not in database"; no earlier rating changed.
+
 ## 1. Mrs Wong (demo case)
 
 Fictional 72-year-old with atrial fibrillation, on warfarin and amlodipine, who buys danshen.
@@ -18,7 +20,7 @@ Fictional 72-year-old with atrial fibrillation, on warfarin and amlodipine, who 
 | Herb | Medicine | Expected result | Entry | Why this matters for your heart |
 |---|---|---|---|---|
 | Danshen | Warfarin | Moderate | `danshen-warfarin` | Too much bleeding, including bleeding in the brain. |
-| Danshen | Amlodipine | Not in database | none | (not shown on grey cards) |
+| Danshen | Amlodipine | Low | `danshen-amlodipine` | Amlodipine controls your blood pressure. Whether danshen weakens it in people is not known. |
 
 ## 2. Nothing in our database
 
@@ -57,9 +59,9 @@ Heart failure and atrial fibrillation: warfarin, aspirin, digoxin and furosemide
 | Dong quai | Warfarin | High | `dong_quai-warfarin` | Too much bleeding, including bleeding in the brain. |
 | Liquorice | Digoxin | Moderate | `liquorice-digoxin` | Low potassium can lead to a dangerous heart rhythm. |
 | Liquorice | Furosemide | Moderate | `liquorice-diuretic` | Low potassium can lead to a dangerous heart rhythm. |
+| Dong quai | Aspirin | Low | `dong_quai-aspirin` | Watch for unusual bruising or bleeding. |
 | Ginkgo | Warfarin | Low (watch) | `ginkgo-warfarin` | Watch for unusual bruising or bleeding. |
 | Ginkgo | Aspirin | Low (watch) | `ginkgo-aspirin` | Watch for unusual bruising or bleeding. |
-| Dong quai | Aspirin | Not in database | none | (not shown on grey cards) |
 | Dong quai | Digoxin | Not in database | none | (not shown on grey cards) |
 | Dong quai | Furosemide | Not in database | none | (not shown on grey cards) |
 | Ginkgo | Digoxin | Not in database | none | (not shown on grey cards) |
@@ -127,7 +129,7 @@ Takes ginkgo for memory, on aspirin and clopidogrel. Only ginkgo + aspirin has a
 
 ## 10. Danshen, sanqi and safflower with warfarin and aspirin
 
-A 'blood circulation' herbal mix (丹參, 三七, 紅花) taken with warfarin and aspirin. Only danshen + warfarin has a record; every other pair must show 'not in database', never 'safe'.
+A 'blood circulation' herbal mix (丹參, 三七, 紅花) taken with warfarin and aspirin. Every pair now has a record: three Moderate and three Low.
 
 - **Chinese herbs:** Danshen 丹參, Sanqi 三七, Safflower 紅花
 - **Western medicines:** Warfarin – Blood thinners (stroke and heart valve protection), Aspirin – Blood thinners (stroke and heart valve protection)
@@ -135,8 +137,8 @@ A 'blood circulation' herbal mix (丹參, 三七, 紅花) taken with warfarin an
 | Herb | Medicine | Expected result | Entry | Why this matters for your heart |
 |---|---|---|---|---|
 | Danshen | Warfarin | Moderate | `danshen-warfarin` | Too much bleeding, including bleeding in the brain. |
-| Danshen | Aspirin | Not in database | none | (not shown on grey cards) |
-| Sanqi | Warfarin | Not in database | none | (not shown on grey cards) |
-| Sanqi | Aspirin | Not in database | none | (not shown on grey cards) |
-| Safflower | Warfarin | Not in database | none | (not shown on grey cards) |
-| Safflower | Aspirin | Not in database | none | (not shown on grey cards) |
+| Sanqi | Aspirin | Moderate | `sanqi-aspirin` | A stronger anti-clotting effect could raise the chance of bleeding. |
+| Safflower | Warfarin | Moderate | `safflower-warfarin` | Too much bleeding, including bleeding in the brain. |
+| Danshen | Aspirin | Low (watch) | `danshen-aspirin` | Watch for unusual bruising or bleeding. |
+| Sanqi | Warfarin | Low (watch) | `sanqi-warfarin` | If warfarin works too strongly you may bleed; if it works less well, the risk of clots and stroke rises. |
+| Safflower | Aspirin | Low | `safflower-aspirin` | Watch for unusual bruising or bleeding. |

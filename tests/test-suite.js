@@ -23,7 +23,24 @@
     'ginkgo-aspirin':            { risk: 'low',      watch: true,  rating_source: 'team' },
     'liquorice-digoxin':         { risk: 'moderate', watch: false, rating_source: 'team' },
     'liquorice-diuretic':        { risk: 'moderate', watch: false, rating_source: 'team' },
-    'red_yeast_rice-statin':     { risk: 'high',     watch: false, rating_source: 'team' }
+    'red_yeast_rice-statin':     { risk: 'high',     watch: false, rating_source: 'team' },
+    // Approved by the owner on 18 Oct 2026 (proposals/approved-pairs.json).
+    // watch is true on goji and safflower + warfarin as checked; the app shows it only for Low.
+    'goji-warfarin':             { risk: 'high',     watch: true,  rating_source: 'team' },
+    'safflower-warfarin':        { risk: 'moderate', watch: true,  rating_source: 'team' },
+    'safflower-aspirin':         { risk: 'low',      watch: false, rating_source: 'team' },
+    'safflower-clopidogrel':     { risk: 'low',      watch: false, rating_source: 'team' },
+    'sanqi-warfarin':            { risk: 'low',      watch: true,  rating_source: 'team' },
+    'sanqi-aspirin':             { risk: 'moderate', watch: false, rating_source: 'team' },
+    'sanqi-clopidogrel':         { risk: 'low',      watch: true,  rating_source: 'team' },
+    'danshen-aspirin':           { risk: 'low',      watch: true,  rating_source: 'team' },
+    'danshen-clopidogrel':       { risk: 'low',      watch: true,  rating_source: 'team' },
+    'danshen-digoxin':           { risk: 'low',      watch: false, rating_source: 'team' },
+    'danshen-rosuvastatin':      { risk: 'low',      watch: false, rating_source: 'team' },
+    'danshen-atorvastatin':      { risk: 'low',      watch: false, rating_source: 'team' },
+    'danshen-amlodipine':        { risk: 'low',      watch: false, rating_source: 'team' },
+    'dong_quai-aspirin':         { risk: 'low',      watch: false, rating_source: 'team' },
+    'dong_quai-clopidogrel':     { risk: 'low',      watch: false, rating_source: 'team' }
   };
 
   var SEARCH_CASES = [
@@ -154,9 +171,20 @@
       });
       return { pass: bad.length === 0, detail: bad.map(function (r) { return r.herb.id + ' × ' + r.drug.id + ' → ' + r.status; }).join('\n') };
     });
-    check('Safety rules', 'goji, sanqi and safflower show "not_in_database" with every drug', function () {
-      var rows = lookup.checkPairs(db, ['goji', 'sanqi', 'safflower'], ids(db.drugs));
-      return rows.length === 3 * db.drugs.length && rows.every(function (r) { return r.status === 'not_in_database' && r.entry === null; });
+    // Pairs with no record yet, written out by hand. Remove a pair here only when its entry is approved.
+    var STILL_UNRECORDED = {
+      goji:      ['aspirin', 'clopidogrel', 'atorvastatin', 'simvastatin', 'rosuvastatin', 'digoxin', 'amlodipine', 'furosemide'],
+      sanqi:     ['atorvastatin', 'simvastatin', 'rosuvastatin', 'digoxin', 'amlodipine', 'furosemide'],
+      safflower: ['atorvastatin', 'simvastatin', 'rosuvastatin', 'digoxin', 'amlodipine', 'furosemide']
+    };
+    check('Safety rules', 'goji, sanqi and safflower show "not_in_database" with the medicines that still have no record', function () {
+      var bad = [];
+      Object.keys(STILL_UNRECORDED).forEach(function (h) {
+        var rows = lookup.checkPairs(db, [h], STILL_UNRECORDED[h]);
+        if (rows.length !== STILL_UNRECORDED[h].length) bad.push(h + ': expected ' + STILL_UNRECORDED[h].length + ' rows, got ' + rows.length);
+        rows.forEach(function (r) { if (r.status !== 'not_in_database' || r.entry !== null) bad.push(h + ' × ' + r.drug.id + ' → ' + r.status); });
+      });
+      return { pass: bad.length === 0, detail: bad.join('\n') };
     });
     check('Safety rules', 'results are sorted High → Moderate → Low → No reported risk → Not in database', function () {
       var all = lookup.checkPairs(db, ids(db.herbs), ids(db.drugs));
