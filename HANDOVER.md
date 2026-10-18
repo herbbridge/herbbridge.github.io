@@ -113,6 +113,14 @@ For Sunday this is done WITHOUT accounts, a server or scanning:
   the ginsengs; liquorice + amlodipine; danshen + furosemide; goji/sanqi/safflower with
   digoxin, amlodipine, furosemide). Research → independent source check → wording/Chinese
   check → proposals/. Nothing goes live until the owner approves each pair.
+- Owner, 18 Oct: "sources must be officially ensured". Every live pair so far was checked by
+  web search only, so after every disclaimer the app now says (in bold) "Prototype: this
+  information has not yet been reviewed by a pharmacist." Round 2 pairs are ON HOLD (not
+  live). Next: a pharmacist signs off each pair ("reviewed by" record) before real use.
+- Owner approved researching herb-level warnings from OFFICIAL sources only (regulators,
+  NIH, EMA, HK DH/HA, WHO, MSKCC) to reduce grey cards. Candidates go to
+  proposals/herb-warnings-*.json; how they are shown in the app is still to be decided.
+  Cache herbsafe-v8.
 
 ## Future full app (owner's long-term plan; pitch as roadmap, do not build now)
 - Accounts (username + password) and a private, secure database of each person's

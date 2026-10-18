@@ -644,6 +644,11 @@
     return el('div', { class: 'block ' + (cls || '') }, [el('h4', { class: 'block-label', text: label })].concat(content));
   }
 
+  // The required disclaimer, word for word, then the prototype notice (owner, 18 Oct).
+  function disclaimerText() {
+    return [t('card_disclaimer'), ' ', el('strong', { class: 'prototype-note', text: t('prototype_note') })];
+  }
+
   // Under the required grey wording: a next step, so the card is not a dead end. No medical claim.
   function unknownNext() {
     return el('div', { class: 'unknown-next' }, [
@@ -670,7 +675,7 @@
       el('p', { class: 'unknown-text', text: t('not_in_db_text') }),
       pairs,
       unknownNext(),
-      el('p', { class: 'card-disclaimer', text: t('card_disclaimer') })
+      el('p', { class: 'card-disclaimer' }, disclaimerText())
     ]);
   }
 
@@ -681,7 +686,7 @@
         el('header', { class: 'card-head' }, [pairTitle(r), badge('not_in_database')]),
         el('p', { class: 'unknown-text', text: t('not_in_db_text') }),
         unknownNext(),
-        el('p', { class: 'card-disclaimer', text: t('card_disclaimer') })
+        el('p', { class: 'card-disclaimer' }, disclaimerText())
       ]);
     }
     var e = r.entry;
@@ -738,7 +743,7 @@
       ]),
       toggleBtn,
       details,
-      el('p', { class: 'card-disclaimer', text: t('card_disclaimer') })
+      el('p', { class: 'card-disclaimer' }, disclaimerText())
     ]);
     return art;
   }
@@ -768,7 +773,7 @@
     if (flagged) tally.appendChild(el('li', { class: 'tally-flagged', text: t('results_counts_flagged', { n: flagged }) }));
     if (unknown) tally.appendChild(el('li', { class: 'tally-unknown', text: t('results_counts_unknown', { n: unknown }) }));
     head.appendChild(tally);
-    head.appendChild(el('p', { class: 'disclaimer-box', text: t('card_disclaimer') }));
+    head.appendChild(el('p', { class: 'disclaimer-box' }, disclaimerText()));
 
     // Groups in the fixed order High → Moderate → Low → No reported risk → Not in our database.
     L.STATUS_ORDER.forEach(function (status) {
@@ -898,7 +903,7 @@
       ]));
     }
 
-    page.appendChild(el('p', { class: 'disclaimer-box summary-disclaimer', text: t('card_disclaimer') }));
+    page.appendChild(el('p', { class: 'disclaimer-box summary-disclaimer' }, disclaimerText()));
     if (state.lang === 'zh' && zhUnreviewed()) page.appendChild(el('p', { class: 'muted zh-note', text: t('zh_unreviewed_note') }));
   }
 
@@ -964,7 +969,7 @@
     });
     page.appendChild(section('about_evidence_title', [ev]));
 
-    page.appendChild(section('about_disclaimer_title', [el('p', { class: 'disclaimer-box', text: t('card_disclaimer') })]));
+    page.appendChild(section('about_disclaimer_title', [el('p', { class: 'disclaimer-box' }, disclaimerText())]));
     page.appendChild(section('about_privacy_title', [el('p', { text: t('about_privacy') })]));
     page.appendChild(installSection());
 
