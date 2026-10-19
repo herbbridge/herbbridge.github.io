@@ -697,10 +697,14 @@
     var o = r.official;
     var intro = !r.entry ? 'official_intro_none' : o.kind === 'disagree' ? 'official_intro_disagree' : 'official_intro_rated';
     var box = el('div', { class: 'official-box' }, [el('p', { class: 'official-intro', text: t(intro) })]);
-    o.statements.forEach(function (id) {
+    // The first statement is always shown; any others fold away behind one big button (all print).
+    var moreKey = pairKey(r) + '|official';
+    var moreOpen = !!openCards[moreKey];
+    var more = o.statements.length > 1 ? el('div', { class: 'official-more', id: 'more-' + r.herb.id + '-' + r.drug.id, hidden: !moreOpen }) : null;
+    o.statements.forEach(function (id, i) {
       var s = db.statementById[id];
       var zh = state.lang === 'zh';
-      box.appendChild(el('figure', { class: 'official-statement' }, [
+      (i === 0 ? box : more).appendChild(el('figure', { class: 'official-statement' }, [
         el('blockquote', { class: 'official-quote', lang: zh ? 'zh-HK' : 'en-GB', text: '“' + (zh ? s.quote_zh : s.quote_en) + '”' }),
         zh ? el('p', { class: 'official-original' }, [
           el('span', { text: t(s.quote_zh_is_original ? 'official_zh_original_note' : 'official_translation_note') + ' ' }),
@@ -712,6 +716,22 @@
         ])
       ]));
     });
+    if (more) {
+      var n = o.statements.length - 1;
+      var moreLabel = el('span', { text: moreOpen ? t('official_less') : I.tn('official_more', n) });
+      var moreBtn = el('button', {
+        type: 'button', class: 'official-more-toggle', 'aria-expanded': moreOpen ? 'true' : 'false', 'aria-controls': more.id,
+        onclick: function () {
+          var nowOpen = more.hidden;
+          more.hidden = !nowOpen;
+          moreBtn.setAttribute('aria-expanded', nowOpen ? 'true' : 'false');
+          moreLabel.textContent = nowOpen ? t('official_less') : I.tn('official_more', n);
+          if (nowOpen) openCards[moreKey] = true; else delete openCards[moreKey];
+        }
+      }, [moreLabel, icon('chevron', 'toggle-chev')]);
+      box.appendChild(moreBtn);
+      box.appendChild(more);
+    }
     box.appendChild(el('p', { class: 'official-action' }, [el('strong', { text: t('label_what_to_do') + ': ' }), el('span', { text: t('official_action') })]));
     return box;
   }

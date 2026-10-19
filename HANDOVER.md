@@ -156,6 +156,12 @@ For Sunday this is done WITHOUT accounts, a server or scanning:
     checker read Leonard, Cleveland Clinic Pharmacotherapy Update, Mar/Apr 2001 ("Oriental
     ginseng", INR fell to 1.5). Leonard's Table 2 also confirmed for liquorice + digoxin and
     + potassium-depleting diuretics (two wording points put to the owner).
+- Shorter cards (owner, 19 Oct): an official caution shows its first statement; the others fold
+  behind one big "Show N more official statements" button. All statements still print and all
+  appear in the doctor summary. Statement order in data/official.json decides which is first.
+  Cache herbsafe-v15.
+- Next (owner-agreed order): HA patient leaflets for the other heart medicines (prompt for the
+  owner's checker), then a "reviewed by a pharmacist" record per card, then read-aloud.
   * HA leaflet quote now on EVERY herb + warfarin (owner: it covers all TCM); Health Canada
     "blood thinners" sentences added to both ginseng + warfarin cards. Cache herbsafe-v12.
 

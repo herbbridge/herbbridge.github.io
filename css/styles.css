@@ -757,3 +757,17 @@ html.sheet-open, html.sheet-open body { overflow: hidden; }
   .official-box { background: #fff; border: 1pt solid #000; padding: 4pt 6pt; margin: 4pt 0; }
   .official-quote { background: #fff; }
 }
+
+/* Extra official statements fold away behind one big button (all of them print). */
+.official-more-toggle {
+  display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; width: 100%; min-height: 3rem;
+  margin: 0 0 0.875rem; padding: 0.5rem 0.875rem; background: var(--surface); color: var(--accent);
+  border: 1.5px solid var(--official); border-radius: var(--radius-sm); font: inherit; font-weight: 700; text-align: left; cursor: pointer;
+}
+.official-more-toggle:hover { background: var(--accent-soft); }
+.official-more-toggle .toggle-chev { flex: none; width: 1.25rem; height: 1.25rem; transform: rotate(90deg); }
+.official-more-toggle[aria-expanded="true"] .toggle-chev { transform: rotate(-90deg); }
+@media print {
+  .official-more-toggle { display: none !important; }
+  .official-more[hidden] { display: block !important; }
+}
