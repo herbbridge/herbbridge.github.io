@@ -27,7 +27,7 @@
         { "label": "Izzat et al. Ann Thorac Surg 1998", "url": "https://pubmed.ncbi.nlm.nih.gov/9768962/" },
         { "label": "Chan. Ann Pharmacother 2001", "url": "https://pubmed.ncbi.nlm.nih.gov/11302416/" },
         { "label": "Zhuang et al. Front Pharmacol 2021", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8489681/" },
-        { "label": "Hong Kong Hospital Authority: Warfarin – Oral Anticoagulant, patient leaflet (S/N 019Ev10), October 2025", "url": "https://www.ha.org.hk/hadf/Content/uploads/docs/mcfDfgqUQ5320084.pdf" }
+        { "label": "Hong Kong Hospital Authority: Warfarin – Oral Anticoagulant, patient leaflet (S/N 019Ev10), October 2025", "url": "https://www.ha.org.hk/hadf/Content/uploads/docs/mcfDfgqUQ5320084.pdf", "label_zh": "香港醫院管理局：華法林 (Warfarin) 口服抗凝血藥，病人資料單張（S/N 019Cv10），2025年10月", "url_zh": "https://www.ha.org.hk/hadf/Content/uploads/docs/eGOLcFArB5505364.pdf" }
       ],
       "zh_reviewed": false
     },
@@ -54,7 +54,7 @@
       "sources": [
         { "label": "Page & Lawrence. Pharmacotherapy 1999", "url": "https://pubmed.ncbi.nlm.nih.gov/10417036/" },
         { "label": "Zhuang et al. Front Pharmacol 2021", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8489681/" },
-        { "label": "Hong Kong Hospital Authority: Warfarin – Oral Anticoagulant, patient leaflet (S/N 019Ev10), October 2025", "url": "https://www.ha.org.hk/hadf/Content/uploads/docs/mcfDfgqUQ5320084.pdf" }
+        { "label": "Hong Kong Hospital Authority: Warfarin – Oral Anticoagulant, patient leaflet (S/N 019Ev10), October 2025", "url": "https://www.ha.org.hk/hadf/Content/uploads/docs/mcfDfgqUQ5320084.pdf", "label_zh": "香港醫院管理局：華法林 (Warfarin) 口服抗凝血藥，病人資料單張（S/N 019Cv10），2025年10月", "url_zh": "https://www.ha.org.hk/hadf/Content/uploads/docs/eGOLcFArB5505364.pdf" }
       ],
       "zh_reviewed": false
     },
@@ -289,7 +289,7 @@
           "label": "Memorial Sloan Kettering: About Herbs, Lycium",
           "url": "https://www.mskcc.org/cancer-care/integrative-medicine/herbs/lycium"
         },
-        { "label": "Hong Kong Hospital Authority: Warfarin – Oral Anticoagulant, patient leaflet (S/N 019Ev10), October 2025", "url": "https://www.ha.org.hk/hadf/Content/uploads/docs/mcfDfgqUQ5320084.pdf" }
+        { "label": "Hong Kong Hospital Authority: Warfarin – Oral Anticoagulant, patient leaflet (S/N 019Ev10), October 2025", "url": "https://www.ha.org.hk/hadf/Content/uploads/docs/mcfDfgqUQ5320084.pdf", "label_zh": "香港醫院管理局：華法林 (Warfarin) 口服抗凝血藥，病人資料單張（S/N 019Cv10），2025年10月", "url_zh": "https://www.ha.org.hk/hadf/Content/uploads/docs/eGOLcFArB5505364.pdf" }
       ],
       "zh_reviewed": false
     },
@@ -330,7 +330,7 @@
           "label": "Liu et al. Xenobiotica 2024",
           "url": "https://pubmed.ncbi.nlm.nih.gov/38445636/"
         },
-        { "label": "Hong Kong Hospital Authority: Warfarin – Oral Anticoagulant, patient leaflet (S/N 019Ev10), October 2025", "url": "https://www.ha.org.hk/hadf/Content/uploads/docs/mcfDfgqUQ5320084.pdf" }
+        { "label": "Hong Kong Hospital Authority: Warfarin – Oral Anticoagulant, patient leaflet (S/N 019Ev10), October 2025", "url": "https://www.ha.org.hk/hadf/Content/uploads/docs/mcfDfgqUQ5320084.pdf", "label_zh": "香港醫院管理局：華法林 (Warfarin) 口服抗凝血藥，病人資料單張（S/N 019Cv10），2025年10月", "url_zh": "https://www.ha.org.hk/hadf/Content/uploads/docs/eGOLcFArB5505364.pdf" }
       ],
       "zh_reviewed": false
     },

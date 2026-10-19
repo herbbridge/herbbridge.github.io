@@ -75,6 +75,8 @@
       el('span', { class: 'name-secondary', text: secondaryName(item), lang: state.lang === 'zh' ? 'en-GB' : 'zh-HK' })
     ]);
   }
+  // "Label: " in English, "標籤：" (full-width colon) in Chinese.
+  function labelText(key) { return t(key) + (state.lang === 'zh' ? '：' : ': '); }
   function field(entry, base) {
     var zh = entry[base + '_zh'];
     return state.lang === 'zh' && zh ? zh : entry[base + '_en'];
@@ -275,7 +277,6 @@
         onclick: function () { openSheet(kind, true); }
       }, [icon('plus'), el('span', { text: t(kind === 'herbs' ? 'step_add_herb' : 'step_add_drug') })]));
       rest.push(el('p', { class: 'step-then', text: t('step_then') }));
-      if (!nH && !nD) rest.push(el('button', { type: 'button', class: 'link-button demo-start', onclick: startDemo }, [el('span', { text: t('demo_try') })]));
     } else {
       var rows = L.checkPairs(db, state.herbs, state.drugs);
       var flagged = rows.filter(isFlagged);
@@ -299,7 +300,8 @@
       rest.push(el('a', { class: 'btn btn-secondary btn-small status-more', href: '#/results' }, [el('span', { text: t('cabinet_see_all') }), icon('arrow')]));
     }
 
-    statusTile.className = 'status status-' + tone;
+    // Ready (both lists filled): Simple mode hides this card, unless it warns that the list cannot be saved.
+    statusTile.className = 'status status-' + tone + (nH && nD && storageOk ? ' status-ready' : '');
     statusTile.appendChild(el('div', { class: 'status-head' }, [
       tone === 'neutral' ? null : icon(tone, 'status-icon tone-' + tone),
       el('h2', { id: 'h-status', tabindex: '-1', text: title })
@@ -595,7 +597,6 @@
     }
     showClear(false);
     var clear = clearBox;
-    var demo = el('button', { type: 'button', class: 'btn btn-quiet', onclick: startDemo }, [el('span', { text: t('demo_button') })]);
 
     app.textContent = '';
     demoBox = el('section', { class: 'demo-banner', 'aria-labelledby': 'h-demo', hidden: true });
@@ -609,6 +610,7 @@
       el('div', { class: 'dash-main' }, [
         el('header', { class: 'page-head' }, [
           el('h1', { tabindex: '-1', text: t('cabinet_title') }),
+          state.demo ? null : el('button', { type: 'button', class: 'btn btn-secondary btn-small demo-start demo-top', onclick: startDemo }, [el('span', { text: t('demo_button') })]),
           el('p', { class: 'subtitle', text: t('cabinet_for') }),
           el('p', { class: 'lede', text: t('cabinet_lede') })
         ]),
@@ -620,7 +622,7 @@
       el('div', { class: 'check-bar-inner' }, [notice, status, button])
     ]);
     app.appendChild(checkBar.bar);
-    app.appendChild(el('div', { class: 'below-bar' }, [clear, ' ', demo]));
+    app.appendChild(el('div', { class: 'below-bar' }, [clear]));
     renderCard('herbs');
     renderCard('drugs');
     renderDemo();
@@ -654,8 +656,9 @@
   }
 
   function sourceLink(s) {
-    return el('a', { href: s.url, target: '_blank', rel: 'noopener noreferrer' }, [
-      el('span', { text: s.label }), icon('external', 'ext'),
+    var zh = state.lang === 'zh';
+    return el('a', { href: zh && s.url_zh ? s.url_zh : s.url, target: '_blank', rel: 'noopener noreferrer' }, [
+      el('span', { text: zh && s.label_zh ? s.label_zh : s.label }), icon('external', 'ext'),
       el('span', { class: 'visually-hidden', text: ' ' + t('opens_new_tab') })
     ]);
   }
@@ -741,11 +744,17 @@
     ]);
   }
 
+  // The HA warfarin leaflet names ginseng (人參, i.e. Asian ginseng), dong quai and danshen (and chishao,
+  // not in HerbSafe). Its own intro line is used only on those herbs' cards.
+  var HA_LEAFLET = 'ha-warfarin-leaflet-tcm';
+  var HA_LEAFLET_NAMES = ['danshen', 'dong_quai', 'asian_ginseng'];
+
   /* An official caution: the agency's own words (never reworded), its document, date and section.
      In Chinese the translation is shown first, then the English original, which is what counts. */
   function officialBlock(r) {
     var o = r.official;
-    var intro = !r.entry ? 'official_intro_none' : o.kind === 'disagree' ? 'official_intro_disagree' : 'official_intro_rated';
+    var intro = !r.entry ? 'official_intro_none' : o.kind === 'disagree' ? 'official_intro_disagree'
+      : o.statements[0] === HA_LEAFLET && HA_LEAFLET_NAMES.indexOf(r.herb.id) !== -1 ? 'official_intro_ha' : 'official_intro_rated';
     var box = el('div', { class: 'official-box' }, [el('p', { class: 'official-intro', text: t(intro) })]);
     // The first statement is always shown; any others fold away behind one big button (all print).
     var moreKey = pairKey(r) + '|official';
@@ -782,7 +791,6 @@
       box.appendChild(moreBtn);
       box.appendChild(more);
     }
-    box.appendChild(el('p', { class: 'official-action' }, [el('strong', { text: t('label_what_to_do') + ': ' }), el('span', { text: t('official_action') })]));
     return box;
   }
 
@@ -805,9 +813,9 @@
       if (r.advice) parts.push(state.lang === 'zh' ? r.advice.quote_zh : r.advice.quote_en);
     } else {
       parts.push((r.status === L.OFFICIAL || !r.entry ? riskLabel(r) : badgeText(r.entry)) + '.');
-      if (r.official) { var s = db.statementById[r.official.statements[0]]; parts.push((state.lang === 'zh' ? s.body_zh : s.body_en) + ': ' + (state.lang === 'zh' ? s.quote_zh : s.quote_en)); }
-      if (r.entry) parts.push(field(r.entry, 'effect'), t('label_what_to_do') + ': ' + field(r.entry, 'action'));
-      else parts.push(t('label_what_to_do') + ': ' + t('official_action'));
+      if (r.official) { var s = db.statementById[r.official.statements[0]]; parts.push((state.lang === 'zh' ? s.body_zh + '：' : s.body_en + ': ') + (state.lang === 'zh' ? s.quote_zh : s.quote_en)); }
+      if (r.entry) parts.push(field(r.entry, 'effect'), labelText('label_what_to_do') + field(r.entry, 'action'));
+      else parts.push(labelText('label_what_to_do') + t('official_action'));
     }
     parts.push(t('card_disclaimer'));
     return parts.join(' ');
@@ -849,6 +857,7 @@
       return el('article', { class: 'card card-official', 'data-pair': key }, [
         el('header', { class: 'card-head' }, [pairTitle(r), badgeFor(r)]),
         readButton(r),
+        el('div', { class: 'todo' }, [el('h4', { class: 'block-label', text: t('label_what_to_do') }), el('p', { text: t('official_action') })]),
         officialBlock(r),
         cardAdvice(r),
         el('p', { class: 'card-disclaimer' }, disclaimerText(r))
@@ -916,7 +925,7 @@
       withOfficial ? officialBlock(r) : null,
       withOfficial ? el('div', { class: 'studies-head' }, [
         el('h4', { class: 'block-label', text: t('label_studies') }),
-        el('p', { class: 'team-rating' }, [el('span', { text: t('label_team_rating') + ': ' }), badge(e.risk, e.watch, 'span')])
+        el('p', { class: 'team-rating' }, [el('span', { text: labelText('label_team_rating') }), badge(e.risk, e.watch, 'span')])
       ]) : null,
       el('p', { class: 'effect', text: field(e, 'effect') }),
       field(e, 'heart_impact') ? el('div', { class: 'heart-impact' }, [
@@ -975,7 +984,7 @@
     if (r.status === L.NOT_IN_DATABASE) return el('p', { class: 'pair-line pair-line-unknown', text: t('not_in_db_text') });
     if (mode === 'simple') {
       var act = r.entry ? field(r.entry, 'action') : t('official_action');
-      return el('p', { class: 'pair-line' }, [el('strong', { text: t('label_what_to_do') + ': ' }), el('span', { text: firstSentence(act) })]);
+      return el('p', { class: 'pair-line' }, [el('strong', { text: labelText('label_what_to_do') }), el('span', { text: firstSentence(act) })]);
     }
     if (r.entry && field(r.entry, 'heart_impact')) return el('p', { class: 'pair-line', text: field(r.entry, 'heart_impact') });
     var s = db.statementById[r.official.statements[0]];
@@ -1077,8 +1086,10 @@
     // Simple: badge, What to do, the required grey wording, disclaimer; everything else behind one button.
     var grey = r.status === L.NOT_IN_DATABASE;
     var todo = grey ? t('unknown_next_text') : r.entry ? field(r.entry, 'action') : t('official_action');
-    var readRow = whole.querySelector('.read-row');
-    if (readRow) readRow.parentNode.removeChild(readRow);
+    ['.read-row', '.official-box', '.todo'].forEach(function (sel) {
+      var node = whole.querySelector(sel);
+      if (node) node.parentNode.removeChild(node);
+    });
     var more = el('div', { class: 'more-box', id: 'more-' + key.replace('|', '-'), hidden: true }, [whole]);
     var moreLabel = el('span', { text: t('more_details') });
     var moreBtn = el('button', { type: 'button', class: 'btn btn-secondary more-btn', 'aria-expanded': 'false', 'aria-controls': more.id, onclick: function () {
@@ -1092,6 +1103,7 @@
       readButton(r),
       grey ? el('p', { class: 'unknown-text', text: t('not_in_db_text') }) : null,
       el('div', { class: 'todo' }, [el('h2', { text: t('label_what_to_do') }), el('p', { text: todo })]),
+      r.official ? officialBlock(r) : null,
       grey ? el('a', { class: 'btn btn-primary', href: '#/summary' }, [el('span', { text: t('unknown_next_button') }), icon('arrow')]) : null,
       el('p', { class: 'disclaimer-box' }, disclaimerText(r))
     ]));
@@ -1110,7 +1122,7 @@
   function sourceList(sources) {
     var ol = el('ol', { class: 'sources' });
     sources.forEach(function (s) {
-      ol.appendChild(el('li', null, [sourceLink(s), el('span', { class: 'print-url', text: s.url })]));
+      ol.appendChild(el('li', null, [sourceLink(s), el('span', { class: 'print-url', text: state.lang === 'zh' && s.url_zh ? s.url_zh : s.url })]));
     });
     return ol;
   }
