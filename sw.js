@@ -57,6 +57,8 @@ self.addEventListener('fetch', function (event) {
   var url = new URL(request.url);
 
   if (url.origin === self.location.origin) {
+    // The test preview (/preview/) is never cached or intercepted by the live app.
+    if (/^\/(preview|_preview)\//.test(url.pathname)) return;
     if (request.mode === 'navigate') {
       // Opening the app: try the network, fall back to the saved page when offline.
       event.respondWith(fetch(request).catch(function () { return caches.match('index.html'); }));

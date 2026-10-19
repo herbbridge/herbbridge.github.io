@@ -1,0 +1,4 @@
+{
+  "about": "Pharmacist reviews, one per card (herb_id + drug_id). A review only shows while the card's content still matches its fingerprint: if the card changes, the review stops showing and the tests ask for a new review. Get a card's fingerprint with: node tests/review-fingerprint.js <herb_id> <drug_id>",
+  "reviews": []
+}
