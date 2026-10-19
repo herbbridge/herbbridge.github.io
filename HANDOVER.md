@@ -256,4 +256,8 @@ rating, quote, source, S/N or date changed.
   the HA warfarin leaflet now shows in its Hospital Authority advice box (as for other herbs the
   leaflet does not name). Added as last source: "Hospital Authority patient talk (undated):
   當中藥師遇見藥劑師, slide 19" (smartpatient.ha.org.hk PDF; lists 西洋參 with warfarin). Not used for
-  the badge. Link found by an earlier web search: owner to confirm it is the PDF they read. Cache v24.
+  the badge. Owner confirmed (20 Oct) the link is the PDF they read and slide 19 lists 西洋參 with
+  warfarin. Cache v24.
+- Remaining before Wed 21 Oct merge (owner): phone check with Cyrus, then Chinese sign-off (set every
+  zh_reviewed and ZH_REVIEWED to true only when the owner confirms), then merge redesign → main,
+  removing _preview/ and preview/ in the same step and keeping sw.js from redesign.
