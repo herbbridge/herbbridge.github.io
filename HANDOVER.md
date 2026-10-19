@@ -233,3 +233,9 @@ rating, quote, source, S/N or date changed.
 - Simple cards: first sentence of "What to do"; in Chinese a ； clause counts as a sentence too.
 - Font subset rebuilt (tools/make-font-subset.py); every character on these cards is covered.
 - sw.js ignores /preview/ and /_preview/ (never cached or intercepted). Cache herbsafe-v21.
+- 20 Oct: goji + warfarin "What to do" split so tea/juice/wine is not attributed to the HA:
+  "…not to take any Chinese medicine with warfarin. Goji tea, juice and wine count too." /
+  「…唔好將任何中藥同華法林一齊食。枸杞茶、枸杞汁同枸杞酒都計埋。」 (zh NOT YET REVIEWED). Cache v22.
+- Merge plan agreed (owner, 20 Oct): on Wed 21 Oct, when the owner says so, merge redesign into
+  main, removing _preview/ and preview/ in the same step and keeping sw.js from redesign (with the
+  /preview/ exclusion). Do not merge before the owner says so.
