@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en-GB" data-mode="simple">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HerbSafe preview: Results</title>
+<style>
+@font-face { font-family: 'Inter'; font-weight: 400; font-display: swap; src: url(fonts/inter-latin-400-normal.woff2) format('woff2'); }
+@font-face { font-family: 'Inter'; font-weight: 600; font-display: swap; src: url(fonts/inter-latin-600-normal.woff2) format('woff2'); }
+@font-face { font-family: 'Inter'; font-weight: 700; font-display: swap; src: url(fonts/inter-latin-700-normal.woff2) format('woff2'); }
+@font-face { font-family: 'Noto Sans TC HS'; font-weight: 400; font-display: swap; src: url(fonts/noto-sans-tc-herbsafe-400.woff2) format('woff2'); }
+@font-face { font-family: 'Noto Sans TC HS'; font-weight: 700; font-display: swap; src: url(fonts/noto-sans-tc-herbsafe-700.woff2) format('woff2'); }
+
+:root {
+  --bg: #F5F4F0; --surface: #FFFFFF; --ink: #16181D; --ink-2: #4B515C; --line: #E6E4DE;
+  --accent: #4B3FD1; --accent-hover: #3B30B0; --accent-soft: #EEECFB; --accent-ink: #FFFFFF;
+  --high-bg: #FDE8E7; --high-ink: #9F1D16; --high-dot: #D92D20;
+  --mod-bg: #FDEFD9; --mod-ink: #844700; --mod-dot: #E8890C;
+  --low-bg: #FBF3C4; --low-ink: #5E4C00; --low-dot: #D9B70F;
+  --off-bg: #E6EEFB; --off-ink: #1C4597; --off-dot: #2E5AAC;
+  --unk-bg: #EDEDEA; --unk-ink: #393C42; --unk-line: #8A8D93;
+  --radius: 24px; --radius-sm: 14px;
+  --shadow: 0 1px 2px rgba(22, 24, 40, .05), 0 10px 28px rgba(22, 24, 40, .07);
+  --font: 'Inter', 'Noto Sans TC HS', system-ui, -apple-system, 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+  font-size: 100%;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 1.0625rem; line-height: 1.55; -webkit-text-size-adjust: 100%; }
+:lang(zh-HK) { font-family: 'Noto Sans TC HS', 'Inter', system-ui, 'PingFang TC', sans-serif; }
+.zh { word-break: keep-all; white-space: nowrap; }
+a { color: inherit; }
+
+/* Header */
+.top { position: sticky; top: 0; z-index: 5; background: rgba(245, 244, 240, .92); backdrop-filter: saturate(1.4) blur(10px); }
+.top-in { max-width: 44rem; margin: 0 auto; padding: 0.75rem 16px; display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
+.brand { display: flex; align-items: center; gap: 0.5rem; font-weight: 700; font-size: 1.125rem; text-decoration: none; margin-right: auto; }
+.mark { width: 2rem; height: 2rem; border-radius: 10px; background: var(--accent); display: grid; place-items: center; }
+.mark svg { width: 1.25rem; height: 1.25rem; }
+.seg { display: inline-flex; background: #E9E7E1; border-radius: 999px; padding: 3px; }
+.seg button { font: inherit; font-size: 0.9375rem; font-weight: 600; border: 0; background: transparent; color: var(--ink-2); min-height: 2.5rem; padding: 0 0.875rem; border-radius: 999px; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+.lang { font: inherit; font-weight: 600; font-size: 0.9375rem; min-height: 2.5rem; padding: 0 0.875rem; border-radius: 999px; border: 0; background: var(--surface); box-shadow: 0 1px 3px rgba(0,0,0,.1); cursor: pointer; }
+
+main { max-width: 44rem; margin: 0 auto; padding: 0.5rem 16px 2.5rem; }
+
+/* Steps (full only) */
+.steps { display: flex; gap: 0.5rem; list-style: none; padding: 0; margin: 0.75rem 0 1.25rem; font-size: 0.875rem; font-weight: 600; color: var(--ink-2); flex-wrap: wrap; }
+.steps li { display: flex; align-items: center; gap: 0.375rem; background: var(--surface); padding: 0.375rem 0.75rem 0.375rem 0.375rem; border-radius: 999px; }
+.steps .n { width: 1.5rem; height: 1.5rem; border-radius: 50%; display: grid; place-items: center; background: #ECEAE4; font-size: 0.8125rem; }
+.steps .done .n { background: var(--accent-soft); color: var(--accent); }
+.steps .now { color: var(--accent-ink); background: var(--accent); }
+.steps .now .n { background: rgba(255,255,255,.2); color: #fff; }
+
+/* Headline */
+.kicker { font-size: 0.9375rem; font-weight: 600; color: var(--accent); margin: 1rem 0 0.25rem; letter-spacing: .01em; }
+h1 { font-size: clamp(1.75rem, 7vw, 2.25rem); line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 0.75rem; overflow-wrap: normal; word-break: normal; hyphens: manual; }
+:lang(zh-HK) h1, h1:lang(zh-HK) { letter-spacing: 0; }
+.chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0 0 1.25rem; padding: 0; list-style: none; }
+.chips li { background: var(--surface); border-radius: 999px; padding: 0.375rem 0.875rem; font-weight: 600; font-size: 0.9375rem; box-shadow: var(--shadow); }
+
+/* Badges: soft pill, coloured dot icon, always a text label */
+.badge { display: inline-flex; align-items: center; gap: 0.5rem; border-radius: 999px; padding: 0.3125rem 0.875rem 0.3125rem 0.3125rem; font-weight: 700; font-size: 0.9375rem; line-height: 1.2; }
+.badge .dot { width: 1.625rem; height: 1.625rem; border-radius: 50%; display: grid; place-items: center; flex: none; }
+.badge .dot svg { width: 1rem; height: 1rem; }
+.b-high { background: var(--high-bg); color: var(--high-ink); } .b-high .dot { background: var(--high-dot); color: #fff; }
+.b-moderate { background: var(--mod-bg); color: var(--mod-ink); } .b-moderate .dot { background: var(--mod-dot); color: #241500; }
+.b-low { background: var(--low-bg); color: var(--low-ink); } .b-low .dot { background: var(--low-dot); color: #262000; }
+.b-official { background: var(--off-bg); color: var(--off-ink); } .b-official .dot { background: var(--off-dot); color: #fff; }
+.b-unknown { background: var(--unk-bg); color: var(--unk-ink); box-shadow: inset 0 0 0 1.5px var(--unk-line); }
+.b-unknown .dot { background: transparent; color: var(--unk-ink); box-shadow: inset 0 0 0 1.5px var(--unk-line); }
+
+/* Pair cards */
+.cards { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; }
+.pair { position: relative; display: block; text-decoration: none; background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.25rem 1.25rem 1.125rem 1.5rem; overflow: hidden; }
+.pair::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; }
+.t-high::before { background: var(--high-dot); } .t-moderate::before { background: var(--mod-dot); } .t-low::before { background: var(--low-dot); }
+.t-official::before { background: var(--off-dot); }
+.t-unknown { background: #FAFAF8; box-shadow: inset 0 0 0 1.5px #C9C9C4; }
+.t-unknown::before { background: repeating-linear-gradient(180deg, var(--unk-line) 0 6px, transparent 6px 11px); }
+.pair-top { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; }
+.tag { font-size: 0.8125rem; font-weight: 600; color: var(--off-ink); background: var(--off-bg); border-radius: 999px; padding: 0.25rem 0.625rem; }
+.names { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 0.5rem; font-size: 1.25rem; font-weight: 700; line-height: 1.3; margin: 0 0 0.5rem; }
+.name { display: inline-flex; align-items: center; gap: 0.375rem; }
+.name .ico { width: 1.5rem; height: 1.5rem; color: var(--ink-2); flex: none; }
+.name .sec { font-weight: 400; color: var(--ink-2); }
+.plus { color: var(--ink-2); font-weight: 400; }
+.line { margin: 0; color: var(--ink-2); }
+.line strong { color: var(--ink); }
+.go { display: inline-flex; align-items: center; gap: 0.25rem; margin-top: 0.875rem; font-weight: 700; color: var(--accent); }
+.go svg { width: 1.125rem; height: 1.125rem; }
+
+.note { background: var(--surface); border-radius: var(--radius-sm); padding: 0.875rem 1rem; margin: 0 0 1.25rem; font-size: 0.9375rem; color: var(--ink-2); box-shadow: inset 0 0 0 1.5px var(--line); }
+.note strong { color: var(--ink); }
+.actions { display: grid; gap: 0.75rem; margin-top: 1.75rem; }
+.btn { display: flex; align-items: center; justify-content: center; gap: 0.5rem; min-height: 3.5rem; border-radius: 999px; font: inherit; font-weight: 700; font-size: 1.0625rem; text-decoration: none; border: 0; cursor: pointer; }
+.btn-primary { background: var(--accent); color: var(--accent-ink); box-shadow: 0 6px 18px rgba(75, 63, 209, .28); }
+.btn-ghost { background: transparent; color: var(--accent); }
+
+/* ---------- FULL design ---------- */
+[data-mode="full"] .hero { background: linear-gradient(160deg, #EEECFB 0%, #F5F4F0 70%); border-radius: 0 0 32px 32px; margin: -0.5rem -16px 1.25rem; padding: 0.25rem 16px 1.25rem; }
+[data-mode="full"] .pair { transition: transform .18s ease, box-shadow .18s ease; animation: rise .32s ease both; }
+[data-mode="full"] .pair:hover { transform: translateY(-2px); box-shadow: 0 2px 4px rgba(22,24,40,.06), 0 16px 32px rgba(22,24,40,.10); }
+[data-mode="full"] .cards li:nth-child(2) .pair { animation-delay: .05s; }
+[data-mode="full"] .cards li:nth-child(3) .pair { animation-delay: .1s; }
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* ---------- SIMPLE mode: larger, calmer, higher contrast, no motion ---------- */
+[data-mode="simple"] body { font-size: 1.25rem; }
+[data-mode="simple"] { --ink-2: #33373E; }
+[data-mode="simple"] h1 { font-size: clamp(2rem, 9vw, 2.5rem); }
+[data-mode="simple"] .names { font-size: 1.5rem; }
+[data-mode="simple"] .badge { font-size: 1.0625rem; padding: 0.375rem 1rem 0.375rem 0.375rem; }
+[data-mode="simple"] .badge .dot { width: 1.875rem; height: 1.875rem; }
+[data-mode="simple"] .pair { box-shadow: inset 0 0 0 2px #D3D1CA; padding: 1.5rem 1.375rem 1.375rem 1.75rem; }
+[data-mode="simple"] .t-unknown { box-shadow: inset 0 0 0 2px #9A9A95; }
+[data-mode="simple"] .line { color: var(--ink); font-size: 1.25rem; }
+[data-mode="simple"] .note { font-size: 1.125rem; color: var(--ink); box-shadow: inset 0 0 0 2px #D3D1CA; }
+[data-mode="simple"] .btn { min-height: 4rem; font-size: 1.25rem; }
+[data-mode="simple"] .go { font-size: 1.25rem; }
+[data-mode="simple"] .seg button, [data-mode="simple"] .lang { min-height: 3rem; font-size: 1.0625rem; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<header class="top"><div class="top-in">
+  <a class="brand" href="#"><span class="mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20c-4.5-2.6-7-6-7-9.6C5 7 7.6 5 10.2 5c.7 0 1.3.1 1.8.4.5-.3 1.1-.4 1.8-.4C16.4 5 19 7 19 10.4 19 14 16.5 17.4 12 20z" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/><path d="M12 9v6M9 12h6" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></span><span>HerbSafe <span class="zh" lang="zh-HK">中西通</span></span></a>
+  <div class="seg" role="group" aria-label="Display"><button type="button" id="m-simple"></button><button type="button" id="m-full"></button></div>
+  <button type="button" class="lang" id="lang"></button>
+</div></header>
+<main id="main"></main>
+<script src="../js/lookup.js"></script>
+<script src="../js/i18n.js"></script>
+<script>
+(function () {
+  var L = window.HerbSafeLookup, I = window.HerbSafeI18n;
+  var params = new URLSearchParams(location.search);
+  var mode = params.get('mode') || 'simple', lang = params.get('lang') || 'en';
+  var herbs = (params.get('herbs') || 'danshen').split(','), drugs = (params.get('drugs') || 'warfarin,amlodipine').split(',');
+  // Preview-only labels (will move into js/i18n.js). Chinese NOT YET REVIEWED.
+  var NEW = {
+    en: { simple: 'Simple', full: 'Full design', kicker: 'Your results', need_one: '1 combination needs attention', need_other: '{n} combinations need attention',
+      none_need: 'No combination needs attention', norec_one: '1 has no record', norec_other: '{n} have no record', details: 'See details',
+      summary: 'Show my doctor', edit: 'Change my list', s1: 'My cabinet', s2: 'Results', s3: 'Details', official_tag: 'Official source quoted',
+      what: 'What to do:', note_title: 'Important:' },
+    zh: { simple: '簡易', full: '完整設計', kicker: '你嘅結果', need_one: '有 1 個配搭要留意', need_other: '有 {n} 個配搭要留意',
+      none_need: '冇配搭需要留意', norec_one: '1 個未有記錄', norec_other: '{n} 個未有記錄', details: '睇詳情',
+      summary: '俾醫生睇', edit: '改我嘅清單', s1: '我嘅藥箱', s2: '結果', s3: '詳情', official_tag: '有引用官方資料',
+      what: '應該點做：', note_title: '注意：' }
+  };
+  function n(k, v) { var s = NEW[lang][k]; return v ? s.replace('{n}', v) : s; }
+  var ICON = {
+    high: '<path d="M12 6v7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><circle cx="12" cy="17.2" r="1.5" fill="currentColor"/>',
+    moderate: '<path d="M12 6v7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><circle cx="12" cy="17.2" r="1.5" fill="currentColor"/>',
+    low: '<circle cx="12" cy="7" r="1.5" fill="currentColor"/><path d="M12 11v7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>',
+    official: '<path d="M12 4.5 6.5 6.6v4.2c0 3.4 2.3 6.4 5.5 7.4 3.2-1 5.5-4 5.5-7.4V6.6L12 4.5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>',
+    not_in_database: '<path d="M9.6 9.4a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1.1.9-1.1 1.7v.3" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="17" r="1.3" fill="currentColor"/>',
+    leaf: '<path d="M5 19c0-8 5-13 14-14 0 9-5 14-13 14M5 19l7-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>',
+    pill: '<rect x="3.5" y="8.5" width="17" height="7" rx="3.5" transform="rotate(-35 12 12)" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m9.6 8.6 4.8 6.8" stroke="currentColor" stroke-width="1.8"/>',
+    arrow: '<path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>'
+  };
+  function svg(name, cls) { return '<svg class="' + (cls || '') + '" viewBox="0 0 24 24" aria-hidden="true">' + ICON[name] + '</svg>'; }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function prim(x) { return lang === 'zh' ? x.name_zh : x.name_en; }
+  function sec(x) { return lang === 'zh' ? x.name_en : x.name_zh; }
+  function field(e, f) { return lang === 'zh' && e[f + '_zh'] ? e[f + '_zh'] : e[f + '_en']; }
+  function badge(r) {
+    var st = r.status, key = st === 'low' && r.entry && r.entry.watch ? 'risk_low_watch' : st === 'official' && r.official.kind === 'disagree' ? 'risk_official_disagree' : 'risk_' + st;
+    var cls = { high: 'b-high', moderate: 'b-moderate', low: 'b-low', official: 'b-official', not_in_database: 'b-unknown', none_reported: 'b-low' }[st];
+    return '<span class="badge ' + cls + '"><span class="dot">' + svg(st === 'none_reported' ? 'low' : st) + '</span>' + esc(I.t(key)) + '</span>';
+  }
+  function nameHtml(x, icon) {
+    var zhFirst = lang === 'zh';
+    return '<span class="name">' + (mode === 'full' ? svg(icon, 'ico') : '') + '<span' + (zhFirst ? ' class="zh" lang="zh-HK"' : '') + '>' + esc(prim(x)) + '</span>' +
+      (mode === 'full' ? ' <span class="sec' + (zhFirst ? '' : ' zh') + '"' + (zhFirst ? '' : ' lang="zh-HK"') + '>' + esc(sec(x)) + '</span>' : '') + '</span>';
+  }
+  function line(r) {
+    if (!r.entry && !r.official) return '<p class="line"><strong>' + esc(I.t('not_in_db_text')) + '</strong></p>';
+    if (mode === 'simple') return '<p class="line"><strong>' + esc(n('what')) + '</strong> ' + esc(r.entry ? field(r.entry, 'action') : I.t('official_action')) + '</p>';
+    return '<p class="line">' + esc(r.entry ? field(r.entry, 'heart_impact') : I.t('official_intro_none')) + '</p>';
+  }
+  function render() {
+    I.setLang(lang);
+    document.documentElement.lang = lang === 'zh' ? 'zh-HK' : 'en-GB';
+    document.documentElement.setAttribute('data-mode', mode);
+    document.getElementById('m-simple').textContent = n('simple');
+    document.getElementById('m-full').textContent = n('full');
+    document.getElementById('m-simple').setAttribute('aria-pressed', mode === 'simple');
+    document.getElementById('m-full').setAttribute('aria-pressed', mode === 'full');
+    document.getElementById('lang').textContent = lang === 'zh' ? 'English' : '繁體中文';
+    var rows = L.checkPairs(db, herbs, drugs);
+    var flagged = rows.filter(function (r) { return r.status !== 'none_reported' && r.status !== 'not_in_database'; }).length;
+    var unknown = rows.filter(function (r) { return r.status === 'not_in_database'; }).length;
+    var h = '';
+    var head = (mode === 'full' ? '<ol class="steps"><li class="done"><span class="n">1</span>' + esc(n('s1')) + '</li><li class="now"><span class="n">2</span>' + esc(n('s2')) + '</li><li><span class="n">3</span>' + esc(n('s3')) + '</li></ol>' : '') +
+      '<p class="kicker">' + esc(n('kicker')) + '</p><h1>' + esc(flagged ? (flagged === 1 ? n('need_one') : n('need_other', flagged)) : n('none_need')) + '</h1>' +
+      (unknown ? '<ul class="chips"><li>' + esc(unknown === 1 ? n('norec_one') : n('norec_other', unknown)) + '</li></ul>' : '');
+    h += mode === 'full' ? '<div class="hero">' + head + '</div>' : head;
+    if (mode === 'simple') h += '<p class="note"><strong>' + esc(n('note_title')) + '</strong> ' + esc(I.t('card_disclaimer')) + '</p>';
+    h += '<ol class="cards">';
+    rows.forEach(function (r) {
+      var tone = { high: 't-high', moderate: 't-moderate', low: 't-low', official: 't-official', not_in_database: 't-unknown', none_reported: 't-low' }[r.status];
+      h += '<li><a class="pair ' + tone + '" href="#/pair/' + r.herb.id + '-' + r.drug.id + '"><div class="pair-top">' + badge(r) +
+        (mode === 'full' && r.official ? '<span class="tag">' + esc(n('official_tag')) + '</span>' : '') + '</div>' +
+        '<p class="names">' + nameHtml(r.herb, 'leaf') + '<span class="plus" aria-hidden="true">+</span>' + nameHtml(r.drug, 'pill') + '</p>' + line(r) +
+        '<span class="go">' + esc(n('details')) + svg('arrow') + '</span></a></li>';
+    });
+    h += '</ol>';
+    if (mode === 'full') h += '<p class="note" style="margin-top:1.25rem">' + esc(I.t('card_disclaimer')) + '</p>';
+    h += '<div class="actions"><a class="btn btn-primary" href="#/summary">' + esc(n('summary')) + '</a><a class="btn btn-ghost" href="#/cabinet">' + esc(n('edit')) + '</a></div>';
+    document.getElementById('main').innerHTML = h;
+  }
+  var db;
+  Promise.all(['../data/herbs.json', '../data/drugs.json', '../data/interactions.json', '../data/official.json', '../data/reviews.json'].map(function (u) { return fetch(u).then(function (r) { return r.json(); }); }))
+    .then(function (d) { db = L.createDb(d[0], d[1], d[2], d[3], d[4]); render(); });
+  document.getElementById('m-simple').onclick = function () { mode = 'simple'; render(); };
+  document.getElementById('m-full').onclick = function () { mode = 'full'; render(); };
+  document.getElementById('lang').onclick = function () { lang = lang === 'zh' ? 'en' : 'zh'; render(); };
+})();
+</script>
+</body>
+</html>
