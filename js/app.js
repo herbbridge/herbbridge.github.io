@@ -43,6 +43,7 @@
     none_reported: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M7.5 12h9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
     not_in_database: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="3 2.6"/><path d="M9.4 9.3a2.7 2.7 0 1 1 3.8 2.5c-.8.4-1.2 1-1.2 1.8v.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17.2" r="1.2" fill="currentColor"/></svg>',
     official: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.8 4.5 5.6v5.6c0 4.6 3.1 8.6 7.5 10 4.4-1.4 7.5-5.4 7.5-10V5.6L12 2.8z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/><path d="M12 8v5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="16.2" r="1.25" fill="currentColor"/></svg>',
+    speaker: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
     heart: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 20.5s-7.5-4.6-9.2-9.4C1.6 7.6 3.9 4.5 7.2 4.5c2 0 3.6 1.1 4.8 2.8 1.2-1.7 2.8-2.8 4.8-2.8 3.3 0 5.6 3.1 4.4 6.6-1.7 4.8-9.2 9.4-9.2 9.4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>',
     close: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 7l10 10M17 7 7 17" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>',
     plus: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 6v12M6 12h12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>',
@@ -778,11 +779,69 @@
     return box;
   }
 
+  /* ---------- Read aloud (on-device voices only, so nothing leaves the phone) ---------- */
+
+  var speaking = null; // the button whose card is being read
+  function speechOk() { return 'speechSynthesis' in window && typeof window.SpeechSynthesisUtterance === 'function'; }
+  function deviceVoice() {
+    var voices = window.speechSynthesis.getVoices().filter(function (v) { return v.localService !== false; });
+    var want = state.lang === 'zh' ? /^(zh-HK|yue)/i : /^en/i;
+    var pick = voices.filter(function (v) { return want.test(v.lang); });
+    if (state.lang === 'en') pick.sort(function (a, b) { return (/^en-GB/i.test(b.lang) ? 1 : 0) - (/^en-GB/i.test(a.lang) ? 1 : 0); });
+    return pick[0] || null;
+  }
+  // What a card says, in a short spoken form: pair, level, main point, what to do, disclaimer.
+  function speechText(r) {
+    var parts = [primaryName(r.herb) + ' ' + t('and_sr') + ' ' + primaryName(r.drug) + '.'];
+    if (!r.entry && !r.official) {
+      parts.push(t('risk_not_in_database') + '.', t('not_in_db_text'));
+      if (r.advice) parts.push(state.lang === 'zh' ? r.advice.quote_zh : r.advice.quote_en);
+    } else {
+      parts.push((r.status === L.OFFICIAL || !r.entry ? riskLabel(r) : badgeText(r.entry)) + '.');
+      if (r.official) { var s = db.statementById[r.official.statements[0]]; parts.push((state.lang === 'zh' ? s.body_zh : s.body_en) + ': ' + (state.lang === 'zh' ? s.quote_zh : s.quote_en)); }
+      if (r.entry) parts.push(field(r.entry, 'effect'), t('label_what_to_do') + ': ' + field(r.entry, 'action'));
+      else parts.push(t('label_what_to_do') + ': ' + t('official_action'));
+    }
+    parts.push(t('card_disclaimer'));
+    return parts.join(' ');
+  }
+  function badgeText(e) { return t(e.risk === 'low' && e.watch ? 'risk_low_watch' : 'risk_' + e.risk); }
+  function stopSpeaking() {
+    if (!speaking) return;
+    var btn = speaking; speaking = null;
+    try { window.speechSynthesis.cancel(); } catch (e) { /* ignore */ }
+    btn.setAttribute('aria-pressed', 'false');
+    btn.querySelector('.read-label').textContent = t('read_aloud');
+  }
+  function readButton(r) {
+    if (!speechOk()) return null;
+    var msg = el('p', { class: 'read-msg', role: 'status', hidden: true });
+    var btn = el('button', { type: 'button', class: 'read-aloud', 'aria-pressed': 'false', onclick: function () {
+      if (speaking === btn) { stopSpeaking(); return; }
+      stopSpeaking();
+      var voice = deviceVoice();
+      if (!voice) { msg.textContent = t(state.lang === 'zh' ? 'read_no_voice_zh' : 'read_no_voice_en'); msg.hidden = false; return; }
+      msg.hidden = true;
+      var u = new window.SpeechSynthesisUtterance(speechText(r));
+      u.voice = voice; u.lang = voice.lang; u.rate = 0.9;
+      u.onend = u.onerror = function () { if (speaking === btn) stopSpeaking(); };
+      speaking = btn;
+      btn.setAttribute('aria-pressed', 'true');
+      btn.querySelector('.read-label').textContent = t('read_stop');
+      window.speechSynthesis.speak(u);
+    } }, [icon('speaker'), el('span', { class: 'read-label', text: t('read_aloud') })]);
+    return el('div', { class: 'read-row' }, [btn, msg]);
+  }
+  window.addEventListener('hashchange', stopSpeaking);
+  // Some browsers load their voice list late.
+  if (speechOk() && window.speechSynthesis.addEventListener) window.speechSynthesis.addEventListener('voiceschanged', function () {});
+
   function card(r) {
     var key = pairKey(r);
     if (r.official && !r.entry) {
       return el('article', { class: 'card card-official', 'data-pair': key }, [
         el('header', { class: 'card-head' }, [pairTitle(r), badgeFor(r)]),
+        readButton(r),
         officialBlock(r),
         cardAdvice(r),
         el('p', { class: 'card-disclaimer' }, disclaimerText(r))
@@ -791,6 +850,7 @@
     if (!r.entry) {
       return el('article', { class: 'card card-unknown', 'data-pair': key }, [
         el('header', { class: 'card-head' }, [pairTitle(r), badge('not_in_database')]),
+        readButton(r),
         el('p', { class: 'unknown-text', text: t('not_in_db_text') }),
         cardAdvice(r),
         unknownNext(),
@@ -845,6 +905,7 @@
     var shownAsOfficial = r.status === L.OFFICIAL;
     art = el('article', { class: 'card card-' + (shownAsOfficial ? 'official' : e.risk) + (open ? ' is-open' : ''), 'data-pair': key }, [
       el('header', { class: 'card-head' }, [pairTitle(r), shownAsOfficial ? badgeFor(r) : badge(e.risk, e.watch)]),
+      readButton(r),
       withOfficial ? officialBlock(r) : null,
       withOfficial ? el('div', { class: 'studies-head' }, [
         el('h4', { class: 'block-label', text: t('label_studies') }),

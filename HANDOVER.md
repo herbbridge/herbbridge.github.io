@@ -180,7 +180,12 @@ For Sunday this is done WITHOUT accounts, a server or scanning:
   (tests/review-fingerprint.js). A reviewed card says "Reviewed by …" instead of "Prototype";
   any later change to the card hides the review and fails the tests until re-reviewed. Steps in
   README. Cache herbsafe-v18.
-- Next: read-aloud.
+- Read aloud (19 Oct): a "Read aloud / 讀出嚟" button on each card reads pair, level, the first
+  official quote or the effect, what to do and the disclaimer. Uses ON-DEVICE voices only
+  (localService), so no text leaves the phone. Chinese reads only with a Cantonese (zh-HK/yue)
+  voice; otherwise it says the phone has none. The grouped grey card (several pairs) has no
+  button. Cache herbsafe-v19.
+- Ideas not started: search by HK product names (needs official registration data).
   * HA leaflet quote now on EVERY herb + warfarin (owner: it covers all TCM); Health Canada
     "blood thinners" sentences added to both ginseng + warfarin cards. Cache herbsafe-v12.
 
