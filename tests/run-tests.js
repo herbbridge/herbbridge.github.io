@@ -30,6 +30,39 @@ results.push({ group: 'Installable app', name: 'every file in sw.js APP_FILES ex
 var manifest = load('manifest.webmanifest');
 var badIcons = manifest.icons.filter(function (i) { return !fs.existsSync(path.join(__dirname, '..', i.src)); });
 results.push({ group: 'Installable app', name: 'manifest icons exist', pass: badIcons.length === 0, detail: badIcons.map(function (i) { return i.src; }).join(', ') });
+
+// Read aloud: the spoken script for every herb × drug pair is easy to listen to (Node only).
+var speech = require('../js/speech.js');
+var sdb = lookup.createDb(data.herbs, data.drugs, data.interactions, data.official, data.reviews);
+var badSpoken = [];
+data.herbs.herbs.forEach(function (h) {
+  data.drugs.drugs.forEach(function (d) {
+    var r = lookup.checkPairs(sdb, [h.id], [d.id])[0];
+    ['en', 'zh'].forEach(function (lang) {
+      data.i18n.setLang(lang);
+      var name = function (x) { return lang === 'zh' ? x.name_zh : x.name_en; };
+      var parts = speech.script(sdb, r, lang, data.i18n.t, name);
+      var text = parts.join(' ');
+      var problem = !parts.length ? 'empty' :
+        /[()（）\[\]〔〕【】]/.test(text) ? 'bracket' :
+        /\//.test(text) ? 'slash' :
+        lang === 'zh' && /[,:;]/.test(text.replace(/\d,\d/g, '')) ? 'English punctuation in Chinese' :
+        /\b[Aa]n clotting/.test(text) || parts.some(function (p) { return p.indexOf(data.i18n.t('label_what_to_do')) === 0 && /\bTCM\b/.test(p); }) ? 'wording' :
+        /\bINR\b|INR/.test(text) ? 'INR' :
+        /\bS\d+\b|https?:|www\.|new tab|新分頁/i.test(text) ? 'source label or link' :
+        parts[0].indexOf(name(h)) !== 0 ? 'does not start with the herb name' : '';
+      if (problem) badSpoken.push(h.id + '+' + d.id + ' ' + lang + ': ' + problem + ' — ' + text.slice(0, 120));
+    });
+  });
+});
+data.i18n.setLang('en');
+results.push({ group: 'Read aloud', name: 'spoken script has no brackets, INR, source labels or links', pass: badSpoken.length === 0, detail: badSpoken.slice(0, 10).join('\n') });
+var audioList = load('audio/manifest.json').files || [];
+var badAudio = audioList.filter(function (f) {
+  var m = String(f).replace(/^audio\//, '').match(/^([a-z0-9_]+)-([a-z0-9_]+)\.(en|zh)\.mp3$/);
+  return !m || !sdb.herbById[m[1]] || !sdb.drugById[m[2]] || !fs.existsSync(path.join(__dirname, '..', 'audio', String(f).replace(/^audio\//, '')));
+});
+results.push({ group: 'Read aloud', name: 'every recording in audio/manifest.json exists and is named <herb>-<drug>.<en|zh>.mp3', pass: badAudio.length === 0, detail: badAudio.join(', ') });
 var group = null, failed = 0;
 results.forEach(function (r) {
   if (r.group !== group) { group = r.group; console.log('\n' + group); }
