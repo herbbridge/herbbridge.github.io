@@ -803,6 +803,8 @@
      at all). It is loaded in the background, because iOS only lets a page speak when speak() runs
      straight away in the tap: there is no waiting at tap time. */
   var voiceList = [];
+  // Novelty and character voices (Apple and others): never used for health information.
+  var NOVELTY = /\b(Albert|Bad News|Bahh|Bells|Boing|Bubbles|Cellos|Deranged|Good News|Hysterical|Jester|Organ|Pipe Organ|Superstar|Trinoids|Whisper|Wobble|Zarvox|Grandma|Grandpa|Eddy|Flo|Reed|Rocko|Sandy|Shelley|Fred|Junior|Kathy|Ralph|Princess|Bruce|Agnes|Vicki|Victoria)\b/i;
   function refreshVoices() {
     try { voiceList = window.speechSynthesis.getVoices() || []; } catch (e) { voiceList = []; }
     updateVoiceAvailability();
@@ -816,10 +818,14 @@
     var want = lang === 'zh' ? 'zh-HK' : 'en-GB';
     var family = lang === 'zh' ? /^(zh|yue|cmn)/i : /^en/i;
     var exact = lang === 'zh' ? /^(zh[-_]HK|yue)/i : /^en/i;
-    var local = voiceList.filter(function (v) { return v.localService !== false; });
+    var local = voiceList.filter(function (v) { return v.localService !== false && !NOVELTY.test(v.name || ''); });
     var best = local.filter(function (v) { return exact.test(v.lang); });
-    if (lang === 'en') best.sort(function (a, b) { return (/^en[-_]GB/i.test(b.lang) ? 1 : 0) - (/^en[-_]GB/i.test(a.lang) ? 1 : 0); });
     if (!best.length) best = local.filter(function (v) { return family.test(v.lang); });
+    // Natural-sounding voices first ("Daniel (Enhanced)", "Sinji (Premium)"), then British English.
+    best.sort(function (a, b) {
+      var q = function (v) { return (/enhanced|premium/i.test(v.name || '') ? 2 : 0) + (lang === 'en' && /^en[-_]GB/i.test(v.lang) ? 1 : 0); };
+      return q(b) - q(a);
+    });
     if (best.length) return { voice: best[0], lang: best[0].lang || want };
     if (!voiceList.length) return { voice: null, lang: want };
     return null;
@@ -835,63 +841,92 @@
     } catch (e) { /* ignore */ }
     [250, 750, 1500, 3000].forEach(function (ms) { window.setTimeout(refreshVoices, ms); });
   }
-  // What a card says, in a short spoken form: pair, level, main point, what to do, disclaimer.
-  function speechText(r) {
-    var stop = state.lang === 'zh' ? '。' : '.';
-    var parts = [primaryName(r.herb) + (state.lang === 'zh' ? t('and_sr') : ' ' + t('and_sr') + ' ') + primaryName(r.drug) + stop];
-    if (!r.entry && !r.official) {
-      parts.push(t('risk_not_in_database') + stop, t('not_in_db_text'));
-      if (r.advice) parts.push(state.lang === 'zh' ? r.advice.quote_zh : r.advice.quote_en);
-    } else {
-      parts.push((r.status === L.OFFICIAL || !r.entry ? riskLabel(r) : badgeText(r.entry)) + stop);
-      if (r.official) { var s = db.statementById[r.official.statements[0]]; parts.push((state.lang === 'zh' ? s.body_zh + '：' : s.body_en + ': ') + (state.lang === 'zh' ? s.quote_zh : s.quote_en)); }
-      if (r.entry) parts.push(field(r.entry, 'effect'), labelText('label_what_to_do') + field(r.entry, 'action'));
-      else parts.push(labelText('label_what_to_do') + t('official_action'));
-    }
-    parts.push(t('card_disclaimer'));
-    return parts.join(state.lang === 'zh' ? '' : ' ');
+  // The listening version of a card (js/speech.js): names + rating, What to do, official quote, heart line.
+  function speechParts(r) { return window.HerbSafeSpeech.script(db, r, state.lang, t, primaryName); }
+
+  /* Pre-recorded audio (audio/<herb>-<drug>.<lang>.mp3), listed in audio/manifest.json. The files are
+     loaded when the app opens, so a tap can start playing straight away (iPhones need that). */
+  var recordings = {}; // "danshen-warfarin.en" → object URL
+  function loadRecordings() {
+    if (!window.fetch || !window.URL || !URL.createObjectURL) return;
+    fetch('audio/manifest.json', { cache: 'no-cache' }).then(function (res) { return res.ok ? res.json() : { files: [] }; }).then(function (m) {
+      (m.files || []).forEach(function (f) {
+        var key = String(f).replace(/^audio\//, '').replace(/\.mp3$/, '');
+        fetch('audio/' + key + '.mp3').then(function (res) { return res.ok ? res.blob() : null; }).then(function (blob) {
+          if (blob && blob.size) recordings[key] = URL.createObjectURL(blob);
+        }).catch(function () { /* phone voice instead */ });
+      });
+    }).catch(function () { /* no recordings */ });
   }
+  loadRecordings();
+  var playing = null; // current Audio element
+  var readRun = 0;    // each tap is a new run; events from an earlier, stopped run are ignored
   function badgeText(e) { return t(e.risk === 'low' && e.watch ? 'risk_low_watch' : 'risk_' + e.risk); }
   function stopSpeaking() {
     if (!speaking) return;
     var btn = speaking; speaking = null;
-    try { window.speechSynthesis.cancel(); } catch (e) { /* ignore */ }
+    if (playing) { try { playing.pause(); } catch (e) { /* ignore */ } playing = null; }
+    try { if (speechOk()) window.speechSynthesis.cancel(); } catch (e) { /* ignore */ }
     btn.setAttribute('aria-pressed', 'false');
     btn.querySelector('.read-label').textContent = t('read_aloud');
   }
   function readButton(r) {
-    if (!speechOk()) return null;
+    var recKey = r.herb.id + '-' + r.drug.id + '.' + state.lang;
+    if (!speechOk() && !recordings[recKey]) return null;
     var msg = el('p', { class: 'read-msg', role: 'status', hidden: true });
     var btn = el('button', { type: 'button', class: 'read-aloud', 'aria-pressed': 'false', onclick: function () {
       if (speaking === btn) { stopSpeaking(); return; }
       stopSpeaking();
-      refreshVoices();
-      var choice = voiceFor(state.lang);
-      if (!choice) return; // only online voices: the button is hidden by updateVoiceAvailability()
       msg.hidden = true;
-      var u = new window.SpeechSynthesisUtterance(speechText(r));
-      if (choice.voice) u.voice = choice.voice;
-      u.lang = choice.lang; u.rate = 0.9;
-      var started = false;
+      var started = false, run = ++readRun;
+      function mine() { return speaking === btn && readRun === run; }
       // The message appears only when speaking actually fails.
       function fail() {
+        if (readRun !== run) return;
         if (speaking === btn) stopSpeaking();
         msg.textContent = t('read_failed'); msg.hidden = false;
       }
-      u.onstart = function () { started = true; };
-      u.onend = function () { if (speaking === btn) stopSpeaking(); };
-      u.onerror = function (ev) {
-        if (ev && (ev.error === 'interrupted' || ev.error === 'canceled')) { if (speaking === btn) stopSpeaking(); return; }
-        fail();
-      };
-      speaking = btn;
-      btn.setAttribute('aria-pressed', 'true');
-      btn.querySelector('.read-label').textContent = t('read_stop');
-      window.speechSynthesis.speak(u);
+      function begin() {
+        speaking = btn;
+        btn.setAttribute('aria-pressed', 'true');
+        btn.querySelector('.read-label').textContent = t('read_stop');
+      }
+      // A recording for this pair and language: play it instead of the phone voice.
+      var rec = recordings[r.herb.id + '-' + r.drug.id + '.' + state.lang];
+      if (rec) {
+        var audio = new Audio(rec);
+        playing = audio; begin();
+        audio.onended = function () { if (mine()) stopSpeaking(); };
+        audio.onplaying = function () { started = true; };
+        var p = audio.play();
+        if (p && p.catch) p.catch(function () { if (mine() && playing === audio) fail(); });
+        return;
+      }
+      if (!speechOk()) return;
+      refreshVoices();
+      var choice = voiceFor(state.lang);
+      if (!choice) return; // only online voices: the button is hidden by updateVoiceAvailability()
+      // One short utterance per section, so the voice pauses naturally between them.
+      var parts = speechParts(r);
+      begin();
+      parts.forEach(function (text, i) {
+        var u = new window.SpeechSynthesisUtterance(text);
+        if (choice.voice) u.voice = choice.voice;
+        u.lang = choice.lang;
+        u.rate = state.lang === 'zh' ? 0.85 : 0.9;
+        u.pitch = 1;
+        u.onstart = function () { started = true; };
+        if (i === parts.length - 1) u.onend = function () { if (mine()) stopSpeaking(); };
+        u.onerror = function (ev) {
+          if (ev && (ev.error === 'interrupted' || ev.error === 'canceled')) { if (mine()) stopSpeaking(); return; }
+          fail();
+        };
+        window.speechSynthesis.speak(u);
+      });
       window.setTimeout(function () {
         var busy = false;
         try { busy = window.speechSynthesis.speaking || window.speechSynthesis.pending; } catch (e) { /* ignore */ }
-        if (speaking === btn && !started && !busy) fail();
+        if (mine() && !started && !busy) fail();
       }, 4000);
     } }, [icon('speaker'), el('span', { class: 'read-label', text: t('read_aloud') })]);
     return el('div', { class: 'read-row' }, [btn, msg]);

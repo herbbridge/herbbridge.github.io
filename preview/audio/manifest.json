@@ -1,0 +1,4 @@
+{
+  "about": "Pre-recorded Read aloud audio, one file per pair and language: audio/<herb_id>-<drug_id>.<en|zh>.mp3. List each file here; it is then played instead of the phone voice and saved for offline use.",
+  "files": []
+}

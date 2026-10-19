@@ -1,0 +1,118 @@
+/*
+ * HerbSafe spoken script: a listening version of one pair, separate from the on-screen text.
+ * Pure functions, no DOM: used by the app (window.HerbSafeSpeech) and by the tests (Node).
+ *
+ * Order: names + rating → the official quote → What to do (our own advice) → why it matters. Nothing else
+ * (no evidence lists, sources, S/N numbers or links). Each section is its own short utterance,
+ * so the voice pauses between them. Official quotes keep their own words; only brackets,
+ * citations and "INR" are made easier to listen to.
+ */
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory();
+  else root.HerbSafeSpeech = factory();
+})(typeof self !== 'undefined' ? self : this, function () {
+  'use strict';
+
+  // Short spoken names of the agencies quoted on official cautions.
+  // match: how our own advice names the agency (used to avoid saying it twice).
+  var BODY = {
+    'Hong Kong Hospital Authority': { en: 'The Hospital Authority', zh: '醫院管理局', match: /Hospital Authority|醫院管理局/ },
+    'Health Canada': { en: 'Health Canada', zh: '加拿大衞生部', match: /Health Canada|加拿大衞生部/ },
+    'European Medicines Agency': { en: 'The European Medicines Agency', zh: '歐洲藥品管理局', match: /European Medicines Agency|歐洲藥品管理局/ }
+  };
+
+  // Our own English lines (not quotes): "TCM" said as "Chinese medicine", a pause before a second
+  // instruction ("…danshen, and ask…"), and a small letter after the section label.
+  function ownEn(s) {
+    return listenEn(String(s || '').replace(/\bTCM\b/g, 'Chinese medicine'))
+      .replace(/([a-z]) and (ask|tell|watch|get) /g, '$1, and $2 ')
+      .replace(/^([A-Z])(?=[a-z ])/, function (c) { return c.toLowerCase(); });
+  }
+
+  // Our advice without the sentences that name the agency whose words were just read out.
+  function withoutBody(text, body, zh) {
+    if (!body || !body.match) return text;
+    var sentences = zh ? String(text).match(/[^。！？]+[。！？]?/g) || [] : String(text).split(/(?<=[.!?])\s+/);
+    return sentences.filter(function (x) { return !body.match.test(x); }).join(zh ? '' : ' ').trim();
+  }
+
+  // English for listening: INR said as "clotting test"; citations and acronym brackets dropped;
+  // any other bracket becomes a short pause.
+  function listenEn(s) {
+    return String(s || '')
+      .replace(/\b([Aa])n INR \(clotting\) (test|check)\b/g, '$1 clotting $2')
+      .replace(/\bINR \(clotting\) (test|check)\b/g, 'clotting $1')
+      .replace(/\b([Aa])n INR\b( \(clotting\))?/g, '$1 clotting test')
+      .replace(/\bINR\b( \(clotting\))?/g, 'clotting test')
+      .replace(/\s*\/\s*/g, ', ')                    // "practitioner/doctor" → pause, not "slash"
+      .replace(/\s*\([^()]*\d{4}[^()]*\)/g, '')     // "(Brinker 2010; …)"
+      .replace(/\s*\((see )?section[^()]*\)/gi, '') // "(see section with 4.4)": a reference, not advice
+      .replace(/\s*\([A-Z]{2,6}\)/g, '')            // "(TCM)"
+      .replace(/\s*\(([^()]*)\)/g, ', $1,')         // "(warfarin works more strongly)" → pause
+      .replace(/,\s*([.,;:!?])/g, '$1')
+      .replace(/\s{2,}/g, ' ')
+      .trim();
+  }
+
+  // Chinese for listening: INR（凝血指數）said as 凝血指數; citations and Latin-only brackets
+  // dropped; other brackets become a pause (，).
+  function listenZh(s) {
+    return String(s || '')
+      .replace(/INR\s*[（(]凝血指數[）)]/g, '凝血指數')
+      .replace(/INR/g, '凝血指數')
+      .replace(/〔([^〔〕]*)〕/g, '，$1，')
+      .replace(/\s*[\/／]\s*/g, '、')
+      .replace(/\s*[（(][^（）()]*\d{4}[^（）()]*[）)]/g, '')
+      .replace(/\s*[（(]見第[^（）()]*節[）)]/g, '')
+      .replace(/\s*[（(]\s*[A-Za-z][A-Za-z .,&-]*\s*[）)]/g, '')
+      .replace(/\s*[（(]\s*([^（）()]*?)\s*[）)]\s*/g, '，$1，')
+      .replace(/，\s*([。，、；：！？])/g, '$1')
+      .replace(/([。；：！？])，/g, '$1')
+      .replace(/\s+/g, '')
+      .replace(/^，/, '');
+  }
+
+  /* The spoken script for one result row r (from lookup.checkPairs) as a list of short utterances.
+     t(key) and name(item) come from the app, in the current language. */
+  function script(db, r, lang, t, name) {
+    var zh = lang === 'zh';
+    var listen = zh ? listenZh : listenEn;
+    var stop = zh ? '。' : '.';
+    var colon = zh ? '：' : ': ';
+    var pick = function (o, base) { return (zh && o[base + '_zh']) || o[base + '_en']; };
+    var parts = [];
+    var own = zh ? listenZh : ownEn;
+    var drugName = zh ? name(r.drug) : name(r.drug).toLowerCase(); // "Danshen and warfarin."
+    var pair = name(r.herb) + (zh ? t('and_sr') : ' ' + t('and_sr') + ' ') + drugName + stop;
+
+    if (!r.entry && !r.official) {
+      parts.push(pair + ' ' + t('risk_not_in_database') + stop + ' ' + t('not_in_db_text'));
+      parts.push(t('label_what_to_do') + colon + own(t('unknown_next_text')));
+      return parts.map(function (p) { return zh ? p.replace(/\s+/g, '') : p; });
+    }
+
+    var rating;
+    if (r.status === 'official') rating = t(r.official.kind === 'disagree' ? 'risk_official_disagree' : 'risk_official');
+    else rating = t(r.entry.risk === 'low' && r.entry.watch ? 'risk_low_watch' : 'risk_' + r.entry.risk);
+    parts.push(pair + ' ' + rating.replace(/\s*·\s*/g, zh ? '，' : ', ') + stop);
+
+    // The official quote comes straight after the rating, in the agency's own words.
+    var body = null;
+    if (r.official) {
+      var s = db.statementById[r.official.statements[0]];
+      body = BODY[s.body_en] || { en: s.body_en, zh: s.body_zh };
+      parts.push(t('speak_says', { body: zh ? body.zh : body.en }) + ' ' + listen(zh ? s.quote_zh : s.quote_en));
+    }
+
+    // Then only our own advice: a sentence naming that agency again is left out.
+    var action = r.entry ? withoutBody(pick(r.entry, 'action'), body, zh) : '';
+    parts.push(t('label_what_to_do') + colon + own(action || t('official_action')));
+
+    if (r.entry && pick(r.entry, 'heart_impact')) {
+      parts.push(t('speak_why') + colon + own(pick(r.entry, 'heart_impact')));
+    }
+    return parts.map(function (p) { return zh ? p.replace(/\s+/g, '') : p; });
+  }
+
+  return { script: script, listenEn: listenEn, listenZh: listenZh };
+});
