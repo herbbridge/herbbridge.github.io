@@ -798,27 +798,58 @@
 
   var speaking = null; // the button whose card is being read
   function speechOk() { return 'speechSynthesis' in window && typeof window.SpeechSynthesisUtterance === 'function'; }
-  function deviceVoice() {
-    var voices = window.speechSynthesis.getVoices().filter(function (v) { return v.localService !== false; });
-    var want = state.lang === 'zh' ? /^(zh-HK|yue)/i : /^en/i;
-    var pick = voices.filter(function (v) { return want.test(v.lang); });
-    if (state.lang === 'en') pick.sort(function (a, b) { return (/^en-GB/i.test(b.lang) ? 1 : 0) - (/^en-GB/i.test(a.lang) ? 1 : 0); });
-    return pick[0] || null;
+
+  /* The voice list loads late on iPhones (often empty until "voiceschanged", sometimes with no event
+     at all). It is loaded in the background, because iOS only lets a page speak when speak() runs
+     straight away in the tap: there is no waiting at tap time. */
+  var voiceList = [];
+  function refreshVoices() {
+    try { voiceList = window.speechSynthesis.getVoices() || []; } catch (e) { voiceList = []; }
+    updateVoiceAvailability();
+  }
+  // Which voice to use for a language: { voice, lang }, or null when Read aloud cannot be offered.
+  // 1. an on-device voice for the language (Cantonese; English, British first);
+  // 2. another on-device voice of the same language family (e.g. Mandarin when there is no Cantonese);
+  // 3. no voice list at all (some iPhone in-app browsers): the phone's default voice, language set;
+  // never an online-only voice, so the text never leaves the phone.
+  function voiceFor(lang) {
+    var want = lang === 'zh' ? 'zh-HK' : 'en-GB';
+    var family = lang === 'zh' ? /^(zh|yue|cmn)/i : /^en/i;
+    var exact = lang === 'zh' ? /^(zh[-_]HK|yue)/i : /^en/i;
+    var local = voiceList.filter(function (v) { return v.localService !== false; });
+    var best = local.filter(function (v) { return exact.test(v.lang); });
+    if (lang === 'en') best.sort(function (a, b) { return (/^en[-_]GB/i.test(b.lang) ? 1 : 0) - (/^en[-_]GB/i.test(a.lang) ? 1 : 0); });
+    if (!best.length) best = local.filter(function (v) { return family.test(v.lang); });
+    if (best.length) return { voice: best[0], lang: best[0].lang || want };
+    if (!voiceList.length) return { voice: null, lang: want };
+    return null;
+  }
+  function updateVoiceAvailability() {
+    document.documentElement.classList.toggle('no-voice', speechOk() && voiceList.length > 0 && voiceFor(state.lang) === null);
+  }
+  if (speechOk()) {
+    refreshVoices();
+    try {
+      if (window.speechSynthesis.addEventListener) window.speechSynthesis.addEventListener('voiceschanged', refreshVoices);
+      else window.speechSynthesis.onvoiceschanged = refreshVoices;
+    } catch (e) { /* ignore */ }
+    [250, 750, 1500, 3000].forEach(function (ms) { window.setTimeout(refreshVoices, ms); });
   }
   // What a card says, in a short spoken form: pair, level, main point, what to do, disclaimer.
   function speechText(r) {
-    var parts = [primaryName(r.herb) + ' ' + t('and_sr') + ' ' + primaryName(r.drug) + '.'];
+    var stop = state.lang === 'zh' ? '。' : '.';
+    var parts = [primaryName(r.herb) + (state.lang === 'zh' ? t('and_sr') : ' ' + t('and_sr') + ' ') + primaryName(r.drug) + stop];
     if (!r.entry && !r.official) {
-      parts.push(t('risk_not_in_database') + '.', t('not_in_db_text'));
+      parts.push(t('risk_not_in_database') + stop, t('not_in_db_text'));
       if (r.advice) parts.push(state.lang === 'zh' ? r.advice.quote_zh : r.advice.quote_en);
     } else {
-      parts.push((r.status === L.OFFICIAL || !r.entry ? riskLabel(r) : badgeText(r.entry)) + '.');
+      parts.push((r.status === L.OFFICIAL || !r.entry ? riskLabel(r) : badgeText(r.entry)) + stop);
       if (r.official) { var s = db.statementById[r.official.statements[0]]; parts.push((state.lang === 'zh' ? s.body_zh + '：' : s.body_en + ': ') + (state.lang === 'zh' ? s.quote_zh : s.quote_en)); }
       if (r.entry) parts.push(field(r.entry, 'effect'), labelText('label_what_to_do') + field(r.entry, 'action'));
       else parts.push(labelText('label_what_to_do') + t('official_action'));
     }
     parts.push(t('card_disclaimer'));
-    return parts.join(' ');
+    return parts.join(state.lang === 'zh' ? '' : ' ');
   }
   function badgeText(e) { return t(e.risk === 'low' && e.watch ? 'risk_low_watch' : 'risk_' + e.risk); }
   function stopSpeaking() {
@@ -834,22 +865,38 @@
     var btn = el('button', { type: 'button', class: 'read-aloud', 'aria-pressed': 'false', onclick: function () {
       if (speaking === btn) { stopSpeaking(); return; }
       stopSpeaking();
-      var voice = deviceVoice();
-      if (!voice) { msg.textContent = t(state.lang === 'zh' ? 'read_no_voice_zh' : 'read_no_voice_en'); msg.hidden = false; return; }
+      refreshVoices();
+      var choice = voiceFor(state.lang);
+      if (!choice) return; // only online voices: the button is hidden by updateVoiceAvailability()
       msg.hidden = true;
       var u = new window.SpeechSynthesisUtterance(speechText(r));
-      u.voice = voice; u.lang = voice.lang; u.rate = 0.9;
-      u.onend = u.onerror = function () { if (speaking === btn) stopSpeaking(); };
+      if (choice.voice) u.voice = choice.voice;
+      u.lang = choice.lang; u.rate = 0.9;
+      var started = false;
+      // The message appears only when speaking actually fails.
+      function fail() {
+        if (speaking === btn) stopSpeaking();
+        msg.textContent = t('read_failed'); msg.hidden = false;
+      }
+      u.onstart = function () { started = true; };
+      u.onend = function () { if (speaking === btn) stopSpeaking(); };
+      u.onerror = function (ev) {
+        if (ev && (ev.error === 'interrupted' || ev.error === 'canceled')) { if (speaking === btn) stopSpeaking(); return; }
+        fail();
+      };
       speaking = btn;
       btn.setAttribute('aria-pressed', 'true');
       btn.querySelector('.read-label').textContent = t('read_stop');
       window.speechSynthesis.speak(u);
+      window.setTimeout(function () {
+        var busy = false;
+        try { busy = window.speechSynthesis.speaking || window.speechSynthesis.pending; } catch (e) { /* ignore */ }
+        if (speaking === btn && !started && !busy) fail();
+      }, 4000);
     } }, [icon('speaker'), el('span', { class: 'read-label', text: t('read_aloud') })]);
     return el('div', { class: 'read-row' }, [btn, msg]);
   }
   window.addEventListener('hashchange', stopSpeaking);
-  // Some browsers load their voice list late.
-  if (speechOk() && window.speechSynthesis.addEventListener) window.speechSynthesis.addEventListener('voiceschanged', function () {});
 
   function card(r) {
     var key = pairKey(r);
@@ -1454,6 +1501,7 @@
       node.setAttribute('aria-label', t(node.getAttribute('data-i18n-label')));
     });
     applyMode();
+    if (speechOk()) updateVoiceAvailability();
     var toggleBtn = document.getElementById('lang-toggle');
     toggleBtn.textContent = '';
     toggleBtn.appendChild(el('span', { lang: zh ? 'en-GB' : 'zh-HK', text: t('lang_toggle') }));

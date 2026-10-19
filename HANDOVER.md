@@ -261,3 +261,11 @@ rating, quote, source, S/N or date changed.
 - Remaining before Wed 21 Oct merge (owner): phone check with Cyrus, then Chinese sign-off (set every
   zh_reviewed and ZH_REVIEWED to true only when the owner confirms), then merge redesign → main,
   removing _preview/ and preview/ in the same step and keeping sw.js from redesign.
+- 20 Oct, iPhone phone check → Read aloud fix (cache v25): the voice list is loaded in the background
+  (voiceschanged + re-checks for 3 s; iOS often fills it late or with no event), because iOS only
+  speaks when speak() runs straight away in the tap. Voice order: on-device voice for the language →
+  on-device voice of the same family (e.g. Mandarin) → phone default with lang en-GB/zh-HK when the
+  list is empty (in-app browsers). Never an online-only voice: then the button is hidden. A message
+  shows only when speaking fails (error, or nothing starts within 4 s). Tested with iPhone emulation
+  in Chromium and a fake speech engine (no real iOS/WebKit available here). Chinese speech uses 。.
+- Preview build tags css/js with ?v=<cache version> so phones fetch a rebuilt preview fresh.
