@@ -667,7 +667,7 @@
     var zh = state.lang === 'zh';
     var names = drugs.map(primaryName).join(t('list_sep'));
     return el('div', { class: 'advice-box' }, [
-      el('h4', { class: 'advice-title', text: t('advice_title', { group: zh ? adv.group_zh : adv.group_en, drugs: names }) }),
+      el('h4', { class: 'advice-title', text: adv.single_drug ? t('advice_title_single', { drugs: names }) : t('advice_title', { group: zh ? adv.group_zh : adv.group_en, drugs: names }) }),
       el('blockquote', { class: 'advice-quote', lang: zh ? 'zh-HK' : 'en-GB', text: '“' + (zh ? adv.quote_zh : adv.quote_en) + '”' }),
       zh ? el('p', { class: 'official-original' }, [
         el('span', { text: t('official_zh_original_note') + ' ' }), el('span', { lang: 'en-GB', text: '“' + adv.quote_en + '”' })
@@ -677,6 +677,12 @@
         sourceLink({ url: zh ? adv.url_zh : adv.url, label: zh ? adv.document_zh + '，S/N ' + adv.sn_zh + '，' + adv.date_zh : adv.document_en + ', S/N ' + adv.sn_en + ', ' + adv.date_en })
       ])
     ]);
+  }
+  // A card's advice box, unless its official caution already quotes the same leaflet.
+  function cardAdvice(r) {
+    if (!r.advice) return null;
+    if (r.official && r.official.statements.some(function (id) { return db.statementById[id].url === r.advice.url; })) return null;
+    return adviceBlock(r.advice, [r.drug]);
   }
   // One advice block per leaflet for a set of rows (several medicines can share one leaflet).
   function adviceBlocks(rows) {
@@ -771,7 +777,7 @@
       return el('article', { class: 'card card-official', 'data-pair': key }, [
         el('header', { class: 'card-head' }, [pairTitle(r), badgeFor(r)]),
         officialBlock(r),
-        r.advice ? adviceBlock(r.advice, [r.drug]) : null,
+        cardAdvice(r),
         el('p', { class: 'card-disclaimer' }, disclaimerText())
       ]);
     }
@@ -779,7 +785,7 @@
       return el('article', { class: 'card card-unknown', 'data-pair': key }, [
         el('header', { class: 'card-head' }, [pairTitle(r), badge('not_in_database')]),
         el('p', { class: 'unknown-text', text: t('not_in_db_text') }),
-        r.advice ? adviceBlock(r.advice, [r.drug]) : null,
+        cardAdvice(r),
         unknownNext(),
         el('p', { class: 'card-disclaimer' }, disclaimerText())
       ]);
@@ -807,7 +813,7 @@
       block(t('label_main_evidence'), [el('p', { class: 'main-finding', text: field(e, 'main_finding') })]),
       block(t('label_why'), whyBlock),
       block(t('label_what_to_do'), [el('p', { class: 'action', text: field(e, 'action') })], 'block-action'),
-      r.advice ? adviceBlock(r.advice, [r.drug]) : null,
+      cardAdvice(r),
       block(t('label_rated_by'), [el('p', { text: e.rating_source === 'HA' ? t('rated_by_ha') : t('rated_by_team') })]),
       block(t('label_sources'), [sourceList(e.sources)])
     ]);
@@ -1090,6 +1096,7 @@
       el('p', { text: t('about_low_watch') }),
       el('p', null, [badge('official')]),
       el('p', { text: t('about_official') }),
+      el('p', { class: 'strong', text: t('about_official_rule') }),
       el('p', null, [badge('not_in_database')]),
       el('p', { class: 'strong', text: t('about_not_in_db') }),
       el('p', { text: t('about_rating_source') })

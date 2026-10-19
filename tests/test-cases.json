@@ -45,7 +45,6 @@
         { "herb": "dong_quai", "drug": "warfarin", "status": "high", "entry": "dong_quai-warfarin", "official": "dong_quai-warfarin-official" },
         { "herb": "ginkgo", "drug": "warfarin", "status": "official", "entry": "ginkgo-warfarin", "official": "ginkgo-warfarin-official" },
         { "herb": "ginkgo", "drug": "aspirin", "status": "official", "entry": "ginkgo-aspirin", "official": "ginkgo-aspirin-official" },
-        { "herb": "liquorice", "drug": "warfarin", "status": "official", "entry": null, "official": "liquorice-warfarin-official" },
         { "herb": "liquorice", "drug": "digoxin", "status": "official", "entry": "liquorice-digoxin", "official": "liquorice-digoxin-official" },
         { "herb": "liquorice", "drug": "furosemide", "status": "official", "entry": "liquorice-diuretic", "official": "liquorice-diuretic-official" },
         { "herb": "dong_quai", "drug": "aspirin", "status": "low", "entry": "dong_quai-aspirin" },
@@ -53,6 +52,7 @@
         { "herb": "dong_quai", "drug": "furosemide", "status": "not_in_database", "entry": null },
         { "herb": "ginkgo", "drug": "digoxin", "status": "not_in_database", "entry": null },
         { "herb": "ginkgo", "drug": "furosemide", "status": "not_in_database", "entry": null },
+        { "herb": "liquorice", "drug": "warfarin", "status": "not_in_database", "entry": null },
         { "herb": "liquorice", "drug": "aspirin", "status": "not_in_database", "entry": null }
       ]
     },
@@ -112,15 +112,15 @@
     {
       "id": "10-blood-circulation-mix",
       "name": "Danshen, sanqi and safflower with warfarin and aspirin",
-      "story": "A 'blood circulation' herbal mix (丹參, 三七, 紅花) taken with warfarin and aspirin. Every pair now has a record: danshen + warfarin is High with the Hospital Authority leaflet quoted; sanqi and safflower + warfarin show the leaflet as an official caution (sanqi: sources disagree); then one Moderate and two Low.",
+      "story": "A 'blood circulation' herbal mix (丹參, 三七, 紅花) taken with warfarin and aspirin. Every pair now has a record: danshen + warfarin is High with the Hospital Authority leaflet quoted (it names danshen); then two Moderate and three Low. The HA warfarin leaflet's general 'any TCM' advice appears on the sanqi and safflower cards as Hospital Authority advice, not as an official caution.",
       "herbs": ["danshen", "sanqi", "safflower"],
       "drugs": ["warfarin", "aspirin"],
       "expected": [
         { "herb": "danshen", "drug": "warfarin", "status": "high", "entry": "danshen-warfarin", "official": "danshen-warfarin-official" },
-        { "herb": "sanqi", "drug": "warfarin", "status": "official", "entry": "sanqi-warfarin", "official": "sanqi-warfarin-official" },
-        { "herb": "safflower", "drug": "warfarin", "status": "official", "entry": "safflower-warfarin", "official": "safflower-warfarin-official" },
         { "herb": "sanqi", "drug": "aspirin", "status": "moderate", "entry": "sanqi-aspirin" },
+        { "herb": "safflower", "drug": "warfarin", "status": "moderate", "entry": "safflower-warfarin" },
         { "herb": "danshen", "drug": "aspirin", "status": "low", "entry": "danshen-aspirin" },
+        { "herb": "sanqi", "drug": "warfarin", "status": "low", "entry": "sanqi-warfarin" },
         { "herb": "safflower", "drug": "aspirin", "status": "low", "entry": "safflower-aspirin" }
       ]
     }

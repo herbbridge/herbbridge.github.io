@@ -20,13 +20,9 @@
     'danshen|warfarin':          { kind: 'official', statements: ['ha-warfarin-leaflet-tcm'] },
     'dong_quai|warfarin':        { kind: 'official', statements: ['ha-warfarin-leaflet-tcm'] },
     'asian_ginseng|warfarin':    { kind: 'disagree', statements: ['ha-warfarin-leaflet-tcm', 'hc-panax-ginseng'] },
-    // Owner, 19 Oct: the HA leaflet ("Do not take any TCM...") applies to every herb + warfarin.
+    // Owner, 19 Oct (rule): an Official caution needs an official source that NAMES the herb. The HA
+    // warfarin leaflet's "any TCM" reaches the other herbs only as Hospital Authority advice.
     'american_ginseng|warfarin': { kind: 'official', statements: ['ha-warfarin-leaflet-tcm', 'hc-american-ginseng'] },
-    'liquorice|warfarin':        { kind: 'official', statements: ['ha-warfarin-leaflet-tcm'] },
-    'red_yeast_rice|warfarin':   { kind: 'official', statements: ['ha-warfarin-leaflet-tcm'] },
-    'goji|warfarin':             { kind: 'official', statements: ['ha-warfarin-leaflet-tcm'] },
-    'sanqi|warfarin':            { kind: 'disagree', statements: ['ha-warfarin-leaflet-tcm'] },
-    'safflower|warfarin':        { kind: 'official', statements: ['ha-warfarin-leaflet-tcm'] },
     'ginkgo|aspirin':            { kind: 'disagree', statements: ['hc-ginkgo-contraindication', 'ema-ginkgo-4.5'] },
     'ginkgo|clopidogrel':        { kind: 'official', statements: ['ema-ginkgo-4.5', 'hc-ginkgo-contraindication'] },
     'ginkgo|amlodipine':         { kind: 'official', statements: ['hc-ginkgo-blood-pressure'] },
@@ -53,6 +49,9 @@
   // Hospital Authority leaflets for groups of heart medicines (owner-approved 19 Oct 2026), both
   // languages exactly as the HA wrote them. General advice only: never a rating, never an Official caution.
   var GENERAL_ADVICE = {
+    'ha-warfarin': { drugs: ['warfarin'],
+      en: 'Do not take any Traditional Chinese Medicines (TCM), Proprietary Chinese Medicines, herbal drinks, or food that contains TCM, such as Guilinggao. Many TCM such as ginseng, Dong quai, Danshen, Chishao can interact with warfarin.',
+      zh: '不可隨便服用中藥材，中成藥，藥材湯或涼茶，或含中藥成份的食品如龜苓膏，因為很多中藥 ( 如人參、當歸、丹參、赤芍 )，會與「華法林」產生相互作用，影響抗凝血藥的功效。' },
     'ha-antianginal': { drugs: ['aspirin', 'clopidogrel'],
       en: 'Consult your doctor before using any other medications, including health supplements, Traditional Chinese Medicine, Proprietary Chinese Medicines and over-the-counter medications.',
       zh: '未經醫生指示，切勿隨便使用其他藥物，包括保健產品、中藥、中成藥或西藥。' },
@@ -291,8 +290,8 @@
       });
       return { pass: bad.length === 0, detail: bad.map(function (r) { return r.herb.id + ' × ' + r.drug.id; }).join('\n') };
     });
-    check('Safety rules', 'every medicine except warfarin has HA leaflet advice', function () {
-      var bad = db.drugs.filter(function (d) { return d.id !== 'warfarin' && !lookup.findAdvice(db, d.id); }).map(function (d) { return d.id; });
+    check('Safety rules', 'every medicine has HA leaflet advice', function () {
+      var bad = db.drugs.filter(function (d) { return !lookup.findAdvice(db, d.id); }).map(function (d) { return d.id; });
       return { pass: bad.length === 0, detail: bad.join(', ') };
     });
     check('Safety rules', 'an official caution never hides a High team rating', function () {

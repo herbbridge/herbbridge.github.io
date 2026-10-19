@@ -167,9 +167,15 @@ For Sunday this is done WITHOUT accounts, a server or scanning:
   grey cards, rated cards (under Details), official-only cards and the summary; never a rating
   or Official caution. Locked in GENERAL_ADVICE (both languages exactly as the HA wrote them).
   Cache herbsafe-v16.
-- OPEN: owner's rule "Official caution = an official source names the herb" (for the About
-  page) conflicts with 5 warfarin cards that are blue only via the HA warfarin leaflet's "any
-  TCM": liquorice, goji, red yeast rice, sanqi, safflower + warfarin. Awaiting owner decision.
+- RULE (owner, 19 Oct, on the About page): an Official caution needs an official source that
+  NAMES the herb. General "any Chinese medicine" advice is shown as Hospital Authority advice.
+  So liquorice, goji, red yeast rice, sanqi and safflower + warfarin are no longer blue; the
+  HA warfarin leaflet (019Ev10) is now general advice for warfarin and appears in their advice
+  box. Team ratings unchanged (goji High, safflower Moderate, sanqi Low · watch); liquorice and
+  red yeast rice + warfarin are grey with the HA box. A card whose official caution already
+  quotes the same leaflet does not repeat it. Cache herbsafe-v17.
+  Possible later team-rating candidate: liquorice + warfarin (Zhuang 2021 discusses mixed
+  evidence; would need the usual research/check/approval).
 - Next: "reviewed by a pharmacist" record per card, then read-aloud.
   * HA leaflet quote now on EVERY herb + warfarin (owner: it covers all TCM); Health Canada
     "blood thinners" sentences added to both ginseng + warfarin cards. Cache herbsafe-v12.

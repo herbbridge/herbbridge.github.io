@@ -294,59 +294,33 @@
         "hc-american-ginseng"
       ],
       "zh_reviewed": false
-    },
-    {
-      "id": "liquorice-warfarin-official",
-      "herb_id": "liquorice",
-      "drug_id": "warfarin",
-      "kind": "official",
-      "statements": [
-        "ha-warfarin-leaflet-tcm"
-      ],
-      "zh_reviewed": false
-    },
-    {
-      "id": "red_yeast_rice-warfarin-official",
-      "herb_id": "red_yeast_rice",
-      "drug_id": "warfarin",
-      "kind": "official",
-      "statements": [
-        "ha-warfarin-leaflet-tcm"
-      ],
-      "zh_reviewed": false
-    },
-    {
-      "id": "goji-warfarin-official",
-      "herb_id": "goji",
-      "drug_id": "warfarin",
-      "kind": "official",
-      "statements": [
-        "ha-warfarin-leaflet-tcm"
-      ],
-      "zh_reviewed": false
-    },
-    {
-      "id": "sanqi-warfarin-official",
-      "herb_id": "sanqi",
-      "drug_id": "warfarin",
-      "kind": "disagree",
-      "statements": [
-        "ha-warfarin-leaflet-tcm"
-      ],
-      "zh_reviewed": false
-    },
-    {
-      "id": "safflower-warfarin-official",
-      "herb_id": "safflower",
-      "drug_id": "warfarin",
-      "kind": "official",
-      "statements": [
-        "ha-warfarin-leaflet-tcm"
-      ],
-      "zh_reviewed": false
     }
   ],
   "general_advice": [
+    {
+      "id": "ha-warfarin",
+      "drug_ids": [
+        "warfarin"
+      ],
+      "body_en": "Hong Kong Hospital Authority",
+      "body_zh": "香港醫院管理局",
+      "verified": "2026-10-19",
+      "document_en": "Warfarin – Oral Anticoagulant",
+      "document_zh": "華法林 (Warfarin) 口服抗凝血藥",
+      "sn_en": "019Ev10",
+      "sn_zh": "019Cv10",
+      "date_en": "October 2025",
+      "date_zh": "2025年10月",
+      "group_en": "warfarin",
+      "group_zh": "華法林",
+      "single_drug": true,
+      "section_en": "patient advice",
+      "section_zh": "病人須知",
+      "url": "https://www.ha.org.hk/hadf/Content/uploads/docs/mcfDfgqUQ5320084.pdf",
+      "url_zh": "https://www.ha.org.hk/hadf/Content/uploads/docs/eGOLcFArB5505364.pdf",
+      "quote_en": "Do not take any Traditional Chinese Medicines (TCM), Proprietary Chinese Medicines, herbal drinks, or food that contains TCM, such as Guilinggao. Many TCM such as ginseng, Dong quai, Danshen, Chishao can interact with warfarin.",
+      "quote_zh": "不可隨便服用中藥材，中成藥，藥材湯或涼茶，或含中藥成份的食品如龜苓膏，因為很多中藥 ( 如人參、當歸、丹參、赤芍 )，會與「華法林」產生相互作用，影響抗凝血藥的功效。"
+    },
     {
       "id": "ha-antianginal",
       "drug_ids": [
