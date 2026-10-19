@@ -176,7 +176,11 @@ For Sunday this is done WITHOUT accounts, a server or scanning:
   quotes the same leaflet does not repeat it. Cache herbsafe-v17.
   Possible later team-rating candidate: liquorice + warfarin (Zhuang 2021 discusses mixed
   evidence; would need the usual research/check/approval).
-- Next: "reviewed by a pharmacist" record per card, then read-aloud.
+- Pharmacist review record (19 Oct): data/reviews.json (empty) + fingerprint per card
+  (tests/review-fingerprint.js). A reviewed card says "Reviewed by …" instead of "Prototype";
+  any later change to the card hides the review and fails the tests until re-reviewed. Steps in
+  README. Cache herbsafe-v18.
+- Next: read-aloud.
   * HA leaflet quote now on EVERY herb + warfarin (owner: it covers all TCM); Health Canada
     "blood thinners" sentences added to both ginseng + warfarin cards. Cache herbsafe-v12.
 

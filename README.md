@@ -114,6 +114,22 @@ agency's own words, never reworded, with the body, document, date and section.
   `tests/test-suite.js`. Only add a statement after a person has opened the official document
   and copied the sentence.
 
+## Pharmacist reviews (`data/reviews.json`)
+
+Every card says "Prototype: … not yet reviewed by a pharmacist" until a pharmacist has checked
+it. To record a review:
+
+1. The pharmacist reads the card (English and Chinese) in the app.
+2. Run `node tests/review-fingerprint.js <herb_id> <drug_id>` (e.g. `danshen warfarin`) and copy
+   the 8-character fingerprint.
+3. Add to `reviews`: `{ "herb_id": "danshen", "drug_id": "warfarin", "reviewer_en": "…",
+   "reviewer_zh": "…", "role_en": "registered pharmacist", "role_zh": "註冊藥劑師",
+   "date": "YYYY-MM-DD", "fingerprint": "…" }`.
+
+The card then says "Reviewed by …, …, on …". The fingerprint covers everything the card shows
+(team entry, official quotes, Hospital Authority advice). If any of it changes later, the
+review stops showing and `node tests/run-tests.js` fails until the card is reviewed again.
+
 To add a herb or a medicine, add it to `data/herbs.json` or `data/drugs.json` with its
 English and Chinese names and search `aliases` (pinyin, Cantonese romanisation, brand
 names). Only add names you have checked.

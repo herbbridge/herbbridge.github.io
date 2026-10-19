@@ -42,7 +42,7 @@
       .filter(Boolean);
   }
 
-  function createDb(herbsJson, drugsJson, interactionsJson, officialJson) {
+  function createDb(herbsJson, drugsJson, interactionsJson, officialJson, reviewsJson) {
     var db = {
       herbs: herbsJson.herbs,
       drugs: drugsJson.drugs,
@@ -51,6 +51,7 @@
       cautions: (officialJson && officialJson.cautions) || [],
       // General Hospital Authority advice per medicine (leaflets for groups of heart medicines). Never a rating.
       generalAdvice: (officialJson && officialJson.general_advice) || [],
+      reviews: (reviewsJson && reviewsJson.reviews) || [],
       statementById: Object.create(null),
       lastUpdated: interactionsJson.last_updated || null,
       // Plain maps (no prototype), so ids like "constructor" can never match anything.
@@ -114,6 +115,33 @@
     return db.generalAdvice.filter(function (a) { return Array.isArray(a.drug_ids) && a.drug_ids.indexOf(drugId) !== -1; })[0] || null;
   }
 
+  /* Fingerprint of everything a card shows (team entry, official quotes, HA advice). A pharmacist
+     review is tied to this, so any later change to the card hides the review until it is re-reviewed. */
+  function stable(v) {
+    if (Array.isArray(v)) return '[' + v.map(stable).join(',') + ']';
+    if (v && typeof v === 'object') return '{' + Object.keys(v).sort().map(function (k) { return JSON.stringify(k) + ':' + stable(v[k]); }).join(',') + '}';
+    return JSON.stringify(v === undefined ? null : v);
+  }
+  function cardFingerprint(db, herbId, drugId) {
+    var official = findOfficial(db, herbId, drugId);
+    var text = stable({
+      herb: herbId, drug: drugId,
+      entry: findInteraction(db, herbId, drugId),
+      official: official ? { kind: official.kind, statements: official.statements.map(function (id) { return db.statementById[id] || id; }) } : null,
+      advice: findAdvice(db, drugId)
+    });
+    var h = 0x811c9dc5; // FNV-1a, 32-bit
+    for (var i = 0; i < text.length; i++) { h ^= text.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
+    return ('0000000' + h.toString(16)).slice(-8);
+  }
+  /* The pharmacist review for a pair: { review, stale }. A stale review is never shown. */
+  function findReview(db, herbId, drugId) {
+    var rev = db.reviews.filter(function (x) { return x.herb_id === herbId && x.drug_id === drugId; })[0] || null;
+    if (!rev) return { review: null, stale: false };
+    var ok = rev.fingerprint === cardFingerprint(db, herbId, drugId);
+    return { review: ok ? rev : null, stale: !ok };
+  }
+
   /* What a pair shows: the team rating, unless an official caution exists (then that, except
      when the team rating is already High, which stays). Never makes a pair look safer. */
   function statusOf(entry, official) {
@@ -146,6 +174,7 @@
           entry: entry,
           official: official,
           advice: findAdvice(db, drugId),
+          review: findReview(db, herbId, drugId).review,
           status: statusOf(entry, official),
           _order: hi * 1000 + di
         });
@@ -286,6 +315,19 @@
       });
     });
 
+    // Pharmacist reviews: who, role, when, and the fingerprint of the card they saw.
+    var reviewKeys = {};
+    db.reviews.forEach(function (rv, i) {
+      var where = 'review #' + (i + 1) + ' (' + rv.herb_id + ' × ' + rv.drug_id + ')';
+      if (!db.herbById[rv.herb_id]) problem(where + ': unknown herb_id');
+      if (!db.drugById[rv.drug_id]) problem(where + ': unknown drug_id');
+      ['reviewer_en', 'reviewer_zh', 'role_en', 'role_zh', 'fingerprint'].forEach(function (f) { if (!isText(rv[f])) problem(where + ': missing ' + f); });
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(rv.date || '')) problem(where + ': date must be YYYY-MM-DD');
+      var k = rv.herb_id + '|' + rv.drug_id;
+      if (reviewKeys[k]) problem(where + ': this card already has a review');
+      reviewKeys[k] = true;
+    });
+
     // A drug matching two different class entries for the same herb would be ambiguous.
     db.herbs.forEach(function (h) {
       db.drugs.forEach(function (d) {
@@ -311,6 +353,8 @@
     findInteraction: findInteraction,
     findOfficial: findOfficial,
     findAdvice: findAdvice,
+    cardFingerprint: cardFingerprint,
+    findReview: findReview,
     checkPairs: checkPairs,
     validateData: validateData
   };

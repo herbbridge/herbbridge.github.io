@@ -173,7 +173,7 @@
       results.push({ group: group, name: name, pass: pass, detail: detail });
     }
 
-    var db = lookup.createDb(data.herbs, data.drugs, data.interactions, data.official);
+    var db = lookup.createDb(data.herbs, data.drugs, data.interactions, data.official, data.reviews);
 
     // 1. The data files themselves.
     check('Data files', 'herbs.json, drugs.json and interactions.json are valid', function () {
@@ -293,6 +293,20 @@
     check('Safety rules', 'every medicine has HA leaflet advice', function () {
       var bad = db.drugs.filter(function (d) { return !lookup.findAdvice(db, d.id); }).map(function (d) { return d.id; });
       return { pass: bad.length === 0, detail: bad.join(', ') };
+    });
+    check('Pharmacist reviews', 'every review still matches its card (re-review any card changed after review)', function () {
+      var stale = db.reviews.filter(function (rv) { return lookup.findReview(db, rv.herb_id, rv.drug_id).stale; })
+        .map(function (rv) { return rv.herb_id + ' × ' + rv.drug_id + ': card changed after review on ' + rv.date + '; new fingerprint ' + lookup.cardFingerprint(db, rv.herb_id, rv.drug_id); });
+      return { pass: stale.length === 0, detail: stale.join('\n') };
+    });
+    check('Pharmacist reviews', 'a review shows only while the card is unchanged', function () {
+      var f = lookup.createDb({ herbs: [herb('h')] }, { drugs: [drug('d')] }, { interactions: [entry({})] }, null,
+        { reviews: [{ herb_id: 'h', drug_id: 'd', reviewer_en: 'x', reviewer_zh: 'x', role_en: 'x', role_zh: 'x', date: '2026-10-19', fingerprint: '' }] });
+      f.reviews[0].fingerprint = lookup.cardFingerprint(f, 'h', 'd');
+      var shownBefore = !!lookup.checkPairs(f, ['h'], ['d'])[0].review;
+      f.interactions[0].effect_en = 'changed';
+      var after = lookup.findReview(f, 'h', 'd');
+      return shownBefore && !after.review && after.stale;
     });
     check('Safety rules', 'an official caution never hides a High team rating', function () {
       var bad = lookup.checkPairs(db, ids(db.herbs), ids(db.drugs)).filter(function (r) { return r.entry && r.entry.risk === 'high' && r.status !== 'high'; });

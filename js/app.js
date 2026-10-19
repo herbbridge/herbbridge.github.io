@@ -657,7 +657,14 @@
   }
 
   // The required disclaimer, word for word, then the prototype notice (owner, 18 Oct).
-  function disclaimerText() {
+  // On a card a pharmacist has reviewed (and that has not changed since), the review replaces the notice.
+  function disclaimerText(r) {
+    var rv = r && r.review;
+    if (rv) {
+      var zh = state.lang === 'zh';
+      return [t('card_disclaimer'), ' ', el('strong', { class: 'reviewed-note', text: t('reviewed_note', {
+        name: zh ? rv.reviewer_zh : rv.reviewer_en, role: zh ? rv.role_zh : rv.role_en, date: formatDate(new Date(rv.date + 'T00:00:00')) }) })];
+    }
     return [t('card_disclaimer'), ' ', el('strong', { class: 'prototype-note', text: t('prototype_note') })];
   }
 
@@ -778,7 +785,7 @@
         el('header', { class: 'card-head' }, [pairTitle(r), badgeFor(r)]),
         officialBlock(r),
         cardAdvice(r),
-        el('p', { class: 'card-disclaimer' }, disclaimerText())
+        el('p', { class: 'card-disclaimer' }, disclaimerText(r))
       ]);
     }
     if (!r.entry) {
@@ -787,7 +794,7 @@
         el('p', { class: 'unknown-text', text: t('not_in_db_text') }),
         cardAdvice(r),
         unknownNext(),
-        el('p', { class: 'card-disclaimer' }, disclaimerText())
+        el('p', { class: 'card-disclaimer' }, disclaimerText(r))
       ]);
     }
     var e = r.entry;
@@ -854,7 +861,7 @@
       ]),
       toggleBtn,
       details,
-      el('p', { class: 'card-disclaimer' }, disclaimerText())
+      el('p', { class: 'card-disclaimer' }, disclaimerText(r))
     ]);
     return art;
   }
@@ -1097,6 +1104,7 @@
       el('p', null, [badge('official')]),
       el('p', { text: t('about_official') }),
       el('p', { class: 'strong', text: t('about_official_rule') }),
+      el('p', { text: t('about_reviews') }),
       el('p', null, [badge('not_in_database')]),
       el('p', { class: 'strong', text: t('about_not_in_db') }),
       el('p', { text: t('about_rating_source') })
@@ -1335,9 +1343,9 @@
     });
   }
 
-  Promise.all(['data/herbs.json', 'data/drugs.json', 'data/interactions.json', 'data/official.json'].map(getJson))
+  Promise.all(['data/herbs.json', 'data/drugs.json', 'data/interactions.json', 'data/official.json', 'data/reviews.json'].map(getJson))
     .then(function (d) {
-      db = L.createDb(d[0], d[1], d[2], d[3]);
+      db = L.createDb(d[0], d[1], d[2], d[3], d[4]);
       drugGroups = Array.isArray(d[1].groups) ? d[1].groups : [];
       load();
       I.setLang(state.lang);
