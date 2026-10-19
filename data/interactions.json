@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-10-19",
+  "last_updated": "2026-10-20",
   "interactions": [
     {
       "id": "danshen-warfarin",
@@ -11,8 +11,8 @@
       "rating_source": "team",
       "effect_en": "Raises INR (warfarin works more strongly), with a risk of bleeding.",
       "effect_zh": "會令INR（凝血指數）升高，即係華法林藥力變強，有出血風險。",
-      "heart_impact_en": "Too much bleeding, including bleeding in the brain.",
-      "heart_impact_zh": "出血過多，包括腦出血。",
+      "heart_impact_en": "Serious bleeding, including internal bleeding.",
+      "heart_impact_zh": "嚴重出血，包括內出血。",
       "why_en": "Danshen can thin the blood a little on its own. Studies also suggest it may slow down how fast your body clears warfarin, and free up more active warfarin in your blood. Together, these can make warfarin work more strongly.",
       "why_zh": "丹參本身有輕微「薄血」作用。研究亦提示，佢可能減慢身體清除華法林嘅速度，同埋令血液入面有效嘅華法林增加。以上幾樣加埋，可以令華法林藥力變強。",
       "why_pro_en": "(1) Danshen inhibits platelet aggregation and affects other parts of coagulation (Chan 2001). (2) In rats, danshen reduced warfarin clearance and raised warfarin levels (Chan 2001); in laboratory studies using human liver enzymes, some tanshinones strongly inhibited CYP1A2 and moderately inhibited CYP2C9, which break down warfarin (Zhuang 2021). (3) Danshen and tanshinone IIA may displace warfarin from albumin, raising free warfarin (Zhuang 2021).",
@@ -26,7 +26,8 @@
         { "label": "Yu, Chan & Sanderson. J Intern Med 1997", "url": "https://doi.org/10.1046/j.1365-2796.1997.134137000.x" },
         { "label": "Izzat et al. Ann Thorac Surg 1998", "url": "https://pubmed.ncbi.nlm.nih.gov/9768962/" },
         { "label": "Chan. Ann Pharmacother 2001", "url": "https://pubmed.ncbi.nlm.nih.gov/11302416/" },
-        { "label": "Zhuang et al. Front Pharmacol 2021", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8489681/" }
+        { "label": "Zhuang et al. Front Pharmacol 2021", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8489681/" },
+        { "label": "Hong Kong Hospital Authority: Warfarin – Oral Anticoagulant, patient leaflet (S/N 019Ev10), October 2025", "url": "https://www.ha.org.hk/hadf/Content/uploads/docs/mcfDfgqUQ5320084.pdf" }
       ],
       "zh_reviewed": false
     },
@@ -39,8 +40,8 @@
       "rating_source": "team",
       "effect_en": "INR more than doubled in a case report.",
       "effect_zh": "有病例報告指，INR（凝血指數）升高超過一倍。",
-      "heart_impact_en": "Too much bleeding, including bleeding in the brain.",
-      "heart_impact_zh": "出血過多，包括腦出血。",
+      "heart_impact_en": "Serious bleeding, including internal bleeding.",
+      "heart_impact_zh": "嚴重出血，包括內出血。",
       "why_en": "Dong quai contains coumarin-like compounds, which may reduce blood clotting. The exact mechanism of this interaction is not known.",
       "why_zh": "當歸含有香豆素類物質，可能有「薄血」作用。呢個相互作用嘅確實原理仲未清楚。",
       "why_pro_en": "Contains coumarin-like constituents that may inhibit platelet aggregation; a single-dose animal study found no change in PT or warfarin pharmacokinetics, but in steady-state experiments dong quai prolonged PT in rabbits without changing warfarin blood levels (Zhuang 2021). The case report authors state that the mechanism is unknown (Page & Lawrence 1999).",
@@ -52,7 +53,8 @@
       "evidence_level": ["case_reports", "review"],
       "sources": [
         { "label": "Page & Lawrence. Pharmacotherapy 1999", "url": "https://pubmed.ncbi.nlm.nih.gov/10417036/" },
-        { "label": "Zhuang et al. Front Pharmacol 2021", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8489681/" }
+        { "label": "Zhuang et al. Front Pharmacol 2021", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8489681/" },
+        { "label": "Hong Kong Hospital Authority: Warfarin – Oral Anticoagulant, patient leaflet (S/N 019Ev10), October 2025", "url": "https://www.ha.org.hk/hadf/Content/uploads/docs/mcfDfgqUQ5320084.pdf" }
       ],
       "zh_reviewed": false
     },
@@ -243,13 +245,13 @@
       "rating_source": "team",
       "effect_en": "Case reports found a raised INR (warfarin working more strongly) and bleeding, including one hospital admission.",
       "effect_zh": "有病例報告發現INR（凝血指數）升高，即係華法林藥力變強，仲有出血，其中一宗要入院。",
-      "heart_impact_en": "Too much bleeding, including bleeding in the brain.",
-      "heart_impact_zh": "出血過多，包括腦出血。",
+      "heart_impact_en": "Serious bleeding, including internal bleeding.",
+      "heart_impact_zh": "嚴重出血，包括內出血。",
       "why_en": "Lab tests suggest goji may slightly slow a liver enzyme that breaks down warfarin, but the exact reason is not known.",
       "why_zh": "實驗室研究提示，枸杞可能令肝臟分解華法林嘅酵素稍為慢咗，但確實原因仲未清楚。",
       "why_pro_en": "The mechanism is not established. Lam et al. (Ann Pharmacother 2001) found the patient's goji tea only weakly inhibited CYP2C9-mediated S-warfarin metabolism in vitro (Ki 3.4 mg/mL), and suggested factors other than CYP450 may be involved. MSKCC About Herbs notes that lycium extracts and juice inhibit CYP2C9 and CYP2C19 in the laboratory, but that clinical relevance has yet to be determined. Reported cases: INR 4.1 in a 61-year-old woman after several days of concentrated goji tea (Lam 2001); two episodes of raised INR (up to 4.97) in an 80-year-old Chinese woman in Hong Kong on a stable warfarin dose who drank herbal tea containing L. barbarum (Leung et al., Food Chem Toxicol 2008); hospital admission with prothrombin time over 120 s, nosebleeds, bruising and rectal bleeding after goji juice, Naranjo 6 'probable' (Rivera et al., Pharmacotherapy 2012); raised INR with bleeding in a 65-year-old man after goji wine, judged a probable interaction (Zhang et al., Toxicol Rep 2015). Zhang et al. concluded that large doses (more than 6–12 g) of goji can significantly enhance warfarin's anticoagulant action; none of the cited sources gives a safe amount. Ge et al. (CUHK; Evid Based Complement Alternat Med 2014) rated lycium among nine herbs with a major-severity warfarin interaction. Tan & Lee (Br J Clin Pharmacol 2021, systematic review) list Chinese wolfberry among products with an increased risk of bleeding with warfarin.",
-      "action_en": "Talk to your doctor before taking these together. This includes goji tea, juice and wine. Ask your doctor about an INR (clotting) test. Watch for unusual bruising or bleeding, such as nosebleeds or blood in your urine or stools, and get medical advice if this happens.",
-      "action_zh": "兩樣一齊食之前，請先同醫生傾；飲枸杞茶、枸杞汁或者枸杞酒都一樣。問醫生需唔需要驗INR（凝血指數）。留意有冇唔尋常嘅瘀傷或者出血，例如流鼻血、小便或者大便有血；如果有，要盡快睇醫生。",
+      "action_en": "The Hospital Authority's warfarin leaflet says not to take any Chinese medicine with warfarin. This includes goji tea, juice and wine. Ask your doctor about an INR (clotting) test. Watch for unusual bruising or bleeding, such as nosebleeds or blood in your urine or stools, and get medical advice if this happens.",
+      "action_zh": "醫院管理局嘅華法林單張話，唔好將任何中藥同華法林一齊食；飲枸杞茶、枸杞汁或者枸杞酒都一樣。問醫生需唔需要驗INR（凝血指數）。留意有冇唔尋常嘅瘀傷或者出血，例如流鼻血、小便或者大便有血；如果有，要盡快睇醫生。",
       "main_source": 0,
       "main_finding_en": "Case report: a woman on warfarin was admitted to hospital with a very high INR and bleeding after drinking goji juice.",
       "main_finding_zh": "病例報告：一位食緊華法林嘅女士飲咗枸杞汁之後，INR極高兼出血，要入院。",
@@ -286,7 +288,8 @@
         {
           "label": "Memorial Sloan Kettering: About Herbs, Lycium",
           "url": "https://www.mskcc.org/cancer-care/integrative-medicine/herbs/lycium"
-        }
+        },
+        { "label": "Hong Kong Hospital Authority: Warfarin – Oral Anticoagulant, patient leaflet (S/N 019Ev10), October 2025", "url": "https://www.ha.org.hk/hadf/Content/uploads/docs/mcfDfgqUQ5320084.pdf" }
       ],
       "zh_reviewed": false
     },
@@ -299,8 +302,8 @@
       "rating_source": "team",
       "effect_en": "A raised INR (warfarin working more strongly) and blood in the urine in one case report.",
       "effect_zh": "有一個病例報告發現INR（凝血指數）升高，即係華法林藥力變強，仲有血尿。",
-      "heart_impact_en": "Too much bleeding, including bleeding in the brain.",
-      "heart_impact_zh": "出血過多，包括腦出血。",
+      "heart_impact_en": "Serious bleeding, including internal bleeding.",
+      "heart_impact_zh": "嚴重出血，包括內出血。",
       "why_en": "In rat studies with injected safflower products, the safflower product on its own slowed blood clotting, and it also raised warfarin levels in the blood.",
       "why_zh": "用注射紅花製劑做嘅大鼠研究發現，紅花製劑本身會令血液凝固得慢啲，亦會令血液入面嘅華法林增加。",
       "why_pro_en": "Human evidence: one case, summarised in a 2015 Singapore Medical Journal review (PMID 25640094). A 74-year-old man stable on warfarin 1.25 mg/day with a therapeutic INR developed haematuria with an INR of 5.31 after 14 days of safflower 20 g. His INR fell to 1.64–2.57 when he restarted the same warfarin dose without safflower. Rat data: safflower injection increased the anticoagulant effect of warfarin and altered its pharmacokinetics (Liu et al., Xenobiotica 2018;48:818-823, PMID 28783419). Safflower yellow for injection increased PT, INR and APTT both alone and with warfarin, raised R- and S-warfarin concentrations at steady dosing, and slowed warfarin metabolism (Liu et al., Xenobiotica 2024;54(2):75-82, PMID 38445636). Both rat studies used injectable preparations, not oral honghua.",
@@ -326,7 +329,8 @@
         {
           "label": "Liu et al. Xenobiotica 2024",
           "url": "https://pubmed.ncbi.nlm.nih.gov/38445636/"
-        }
+        },
+        { "label": "Hong Kong Hospital Authority: Warfarin – Oral Anticoagulant, patient leaflet (S/N 019Ev10), October 2025", "url": "https://www.ha.org.hk/hadf/Content/uploads/docs/mcfDfgqUQ5320084.pdf" }
       ],
       "zh_reviewed": false
     },
@@ -723,8 +727,8 @@
       "risk": "low",
       "watch": false,
       "rating_source": "team",
-      "effect_en": "In rats, danshen tablets (a Chinese medicine product) lowered amlodipine levels in the blood. No reports in people were found.",
-      "effect_zh": "大鼠研究發現，丹參片（一種中成藥）令血液入面嘅氨氯地平減少。暫時搵唔到人體報告。",
+      "effect_en": "In rats, danshen tablets (a multi-herb Chinese medicine product) lowered amlodipine levels in the blood. No reports in people were found.",
+      "effect_zh": "大鼠研究發現，丹參片（一種由多種藥材組成嘅中成藥）令血液入面嘅氨氯地平減少。暫時搵唔到人體報告。",
       "heart_impact_en": "Amlodipine controls your blood pressure. Whether danshen weakens it in people is not known.",
       "heart_impact_zh": "氨氯地平用嚟控制血壓。丹參喺人體會唔會減弱佢嘅效果，仲未知道。",
       "why_en": "In rat liver tests, danshen tablets seemed to make the liver break down amlodipine faster.",
@@ -733,8 +737,8 @@
       "action_en": "Tell your doctor or pharmacist that you take danshen, so they can keep an eye on your blood pressure.",
       "action_zh": "話俾醫生或者藥劑師知你有食丹參，等佢哋留意你嘅血壓。",
       "main_source": 0,
-      "main_finding_en": "Rat study: 7 days of danshen tablets roughly halved amlodipine levels in the blood.",
-      "main_finding_zh": "大鼠研究：食咗7日丹參片，血液入面嘅氨氯地平大約減半。",
+      "main_finding_en": "Rat study: 7 days of danshen tablets roughly halved the total amount of amlodipine in the blood (AUC).",
+      "main_finding_zh": "大鼠研究：食咗7日丹參片，血液入面氨氯地平嘅總量（AUC）大約減半。",
       "evidence_level": [
         "lab_animal"
       ],

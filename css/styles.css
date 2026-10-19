@@ -962,7 +962,8 @@ html[data-mode="simple"] *, html[data-mode="simple"] *::before, html[data-mode="
   .header-tools, .back-link, .more-btn, .steps { display: none !important; }
   #app h1, html[data-mode="simple"] #app h1 { font-size: 15pt !important; letter-spacing: -0.01em; margin-bottom: 2pt; }
   .disclaimer-box { padding: 4pt 7pt !important; }
-  .summary { line-height: 1.27; }
+  .summary { line-height: 1.24; }
+  .summary .sources { font-size: 7.5pt; }
   .summary-row::before { background: #000 !important; }
   .badge { padding: 1pt 6pt 1pt 3pt !important; gap: 3pt; }
   .badge .icon { width: 1.15em !important; height: 1.15em !important; padding: 0 !important; }

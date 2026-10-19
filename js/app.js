@@ -961,8 +961,10 @@
   }
   // The first sentence only (Simple mode cards); the full text is on the detail screen.
   function firstSentence(s) {
-    var m = /^[\s\S]*?[.。!?！？](?=\s|$)/.exec(s || '');
-    return m ? m[0] : s;
+    // English full stop needs a space or the end after it ("e.g." safe); Chinese 。！？ end a sentence
+    // directly, and a ； clause counts as one too (the English has a full stop there), closed with 。.
+    var m = /^[\s\S]*?(?:[.!?](?=\s|$)|[。！？；])/.exec(s || '');
+    return m ? m[0].replace(/；$/, '。') : s;
   }
   function cardName(item, kind) {
     if (mode === 'full') return el('span', { class: 'name-with-icon' }, [icon(kind === 'herb' ? 'leaf' : 'pill', 'kind-icon'), nameNode(item)]);

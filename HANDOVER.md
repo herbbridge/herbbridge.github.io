@@ -221,3 +221,15 @@ rating, quote, source, S/N or date changed.
   doctor summary prints on one A4 page in black and white. Cache herbsafe-v20.
 - Screenshots of every screen: _preview/build/.
 - New Chinese labels (Cantonese style) are NOT YET REVIEWED; see the list in the owner report.
+
+### 20 Oct 2026 (redesign branch), owner-checked data fixes, applied exactly
+- danshen/dong quai/goji/safflower + warfarin: heart line now "Serious bleeding, including
+  internal bleeding." / 「嚴重出血，包括內出血。」 (zh NOT YET REVIEWED); "bleeding in the brain"
+  removed everywhere; HA warfarin leaflet 019Ev10 added as the LAST source on all four (main
+  evidence unchanged).
+- danshen + amlodipine: "(a multi-herb Chinese medicine product)"; main evidence now about the
+  total amount (AUC). Rating stays Low; no dosing advice added.
+- goji + warfarin "What to do" now starts with the HA leaflet sentence (tea/juice/wine kept).
+- Simple cards: first sentence of "What to do"; in Chinese a ； clause counts as a sentence too.
+- Font subset rebuilt (tools/make-font-subset.py); every character on these cards is covered.
+- sw.js ignores /preview/ and /_preview/ (never cached or intercepted). Cache herbsafe-v21.

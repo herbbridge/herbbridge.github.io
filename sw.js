@@ -6,7 +6,7 @@
  * Nothing is sent anywhere: this only caches files HerbSafe already loads.
  * Change VERSION whenever the list of app files changes.
  */
-var VERSION = 'herbsafe-v20';
+var VERSION = 'herbsafe-v21';
 var FONTS = 'herbsafe-fonts-v1';
 var APP_FILES = [
   './', 'index.html', 'css/styles.css', 'js/lookup.js', 'js/i18n.js', 'js/app.js',
@@ -59,6 +59,9 @@ self.addEventListener('fetch', function (event) {
   var url = new URL(request.url);
 
   if (url.origin === self.location.origin) {
+    // The test preview (/preview/) and the review screenshots (/_preview/) are never cached or
+    // intercepted by the live app.
+    if (/^\/(preview|_preview)\//.test(url.pathname.replace(/^\/[^/]*\.github\.io/, ''))) return;
     if (request.mode === 'navigate') {
       // Opening the app: try the network, fall back to the saved page when offline.
       event.respondWith(fetch(request).catch(function () { return caches.match('index.html'); }));
