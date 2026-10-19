@@ -49,6 +49,8 @@
       interactions: interactionsJson.interactions,
       statements: (officialJson && officialJson.statements) || [],
       cautions: (officialJson && officialJson.cautions) || [],
+      // General Hospital Authority advice per medicine (leaflets for groups of heart medicines). Never a rating.
+      generalAdvice: (officialJson && officialJson.general_advice) || [],
       statementById: Object.create(null),
       lastUpdated: interactionsJson.last_updated || null,
       // Plain maps (no prototype), so ids like "constructor" can never match anything.
@@ -107,6 +109,11 @@
     return exact || byClass;
   }
 
+  /* The general Hospital Authority advice for a medicine, or null. */
+  function findAdvice(db, drugId) {
+    return db.generalAdvice.filter(function (a) { return Array.isArray(a.drug_ids) && a.drug_ids.indexOf(drugId) !== -1; })[0] || null;
+  }
+
   /* What a pair shows: the team rating, unless an official caution exists (then that, except
      when the team rating is already High, which stays). Never makes a pair look safer. */
   function statusOf(entry, official) {
@@ -138,6 +145,7 @@
           drug: db.drugById[drugId],
           entry: entry,
           official: official,
+          advice: findAdvice(db, drugId),
           status: statusOf(entry, official),
           _order: hi * 1000 + di
         });
@@ -260,6 +268,24 @@
       if (typeof c.zh_reviewed !== 'boolean') problem(where + ': zh_reviewed must be true or false');
     });
 
+    // General advice: one leaflet per medicine at most, all fields present, both languages as written.
+    var adviceIds = {}, adviceFor = {};
+    db.generalAdvice.forEach(function (a, i) {
+      var where = 'general advice #' + (i + 1) + ' (' + (a.id || 'no id') + ')';
+      if (!isText(a.id)) problem(where + ': missing id');
+      if (adviceIds[a.id]) problem(where + ': duplicate id');
+      adviceIds[a.id] = true;
+      ['body_en', 'body_zh', 'document_en', 'document_zh', 'sn_en', 'sn_zh', 'date_en', 'date_zh', 'group_en', 'group_zh',
+       'section_en', 'section_zh', 'quote_en', 'quote_zh', 'verified'].forEach(function (f) { if (!isText(a[f])) problem(where + ': missing ' + f); });
+      ['url', 'url_zh'].forEach(function (f) { if (!/^https:\/\/[^\s]+$/.test(a[f] || '')) problem(where + ': ' + f + ' must start with https://'); });
+      if (!Array.isArray(a.drug_ids) || !a.drug_ids.length) problem(where + ': drug_ids must be a non-empty list');
+      else a.drug_ids.forEach(function (d) {
+        if (!db.drugById[d]) problem(where + ': unknown drug "' + d + '"');
+        if (adviceFor[d]) problem(where + ': ' + d + ' already has general advice (' + adviceFor[d] + ')');
+        adviceFor[d] = a.id;
+      });
+    });
+
     // A drug matching two different class entries for the same herb would be ambiguous.
     db.herbs.forEach(function (h) {
       db.drugs.forEach(function (d) {
@@ -284,6 +310,7 @@
     search: search,
     findInteraction: findInteraction,
     findOfficial: findOfficial,
+    findAdvice: findAdvice,
     checkPairs: checkPairs,
     validateData: validateData
   };

@@ -105,6 +105,11 @@ agency's own words, never reworded, with the body, document, date and section.
   `"official"`, or `"disagree"` when the agency and the team rating do not agree.
 - An official caution shows instead of a Moderate/Low team rating (the team evidence stays on
   the card under "What the studies in our database show"), but never instead of High.
+- `general_advice`: Hospital Authority patient leaflets for GROUPS of heart medicines (angina,
+  cholesterol-lowering, heart failure, blood pressure). They give general advice about all
+  Chinese medicines, so they are shown as "Hospital Authority advice" on grey and rated cards
+  (and in the doctor summary), never as a rating and never as an Official caution. Both
+  languages are the HA's own wording; each card shows the leaflet's own S/N and date.
 - Every quote is locked in `VERIFIED_QUOTES` and every caution in `OFFICIAL_CAUTIONS` in
   `tests/test-suite.js`. Only add a statement after a person has opened the official document
   and copied the sentence.

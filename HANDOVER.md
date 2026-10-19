@@ -160,8 +160,17 @@ For Sunday this is done WITHOUT accounts, a server or scanning:
   behind one big "Show N more official statements" button. All statements still print and all
   appear in the doctor summary. Statement order in data/official.json decides which is first.
   Cache herbsafe-v15.
-- Next (owner-agreed order): HA patient leaflets for the other heart medicines (prompt for the
-  owner's checker), then a "reviewed by a pharmacist" record per card, then read-aloud.
+- HA leaflets for the other heart medicines (owner's checker, 19 Oct): four GROUP leaflets
+  (015 angina incl. aspirin/clopidogrel, 013 cholesterol, 016 heart failure incl. digoxin,
+  014 blood pressure incl. amlodipine/furosemide) advise consulting before ANY Chinese
+  medicine; none names a herb. Owner chose option A: shown as "Hospital Authority advice" on
+  grey cards, rated cards (under Details), official-only cards and the summary; never a rating
+  or Official caution. Locked in GENERAL_ADVICE (both languages exactly as the HA wrote them).
+  Cache herbsafe-v16.
+- OPEN: owner's rule "Official caution = an official source names the herb" (for the About
+  page) conflicts with 5 warfarin cards that are blue only via the HA warfarin leaflet's "any
+  TCM": liquorice, goji, red yeast rice, sanqi, safflower + warfarin. Awaiting owner decision.
+- Next: "reviewed by a pharmacist" record per card, then read-aloud.
   * HA leaflet quote now on EVERY herb + warfarin (owner: it covers all TCM); Health Canada
     "blood thinners" sentences added to both ginseng + warfarin cards. Cache herbsafe-v12.
 

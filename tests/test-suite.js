@@ -50,6 +50,23 @@
     'ema-liquorice-blood-pressure': 'Liquorice root may counteract antihypertensive action of prescribed medications.',
     'ema-liquorice-electrolytes': 'Not to be used concomitantly with diuretics, cardiac glycosides, corticosteroids, stimulant laxatives or other medications which may aggravate electrolyte imbalance (see section with 4.4).'
   };
+  // Hospital Authority leaflets for groups of heart medicines (owner-approved 19 Oct 2026), both
+  // languages exactly as the HA wrote them. General advice only: never a rating, never an Official caution.
+  var GENERAL_ADVICE = {
+    'ha-antianginal': { drugs: ['aspirin', 'clopidogrel'],
+      en: 'Consult your doctor before using any other medications, including health supplements, Traditional Chinese Medicine, Proprietary Chinese Medicines and over-the-counter medications.',
+      zh: '未經醫生指示，切勿隨便使用其他藥物，包括保健產品、中藥、中成藥或西藥。' },
+    'ha-cholesterol': { drugs: ['atorvastatin', 'simvastatin', 'rosuvastatin'],
+      en: 'Consult your doctor or pharmacist before using any other medications, including health supplements, Traditional Chinese Medicines, Proprietary Chinese Medicines and over-the-counter medications.',
+      zh: '未經醫生或藥劑師指示，切勿隨便使用其他藥物，包括保健產品、中藥、中成藥或西藥。' },
+    'ha-heart-failure-digoxin': { drugs: ['digoxin'],
+      en: 'Do not take any other medications, including health supplements, Traditional Chinese Medicines, Proprietary Chinese Medicines and over-the-counter medications as these may affect the absorption of digoxin. Consult your doctor or pharmacist if necessary.',
+      zh: '為避免影響此藥的吸收，令體內含量過高或不足，切勿隨便使用其他藥物，包括保健產品、中藥、中成藥或西藥。如有需要，應先諮詢醫生或藥劑師。' },
+    'ha-antihypertensive': { drugs: ['amlodipine', 'furosemide'],
+      en: 'Consult your doctor or pharmacist before using any other medications, including health supplements, Traditional Chinese Medicines, Proprietary Chinese Medicines and over-the-counter medications.',
+      zh: '未經醫生或藥劑師指示，切勿隨便使用其他藥物，包括保健產品、中藥、中成藥或西藥。' }
+  };
+
   // Where the agency publishes its own Chinese version, that text is locked too.
   var VERIFIED_QUOTES_ZH = {
     'ha-warfarin-leaflet-tcm': '不可隨便服用中藥材，中成藥，藥材湯或涼茶，或含中藥成份的食品如龜苓膏，因為很多中藥 ( 如人參、當歸、丹參、赤芍 )，會與「華法林」產生相互作用，影響抗凝血藥的功效。'
@@ -254,6 +271,29 @@
         if (!s.quote_zh_is_original && VERIFIED_QUOTES_ZH[s.id]) bad.push(s.id + ': has a verified official Chinese text but is not marked quote_zh_is_original');
       });
       return { pass: bad.length === 0, detail: bad.join('\n') };
+    });
+    check('Safety rules', 'HA leaflet advice is exactly the approved set, word for word in both languages', function () {
+      var bad = [];
+      db.generalAdvice.forEach(function (a) {
+        var want = GENERAL_ADVICE[a.id];
+        if (!want) { bad.push(a.id + ': not on the approved list'); return; }
+        if (a.quote_en !== want.en) bad.push(a.id + ': English differs from the leaflet');
+        if (a.quote_zh !== want.zh) bad.push(a.id + ': Chinese differs from the leaflet');
+        if (JSON.stringify(a.drug_ids) !== JSON.stringify(want.drugs)) bad.push(a.id + ': medicines differ');
+      });
+      Object.keys(GENERAL_ADVICE).forEach(function (id) { if (!db.generalAdvice.some(function (a) { return a.id === id; })) bad.push(id + ': missing'); });
+      return { pass: bad.length === 0, detail: bad.join('\n') };
+    });
+    check('Safety rules', 'HA leaflet advice never changes a result (it is not a rating)', function () {
+      var bad = lookup.checkPairs(db, ids(db.herbs), ids(db.drugs)).filter(function (r) {
+        var expected = r.official && !(r.entry && r.entry.risk === 'high') ? 'official' : r.entry ? r.entry.risk : 'not_in_database';
+        return r.status !== expected;
+      });
+      return { pass: bad.length === 0, detail: bad.map(function (r) { return r.herb.id + ' × ' + r.drug.id; }).join('\n') };
+    });
+    check('Safety rules', 'every medicine except warfarin has HA leaflet advice', function () {
+      var bad = db.drugs.filter(function (d) { return d.id !== 'warfarin' && !lookup.findAdvice(db, d.id); }).map(function (d) { return d.id; });
+      return { pass: bad.length === 0, detail: bad.join(', ') };
     });
     check('Safety rules', 'an official caution never hides a High team rating', function () {
       var bad = lookup.checkPairs(db, ids(db.herbs), ids(db.drugs)).filter(function (r) { return r.entry && r.entry.risk === 'high' && r.status !== 'high'; });

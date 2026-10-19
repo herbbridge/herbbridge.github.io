@@ -661,6 +661,34 @@
     return [t('card_disclaimer'), ' ', el('strong', { class: 'prototype-note', text: t('prototype_note') })];
   }
 
+  /* General Hospital Authority advice from a leaflet for a GROUP of medicines: quoted exactly (each
+     language as the HA wrote it), with the leaflet's own S/N and date. Not a rating. */
+  function adviceBlock(adv, drugs) {
+    var zh = state.lang === 'zh';
+    var names = drugs.map(primaryName).join(t('list_sep'));
+    return el('div', { class: 'advice-box' }, [
+      el('h4', { class: 'advice-title', text: t('advice_title', { group: zh ? adv.group_zh : adv.group_en, drugs: names }) }),
+      el('blockquote', { class: 'advice-quote', lang: zh ? 'zh-HK' : 'en-GB', text: '“' + (zh ? adv.quote_zh : adv.quote_en) + '”' }),
+      zh ? el('p', { class: 'official-original' }, [
+        el('span', { text: t('official_zh_original_note') + ' ' }), el('span', { lang: 'en-GB', text: '“' + adv.quote_en + '”' })
+      ]) : null,
+      el('p', { class: 'official-source' }, [
+        el('span', { class: 'official-body', text: zh ? adv.body_zh + '：' : adv.body_en + ': ' }),
+        sourceLink({ url: zh ? adv.url_zh : adv.url, label: zh ? adv.document_zh + '，S/N ' + adv.sn_zh + '，' + adv.date_zh : adv.document_en + ', S/N ' + adv.sn_en + ', ' + adv.date_en })
+      ])
+    ]);
+  }
+  // One advice block per leaflet for a set of rows (several medicines can share one leaflet).
+  function adviceBlocks(rows) {
+    var seen = {}, order = [];
+    rows.forEach(function (r) {
+      if (!r.advice) return;
+      if (!seen[r.advice.id]) { seen[r.advice.id] = { adv: r.advice, drugs: [] }; order.push(r.advice.id); }
+      if (seen[r.advice.id].drugs.indexOf(r.drug) === -1) seen[r.advice.id].drugs.push(r.drug);
+    });
+    return order.map(function (id) { return adviceBlock(seen[id].adv, seen[id].drugs); });
+  }
+
   // Under the required grey wording: a next step, so the card is not a dead end. No medical claim.
   function unknownNext() {
     return el('div', { class: 'unknown-next' }, [
@@ -686,6 +714,7 @@
       el('header', { class: 'card-head' }, [badge('not_in_database')]),
       el('p', { class: 'unknown-text', text: t('not_in_db_text') }),
       pairs,
+      el('div', { class: 'advice-list' }, adviceBlocks(rows)),
       unknownNext(),
       el('p', { class: 'card-disclaimer' }, disclaimerText())
     ]);
@@ -742,6 +771,7 @@
       return el('article', { class: 'card card-official', 'data-pair': key }, [
         el('header', { class: 'card-head' }, [pairTitle(r), badgeFor(r)]),
         officialBlock(r),
+        r.advice ? adviceBlock(r.advice, [r.drug]) : null,
         el('p', { class: 'card-disclaimer' }, disclaimerText())
       ]);
     }
@@ -749,6 +779,7 @@
       return el('article', { class: 'card card-unknown', 'data-pair': key }, [
         el('header', { class: 'card-head' }, [pairTitle(r), badge('not_in_database')]),
         el('p', { class: 'unknown-text', text: t('not_in_db_text') }),
+        r.advice ? adviceBlock(r.advice, [r.drug]) : null,
         unknownNext(),
         el('p', { class: 'card-disclaimer' }, disclaimerText())
       ]);
@@ -776,6 +807,7 @@
       block(t('label_main_evidence'), [el('p', { class: 'main-finding', text: field(e, 'main_finding') })]),
       block(t('label_why'), whyBlock),
       block(t('label_what_to_do'), [el('p', { class: 'action', text: field(e, 'action') })], 'block-action'),
+      r.advice ? adviceBlock(r.advice, [r.drug]) : null,
       block(t('label_rated_by'), [el('p', { text: e.rating_source === 'HA' ? t('rated_by_ha') : t('rated_by_team') })]),
       block(t('label_sources'), [sourceList(e.sources)])
     ]);
@@ -999,7 +1031,7 @@
         el('h2', null, [icon('not_in_database'), el('span', { text: ' ' + t('summary_unknown') })]),
         el('p', { text: t('summary_unknown_text') }),
         ul
-      ]));
+      ].concat(adviceBlocks(unknown))));
     }
 
     page.appendChild(el('p', { class: 'disclaimer-box summary-disclaimer' }, disclaimerText()));

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "last_updated": "2026-10-19",
-  "about": "Official cautions: the exact words of government health agencies, quoted, never paraphrased. Each statement was checked against the official document on 18–19 Oct 2026 (see proposals/official-warnings-verified.json). quote_zh is a translation, unless quote_zh_is_original is true (the agency's own Chinese version, e.g. the Hospital Authority leaflet). Approved by the owner on 18–19 Oct 2026.",
+  "about": "Official cautions: the exact words of government health agencies, quoted, never paraphrased. Each statement was checked against the official document on 18–19 Oct 2026 (see proposals/official-warnings-verified.json). quote_zh is a translation, unless quote_zh_is_original is true (the agency's own Chinese version, e.g. the Hospital Authority leaflet). Approved by the owner on 18–19 Oct 2026. general_advice: Hospital Authority patient leaflets for groups of heart medicines; general advice about all Chinese medicines, never a rating and never an Official caution (an Official caution needs an official source that names the herb). Both languages are the HA's own wording.",
   "statements": [
     {
       "id": "ema-ginkgo-4.5",
@@ -344,6 +344,104 @@
         "ha-warfarin-leaflet-tcm"
       ],
       "zh_reviewed": false
+    }
+  ],
+  "general_advice": [
+    {
+      "id": "ha-antianginal",
+      "drug_ids": [
+        "aspirin",
+        "clopidogrel"
+      ],
+      "body_en": "Hong Kong Hospital Authority",
+      "body_zh": "香港醫院管理局",
+      "verified": "2026-10-19",
+      "document_en": "Medications for the Heart – Antianginal Medications",
+      "document_zh": "抗心絞痛藥",
+      "sn_en": "015Ev4",
+      "sn_zh": "015Cv8",
+      "date_en": "October 2025",
+      "date_zh": "2025年10月",
+      "group_en": "angina medicines",
+      "group_zh": "抗心絞痛藥",
+      "section_en": "precautions",
+      "section_zh": "注意事項",
+      "url": "https://www.ha.org.hk/hadf/Content/uploads/docs/svKrKpYzA7773874.pdf",
+      "url_zh": "https://www.ha.org.hk/hadf/Content/uploads/docs/KjUmwcVfL5867715.pdf",
+      "quote_en": "Consult your doctor before using any other medications, including health supplements, Traditional Chinese Medicine, Proprietary Chinese Medicines and over-the-counter medications.",
+      "quote_zh": "未經醫生指示，切勿隨便使用其他藥物，包括保健產品、中藥、中成藥或西藥。"
+    },
+    {
+      "id": "ha-cholesterol",
+      "drug_ids": [
+        "atorvastatin",
+        "simvastatin",
+        "rosuvastatin"
+      ],
+      "body_en": "Hong Kong Hospital Authority",
+      "body_zh": "香港醫院管理局",
+      "verified": "2026-10-19",
+      "document_en": "Medications for the Heart – Cholesterol-lowering Medications",
+      "document_zh": "降膽固醇藥",
+      "sn_en": "013Ev5",
+      "sn_zh": "013Cv10",
+      "date_en": "October 2025",
+      "date_zh": "2025年10月",
+      "group_en": "cholesterol-lowering medicines",
+      "group_zh": "降膽固醇藥",
+      "section_en": "precautions",
+      "section_zh": "注意事項",
+      "url": "https://www.ha.org.hk/hadf/Content/uploads/docs/KEYKRetbO2674486.pdf",
+      "url_zh": "https://www.ha.org.hk/hadf/Content/uploads/docs/jQBuuTjYm4812740.pdf",
+      "quote_en": "Consult your doctor or pharmacist before using any other medications, including health supplements, Traditional Chinese Medicines, Proprietary Chinese Medicines and over-the-counter medications.",
+      "quote_zh": "未經醫生或藥劑師指示，切勿隨便使用其他藥物，包括保健產品、中藥、中成藥或西藥。"
+    },
+    {
+      "id": "ha-heart-failure-digoxin",
+      "drug_ids": [
+        "digoxin"
+      ],
+      "body_en": "Hong Kong Hospital Authority",
+      "body_zh": "香港醫院管理局",
+      "verified": "2026-10-19",
+      "document_en": "Medications for the Heart – Heart Failure Medications",
+      "document_zh": "抗心臟衰竭藥",
+      "sn_en": "016Ev3",
+      "sn_zh": "016Cv5",
+      "date_en": "October 2023",
+      "date_zh": "2023年10月",
+      "group_en": "heart failure medicines",
+      "group_zh": "抗心臟衰竭藥",
+      "section_en": "digoxin",
+      "section_zh": "洋地黃類",
+      "url": "https://www.ha.org.hk/hadf/Content/uploads/docs/HTmRGELGH1856422.pdf",
+      "url_zh": "https://www.ha.org.hk/hadf/Content/uploads/docs/hHlUQtALz3532005.pdf",
+      "quote_en": "Do not take any other medications, including health supplements, Traditional Chinese Medicines, Proprietary Chinese Medicines and over-the-counter medications as these may affect the absorption of digoxin. Consult your doctor or pharmacist if necessary.",
+      "quote_zh": "為避免影響此藥的吸收，令體內含量過高或不足，切勿隨便使用其他藥物，包括保健產品、中藥、中成藥或西藥。如有需要，應先諮詢醫生或藥劑師。"
+    },
+    {
+      "id": "ha-antihypertensive",
+      "drug_ids": [
+        "amlodipine",
+        "furosemide"
+      ],
+      "body_en": "Hong Kong Hospital Authority",
+      "body_zh": "香港醫院管理局",
+      "verified": "2026-10-19",
+      "document_en": "Medications for the Heart – Antihypertensive Medications",
+      "document_zh": "降高血壓藥",
+      "sn_en": "014Ev3",
+      "sn_zh": "014Cv5",
+      "date_en": "October 2023",
+      "date_zh": "2023年10月",
+      "group_en": "blood pressure medicines",
+      "group_zh": "降高血壓藥",
+      "section_en": "precautions",
+      "section_zh": "注意事項",
+      "url": "https://www.ha.org.hk/hadf/Content/uploads/docs/rLlnCVXaV0764013.pdf",
+      "url_zh": "https://www.ha.org.hk/hadf/Content/uploads/docs/ISPBmulCE5304876.pdf",
+      "quote_en": "Consult your doctor or pharmacist before using any other medications, including health supplements, Traditional Chinese Medicines, Proprietary Chinese Medicines and over-the-counter medications.",
+      "quote_zh": "未經醫生或藥劑師指示，切勿隨便使用其他藥物，包括保健產品、中藥、中成藥或西藥。"
     }
   ]
 }

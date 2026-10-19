@@ -771,3 +771,10 @@ html.sheet-open, html.sheet-open body { overflow: hidden; }
   .official-more-toggle { display: none !important; }
   .official-more[hidden] { display: block !important; }
 }
+
+/* General Hospital Authority advice (leaflets for groups of medicines): quoted, never a rating. */
+.advice-box { background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: var(--radius-sm); padding: 0.75rem 0.875rem; margin: 0.875rem 0 0; }
+.advice-title { margin: 0 0 0.5rem; font-size: 1rem; font-weight: 700; overflow-wrap: anywhere; }
+.advice-quote { margin: 0; overflow-wrap: anywhere; }
+.advice-list .advice-box + .advice-box { margin-top: 0.625rem; }
+@media print { .advice-box { border: 1pt solid #000; border-left-width: 2pt; padding: 3pt 6pt; margin-top: 4pt; } }
