@@ -239,3 +239,16 @@ rating, quote, source, S/N or date changed.
 - Merge plan agreed (owner, 20 Oct): on Wed 21 Oct, when the owner says so, merge redesign into
   main, removing _preview/ and preview/ in the same step and keeping sw.js from redesign (with the
   /preview/ exclusion). Do not merge before the owner says so.
+- 20 Oct, owner's phone test of the preview → fixes on redesign (cache v23):
+  1. No "What to do" inside official quote boxes (it contradicted the HA's "Do not take"); official-only
+     cards keep their own What to do above the quotes.
+  2. Intro "Hong Kong's Hospital Authority, which runs the public hospitals, says in its own words:" /
+     「管理公立醫院嘅香港醫院管理局，原文係咁講：」 only on cards whose herb the HA leaflet names
+     (danshen, dong quai; Asian ginseng keeps its "sources disagree" intro). American ginseng + warfarin
+     still quotes the HA leaflet ("ginseng") first under the general intro: owner to decide.
+  3. Simple cabinet: once both lists are filled, only the clash pop-up and "Check my list" remain
+     (the status card stays if the list cannot be saved).
+  4. Phones: mode toggle and language button on one row; "Demo: Mrs Wong" button under the cabinet title.
+  5. Simple pair screen shows the official quote block without "More details".
+  6. Chinese labels use full-width "："; HA leaflet sources carry label_zh/url_zh (019Cv10), shown in
+     Chinese mode (screen and printed summary).

@@ -259,6 +259,9 @@
       else e.sources.forEach(function (s, si) {
         if (!isText(s.label)) problem(where + ': source ' + (si + 1) + ' has no label');
         if (!/^https:\/\/[^\s]+$/.test(s.url || '')) problem(where + ': source ' + (si + 1) + ' url must start with https://');
+        // Optional Chinese version of the same source (e.g. the HA leaflet in Chinese): both or neither.
+        if ((s.label_zh == null) !== (s.url_zh == null)) problem(where + ': source ' + (si + 1) + ' needs both label_zh and url_zh, or neither');
+        if (s.url_zh != null && !/^https:\/\/[^\s]+$/.test(s.url_zh)) problem(where + ': source ' + (si + 1) + ' url_zh must start with https://');
       });
       if (typeof e.zh_reviewed !== 'boolean') problem(where + ': zh_reviewed must be true or false');
     });
