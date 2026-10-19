@@ -10,7 +10,7 @@ Usage: python3 tools/make-preview.py <path-to-main-checkout>
 import os, re, shutil, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-COPY = ['index.html', 'css', 'js', 'data', 'fonts', 'icons']
+COPY = ['index.html', 'css', 'js', 'data', 'fonts', 'icons', 'audio']
 
 def patch(path, pairs):
     with open(path, encoding='utf-8') as f:
@@ -40,6 +40,7 @@ def main():
         ('href="css/styles.css"', 'href="css/styles.css?v=%s"' % version),
         ('src="js/lookup.js"', 'src="js/lookup.js?v=%s"' % version),
         ('src="js/i18n.js"', 'src="js/i18n.js?v=%s"' % version),
+        ('src="js/speech.js"', 'src="js/speech.js?v=%s"' % version),
         ('src="js/app.js"', 'src="js/app.js?v=%s"' % version),
     ])
     patch(os.path.join(dest, 'index.html'), [
