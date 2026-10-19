@@ -13,9 +13,7 @@
   <meta name="apple-mobile-web-app-title" content="HerbSafe">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231D3F8F'/%3E%3Cpath d='M9 16h14M16 9v14' stroke='white' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -24,16 +22,22 @@
 
   <header class="site-header">
     <div class="wrap header-inner">
-      <a class="brand" href="#/check" aria-label="HerbSafe 中西通, home" data-i18n-label="brand_home">
+      <a class="brand" href="#/cabinet" aria-label="HerbSafe 中西通, home" data-i18n-label="brand_home">
         <span class="brand-mark" aria-hidden="true"></span>
         <span class="brand-name">HerbSafe <span class="brand-zh" lang="zh-HK">中西通</span></span>
       </a>
       <nav class="site-nav" aria-label="Main" data-i18n-label="nav_main">
-        <a href="#/check" data-route-link="check" data-i18n="nav_check">My cabinet</a>
+        <a href="#/cabinet" data-route-link="check" data-i18n="nav_check">My cabinet</a>
         <a href="#/summary" data-route-link="summary" data-i18n="nav_summary">Doctor summary</a>
         <a href="#/about" data-route-link="about" data-i18n="nav_about">About</a>
       </nav>
-      <button type="button" id="lang-toggle" class="lang-toggle" aria-label="Switch language to 繁體中文 (Traditional Chinese)">繁體中文</button>
+      <div class="header-tools">
+        <div class="mode-toggle" role="group" aria-label="Display" data-i18n-label="mode_label">
+          <button type="button" id="mode-simple" aria-pressed="true" data-i18n="mode_simple">Simple</button>
+          <button type="button" id="mode-full" aria-pressed="false" data-i18n="mode_full">Full design</button>
+        </div>
+        <button type="button" id="lang-toggle" class="lang-toggle" aria-label="Switch language to 繁體中文 (Traditional Chinese)">繁體中文</button>
+      </div>
     </div>
   </header>
 

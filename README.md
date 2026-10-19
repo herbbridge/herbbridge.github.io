@@ -114,6 +114,27 @@ agency's own words, never reworded, with the body, document, date and section.
   `tests/test-suite.js`. Only add a statement after a person has opened the official document
   and copied the sentence.
 
+## Screens and display modes
+
+Screens: `#/cabinet` (add herbs and medicines) → `#/results` (short headline and one compact
+card per pair) → `#/pair/<herb_id>-<drug_id>` (everything about one pair) → `#/summary`
+(printable doctor summary, one A4 page). The phone's Back button goes back one step and closes
+the picker.
+
+Two display modes, switched in the header and remembered on the device:
+- **Simple** (default, for older users): very large text, higher contrast, no animation. Result
+  cards show the badge, the names and the first sentence of "What to do". On a pair screen the
+  rest sits behind one "More details" button. The grey card's required sentence is always shown.
+- **Full design**: same screens and content, with icons, a step bar, short transitions (off when
+  the phone asks for reduced motion) and every detail open.
+
+## Fonts
+
+`fonts/` holds Inter (latin) and a subset of Noto Sans TC. **Whenever new Chinese text is added
+to `data/`, `js/i18n.js`, `js/app.js` or `index.html`, run `python3 tools/make-font-subset.py`**
+(needs Python with fonttools and brotli, and npm), then bump `VERSION` in `sw.js`. Characters
+missing from the subset fall back to the phone's own font.
+
 ## Pharmacist reviews (`data/reviews.json`)
 
 Every card says "Prototype: … not yet reviewed by a pharmacist" until a pharmacist has checked
@@ -160,7 +181,8 @@ HANDOVER.md           decisions made so far and what still needs checking
 ## Privacy
 
 No accounts and no tracking. A person's list is saved only in their own browser
-(localStorage) and never leaves the device. The only outside request is Google Fonts.
+(localStorage) and never leaves the device. The app makes no outside requests: the fonts are
+stored in `fonts/` (Inter, and Noto Sans TC cut down to the characters HerbSafe uses).
 
 ## Medical disclaimer
 

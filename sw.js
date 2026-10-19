@@ -6,12 +6,14 @@
  * Nothing is sent anywhere: this only caches files HerbSafe already loads.
  * Change VERSION whenever the list of app files changes.
  */
-var VERSION = 'herbsafe-v19';
+var VERSION = 'herbsafe-v20';
 var FONTS = 'herbsafe-fonts-v1';
 var APP_FILES = [
   './', 'index.html', 'css/styles.css', 'js/lookup.js', 'js/i18n.js', 'js/app.js',
   'manifest.webmanifest', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/apple-touch-icon.png',
-  'data/herbs.json', 'data/drugs.json', 'data/interactions.json', 'data/official.json', 'data/reviews.json'
+  'data/herbs.json', 'data/drugs.json', 'data/interactions.json', 'data/official.json', 'data/reviews.json',
+  'fonts/inter-latin-400-normal.woff2', 'fonts/inter-latin-600-normal.woff2', 'fonts/inter-latin-700-normal.woff2',
+  'fonts/noto-sans-tc-herbsafe-400.woff2', 'fonts/noto-sans-tc-herbsafe-700.woff2'
 ];
 
 self.addEventListener('install', function (event) {

@@ -200,3 +200,24 @@ For Sunday this is done WITHOUT accounts, a server or scanning:
 - Push notifications for new clashes or database updates (needs a server).
 - Keep the current data model (cabinet = lists of herb/drug ids; curated JSON database)
   so it can be synced to an account later without rewriting the lookup logic.
+
+## Redesign (branch `redesign`, 19 Oct 2026; NOT merged to main until the owner says so)
+Owner and Cyrus approved the look from a preview (`_preview/`). Layout and design only: no data,
+rating, quote, source, S/N or date changed.
+- Step-by-step screens: #/cabinet → #/results (compact cards) → #/pair/<herb>-<drug> → #/summary.
+- Two modes, header toggle "Simple / Full design" (簡易 / 完整設計), stored in localStorage
+  ("herbsafe.mode"), default Simple. Simple: 20px base, no motion, cards show the FIRST sentence of
+  "What to do"; pair screen shows badge, What to do, required grey wording, disclaimer, then
+  "More details". Full: icons, steps, transitions (respecting reduced motion).
+- New palette (violet accent #4B3FD1, warm neutral background, soft rating pills; all WCAG AA).
+- Fonts self-hosted in fonts/ (Inter + Noto Sans TC subset); Google Fonts removed; no outside
+  requests. MUST RUN `python3 tools/make-font-subset.py` WHENEVER DATA OR UI TEXT GAINS NEW
+  CHINESE, then bump sw.js VERSION.
+- Fixed: headings breaking mid-word at large text; Chinese headings/names splitting (華法 / 林,
+  虛構人 / 物); controls running off screen at 200% text.
+- Checked: Mrs Wong demo end to end in both modes and languages; Back closes picker; offline with
+  the service worker (fonts cached, zero outside requests); 390/195/1280 px and 200% text, all
+  screens, both modes and languages: no sideways scroll, no clipped headings, no console errors;
+  doctor summary prints on one A4 page in black and white. Cache herbsafe-v20.
+- Screenshots of every screen: _preview/build/.
+- New Chinese labels (Cantonese style) are NOT YET REVIEWED; see the list in the owner report.
