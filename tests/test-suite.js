@@ -22,7 +22,9 @@
     'asian_ginseng|warfarin':    { kind: 'disagree', statements: ['ha-warfarin-leaflet-tcm', 'hc-panax-ginseng'] },
     // Owner, 19 Oct (rule): an Official caution needs an official source that NAMES the herb. The HA
     // warfarin leaflet's "any TCM" reaches the other herbs only as Hospital Authority advice.
-    'american_ginseng|warfarin': { kind: 'official', statements: ['ha-warfarin-leaflet-tcm', 'hc-american-ginseng'] },
+    // Owner, 20 Oct: Health Canada names American ginseng; the HA leaflet ("ginseng", 人參 = Asian) is
+    // shown as Hospital Authority advice on this card instead.
+    'american_ginseng|warfarin': { kind: 'official', statements: ['hc-american-ginseng'] },
     'ginkgo|aspirin':            { kind: 'disagree', statements: ['hc-ginkgo-contraindication', 'ema-ginkgo-4.5'] },
     'ginkgo|clopidogrel':        { kind: 'official', statements: ['ema-ginkgo-4.5', 'hc-ginkgo-contraindication'] },
     'ginkgo|amlodipine':         { kind: 'official', statements: ['hc-ginkgo-blood-pressure'] },

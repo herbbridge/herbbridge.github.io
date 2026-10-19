@@ -290,7 +290,6 @@
       "drug_id": "warfarin",
       "kind": "official",
       "statements": [
-        "ha-warfarin-leaflet-tcm",
         "hc-american-ginseng"
       ],
       "zh_reviewed": false

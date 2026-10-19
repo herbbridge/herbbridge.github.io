@@ -252,3 +252,8 @@ rating, quote, source, S/N or date changed.
   5. Simple pair screen shows the official quote block without "More details".
   6. Chinese labels use full-width "："; HA leaflet sources carry label_zh/url_zh (019Cv10), shown in
      Chinese mode (screen and printed summary).
+- 20 Oct: American ginseng + warfarin official caution = Health Canada only (names American ginseng);
+  the HA warfarin leaflet now shows in its Hospital Authority advice box (as for other herbs the
+  leaflet does not name). Added as last source: "Hospital Authority patient talk (undated):
+  當中藥師遇見藥劑師, slide 19" (smartpatient.ha.org.hk PDF; lists 西洋參 with warfarin). Not used for
+  the badge. Link found by an earlier web search: owner to confirm it is the PDF they read. Cache v24.
