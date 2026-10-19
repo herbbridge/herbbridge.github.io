@@ -1013,3 +1013,6 @@ html[data-mode="simple"] .check-bar .bar-notice { display: none !important; }
   .lang-toggle { padding: 0 0.75rem; font-size: 0.875rem; }
   html[data-mode="simple"] .mode-toggle button, html[data-mode="simple"] .lang-toggle { font-size: 0.75rem; min-height: 2.25rem; }
 }
+
+/* Read aloud is hidden when the only voices for this language are online ones (text would leave the phone). */
+html.no-voice .read-row { display: none !important; }
