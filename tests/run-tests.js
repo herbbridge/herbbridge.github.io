@@ -85,7 +85,8 @@ data.herbs.herbs.forEach(function (h) { data.drugs.drugs.forEach(function (d) { 
   });
 }); }); });
 rules.push(['no sentence is spoken twice in one reading', repeats.length === 0, repeats.slice(0, 5).join('\n')]);
-rules.push(['Low risk with watch is spoken "Low risk. Keep an eye on it."', spoken('sanqi', 'warfarin', 'en')[0] === 'Sanqi and warfarin. Low risk. Keep an eye on it.']);
+rules.push(['every Low card is spoken "Low risk. Keep an eye on it."', spoken('sanqi', 'warfarin', 'en')[0] === 'Sanqi and warfarin. Low risk. Keep an eye on it.' &&
+  spoken('danshen', 'amlodipine', 'en')[0] === 'Danshen and amlodipine. Low risk. Keep an eye on it.' && spoken('danshen', 'amlodipine', 'zh')[0] === '丹參同氨氯地平。低度風險。要留意。']);
 var goji = spoken('goji', 'warfarin', 'en'), long = [];
 data.herbs.herbs.forEach(function (h) { data.drugs.drugs.forEach(function (d) { ['en', 'zh'].forEach(function (lang) {
   spoken(h.id, d.id, lang).forEach(function (p) { if (p.indexOf(lang === 'zh' ? '應該點做' : 'What to do') === 0 && (lang === 'zh' ? (p.match(/[。！？]/g) || []).length : p.split(/(?<=[.!?])\s+/).length) > 1) long.push(h.id + '+' + d.id + ' ' + lang); });

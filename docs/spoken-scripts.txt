@@ -48,12 +48,12 @@ The words on screen are not changed by this script.
 4. Danshen + Atorvastatin  (danshen-atorvastatin, status: low)
 
   English
-  [1] Danshen and atorvastatin. Low risk.
+  [1] Danshen and atorvastatin. Low risk. Keep an eye on it.
   [2] What to do: tell your doctor or pharmacist that you take danshen, so they can keep an eye on your cholesterol results.
   [3] Why this matters for your heart: statins protect your heart by lowering cholesterol. Lower statin levels could weaken that protection, and higher levels could raise the risk of side effects. The effect in people is not known.
 
   中文
-  [1] 丹參同阿托伐他汀。低度風險。
+  [1] 丹參同阿托伐他汀。低度風險。要留意。
   [2] 應該點做：話俾醫生或者藥劑師知你有食丹參，等佢哋留意你嘅膽固醇指數。
   [3] 對心臟有咩影響：他汀類藥物靠降膽固醇保護心臟。他汀類藥物水平降低可能減弱保護作用，升高就可能增加副作用風險。對人嘅影響仲未知道。
 
@@ -61,12 +61,12 @@ The words on screen are not changed by this script.
 5. Danshen + Rosuvastatin  (danshen-rosuvastatin, status: low)
 
   English
-  [1] Danshen and rosuvastatin. Low risk.
+  [1] Danshen and rosuvastatin. Low risk. Keep an eye on it.
   [2] What to do: tell your doctor or pharmacist that you take danshen, so they can keep an eye on your cholesterol results.
   [3] Why this matters for your heart: statins protect your heart by lowering cholesterol. Whether this weakens that protection is not known.
 
   中文
-  [1] 丹參同瑞舒伐他汀。低度風險。
+  [1] 丹參同瑞舒伐他汀。低度風險。要留意。
   [2] 應該點做：話俾醫生或者藥劑師知你有食丹參，等佢哋留意你嘅膽固醇指數。
   [3] 對心臟有咩影響：他汀類藥物靠降膽固醇保護心臟。呢個會唔會減弱保護作用，仲未知道。
 
@@ -74,12 +74,12 @@ The words on screen are not changed by this script.
 6. Danshen + Digoxin  (danshen-digoxin, status: low)
 
   English
-  [1] Danshen and digoxin. Low risk.
+  [1] Danshen and digoxin. Low risk. Keep an eye on it.
   [2] What to do: tell your doctor or pharmacist that you take danshen, because it can affect some digoxin blood tests.
   [3] Why this matters for your heart: a wrong result could hide a digoxin level that is too high, and too much digoxin can cause a dangerous heart rhythm.
 
   中文
-  [1] 丹參同地高辛。低度風險。
+  [1] 丹參同地高辛。低度風險。要留意。
   [2] 應該點做：話俾醫生或者藥劑師知你有食丹參，因為丹參可能影響某啲地高辛驗血結果。
   [3] 對心臟有咩影響：驗血結果唔準，可能睇唔出地高辛過高；地高辛過量可以引致危險嘅心律不正。
 
@@ -87,12 +87,12 @@ The words on screen are not changed by this script.
 7. Danshen + Amlodipine  (danshen-amlodipine, status: low)
 
   English
-  [1] Danshen and amlodipine. Low risk.
+  [1] Danshen and amlodipine. Low risk. Keep an eye on it.
   [2] What to do: tell your doctor or pharmacist that you take danshen, so they can keep an eye on your blood pressure.
   [3] Why this matters for your heart: amlodipine controls your blood pressure. Whether danshen weakens it in people is not known.
 
   中文
-  [1] 丹參同氨氯地平。低度風險。
+  [1] 丹參同氨氯地平。低度風險。要留意。
   [2] 應該點做：話俾醫生或者藥劑師知你有食丹參，等佢哋留意你嘅血壓。
   [3] 對心臟有咩影響：氨氯地平用嚟控制血壓。丹參喺人體會唔會減弱佢嘅效果，仲未知道。
 
@@ -115,13 +115,13 @@ The words on screen are not changed by this script.
 9. Dong quai + Aspirin  (dong_quai-aspirin, status: low)
 
   English
-  [1] Dong quai and aspirin. Low risk.
+  [1] Dong quai and aspirin. Low risk. Keep an eye on it.
   [2] What to do: talk to your doctor or pharmacist if you take both.
   [3] Tell them that you take dong quai.
   [4] Why this matters for your heart: watch for unusual bruising or bleeding.
 
   中文
-  [1] 當歸同阿士匹靈。低度風險。
+  [1] 當歸同阿士匹靈。低度風險。要留意。
   [2] 應該點做：如果兩樣都食，請同醫生或者藥劑師傾，話俾佢哋知你有食當歸。
   [3] 對心臟有咩影響：留意有冇唔尋常嘅瘀傷或者出血。
 
@@ -129,13 +129,13 @@ The words on screen are not changed by this script.
 10. Dong quai + Clopidogrel  (dong_quai-clopidogrel, status: low)
 
   English
-  [1] Dong quai and clopidogrel. Low risk.
+  [1] Dong quai and clopidogrel. Low risk. Keep an eye on it.
   [2] What to do: talk to your doctor or pharmacist if you take both.
   [3] Tell them that you take dong quai.
   [4] Why this matters for your heart: watch for unusual bruising or bleeding.
 
   中文
-  [1] 當歸同氯吡格雷。低度風險。
+  [1] 當歸同氯吡格雷。低度風險。要留意。
   [2] 應該點做：如果兩樣都食，請同醫生或者藥劑師傾，話俾佢哋知你有食當歸。
   [3] 對心臟有咩影響：留意有冇唔尋常嘅瘀傷或者出血。
 
@@ -424,12 +424,12 @@ The words on screen are not changed by this script.
 30. Safflower + Aspirin  (safflower-aspirin, status: low)
 
   English
-  [1] Safflower and aspirin. Low risk.
+  [1] Safflower and aspirin. Low risk. Keep an eye on it.
   [2] What to do: talk to your doctor or pharmacist before taking safflower, honghua.
   [3] Watch for unusual bruising or bleeding.
 
   中文
-  [1] 紅花同阿士匹靈。低度風險。
+  [1] 紅花同阿士匹靈。低度風險。要留意。
   [2] 應該點做：食紅花之前，請先同醫生或者藥劑師傾。
   [3] 留意有冇唔尋常嘅瘀傷或者出血。
 
@@ -437,11 +437,11 @@ The words on screen are not changed by this script.
 31. Safflower + Clopidogrel  (safflower-clopidogrel, status: low)
 
   English
-  [1] Safflower and clopidogrel. Low risk.
+  [1] Safflower and clopidogrel. Low risk. Keep an eye on it.
   [2] What to do: talk to your doctor or pharmacist before taking safflower, honghua.
   [3] Watch for unusual bruising or bleeding.
 
   中文
-  [1] 紅花同氯吡格雷。低度風險。
+  [1] 紅花同氯吡格雷。低度風險。要留意。
   [2] 應該點做：食紅花之前，請先同醫生或者藥劑師傾。
   [3] 留意有冇唔尋常嘅瘀傷或者出血。

@@ -99,7 +99,7 @@
 
     var rating;
     if (r.status === 'official') rating = t(r.official.kind === 'disagree' ? 'risk_official_disagree' : 'risk_official');
-    else if (r.entry.risk === 'low' && r.entry.watch) rating = t('speak_low_watch'); // "Low risk. Keep an eye on it."
+    else if (r.entry.risk === 'low') rating = t('speak_low'); // every Low card: "Low risk. Keep an eye on it."
     else rating = t('risk_' + r.entry.risk);
     rating = rating.replace(/\s*·\s*/g, zh ? '，' : ', ');
     parts.push(pair + ' ' + rating + (/[.。]$/.test(rating) ? '' : stop));

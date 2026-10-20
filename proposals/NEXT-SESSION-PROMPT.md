@@ -1,4 +1,4 @@
-You are taking over HerbBridge 中西通, a static web app I am building for the Imperial College London Hackathon (Hong Kong & Macau 2026), Challenge 4: Chinese and Western medicine, focusing on cardiovascular disease. Tagline: "Chinese and Western medicine, safely together." It lets heart patients in Hong Kong check the Chinese herbs they take against their heart, blood pressure, cholesterol and blood-thinning medicines.
+You are taking over HerbBridge 中西通, a static web app I am building for the Imperial College London Hackathon (Hong Kong & Macau 2026), Challenge 4: Chinese and Western medicine, focusing on cardiovascular disease. It lets heart patients in Hong Kong check the Chinese herbs they take against their heart, blood pressure, cholesterol and blood-thinning medicines.
 
 - Code: https://github.com/herbsafe/herbsafe.github.io (branch main)
 - Live site: https://herbsafe.github.io (GitHub Pages deploys from main)

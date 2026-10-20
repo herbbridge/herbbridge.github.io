@@ -282,9 +282,9 @@ rating, quote, source, S/N or date changed.
 - 20 Oct, Read aloud script rules (cache herbbridge-v28), spoken script only, screen unchanged:
   Chinese Health Canada/EMA quotes introduced 「…話（英文原文翻譯）：」; Health Canada's
   "health care practitioner/…/physician" spoken as "health care practitioner"; no sentence spoken twice
-  (a heart line already said in What to do is skipped); Low + watch spoken "Low risk. Keep an eye on it." /
+  (a heart line already said in What to do is skipped); every Low card spoken "Low risk. Keep an eye on it." /
   「低度風險。要留意。」; What to do spoken one sentence per piece. Dong quai + warfarin has spoken-only
   wording in data/interactions.json (action_spoken_en/zh, owner's exact words); the card on screen still
   shows action_en/zh.
-- 20 Oct, new slogan (cache herbbridge-v29): "Bridging you from East to West, easing worries in your chest." / 「中西相通，心頭放鬆。」 (was "Check before you mix." / 「中藥西藥，食之前查一查。」).
+- 20 Oct, new slogan (cache herbbridge-v29): "Bridging you from East to West, easing worries in your chest." / 「中西相通，心頭放鬆。」 (replaces the first slogan).
   It may break onto two lines only after the comma.
