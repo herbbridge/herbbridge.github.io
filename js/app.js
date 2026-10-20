@@ -1456,7 +1456,7 @@
 
     var next = el('ul', { class: 'about-next' });
     ['about_next_1', 'about_next_2', 'about_next_3', 'about_next_4'].forEach(function (k) { next.appendChild(el('li', { text: t(k) })); });
-    page.appendChild(section('about_next_title', [next, el('p', { class: 'muted', text: t('about_team') })]));
+    page.appendChild(section('about_next_title', [next]));
   }
 
   /* ---------- Installable app ---------- */
