@@ -288,3 +288,12 @@ rating, quote, source, S/N or date changed.
   shows action_en/zh.
 - 20 Oct, new slogan (cache herbbridge-v29): "Bridging you from East to West, easing worries in your chest." / 「中西相通，心頭放鬆。」 (replaces the first slogan).
   It may break onto two lines only after the comma.
+- 20 Oct, Simple vs Full made obvious (cache herbbridge-v32). The modes worked, but looked the same on a
+  phone's first screen. Now: a coloured strip on every screen (Simple: violet "Simple view: the key points,
+  one step at a time." + "Show everything"; Full: dark "Full design: evidence, official quotes and sources
+  on one page." + "Simple view"); Simple says "Step 2 of 3"; Simple results = big cards, badge + one
+  What to do line + big "See details"; Full results = dense cards with What to do, evidence levels and
+  source count; Full pair page opens everything (incl. "For professionals"). Summary content unchanged in
+  both modes (it is for the doctor and prints on one A4 page); the strip is screen-only.
+  Check: node tools/check-modes.js (Simple hides the pair sources list, Full shows it; same badge, colour,
+  disclaimer and grey wording in both). New Chinese strip text not yet reviewed.

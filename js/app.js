@@ -1040,6 +1040,18 @@
     try { localStorage.setItem(MODE_KEY, m); } catch (e) { /* stays for this visit */ }
     render(false);
   }
+  // A coloured strip on every screen says which mode is on, so the two look different at a glance.
+  function modeStrip() {
+    var simple = mode === 'simple';
+    return el('div', { class: 'mode-strip mode-strip-' + mode, role: 'note' }, [
+      el('span', { class: 'mode-strip-icon', 'aria-hidden': 'true', text: simple ? '1·2·3' : '☰' }),
+      el('p', { class: 'mode-strip-text', text: t(simple ? 'mode_strip_simple' : 'mode_strip_full') }),
+      el('button', { type: 'button', class: 'mode-strip-btn', onclick: function () { setMode(simple ? 'full' : 'simple'); } },
+        [el('span', { text: t(simple ? 'mode_strip_to_full' : 'mode_strip_to_simple') })])
+    ]);
+  }
+  // Simple: one step at a time, said in words ("Step 2 of 3").
+  function stepLine(n) { return el('p', { class: 'step-line', text: t('step_of', { n: n, total: 3 }) }); }
   function pairHref(r) { return '#/pair/' + r.herb.id + '-' + r.drug.id; }
   function stepsBar(current) {
     var labels = ['nav_check', 'step_results', 'step_details'];
@@ -1072,6 +1084,20 @@
     var s = db.statementById[r.official.statements[0]];
     return el('p', { class: 'pair-line pair-line-quote' }, [el('strong', { text: (zh ? s.body_zh + '：' : s.body_en + ': ') }), el('span', { text: '“' + (zh ? s.quote_zh : s.quote_en) + '”' })]);
   }
+  // Full design only: What to do in full, the evidence levels and how many sources, on the card itself.
+  function fullFacts(r) {
+    if (mode !== 'full' || r.status === L.NOT_IN_DATABASE) return null;
+    var act = r.entry ? field(r.entry, 'action') : t('official_action');
+    var rows = [el('p', { class: 'pair-fact' }, [el('strong', { text: labelText('label_what_to_do') }), el('span', { text: act })])];
+    if (r.entry) {
+      rows.push(el('p', { class: 'pair-fact pair-fact-meta' }, [
+        el('strong', { text: labelText('label_evidence') }),
+        el('span', { text: r.entry.evidence_level.map(function (l) { return t('ev_' + l); }).join(' · ') }),
+        el('span', { class: 'pair-fact-count', text: I.tn('sources_count', r.entry.sources.length) })
+      ]));
+    }
+    return el('span', { class: 'pair-facts' }, rows);
+  }
   function compactCard(r) {
     var tag = mode === 'full' && r.official && r.status !== L.NOT_IN_DATABASE;
     return el('a', { class: 'pair-card tone-' + r.status, href: pairHref(r), 'data-pair': pairKey(r) }, [
@@ -1081,6 +1107,7 @@
         el('span', { class: 'visually-hidden', text: t('and_sr') + ' ' }), cardName(r.drug, 'drug')
       ]),
       shortLine(r),
+      fullFacts(r),
       el('span', { class: 'pair-card-go' }, [el('span', { text: t('alert_details') }), icon('chevron')])
     ]);
   }
@@ -1106,7 +1133,7 @@
     var results = L.checkPairs(db, state.herbs, state.drugs);
     var full = mode === 'full';
     var head = el('header', { class: 'page-head results-head' }, [
-      full ? stepsBar(2) : null,
+      full ? stepsBar(2) : stepLine(2),
       el('p', { class: 'kicker', text: t('results_title') })
     ]);
     app.appendChild(full ? el('div', { class: 'hero' }, [head]) : head);
@@ -1152,7 +1179,7 @@
     var key = pairKey(r);
     app.appendChild(el('header', { class: 'page-head pair-head' }, [
       back,
-      full ? stepsBar(3) : null,
+      full ? stepsBar(3) : stepLine(3),
       el('h1', { tabindex: '-1', class: 'pair-h1' }, [
         nameNode(r.herb), ' ', el('span', { class: 'pair-plus', 'aria-hidden': 'true', text: '+' }), ' ',
         el('span', { class: 'visually-hidden', text: t('and_sr') + ' ' }), nameNode(r.drug)
@@ -1163,7 +1190,11 @@
     var whole = card(r);
     var title = whole.querySelector('h3.pair');
     if (title) title.parentNode.removeChild(title);
-    if (full) { app.appendChild(whole); return; }
+    if (full) {
+      Array.prototype.forEach.call(whole.querySelectorAll('details'), function (d) { d.open = true; });
+      app.appendChild(whole);
+      return;
+    }
 
     // Simple: badge, What to do, the required grey wording, disclaimer; everything else behind one button.
     var grey = r.status === L.NOT_IN_DATABASE;
@@ -1596,6 +1627,7 @@
     else if (route === 'summary') renderSummary();
     else if (route === 'about') renderAbout();
     else renderCheck();
+    app.insertBefore(modeStrip(), app.firstChild);
     // Full design: a short fade between screens (CSS turns it off for "reduce motion").
     app.classList.remove('screen-in');
     if (mode === 'full' && focus) { void app.offsetWidth; app.classList.add('screen-in'); }
