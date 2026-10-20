@@ -5,6 +5,11 @@ Power simulation for the proposed HerbBridge trial. A PLANNING TOOL, NOT TRIAL R
 Design: 2-arm randomised controlled trial (HerbBridge + usual care vs usual care), 6 months.
 Primary outcome: time in therapeutic range (TTR, %) for warfarin patients.
 
+Control arm mean TTR 40.2% and SD 17.1 from:
+  Lam ASM, Lee IMH, Mak SKS, Yan BPY, Lee VWY. Warfarin control in Hong Kong clinical practice:
+  a single-centre observational study. Hong Kong Med J. 2020;26(4):294–303.
+  https://www.hkmj.org/node/10340
+
 Each simulated trial draws TTR for both arms from a normal distribution, clipped to 0-100,
 and compares the arms with a two-sided t-test. Power = share of simulated trials with p < alpha.
 
@@ -29,6 +34,8 @@ ALPHA = 0.05             # two-sided
 TARGET_POWER = 0.80
 DROPOUT = 0.20
 N_FORMULA = 72           # per arm, from the formula check below
+N_RECOMMENDED = 73       # per arm: the t-test reaches 80% power at 73, not 72
+REFERENCE = 'Lam ASM, Lee IMH, Mak SKS, Yan BPY, Lee VWY. Warfarin control in Hong Kong clinical practice: a single-centre observational study. Hong Kong Med J. 2020;26(4):294–303. https://www.hkmj.org/node/10340'
 
 # ---- Simulation settings (not trial inputs) ----
 N_SIMS = 5000            # simulated trials per setting
@@ -92,7 +99,7 @@ def chart(x, y, se, xlabel, title, mark_x, path, x_ticks=None):
 
 def main():
     rng = np.random.default_rng(SEED)  # for the clipping check only
-    lines = [NOTE, '']
+    lines = [NOTE, '', 'Source for control mean TTR 40.2% and SD 17.1: ' + REFERENCE, '']
 
     # 1. Formula check
     n_rounded = formula_n(z_alpha=1.96, z_beta=0.84)
@@ -116,6 +123,21 @@ def main():
         'Exact t-test power at %d per arm without clipping (noncentral t): %.1f%%' % (N_FORMULA, analytic_t_power(N_FORMULA, EFFECT) * 100),
         'Effect of clipping to 0-100 (1,000,000 draws per arm): control mean %.2f, SD %.2f; HerbBridge arm mean %.2f, SD %.2f; difference %.2f points'
         % (clip_c.mean(), clip_c.std(), clip_t.mean(), clip_t.std(), clip_t.mean() - clip_c.mean()),
+        '',
+    ]
+
+    # Recommended size: 72 (formula) and 73 (t-test) side by side
+    p73, _ = simulate_power(N_RECOMMENDED, EFFECT)
+    rec = [int(np.ceil(n / (1 - DROPOUT))) for n in (N_FORMULA, N_RECOMMENDED)]
+    lines += [
+        'Sample size per arm (assumed effect +8 points):',
+        '                                   72 (formula)   73 (t-test, recommended)',
+        '  exact t-test power                 %5.1f%%          %5.1f%%' % (analytic_t_power(N_FORMULA, EFFECT) * 100, analytic_t_power(N_RECOMMENDED, EFFECT) * 100),
+        '  simulated power (5,000 trials)     %5.1f%%          %5.1f%%' % (p72 * 100, p73 * 100),
+        '  recruited per arm (20%% dropout)    %3d             %3d' % (rec[0], rec[1]),
+        '  recruited in total                 %3d             %3d' % (2 * rec[0], 2 * rec[1]),
+        '  Why 73: the formula uses the normal approximation (1.96 and 0.84), but the analysis is a',
+        '  t-test, which reaches 80% power at 73 per arm, not 72.',
         '',
     ]
 

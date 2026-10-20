@@ -1,5 +1,7 @@
 Simulation for planning only. Not real trial results. Assumed effect: +8 points.
 
+Source for control mean TTR 40.2% and SD 17.1: Lam ASM, Lee IMH, Mak SKS, Yan BPY, Lee VWY. Warfarin control in Hong Kong clinical practice: a single-centre observational study. Hong Kong Med J. 2020;26(4):294–303. https://www.hkmj.org/node/10340
+
 Formula: n = 2 x (1.96 + 0.84)^2 x 17.1^2 / 8^2
   with 1.96 and 0.84:          n = 71.64 per arm -> 72
   with exact z (1.9600, 0.8416): n = 71.72 per arm -> 72
@@ -8,6 +10,15 @@ Formula: n = 2 x (1.96 + 0.84)^2 x 17.1^2 / 8^2
 Simulated power at 72 per arm, +8 points (assumed), 5000 trials: 79.6% (95% simulation interval 78.5% to 80.7%)
 Exact t-test power at 72 per arm without clipping (noncentral t): 79.6%
 Effect of clipping to 0-100 (1,000,000 draws per arm): control mean 40.25, SD 16.96; HerbBridge arm mean 48.21, SD 17.03; difference 7.96 points
+
+Sample size per arm (assumed effect +8 points):
+                                   72 (formula)   73 (t-test, recommended)
+  exact t-test power                  79.6%           80.2%
+  simulated power (5,000 trials)      79.6%           80.2%
+  recruited per arm (20% dropout)     90              92
+  recruited in total                 180             184
+  Why 73: the formula uses the normal approximation (1.96 and 0.84), but the analysis is a
+  t-test, which reaches 80% power at 73 per arm, not 72.
 
 Power vs sample size per arm (assumed effect +8 points):
    20 per arm:  29.8%
