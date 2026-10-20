@@ -125,7 +125,7 @@ Two display modes, switched in the header and remembered on the device:
 - **Simple** (default, for older users): very large text, higher contrast, no animation. Result
   cards show the badge, the names and the first sentence of "What to do". On a pair screen the
   rest sits behind one "More details" button. The grey card's required sentence is always shown.
-- **Full design**: same screens and content, with icons, a step bar, short transitions (off when
+- **Full details**: same screens and content, with icons, a step bar, short transitions (off when
   the phone asks for reduced motion) and every detail open.
 
 ## Fonts

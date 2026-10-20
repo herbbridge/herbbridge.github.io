@@ -58,6 +58,8 @@
     tick: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5.5 12.5l4 4 9-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     chevron: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     arrow: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h13M13 6.5 18.5 12 13 17.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    view_simple: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 12h8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
+    view_full: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 9h8M8 12h8M8 15h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
     external: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
   };
   function icon(name, cls) {
@@ -558,6 +560,9 @@
     var bar = checkBar.bar;
     bar.classList.remove('is-static');
     if (bar.offsetHeight > window.innerHeight * 0.28) bar.classList.add('is-static');
+    // Scrolling (and focus) keeps everything clear of the bar: the bottom padding equals its height.
+    var h = bar.classList.contains('is-static') || bar.hidden ? 0 : bar.offsetHeight;
+    document.documentElement.style.setProperty('--check-bar-h', h + 'px');
   }
   window.addEventListener('resize', fitCheckBar);
 
@@ -1044,8 +1049,11 @@
   function modeStrip() {
     var simple = mode === 'simple';
     return el('div', { class: 'mode-strip mode-strip-' + mode, role: 'note' }, [
-      el('span', { class: 'mode-strip-icon', 'aria-hidden': 'true', text: simple ? '1·2·3' : '☰' }),
-      el('p', { class: 'mode-strip-text', text: t(simple ? 'mode_strip_simple' : 'mode_strip_full') }),
+      icon(simple ? 'view_simple' : 'view_full', 'mode-strip-icon'),
+      (function () {
+        var parts = t(simple ? 'mode_strip_simple' : 'mode_strip_full').split(' · ');
+        return el('p', { class: 'mode-strip-text' }, [el('span', { text: parts[0] }), parts[1] ? el('span', { class: 'mode-strip-detail', text: ' · ' + parts[1] }) : null]);
+      })(),
       el('button', { type: 'button', class: 'mode-strip-btn', onclick: function () { setMode(simple ? 'full' : 'simple'); } },
         [el('span', { text: t(simple ? 'mode_strip_to_full' : 'mode_strip_to_simple') })])
     ]);
@@ -1084,7 +1092,7 @@
     var s = db.statementById[r.official.statements[0]];
     return el('p', { class: 'pair-line pair-line-quote' }, [el('strong', { text: (zh ? s.body_zh + '：' : s.body_en + ': ') }), el('span', { text: '“' + (zh ? s.quote_zh : s.quote_en) + '”' })]);
   }
-  // Full design only: What to do in full, the evidence levels and how many sources, on the card itself.
+  // Full details only: What to do in full, the evidence levels and how many sources, on the card itself.
   function fullFacts(r) {
     if (mode !== 'full' || r.status === L.NOT_IN_DATABASE) return null;
     var act = r.entry ? field(r.entry, 'action') : t('official_action');
@@ -1148,7 +1156,6 @@
     var headline = flagged ? I.tn('results_need', flagged) : unknown ? I.tn('results_norec_head', unknown) : t('level_none_reported');
     head.appendChild(el('h1', { tabindex: '-1', text: headline }));
     if (flagged && unknown) head.appendChild(el('ul', { class: 'result-chips' }, [el('li', { text: I.tn('results_norec', unknown) })]));
-    if (!full) app.appendChild(el('p', { class: 'disclaimer-box' }, disclaimerText()));
 
     var list = el('ol', { class: 'pair-cards' });
     var greys = results.filter(function (r) { return r.status === L.NOT_IN_DATABASE; });
@@ -1156,7 +1163,7 @@
     if (greys.length === 1) list.appendChild(el('li', null, [compactCard(greys[0])]));
     else if (greys.length > 1) list.appendChild(el('li', null, [compactUnknownGroup(greys)]));
     app.appendChild(list);
-    if (full) app.appendChild(el('p', { class: 'disclaimer-box' }, disclaimerText()));
+    app.appendChild(el('p', { class: 'disclaimer-box' }, disclaimerText()));
 
     app.appendChild(el('div', { class: 'actions actions-stack' }, [
       el('a', { class: 'btn btn-primary', href: '#/summary', text: t('to_summary') }),
@@ -1185,7 +1192,7 @@
         el('span', { class: 'visually-hidden', text: t('and_sr') + ' ' }), nameNode(r.drug)
       ])
     ]));
-    // The full card (its own title is the page heading above). Full design opens everything.
+    // The full card (its own title is the page heading above). Full details opens everything.
     if (full) openCards[key] = true;
     var whole = card(r);
     var title = whole.querySelector('h3.pair');
@@ -1628,7 +1635,7 @@
     else if (route === 'about') renderAbout();
     else renderCheck();
     app.insertBefore(modeStrip(), app.firstChild);
-    // Full design: a short fade between screens (CSS turns it off for "reduce motion").
+    // Full details: a short fade between screens (CSS turns it off for "reduce motion").
     app.classList.remove('screen-in');
     if (mode === 'full' && focus) { void app.offsetWidth; app.classList.add('screen-in'); }
     if (focus) {

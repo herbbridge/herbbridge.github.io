@@ -205,7 +205,7 @@ For Sunday this is done WITHOUT accounts, a server or scanning:
 Owner and Cyrus approved the look from a preview (`_preview/`). Layout and design only: no data,
 rating, quote, source, S/N or date changed.
 - Step-by-step screens: #/cabinet → #/results (compact cards) → #/pair/<herb>-<drug> → #/summary.
-- Two modes, header toggle "Simple / Full design" (簡易 / 完整設計), stored in localStorage
+- Two modes, header toggle "Simple / Full details" (簡易 / 詳細模式), stored in localStorage
   ("herbsafe.mode"), default Simple. Simple: 20px base, no motion, cards show the FIRST sentence of
   "What to do"; pair screen shows badge, What to do, required grey wording, disclaimer, then
   "More details". Full: icons, steps, transitions (respecting reduced motion).
@@ -290,10 +290,16 @@ rating, quote, source, S/N or date changed.
   It may break onto two lines only after the comma.
 - 20 Oct, Simple vs Full made obvious (cache herbbridge-v32). The modes worked, but looked the same on a
   phone's first screen. Now: a coloured strip on every screen (Simple: violet "Simple view: the key points,
-  one step at a time." + "Show everything"; Full: dark "Full design: evidence, official quotes and sources
+  one step at a time." + "Show everything"; Full: dark "Full details: evidence, official quotes and sources
   on one page." + "Simple view"); Simple says "Step 2 of 3"; Simple results = big cards, badge + one
   What to do line + big "See details"; Full results = dense cards with What to do, evidence levels and
   source count; Full pair page opens everything (incl. "For professionals"). Summary content unchanged in
   both modes (it is for the doctor and prints on one A4 page); the strip is screen-only.
   Check: node tools/check-modes.js (Simple hides the pair sources list, Full shows it; same badge, colour,
   disclaimer and grey wording in both). New Chinese strip text not yet reviewed.
+- 20 Oct, mode strip slimmed and Full renamed (cache herbbridge-v33): "Full design" → "Full details",
+  完整設計 → 詳細模式. Strip is one 44px line at 390px: "Simple view · key points only" + "Show everything" /
+  "Full details · evidence and sources" + "Simple view" (ZH 簡易模式 · 只講重點 + 睇晒全部 /
+  詳細模式 · 證據同資料來源 + 轉返簡易模式); at 200% zoom it shows only the mode name. Results disclaimer
+  sits under the cards in both modes, so the first badge is on the first screen. Scroll padding on the
+  cabinet equals the sticky bar's height. tools/check-modes.js also checks the first screen (390 x 844).
