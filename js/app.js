@@ -1532,6 +1532,15 @@
     Array.prototype.forEach.call(document.querySelectorAll('[data-i18n]'), function (node) {
       node.textContent = t(node.getAttribute('data-i18n'));
     });
+    // The slogan may only break after its comma ("…East to West," / 「中西相通，」).
+    Array.prototype.forEach.call(document.querySelectorAll('.brand-slogan'), function (node) {
+      var m = t('slogan').match(/^(.*?[,，])\s*(.*)$/);
+      if (!m) return;
+      node.textContent = '';
+      node.appendChild(el('span', { class: 'slogan-part', text: m[1] }));
+      node.appendChild(document.createTextNode(zh ? '' : ' '));
+      node.appendChild(el('span', { class: 'slogan-part', text: m[2] }));
+    });
     Array.prototype.forEach.call(document.querySelectorAll('[data-i18n-label]'), function (node) {
       node.setAttribute('aria-label', t(node.getAttribute('data-i18n-label')));
     });

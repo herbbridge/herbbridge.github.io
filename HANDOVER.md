@@ -274,8 +274,8 @@ rating, quote, source, S/N or date changed.
   official quote → What to do (our own advice only) → why it matters. Optional recordings in audio/
   (listed in audio/manifest.json). All scripts for review: docs/spoken-scripts.txt
   (tools/make-spoken-scripts.js). Print check: tools/check-print.js.
-- 20 Oct, renamed HerbSafe → HerbBridge 中西通 (cache herbbridge-v27). Slogan "Check before you mix." /
-  「中藥西藥，食之前查一查。」 under the name on the home screen. In Chinese text the app is called 中西通.
+- 20 Oct, renamed HerbSafe → HerbBridge 中西通 (cache herbbridge-v27). Slogan "Bridging you from East to West, easing worries in your chest." /
+  「中西相通，心頭放鬆。」 under the name on the home screen. In Chinese text the app is called 中西通.
   Not renamed: the repo, organisation and URL (herbsafe.github.io), and the storage keys herbsafe.v1 /
   herbsafe.mode (renaming them would wipe saved lists). Old herbsafe-* caches are deleted when the
   new service worker activates.
@@ -286,3 +286,5 @@ rating, quote, source, S/N or date changed.
   「低度風險。要留意。」; What to do spoken one sentence per piece. Dong quai + warfarin has spoken-only
   wording in data/interactions.json (action_spoken_en/zh, owner's exact words); the card on screen still
   shows action_en/zh.
+- 20 Oct, new slogan (cache herbbridge-v29): "Bridging you from East to West, easing worries in your chest." / 「中西相通，心頭放鬆。」 (was "Check before you mix." / 「中藥西藥，食之前查一查。」).
+  It may break onto two lines only after the comma.

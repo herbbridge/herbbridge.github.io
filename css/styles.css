@@ -809,8 +809,11 @@ html[data-mode="simple"] { --ink-2: #33373E; }          /* higher contrast for s
 .brand-zh { color: var(--ink); font-weight: 700; }
 .brand-text { display: flex; flex-direction: column; line-height: 1.2; }
 /* Slogan under the name, on the home screen (My cabinet) only. */
-.brand-slogan { display: none; font-size: 0.8125rem; font-weight: 500; color: var(--ink-2); letter-spacing: 0; }
+.brand-slogan { display: none; font-size: min(0.8125rem, 4.75vw); /* fits 320px in Simple */ font-weight: 500; color: var(--ink-2); letter-spacing: 0; }
 html[data-route="check"] .brand-slogan { display: block; }
+/* Each half is a block, so the slogan breaks after its comma. Only when one half is wider than the
+   screen on its own (very large text) does it wrap inside, instead of running off the page. */
+.slogan-part { display: inline-block; max-width: 100%; }
 .header-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
 .mode-toggle { display: inline-flex; background: #E9E7E1; border-radius: 999px; padding: 3px; }
 .mode-toggle button {

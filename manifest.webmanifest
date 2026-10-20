@@ -1,7 +1,7 @@
 {
   "name": "HerbBridge 中西通",
   "short_name": "HerbBridge",
-  "description": "HerbBridge 中西通: check Chinese herbs and Western medicines together. Check before you mix.",
+  "description": "HerbBridge 中西通: check Chinese herbs and Western medicines together. Bridging you from East to West, easing worries in your chest.",
   "lang": "en-GB",
   "start_url": "./#/check",
   "scope": "./",

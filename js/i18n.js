@@ -15,7 +15,7 @@
       nav_check: 'My cabinet',
       nav_summary: 'Doctor summary',
       nav_about: 'About',
-      slogan: 'Check before you mix.',
+      slogan: 'Bridging you from East to West, easing worries in your chest.',
       footer_disclaimer: 'HerbBridge gives information, not medical advice. Never stop or change a medicine without talking to your doctor or pharmacist.',
       footer_privacy: 'No accounts, no tracking. Your list stays on this device.',
 
@@ -253,7 +253,7 @@
       nav_check: '我嘅藥箱',
       nav_summary: '醫生摘要',
       nav_about: '關於',
-      slogan: '中藥西藥，食之前查一查。',
+      slogan: '中西相通，心頭放鬆。',
       footer_disclaimer: '中西通只提供資訊，唔係醫療建議。未同醫生或者藥劑師傾過之前，千祈唔好自行停藥或者改藥。',
       footer_privacy: '唔使開帳戶，冇追蹤。你嘅清單只會儲存喺呢部裝置。',
 

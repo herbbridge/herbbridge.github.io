@@ -467,6 +467,9 @@
         var bad = texts.filter(function (x) { return /同時服用|中風險/.test(x); });
         return { pass: bad.length === 0, detail: bad.join('\n') };
       });
+      check('Languages', 'the slogan is exact in both languages', function () {
+        return S.en.slogan === 'Bridging you from East to West, easing worries in your chest.' && S.zh.slogan === '中西相通，心頭放鬆。';
+      });
       check('Languages', 'the required disclaimer and "not in database" wording are exact in English', function () {
         return S.en.card_disclaimer === 'HerbBridge gives information, not medical advice. Never stop or change a medicine without talking to your doctor or pharmacist.' &&
           S.en.not_in_db_text === 'We have no record of this combination. This does not mean it is safe. Please ask your pharmacist or doctor.';

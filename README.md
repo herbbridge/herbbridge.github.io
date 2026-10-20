@@ -1,6 +1,6 @@
 # HerbBridge 中西通
 
-*Check before you mix.* 「中藥西藥，食之前查一查。」
+*Bridging you from East to West, easing worries in your chest.* 「中西相通，心頭放鬆。」
 
 HerbBridge is built for **heart patients**: people taking heart, blood pressure, cholesterol or
 blood-thinning medicines (Challenge 4: cardiovascular disease).
