@@ -35,6 +35,7 @@ Power vs sample size per arm (assumed effect +8 points):
    64 per arm:  74.6%
    68 per arm:  77.3%
    72 per arm:  79.6%
+   73 per arm:  80.2%
    76 per arm:  81.8%
    80 per arm:  83.1%
    84 per arm:  85.3%
@@ -52,17 +53,17 @@ Power vs sample size per arm (assumed effect +8 points):
   132 per arm:  96.9%
   136 per arm:  97.1%
   140 per arm:  97.5%
-  smallest size on this grid with simulated power >= 80%: 76 per arm
+  smallest size on this grid with simulated power >= 80%: 73 per arm
 
-Power vs assumed effect (72 per arm):
-  + 4 points:  28.4%
-  + 5 points:  42.0%
-  + 6 points:  54.8%
-  + 7 points:  67.4%
-  + 8 points:  79.6%
-  + 9 points:  87.8%
-  +10 points:  93.3%
-  +11 points:  96.9%
-  +12 points:  98.5%
+Power vs assumed effect:     73 per arm (chart)   72 per arm
+  + 4 points:                28.5%                28.4%
+  + 5 points:                41.5%                42.0%
+  + 6 points:                56.3%                54.8%
+  + 7 points:                68.7%                67.4%
+  + 8 points:                80.2%                79.6%
+  + 9 points:                88.3%                87.8%
+  +10 points:                93.7%                93.3%
+  +11 points:                97.0%                96.9%
+  +12 points:                98.8%                98.5%
 
 Seed 2026, 5000 simulated trials per setting.

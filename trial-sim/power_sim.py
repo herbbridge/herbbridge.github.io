@@ -40,7 +40,7 @@ REFERENCE = 'Lam ASM, Lee IMH, Mak SKS, Yan BPY, Lee VWY. Warfarin control in Ho
 # ---- Simulation settings (not trial inputs) ----
 N_SIMS = 5000            # simulated trials per setting
 SEED = 2026              # fixed, so every run gives the same results
-SIZES = list(range(20, 141, 4))                    # per arm, chart 1 (includes 72)
+SIZES = sorted(set(range(20, 141, 4)) | {N_RECOMMENDED})  # per arm, chart 1 (includes 72 and 73)
 EFFECTS = [float(e) for e in range(4, 13)]         # +4 to +12 points, chart 2
 
 NOTE = 'Simulation for planning only. Not real trial results. Assumed effect: +8 points.'
@@ -145,19 +145,20 @@ def main():
     res = [simulate_power(n, EFFECT) for n in SIZES]
     chart(SIZES, [r[0] for r in res], [r[1] for r in res], 'Patients analysed per arm',
           'Power vs sample size per arm (TTR, assumed effect +8 points, SD 17.1, alpha 0.05)',
-          N_FORMULA, os.path.join(HERE, 'power_vs_sample_size.png'), x_ticks=list(range(20, 141, 20)))
+          N_RECOMMENDED, os.path.join(HERE, 'power_vs_sample_size.png'), x_ticks=list(range(20, 141, 20)))
     lines.append('Power vs sample size per arm (assumed effect +8 points):')
     lines += ['  %3d per arm: %5.1f%%' % (n, r[0] * 100) for n, r in zip(SIZES, res)]
     first = next((n for n, r in zip(SIZES, res) if r[0] >= TARGET_POWER), None)
     lines += ['  smallest size on this grid with simulated power >= 80%%: %s per arm' % first, '']
 
-    # 4. Power vs assumed effect (at 72 per arm)
-    res = [simulate_power(N_FORMULA, e) for e in EFFECTS]
+    # 4. Power vs assumed effect (chart at 73 per arm; 72 listed too, for comparison)
+    res = [simulate_power(N_RECOMMENDED, e) for e in EFFECTS]
+    res72 = [simulate_power(N_FORMULA, e) for e in EFFECTS]
     chart(EFFECTS, [r[0] for r in res], [r[1] for r in res], 'Assumed effect on TTR (percentage points)',
-          'Power vs assumed effect (72 analysed per arm, SD 17.1, alpha 0.05)',
+          'Power vs assumed effect (73 analysed per arm, SD 17.1, alpha 0.05)',
           EFFECT, os.path.join(HERE, 'power_vs_effect.png'), x_ticks=EFFECTS)
-    lines.append('Power vs assumed effect (72 per arm):')
-    lines += ['  +%2g points: %5.1f%%' % (e, r[0] * 100) for e, r in zip(EFFECTS, res)]
+    lines.append('Power vs assumed effect:     73 per arm (chart)   72 per arm')
+    lines += ['  +%2g points:               %5.1f%%               %5.1f%%' % (e, r[0] * 100, q[0] * 100) for e, r, q in zip(EFFECTS, res, res72)]
 
     lines += ['', 'Seed %d, %d simulated trials per setting.' % (SEED, N_SIMS)]
     with open(os.path.join(HERE, 'results.txt'), 'w') as f:

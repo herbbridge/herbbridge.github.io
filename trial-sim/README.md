@@ -24,7 +24,7 @@ no patients took part. It is not part of the app: the app does not load or link 
 Reference: Lam ASM, Lee IMH, Mak SKS, Yan BPY, Lee VWY. Warfarin control in Hong Kong clinical practice: a single-centre observational study. *Hong Kong Med J.* 2020;26(4):294–303. <https://www.hkmj.org/node/10340>
 
 Simulation settings (not trial inputs): 5,000 simulated trials per setting, fixed random seed 2026,
-sample sizes 20 to 140 per arm in steps of 4, assumed effects +4 to +12 points in steps of 1.
+sample sizes 20 to 140 per arm in steps of 4 plus 73, assumed effects +4 to +12 points in steps of 1.
 
 ## Formula check
 
@@ -71,8 +71,9 @@ This assumes an 8-point improvement in TTR; if the true effect is smaller, a lar
 
 Charts:
 
-- `power_vs_sample_size.png`: power vs patients analysed per arm, at the assumed +8 points.
-- `power_vs_effect.png`: power vs assumed effect (+4 to +12 points), at 72 per arm.
+- `power_vs_sample_size.png`: power vs patients analysed per arm, at the assumed +8 points; marker at 73 per arm.
+- `power_vs_effect.png`: power vs assumed effect (+4 to +12 points), at 73 per arm (recommended).
+  `results.txt` lists the same effects at both 73 and 72 per arm.
 
 ## Rerun it
 
