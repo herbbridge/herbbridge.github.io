@@ -11,12 +11,14 @@ The words on screen are not changed by this script.
   [2] The Hospital Authority says: Do not take any Traditional Chinese Medicines, Proprietary Chinese Medicines, herbal drinks, or food that contains TCM, such as Guilinggao. Many TCM such as ginseng, Dong quai, Danshen, Chishao can interact with warfarin.
   [3] What to do: tell your doctor that you take danshen, and ask about a clotting test.
   [4] Why this matters for your heart: serious bleeding, including internal bleeding.
+  [5] Next: show your doctor. You can say: ‘I take danshen and warfarin. Can you check if that’s OK for me?’
 
   中文
   [1] 丹參同華法林。高度風險。
   [2] 醫院管理局話：不可隨便服用中藥材，中成藥，藥材湯或涼茶，或含中藥成份的食品如龜苓膏，因為很多中藥，如人參、當歸、丹參、赤芍，會與「華法林」產生相互作用，影響抗凝血藥的功效。
   [3] 應該點做：話俾醫生知你有食丹參，同埋問吓需唔需要驗凝血指數。
   [4] 對心臟有咩影響：嚴重出血，包括內出血。
+  [5] 下一步：俾醫生睇。你可以咁講：『我有食丹參同華法林，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 2. Danshen + Aspirin  (danshen-aspirin, status: low)
@@ -25,11 +27,13 @@ The words on screen are not changed by this script.
   [1] Danshen and aspirin. Low risk. Keep an eye on it.
   [2] What to do: talk to your doctor or pharmacist before using danshen, and tell them about any unusual bruising or bleeding.
   [3] Why this matters for your heart: watch for unusual bruising or bleeding.
+  [4] Next: show your doctor. You can say: ‘I take danshen and aspirin. Can you check if that’s OK for me?’
 
   中文
   [1] 丹參同阿士匹靈。低度風險。要留意。
   [2] 應該點做：食丹參之前，請先同醫生或者藥劑師傾；如果有唔尋常嘅瘀傷或者出血，要話俾佢哋知。
   [3] 對心臟有咩影響：留意有冇唔尋常嘅瘀傷或者出血。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食丹參同阿士匹靈，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 3. Danshen + Clopidogrel  (danshen-clopidogrel, status: low)
@@ -38,11 +42,13 @@ The words on screen are not changed by this script.
   [1] Danshen and clopidogrel. Low risk. Keep an eye on it.
   [2] What to do: talk to your doctor or pharmacist before using danshen.
   [3] Why this matters for your heart: watch for unusual bruising or bleeding.
+  [4] Next: show your doctor. You can say: ‘I take danshen and clopidogrel. Can you check if that’s OK for me?’
 
   中文
   [1] 丹參同氯吡格雷。低度風險。要留意。
   [2] 應該點做：食丹參之前，請先同醫生或者藥劑師傾。
   [3] 對心臟有咩影響：留意有冇唔尋常嘅瘀傷或者出血。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食丹參同氯吡格雷，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 4. Danshen + Atorvastatin  (danshen-atorvastatin, status: low)
@@ -51,11 +57,13 @@ The words on screen are not changed by this script.
   [1] Danshen and atorvastatin. Low risk. Keep an eye on it.
   [2] What to do: tell your doctor or pharmacist that you take danshen, so they can keep an eye on your cholesterol results.
   [3] Why this matters for your heart: statins protect your heart by lowering cholesterol. Lower statin levels could weaken that protection, and higher levels could raise the risk of side effects. The effect in people is not known.
+  [4] Next: show your doctor. You can say: ‘I take danshen and atorvastatin. Can you check if that’s OK for me?’
 
   中文
   [1] 丹參同阿托伐他汀。低度風險。要留意。
   [2] 應該點做：話俾醫生或者藥劑師知你有食丹參，等佢哋留意你嘅膽固醇指數。
   [3] 對心臟有咩影響：他汀類藥物靠降膽固醇保護心臟。他汀類藥物水平降低可能減弱保護作用，升高就可能增加副作用風險。對人嘅影響仲未知道。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食丹參同阿托伐他汀，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 5. Danshen + Rosuvastatin  (danshen-rosuvastatin, status: low)
@@ -64,11 +72,13 @@ The words on screen are not changed by this script.
   [1] Danshen and rosuvastatin. Low risk. Keep an eye on it.
   [2] What to do: tell your doctor or pharmacist that you take danshen, so they can keep an eye on your cholesterol results.
   [3] Why this matters for your heart: statins protect your heart by lowering cholesterol. Whether this weakens that protection is not known.
+  [4] Next: show your doctor. You can say: ‘I take danshen and rosuvastatin. Can you check if that’s OK for me?’
 
   中文
   [1] 丹參同瑞舒伐他汀。低度風險。要留意。
   [2] 應該點做：話俾醫生或者藥劑師知你有食丹參，等佢哋留意你嘅膽固醇指數。
   [3] 對心臟有咩影響：他汀類藥物靠降膽固醇保護心臟。呢個會唔會減弱保護作用，仲未知道。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食丹參同瑞舒伐他汀，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 6. Danshen + Digoxin  (danshen-digoxin, status: low)
@@ -77,11 +87,13 @@ The words on screen are not changed by this script.
   [1] Danshen and digoxin. Low risk. Keep an eye on it.
   [2] What to do: tell your doctor or pharmacist that you take danshen, because it can affect some digoxin blood tests.
   [3] Why this matters for your heart: a wrong result could hide a digoxin level that is too high, and too much digoxin can cause a dangerous heart rhythm.
+  [4] Next: show your doctor. You can say: ‘I take danshen and digoxin. Can you check if that’s OK for me?’
 
   中文
   [1] 丹參同地高辛。低度風險。要留意。
   [2] 應該點做：話俾醫生或者藥劑師知你有食丹參，因為丹參可能影響某啲地高辛驗血結果。
   [3] 對心臟有咩影響：驗血結果唔準，可能睇唔出地高辛過高；地高辛過量可以引致危險嘅心律不正。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食丹參同地高辛，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 7. Danshen + Amlodipine  (danshen-amlodipine, status: low)
@@ -90,11 +102,13 @@ The words on screen are not changed by this script.
   [1] Danshen and amlodipine. Low risk. Keep an eye on it.
   [2] What to do: tell your doctor or pharmacist that you take danshen, so they can keep an eye on your blood pressure.
   [3] Why this matters for your heart: amlodipine controls your blood pressure. Whether danshen weakens it in people is not known.
+  [4] Next: show your doctor. You can say: ‘I take danshen and amlodipine. Can you check if that’s OK for me?’
 
   中文
   [1] 丹參同氨氯地平。低度風險。要留意。
   [2] 應該點做：話俾醫生或者藥劑師知你有食丹參，等佢哋留意你嘅血壓。
   [3] 對心臟有咩影響：氨氯地平用嚟控制血壓。丹參喺人體會唔會減弱佢嘅效果，仲未知道。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食丹參同氨氯地平，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 8. Dong quai + Warfarin  (dong_quai-warfarin, status: high)
@@ -104,12 +118,14 @@ The words on screen are not changed by this script.
   [2] The Hospital Authority says: Do not take any Traditional Chinese Medicines, Proprietary Chinese Medicines, herbal drinks, or food that contains TCM, such as Guilinggao. Many TCM such as ginseng, Dong quai, Danshen, Chishao can interact with warfarin.
   [3] What to do: tell your doctor that you take dong quai, and ask about a clotting test.
   [4] Why this matters for your heart: serious bleeding, including internal bleeding.
+  [5] Next: show your doctor. You can say: ‘I take dong quai and warfarin. Can you check if that’s OK for me?’
 
   中文
   [1] 當歸同華法林。高度風險。
   [2] 醫院管理局話：不可隨便服用中藥材，中成藥，藥材湯或涼茶，或含中藥成份的食品如龜苓膏，因為很多中藥，如人參、當歸、丹參、赤芍，會與「華法林」產生相互作用，影響抗凝血藥的功效。
   [3] 應該點做：話俾醫生知你有食當歸，同埋問吓需唔需要驗凝血指數。
   [4] 對心臟有咩影響：嚴重出血，包括內出血。
+  [5] 下一步：俾醫生睇。你可以咁講：『我有食當歸同華法林，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 9. Dong quai + Aspirin  (dong_quai-aspirin, status: low)
@@ -119,11 +135,13 @@ The words on screen are not changed by this script.
   [2] What to do: talk to your doctor or pharmacist if you take both.
   [3] Tell them that you take dong quai.
   [4] Why this matters for your heart: watch for unusual bruising or bleeding.
+  [5] Next: show your doctor. You can say: ‘I take dong quai and aspirin. Can you check if that’s OK for me?’
 
   中文
   [1] 當歸同阿士匹靈。低度風險。要留意。
   [2] 應該點做：如果兩樣都食，請同醫生或者藥劑師傾，話俾佢哋知你有食當歸。
   [3] 對心臟有咩影響：留意有冇唔尋常嘅瘀傷或者出血。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食當歸同阿士匹靈，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 10. Dong quai + Clopidogrel  (dong_quai-clopidogrel, status: low)
@@ -133,11 +151,13 @@ The words on screen are not changed by this script.
   [2] What to do: talk to your doctor or pharmacist if you take both.
   [3] Tell them that you take dong quai.
   [4] Why this matters for your heart: watch for unusual bruising or bleeding.
+  [5] Next: show your doctor. You can say: ‘I take dong quai and clopidogrel. Can you check if that’s OK for me?’
 
   中文
   [1] 當歸同氯吡格雷。低度風險。要留意。
   [2] 應該點做：如果兩樣都食，請同醫生或者藥劑師傾，話俾佢哋知你有食當歸。
   [3] 對心臟有咩影響：留意有冇唔尋常嘅瘀傷或者出血。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食當歸同氯吡格雷，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 11. American ginseng + Warfarin  (american_ginseng-warfarin, status: official)
@@ -148,6 +168,7 @@ The words on screen are not changed by this script.
   [3] What to do: tell your doctor that you take American ginseng.
   [4] A clotting check may be needed.
   [5] Why this matters for your heart: warfarin may work less well, raising the risk of clots and stroke.
+  [6] Next: show your doctor. You can say: ‘I take American ginseng and warfarin. Can you check if that’s OK for me?’
 
   中文
   [1] 花旗參同華法林。官方提醒。
@@ -155,6 +176,7 @@ The words on screen are not changed by this script.
   [3] 應該點做：話俾醫生知你有食花旗參。
   [4] 可能需要驗凝血指數。
   [5] 對心臟有咩影響：華法林可能效果變差，增加血栓同中風嘅風險。
+  [6] 下一步：俾醫生睇。你可以咁講：『我有食花旗參同華法林，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 12. American ginseng + Digoxin  (american_ginseng-digoxin, status: official)
@@ -163,11 +185,13 @@ The words on screen are not changed by this script.
   [1] American ginseng and digoxin. Official caution.
   [2] Health Canada says: Ask a health care practitioner before use if you are taking blood thinners or digoxin.
   [3] What to do: talk to your doctor or pharmacist.
+  [4] Next: show your doctor. You can say: ‘I take American ginseng and digoxin. Can you check if that’s OK for me?’
 
   中文
   [1] 花旗參同地高辛。官方提醒。
   [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊薄血藥或者地高辛，用之前要先問醫護人員或者醫生。
   [3] 應該點做：同醫生或者藥劑師傾吓。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食花旗參同地高辛，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 13. Asian ginseng + Warfarin  (asian_ginseng-warfarin, status: official)
@@ -177,12 +201,14 @@ The words on screen are not changed by this script.
   [2] The Hospital Authority says: Do not take any Traditional Chinese Medicines, Proprietary Chinese Medicines, herbal drinks, or food that contains TCM, such as Guilinggao. Many TCM such as ginseng, Dong quai, Danshen, Chishao can interact with warfarin.
   [3] What to do: tell your doctor that you take Asian ginseng.
   [4] Why this matters for your heart: warfarin may work less well, raising the risk of clots and stroke.
+  [5] Next: show your doctor. You can say: ‘I take Asian ginseng and warfarin. Can you check if that’s OK for me?’
 
   中文
   [1] 人參同華法林。官方提醒，資料講法唔一致。
   [2] 醫院管理局話：不可隨便服用中藥材，中成藥，藥材湯或涼茶，或含中藥成份的食品如龜苓膏，因為很多中藥，如人參、當歸、丹參、赤芍，會與「華法林」產生相互作用，影響抗凝血藥的功效。
   [3] 應該點做：話俾醫生知你有食人參。
   [4] 對心臟有咩影響：華法林可能效果變差，增加血栓同中風嘅風險。
+  [5] 下一步：俾醫生睇。你可以咁講：『我有食人參同華法林，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 14. Asian ginseng + Digoxin  (asian_ginseng-digoxin, status: official)
@@ -191,11 +217,13 @@ The words on screen are not changed by this script.
   [1] Asian ginseng and digoxin. Official caution.
   [2] Health Canada says: Ask a health care practitioner before use if you are taking antidepressant medication, blood thinners or digoxin.
   [3] What to do: talk to your doctor or pharmacist.
+  [4] Next: show your doctor. You can say: ‘I take Asian ginseng and digoxin. Can you check if that’s OK for me?’
 
   中文
   [1] 人參同地高辛。官方提醒。
   [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊抗抑鬱藥、薄血藥或者地高辛，用之前要先問醫護人員或者醫生。
   [3] 應該點做：同醫生或者藥劑師傾吓。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食人參同地高辛，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 15. Ginkgo + Warfarin  (ginkgo-warfarin, status: official)
@@ -205,12 +233,14 @@ The words on screen are not changed by this script.
   [2] Health Canada says: Do not use if you are taking blood thinners or other health products that affect blood coagulation.
   [3] What to do: mention it to your doctor.
   [4] Watch for unusual bruising or bleeding.
+  [5] Next: show your doctor. You can say: ‘I take ginkgo and warfarin. Can you check if that’s OK for me?’
 
   中文
   [1] 銀杏同華法林。官方提醒，資料講法唔一致。
   [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊薄血藥，或者其他會影響血液凝固嘅健康產品，就唔好用。
   [3] 應該點做：話俾醫生知。
   [4] 留意有冇唔尋常嘅瘀傷或者出血。
+  [5] 下一步：俾醫生睇。你可以咁講：『我有食銀杏同華法林，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 16. Ginkgo + Aspirin  (ginkgo-aspirin, status: official)
@@ -220,12 +250,14 @@ The words on screen are not changed by this script.
   [2] Health Canada says: Do not use if you are taking blood thinners or other health products that affect blood coagulation.
   [3] What to do: mention it to your doctor.
   [4] Watch for unusual bruising or bleeding.
+  [5] Next: show your doctor. You can say: ‘I take ginkgo and aspirin. Can you check if that’s OK for me?’
 
   中文
   [1] 銀杏同阿士匹靈。官方提醒，資料講法唔一致。
   [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊薄血藥，或者其他會影響血液凝固嘅健康產品，就唔好用。
   [3] 應該點做：話俾醫生知。
   [4] 留意有冇唔尋常嘅瘀傷或者出血。
+  [5] 下一步：俾醫生睇。你可以咁講：『我有食銀杏同阿士匹靈，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 17. Ginkgo + Clopidogrel  (ginkgo-clopidogrel, status: official)
@@ -234,11 +266,13 @@ The words on screen are not changed by this script.
   [1] Ginkgo and clopidogrel. Official caution.
   [2] The European Medicines Agency says: If the medicinal product is taken concomitantly with anticoagulants, e.g. phenprocoumon and warfarin, or antiplatelet drugs, e.g. clopidogrel, acetylsalicylic acid and other non-steroidal anti-inflammatory drugs, their effect may be influenced.
   [3] What to do: talk to your doctor or pharmacist.
+  [4] Next: show your doctor. You can say: ‘I take ginkgo and clopidogrel. Can you check if that’s OK for me?’
 
   中文
   [1] 銀杏同氯吡格雷。官方提醒。
   [2] 歐洲藥品管理局話（英文原文翻譯）：如果呢種藥同抗凝血藥，例如苯丙香豆素同華法林，或者抗血小板藥，例如氯吡格雷、乙醯水楊酸，阿士匹靈，同其他非類固醇消炎藥，一齊用，佢哋嘅效果可能會受到影響。
   [3] 應該點做：同醫生或者藥劑師傾吓。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食銀杏同氯吡格雷，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 18. Ginkgo + Amlodipine  (ginkgo-amlodipine, status: official)
@@ -247,11 +281,13 @@ The words on screen are not changed by this script.
   [1] Ginkgo and amlodipine. Official caution.
   [2] Health Canada says: Ask a health care practitioner before use if you are taking diabetes, high blood pressure or seizure medications.
   [3] What to do: talk to your doctor or pharmacist.
+  [4] Next: show your doctor. You can say: ‘I take ginkgo and amlodipine. Can you check if that’s OK for me?’
 
   中文
   [1] 銀杏同氨氯地平。官方提醒。
   [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊糖尿病、高血壓或者癲癇嘅藥，用之前要先問醫護人員或者醫生。
   [3] 應該點做：同醫生或者藥劑師傾吓。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食銀杏同氨氯地平，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 19. Liquorice + Digoxin  (liquorice-digoxin, status: official)
@@ -262,6 +298,7 @@ The words on screen are not changed by this script.
   [3] What to do: tell your doctor.
   [4] A potassium blood test may be needed.
   [5] Why this matters for your heart: low potassium can lead to a dangerous heart rhythm.
+  [6] Next: show your doctor. You can say: ‘I take liquorice and digoxin. Can you check if that’s OK for me?’
 
   中文
   [1] 甘草同地高辛。官方提醒。
@@ -269,6 +306,7 @@ The words on screen are not changed by this script.
   [3] 應該點做：話俾醫生知。
   [4] 可能需要驗血檢查鉀質水平。
   [5] 對心臟有咩影響：血鉀過低可以引致危險嘅心律不正。
+  [6] 下一步：俾醫生睇。你可以咁講：『我有食甘草同地高辛，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 20. Liquorice + Amlodipine  (liquorice-amlodipine, status: official)
@@ -277,11 +315,13 @@ The words on screen are not changed by this script.
   [1] Liquorice and amlodipine. Official caution.
   [2] The European Medicines Agency says: Liquorice root may counteract antihypertensive action of prescribed medications.
   [3] What to do: talk to your doctor or pharmacist.
+  [4] Next: show your doctor. You can say: ‘I take liquorice and amlodipine. Can you check if that’s OK for me?’
 
   中文
   [1] 甘草同氨氯地平。官方提醒。
   [2] 歐洲藥品管理局話（英文原文翻譯）：甘草根可能會抵消處方降血壓藥嘅作用。
   [3] 應該點做：同醫生或者藥劑師傾吓。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食甘草同氨氯地平，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 21. Liquorice + Furosemide  (liquorice-furosemide, status: official)
@@ -292,6 +332,7 @@ The words on screen are not changed by this script.
   [3] What to do: tell your doctor.
   [4] A potassium blood test may be needed.
   [5] Why this matters for your heart: low potassium can lead to a dangerous heart rhythm.
+  [6] Next: show your doctor. You can say: ‘I take liquorice and furosemide. Can you check if that’s OK for me?’
 
   中文
   [1] 甘草同呋塞米。官方提醒。
@@ -299,6 +340,7 @@ The words on screen are not changed by this script.
   [3] 應該點做：話俾醫生知。
   [4] 可能需要驗血檢查鉀質水平。
   [5] 對心臟有咩影響：血鉀過低可以引致危險嘅心律不正。
+  [6] 下一步：俾醫生睇。你可以咁講：『我有食甘草同呋塞米，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 22. Red yeast rice + Atorvastatin  (red_yeast_rice-atorvastatin, status: high)
@@ -307,11 +349,13 @@ The words on screen are not changed by this script.
   [1] Red yeast rice and atorvastatin. High risk.
   [2] What to do: do not combine without asking your doctor.
   [3] Why this matters for your heart: a double statin dose can damage muscles and the liver.
+  [4] Next: show your doctor. You can say: ‘I take red yeast rice and atorvastatin. Can you check if that’s OK for me?’
 
   中文
   [1] 紅麴同阿托伐他汀。高度風險。
   [2] 應該點做：未問過醫生之前，唔好紅麴同他汀類藥物兩樣都食。
   [3] 對心臟有咩影響：等於食雙倍他汀類藥物，可能損害肌肉同肝臟。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食紅麴同阿托伐他汀，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 23. Red yeast rice + Simvastatin  (red_yeast_rice-simvastatin, status: high)
@@ -320,11 +364,13 @@ The words on screen are not changed by this script.
   [1] Red yeast rice and simvastatin. High risk.
   [2] What to do: do not combine without asking your doctor.
   [3] Why this matters for your heart: a double statin dose can damage muscles and the liver.
+  [4] Next: show your doctor. You can say: ‘I take red yeast rice and simvastatin. Can you check if that’s OK for me?’
 
   中文
   [1] 紅麴同辛伐他汀。高度風險。
   [2] 應該點做：未問過醫生之前，唔好紅麴同他汀類藥物兩樣都食。
   [3] 對心臟有咩影響：等於食雙倍他汀類藥物，可能損害肌肉同肝臟。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食紅麴同辛伐他汀，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 24. Red yeast rice + Rosuvastatin  (red_yeast_rice-rosuvastatin, status: high)
@@ -333,11 +379,13 @@ The words on screen are not changed by this script.
   [1] Red yeast rice and rosuvastatin. High risk.
   [2] What to do: do not combine without asking your doctor.
   [3] Why this matters for your heart: a double statin dose can damage muscles and the liver.
+  [4] Next: show your doctor. You can say: ‘I take red yeast rice and rosuvastatin. Can you check if that’s OK for me?’
 
   中文
   [1] 紅麴同瑞舒伐他汀。高度風險。
   [2] 應該點做：未問過醫生之前，唔好紅麴同他汀類藥物兩樣都食。
   [3] 對心臟有咩影響：等於食雙倍他汀類藥物，可能損害肌肉同肝臟。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食紅麴同瑞舒伐他汀，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 25. Goji + Warfarin  (goji-warfarin, status: high)
@@ -349,6 +397,7 @@ The words on screen are not changed by this script.
   [4] Ask your doctor about a clotting test.
   [5] Watch for unusual bruising or bleeding, such as nosebleeds or blood in your urine or stools, and get medical advice if this happens.
   [6] Why this matters for your heart: serious bleeding, including internal bleeding.
+  [7] Next: show your doctor. You can say: ‘I take goji and warfarin. Can you check if that’s OK for me?’
 
   中文
   [1] 枸杞同華法林。高度風險。
@@ -357,6 +406,7 @@ The words on screen are not changed by this script.
   [4] 問醫生需唔需要驗凝血指數。
   [5] 留意有冇唔尋常嘅瘀傷或者出血，例如流鼻血、小便或者大便有血；如果有，要盡快睇醫生。
   [6] 對心臟有咩影響：嚴重出血，包括內出血。
+  [7] 下一步：俾醫生睇。你可以咁講：『我有食枸杞同華法林，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 26. Sanqi + Warfarin  (sanqi-warfarin, status: low)
@@ -367,6 +417,7 @@ The words on screen are not changed by this script.
   [3] Ask whether you need a clotting test.
   [4] Watch for unusual bruising or bleeding.
   [5] Why this matters for your heart: if warfarin works too strongly you may bleed; if it works less well, the risk of clots and stroke rises.
+  [6] Next: show your doctor. You can say: ‘I take sanqi and warfarin. Can you check if that’s OK for me?’
 
   中文
   [1] 三七同華法林。低度風險。要留意。
@@ -374,6 +425,7 @@ The words on screen are not changed by this script.
   [3] 問吓需唔需要驗凝血指數。
   [4] 留意有冇唔尋常嘅瘀傷或者出血。
   [5] 對心臟有咩影響：華法林藥力太強可能引致出血；藥力變弱就會增加血栓同中風嘅風險。
+  [6] 下一步：俾醫生睇。你可以咁講：『我有食三七同華法林，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 27. Sanqi + Aspirin  (sanqi-aspirin, status: moderate)
@@ -383,12 +435,14 @@ The words on screen are not changed by this script.
   [2] What to do: talk to your doctor or pharmacist before taking both.
   [3] Tell your doctor that you take sanqi.
   [4] Why this matters for your heart: a stronger anti-clotting effect could raise the chance of bleeding.
+  [5] Next: show your doctor. You can say: ‘I take sanqi and aspirin. Can you check if that’s OK for me?’
 
   中文
   [1] 三七同阿士匹靈。中度風險。
   [2] 應該點做：兩樣都食之前，請先同醫生或者藥劑師傾。
   [3] 話俾醫生知你有食三七。
   [4] 對心臟有咩影響：「薄血」作用變強，可能增加出血嘅機會。
+  [5] 下一步：俾醫生睇。你可以咁講：『我有食三七同阿士匹靈，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 28. Sanqi + Clopidogrel  (sanqi-clopidogrel, status: low)
@@ -397,11 +451,13 @@ The words on screen are not changed by this script.
   [1] Sanqi and clopidogrel. Low risk. Keep an eye on it.
   [2] What to do: tell your doctor or pharmacist that you take sanqi.
   [3] Watch for unusual bruising or bleeding.
+  [4] Next: show your doctor. You can say: ‘I take sanqi and clopidogrel. Can you check if that’s OK for me?’
 
   中文
   [1] 三七同氯吡格雷。低度風險。要留意。
   [2] 應該點做：話俾醫生或者藥劑師知你有食三七。
   [3] 留意有冇唔尋常嘅瘀傷或者出血。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食三七同氯吡格雷，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 29. Safflower + Warfarin  (safflower-warfarin, status: moderate)
@@ -412,6 +468,7 @@ The words on screen are not changed by this script.
   [3] Ask whether you need a clotting test.
   [4] If you notice unusual bruising or bleeding, such as blood in your urine, tell your doctor.
   [5] Why this matters for your heart: serious bleeding, including internal bleeding.
+  [6] Next: show your doctor. You can say: ‘I take safflower and warfarin. Can you check if that’s OK for me?’
 
   中文
   [1] 紅花同華法林。中度風險。
@@ -419,6 +476,7 @@ The words on screen are not changed by this script.
   [3] 問吓需唔需要驗凝血指數。
   [4] 如果有唔尋常嘅瘀傷或者出血，例如小便有血，請話俾醫生知。
   [5] 對心臟有咩影響：嚴重出血，包括內出血。
+  [6] 下一步：俾醫生睇。你可以咁講：『我有食紅花同華法林，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 30. Safflower + Aspirin  (safflower-aspirin, status: low)
@@ -427,11 +485,13 @@ The words on screen are not changed by this script.
   [1] Safflower and aspirin. Low risk. Keep an eye on it.
   [2] What to do: talk to your doctor or pharmacist before taking safflower, honghua.
   [3] Watch for unusual bruising or bleeding.
+  [4] Next: show your doctor. You can say: ‘I take safflower and aspirin. Can you check if that’s OK for me?’
 
   中文
   [1] 紅花同阿士匹靈。低度風險。要留意。
   [2] 應該點做：食紅花之前，請先同醫生或者藥劑師傾。
   [3] 留意有冇唔尋常嘅瘀傷或者出血。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食紅花同阿士匹靈，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 31. Safflower + Clopidogrel  (safflower-clopidogrel, status: low)
@@ -440,8 +500,10 @@ The words on screen are not changed by this script.
   [1] Safflower and clopidogrel. Low risk. Keep an eye on it.
   [2] What to do: talk to your doctor or pharmacist before taking safflower, honghua.
   [3] Watch for unusual bruising or bleeding.
+  [4] Next: show your doctor. You can say: ‘I take safflower and clopidogrel. Can you check if that’s OK for me?’
 
   中文
   [1] 紅花同氯吡格雷。低度風險。要留意。
   [2] 應該點做：食紅花之前，請先同醫生或者藥劑師傾。
   [3] 留意有冇唔尋常嘅瘀傷或者出血。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食紅花同氯吡格雷，可唔可以幫我睇吓有冇問題？』

@@ -2,7 +2,8 @@
  * HerbBridge spoken script: a listening version of one pair, separate from the on-screen text.
  * Pure functions, no DOM: used by the app (window.HerbBridgeSpeech) and by the tests (Node).
  *
- * Order: names + rating → the official quote → What to do (our own advice) → why it matters. Nothing else
+ * Order: names + rating → the official quote → What to do (our own advice) → why it matters → "Next:
+ * show your doctor" with the sentence to say. Nothing else
  * (no evidence lists, sources, S/N numbers or links). Each section is its own short utterance,
  * so the voice pauses between them. Official quotes keep their own words; only brackets,
  * citations and "INR" are made easier to listen to.
@@ -78,6 +79,25 @@
       .replace(/^，/, '');
   }
 
+  // A herb or medicine name inside a sentence: "danshen", "American ginseng"; Chinese as is.
+  function sentenceName(item, lang) {
+    if (lang === 'zh') return item.name_zh;
+    return /^(American|Asian)\b/.test(item.name_en) ? item.name_en : item.name_en.charAt(0).toLowerCase() + item.name_en.slice(1);
+  }
+  function listNames(names, lang) {
+    if (names.length < 2) return names.join('');
+    var and = lang === 'zh' ? '同' : ' and ';
+    return names.slice(0, -1).join(lang === 'zh' ? '、' : ', ') + and + names[names.length - 1];
+  }
+  // "You can say: 'I take danshen and warfarin. Can you check if that's OK for me?'" for a list of rows.
+  function youCanSay(rows, lang, t) {
+    var names = [];
+    rows.forEach(function (r) {
+      [r.herb, r.drug].forEach(function (item) { var n = sentenceName(item, lang); if (names.indexOf(n) === -1) names.push(n); });
+    });
+    return t('next_say', { names: listNames(names, lang) });
+  }
+
   /* The spoken script for one result row r (from lookup.checkPairs) as a list of short utterances.
      t(key) and name(item) come from the app, in the current language. */
   function script(db, r, lang, t, name) {
@@ -94,6 +114,7 @@
     if (!r.entry && !r.official) {
       parts.push(pair + ' ' + t('risk_not_in_database') + stop + ' ' + t('not_in_db_text'));
       sentences(own(t('unknown_next_text')), zh).forEach(function (x, i) { parts.push(i === 0 ? t('label_what_to_do') + colon + x : x); });
+      parts.push(t('next_title') + ' ' + youCanSay([r], lang, t));
       return parts.map(function (p) { return zh ? p.replace(/\s+/g, '') : p; });
     }
 
@@ -129,8 +150,9 @@
       var heart = fresh(sentences(own(pick(r.entry, 'heart_impact')), zh));
       if (heart.length) parts.push(t('speak_why') + colon + heart.join(zh ? '' : ' '));
     }
+    parts.push(t('next_title') + ' ' + youCanSay([r], lang, t));
     return parts.map(function (p) { return zh ? p.replace(/\s+/g, '') : p; });
   }
 
-  return { script: script, listenEn: listenEn, listenZh: listenZh };
+  return { script: script, listenEn: listenEn, listenZh: listenZh, youCanSay: youCanSay, sentenceName: sentenceName };
 });

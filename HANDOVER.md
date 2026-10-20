@@ -303,3 +303,13 @@ rating, quote, source, S/N or date changed.
   詳細模式 · 證據同資料來源 + 轉返簡易模式); at 200% zoom it shows only the mode name. Results disclaimer
   sits under the cards in both modes, so the first badge is on the first screen. Scroll padding on the
   cabinet equals the sticky bar's height. tools/check-modes.js also checks the first screen (390 x 844).
+- 20 Oct, home, no-jump removal, next step, recordings (cache herbbridge-v34):
+  Home button (house + "Home" / 「主頁」) beside "Back to results" on results and pair pages; the
+  HerbBridge name goes to My cabinet from every screen. Removing a chip keeps its list where it was on
+  screen; focus moves to the next item, else the one before, else the list heading. Every pair page ends
+  with "Next: show your doctor." + "You can say: ‘I take … and …. Can you check if that’s OK for me?’" /
+  「下一步：俾醫生睇。」「你可以咁講：『我有食…同…，可唔可以幫我睇吓有冇問題？』」 + "Open doctor
+  summary"; it comes into view when reading aloud finishes, and Read aloud ends with that sentence. The
+  summary has the sentence once (pairs that need attention). audio/RECORDING-LIST.md (made by
+  tools/make-spoken-scripts.js) lists what to record for the demo pairs. Checks: tools/check-flow.js,
+  tools/check-modes.js (Read aloud on the first screen). Print spacing tightened to keep one A4 page.

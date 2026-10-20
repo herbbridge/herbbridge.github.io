@@ -232,6 +232,10 @@
       lang_toggle: '繁體中文',
       lang_toggle_label: 'Switch language to 繁體中文 (Traditional Chinese)',
       and_sr: 'and',
+      nav_home: 'Home',
+      next_title: 'Next: show your doctor.',
+      next_say: 'You can say: ‘I take {names}. Can you check if that’s OK for me?’',
+      next_button: 'Open doctor summary',
       zh_unreviewed_note: '',
 
       step_herbs: 'Step 1: Which Chinese herbs do you take?',
@@ -463,6 +467,10 @@
       lang_toggle: 'English',
       lang_toggle_label: '切換語言至英文 (Switch language to English)',
       and_sr: '同',
+      nav_home: '主頁',
+      next_title: '下一步：俾醫生睇。',
+      next_say: '你可以咁講：『我有食{names}，可唔可以幫我睇吓有冇問題？』',
+      next_button: '打開醫生摘要',
       zh_unreviewed_note: '中文內容仲未經專人審閱，如有疑問請以英文版本為準，並請教醫生或藥劑師。',
 
       step_herbs: '第一步：你食緊邊啲中藥？',

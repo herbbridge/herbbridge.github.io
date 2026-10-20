@@ -6,7 +6,7 @@
  *   line, and the grey card's exact required wording.
  * - Each screen says which mode is on (the mode strip, one slim line at 390px).
  * - First screen of a 390 x 844 phone: home heading clear of the sticky bar; results headline and
- *   first badge; pair name and badge.
+ *   first badge; pair name, badge and the Read aloud button.
  */
 let chromium;
 try { ({ chromium } = require('playwright')); } catch (e) { ({ chromium } = require('/opt/node-tools/node_modules/playwright')); }
@@ -65,8 +65,11 @@ const PAIRS = ['danshen-warfarin', 'danshen-amlodipine', 'american_ginseng-warfa
           const box = s => { const x = document.querySelector(s); return x ? x.getBoundingClientRect() : null; };
           const bar = box('.check-bar'), limit = bar && bar.height ? bar.top : innerHeight;
           const badge = [...document.querySelectorAll('#app .pair-cards .badge, #app .pair-simple .badge, #app article.card .badge')].map(x => x.getBoundingClientRect()).find(r => r.height);
-          return { strip: Math.round(box('.mode-strip').height), h1: Math.round(box('#app h1').bottom), badge: badge ? Math.round(badge.bottom) : null, limit: Math.round(limit) };
+          const read = box('#app .read-aloud');
+          return { strip: Math.round(box('.mode-strip').height), h1: Math.round(box('#app h1').bottom), badge: badge ? Math.round(badge.bottom) : null,
+                   read: read && read.height ? Math.round(read.bottom) : null, limit: Math.round(limit) };
         });
+        if (name === 'pair') check(f.read !== null && f.read <= f.limit, `pair: Read aloud button on the first screen, under the badge (${f.read} <= ${f.limit})`);
         check(f.strip <= 44, `${name}: mode strip is one slim line (${f.strip}px)`);
         if (name === 'home') check(f.h1 <= f.limit, `home: heading clear of the "Check my list" bar (${f.h1} <= ${f.limit})`);
         else check(f.h1 <= f.limit && f.badge !== null && f.badge <= f.limit, `${name}: ${name === 'pair' ? 'pair name' : 'headline'} and first badge on the first screen (${f.h1}, ${f.badge} <= ${f.limit})`);
