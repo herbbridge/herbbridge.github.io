@@ -1,13 +1,13 @@
 /*
- * HerbSafe lookup logic. Pure functions, no DOM, no network.
- * Used by the app (window.HerbSafeLookup) and by the tests (require in Node).
+ * HerbBridge lookup logic. Pure functions, no DOM, no network.
+ * Used by the app (window.HerbBridgeLookup) and by the tests (require in Node).
  *
  * The app only LOOKS THINGS UP in the curated JSON. A herb × drug pair with no
  * entry is reported as "not_in_database", which must never be read as safe.
  */
 (function (root, factory) {
   if (typeof module === 'object' && module.exports) module.exports = factory();
-  else root.HerbSafeLookup = factory();
+  else root.HerbBridgeLookup = factory();
 })(typeof self !== 'undefined' ? self : this, function () {
   'use strict';
 

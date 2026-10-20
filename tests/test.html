@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>HerbSafe tests</title>
+  <title>HerbBridge tests</title>
   <style>
     body { font: 16px/1.5 system-ui, sans-serif; margin: 0 auto; max-width: 860px; padding: 16px; background: #fff; color: #1a1a1a; }
     h1 { font-size: 1.4rem; }
@@ -17,7 +17,7 @@
   </style>
 </head>
 <body>
-  <h1>HerbSafe tests</h1>
+  <h1>HerbBridge tests</h1>
   <p>Runs the same tests as <code>node tests/run-tests.js</code>. Open this page through a local server
      (e.g. <code>python3 -m http.server</code> in the project folder, then
      <a href="http://localhost:8000/tests/test.html">localhost:8000/tests/test.html</a>).</p>
@@ -44,7 +44,7 @@
           throw null;
         })
         .then(function (d) {
-          var results = HerbSafeTests.runAll(HerbSafeLookup, { herbs: d[0], drugs: d[1], interactions: d[2], official: d[3], reviews: d[4], cases: d[5], i18n: HerbSafeI18n });
+          var results = HerbBridgeTests.runAll(HerbBridgeLookup, { herbs: d[0], drugs: d[1], interactions: d[2], official: d[3], reviews: d[4], cases: d[5], i18n: HerbBridgeI18n });
           var failed = results.filter(function (r) { return !r.pass; }).length, group = null, ul;
           results.forEach(function (r) {
             if (r.group !== group) { group = r.group; out.appendChild(el('h2', '', group)); ul = out.appendChild(el('ul')); }

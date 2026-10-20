@@ -1,4 +1,4 @@
-# HerbSafe 中西通: handover notes
+# HerbBridge 中西通: handover notes
 
 Status as of 18 Oct 2026. Deadline: working app by Sunday 18 Oct (demo video).
 Paste the original project brief into the new session together with this file.
@@ -269,3 +269,13 @@ rating, quote, source, S/N or date changed.
   shows only when speaking fails (error, or nothing starts within 4 s). Tested with iPhone emulation
   in Chromium and a fake speech engine (no real iOS/WebKit available here). Chinese speech uses 。.
 - Preview build tags css/js with ?v=<cache version> so phones fetch a rebuilt preview fresh.
+- 20 Oct, Read aloud sounds more natural (cache v26): Enhanced/Premium voices first, never novelty
+  voices; rate 0.9 English, 0.85 Chinese. Separate spoken script (js/speech.js): names + rating →
+  official quote → What to do (our own advice only) → why it matters. Optional recordings in audio/
+  (listed in audio/manifest.json). All scripts for review: docs/spoken-scripts.txt
+  (tools/make-spoken-scripts.js). Print check: tools/check-print.js.
+- 20 Oct, renamed HerbSafe → HerbBridge 中西通 (cache herbbridge-v27). Slogan "Check before you mix." /
+  「中藥西藥，食之前查一查。」 under the name on the home screen. In Chinese text the app is called 中西通.
+  Not renamed: the repo, organisation and URL (herbsafe.github.io), and the storage keys herbsafe.v1 /
+  herbsafe.mode (renaming them would wipe saved lists). Old herbsafe-* caches are deleted when the
+  new service worker activates.

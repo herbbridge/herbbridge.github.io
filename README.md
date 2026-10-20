@@ -1,11 +1,11 @@
-# HerbSafe 中西通
+# HerbBridge 中西通
 
-*Chinese and Western medicine, safely together.*
+*Check before you mix.* 「中藥西藥，食之前查一查。」
 
-HerbSafe is built for **heart patients**: people taking heart, blood pressure, cholesterol or
+HerbBridge is built for **heart patients**: people taking heart, blood pressure, cholesterol or
 blood-thinning medicines (Challenge 4: cardiovascular disease).
 
-HerbSafe lets patients in Hong Kong check the Chinese herbs they take against their Western
+HerbBridge lets patients in Hong Kong check the Chinese herbs they take against their Western
 medicines. Each herb × medicine pair is shown with a rating on a four-level scale (High,
 Moderate, Low, No reported risk), a plain-language reason, what to do, the evidence level and
 the sources. Where a government health agency has written about a pair, its own words are
@@ -33,7 +33,7 @@ Browsers block pages opened straight from a file from reading the data, so use a
 local server:
 
 ```
-cd herbsafe
+cd herbsafe.github.io
 python3 -m http.server
 ```
 
@@ -44,7 +44,7 @@ No build step, no frameworks, no backend. Plain HTML, CSS and JavaScript.
 
 ## Install it on a phone
 
-Once HerbSafe is online (e.g. GitHub Pages), open it on the phone and choose
+Once HerbBridge is online (e.g. GitHub Pages), open it on the phone and choose
 "Add to Home Screen" (iPhone: Safari → Share; Android: menu → Install app). It opens
 full-screen like an app and works without the internet. Database files are always
 fetched fresh when online; the saved copy is used only offline. If you add or rename
@@ -182,9 +182,9 @@ HANDOVER.md           decisions made so far and what still needs checking
 
 No accounts and no tracking. A person's list is saved only in their own browser
 (localStorage) and never leaves the device. The app makes no outside requests: the fonts are
-stored in `fonts/` (Inter, and Noto Sans TC cut down to the characters HerbSafe uses).
+stored in `fonts/` (Inter, and Noto Sans TC cut down to the characters HerbBridge uses).
 
 ## Medical disclaimer
 
-HerbSafe gives information, not medical advice. Never stop or change a medicine without
+HerbBridge gives information, not medical advice. Never stop or change a medicine without
 talking to your doctor or pharmacist.

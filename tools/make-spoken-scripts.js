@@ -7,7 +7,7 @@ var path = require('path');
 var root = path.join(__dirname, '..');
 var lookup = require('../js/lookup.js');
 var speech = require('../js/speech.js');
-var i18n = require('../js/i18n.js').HerbSafeI18n;
+var i18n = require('../js/i18n.js').HerbBridgeI18n;
 function load(rel) { return JSON.parse(fs.readFileSync(path.join(root, rel), 'utf8')); }
 
 var herbs = load('data/herbs.json'), drugs = load('data/drugs.json');
@@ -21,7 +21,7 @@ herbs.herbs.forEach(function (h) {
 });
 
 var out = [
-  'HerbSafe Read aloud: spoken scripts for review',
+  'HerbBridge Read aloud: spoken scripts for review',
   'Made by tools/make-spoken-scripts.js from js/speech.js and data/ (' + rows.length + ' pairs).',
   'Each numbered line is said as a separate piece, with a short pause between pieces.',
   'The words on screen are not changed by this script.',

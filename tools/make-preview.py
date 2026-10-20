@@ -44,7 +44,7 @@ def main():
         ('src="js/app.js"', 'src="js/app.js?v=%s"' % version),
     ])
     patch(os.path.join(dest, 'index.html'), [
-        ('<title>HerbSafe 中西通</title>', '<title>PREVIEW · HerbSafe 中西通</title>\n  <meta name="robots" content="noindex, nofollow">'),
+        ('<title>HerbBridge 中西通</title>', '<title>PREVIEW · HerbBridge 中西通</title>\n  <meta name="robots" content="noindex, nofollow">'),
         ('  <link rel="manifest" href="manifest.webmanifest">\n', ''),
         ('<body>\n', '<body>\n  <div class="preview-flag" role="note" style="position:sticky;top:0;z-index:50;background:#16181D;color:#fff;'
          'text-align:center;font:700 15px/1.3 Inter,system-ui,sans-serif;padding:8px 12px;letter-spacing:.04em">'

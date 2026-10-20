@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* Run all HerbSafe tests in Node:  node tests/run-tests.js */
+/* Run all HerbBridge tests in Node:  node tests/run-tests.js */
 'use strict';
 var fs = require('fs');
 var path = require('path');
@@ -17,7 +17,7 @@ var data = {
   official: load('data/official.json'),
   reviews: load('data/reviews.json'),
   cases: load('tests/test-cases.json'),
-  i18n: require('../js/i18n.js').HerbSafeI18n
+  i18n: require('../js/i18n.js').HerbBridgeI18n
 };
 
 var results = suite.runAll(lookup, data);

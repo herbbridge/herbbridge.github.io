@@ -1,4 +1,4 @@
-HerbSafe Read aloud: spoken scripts for review
+HerbBridge Read aloud: spoken scripts for review
 Made by tools/make-spoken-scripts.js from js/speech.js and data/ (31 pairs).
 Each numbered line is said as a separate piece, with a short pause between pieces.
 The words on screen are not changed by this script.

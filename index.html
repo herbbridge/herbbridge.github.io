@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>HerbSafe 中西通</title>
-  <meta name="description" content="Check Chinese herbs and Western medicines together. Chinese and Western medicine, safely together.">
+  <title>HerbBridge 中西通</title>
+  <meta name="description" content="HerbBridge 中西通: check Chinese herbs and Western medicines together. Check before you mix.">
   <meta name="theme-color" content="#FFFFFF">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="HerbSafe">
+  <meta name="apple-mobile-web-app-title" content="HerbBridge">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231D3F8F'/%3E%3Cpath d='M9 16h14M16 9v14' stroke='white' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E">
   <link rel="preload" href="fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -22,9 +22,12 @@
 
   <header class="site-header">
     <div class="wrap header-inner">
-      <a class="brand" href="#/cabinet" aria-label="HerbSafe 中西通, home" data-i18n-label="brand_home">
+      <a class="brand" href="#/cabinet" aria-label="HerbBridge 中西通, home" data-i18n-label="brand_home">
         <span class="brand-mark" aria-hidden="true"></span>
-        <span class="brand-name">HerbSafe <span class="brand-zh" lang="zh-HK">中西通</span></span>
+        <span class="brand-text">
+          <span class="brand-name">HerbBridge <span class="brand-zh" lang="zh-HK">中西通</span></span>
+          <span class="brand-slogan" data-i18n="slogan">Check before you mix.</span>
+        </span>
       </a>
       <nav class="site-nav" aria-label="Main" data-i18n-label="nav_main">
         <a href="#/cabinet" data-route-link="check" data-i18n="nav_check">My cabinet</a>
@@ -46,14 +49,14 @@
       <p class="loading" data-i18n="loading">Loading…</p>
     </div>
     <noscript>
-      <p class="notice">HerbSafe needs JavaScript to look up your herbs and medicines. Please turn JavaScript on.</p>
-      <p class="notice" lang="zh-HK">HerbSafe 需要 JavaScript 先可以查你嘅中藥同西藥。請開啟 JavaScript。</p>
+      <p class="notice">HerbBridge needs JavaScript to look up your herbs and medicines. Please turn JavaScript on.</p>
+      <p class="notice" lang="zh-HK">中西通需要 JavaScript 先可以查你嘅中藥同西藥。請開啟 JavaScript。</p>
     </noscript>
   </main>
 
   <footer class="site-footer">
     <div class="wrap">
-      <p data-i18n="footer_disclaimer">HerbSafe gives information, not medical advice. Never stop or change a medicine without talking to your doctor or pharmacist.</p>
+      <p data-i18n="footer_disclaimer">HerbBridge gives information, not medical advice. Never stop or change a medicine without talking to your doctor or pharmacist.</p>
       <p class="muted" data-i18n="footer_privacy">No accounts, no tracking. Your list stays on this device.</p>
       <p class="muted zh-note" id="zh-note" hidden></p>
     </div>

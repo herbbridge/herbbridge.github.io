@@ -1,6 +1,6 @@
 /*
- * HerbSafe spoken script: a listening version of one pair, separate from the on-screen text.
- * Pure functions, no DOM: used by the app (window.HerbSafeSpeech) and by the tests (Node).
+ * HerbBridge spoken script: a listening version of one pair, separate from the on-screen text.
+ * Pure functions, no DOM: used by the app (window.HerbBridgeSpeech) and by the tests (Node).
  *
  * Order: names + rating → the official quote → What to do (our own advice) → why it matters. Nothing else
  * (no evidence lists, sources, S/N numbers or links). Each section is its own short utterance,
@@ -9,7 +9,7 @@
  */
 (function (root, factory) {
   if (typeof module === 'object' && module.exports) module.exports = factory();
-  else root.HerbSafeSpeech = factory();
+  else root.HerbBridgeSpeech = factory();
 })(typeof self !== 'undefined' ? self : this, function () {
   'use strict';
 

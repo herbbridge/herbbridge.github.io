@@ -1,19 +1,19 @@
 /*
- * HerbSafe service worker: lets the installed app open without the internet.
+ * HerbBridge service worker: lets the installed app open without the internet.
  * - App files: served from the cache, refreshed in the background.
  * - Database files (data/*.json): network first, so updates show straight away;
  *   the saved copy is used only when offline.
- * Nothing is sent anywhere: this only caches files HerbSafe already loads.
+ * Nothing is sent anywhere: this only caches files HerbBridge already loads.
  * Change VERSION whenever the list of app files changes.
  */
-var VERSION = 'herbsafe-v26';
-var FONTS = 'herbsafe-fonts-v1';
+var VERSION = 'herbbridge-v27';
+var FONTS = 'herbbridge-fonts-v1';
 var APP_FILES = [
   './', 'index.html', 'css/styles.css', 'js/lookup.js', 'js/i18n.js', 'js/speech.js', 'js/app.js',
   'manifest.webmanifest', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/apple-touch-icon.png',
   'data/herbs.json', 'data/drugs.json', 'data/interactions.json', 'data/official.json', 'data/reviews.json', 'audio/manifest.json',
   'fonts/inter-latin-400-normal.woff2', 'fonts/inter-latin-600-normal.woff2', 'fonts/inter-latin-700-normal.woff2',
-  'fonts/noto-sans-tc-herbsafe-400.woff2', 'fonts/noto-sans-tc-herbsafe-700.woff2'
+  'fonts/noto-sans-tc-herbbridge-400.woff2', 'fonts/noto-sans-tc-herbbridge-700.woff2'
 ];
 
 self.addEventListener('install', function (event) {
@@ -29,6 +29,7 @@ self.addEventListener('install', function (event) {
 });
 
 self.addEventListener('activate', function (event) {
+  // Deletes every other cache, including the old herbsafe-* caches from before the rename.
   event.waitUntil(caches.keys().then(function (keys) {
     return Promise.all(keys.filter(function (k) { return k !== VERSION && k !== FONTS; })
       .map(function (k) { return caches.delete(k); }));

@@ -1,5 +1,5 @@
 /*
- * HerbSafe tests, shared by tests/run-tests.js (Node) and tests/test.html (browser).
+ * HerbBridge tests, shared by tests/run-tests.js (Node) and tests/test.html (browser).
  * runAll(lookup, data) returns [{ group, name, pass, detail }].
  *
  * Expected values here are written out by hand from the project brief, never read
@@ -7,7 +7,7 @@
  */
 (function (root, factory) {
   if (typeof module === 'object' && module.exports) module.exports = factory();
-  else root.HerbSafeTests = factory();
+  else root.HerbBridgeTests = factory();
 })(typeof self !== 'undefined' ? self : this, function () {
   'use strict';
 
@@ -468,7 +468,7 @@
         return { pass: bad.length === 0, detail: bad.join('\n') };
       });
       check('Languages', 'the required disclaimer and "not in database" wording are exact in English', function () {
-        return S.en.card_disclaimer === 'HerbSafe gives information, not medical advice. Never stop or change a medicine without talking to your doctor or pharmacist.' &&
+        return S.en.card_disclaimer === 'HerbBridge gives information, not medical advice. Never stop or change a medicine without talking to your doctor or pharmacist.' &&
           S.en.not_in_db_text === 'We have no record of this combination. This does not mean it is safe. Please ask your pharmacist or doctor.';
       });
     }

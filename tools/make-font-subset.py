@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Rebuild fonts/noto-sans-tc-herbsafe-{400,700}.woff2: Noto Sans TC cut down to the Chinese
-characters HerbSafe actually shows, so the app stays small and works offline.
+"""Rebuild fonts/noto-sans-tc-herbbridge-{400,700}.woff2: Noto Sans TC cut down to the Chinese
+characters HerbBridge actually shows, so the app stays small and works offline.
 
 RUN THIS WHENEVER data/*.json, js/i18n.js, js/app.js or index.html gain new Chinese text,
 otherwise new characters fall back to the phone's own font.
@@ -59,7 +59,7 @@ def main():
                 out = os.path.join(tmp, 'p%s-%d.ttf' % (weight, i)); font.save(out); ttfs.append(out)
             merged = Merger().merge(ttfs)
             merged.flavor = 'woff2'
-            dest = os.path.join(ROOT, 'fonts', 'noto-sans-tc-herbsafe-%s.woff2' % weight)
+            dest = os.path.join(ROOT, 'fonts', 'noto-sans-tc-herbbridge-%s.woff2' % weight)
             merged.save(dest)
             print('  wrote', os.path.relpath(dest, ROOT), os.path.getsize(dest) // 1024, 'KB')
 

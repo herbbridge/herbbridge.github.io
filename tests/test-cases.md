@@ -1,6 +1,6 @@
-# HerbSafe test cases
+# HerbBridge test cases
 
-Ten realistic medicine lists for heart patients (HerbSafe’s focus for Challenge 4: cardiovascular disease). Every person here is fictional.
+Ten realistic medicine lists for heart patients (HerbBridge’s focus for Challenge 4: cardiovascular disease). Every person here is fictional.
 
 The machine-readable copy is `tests/test-cases.json`. Check both with `node tests/run-tests.js`, or open `tests/test.html` through a local server. Results are listed in the order the Results screen shows them: High → Official caution → Moderate → Low → No reported risk → Not in database.
 
