@@ -29,11 +29,15 @@
       .replace(/^([A-Z])(?=[a-z ])/, function (c) { return c.toLowerCase(); });
   }
 
+  function sentences(text, zh) {
+    return (zh ? String(text).match(/[^。！？]+[。！？]?/g) || [] : String(text).split(/(?<=[.!?])\s+/))
+      .map(function (x) { return x.trim(); }).filter(Boolean);
+  }
+
   // Our advice without the sentences that name the agency whose words were just read out.
   function withoutBody(text, body, zh) {
     if (!body || !body.match) return text;
-    var sentences = zh ? String(text).match(/[^。！？]+[。！？]?/g) || [] : String(text).split(/(?<=[.!?])\s+/);
-    return sentences.filter(function (x) { return !body.match.test(x); }).join(zh ? '' : ' ').trim();
+    return sentences(text, zh).filter(function (x) { return !body.match.test(x); }).join(zh ? '' : ' ').trim();
   }
 
   // English for listening: INR said as "clotting test"; citations and acronym brackets dropped;
@@ -44,7 +48,9 @@
       .replace(/\bINR \(clotting\) (test|check)\b/g, 'clotting $1')
       .replace(/\b([Aa])n INR\b( \(clotting\))?/g, '$1 clotting test')
       .replace(/\bINR\b( \(clotting\))?/g, 'clotting test')
-      .replace(/\s*\/\s*/g, ', ')                    // "practitioner/doctor" → pause, not "slash"
+      // Health Canada's "health care practitioner/health care provider/…/physician": only the first title.
+      .replace(/health care practitioner(?:\s*\/\s*(?:health care provider|health care professional|doctor|physician|pharmacist))+/gi, 'health care practitioner')
+      .replace(/\s*\/\s*/g, ', ')                    // any other "a/b" → pause, not "slash"
       .replace(/\s*\([^()]*\d{4}[^()]*\)/g, '')     // "(Brinker 2010; …)"
       .replace(/\s*\((see )?section[^()]*\)/gi, '') // "(see section with 4.4)": a reference, not advice
       .replace(/\s*\([A-Z]{2,6}\)/g, '')            // "(TCM)"
@@ -87,29 +93,41 @@
 
     if (!r.entry && !r.official) {
       parts.push(pair + ' ' + t('risk_not_in_database') + stop + ' ' + t('not_in_db_text'));
-      parts.push(t('label_what_to_do') + colon + own(t('unknown_next_text')));
+      sentences(own(t('unknown_next_text')), zh).forEach(function (x, i) { parts.push(i === 0 ? t('label_what_to_do') + colon + x : x); });
       return parts.map(function (p) { return zh ? p.replace(/\s+/g, '') : p; });
     }
 
     var rating;
     if (r.status === 'official') rating = t(r.official.kind === 'disagree' ? 'risk_official_disagree' : 'risk_official');
-    else rating = t(r.entry.risk === 'low' && r.entry.watch ? 'risk_low_watch' : 'risk_' + r.entry.risk);
-    parts.push(pair + ' ' + rating.replace(/\s*·\s*/g, zh ? '，' : ', ') + stop);
+    else if (r.entry.risk === 'low' && r.entry.watch) rating = t('speak_low_watch'); // "Low risk. Keep an eye on it."
+    else rating = t('risk_' + r.entry.risk);
+    rating = rating.replace(/\s*·\s*/g, zh ? '，' : ', ');
+    parts.push(pair + ' ' + rating + (/[.。]$/.test(rating) ? '' : stop));
 
     // The official quote comes straight after the rating, in the agency's own words.
     var body = null;
     if (r.official) {
       var s = db.statementById[r.official.statements[0]];
       body = BODY[s.body_en] || { en: s.body_en, zh: s.body_zh };
-      parts.push(t('speak_says', { body: zh ? body.zh : body.en }) + ' ' + listen(zh ? s.quote_zh : s.quote_en));
+      // A Chinese quote that is our translation of an English original says so.
+      var says = zh && !s.quote_zh_is_original ? 'speak_says_translated' : 'speak_says';
+      parts.push(t(says, { body: zh ? body.zh : body.en }) + ' ' + listen(zh ? s.quote_zh : s.quote_en));
     }
 
-    // Then only our own advice: a sentence naming that agency again is left out.
-    var action = r.entry ? withoutBody(pick(r.entry, 'action'), body, zh) : '';
-    parts.push(t('label_what_to_do') + colon + own(action || t('official_action')));
+    // Then only our own advice, one sentence per spoken piece: a sentence naming that agency again is
+    // left out. action_spoken_* (data) replaces the on-screen advice for listening where the owner set it.
+    var said = {};
+    var key = function (x) { return String(x).toLowerCase().replace(/[\s.,;:!?。，、；：！？「」]/g, ''); };
+    var fresh = function (list) { return list.filter(function (x) { var k = key(x); if (!k || said[k]) return false; said[k] = true; return true; }); };
+    var action = r.entry ? withoutBody(pick(r.entry, 'action_spoken') || pick(r.entry, 'action'), body, zh) : '';
+    fresh(sentences(own(action || t('official_action')), zh)).forEach(function (x, i) {
+      parts.push(i === 0 ? t('label_what_to_do') + colon + x : x);
+    });
 
+    // Why it matters, unless those words were already said.
     if (r.entry && pick(r.entry, 'heart_impact')) {
-      parts.push(t('speak_why') + colon + own(pick(r.entry, 'heart_impact')));
+      var heart = fresh(sentences(own(pick(r.entry, 'heart_impact')), zh));
+      if (heart.length) parts.push(t('speak_why') + colon + heart.join(zh ? '' : ' '));
     }
     return parts.map(function (p) { return zh ? p.replace(/\s+/g, '') : p; });
   }
