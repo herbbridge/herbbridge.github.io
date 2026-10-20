@@ -47,6 +47,8 @@
       "why_pro_en": "Contains coumarin-like constituents that may inhibit platelet aggregation; a single-dose animal study found no change in PT or warfarin pharmacokinetics, but in steady-state experiments dong quai prolonged PT in rabbits without changing warfarin blood levels (Zhuang 2021). The case report authors state that the mechanism is unknown (Page & Lawrence 1999).",
       "action_en": "Talk to your doctor before taking these together. Ask your doctor about an INR (clotting) test.",
       "action_zh": "兩樣一齊食之前，請先同醫生傾。問醫生需唔需要驗INR（凝血指數）。",
+      "action_spoken_en": "Tell your doctor that you take dong quai, and ask about a clotting test.",
+      "action_spoken_zh": "話俾醫生知你有食當歸，同埋問吓需唔需要驗凝血指數。",
       "main_source": 0,
       "main_finding_en": "Case report: INR more than doubled after 4 weeks of dong quai.",
       "main_finding_zh": "病例報告：食咗當歸4個星期之後，INR升高超過一倍。",

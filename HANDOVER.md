@@ -279,3 +279,10 @@ rating, quote, source, S/N or date changed.
   Not renamed: the repo, organisation and URL (herbsafe.github.io), and the storage keys herbsafe.v1 /
   herbsafe.mode (renaming them would wipe saved lists). Old herbsafe-* caches are deleted when the
   new service worker activates.
+- 20 Oct, Read aloud script rules (cache herbbridge-v28), spoken script only, screen unchanged:
+  Chinese Health Canada/EMA quotes introduced 「…話（英文原文翻譯）：」; Health Canada's
+  "health care practitioner/…/physician" spoken as "health care practitioner"; no sentence spoken twice
+  (a heart line already said in What to do is skipped); Low + watch spoken "Low risk. Keep an eye on it." /
+  「低度風險。要留意。」; What to do spoken one sentence per piece. Dong quai + warfarin has spoken-only
+  wording in data/interactions.json (action_spoken_en/zh, owner's exact words); the card on screen still
+  shows action_en/zh.
