@@ -45,7 +45,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 html {
-  font-size: 106.25%; /* Full design: 17px base */
+  font-size: 106.25%; /* Full details: 17px base */
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
@@ -305,7 +305,7 @@ main:focus { outline: none; }
 .btn-check { min-width: min(7.5rem, 100%); font-size: 1.1667rem; flex: none; }
 .check-bar.is-static { position: static; }
 .below-bar { padding: 1rem 0 0; display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; }
-html[data-route="check"] { scroll-padding-bottom: 9rem; }
+html[data-route="check"] { scroll-padding-bottom: calc(var(--check-bar-h, 9rem) + 0.5rem); }
 /* Short screens (or browser zoom): the bar stops being sticky so it never covers the page. */
 @media (max-height: 34em) { .check-bar { position: static; } }
 
@@ -843,7 +843,7 @@ html[data-mode="simple"] #app h1 { font-size: clamp(1.875rem, 1.6rem + 2vw, 2.5r
 .subtitle { font-size: 1.0625rem; font-weight: 600; }
 .lede { color: var(--ink-2); }
 
-/* Steps (Full design) */
+/* Steps (Full details) */
 .steps { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; padding: 0; margin: 0.25rem 0 0.75rem; font-size: 0.875rem; font-weight: 600; color: var(--ink-2); }
 .steps li { display: inline-flex; align-items: center; gap: 0.375rem; background: var(--surface); padding: 0.3125rem 0.75rem 0.3125rem 0.3125rem; border-radius: 999px; }
 .step-n { width: 1.5rem; height: 1.5rem; border-radius: 50%; display: grid; place-items: center; background: #ECEAE4; font-size: 0.8125rem; }
@@ -951,7 +951,7 @@ html[data-mode="simple"] .status, html[data-mode="simple"] .cab-card, html[data-
 .name-primary:lang(zh-HK), .name-secondary:lang(zh-HK), .unknown-pair:lang(zh-HK) { white-space: nowrap; }
 .pair-card-names .name, .pair-h1 .name { display: inline-flex; flex-wrap: wrap; gap: 0 0.35em; }
 
-/* ---------- motion: Full design only, and never with "reduce motion" ---------- */
+/* ---------- motion: Full details only, and never with "reduce motion" ---------- */
 html[data-mode="full"] .pair-card { transition: transform .18s ease, box-shadow .18s ease; animation: hs-rise .32s ease both; }
 html[data-mode="full"] a.pair-card:hover { transform: translateY(-2px); box-shadow: 0 2px 4px rgba(22, 24, 40, .06), 0 16px 32px rgba(22, 24, 40, .10); }
 html[data-mode="full"] .pair-cards li:nth-child(2) .pair-card { animation-delay: .04s; }
@@ -1024,17 +1024,16 @@ html[data-mode="simple"] .check-bar .bar-notice { display: none !important; }
 /* Read aloud is hidden when the only voices for this language are online ones (text would leave the phone). */
 html.no-voice .read-row { display: none !important; }
 
-/* ---------- Mode strip: Simple and Full look different at a glance ---------- */
-.mode-strip { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.75rem; border-radius: var(--radius-sm); padding: 0.625rem 0.75rem 0.625rem 0.875rem; margin: 0 0 1rem; }
+/* ---------- Mode strip: one slim line saying which mode is on, with a small switch ---------- */
+.mode-strip { display: flex; flex-wrap: wrap; align-items: center; gap: 0 0.375rem; min-height: 44px; padding: 0 0.125rem 0 0.625rem; margin: 0 0 0.75rem; border-radius: var(--radius-sm); font-size: max(10px, min(0.8125rem, 3.3vw)); line-height: 1.3; }
 .mode-strip-simple { background: var(--accent); color: #fff; }
 .mode-strip-full { background: #1B1D2A; color: #fff; }
-.mode-strip-icon { flex: none; font-weight: 700; font-size: 0.875rem; letter-spacing: 0.02em; background: rgba(255, 255, 255, .18); border-radius: 999px; padding: 0.125rem 0.5rem; }
-.mode-strip-text { flex: 1 1 10rem; margin: 0; font-weight: 600; font-size: 0.9375rem; line-height: 1.35; }
-.mode-strip-btn { flex: none; min-height: 2.75rem; padding: 0 0.875rem; border: 0; border-radius: 999px; background: #fff; color: #1B1D2A; font: inherit; font-size: 0.9375rem; font-weight: 700; cursor: pointer; }
-.mode-strip-simple .mode-strip-btn { color: var(--accent); }
-.mode-strip-btn:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
-.mode-strip-btn { max-width: 100%; white-space: normal; text-align: center; line-height: 1.25; }
-@media (max-width: 16.25rem) { .mode-strip { padding: 0.5rem; } .mode-strip-icon { display: none; } .mode-strip-btn { width: 100%; padding: 0.375rem 0.5rem; } }
+.mode-strip .mode-strip-icon { flex: none; width: 1.125em; height: 1.125em; }
+.mode-strip-text { flex: 0 1 auto; min-width: 0; margin: 0; font-weight: 600; }
+.mode-strip-btn { flex: none; min-height: 44px; margin-left: auto; padding: 0 0.375rem; border: 0; background: none; color: #fff; font: inherit; font-weight: 700; text-decoration: underline; text-underline-offset: 0.2em; cursor: pointer; }
+.mode-strip-btn:focus-visible { outline: 3px solid #fff; outline-offset: -3px; border-radius: 6px; }
+/* Very narrow screens (200% zoom): the mode name only, so the strip stays at most two lines. */
+@media (max-width: 16.25rem) { .mode-strip .mode-strip-icon, .mode-strip-detail { display: none; } .mode-strip { padding-left: 0.5rem; } }
 .step-line { margin: 0 0 0.25rem; font-weight: 700; color: var(--accent); }
 /* Simple: big cards, one line each, a big "See details" button. */
 html[data-mode="simple"] .pair-card { padding-top: 1.25rem; padding-bottom: 1.25rem; }
