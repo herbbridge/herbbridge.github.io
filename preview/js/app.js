@@ -1,13 +1,13 @@
 /*
- * HerbSafe app: cabinet dashboard, picker sheets, results cards and routing.
+ * HerbBridge app: cabinet dashboard, picker sheets, results cards and routing.
  * All medical content comes from data/*.json via js/lookup.js. Nothing is generated.
  * Data text is always inserted with textContent, never as HTML.
  */
 (function () {
   'use strict';
 
-  var L = window.HerbSafeLookup;
-  var I = window.HerbSafeI18n;
+  var L = window.HerbBridgeLookup;
+  var I = window.HerbBridgeI18n;
   var t = I.t;
   var STORAGE_KEY = 'herbsafe.preview.v1'; // preview: separate from the live app
 
@@ -745,7 +745,7 @@
   }
 
   // The HA warfarin leaflet names ginseng (人參, i.e. Asian ginseng), dong quai and danshen (and chishao,
-  // not in HerbSafe). Its own intro line is used only on those herbs' cards.
+  // not in HerbBridge). Its own intro line is used only on those herbs' cards.
   var HA_LEAFLET = 'ha-warfarin-leaflet-tcm';
   var HA_LEAFLET_NAMES = ['danshen', 'dong_quai', 'asian_ginseng'];
 
@@ -842,7 +842,7 @@
     [250, 750, 1500, 3000].forEach(function (ms) { window.setTimeout(refreshVoices, ms); });
   }
   // The listening version of a card (js/speech.js): names + rating, What to do, official quote, heart line.
-  function speechParts(r) { return window.HerbSafeSpeech.script(db, r, state.lang, t, primaryName); }
+  function speechParts(r) { return window.HerbBridgeSpeech.script(db, r, state.lang, t, primaryName); }
 
   /* Pre-recorded audio (audio/<herb>-<drug>.<lang>.mp3), listed in audio/manifest.json. The files are
      loaded when the app opens, so a tap can start playing straight away (iPhones need that). */
@@ -1236,7 +1236,7 @@
     var page = el('article', { class: 'summary' });
     app.appendChild(page);
     page.appendChild(el('header', { class: 'summary-head' }, [
-      el('p', { class: 'summary-kicker', text: 'HerbSafe 中西通 · ' + t('summary_title') }),
+      el('p', { class: 'summary-kicker', text: 'HerbBridge 中西通 · ' + t('summary_title') }),
       el('h1', { tabindex: '-1', text: t('summary_headline') }),
       el('p', { class: 'muted', text: t('summary_generated', { date: formatDate(new Date()) }) })
     ]));
@@ -1355,7 +1355,7 @@
       el('p', { class: 'lede', text: t('about_intro') })
     ]));
 
-    // Why HerbSafe focuses on heart patients (Challenge 4: cardiovascular disease).
+    // Why HerbBridge focuses on heart patients (Challenge 4: cardiovascular disease).
     var why = el('ul', { class: 'about-heart' });
     why.appendChild(el('li', { text: t('about_heart_1') }));
     why.appendChild(el('li', { text: t('about_heart_2') }));
