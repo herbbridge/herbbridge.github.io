@@ -58,6 +58,7 @@
     tick: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5.5 12.5l4 4 9-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     chevron: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     arrow: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h13M13 6.5 18.5 12 13 17.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    home: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3.5 11 12 4l8.5 7M6 9.5V20h4.5v-5.5h3V20H18V9.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     view_simple: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 12h8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
     view_full: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 9h8M8 12h8M8 15h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
     external: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
@@ -147,6 +148,10 @@
     var inSheet = !!(sourceEl && sourceEl.closest && sourceEl.closest('.sheet'));
     var anchorKey = !inSheet && sourceEl ? sourceEl.getAttribute('data-key') : null;
     var anchorTop = anchorKey ? sourceEl.getBoundingClientRect().top : null;
+    // Removing a chip: the chip disappears, so the card it sat in is the anchor instead.
+    var removing = !inSheet && state[kind].indexOf(id) !== -1 && cards[kind];
+    var index = removing ? state[kind].indexOf(id) : -1;
+    var cardTop = removing ? cards[kind].getBoundingClientRect().top : null;
     var added = toggle(kind, id);
     if (added) {
       var clashes = clashesFor(kind, id);
@@ -167,7 +172,15 @@
       if (!alertState.rows.length) alertState = null;
     }
     refreshCheck();
-    if (anchorKey) {
+    if (removing) {
+      // No jump: the card stays where it was on screen. Focus: the next item, else the one before,
+      // else the list heading (screen readers then hear where they are).
+      window.scrollBy(0, cards[kind].getBoundingClientRect().top - cardTop);
+      var ids = state[kind];
+      var nextId = ids[index] || ids[index - 1];
+      var target = nextId ? findByKey('chip-' + kind + '-' + nextId) : document.getElementById('h-' + kind);
+      if (target) target.focus({ preventScroll: true });
+    } else if (anchorKey) {
       var again = findByKey(anchorKey);
       if (again) window.scrollBy(0, again.getBoundingClientRect().top - anchorTop);
     }
@@ -320,7 +333,7 @@
     var ids = state[kind];
     box.textContent = '';
     box.appendChild(el('div', { class: 'cab-head' }, [
-      el('h2', { id: 'h-' + kind, text: t(kind === 'herbs' ? 'summary_herbs' : 'summary_drugs') }),
+      el('h2', { id: 'h-' + kind, tabindex: '-1', text: t(kind === 'herbs' ? 'summary_herbs' : 'summary_drugs') }),
       el('p', { class: 'cab-count', text: ids.length ? t('selected_count', { n: ids.length }) : t('selected_none') })
     ]));
     if (ids.length) {
@@ -901,7 +914,7 @@
       if (rec) {
         var audio = new Audio(rec);
         playing = audio; begin();
-        audio.onended = function () { if (mine()) stopSpeaking(); };
+        audio.onended = function () { if (mine()) { stopSpeaking(); showNextStep(); } };
         audio.onplaying = function () { started = true; };
         var p = audio.play();
         if (p && p.catch) p.catch(function () { if (mine() && playing === audio) fail(); });
@@ -921,7 +934,7 @@
         u.rate = state.lang === 'zh' ? 0.85 : 0.9;
         u.pitch = 1;
         u.onstart = function () { started = true; };
-        if (i === parts.length - 1) u.onend = function () { if (mine()) stopSpeaking(); };
+        if (i === parts.length - 1) u.onend = function () { if (mine()) { stopSpeaking(); showNextStep(); } };
         u.onerror = function (ev) {
           if (ev && (ev.error === 'interrupted' || ev.error === 'canceled')) { if (mine()) stopSpeaking(); return; }
           fail();
@@ -1058,6 +1071,25 @@
         [el('span', { text: t(simple ? 'mode_strip_to_full' : 'mode_strip_to_simple') })])
     ]);
   }
+  function homeLink() {
+    return el('a', { class: 'home-link', href: '#/cabinet' }, [icon('home'), el('span', { text: t('nav_home') })]);
+  }
+  // The last step on every pair page: show the doctor, with the sentence to say and the summary.
+  function nextStep(rows) {
+    return el('section', { class: 'next-step', id: 'next-step', tabindex: '-1', 'aria-labelledby': 'h-next' }, [
+      el('h2', { id: 'h-next', text: t('next_title') }),
+      el('p', { class: 'next-say', text: window.HerbBridgeSpeech.youCanSay(rows, state.lang, t) }),
+      el('a', { class: 'btn btn-primary btn-next', href: '#/summary' }, [el('span', { text: t('next_button') }), icon('arrow')])
+    ]);
+  }
+  // When reading aloud finishes on a pair page, bring the next step into view.
+  function showNextStep() {
+    var next = document.getElementById('next-step');
+    if (!next) return;
+    next.classList.add('is-now');
+    next.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    next.focus({ preventScroll: true });
+  }
   // Simple: one step at a time, said in words ("Step 2 of 3").
   function stepLine(n) { return el('p', { class: 'step-line', text: t('step_of', { n: n, total: 3 }) }); }
   function pairHref(r) { return '#/pair/' + r.herb.id + '-' + r.drug.id; }
@@ -1141,6 +1173,7 @@
     var results = L.checkPairs(db, state.herbs, state.drugs);
     var full = mode === 'full';
     var head = el('header', { class: 'page-head results-head' }, [
+      el('div', { class: 'page-nav' }, [homeLink()]),
       full ? stepsBar(2) : stepLine(2),
       el('p', { class: 'kicker', text: t('results_title') })
     ]);
@@ -1185,7 +1218,7 @@
     var full = mode === 'full';
     var key = pairKey(r);
     app.appendChild(el('header', { class: 'page-head pair-head' }, [
-      back,
+      el('div', { class: 'page-nav' }, [back, homeLink()]),
       full ? stepsBar(3) : stepLine(3),
       el('h1', { tabindex: '-1', class: 'pair-h1' }, [
         nameNode(r.herb), ' ', el('span', { class: 'pair-plus', 'aria-hidden': 'true', text: '+' }), ' ',
@@ -1200,6 +1233,7 @@
     if (full) {
       Array.prototype.forEach.call(whole.querySelectorAll('details'), function (d) { d.open = true; });
       app.appendChild(whole);
+      app.appendChild(nextStep([r]));
       return;
     }
 
@@ -1229,6 +1263,7 @@
     ]));
     app.appendChild(moreBtn);
     app.appendChild(more);
+    app.appendChild(nextStep([r]));
   }
 
   /* ---------- Doctor summary (printable) ---------- */
@@ -1283,6 +1318,13 @@
       page.appendChild(el('p', { class: 'lede', text: t('summary_empty') }));
       page.appendChild(el('a', { class: 'btn btn-primary no-print', href: '#/cabinet', text: t('back_to_check') }));
       return;
+    }
+
+    // The sentence to say to the doctor, once, for the pairs that need attention (all pairs if none do).
+    var sayRows = L.checkPairs(db, state.herbs, state.drugs);
+    if (sayRows.length) {
+      var needs = sayRows.filter(isFlagged);
+      page.appendChild(el('p', { class: 'summary-say' }, [window.HerbBridgeSpeech.youCanSay(needs.length ? needs : sayRows, state.lang, t)]));
     }
 
     page.appendChild(el('div', { class: 'no-print summary-actions' }, [
