@@ -1071,6 +1071,16 @@
         [el('span', { text: t(simple ? 'mode_strip_to_full' : 'mode_strip_to_simple') })])
     ]);
   }
+  // Chinese headings: the last character and the closing 。！？ stay on one line (never a lone 。).
+  function keepEndTogether(root) {
+    if (state.lang !== 'zh') return;
+    Array.prototype.forEach.call(root.querySelectorAll('h1, h2'), function (h) {
+      if (h.children.length || !/[㐀-鿿][。！？]$/.test(h.textContent)) return;
+      var text = h.textContent;
+      h.textContent = text.slice(0, -2);
+      h.appendChild(el('span', { class: 'keep-end', text: text.slice(-2) }));
+    });
+  }
   function homeLink() {
     return el('a', { class: 'home-link', href: '#/cabinet' }, [icon('home'), el('span', { text: t('nav_home') })]);
   }
@@ -1677,6 +1687,7 @@
     else if (route === 'about') renderAbout();
     else renderCheck();
     app.insertBefore(modeStrip(), app.firstChild);
+    keepEndTogether(app);
     // Full details: a short fade between screens (CSS turns it off for "reduce motion").
     app.classList.remove('screen-in');
     if (mode === 'full' && focus) { void app.offsetWidth; app.classList.add('screen-in'); }
