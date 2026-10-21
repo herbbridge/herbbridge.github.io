@@ -70,10 +70,12 @@ h1:focus, h1:focus-visible, h2[tabindex]:focus:not(:focus-visible), h3[tabindex]
 
 p { margin: 0 0 0.75rem; }
 h1, h2, h3, h4 { margin: 0; line-height: 1.25; }
+/* The page never shifts sideways when a scrollbar appears or disappears (desktop; phones overlay theirs). */
+@media (min-width: 48rem) { html { scrollbar-gutter: stable; } }
 
 .wrap {
   width: 100%;
-  max-width: 68rem;
+  max-width: min(68rem, 1200px); /* same column in Simple (20px text) and Full; centred on wide screens */
   margin: 0 auto;
   padding-left: max(var(--gutter), env(safe-area-inset-left));
   padding-right: max(var(--gutter), env(safe-area-inset-right));
@@ -809,8 +811,9 @@ html[data-mode="simple"] { --ink-2: #33373E; }          /* higher contrast for s
 .brand-zh { color: var(--ink); font-weight: 700; }
 .brand-text { display: flex; flex-direction: column; line-height: 1.2; }
 /* Slogan under the name, on the home screen (My cabinet) only. */
-.brand-slogan { display: none; font-size: min(0.8125rem, 4.75vw); /* fits 320px in Simple */ font-weight: 500; color: var(--ink-2); letter-spacing: 0; }
-html[data-route="check"] .brand-slogan { display: block; }
+.brand-slogan { display: block; visibility: hidden; font-size: min(0.8125rem, 4.75vw); /* fits 320px in Simple */ font-weight: 500; color: var(--ink-2); letter-spacing: 0; }
+/* Shown on My cabinet only; on other pages its space is kept, so the header and menu never move. */
+html[data-route="check"] .brand-slogan { visibility: visible; }
 /* Each half is a block, so the slogan breaks after its comma. Only when one half is wider than the
    screen on its own (very large text) does it wrap inside, instead of running off the page. */
 .slogan-part { display: inline-block; max-width: 100%; }
@@ -824,7 +827,7 @@ html[data-route="check"] .brand-slogan { display: block; }
 .lang-toggle { border: 0; background: var(--surface); box-shadow: 0 1px 3px rgba(0, 0, 0, .12); min-height: 2.75rem; font-size: 0.9375rem; }
 .site-nav { gap: 0.25rem; }
 .site-nav a { border-bottom: 0; border-radius: 999px; min-height: 2.75rem; padding: 0.2em 0.875rem; font-weight: 600; }
-.site-nav a[aria-current="page"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 3px rgba(0, 0, 0, .1); }
+.site-nav a[aria-current="page"] { background: var(--surface); color: var(--ink); font-weight: 600; box-shadow: 0 1px 3px rgba(0, 0, 0, .1); }
 @media (max-width: 47.99rem) {
   .header-tools { order: 2; width: 100%; }
   .site-nav { order: 3; margin: 0; }
