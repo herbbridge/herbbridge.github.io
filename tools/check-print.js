@@ -2,11 +2,13 @@
  * One-A4-page print check: the doctor summary for the demo list must print on a single A4 page,
  * in both languages and both modes. A bigger list is printed too, for information only.
  * Needs Playwright and Python's pypdf. Serve the repo first:  python3 -m http.server 8000
- * Then:  node tools/check-print.js   (PDFs are written to the current folder)
+ * Then:  node tools/check-print.js   (PDFs go to a temporary folder outside the repo; the path is printed)
  */
 let chromium;
 try { ({ chromium } = require('playwright')); } catch (e) { ({ chromium } = require('/opt/node-tools/node_modules/playwright')); }
 const { execFileSync } = require('child_process');
+const fs = require('fs'), os = require('os'), path = require('path');
+const OUT = fs.mkdtempSync(path.join(os.tmpdir(), 'herbbridge-print-'));
 const LISTS = { demo: { herbs: ['danshen'], drugs: ['warfarin', 'amlodipine'] },
   bigger: { herbs: ['danshen', 'ginkgo', 'goji'], drugs: ['warfarin', 'aspirin', 'amlodipine'] } };
 (async () => { const b = await chromium.launch(); let bad = 0;
@@ -18,7 +20,7 @@ const LISTS = { demo: { herbs: ['danshen'], drugs: ['warfarin', 'amlodipine'] },
     await p.evaluate(() => document.fonts.ready);
     const rows = await p.$$eval('.summary tr, .summary .sum-row, .summary li', x => x.length).catch(() => 0);
     await p.emulateMedia({ media: 'print' });
-    const file = `print-${lang}-${mode}-${name}.pdf`;
+    const file = path.join(OUT, `print-${lang}-${mode}-${name}.pdf`);
     await p.pdf({ path: file, format: 'A4', printBackground: true, preferCSSPageSize: true });
     const pages = parseInt(execFileSync('python3', ['-I', '-c', 'import sys,pypdf;print(len(pypdf.PdfReader(sys.argv[1]).pages))', file]).toString());
     if ((name === 'demo' && pages !== 1) || errs.length) bad++;
@@ -26,4 +28,5 @@ const LISTS = { demo: { herbs: ['danshen'], drugs: ['warfarin', 'amlodipine'] },
     await ctx.close();
   }
   console.log(bad ? `${bad} FAILED` : 'Demo list: one A4 page in every language and mode');
+  console.log(`PDFs saved in ${OUT}`);
   process.exitCode = bad ? 1 : 0; await b.close(); })();

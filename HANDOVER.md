@@ -329,3 +329,4 @@ rating, quote, source, S/N or date changed.
   _preview/, preview/ and the preview-skip rule in sw.js; old herbsafe-* caches are deleted on update.
   Storage keys herbsafe.v1 / herbsafe.mode unchanged. redesign branch kept.
 - 21 Oct, renamed on GitHub (by the owner): organisation herbsafe → herbbridge, repository herbbridge/herbbridge.github.io, live site https://herbbridge.github.io/ (cache herbbridge-v39). The old address no longer serves the app; lists saved there stay with the old address. Storage keys herbsafe.v1 / herbsafe.mode unchanged (same names on the new address).
+- 21 Oct, tools/check-print.js now saves its PDFs in a temporary folder outside the repo (path printed at the end); .gitignore ignores print-*.pdf as a backstop. Tools only, no app files changed, cache stays herbbridge-v39.

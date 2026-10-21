@@ -1,0 +1,2 @@
+# PDFs from tools/check-print.js (it now writes them outside the repo; this is a backstop)
+print-*.pdf
