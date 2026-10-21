@@ -44,7 +44,11 @@ console.log('wrote docs/spoken-scripts.txt (' + rows.length + ' pairs)');
 
 // audio/RECORDING-LIST.md: what to record for the demo (Mrs Wong takes warfarin and amlodipine and adds
 // danshen), with the same text as the app's Read aloud, so a recording and the phone voice say the same.
-var DEMO = [['danshen', 'warfarin'], ['danshen', 'amlodipine']];
+// Every pair the demo shows: Mrs Wong's medicines (startDemo in js/app.js) with danshen added,
+// in the order the results screen lists them; a "no record" pair would be included too.
+var DEMO_LIST = { herbs: ['danshen'], drugs: ['warfarin', 'amlodipine'] };
+var demoRows = lookup.checkPairs(db, DEMO_LIST.herbs, DEMO_LIST.drugs);
+var DEMO = demoRows.map(function (r) { return [r.herb.id, r.drug.id]; });
 var rec = [
   '# Recording list (Read aloud)',
   '',
@@ -58,14 +62,25 @@ var rec = [
   '- Read each numbered line as a short sentence, with a short pause (about 1 second) between lines.',
   '- Quiet room, phone about 20 cm from the mouth, no music. Normal, calm speed.',
   '- English: British English. Chinese: Cantonese, read as written (it is Cantonese-style written Chinese).',
-  '- Format: **MP3, mono, 44.1 kHz, 64–96 kbps, under 1 MB** per file (about 1 minute or less).',
-  '  The app plays `.mp3` only; if the phone records `.m4a`, convert it to MP3 first.',
-  '- Save each file in `audio/` with the exact name below, then add the name to `files` in',
-  '  `audio/manifest.json`, e.g. `"files": ["danshen-warfarin.en.mp3"]`. Bump the cache version in `sw.js`.',
-  '- Check: `node tests/run-tests.js` (every listed file must exist and be named correctly), then open',
-  '  the pair in the app and tap Read aloud: the recording plays instead of the phone voice.',
+  '- Format in the app: **MP3, mono, 44.1 kHz, 64–96 kbps, under 1 MB** per file (about 1 minute or less).',
+  '- A phone recording (`.m4a`) is fine: save it in `audio/` with the name below but ending `.m4a`',
+  '  (e.g. `audio/danshen-warfarin.en.m4a`), then run `python3 tools/add-recordings.py`. It converts it',
+  '  to that MP3 format, lists it in `audio/manifest.json` and bumps the cache version in `sw.js`.',
+  '- Check: `node tests/run-tests.js` (every listed file must exist and be named correctly) and',
+  '  `node tools/check-recordings.js` (each recording plays instead of the phone voice).',
+  '',
+  '## Checklist',
+  '',
+  'Every pair the demo shows: ' + DEMO.length + ' pairs, ' +
+    demoRows.filter(function (r) { return r.status !== lookup.NOT_IN_DATABASE && r.status !== 'none_reported'; }).length + ' need attention, ' +
+    demoRows.filter(function (r) { return r.status === lookup.NOT_IN_DATABASE; }).length + ' "no record" card(s).',
   ''
-];
+].concat(DEMO.reduce(function (list, pair) {
+  var r = lookup.checkPairs(db, [pair[0]], [pair[1]])[0];
+  return list.concat(['en', 'zh'].map(function (lang) {
+    return '- [ ] `audio/' + pair[0] + '-' + pair[1] + '.' + lang + '.mp3`: ' + r.herb.name_en + ' + ' + r.drug.name_en + ', ' + (lang === 'en' ? 'English' : 'Cantonese');
+  }));
+}, [])).concat([''] );
 DEMO.forEach(function (pair) {
   var r = lookup.checkPairs(db, [pair[0]], [pair[1]])[0];
   rec.push('## ' + r.herb.name_en + ' + ' + r.drug.name_en + ' (' + r.herb.name_zh + ' + ' + r.drug.name_zh + ')', '');

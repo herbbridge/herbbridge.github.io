@@ -313,3 +313,8 @@ rating, quote, source, S/N or date changed.
   summary has the sentence once (pairs that need attention). audio/RECORDING-LIST.md (made by
   tools/make-spoken-scripts.js) lists what to record for the demo pairs. Checks: tools/check-flow.js,
   tools/check-modes.js (Read aloud on the first screen). Print spacing tightened to keep one A4 page.
+- 20 Oct, recordings workflow (cache herbbridge-v35): Chinese headings keep their last character and
+  closing 。！？ together (no lone 。). audio/RECORDING-LIST.md is built from Mrs Wong's demo list
+  (every pair the demo shows). New recordings: put <herb>-<drug>.<en|zh>.m4a in audio/, run
+  python3 tools/add-recordings.py (MP3 mono 44.1 kHz 64–96 kbps under 1 MB, adds to manifest, bumps the
+  cache), then node tools/check-recordings.js (each recording plays instead of the phone voice).

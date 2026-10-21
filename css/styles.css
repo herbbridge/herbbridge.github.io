@@ -1002,6 +1002,7 @@ html[data-mode="simple"][data-route="check"] .page-head .lede { display: none; }
 .summary-unknown h2 { display: flex; flex-wrap: wrap; align-items: center; gap: 0 0.25em; }
 /* Chinese headings break only at spaces and punctuation, never inside a word (虛構人 / 物). */
 :lang(zh-HK) #app h1, :lang(zh-HK) #app h2, :lang(zh-HK) .sheet-head h2 { word-break: keep-all; overflow-wrap: anywhere; }
+.keep-end { white-space: nowrap; }
 
 /* Simple cabinet (owner, 20 Oct): once both lists have items, only the clash pop-up card and the
    sticky "Check my list" button remain. */
