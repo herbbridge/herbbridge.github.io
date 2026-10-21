@@ -33,7 +33,7 @@ Browsers block pages opened straight from a file from reading the data, so use a
 local server:
 
 ```
-cd herbsafe.github.io
+cd herbbridge.github.io
 python3 -m http.server
 ```
 

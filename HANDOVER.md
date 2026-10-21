@@ -276,7 +276,7 @@ rating, quote, source, S/N or date changed.
   (tools/make-spoken-scripts.js). Print check: tools/check-print.js.
 - 20 Oct, renamed HerbSafe → HerbBridge 中西通 (cache herbbridge-v27). Slogan "Bridging you from East to West, easing worries in your chest." /
   「中西相通，心頭放鬆。」 under the name on the home screen. In Chinese text the app is called 中西通.
-  Not renamed: the repo, organisation and URL (herbsafe.github.io), and the storage keys herbsafe.v1 /
+  Not renamed then: the repo, organisation and web address (renamed on 21 Oct, see below), and the storage keys herbsafe.v1 /
   herbsafe.mode (renaming them would wipe saved lists). Old herbsafe-* caches are deleted when the
   new service worker activates.
 - 20 Oct, Read aloud script rules (cache herbbridge-v28), spoken script only, screen unchanged:
@@ -328,3 +328,4 @@ rating, quote, source, S/N or date changed.
   pre-herbbridge-merge (old main, 3b38f3c; a tag could not be pushed from the session). Removed
   _preview/, preview/ and the preview-skip rule in sw.js; old herbsafe-* caches are deleted on update.
   Storage keys herbsafe.v1 / herbsafe.mode unchanged. redesign branch kept.
+- 21 Oct, renamed on GitHub (by the owner): organisation herbsafe → herbbridge, repository herbbridge/herbbridge.github.io, live site https://herbbridge.github.io/ (cache herbbridge-v39). The old address no longer serves the app; lists saved there stay with the old address. Storage keys herbsafe.v1 / herbsafe.mode unchanged (same names on the new address).
