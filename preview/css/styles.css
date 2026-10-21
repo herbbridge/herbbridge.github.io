@@ -811,9 +811,8 @@ html[data-mode="simple"] { --ink-2: #33373E; }          /* higher contrast for s
 .brand-zh { color: var(--ink); font-weight: 700; }
 .brand-text { display: flex; flex-direction: column; line-height: 1.2; }
 /* Slogan under the name, on the home screen (My cabinet) only. */
-.brand-slogan { display: block; visibility: hidden; font-size: min(0.8125rem, 4.75vw); /* fits 320px in Simple */ font-weight: 500; color: var(--ink-2); letter-spacing: 0; }
-/* Shown on My cabinet only; on other pages its space is kept, so the header and menu never move. */
-html[data-route="check"] .brand-slogan { visibility: visible; }
+/* The slogan shows on every page, so the header (and the menu) is the same size everywhere. */
+.brand-slogan { display: block; font-size: min(0.8125rem, 4.75vw); /* fits 320px in Simple */ font-weight: 500; color: var(--ink-2); letter-spacing: 0; }
 /* Each half is a block, so the slogan breaks after its comma. Only when one half is wider than the
    screen on its own (very large text) does it wrap inside, instead of running off the page. */
 .slogan-part { display: inline-block; max-width: 100%; }
