@@ -1,4 +1,4 @@
-You are taking over HerbSafe 中西通, a static web app I am building for the Imperial College London Hackathon (Hong Kong & Macau 2026), Challenge 4: Chinese and Western medicine, focusing on cardiovascular disease. Tagline: "Chinese and Western medicine, safely together." It lets heart patients in Hong Kong check the Chinese herbs they take against their heart, blood pressure, cholesterol and blood-thinning medicines.
+You are taking over HerbBridge 中西通, a static web app I am building for the Imperial College London Hackathon (Hong Kong & Macau 2026), Challenge 4: Chinese and Western medicine, focusing on cardiovascular disease. It lets heart patients in Hong Kong check the Chinese herbs they take against their heart, blood pressure, cholesterol and blood-thinning medicines.
 
 - Code: https://github.com/herbsafe/herbsafe.github.io (branch main)
 - Live site: https://herbsafe.github.io (GitHub Pages deploys from main)
@@ -11,7 +11,7 @@ Clone the repo and read README.md, HANDOVER.md and proposals/README.md before do
 2. A missing pair is never "safe". It shows a grey card with its own icon and exactly this text: "We have no record of this combination. This does not mean it is safe. Please ask your pharmacist or doctor."
 3. Every rated pair shows clickable sources and an evidence-level label (Case reports, Human trial, Review, Lab/animal studies, Official guidance).
 4. Advice covers monitoring and talking to a professional only. No dosing or timing advice unless the source states it.
-5. Disclaimer on every result: "HerbSafe gives information, not medical advice. Never stop or change a medicine without talking to your doctor or pharmacist."
+5. Disclaimer on every result: "HerbBridge gives information, not medical advice. Never stop or change a medicine without talking to your doctor or pharmacist."
 6. British spelling. All Chinese is Traditional, Cantonese-style written Chinese (食, 話俾醫生知, 嘅). Never use 同時服用 or 中風險 (write 中度風險). New Chinese text is marked zh_reviewed: false.
 7. Only verified content. Every sentence must be supported by its cited sources. Never invent a pair or change a rating. New pairs go into proposals/ first and go live only after I approve each one.
 8. Static site: plain HTML/CSS/vanilla JS, no build step, no frameworks, no backend. Mobile-first, large text, big tap targets. No accounts and no tracking; the medicine list stays in the browser (localStorage).

@@ -1,13 +1,13 @@
 /*
- * HerbSafe lookup logic. Pure functions, no DOM, no network.
- * Used by the app (window.HerbSafeLookup) and by the tests (require in Node).
+ * HerbBridge lookup logic. Pure functions, no DOM, no network.
+ * Used by the app (window.HerbBridgeLookup) and by the tests (require in Node).
  *
  * The app only LOOKS THINGS UP in the curated JSON. A herb × drug pair with no
  * entry is reported as "not_in_database", which must never be read as safe.
  */
 (function (root, factory) {
   if (typeof module === 'object' && module.exports) module.exports = factory();
-  else root.HerbSafeLookup = factory();
+  else root.HerbBridgeLookup = factory();
 })(typeof self !== 'undefined' ? self : this, function () {
   'use strict';
 
@@ -259,6 +259,9 @@
       else e.sources.forEach(function (s, si) {
         if (!isText(s.label)) problem(where + ': source ' + (si + 1) + ' has no label');
         if (!/^https:\/\/[^\s]+$/.test(s.url || '')) problem(where + ': source ' + (si + 1) + ' url must start with https://');
+        // Optional Chinese version of the same source (e.g. the HA leaflet in Chinese): both or neither.
+        if ((s.label_zh == null) !== (s.url_zh == null)) problem(where + ': source ' + (si + 1) + ' needs both label_zh and url_zh, or neither');
+        if (s.url_zh != null && !/^https:\/\/[^\s]+$/.test(s.url_zh)) problem(where + ': source ' + (si + 1) + ' url_zh must start with https://');
       });
       if (typeof e.zh_reviewed !== 'boolean') problem(where + ': zh_reviewed must be true or false');
     });

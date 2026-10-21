@@ -1,48 +1,51 @@
-/* Curly quotes and apostrophes from a Latin system font: Noto Sans TC draws them full-width,
-   which leaves a wide gap in English ("Authority’s"). Chinese text keeps Noto Sans TC. */
-@font-face {
-  font-family: 'HerbSafe Punct';
-  src: local('Helvetica Neue'), local('HelveticaNeue'), local('Segoe UI'), local('Roboto'), local('Arial'), local('ArialMT');
-  unicode-range: U+2018-201F, U+2026;
-}
+/* Fonts are self-hosted so the app works offline and makes no outside requests.
+   Inter (latin) for English; Noto Sans TC cut down to the characters HerbBridge uses
+   (regenerate with tools/make-font-subset.py whenever data or interface text changes). */
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 400; font-display: swap; src: url(../fonts/inter-latin-400-normal.woff2) format('woff2'); }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 600; font-display: swap; src: url(../fonts/inter-latin-600-normal.woff2) format('woff2'); }
+@font-face { font-family: 'Inter'; font-style: normal; font-weight: 700; font-display: swap; src: url(../fonts/inter-latin-700-normal.woff2) format('woff2'); }
+@font-face { font-family: 'Noto Sans TC HS'; font-style: normal; font-weight: 400; font-display: swap; src: url(../fonts/noto-sans-tc-herbbridge-400.woff2) format('woff2'); }
+@font-face { font-family: 'Noto Sans TC HS'; font-style: normal; font-weight: 500 700; font-display: swap; src: url(../fonts/noto-sans-tc-herbbridge-700.woff2) format('woff2'); }
 
-/* HerbSafe 中西通 — "Calm dashboard".
-   Soft white surfaces, crisp 1px lines, generous space, one accent (porcelain blue).
-   Colour is kept for the risk levels, and every risk colour comes with a text label and an icon. */
+/* HerbBridge 中西通: friendly consumer-health design. Warm neutral background, large rounded white
+   cards, one violet accent. Risk colours keep their meaning, and every colour comes with a text
+   label and an icon. Two modes on <html data-mode>: "simple" (default) and "full". */
 
 :root {
   color-scheme: light;
 
-  --bg: #F4F4F1;
+  --bg: #F5F4F0;
   --surface: #FFFFFF;
-  --sunken: #EFEEEA;
-  --ink: #111316;
-  --ink-2: #4B5058;
-  --line: #E0DFDA;
+  --sunken: #EFEDE7;
+  --ink: #16181D;
+  --ink-2: #4B515C;
+  --line: #E6E4DE;
   --line-strong: #8A8E95;
 
-  --accent: #1D3F8F;
-  --accent-hover: #15306E;
-  --accent-soft: #EDF0F8;
+  --accent: #4B3FD1;
+  --accent-hover: #3B30B0;
+  --accent-soft: #EEECFB;
 
-  --high: #B3261E;      --high-ink: #FFFFFF;
-  --moderate: #F2A124;  --moderate-ink: #241500;
-  --low: #F2D51B;       --low-ink: #262000;
-  --none: #1F7A4A;      --none-ink: #FFFFFF;
-  --unknown: #E2E1DC;   --unknown-ink: #33363B;  --unknown-line: #85857F;
-  --official: #2E5AAC;  --official-ink: #FFFFFF;  --official-soft: #EEF3FB;
+  --high: #D92D20;      --high-ink: #FFFFFF;   --high-soft: #FDE8E7;  --high-text: #9F1D16;
+  --moderate: #E8890C;  --moderate-ink: #241500; --moderate-soft: #FDEFD9; --moderate-text: #844700;
+  --low: #D9B70F;       --low-ink: #262000;    --low-soft: #FBF3C4;   --low-text: #5E4C00;
+  --none: #1F7A4A;      --none-ink: #FFFFFF;   --none-soft: #E3F4EA;  --none-text: #14532D;
+  --unknown: #EDEDEA;   --unknown-ink: #393C42;  --unknown-line: #8A8D93;
+  --official: #2E5AAC;  --official-ink: #FFFFFF;  --official-soft: #E6EEFB; --official-text: #1C4597;
 
-  --radius: 16px;
-  --radius-sm: 10px;
+  --radius: 24px;
+  --radius-sm: 14px;
   --gutter: 16px;
-  --pad: min(1.25rem, 6vw); /* card padding: generous, but never squeezes large text at 320px */
-  --font: 'HerbSafe Punct', 'Noto Sans TC', system-ui, -apple-system, 'Segoe UI', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+  --pad: min(1.375rem, 6vw); /* card padding: generous, but never squeezes large text at 320px */
+  --shadow: 0 1px 2px rgba(22, 24, 40, .05), 0 10px 28px rgba(22, 24, 40, .07);
+  --font: 'Inter', 'Noto Sans TC HS', system-ui, -apple-system, 'Segoe UI', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+  --font-zh: 'Noto Sans TC HS', 'Inter', system-ui, -apple-system, 'PingFang TC', 'Microsoft JhengHei', sans-serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
 
 html {
-  font-size: 112.5%; /* 18px base: large text for older readers */
+  font-size: 106.25%; /* Full details: 17px base */
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
@@ -67,10 +70,12 @@ h1:focus, h1:focus-visible, h2[tabindex]:focus:not(:focus-visible), h3[tabindex]
 
 p { margin: 0 0 0.75rem; }
 h1, h2, h3, h4 { margin: 0; line-height: 1.25; }
+/* The page never shifts sideways when a scrollbar appears or disappears (desktop; phones overlay theirs). */
+@media (min-width: 48rem) { html { scrollbar-gutter: stable; } }
 
 .wrap {
   width: 100%;
-  max-width: 68rem;
+  max-width: min(68rem, 1200px); /* same column in Simple (20px text) and Full; centred on wide screens */
   margin: 0 auto;
   padding-left: max(var(--gutter), env(safe-area-inset-left));
   padding-right: max(var(--gutter), env(safe-area-inset-right));
@@ -302,7 +307,7 @@ main:focus { outline: none; }
 .btn-check { min-width: min(7.5rem, 100%); font-size: 1.1667rem; flex: none; }
 .check-bar.is-static { position: static; }
 .below-bar { padding: 1rem 0 0; display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; }
-html[data-route="check"] { scroll-padding-bottom: 9rem; }
+html[data-route="check"] { scroll-padding-bottom: calc(var(--check-bar-h, 9rem) + 0.5rem); }
 /* Short screens (or browser zoom): the bar stops being sticky so it never covers the page. */
 @media (max-height: 34em) { .check-bar { position: static; } }
 
@@ -566,7 +571,7 @@ html.sheet-open, html.sheet-open body { overflow: hidden; }
 /* ---------- Doctor summary ---------- */
 
 .summary { padding: clamp(1.75rem, 5vw, 3.5rem) 0 0; max-width: 52rem; }
-.summary-kicker { font-size: 0.8889rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+.summary-kicker { font-size: 0.8889rem; font-weight: 700; letter-spacing: 0.02em; /* the name keeps its own capitals: "HerbBridge 中西通 · Doctor summary" */ color: var(--accent); margin-bottom: 0.5rem; }
 .summary-head h1 { font-size: clamp(1.75rem, 1.3rem + 2.2vw, 2.75rem); font-weight: 700; letter-spacing: -0.025em; line-height: 1.15; margin-bottom: 0.75rem; }
 .summary-actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 1.5rem 0 0.5rem; }
 @media (max-width: 34rem) { .summary-actions .btn { flex: 1 1 100%; } }
@@ -642,10 +647,10 @@ html.sheet-open, html.sheet-open body { overflow: hidden; }
   .summary { max-width: none; padding: 0; line-height: 1.32; } /* keeps Mrs Wong on one A4 page */
   .summary-head h1 { font-size: 16pt; margin-bottom: 2pt; }
   .summary-kicker { color: #000; margin-bottom: 2pt; }
-  .summary-lists, .summary-section { border-top: 1pt solid #000; margin-top: 8pt; padding-top: 6pt; }
+  .summary-lists, .summary-section { border-top: 1pt solid #000; margin-top: 5pt; padding-top: 4pt; }
   .summary-lists { grid-template-columns: 1fr 1fr; gap: 12pt; }
   .summary h2 { font-size: 11pt; margin-bottom: 3pt; }
-  .summary-row { break-inside: avoid; page-break-inside: avoid; padding: 6pt 8pt 6pt 10pt; margin-bottom: 6pt; border: 1pt solid #999; border-radius: 0; }
+  .summary-row { break-inside: avoid; page-break-inside: avoid; padding: 5pt 8pt 5pt 10pt; margin-bottom: 5pt; border: 1pt solid #999; border-radius: 0; }
   .summary-row::before { width: 4pt; }
   .summary-row-head { display: flex; flex-wrap: wrap; align-items: center; gap: 4pt 8pt; margin-bottom: 2pt; }
   .summary-pair { font-size: 10.5pt; }
@@ -705,7 +710,7 @@ html.sheet-open, html.sheet-open body { overflow: hidden; }
   .header-inner { gap: 0 0.5rem; padding-top: 0.25rem; }
   .brand { min-height: 2.75rem; gap: 0.375rem; font-size: 1rem; }
   .brand-mark { width: 1.375rem; height: 1.375rem; }
-  .brand-zh { display: none; } /* the brand link's label still says HerbSafe 中西通 */
+  .brand-zh { display: none; } /* the brand link's label still says HerbBridge 中西通 */
   .lang-toggle { padding: 0 0.75rem; font-size: 0.9375rem; }
   .site-nav { gap: 0; }
   .site-nav a { min-height: 2.75rem; padding: 0 0.375rem; font-size: 0.9375rem; }
@@ -787,3 +792,279 @@ html.sheet-open, html.sheet-open body { overflow: hidden; }
 .read-aloud[aria-pressed="true"] { background: var(--accent); color: #fff; }
 .read-msg { margin: 0.5rem 0 0; color: var(--ink-2); }
 @media print { .read-row { display: none !important; } }
+
+/* =====================================================================================
+   REDESIGN (Oct 2026): friendly consumer-health look, two display modes.
+   Placed last on purpose: it restyles the components above without changing their markup.
+   ===================================================================================== */
+
+body { font-family: var(--font); line-height: 1.55; }
+:lang(zh-HK) { font-family: var(--font-zh); }
+html[data-mode="simple"] { font-size: 125%; }           /* Simple: 20px base, very large text */
+html[data-mode="simple"] { --ink-2: #33373E; }          /* higher contrast for secondary text */
+
+/* ---------- header ---------- */
+.site-header { background: rgba(245, 244, 240, .94); border-bottom: 0; position: relative; z-index: 4; }
+.header-inner { gap: 0.5rem 1rem; padding-top: 0.625rem; padding-bottom: 0.25rem; }
+.brand { font-size: 1.125rem; }
+.brand-mark { width: 2rem; height: 2rem; border-radius: 10px; background: var(--accent); }
+.brand-zh { color: var(--ink); font-weight: 700; }
+.brand-text { display: flex; flex-direction: column; line-height: 1.2; }
+/* Slogan under the name, on the home screen (My cabinet) only. */
+/* The slogan shows on every page, so the header (and the menu) is the same size everywhere. */
+.brand-slogan { display: block; font-size: min(0.8125rem, 4.75vw); /* fits 320px in Simple */ font-weight: 500; color: var(--ink-2); letter-spacing: 0; }
+/* Each half is a block, so the slogan breaks after its comma. Only when one half is wider than the
+   screen on its own (very large text) does it wrap inside, instead of running off the page. */
+.slogan-part { display: inline-block; max-width: 100%; }
+.header-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+.mode-toggle { display: inline-flex; background: #E9E7E1; border-radius: 999px; padding: 3px; }
+.mode-toggle button {
+  font: inherit; font-size: 0.9375rem; font-weight: 600; border: 0; background: transparent; color: var(--ink-2);
+  min-height: 2.75rem; padding: 0 0.875rem; border-radius: 999px; cursor: pointer; white-space: nowrap;
+}
+.mode-toggle button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 3px rgba(0, 0, 0, .14); }
+.lang-toggle { border: 0; background: var(--surface); box-shadow: 0 1px 3px rgba(0, 0, 0, .12); min-height: 2.75rem; font-size: 0.9375rem; }
+.site-nav { gap: 0.25rem; }
+.site-nav a { border-bottom: 0; border-radius: 999px; min-height: 2.75rem; padding: 0.2em 0.875rem; font-weight: 600; }
+.site-nav a[aria-current="page"] { background: var(--surface); color: var(--ink); font-weight: 600; box-shadow: 0 1px 3px rgba(0, 0, 0, .1); }
+@media (max-width: 47.99rem) {
+  .header-tools { order: 2; width: 100%; }
+  .site-nav { order: 3; margin: 0; }
+}
+
+/* ---------- page headings: one big headline per screen ---------- */
+main#main { padding-bottom: 2rem; }
+.page-head { padding-top: 0.75rem; }
+.kicker { font-size: 0.9375rem; font-weight: 700; color: var(--accent); margin: 0.75rem 0 0.25rem; }
+#app h1 { font-size: clamp(1.75rem, 1.4rem + 2.2vw, 2.5rem); line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+:lang(zh-HK) #app h1, #app h1:lang(zh-HK) { letter-spacing: 0; }
+/* Headings never break inside a word: the size is capped so the longest word (13 letters) fits. */
+@media (max-width: 30rem) { #app h1 { font-size: min(2.25rem, calc((100vw - 2rem) / 8.2)); } }
+html[data-mode="simple"] #app h1 { font-size: clamp(1.875rem, 1.6rem + 2vw, 2.5rem); }
+@media (max-width: 30rem) { html[data-mode="simple"] #app h1 { font-size: min(2.4rem, calc((100vw - 2rem) / 7.6)); } }
+.subtitle { font-size: 1.0625rem; font-weight: 600; }
+.lede { color: var(--ink-2); }
+
+/* Steps (Full details) */
+.steps { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; padding: 0; margin: 0.25rem 0 0.75rem; font-size: 0.875rem; font-weight: 600; color: var(--ink-2); }
+.steps li { display: inline-flex; align-items: center; gap: 0.375rem; background: var(--surface); padding: 0.3125rem 0.75rem 0.3125rem 0.3125rem; border-radius: 999px; }
+.step-n { width: 1.5rem; height: 1.5rem; border-radius: 50%; display: grid; place-items: center; background: #ECEAE4; font-size: 0.8125rem; }
+.steps .done .step-n { background: var(--accent-soft); color: var(--accent); }
+.steps .now { background: var(--accent); color: #fff; }
+.steps .now .step-n { background: rgba(255, 255, 255, .22); color: #fff; }
+html[data-mode="full"] .hero { background: linear-gradient(160deg, #EEECFB 0%, var(--bg) 72%); border-radius: 0 0 32px 32px; margin: 0 calc(-1 * var(--gutter)) 1.25rem; padding: 0 var(--gutter) 0.5rem; }
+.result-chips { list-style: none; display: flex; flex-wrap: wrap; gap: 0.5rem; padding: 0; margin: 0 0 1rem; }
+.result-chips li { background: var(--surface); border-radius: 999px; padding: 0.375rem 0.875rem; font-weight: 600; font-size: 0.9375rem; box-shadow: var(--shadow); }
+
+/* ---------- buttons ---------- */
+.btn { border-radius: 999px; min-height: 3.25rem; font-weight: 700; border-width: 0; }
+.btn-primary { background: var(--accent); color: #fff; box-shadow: 0 6px 18px rgba(75, 63, 209, .26); }
+.btn-primary:hover { background: var(--accent-hover); color: #fff; }
+.btn-secondary { background: var(--surface); color: var(--accent); border: 2px solid var(--accent); }
+.btn-secondary:hover { background: var(--accent-soft); color: var(--accent-hover); border-color: var(--accent-hover); }
+.btn-quiet { color: var(--accent); }
+.btn-add { border-radius: 999px; border: 2px dashed #B9B3EE; background: var(--accent-soft); color: var(--accent); }
+.actions-stack { display: grid; gap: 0.75rem; margin-top: 1.75rem; }
+.actions-stack .btn { width: 100%; justify-content: center; }
+html[data-mode="simple"] .btn { min-height: 3.75rem; font-size: 1.1rem; }
+
+/* ---------- badges: soft pill, coloured round icon, always a text label ---------- */
+.badge { border: 0; border-radius: 999px; gap: 0.5rem; padding: 0.3125rem 0.875rem 0.3125rem 0.3125rem; font-weight: 700; line-height: 1.25; }
+.badge .icon { width: 1.625em; height: 1.625em; padding: 0.3em; border-radius: 50%; }
+.badge-high { background: var(--high-soft); color: var(--high-text); }           .badge-high .icon { background: var(--high); color: #fff; }
+.badge-moderate { background: var(--moderate-soft); color: var(--moderate-text); } .badge-moderate .icon { background: var(--moderate); color: var(--moderate-ink); }
+.badge-low { background: var(--low-soft); color: var(--low-text); }              .badge-low .icon { background: var(--low); color: var(--low-ink); }
+.badge-none_reported { background: var(--none-soft); color: var(--none-text); }   .badge-none_reported .icon { background: var(--none); color: #fff; }
+.badge-official { background: var(--official-soft); color: var(--official-text); } .badge-official .icon { background: var(--official); color: #fff; }
+.badge-not_in_database { background: var(--unknown); color: var(--unknown-ink); box-shadow: inset 0 0 0 1.5px var(--unknown-line); }
+.badge-not_in_database .icon { background: transparent; color: var(--unknown-ink); box-shadow: inset 0 0 0 1.5px var(--unknown-line); }
+
+/* ---------- results: compact pair cards ---------- */
+.pair-cards { list-style: none; margin: 0 0 1rem; padding: 0; display: grid; gap: 1rem; }
+.pair-card {
+  position: relative; display: block; overflow: hidden; color: var(--ink); text-decoration: none;
+  background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.25rem var(--pad) 1.125rem calc(var(--pad) + 6px);
+}
+a.pair-card:hover { color: var(--ink); }
+.pair-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; }
+.tone-high::before { background: var(--high); } .tone-moderate::before { background: var(--moderate); }
+.tone-low::before { background: var(--low); } .tone-official::before { background: var(--official); }
+.tone-none_reported::before { background: var(--none); }
+/* Grey never looks "clear": muted card, dashed edge, question icon, the required wording in bold. */
+.pair-card.tone-not_in_database { background: #FAFAF8; box-shadow: inset 0 0 0 1.5px #C9C9C4; }
+.tone-not_in_database::before { background: repeating-linear-gradient(180deg, var(--unknown-line) 0 6px, transparent 6px 11px); }
+.pair-card-top { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; }
+.tag-official { font-size: 0.8125rem; font-weight: 600; color: var(--official-text); background: var(--official-soft); border-radius: 999px; padding: 0.25rem 0.625rem; }
+.pair-card-names { display: flex; flex-wrap: wrap; align-items: center; gap: 0.125rem 0.5rem; font-size: 1.25rem; font-weight: 700; line-height: 1.3; margin-bottom: 0.5rem; }
+.pair-card-names .name-secondary { font-weight: 400; color: var(--ink-2); }
+.name-with-icon { display: inline-flex; align-items: center; gap: 0.375rem; }
+.kind-icon { width: 1.375rem; height: 1.375rem; color: var(--ink-2); }
+.pair-plus { color: var(--ink-2); font-weight: 400; }
+.pair-line { margin: 0; color: var(--ink-2); }
+.pair-line strong { color: var(--ink); }
+.pair-line-quote { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.pair-line-unknown { color: var(--ink); font-weight: 700; }
+.pair-card-go { display: inline-flex; align-items: center; gap: 0.25rem; margin-top: 0.875rem; font-weight: 700; color: var(--accent); }
+.pair-card-go .icon { width: 1.125rem; height: 1.125rem; }
+.unknown-links { list-style: none; margin: 0.75rem 0 0; padding: 0; border-top: 1.5px dashed #C9C9C4; }
+.unknown-links a { display: flex; align-items: center; gap: 0.5rem; min-height: 3rem; padding: 0.5rem 0; color: var(--ink); text-decoration: none; font-weight: 700; border-bottom: 1.5px dashed #C9C9C4; }
+.unknown-links .unknown-mark { width: 1.25rem; height: 1.25rem; color: var(--unknown-ink); }
+.unknown-links .unknown-pair { flex: 1; min-width: 0; }
+.unknown-links .row-go { width: 1.125rem; height: 1.125rem; color: var(--accent); }
+html[data-mode="simple"] .pair-card { box-shadow: inset 0 0 0 2px #D3D1CA; }
+html[data-mode="simple"] .pair-card.tone-not_in_database { box-shadow: inset 0 0 0 2px #9A9A95; }
+html[data-mode="simple"] .pair-card-names { font-size: 1.375rem; }
+html[data-mode="simple"] .pair-line { color: var(--ink); }
+
+/* ---------- boxes ---------- */
+.disclaimer-box { background: var(--surface); border: 0; border-left: 0; border-radius: var(--radius-sm); box-shadow: inset 0 0 0 1.5px var(--line); padding: 0.875rem 1rem; color: var(--ink-2); }
+html[data-mode="simple"] .disclaimer-box { color: var(--ink); box-shadow: inset 0 0 0 2px #D3D1CA; }
+.status, .cab-card, .card, .clash-alert, .demo-banner { border: 0; border-radius: var(--radius); box-shadow: var(--shadow); }
+html[data-mode="simple"] .status, html[data-mode="simple"] .cab-card, html[data-mode="simple"] .card { box-shadow: inset 0 0 0 2px #D3D1CA; }
+.card.card-unknown { background: #FAFAF8; box-shadow: inset 0 0 0 1.5px #C9C9C4; }
+.chip { border-radius: 999px; }
+.official-box { border-radius: var(--radius-sm); border: 0; }
+.advice-box { border-radius: var(--radius-sm); border: 0; border-left: 4px solid var(--accent); box-shadow: inset 0 0 0 1px var(--line); }
+.heart-impact { border-radius: var(--radius-sm); }
+.check-bar { background: rgba(255, 255, 255, .96); box-shadow: 0 -6px 24px rgba(22, 24, 40, .10); border-top: 0; }
+.sheet-panel { border-radius: var(--radius) var(--radius) 0 0; }
+.options { border-top: 0; }
+.options li { border-bottom: 0; }
+.option { border-radius: var(--radius-sm); }
+
+/* ---------- pair detail screen ---------- */
+.back-link { display: inline-flex; align-items: center; gap: 0.25rem; min-height: 2.75rem; font-weight: 700; text-decoration: none; margin-top: 0.5rem; }
+.back-link .icon { width: 1.25rem; height: 1.25rem; }
+#app h1.pair-h1 { font-size: clamp(1.625rem, 1.3rem + 2vw, 2.25rem); }
+.pair-h1 .name-secondary { font-weight: 400; color: var(--ink-2); }
+.pair-simple { position: relative; overflow: hidden; background: var(--surface); border-radius: var(--radius); box-shadow: inset 0 0 0 2px #D3D1CA; padding: 1.25rem var(--pad) 0.5rem calc(var(--pad) + 6px); margin-bottom: 1rem; }
+.pair-simple::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; }
+.pair-simple.tone-not_in_database { background: #FAFAF8; box-shadow: inset 0 0 0 2px #9A9A95; }
+.pair-simple-badge { margin-bottom: 0.75rem; }
+.todo { background: var(--accent-soft); border-radius: var(--radius-sm); padding: 1rem 1.125rem; margin: 0.75rem 0 1rem; }
+.todo h2 { font-size: 1.125rem; margin-bottom: 0.25rem; }
+.todo p { margin: 0; font-size: 1.125rem; }
+.pair-simple .btn { width: 100%; justify-content: center; margin-bottom: 1rem; }
+.more-btn { width: 100%; justify-content: space-between; padding: 0 1.25rem; margin-bottom: 1rem; }
+.more-btn .toggle-chev { transform: rotate(90deg); }
+.more-btn[aria-expanded="true"] .toggle-chev { transform: rotate(-90deg); }
+
+/* ---------- names never split mid-name (華法 / 林) ---------- */
+.name-primary:lang(zh-HK), .name-secondary:lang(zh-HK), .unknown-pair:lang(zh-HK) { white-space: nowrap; }
+.pair-card-names .name, .pair-h1 .name { display: inline-flex; flex-wrap: wrap; gap: 0 0.35em; }
+
+/* ---------- motion: Full details only, and never with "reduce motion" ---------- */
+html[data-mode="full"] .pair-card { transition: transform .18s ease, box-shadow .18s ease; animation: hs-rise .32s ease both; }
+html[data-mode="full"] a.pair-card:hover { transform: translateY(-2px); box-shadow: 0 2px 4px rgba(22, 24, 40, .06), 0 16px 32px rgba(22, 24, 40, .10); }
+html[data-mode="full"] .pair-cards li:nth-child(2) .pair-card { animation-delay: .04s; }
+html[data-mode="full"] .pair-cards li:nth-child(3) .pair-card { animation-delay: .08s; }
+html[data-mode="full"] .pair-cards li:nth-child(n+4) .pair-card { animation-delay: .12s; }
+html[data-mode="full"] #app.screen-in { animation: hs-fade .22s ease both; }
+@keyframes hs-rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes hs-fade { from { opacity: 0; } to { opacity: 1; } }
+html[data-mode="simple"] *, html[data-mode="simple"] *::before, html[data-mode="simple"] *::after { animation: none !important; transition: none !important; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+
+/* ---------- print: plain black and white ---------- */
+@media print {
+  html, html[data-mode="simple"] { font-size: 10pt; }
+  .header-tools, .back-link, .more-btn, .steps { display: none !important; }
+  #app h1, html[data-mode="simple"] #app h1 { font-size: 15pt !important; letter-spacing: -0.01em; margin-bottom: 2pt; }
+  .disclaimer-box { padding: 4pt 7pt !important; }
+  .summary { line-height: 1.24; }
+  .summary .sources { font-size: 7.5pt; }
+  .summary-row::before { background: #000 !important; }
+  .badge { padding: 1pt 6pt 1pt 3pt !important; gap: 3pt; }
+  .badge .icon { width: 1.15em !important; height: 1.15em !important; padding: 0 !important; }
+  .badge, .badge-high, .badge-moderate, .badge-low, .badge-official, .badge-not_in_database, .badge-none_reported { background: #fff !important; color: #000 !important; box-shadow: none !important; border: 1pt solid #000 !important; }
+  .badge .icon { background: none !important; color: #000 !important; box-shadow: none !important; }
+  .summary-row, .summary-unknown, .disclaimer-box, .advice-box, .official-box { box-shadow: none !important; }
+}
+
+/* Simple mode cabinet: one main action ("Check my list"). The pair rows and the intro paragraph
+   live on the Results screen instead, so they are not repeated here. */
+html[data-mode="simple"] .status-list,
+html[data-mode="simple"] .status-more,
+html[data-mode="simple"][data-route="check"] .page-head .lede { display: none; }
+
+/* Very large text (200%) and narrow screens: controls wrap instead of running off the screen. */
+.header-tools { max-width: 100%; }
+.mode-toggle { flex-wrap: wrap; max-width: 100%; border-radius: 1.5rem; }
+.mode-toggle button { white-space: normal; flex: 1 1 auto; line-height: 1.2; padding-top: 0.25rem; padding-bottom: 0.25rem; }
+.lang-toggle { white-space: normal; max-width: 100%; }
+.check-bar-inner { flex-wrap: wrap; }
+.btn-check { white-space: normal; max-width: 100%; text-align: center; }
+/* Very narrow (a phone at 200% zoom): names shrink with the screen so a long one ("Amlodipine")
+   still fits whole; a name never breaks in the middle. */
+@media (max-width: 22rem) {
+  .pair-card-names, html[data-mode="simple"] .pair-card-names { font-size: min(1.375rem, calc((100vw - 3.5rem) / 6.6)); }
+  #app h1.pair-h1 { font-size: min(1.625rem, calc((100vw - 2rem) / 7)); }
+}
+.pair-card, .pair-simple { min-width: 0; }
+.summary-unknown h2 { display: flex; flex-wrap: wrap; align-items: center; gap: 0 0.25em; }
+/* Chinese headings break only at spaces and punctuation, never inside a word (虛構人 / 物). */
+:lang(zh-HK) #app h1, :lang(zh-HK) #app h2, :lang(zh-HK) .sheet-head h2 { word-break: keep-all; overflow-wrap: anywhere; }
+.keep-end { white-space: nowrap; }
+
+/* Simple cabinet (owner, 20 Oct): once both lists have items, only the clash pop-up card and the
+   sticky "Check my list" button remain. */
+html[data-mode="simple"] .status.status-ready,
+html[data-mode="simple"] .check-bar .bar-notice { display: none !important; }
+/* Demo entry near the top of the cabinet */
+.demo-top { margin: 0 0 0.875rem; }
+/* Official-only cards: the main "What to do" sits above the official quotes */
+.card > .todo { margin: 0.5rem 0 0.75rem; }
+.card > .todo .block-label { margin-bottom: 0.25rem; }
+/* Phones: mode toggle and language button share one row (owner, 20 Oct). Tap targets stay 44px+;
+   at very large text they may still wrap rather than run off the screen. */
+@media (max-width: 47.99rem) {
+  .header-tools { flex-wrap: wrap; gap: 0.375rem; }
+  .mode-toggle button { padding: 0 0.625rem; font-size: 0.875rem; }
+  .lang-toggle { padding: 0 0.75rem; font-size: 0.875rem; }
+  html[data-mode="simple"] .mode-toggle button, html[data-mode="simple"] .lang-toggle { font-size: 0.75rem; min-height: 2.25rem; }
+}
+
+/* Read aloud is hidden when the only voices for this language are online ones (text would leave the phone). */
+html.no-voice .read-row { display: none !important; }
+
+/* ---------- Mode strip: one slim line saying which mode is on, with a small switch ---------- */
+.mode-strip { display: flex; flex-wrap: wrap; align-items: center; gap: 0 0.375rem; min-height: 44px; padding: 0 0.125rem 0 0.625rem; margin: 0 0 0.75rem; border-radius: var(--radius-sm); font-size: max(10px, min(0.8125rem, 3.3vw)); line-height: 1.3; }
+.mode-strip-simple { background: var(--accent); color: #fff; }
+.mode-strip-full { background: #1B1D2A; color: #fff; }
+.mode-strip .mode-strip-icon { flex: none; width: 1.125em; height: 1.125em; }
+.mode-strip-text { flex: 0 1 auto; min-width: 0; margin: 0; font-weight: 600; }
+.mode-strip-btn { flex: none; min-height: 44px; margin-left: auto; padding: 0 0.375rem; border: 0; background: none; color: #fff; font: inherit; font-weight: 700; text-decoration: underline; text-underline-offset: 0.2em; cursor: pointer; }
+.mode-strip-btn:focus-visible { outline: 3px solid #fff; outline-offset: -3px; border-radius: 6px; }
+/* Very narrow screens (200% zoom): the mode name only, so the strip stays at most two lines. */
+@media (max-width: 16.25rem) { .mode-strip .mode-strip-icon, .mode-strip-detail { display: none; } .mode-strip { padding-left: 0.5rem; } }
+.step-line { margin: 0 0 0.25rem; font-weight: 700; color: var(--accent); }
+/* Simple: big cards, one line each, a big "See details" button. */
+html[data-mode="simple"] .pair-card { padding-top: 1.25rem; padding-bottom: 1.25rem; }
+html[data-mode="simple"] .pair-card .badge { font-size: min(1.125rem, 5.4vw); padding: 0.375rem 0.875rem; }
+html[data-mode="simple"] .pair-card-go { display: flex; justify-content: center; width: 100%; min-height: 3rem; margin-top: 1rem; border-radius: 999px; background: var(--accent); color: #fff; }
+/* Full: dense overview cards with the facts on them. */
+html[data-mode="full"] .pair-card { padding-top: 0.875rem; padding-bottom: 0.875rem; }
+html[data-mode="full"] .pair-cards { gap: 0.625rem; }
+.pair-facts { display: block; margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--line); font-size: 0.9375rem; }
+.pair-fact { margin: 0 0 0.25rem; color: var(--ink-2); }
+.pair-fact strong { color: var(--ink); margin-right: 0.25em; }
+.pair-fact-count { display: inline-block; margin-left: 0.5em; padding: 0 0.5em; border-radius: 999px; background: var(--official-soft); color: var(--official-text); font-weight: 600; font-size: 0.875rem; }
+@media print { .mode-strip, .step-line { display: none !important; } }
+
+/* ---------- Home button, "Next: show your doctor", summary sentence ---------- */
+.page-nav { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 1rem; margin-bottom: 0.25rem; }
+.home-link { display: inline-flex; align-items: center; gap: 0.375rem; min-height: 44px; padding: 0 0.875rem; border-radius: 999px; background: var(--surface); box-shadow: inset 0 0 0 1.5px var(--line); color: var(--ink); font-weight: 700; text-decoration: none; }
+.home-link .icon { width: 1.25rem; height: 1.25rem; }
+.home-link:hover { color: var(--accent); }
+.page-nav .back-link { margin: 0; }
+.next-step { margin: 1.5rem 0 1rem; padding: 1.125rem var(--pad) 1.25rem; border-radius: var(--radius); background: var(--accent-soft); box-shadow: inset 0 0 0 2px var(--accent); }
+.next-step:focus { outline: none; }
+.next-step:focus-visible, .next-step.is-now { box-shadow: inset 0 0 0 3px var(--accent), 0 0 0 4px rgba(75, 63, 209, .18); }
+.next-step h2 { margin: 0 0 0.375rem; font-size: 1.25rem; }
+.next-say { margin: 0 0 1rem; font-size: 1.125rem; line-height: 1.5; }
+.btn-next { width: 100%; justify-content: center; min-height: 3.25rem; font-size: 1.125rem; }
+.summary-say { margin: 0.25rem 0 1rem; padding: 0.75rem 1rem; border-radius: var(--radius-sm); background: var(--accent-soft); font-weight: 600; line-height: 1.45; }
+@media print {
+  .page-nav, .next-step { display: none !important; }
+  .summary-say { background: none !important; border: 0.75pt solid #000; padding: 1.5pt 5pt !important; margin: 1pt 0 2pt !important; font-size: 8.5pt; line-height: 1.2; }
+}

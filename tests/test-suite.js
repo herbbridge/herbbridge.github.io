@@ -1,5 +1,5 @@
 /*
- * HerbSafe tests, shared by tests/run-tests.js (Node) and tests/test.html (browser).
+ * HerbBridge tests, shared by tests/run-tests.js (Node) and tests/test.html (browser).
  * runAll(lookup, data) returns [{ group, name, pass, detail }].
  *
  * Expected values here are written out by hand from the project brief, never read
@@ -7,7 +7,7 @@
  */
 (function (root, factory) {
   if (typeof module === 'object' && module.exports) module.exports = factory();
-  else root.HerbSafeTests = factory();
+  else root.HerbBridgeTests = factory();
 })(typeof self !== 'undefined' ? self : this, function () {
   'use strict';
 
@@ -22,7 +22,9 @@
     'asian_ginseng|warfarin':    { kind: 'disagree', statements: ['ha-warfarin-leaflet-tcm', 'hc-panax-ginseng'] },
     // Owner, 19 Oct (rule): an Official caution needs an official source that NAMES the herb. The HA
     // warfarin leaflet's "any TCM" reaches the other herbs only as Hospital Authority advice.
-    'american_ginseng|warfarin': { kind: 'official', statements: ['ha-warfarin-leaflet-tcm', 'hc-american-ginseng'] },
+    // Owner, 20 Oct: Health Canada names American ginseng; the HA leaflet ("ginseng", 人參 = Asian) is
+    // shown as Hospital Authority advice on this card instead.
+    'american_ginseng|warfarin': { kind: 'official', statements: ['hc-american-ginseng'] },
     'ginkgo|aspirin':            { kind: 'disagree', statements: ['hc-ginkgo-contraindication', 'ema-ginkgo-4.5'] },
     'ginkgo|clopidogrel':        { kind: 'official', statements: ['ema-ginkgo-4.5', 'hc-ginkgo-contraindication'] },
     'ginkgo|amlodipine':         { kind: 'official', statements: ['hc-ginkgo-blood-pressure'] },
@@ -465,8 +467,11 @@
         var bad = texts.filter(function (x) { return /同時服用|中風險/.test(x); });
         return { pass: bad.length === 0, detail: bad.join('\n') };
       });
+      check('Languages', 'the slogan is exact in both languages', function () {
+        return S.en.slogan === 'Bridging you from East to West, easing worries in your chest.' && S.zh.slogan === '中西相通，心頭放鬆。';
+      });
       check('Languages', 'the required disclaimer and "not in database" wording are exact in English', function () {
-        return S.en.card_disclaimer === 'HerbSafe gives information, not medical advice. Never stop or change a medicine without talking to your doctor or pharmacist.' &&
+        return S.en.card_disclaimer === 'HerbBridge gives information, not medical advice. Never stop or change a medicine without talking to your doctor or pharmacist.' &&
           S.en.not_in_db_text === 'We have no record of this combination. This does not mean it is safe. Please ask your pharmacist or doctor.';
       });
     }

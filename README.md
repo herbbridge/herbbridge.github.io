@@ -1,11 +1,11 @@
-# HerbSafe 中西通
+# HerbBridge 中西通
 
-*Chinese and Western medicine, safely together.*
+*Bridging you from East to West, easing worries in your chest.* 「中西相通，心頭放鬆。」
 
-HerbSafe is built for **heart patients**: people taking heart, blood pressure, cholesterol or
+HerbBridge is built for **heart patients**: people taking heart, blood pressure, cholesterol or
 blood-thinning medicines (Challenge 4: cardiovascular disease).
 
-HerbSafe lets patients in Hong Kong check the Chinese herbs they take against their Western
+HerbBridge lets patients in Hong Kong check the Chinese herbs they take against their Western
 medicines. Each herb × medicine pair is shown with a rating on a four-level scale (High,
 Moderate, Low, No reported risk), a plain-language reason, what to do, the evidence level and
 the sources. Where a government health agency has written about a pair, its own words are
@@ -33,7 +33,7 @@ Browsers block pages opened straight from a file from reading the data, so use a
 local server:
 
 ```
-cd herbsafe
+cd herbsafe.github.io
 python3 -m http.server
 ```
 
@@ -44,7 +44,7 @@ No build step, no frameworks, no backend. Plain HTML, CSS and JavaScript.
 
 ## Install it on a phone
 
-Once HerbSafe is online (e.g. GitHub Pages), open it on the phone and choose
+Once HerbBridge is online (e.g. GitHub Pages), open it on the phone and choose
 "Add to Home Screen" (iPhone: Safari → Share; Android: menu → Install app). It opens
 full-screen like an app and works without the internet. Database files are always
 fetched fresh when online; the saved copy is used only offline. If you add or rename
@@ -114,6 +114,27 @@ agency's own words, never reworded, with the body, document, date and section.
   `tests/test-suite.js`. Only add a statement after a person has opened the official document
   and copied the sentence.
 
+## Screens and display modes
+
+Screens: `#/cabinet` (add herbs and medicines) → `#/results` (short headline and one compact
+card per pair) → `#/pair/<herb_id>-<drug_id>` (everything about one pair) → `#/summary`
+(printable doctor summary, one A4 page). The phone's Back button goes back one step and closes
+the picker.
+
+Two display modes, switched in the header and remembered on the device:
+- **Simple** (default, for older users): very large text, higher contrast, no animation. Result
+  cards show the badge, the names and the first sentence of "What to do". On a pair screen the
+  rest sits behind one "More details" button. The grey card's required sentence is always shown.
+- **Full details**: same screens and content, with icons, a step bar, short transitions (off when
+  the phone asks for reduced motion) and every detail open.
+
+## Fonts
+
+`fonts/` holds Inter (latin) and a subset of Noto Sans TC. **Whenever new Chinese text is added
+to `data/`, `js/i18n.js`, `js/app.js` or `index.html`, run `python3 tools/make-font-subset.py`**
+(needs Python with fonttools and brotli, and npm), then bump `VERSION` in `sw.js`. Characters
+missing from the subset fall back to the phone's own font.
+
 ## Pharmacist reviews (`data/reviews.json`)
 
 Every card says "Prototype: … not yet reviewed by a pharmacist" until a pharmacist has checked
@@ -160,9 +181,10 @@ HANDOVER.md           decisions made so far and what still needs checking
 ## Privacy
 
 No accounts and no tracking. A person's list is saved only in their own browser
-(localStorage) and never leaves the device. The only outside request is Google Fonts.
+(localStorage) and never leaves the device. The app makes no outside requests: the fonts are
+stored in `fonts/` (Inter, and Noto Sans TC cut down to the characters HerbBridge uses).
 
 ## Medical disclaimer
 
-HerbSafe gives information, not medical advice. Never stop or change a medicine without
+HerbBridge gives information, not medical advice. Never stop or change a medicine without
 talking to your doctor or pharmacist.

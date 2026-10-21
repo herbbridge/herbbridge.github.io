@@ -1,4 +1,4 @@
-# HerbSafe 中西通: handover notes
+# HerbBridge 中西通: handover notes
 
 Status as of 18 Oct 2026. Deadline: working app by Sunday 18 Oct (demo video).
 Paste the original project brief into the new session together with this file.
@@ -200,3 +200,131 @@ For Sunday this is done WITHOUT accounts, a server or scanning:
 - Push notifications for new clashes or database updates (needs a server).
 - Keep the current data model (cabinet = lists of herb/drug ids; curated JSON database)
   so it can be synced to an account later without rewriting the lookup logic.
+
+## Redesign (branch `redesign`, 19 Oct 2026; NOT merged to main until the owner says so)
+Owner and Cyrus approved the look from a preview (`_preview/`). Layout and design only: no data,
+rating, quote, source, S/N or date changed.
+- Step-by-step screens: #/cabinet → #/results (compact cards) → #/pair/<herb>-<drug> → #/summary.
+- Two modes, header toggle "Simple / Full details" (簡易 / 詳細模式), stored in localStorage
+  ("herbsafe.mode"), default Simple. Simple: 20px base, no motion, cards show the FIRST sentence of
+  "What to do"; pair screen shows badge, What to do, required grey wording, disclaimer, then
+  "More details". Full: icons, steps, transitions (respecting reduced motion).
+- New palette (violet accent #4B3FD1, warm neutral background, soft rating pills; all WCAG AA).
+- Fonts self-hosted in fonts/ (Inter + Noto Sans TC subset); Google Fonts removed; no outside
+  requests. MUST RUN `python3 tools/make-font-subset.py` WHENEVER DATA OR UI TEXT GAINS NEW
+  CHINESE, then bump sw.js VERSION.
+- Fixed: headings breaking mid-word at large text; Chinese headings/names splitting (華法 / 林,
+  虛構人 / 物); controls running off screen at 200% text.
+- Checked: Mrs Wong demo end to end in both modes and languages; Back closes picker; offline with
+  the service worker (fonts cached, zero outside requests); 390/195/1280 px and 200% text, all
+  screens, both modes and languages: no sideways scroll, no clipped headings, no console errors;
+  doctor summary prints on one A4 page in black and white. Cache herbsafe-v20.
+- Screenshots of every screen: _preview/build/.
+- New Chinese labels (Cantonese style) are NOT YET REVIEWED; see the list in the owner report.
+
+### 20 Oct 2026 (redesign branch), owner-checked data fixes, applied exactly
+- danshen/dong quai/goji/safflower + warfarin: heart line now "Serious bleeding, including
+  internal bleeding." / 「嚴重出血，包括內出血。」 (zh NOT YET REVIEWED); "bleeding in the brain"
+  removed everywhere; HA warfarin leaflet 019Ev10 added as the LAST source on all four (main
+  evidence unchanged).
+- danshen + amlodipine: "(a multi-herb Chinese medicine product)"; main evidence now about the
+  total amount (AUC). Rating stays Low; no dosing advice added.
+- goji + warfarin "What to do" now starts with the HA leaflet sentence (tea/juice/wine kept).
+- Simple cards: first sentence of "What to do"; in Chinese a ； clause counts as a sentence too.
+- Font subset rebuilt (tools/make-font-subset.py); every character on these cards is covered.
+- sw.js ignores /preview/ and /_preview/ (never cached or intercepted). Cache herbsafe-v21.
+- 20 Oct: goji + warfarin "What to do" split so tea/juice/wine is not attributed to the HA:
+  "…not to take any Chinese medicine with warfarin. Goji tea, juice and wine count too." /
+  「…唔好將任何中藥同華法林一齊食。枸杞茶、枸杞汁同枸杞酒都計埋。」 (zh NOT YET REVIEWED). Cache v22.
+- Merge plan agreed (owner, 20 Oct): on Wed 21 Oct, when the owner says so, merge redesign into
+  main, removing _preview/ and preview/ in the same step and keeping sw.js from redesign (with the
+  /preview/ exclusion). Do not merge before the owner says so.
+- 20 Oct, owner's phone test of the preview → fixes on redesign (cache v23):
+  1. No "What to do" inside official quote boxes (it contradicted the HA's "Do not take"); official-only
+     cards keep their own What to do above the quotes.
+  2. Intro "Hong Kong's Hospital Authority, which runs the public hospitals, says in its own words:" /
+     「管理公立醫院嘅香港醫院管理局，原文係咁講：」 only on cards whose herb the HA leaflet names
+     (danshen, dong quai; Asian ginseng keeps its "sources disagree" intro). American ginseng + warfarin
+     still quotes the HA leaflet ("ginseng") first under the general intro: owner to decide.
+  3. Simple cabinet: once both lists are filled, only the clash pop-up and "Check my list" remain
+     (the status card stays if the list cannot be saved).
+  4. Phones: mode toggle and language button on one row; "Demo: Mrs Wong" button under the cabinet title.
+  5. Simple pair screen shows the official quote block without "More details".
+  6. Chinese labels use full-width "："; HA leaflet sources carry label_zh/url_zh (019Cv10), shown in
+     Chinese mode (screen and printed summary).
+- 20 Oct: American ginseng + warfarin official caution = Health Canada only (names American ginseng);
+  the HA warfarin leaflet now shows in its Hospital Authority advice box (as for other herbs the
+  leaflet does not name). Added as last source: "Hospital Authority patient talk (undated):
+  當中藥師遇見藥劑師, slide 19" (smartpatient.ha.org.hk PDF; lists 西洋參 with warfarin). Not used for
+  the badge. Owner confirmed (20 Oct) the link is the PDF they read and slide 19 lists 西洋參 with
+  warfarin. Cache v24.
+- Remaining before Wed 21 Oct merge (owner): phone check with Cyrus, then Chinese sign-off (set every
+  zh_reviewed and ZH_REVIEWED to true only when the owner confirms), then merge redesign → main,
+  removing _preview/ and preview/ in the same step and keeping sw.js from redesign.
+- 20 Oct, iPhone phone check → Read aloud fix (cache v25): the voice list is loaded in the background
+  (voiceschanged + re-checks for 3 s; iOS often fills it late or with no event), because iOS only
+  speaks when speak() runs straight away in the tap. Voice order: on-device voice for the language →
+  on-device voice of the same family (e.g. Mandarin) → phone default with lang en-GB/zh-HK when the
+  list is empty (in-app browsers). Never an online-only voice: then the button is hidden. A message
+  shows only when speaking fails (error, or nothing starts within 4 s). Tested with iPhone emulation
+  in Chromium and a fake speech engine (no real iOS/WebKit available here). Chinese speech uses 。.
+- Preview build tags css/js with ?v=<cache version> so phones fetch a rebuilt preview fresh.
+- 20 Oct, Read aloud sounds more natural (cache v26): Enhanced/Premium voices first, never novelty
+  voices; rate 0.9 English, 0.85 Chinese. Separate spoken script (js/speech.js): names + rating →
+  official quote → What to do (our own advice only) → why it matters. Optional recordings in audio/
+  (listed in audio/manifest.json). All scripts for review: docs/spoken-scripts.txt
+  (tools/make-spoken-scripts.js). Print check: tools/check-print.js.
+- 20 Oct, renamed HerbSafe → HerbBridge 中西通 (cache herbbridge-v27). Slogan "Bridging you from East to West, easing worries in your chest." /
+  「中西相通，心頭放鬆。」 under the name on the home screen. In Chinese text the app is called 中西通.
+  Not renamed: the repo, organisation and URL (herbsafe.github.io), and the storage keys herbsafe.v1 /
+  herbsafe.mode (renaming them would wipe saved lists). Old herbsafe-* caches are deleted when the
+  new service worker activates.
+- 20 Oct, Read aloud script rules (cache herbbridge-v28), spoken script only, screen unchanged:
+  Chinese Health Canada/EMA quotes introduced 「…話（英文原文翻譯）：」; Health Canada's
+  "health care practitioner/…/physician" spoken as "health care practitioner"; no sentence spoken twice
+  (a heart line already said in What to do is skipped); every Low card spoken "Low risk. Keep an eye on it." /
+  「低度風險。要留意。」; What to do spoken one sentence per piece. Dong quai + warfarin has spoken-only
+  wording in data/interactions.json (action_spoken_en/zh, owner's exact words); the card on screen still
+  shows action_en/zh.
+- 20 Oct, new slogan (cache herbbridge-v29): "Bridging you from East to West, easing worries in your chest." / 「中西相通，心頭放鬆。」 (replaces the first slogan).
+  It may break onto two lines only after the comma.
+- 20 Oct, Simple vs Full made obvious (cache herbbridge-v32). The modes worked, but looked the same on a
+  phone's first screen. Now: a coloured strip on every screen (Simple: violet "Simple view: the key points,
+  one step at a time." + "Show everything"; Full: dark "Full details: evidence, official quotes and sources
+  on one page." + "Simple view"); Simple says "Step 2 of 3"; Simple results = big cards, badge + one
+  What to do line + big "See details"; Full results = dense cards with What to do, evidence levels and
+  source count; Full pair page opens everything (incl. "For professionals"). Summary content unchanged in
+  both modes (it is for the doctor and prints on one A4 page); the strip is screen-only.
+  Check: node tools/check-modes.js (Simple hides the pair sources list, Full shows it; same badge, colour,
+  disclaimer and grey wording in both). New Chinese strip text not yet reviewed.
+- 20 Oct, mode strip slimmed and Full renamed (cache herbbridge-v33): "Full design" → "Full details",
+  完整設計 → 詳細模式. Strip is one 44px line at 390px: "Simple view · key points only" + "Show everything" /
+  "Full details · evidence and sources" + "Simple view" (ZH 簡易模式 · 只講重點 + 睇晒全部 /
+  詳細模式 · 證據同資料來源 + 轉返簡易模式); at 200% zoom it shows only the mode name. Results disclaimer
+  sits under the cards in both modes, so the first badge is on the first screen. Scroll padding on the
+  cabinet equals the sticky bar's height. tools/check-modes.js also checks the first screen (390 x 844).
+- 20 Oct, home, no-jump removal, next step, recordings (cache herbbridge-v34):
+  Home button (house + "Home" / 「主頁」) beside "Back to results" on results and pair pages; the
+  HerbBridge name goes to My cabinet from every screen. Removing a chip keeps its list where it was on
+  screen; focus moves to the next item, else the one before, else the list heading. Every pair page ends
+  with "Next: show your doctor." + "You can say: ‘I take … and …. Can you check if that’s OK for me?’" /
+  「下一步：俾醫生睇。」「你可以咁講：『我有食…同…，可唔可以幫我睇吓有冇問題？』」 + "Open doctor
+  summary"; it comes into view when reading aloud finishes, and Read aloud ends with that sentence. The
+  summary has the sentence once (pairs that need attention). audio/RECORDING-LIST.md (made by
+  tools/make-spoken-scripts.js) lists what to record for the demo pairs. Checks: tools/check-flow.js,
+  tools/check-modes.js (Read aloud on the first screen). Print spacing tightened to keep one A4 page.
+- 20 Oct, recordings workflow (cache herbbridge-v35): Chinese headings keep their last character and
+  closing 。！？ together (no lone 。). audio/RECORDING-LIST.md is built from Mrs Wong's demo list
+  (every pair the demo shows). New recordings: put <herb>-<drug>.<en|zh>.m4a in audio/, run
+  python3 tools/add-recordings.py (MP3 mono 44.1 kHz 64–96 kbps under 1 MB, adds to manifest, bumps the
+  cache), then node tools/check-recordings.js (each recording plays instead of the phone voice).
+- 21 Oct, desktop menu fix (cache herbbridge-v36): the menu jumped between pages because the slogan
+  (My cabinet only) widened the logo and pushed the menu to a second row there, and the active tab was
+  bold. Now the slogan shows on every page (from v37; v36 kept its space only), the active tab changes
+  colour/background only, the column is min(68rem, 1200px) in both modes, and desktop reserves the
+  scrollbar gutter. tools/check-flow.js fails if a menu button or header part moves >1px between pages
+  (390/1024/1440). WebKit not testable here (Playwright download blocked by the network policy).
+- 21 Oct, MERGED redesign into main and went live (cache herbbridge-v38). Rollback point: branch
+  pre-herbbridge-merge (old main, 3b38f3c; a tag could not be pushed from the session). Removed
+  _preview/, preview/ and the preview-skip rule in sw.js; old herbsafe-* caches are deleted on update.
+  Storage keys herbsafe.v1 / herbsafe.mode unchanged. redesign branch kept.

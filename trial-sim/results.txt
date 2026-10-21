@@ -1,0 +1,69 @@
+Simulation for planning only. Not real trial results. Assumed effect: +8 points.
+
+Source for control mean TTR 40.2% and SD 17.1: Lam ASM, Lee IMH, Mak SKS, Yan BPY, Lee VWY. Warfarin control in Hong Kong clinical practice: a single-centre observational study. Hong Kong Med J. 2020;26(4):294–303. https://www.hkmj.org/node/10340
+
+Formula: n = 2 x (1.96 + 0.84)^2 x 17.1^2 / 8^2
+  with 1.96 and 0.84:          n = 71.64 per arm -> 72
+  with exact z (1.9600, 0.8416): n = 71.72 per arm -> 72
+  with 20% dropout: 72 / 0.8 = 90 per arm, 180 in total
+
+Simulated power at 72 per arm, +8 points (assumed), 5000 trials: 79.6% (95% simulation interval 78.5% to 80.7%)
+Exact t-test power at 72 per arm without clipping (noncentral t): 79.6%
+Effect of clipping to 0-100 (1,000,000 draws per arm): control mean 40.25, SD 16.96; HerbBridge arm mean 48.21, SD 17.03; difference 7.96 points
+
+Sample size per arm (assumed effect +8 points):
+                                   72 (formula)   73 (t-test, recommended)
+  exact t-test power                  79.6%           80.2%
+  simulated power (5,000 trials)      79.6%           80.2%
+  recruited per arm (20% dropout)     90              92
+  recruited in total                 180             184
+  Why 73: the formula uses the normal approximation (1.96 and 0.84), but the analysis is a
+  t-test, which reaches 80% power at 73 per arm, not 72.
+
+Power vs sample size per arm (assumed effect +8 points):
+   20 per arm:  29.8%
+   24 per arm:  36.3%
+   28 per arm:  40.0%
+   32 per arm:  45.2%
+   36 per arm:  50.2%
+   40 per arm:  53.6%
+   44 per arm:  57.5%
+   48 per arm:  63.1%
+   52 per arm:  64.7%
+   56 per arm:  69.2%
+   60 per arm:  71.6%
+   64 per arm:  74.6%
+   68 per arm:  77.3%
+   72 per arm:  79.6%
+   73 per arm:  80.2%
+   76 per arm:  81.8%
+   80 per arm:  83.1%
+   84 per arm:  85.3%
+   88 per arm:  86.9%
+   92 per arm:  88.9%
+   96 per arm:  89.8%
+  100 per arm:  90.5%
+  104 per arm:  91.5%
+  108 per arm:  93.0%
+  112 per arm:  93.7%
+  116 per arm:  94.4%
+  120 per arm:  94.9%
+  124 per arm:  95.6%
+  128 per arm:  96.3%
+  132 per arm:  96.9%
+  136 per arm:  97.1%
+  140 per arm:  97.5%
+  smallest size on this grid with simulated power >= 80%: 73 per arm
+
+Power vs assumed effect:     73 per arm (chart)   72 per arm
+  + 4 points:                28.5%                28.4%
+  + 5 points:                41.5%                42.0%
+  + 6 points:                56.3%                54.8%
+  + 7 points:                68.7%                67.4%
+  + 8 points:                80.2%                79.6%
+  + 9 points:                88.3%                87.8%
+  +10 points:                93.7%                93.3%
+  +11 points:                97.0%                96.9%
+  +12 points:                98.8%                98.5%
+
+Seed 2026, 5000 simulated trials per setting.

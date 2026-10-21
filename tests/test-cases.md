@@ -1,6 +1,6 @@
-# HerbSafe test cases
+# HerbBridge test cases
 
-Ten realistic medicine lists for heart patients (HerbSafe’s focus for Challenge 4: cardiovascular disease). Every person here is fictional.
+Ten realistic medicine lists for heart patients (HerbBridge’s focus for Challenge 4: cardiovascular disease). Every person here is fictional.
 
 The machine-readable copy is `tests/test-cases.json`. Check both with `node tests/run-tests.js`, or open `tests/test.html` through a local server. Results are listed in the order the Results screen shows them: High → Official caution → Moderate → Low → No reported risk → Not in database.
 
@@ -21,7 +21,7 @@ Fictional 72-year-old with atrial fibrillation, on warfarin and amlodipine, who 
 
 | Herb | Medicine | Expected result | Entry | Why this matters for your heart |
 |---|---|---|---|---|
-| Danshen | Warfarin | High | `danshen-warfarin` + `danshen-warfarin-official` | Too much bleeding, including bleeding in the brain. |
+| Danshen | Warfarin | High | `danshen-warfarin` + `danshen-warfarin-official` | Serious bleeding, including internal bleeding. |
 | Danshen | Amlodipine | Low | `danshen-amlodipine` | Amlodipine controls your blood pressure. Whether danshen weakens it in people is not known. |
 
 ## 2. Nothing in our database
@@ -58,7 +58,7 @@ Heart failure and atrial fibrillation: warfarin, aspirin, digoxin and furosemide
 
 | Herb | Medicine | Expected result | Entry | Why this matters for your heart |
 |---|---|---|---|---|
-| Dong quai | Warfarin | High | `dong_quai-warfarin` + `dong_quai-warfarin-official` | Too much bleeding, including bleeding in the brain. |
+| Dong quai | Warfarin | High | `dong_quai-warfarin` + `dong_quai-warfarin-official` | Serious bleeding, including internal bleeding. |
 | Ginkgo | Warfarin | Official caution · sources disagree | `ginkgo-warfarin` + `ginkgo-warfarin-official` | Watch for unusual bruising or bleeding. |
 | Ginkgo | Aspirin | Official caution · sources disagree | `ginkgo-aspirin` + `ginkgo-aspirin-official` | Watch for unusual bruising or bleeding. |
 | Liquorice | Digoxin | Official caution | `liquorice-digoxin` + `liquorice-digoxin-official` | Low potassium can lead to a dangerous heart rhythm. |
@@ -138,9 +138,9 @@ A 'blood circulation' herbal mix (丹參, 三七, 紅花) taken with warfarin an
 
 | Herb | Medicine | Expected result | Entry | Why this matters for your heart |
 |---|---|---|---|---|
-| Danshen | Warfarin | High | `danshen-warfarin` + `danshen-warfarin-official` | Too much bleeding, including bleeding in the brain. |
+| Danshen | Warfarin | High | `danshen-warfarin` + `danshen-warfarin-official` | Serious bleeding, including internal bleeding. |
 | Sanqi | Aspirin | Moderate | `sanqi-aspirin` | A stronger anti-clotting effect could raise the chance of bleeding. |
-| Safflower | Warfarin | Moderate | `safflower-warfarin` | Too much bleeding, including bleeding in the brain. |
+| Safflower | Warfarin | Moderate | `safflower-warfarin` | Serious bleeding, including internal bleeding. |
 | Danshen | Aspirin | Low (watch) | `danshen-aspirin` | Watch for unusual bruising or bleeding. |
 | Sanqi | Warfarin | Low (watch) | `sanqi-warfarin` | If warfarin works too strongly you may bleed; if it works less well, the risk of clots and stroke rises. |
 | Safflower | Aspirin | Low | `safflower-aspirin` | Watch for unusual bruising or bleeding. |

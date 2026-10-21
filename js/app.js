@@ -1,19 +1,24 @@
 /*
- * HerbSafe app: cabinet dashboard, picker sheets, results cards and routing.
+ * HerbBridge app: cabinet dashboard, picker sheets, results cards and routing.
  * All medical content comes from data/*.json via js/lookup.js. Nothing is generated.
  * Data text is always inserted with textContent, never as HTML.
  */
 (function () {
   'use strict';
 
-  var L = window.HerbSafeLookup;
-  var I = window.HerbSafeI18n;
+  var L = window.HerbBridgeLookup;
+  var I = window.HerbBridgeI18n;
   var t = I.t;
   var STORAGE_KEY = 'herbsafe.v1';
 
   var db = null;
   var drugGroups = [];   // condition headings for the medicine picker, from data/drugs.json
   var state = { herbs: [], drugs: [], lang: 'en', demo: false };
+  // Display mode: "simple" (default, for older users) or "full". Kept on this device only.
+  var MODE_KEY = 'herbsafe.mode';
+  var mode = 'simple';
+  try { var savedMode = localStorage.getItem(MODE_KEY); if (savedMode === 'full' || savedMode === 'simple') mode = savedMode; } catch (e) { /* default */ }
+  document.documentElement.setAttribute('data-mode', mode);
   var app = document.getElementById('app');
 
   /* ---------- small helpers ---------- */
@@ -44,12 +49,18 @@
     not_in_database: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="3 2.6"/><path d="M9.4 9.3a2.7 2.7 0 1 1 3.8 2.5c-.8.4-1.2 1-1.2 1.8v.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17.2" r="1.2" fill="currentColor"/></svg>',
     official: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.8 4.5 5.6v5.6c0 4.6 3.1 8.6 7.5 10 4.4-1.4 7.5-5.4 7.5-10V5.6L12 2.8z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"/><path d="M12 8v5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="16.2" r="1.25" fill="currentColor"/></svg>',
     speaker: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+    leaf: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 19c0-8 5-13 14-14 0 9-5 14-13 14M5 19l7-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    pill: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.5" y="8.5" width="17" height="7" rx="3.5" transform="rotate(-35 12 12)" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m9.6 8.6 4.8 6.8" stroke="currentColor" stroke-width="1.8"/></svg>',
+    back: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     heart: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 20.5s-7.5-4.6-9.2-9.4C1.6 7.6 3.9 4.5 7.2 4.5c2 0 3.6 1.1 4.8 2.8 1.2-1.7 2.8-2.8 4.8-2.8 3.3 0 5.6 3.1 4.4 6.6-1.7 4.8-9.2 9.4-9.2 9.4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>',
     close: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 7l10 10M17 7 7 17" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>',
     plus: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 6v12M6 12h12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>',
     tick: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5.5 12.5l4 4 9-9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     chevron: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     arrow: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h13M13 6.5 18.5 12 13 17.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    home: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3.5 11 12 4l8.5 7M6 9.5V20h4.5v-5.5h3V20H18V9.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    view_simple: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 12h8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>',
+    view_full: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="4" width="16" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 9h8M8 12h8M8 15h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
     external: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
   };
   function icon(name, cls) {
@@ -67,6 +78,8 @@
       el('span', { class: 'name-secondary', text: secondaryName(item), lang: state.lang === 'zh' ? 'en-GB' : 'zh-HK' })
     ]);
   }
+  // "Label: " in English, "標籤：" (full-width colon) in Chinese.
+  function labelText(key) { return t(key) + (state.lang === 'zh' ? '：' : ': '); }
   function field(entry, base) {
     var zh = entry[base + '_zh'];
     return state.lang === 'zh' && zh ? zh : entry[base + '_en'];
@@ -135,6 +148,10 @@
     var inSheet = !!(sourceEl && sourceEl.closest && sourceEl.closest('.sheet'));
     var anchorKey = !inSheet && sourceEl ? sourceEl.getAttribute('data-key') : null;
     var anchorTop = anchorKey ? sourceEl.getBoundingClientRect().top : null;
+    // Removing a chip: the chip disappears, so the card it sat in is the anchor instead.
+    var removing = !inSheet && state[kind].indexOf(id) !== -1 && cards[kind];
+    var index = removing ? state[kind].indexOf(id) : -1;
+    var cardTop = removing ? cards[kind].getBoundingClientRect().top : null;
     var added = toggle(kind, id);
     if (added) {
       var clashes = clashesFor(kind, id);
@@ -155,7 +172,15 @@
       if (!alertState.rows.length) alertState = null;
     }
     refreshCheck();
-    if (anchorKey) {
+    if (removing) {
+      // No jump: the card stays where it was on screen. Focus: the next item, else the one before,
+      // else the list heading (screen readers then hear where they are).
+      window.scrollBy(0, cards[kind].getBoundingClientRect().top - cardTop);
+      var ids = state[kind];
+      var nextId = ids[index] || ids[index - 1];
+      var target = nextId ? findByKey('chip-' + kind + '-' + nextId) : document.getElementById('h-' + kind);
+      if (target) target.focus({ preventScroll: true });
+    } else if (anchorKey) {
       var again = findByKey(anchorKey);
       if (again) window.scrollBy(0, again.getBoundingClientRect().top - anchorTop);
     }
@@ -267,7 +292,6 @@
         onclick: function () { openSheet(kind, true); }
       }, [icon('plus'), el('span', { text: t(kind === 'herbs' ? 'step_add_herb' : 'step_add_drug') })]));
       rest.push(el('p', { class: 'step-then', text: t('step_then') }));
-      if (!nH && !nD) rest.push(el('button', { type: 'button', class: 'link-button demo-start', onclick: startDemo }, [el('span', { text: t('demo_try') })]));
     } else {
       var rows = L.checkPairs(db, state.herbs, state.drugs);
       var flagged = rows.filter(isFlagged);
@@ -278,7 +302,7 @@
         var list = el('ul', { class: 'status-list' });
         flagged.forEach(function (r) {
           list.appendChild(el('li', null, [
-            el('a', { class: 'status-row', href: '#/results', onclick: function () { pendingOpen = pairKey(r); } }, [
+            el('a', { class: 'status-row', href: pairHref(r) }, [
               badgeFor(r, 'span'), pairText(r), icon('chevron', 'row-go')
             ])
           ]));
@@ -291,7 +315,8 @@
       rest.push(el('a', { class: 'btn btn-secondary btn-small status-more', href: '#/results' }, [el('span', { text: t('cabinet_see_all') }), icon('arrow')]));
     }
 
-    statusTile.className = 'status status-' + tone;
+    // Ready (both lists filled): Simple mode hides this card, unless it warns that the list cannot be saved.
+    statusTile.className = 'status status-' + tone + (nH && nD && storageOk ? ' status-ready' : '');
     statusTile.appendChild(el('div', { class: 'status-head' }, [
       tone === 'neutral' ? null : icon(tone, 'status-icon tone-' + tone),
       el('h2', { id: 'h-status', tabindex: '-1', text: title })
@@ -308,7 +333,7 @@
     var ids = state[kind];
     box.textContent = '';
     box.appendChild(el('div', { class: 'cab-head' }, [
-      el('h2', { id: 'h-' + kind, text: t(kind === 'herbs' ? 'summary_herbs' : 'summary_drugs') }),
+      el('h2', { id: 'h-' + kind, tabindex: '-1', text: t(kind === 'herbs' ? 'summary_herbs' : 'summary_drugs') }),
       el('p', { class: 'cab-count', text: ids.length ? t('selected_count', { n: ids.length }) : t('selected_none') })
     ]));
     if (ids.length) {
@@ -548,6 +573,9 @@
     var bar = checkBar.bar;
     bar.classList.remove('is-static');
     if (bar.offsetHeight > window.innerHeight * 0.28) bar.classList.add('is-static');
+    // Scrolling (and focus) keeps everything clear of the bar: the bottom padding equals its height.
+    var h = bar.classList.contains('is-static') || bar.hidden ? 0 : bar.offsetHeight;
+    document.documentElement.style.setProperty('--check-bar-h', h + 'px');
   }
   window.addEventListener('resize', fitCheckBar);
 
@@ -587,7 +615,6 @@
     }
     showClear(false);
     var clear = clearBox;
-    var demo = el('button', { type: 'button', class: 'btn btn-quiet', onclick: startDemo }, [el('span', { text: t('demo_button') })]);
 
     app.textContent = '';
     demoBox = el('section', { class: 'demo-banner', 'aria-labelledby': 'h-demo', hidden: true });
@@ -601,6 +628,7 @@
       el('div', { class: 'dash-main' }, [
         el('header', { class: 'page-head' }, [
           el('h1', { tabindex: '-1', text: t('cabinet_title') }),
+          state.demo ? null : el('button', { type: 'button', class: 'btn btn-secondary btn-small demo-start demo-top', onclick: startDemo }, [el('span', { text: t('demo_button') })]),
           el('p', { class: 'subtitle', text: t('cabinet_for') }),
           el('p', { class: 'lede', text: t('cabinet_lede') })
         ]),
@@ -612,7 +640,7 @@
       el('div', { class: 'check-bar-inner' }, [notice, status, button])
     ]);
     app.appendChild(checkBar.bar);
-    app.appendChild(el('div', { class: 'below-bar' }, [clear, ' ', demo]));
+    app.appendChild(el('div', { class: 'below-bar' }, [clear]));
     renderCard('herbs');
     renderCard('drugs');
     renderDemo();
@@ -624,7 +652,6 @@
   /* ---------- Results screen: grouped by level, each card opens for details ---------- */
 
   var openCards = {};     // pair key → true while that card is open (kept across language switches)
-  var pendingOpen = null; // pair tapped on the dashboard: open it on the results screen
 
   function badge(status, watch, tag, disagree) {
     var key = status === 'low' && watch ? 'risk_low_watch'
@@ -647,8 +674,9 @@
   }
 
   function sourceLink(s) {
-    return el('a', { href: s.url, target: '_blank', rel: 'noopener noreferrer' }, [
-      el('span', { text: s.label }), icon('external', 'ext'),
+    var zh = state.lang === 'zh';
+    return el('a', { href: zh && s.url_zh ? s.url_zh : s.url, target: '_blank', rel: 'noopener noreferrer' }, [
+      el('span', { text: zh && s.label_zh ? s.label_zh : s.label }), icon('external', 'ext'),
       el('span', { class: 'visually-hidden', text: ' ' + t('opens_new_tab') })
     ]);
   }
@@ -734,11 +762,17 @@
     ]);
   }
 
+  // The HA warfarin leaflet names ginseng (人參, i.e. Asian ginseng), dong quai and danshen (and chishao,
+  // not in HerbBridge). Its own intro line is used only on those herbs' cards.
+  var HA_LEAFLET = 'ha-warfarin-leaflet-tcm';
+  var HA_LEAFLET_NAMES = ['danshen', 'dong_quai', 'asian_ginseng'];
+
   /* An official caution: the agency's own words (never reworded), its document, date and section.
      In Chinese the translation is shown first, then the English original, which is what counts. */
   function officialBlock(r) {
     var o = r.official;
-    var intro = !r.entry ? 'official_intro_none' : o.kind === 'disagree' ? 'official_intro_disagree' : 'official_intro_rated';
+    var intro = !r.entry ? 'official_intro_none' : o.kind === 'disagree' ? 'official_intro_disagree'
+      : o.statements[0] === HA_LEAFLET && HA_LEAFLET_NAMES.indexOf(r.herb.id) !== -1 ? 'official_intro_ha' : 'official_intro_rated';
     var box = el('div', { class: 'official-box' }, [el('p', { class: 'official-intro', text: t(intro) })]);
     // The first statement is always shown; any others fold away behind one big button (all print).
     var moreKey = pairKey(r) + '|official';
@@ -775,7 +809,6 @@
       box.appendChild(moreBtn);
       box.appendChild(more);
     }
-    box.appendChild(el('p', { class: 'official-action' }, [el('strong', { text: t('label_what_to_do') + ': ' }), el('span', { text: t('official_action') })]));
     return box;
   }
 
@@ -783,58 +816,140 @@
 
   var speaking = null; // the button whose card is being read
   function speechOk() { return 'speechSynthesis' in window && typeof window.SpeechSynthesisUtterance === 'function'; }
-  function deviceVoice() {
-    var voices = window.speechSynthesis.getVoices().filter(function (v) { return v.localService !== false; });
-    var want = state.lang === 'zh' ? /^(zh-HK|yue)/i : /^en/i;
-    var pick = voices.filter(function (v) { return want.test(v.lang); });
-    if (state.lang === 'en') pick.sort(function (a, b) { return (/^en-GB/i.test(b.lang) ? 1 : 0) - (/^en-GB/i.test(a.lang) ? 1 : 0); });
-    return pick[0] || null;
+
+  /* The voice list loads late on iPhones (often empty until "voiceschanged", sometimes with no event
+     at all). It is loaded in the background, because iOS only lets a page speak when speak() runs
+     straight away in the tap: there is no waiting at tap time. */
+  var voiceList = [];
+  // Novelty and character voices (Apple and others): never used for health information.
+  var NOVELTY = /\b(Albert|Bad News|Bahh|Bells|Boing|Bubbles|Cellos|Deranged|Good News|Hysterical|Jester|Organ|Pipe Organ|Superstar|Trinoids|Whisper|Wobble|Zarvox|Grandma|Grandpa|Eddy|Flo|Reed|Rocko|Sandy|Shelley|Fred|Junior|Kathy|Ralph|Princess|Bruce|Agnes|Vicki|Victoria)\b/i;
+  function refreshVoices() {
+    try { voiceList = window.speechSynthesis.getVoices() || []; } catch (e) { voiceList = []; }
+    updateVoiceAvailability();
   }
-  // What a card says, in a short spoken form: pair, level, main point, what to do, disclaimer.
-  function speechText(r) {
-    var parts = [primaryName(r.herb) + ' ' + t('and_sr') + ' ' + primaryName(r.drug) + '.'];
-    if (!r.entry && !r.official) {
-      parts.push(t('risk_not_in_database') + '.', t('not_in_db_text'));
-      if (r.advice) parts.push(state.lang === 'zh' ? r.advice.quote_zh : r.advice.quote_en);
-    } else {
-      parts.push((r.status === L.OFFICIAL || !r.entry ? riskLabel(r) : badgeText(r.entry)) + '.');
-      if (r.official) { var s = db.statementById[r.official.statements[0]]; parts.push((state.lang === 'zh' ? s.body_zh : s.body_en) + ': ' + (state.lang === 'zh' ? s.quote_zh : s.quote_en)); }
-      if (r.entry) parts.push(field(r.entry, 'effect'), t('label_what_to_do') + ': ' + field(r.entry, 'action'));
-      else parts.push(t('label_what_to_do') + ': ' + t('official_action'));
-    }
-    parts.push(t('card_disclaimer'));
-    return parts.join(' ');
+  // Which voice to use for a language: { voice, lang }, or null when Read aloud cannot be offered.
+  // 1. an on-device voice for the language (Cantonese; English, British first);
+  // 2. another on-device voice of the same language family (e.g. Mandarin when there is no Cantonese);
+  // 3. no voice list at all (some iPhone in-app browsers): the phone's default voice, language set;
+  // never an online-only voice, so the text never leaves the phone.
+  function voiceFor(lang) {
+    var want = lang === 'zh' ? 'zh-HK' : 'en-GB';
+    var family = lang === 'zh' ? /^(zh|yue|cmn)/i : /^en/i;
+    var exact = lang === 'zh' ? /^(zh[-_]HK|yue)/i : /^en/i;
+    var local = voiceList.filter(function (v) { return v.localService !== false && !NOVELTY.test(v.name || ''); });
+    var best = local.filter(function (v) { return exact.test(v.lang); });
+    if (!best.length) best = local.filter(function (v) { return family.test(v.lang); });
+    // Natural-sounding voices first ("Daniel (Enhanced)", "Sinji (Premium)"), then British English.
+    best.sort(function (a, b) {
+      var q = function (v) { return (/enhanced|premium/i.test(v.name || '') ? 2 : 0) + (lang === 'en' && /^en[-_]GB/i.test(v.lang) ? 1 : 0); };
+      return q(b) - q(a);
+    });
+    if (best.length) return { voice: best[0], lang: best[0].lang || want };
+    if (!voiceList.length) return { voice: null, lang: want };
+    return null;
   }
+  function updateVoiceAvailability() {
+    document.documentElement.classList.toggle('no-voice', speechOk() && voiceList.length > 0 && voiceFor(state.lang) === null);
+  }
+  if (speechOk()) {
+    refreshVoices();
+    try {
+      if (window.speechSynthesis.addEventListener) window.speechSynthesis.addEventListener('voiceschanged', refreshVoices);
+      else window.speechSynthesis.onvoiceschanged = refreshVoices;
+    } catch (e) { /* ignore */ }
+    [250, 750, 1500, 3000].forEach(function (ms) { window.setTimeout(refreshVoices, ms); });
+  }
+  // The listening version of a card (js/speech.js): names + rating, What to do, official quote, heart line.
+  function speechParts(r) { return window.HerbBridgeSpeech.script(db, r, state.lang, t, primaryName); }
+
+  /* Pre-recorded audio (audio/<herb>-<drug>.<lang>.mp3), listed in audio/manifest.json. The files are
+     loaded when the app opens, so a tap can start playing straight away (iPhones need that). */
+  var recordings = {}; // "danshen-warfarin.en" → object URL
+  function loadRecordings() {
+    if (!window.fetch || !window.URL || !URL.createObjectURL) return;
+    fetch('audio/manifest.json', { cache: 'no-cache' }).then(function (res) { return res.ok ? res.json() : { files: [] }; }).then(function (m) {
+      (m.files || []).forEach(function (f) {
+        var key = String(f).replace(/^audio\//, '').replace(/\.mp3$/, '');
+        fetch('audio/' + key + '.mp3').then(function (res) { return res.ok ? res.blob() : null; }).then(function (blob) {
+          if (blob && blob.size) recordings[key] = URL.createObjectURL(blob);
+        }).catch(function () { /* phone voice instead */ });
+      });
+    }).catch(function () { /* no recordings */ });
+  }
+  loadRecordings();
+  var playing = null; // current Audio element
+  var readRun = 0;    // each tap is a new run; events from an earlier, stopped run are ignored
   function badgeText(e) { return t(e.risk === 'low' && e.watch ? 'risk_low_watch' : 'risk_' + e.risk); }
   function stopSpeaking() {
     if (!speaking) return;
     var btn = speaking; speaking = null;
-    try { window.speechSynthesis.cancel(); } catch (e) { /* ignore */ }
+    if (playing) { try { playing.pause(); } catch (e) { /* ignore */ } playing = null; }
+    try { if (speechOk()) window.speechSynthesis.cancel(); } catch (e) { /* ignore */ }
     btn.setAttribute('aria-pressed', 'false');
     btn.querySelector('.read-label').textContent = t('read_aloud');
   }
   function readButton(r) {
-    if (!speechOk()) return null;
+    var recKey = r.herb.id + '-' + r.drug.id + '.' + state.lang;
+    if (!speechOk() && !recordings[recKey]) return null;
     var msg = el('p', { class: 'read-msg', role: 'status', hidden: true });
     var btn = el('button', { type: 'button', class: 'read-aloud', 'aria-pressed': 'false', onclick: function () {
       if (speaking === btn) { stopSpeaking(); return; }
       stopSpeaking();
-      var voice = deviceVoice();
-      if (!voice) { msg.textContent = t(state.lang === 'zh' ? 'read_no_voice_zh' : 'read_no_voice_en'); msg.hidden = false; return; }
       msg.hidden = true;
-      var u = new window.SpeechSynthesisUtterance(speechText(r));
-      u.voice = voice; u.lang = voice.lang; u.rate = 0.9;
-      u.onend = u.onerror = function () { if (speaking === btn) stopSpeaking(); };
-      speaking = btn;
-      btn.setAttribute('aria-pressed', 'true');
-      btn.querySelector('.read-label').textContent = t('read_stop');
-      window.speechSynthesis.speak(u);
+      var started = false, run = ++readRun;
+      function mine() { return speaking === btn && readRun === run; }
+      // The message appears only when speaking actually fails.
+      function fail() {
+        if (readRun !== run) return;
+        if (speaking === btn) stopSpeaking();
+        msg.textContent = t('read_failed'); msg.hidden = false;
+      }
+      function begin() {
+        speaking = btn;
+        btn.setAttribute('aria-pressed', 'true');
+        btn.querySelector('.read-label').textContent = t('read_stop');
+      }
+      // A recording for this pair and language: play it instead of the phone voice.
+      var rec = recordings[r.herb.id + '-' + r.drug.id + '.' + state.lang];
+      if (rec) {
+        var audio = new Audio(rec);
+        playing = audio; begin();
+        audio.onended = function () { if (mine()) { stopSpeaking(); showNextStep(); } };
+        audio.onplaying = function () { started = true; };
+        var p = audio.play();
+        if (p && p.catch) p.catch(function () { if (mine() && playing === audio) fail(); });
+        return;
+      }
+      if (!speechOk()) return;
+      refreshVoices();
+      var choice = voiceFor(state.lang);
+      if (!choice) return; // only online voices: the button is hidden by updateVoiceAvailability()
+      // One short utterance per section, so the voice pauses naturally between them.
+      var parts = speechParts(r);
+      begin();
+      parts.forEach(function (text, i) {
+        var u = new window.SpeechSynthesisUtterance(text);
+        if (choice.voice) u.voice = choice.voice;
+        u.lang = choice.lang;
+        u.rate = state.lang === 'zh' ? 0.85 : 0.9;
+        u.pitch = 1;
+        u.onstart = function () { started = true; };
+        if (i === parts.length - 1) u.onend = function () { if (mine()) { stopSpeaking(); showNextStep(); } };
+        u.onerror = function (ev) {
+          if (ev && (ev.error === 'interrupted' || ev.error === 'canceled')) { if (mine()) stopSpeaking(); return; }
+          fail();
+        };
+        window.speechSynthesis.speak(u);
+      });
+      window.setTimeout(function () {
+        var busy = false;
+        try { busy = window.speechSynthesis.speaking || window.speechSynthesis.pending; } catch (e) { /* ignore */ }
+        if (mine() && !started && !busy) fail();
+      }, 4000);
     } }, [icon('speaker'), el('span', { class: 'read-label', text: t('read_aloud') })]);
     return el('div', { class: 'read-row' }, [btn, msg]);
   }
   window.addEventListener('hashchange', stopSpeaking);
-  // Some browsers load their voice list late.
-  if (speechOk() && window.speechSynthesis.addEventListener) window.speechSynthesis.addEventListener('voiceschanged', function () {});
 
   function card(r) {
     var key = pairKey(r);
@@ -842,6 +957,7 @@
       return el('article', { class: 'card card-official', 'data-pair': key }, [
         el('header', { class: 'card-head' }, [pairTitle(r), badgeFor(r)]),
         readButton(r),
+        el('div', { class: 'todo' }, [el('h4', { class: 'block-label', text: t('label_what_to_do') }), el('p', { text: t('official_action') })]),
         officialBlock(r),
         cardAdvice(r),
         el('p', { class: 'card-disclaimer' }, disclaimerText(r))
@@ -909,7 +1025,7 @@
       withOfficial ? officialBlock(r) : null,
       withOfficial ? el('div', { class: 'studies-head' }, [
         el('h4', { class: 'block-label', text: t('label_studies') }),
-        el('p', { class: 'team-rating' }, [el('span', { text: t('label_team_rating') + ': ' }), badge(e.risk, e.watch, 'span')])
+        el('p', { class: 'team-rating' }, [el('span', { text: labelText('label_team_rating') }), badge(e.risk, e.watch, 'span')])
       ]) : null,
       el('p', { class: 'effect', text: field(e, 'effect') }),
       field(e, 'heart_impact') ? el('div', { class: 'heart-impact' }, [
@@ -927,60 +1043,237 @@
     return art;
   }
 
+  /* ---------- Display mode, steps and compact cards ---------- */
+
+  function applyMode() {
+    document.documentElement.setAttribute('data-mode', mode);
+    ['simple', 'full'].forEach(function (m) {
+      var b = document.getElementById('mode-' + m);
+      if (b) b.setAttribute('aria-pressed', mode === m ? 'true' : 'false');
+    });
+  }
+  function setMode(m) {
+    if (m === mode) return;
+    mode = m;
+    try { localStorage.setItem(MODE_KEY, m); } catch (e) { /* stays for this visit */ }
+    render(false);
+  }
+  // A coloured strip on every screen says which mode is on, so the two look different at a glance.
+  function modeStrip() {
+    var simple = mode === 'simple';
+    return el('div', { class: 'mode-strip mode-strip-' + mode, role: 'note' }, [
+      icon(simple ? 'view_simple' : 'view_full', 'mode-strip-icon'),
+      (function () {
+        var parts = t(simple ? 'mode_strip_simple' : 'mode_strip_full').split(' · ');
+        return el('p', { class: 'mode-strip-text' }, [el('span', { text: parts[0] }), parts[1] ? el('span', { class: 'mode-strip-detail', text: ' · ' + parts[1] }) : null]);
+      })(),
+      el('button', { type: 'button', class: 'mode-strip-btn', onclick: function () { setMode(simple ? 'full' : 'simple'); } },
+        [el('span', { text: t(simple ? 'mode_strip_to_full' : 'mode_strip_to_simple') })])
+    ]);
+  }
+  // Chinese headings: the last character and the closing 。！？ stay on one line (never a lone 。).
+  function keepEndTogether(root) {
+    if (state.lang !== 'zh') return;
+    Array.prototype.forEach.call(root.querySelectorAll('h1, h2'), function (h) {
+      if (h.children.length || !/[㐀-鿿][。！？]$/.test(h.textContent)) return;
+      var text = h.textContent;
+      h.textContent = text.slice(0, -2);
+      h.appendChild(el('span', { class: 'keep-end', text: text.slice(-2) }));
+    });
+  }
+  function homeLink() {
+    return el('a', { class: 'home-link', href: '#/cabinet' }, [icon('home'), el('span', { text: t('nav_home') })]);
+  }
+  // The last step on every pair page: show the doctor, with the sentence to say and the summary.
+  function nextStep(rows) {
+    return el('section', { class: 'next-step', id: 'next-step', tabindex: '-1', 'aria-labelledby': 'h-next' }, [
+      el('h2', { id: 'h-next', text: t('next_title') }),
+      el('p', { class: 'next-say', text: window.HerbBridgeSpeech.youCanSay(rows, state.lang, t) }),
+      el('a', { class: 'btn btn-primary btn-next', href: '#/summary' }, [el('span', { text: t('next_button') }), icon('arrow')])
+    ]);
+  }
+  // When reading aloud finishes on a pair page, bring the next step into view.
+  function showNextStep() {
+    var next = document.getElementById('next-step');
+    if (!next) return;
+    next.classList.add('is-now');
+    next.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    next.focus({ preventScroll: true });
+  }
+  // Simple: one step at a time, said in words ("Step 2 of 3").
+  function stepLine(n) { return el('p', { class: 'step-line', text: t('step_of', { n: n, total: 3 }) }); }
+  function pairHref(r) { return '#/pair/' + r.herb.id + '-' + r.drug.id; }
+  function stepsBar(current) {
+    var labels = ['nav_check', 'step_results', 'step_details'];
+    return el('ol', { class: 'steps', 'aria-label': t('steps_label') }, labels.map(function (k, i) {
+      var n = i + 1;
+      return el('li', { class: n < current ? 'done' : n === current ? 'now' : '', 'aria-current': n === current ? 'step' : null }, [
+        el('span', { class: 'step-n', 'aria-hidden': 'true', text: String(n) }), el('span', { text: t(k) })
+      ]);
+    }));
+  }
+  // The first sentence only (Simple mode cards); the full text is on the detail screen.
+  function firstSentence(s) {
+    // English full stop needs a space or the end after it ("e.g." safe); Chinese 。！？ end a sentence
+    // directly, and a ； clause counts as one too (the English has a full stop there), closed with 。.
+    var m = /^[\s\S]*?(?:[.!?](?=\s|$)|[。！？；])/.exec(s || '');
+    return m ? m[0].replace(/；$/, '。') : s;
+  }
+  function cardName(item, kind) {
+    if (mode === 'full') return el('span', { class: 'name-with-icon' }, [icon(kind === 'herb' ? 'leaf' : 'pill', 'kind-icon'), nameNode(item)]);
+    return el('span', { class: 'name' }, [el('span', { class: 'name-primary', text: primaryName(item), lang: state.lang === 'zh' ? 'zh-HK' : 'en-GB' })]);
+  }
+  function shortLine(r) {
+    var zh = state.lang === 'zh';
+    if (r.status === L.NOT_IN_DATABASE) return el('p', { class: 'pair-line pair-line-unknown', text: t('not_in_db_text') });
+    if (mode === 'simple') {
+      var act = r.entry ? field(r.entry, 'action') : t('official_action');
+      return el('p', { class: 'pair-line' }, [el('strong', { text: labelText('label_what_to_do') }), el('span', { text: firstSentence(act) })]);
+    }
+    if (r.entry && field(r.entry, 'heart_impact')) return el('p', { class: 'pair-line', text: field(r.entry, 'heart_impact') });
+    var s = db.statementById[r.official.statements[0]];
+    return el('p', { class: 'pair-line pair-line-quote' }, [el('strong', { text: (zh ? s.body_zh + '：' : s.body_en + ': ') }), el('span', { text: '“' + (zh ? s.quote_zh : s.quote_en) + '”' })]);
+  }
+  // Full details only: What to do in full, the evidence levels and how many sources, on the card itself.
+  function fullFacts(r) {
+    if (mode !== 'full' || r.status === L.NOT_IN_DATABASE) return null;
+    var act = r.entry ? field(r.entry, 'action') : t('official_action');
+    var rows = [el('p', { class: 'pair-fact' }, [el('strong', { text: labelText('label_what_to_do') }), el('span', { text: act })])];
+    if (r.entry) {
+      rows.push(el('p', { class: 'pair-fact pair-fact-meta' }, [
+        el('strong', { text: labelText('label_evidence') }),
+        el('span', { text: r.entry.evidence_level.map(function (l) { return t('ev_' + l); }).join(' · ') }),
+        el('span', { class: 'pair-fact-count', text: I.tn('sources_count', r.entry.sources.length) })
+      ]));
+    }
+    return el('span', { class: 'pair-facts' }, rows);
+  }
+  function compactCard(r) {
+    var tag = mode === 'full' && r.official && r.status !== L.NOT_IN_DATABASE;
+    return el('a', { class: 'pair-card tone-' + r.status, href: pairHref(r), 'data-pair': pairKey(r) }, [
+      el('span', { class: 'pair-card-top' }, [badgeFor(r, 'span'), tag ? el('span', { class: 'tag-official', text: t('tag_official') }) : null]),
+      el('span', { class: 'pair-card-names' }, [
+        cardName(r.herb, 'herb'), ' ', el('span', { class: 'pair-plus', 'aria-hidden': 'true', text: '+' }), ' ',
+        el('span', { class: 'visually-hidden', text: t('and_sr') + ' ' }), cardName(r.drug, 'drug')
+      ]),
+      shortLine(r),
+      fullFacts(r),
+      el('span', { class: 'pair-card-go' }, [el('span', { text: t('alert_details') }), icon('chevron')])
+    ]);
+  }
+  // Several "not in our database" pairs: one grey card with the required wording once, each pair a link.
+  function compactUnknownGroup(rows) {
+    var list = el('ul', { class: 'unknown-links' });
+    rows.forEach(function (r) {
+      list.appendChild(el('li', null, [el('a', { href: pairHref(r), 'data-pair': pairKey(r) }, [
+        icon('not_in_database', 'unknown-mark'),
+        el('span', { class: 'unknown-pair' }, [primaryName(r.herb), ' + ', primaryName(r.drug)]),
+        icon('chevron', 'row-go')
+      ])]));
+    });
+    return el('div', { class: 'pair-card pair-card-group tone-not_in_database' }, [
+      el('span', { class: 'pair-card-top' }, [badge('not_in_database', false, 'span')]),
+      el('p', { class: 'pair-line pair-line-unknown', text: t('not_in_db_text') }),
+      list
+    ]);
+  }
+
   function renderResults() {
     app.textContent = '';
     var results = L.checkPairs(db, state.herbs, state.drugs);
+    var full = mode === 'full';
     var head = el('header', { class: 'page-head results-head' }, [
-      el('h1', { tabindex: '-1', text: t('results_title') })
+      el('div', { class: 'page-nav' }, [homeLink()]),
+      full ? stepsBar(2) : stepLine(2),
+      el('p', { class: 'kicker', text: t('results_title') })
     ]);
-    app.appendChild(head);
-
+    app.appendChild(full ? el('div', { class: 'hero' }, [head]) : head);
     if (!results.length) {
-      head.appendChild(el('p', { class: 'lede', text: t('results_empty') }));
-      head.appendChild(el('a', { class: 'btn btn-primary head-action', href: '#/check', text: t('back_to_check') }));
+      head.appendChild(el('h1', { tabindex: '-1', text: t('results_empty') }));
+      head.appendChild(el('a', { class: 'btn btn-primary head-action', href: '#/cabinet', text: t('back_to_check') }));
       return null;
     }
-
-    var target = pendingOpen;
-    pendingOpen = null;
-    if (target) openCards[target] = true;
-
     var flagged = results.filter(isFlagged).length;
     var unknown = results.filter(function (r) { return r.status === L.NOT_IN_DATABASE; }).length;
-    head.appendChild(el('p', { class: 'lede', text: t('results_intro') }));
-    var tally = el('ul', { class: 'tally' });
-    if (flagged) tally.appendChild(el('li', { class: 'tally-flagged', text: t('results_counts_flagged', { n: flagged }) }));
-    if (unknown) tally.appendChild(el('li', { class: 'tally-unknown', text: t('results_counts_unknown', { n: unknown }) }));
-    head.appendChild(tally);
-    head.appendChild(el('p', { class: 'disclaimer-box' }, disclaimerText()));
+    // The headline never sounds like "all clear": no record is said as no record.
+    var headline = flagged ? I.tn('results_need', flagged) : unknown ? I.tn('results_norec_head', unknown) : t('level_none_reported');
+    head.appendChild(el('h1', { tabindex: '-1', text: headline }));
+    if (flagged && unknown) head.appendChild(el('ul', { class: 'result-chips' }, [el('li', { text: I.tn('results_norec', unknown) })]));
 
-    // Groups in the fixed order High → Moderate → Low → No reported risk → Not in our database.
-    L.STATUS_ORDER.forEach(function (status) {
-      var rows = results.filter(function (r) { return r.status === status; });
-      if (!rows.length) return;
-      var list = el('ol', { class: 'cards' });
-      if (status === L.NOT_IN_DATABASE && rows.length > 1) list.appendChild(el('li', null, [unknownGroupCard(rows)]));
-      else rows.forEach(function (r) { list.appendChild(el('li', null, [card(r)])); });
-      app.appendChild(el('section', { class: 'group group-' + status, 'aria-labelledby': 'g-' + status }, [
-        el('h2', { class: 'group-head', id: 'g-' + status }, [
-          el('span', { class: 'group-mark', 'aria-hidden': 'true' }),
-          el('span', { class: 'group-name', text: t('risk_' + status) }),
-          el('span', { class: 'group-count' }, [
-            el('span', { 'aria-hidden': 'true', text: String(rows.length) }),
-            el('span', { class: 'visually-hidden', text: ' ' + I.tn('group_count', rows.length) })
-          ])
-        ]),
-        list
-      ]));
-    });
+    var list = el('ol', { class: 'pair-cards' });
+    var greys = results.filter(function (r) { return r.status === L.NOT_IN_DATABASE; });
+    results.forEach(function (r) { if (r.status !== L.NOT_IN_DATABASE) list.appendChild(el('li', null, [compactCard(r)])); });
+    if (greys.length === 1) list.appendChild(el('li', null, [compactCard(greys[0])]));
+    else if (greys.length > 1) list.appendChild(el('li', null, [compactUnknownGroup(greys)]));
+    app.appendChild(list);
+    app.appendChild(el('p', { class: 'disclaimer-box' }, disclaimerText()));
 
-    app.appendChild(el('div', { class: 'actions' }, [
-      el('a', { class: 'btn btn-secondary', href: '#/check', text: t('edit_list') }),
-      el('a', { class: 'btn btn-primary', href: '#/summary', text: t('to_summary') })
+    app.appendChild(el('div', { class: 'actions actions-stack' }, [
+      el('a', { class: 'btn btn-primary', href: '#/summary', text: t('to_summary') }),
+      el('a', { class: 'btn btn-quiet', href: '#/cabinet', text: t('edit_list') })
     ]));
+    return null;
+  }
 
-    var opened = target ? app.querySelector('[data-pair="' + target + '"] .pair') : null;
-    return opened;
+  /* ---------- Pair detail screen ---------- */
+
+  function renderPair(p) {
+    app.textContent = '';
+    var r = p ? L.checkPairs(db, [p.herb], [p.drug])[0] : null;
+    var back = el('a', { class: 'back-link', href: '#/results' }, [icon('back'), el('span', { text: t('back_to_results') })]);
+    if (!r) {
+      app.appendChild(el('header', { class: 'page-head' }, [back, el('h1', { tabindex: '-1', text: t('results_empty') })]));
+      return;
+    }
+    var full = mode === 'full';
+    var key = pairKey(r);
+    app.appendChild(el('header', { class: 'page-head pair-head' }, [
+      el('div', { class: 'page-nav' }, [back, homeLink()]),
+      full ? stepsBar(3) : stepLine(3),
+      el('h1', { tabindex: '-1', class: 'pair-h1' }, [
+        nameNode(r.herb), ' ', el('span', { class: 'pair-plus', 'aria-hidden': 'true', text: '+' }), ' ',
+        el('span', { class: 'visually-hidden', text: t('and_sr') + ' ' }), nameNode(r.drug)
+      ])
+    ]));
+    // The full card (its own title is the page heading above). Full details opens everything.
+    if (full) openCards[key] = true;
+    var whole = card(r);
+    var title = whole.querySelector('h3.pair');
+    if (title) title.parentNode.removeChild(title);
+    if (full) {
+      Array.prototype.forEach.call(whole.querySelectorAll('details'), function (d) { d.open = true; });
+      app.appendChild(whole);
+      app.appendChild(nextStep([r]));
+      return;
+    }
+
+    // Simple: badge, What to do, the required grey wording, disclaimer; everything else behind one button.
+    var grey = r.status === L.NOT_IN_DATABASE;
+    var todo = grey ? t('unknown_next_text') : r.entry ? field(r.entry, 'action') : t('official_action');
+    ['.read-row', '.official-box', '.todo'].forEach(function (sel) {
+      var node = whole.querySelector(sel);
+      if (node) node.parentNode.removeChild(node);
+    });
+    var more = el('div', { class: 'more-box', id: 'more-' + key.replace('|', '-'), hidden: true }, [whole]);
+    var moreLabel = el('span', { text: t('more_details') });
+    var moreBtn = el('button', { type: 'button', class: 'btn btn-secondary more-btn', 'aria-expanded': 'false', 'aria-controls': more.id, onclick: function () {
+      var open = more.hidden;
+      more.hidden = !open;
+      moreBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      moreLabel.textContent = t(open ? 'fewer_details' : 'more_details');
+    } }, [moreLabel, icon('chevron', 'toggle-chev')]);
+    app.appendChild(el('article', { class: 'pair-simple tone-' + r.status }, [
+      el('div', { class: 'pair-simple-badge' }, [badgeFor(r)]),
+      readButton(r),
+      grey ? el('p', { class: 'unknown-text', text: t('not_in_db_text') }) : null,
+      el('div', { class: 'todo' }, [el('h2', { text: t('label_what_to_do') }), el('p', { text: todo })]),
+      r.official ? officialBlock(r) : null,
+      grey ? el('a', { class: 'btn btn-primary', href: '#/summary' }, [el('span', { text: t('unknown_next_button') }), icon('arrow')]) : null,
+      el('p', { class: 'disclaimer-box' }, disclaimerText(r))
+    ]));
+    app.appendChild(moreBtn);
+    app.appendChild(more);
+    app.appendChild(nextStep([r]));
   }
 
   /* ---------- Doctor summary (printable) ---------- */
@@ -994,7 +1287,7 @@
   function sourceList(sources) {
     var ol = el('ol', { class: 'sources' });
     sources.forEach(function (s) {
-      ol.appendChild(el('li', null, [sourceLink(s), el('span', { class: 'print-url', text: s.url })]));
+      ol.appendChild(el('li', null, [sourceLink(s), el('span', { class: 'print-url', text: state.lang === 'zh' && s.url_zh ? s.url_zh : s.url })]));
     });
     return ol;
   }
@@ -1026,20 +1319,27 @@
     var page = el('article', { class: 'summary' });
     app.appendChild(page);
     page.appendChild(el('header', { class: 'summary-head' }, [
-      el('p', { class: 'summary-kicker', text: 'HerbSafe 中西通 · ' + t('summary_title') }),
+      el('p', { class: 'summary-kicker', text: 'HerbBridge 中西通 · ' + t('summary_title') }),
       el('h1', { tabindex: '-1', text: t('summary_headline') }),
       el('p', { class: 'muted', text: t('summary_generated', { date: formatDate(new Date()) }) })
     ]));
 
     if (!state.herbs.length && !state.drugs.length) {
       page.appendChild(el('p', { class: 'lede', text: t('summary_empty') }));
-      page.appendChild(el('a', { class: 'btn btn-primary no-print', href: '#/check', text: t('back_to_check') }));
+      page.appendChild(el('a', { class: 'btn btn-primary no-print', href: '#/cabinet', text: t('back_to_check') }));
       return;
+    }
+
+    // The sentence to say to the doctor, once, for the pairs that need attention (all pairs if none do).
+    var sayRows = L.checkPairs(db, state.herbs, state.drugs);
+    if (sayRows.length) {
+      var needs = sayRows.filter(isFlagged);
+      page.appendChild(el('p', { class: 'summary-say' }, [window.HerbBridgeSpeech.youCanSay(needs.length ? needs : sayRows, state.lang, t)]));
     }
 
     page.appendChild(el('div', { class: 'no-print summary-actions' }, [
       el('button', { type: 'button', class: 'btn btn-primary', onclick: function () { window.print(); } }, [el('span', { text: t('summary_print') })]),
-      el('a', { class: 'btn btn-secondary', href: '#/check', text: t('edit_list') })
+      el('a', { class: 'btn btn-secondary', href: '#/cabinet', text: t('edit_list') })
     ]));
 
     page.appendChild(el('section', { class: 'summary-lists' }, [
@@ -1145,7 +1445,7 @@
       el('p', { class: 'lede', text: t('about_intro') })
     ]));
 
-    // Why HerbSafe focuses on heart patients (Challenge 4: cardiovascular disease).
+    // Why HerbBridge focuses on heart patients (Challenge 4: cardiovascular disease).
     var why = el('ul', { class: 'about-heart' });
     why.appendChild(el('li', { text: t('about_heart_1') }));
     why.appendChild(el('li', { text: t('about_heart_2') }));
@@ -1246,7 +1546,7 @@
 
     var next = el('ul', { class: 'about-next' });
     ['about_next_1', 'about_next_2', 'about_next_3', 'about_next_4'].forEach(function (k) { next.appendChild(el('li', { text: t(k) })); });
-    page.appendChild(section('about_next_title', [next, el('p', { class: 'muted', text: t('about_team') })]));
+    page.appendChild(section('about_next_title', [next]));
   }
 
   /* ---------- Installable app ---------- */
@@ -1305,8 +1605,14 @@
 
   /* ---------- routing ---------- */
 
+  // Screens: #/cabinet (also #/check), #/results, #/pair/<herb>-<drug>, #/summary, #/about.
+  var routeParam = null;
   function currentRoute() {
     var r = (location.hash || '').replace(/^#\/?/, '');
+    routeParam = null;
+    if (r === 'cabinet') return 'check';
+    var m = /^pair\/([a-z_]+)-([a-z_]+)$/.exec(r);
+    if (m) { routeParam = { herb: m[1], drug: m[2] }; return 'pair'; }
     return ['check', 'results', 'summary', 'about'].indexOf(r) !== -1 ? r : 'check';
   }
 
@@ -1316,9 +1622,20 @@
     Array.prototype.forEach.call(document.querySelectorAll('[data-i18n]'), function (node) {
       node.textContent = t(node.getAttribute('data-i18n'));
     });
+    // The slogan may only break after its comma ("…East to West," / 「中西相通，」).
+    Array.prototype.forEach.call(document.querySelectorAll('.brand-slogan'), function (node) {
+      var m = t('slogan').match(/^(.*?[,，])\s*(.*)$/);
+      if (!m) return;
+      node.textContent = '';
+      node.appendChild(el('span', { class: 'slogan-part', text: m[1] }));
+      node.appendChild(document.createTextNode(zh ? '' : ' '));
+      node.appendChild(el('span', { class: 'slogan-part', text: m[2] }));
+    });
     Array.prototype.forEach.call(document.querySelectorAll('[data-i18n-label]'), function (node) {
       node.setAttribute('aria-label', t(node.getAttribute('data-i18n-label')));
     });
+    applyMode();
+    if (speechOk()) updateVoiceAvailability();
     var toggleBtn = document.getElementById('lang-toggle');
     toggleBtn.textContent = '';
     toggleBtn.appendChild(el('span', { lang: zh ? 'en-GB' : 'zh-HK', text: t('lang_toggle') }));
@@ -1365,9 +1682,15 @@
     document.documentElement.setAttribute('data-route', route);
     var target = null;
     if (route === 'results') target = renderResults();
+    else if (route === 'pair') renderPair(routeParam);
     else if (route === 'summary') renderSummary();
     else if (route === 'about') renderAbout();
     else renderCheck();
+    app.insertBefore(modeStrip(), app.firstChild);
+    keepEndTogether(app);
+    // Full details: a short fade between screens (CSS turns it off for "reduce motion").
+    app.classList.remove('screen-in');
+    if (mode === 'full' && focus) { void app.offsetWidth; app.classList.add('screen-in'); }
     if (focus) {
       window.scrollTo(0, 0);
       // From a dashboard row: go straight to that pair's (opened) card.
@@ -1394,6 +1717,11 @@
     if (early && I.languages.indexOf(early.lang) !== -1) { state.lang = early.lang; I.setLang(state.lang); }
   } catch (e) { /* ignore */ }
   document.getElementById('lang-toggle').addEventListener('click', switchLanguage);
+  ['simple', 'full'].forEach(function (m) {
+    var b = document.getElementById('mode-' + m);
+    if (b) b.addEventListener('click', function () { setMode(m); });
+  });
+  applyMode();
   // Screens are redrawn on every visit; the app decides where to scroll (and Back closes the picker sheet).
   try { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; } catch (e) { /* ignore */ }
 
