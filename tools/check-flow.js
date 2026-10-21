@@ -6,6 +6,7 @@
  * - Every pair page ends with "Next: show your doctor" (names filled in, button to the summary); it
  *   comes into view when reading aloud finishes, and the reading ends with that sentence.
  * - The summary says the "You can say" sentence once.
+ * - The menu buttons and the header stay in the same place and size on every page (390, 1024, 1440 px).
  */
 let chromium;
 try { ({ chromium } = require('playwright')); } catch (e) { ({ chromium } = require('/opt/node-tools/node_modules/playwright')); }
@@ -87,6 +88,29 @@ const SUMMARY_SAY = {
     check(errs.length === 0, 'no page errors');
     await ctx.close();
   }
+  // Menu and header: the same place and size on every page (390, 1024 and 1440 px wide, scrollbars shown).
+  const sb = await chromium.launch({ ignoreDefaultArgs: ['--hide-scrollbars'] });
+  const PAGES = ['#/cabinet', '#/summary', '#/about', '#/results', '#/pair/danshen-warfarin'];
+  const PARTS = ['.site-nav a:nth-child(1)', '.site-nav a:nth-child(2)', '.site-nav a:nth-child(3)', '.brand', '.mode-toggle', '.lang-toggle'];
+  for (const lang of ['en', 'zh']) for (const mode of ['simple', 'full']) {
+    console.log(`\nmenu ${lang} ${mode}`);
+    for (const w of [390, 1024, 1440]) {
+      const ctx = await sb.newContext({ viewport: { width: w, height: 900 }, serviceWorkers: 'block' }); const p = await ctx.newPage();
+      await p.goto(BASE);
+      await p.evaluate(([k, l, m]) => { localStorage.setItem(k + '.v1', JSON.stringify({ herbs: ['danshen'], drugs: ['warfarin', 'amlodipine'], lang: l })); localStorage.setItem(k + '.mode', m); }, [KEY, lang, mode]);
+      let first = null, worst = 0, where = '';
+      for (const hash of PAGES) {
+        await p.goto(BASE + hash); await p.reload(); await p.waitForTimeout(400); await p.evaluate(() => document.fonts.ready);
+        const boxes = await p.evaluate(parts => parts.map(s => { const r = document.querySelector(s).getBoundingClientRect(); return [r.left, r.top, r.width, r.height]; }), PARTS);
+        if (!first) { first = boxes; continue; }
+        boxes.forEach((bx, i) => bx.forEach((v, k) => { const d = Math.abs(v - first[i][k]); if (d > worst) { worst = d; where = `${PARTS[i]} on ${hash}`; } }));
+      }
+      check(worst <= 1, `${w}px: menu buttons and header stay put on every page (largest move ${worst.toFixed(1)}px${worst > 1 ? ', ' + where : ''})`);
+      await ctx.close();
+    }
+  }
+  await sb.close();
+
   console.log(failed ? `\n${failed} FAILED` : '\nFlow: all checks passed');
   process.exitCode = failed ? 1 : 0;
   await b.close();

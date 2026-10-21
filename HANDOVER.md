@@ -318,3 +318,9 @@ rating, quote, source, S/N or date changed.
   (every pair the demo shows). New recordings: put <herb>-<drug>.<en|zh>.m4a in audio/, run
   python3 tools/add-recordings.py (MP3 mono 44.1 kHz 64–96 kbps under 1 MB, adds to manifest, bumps the
   cache), then node tools/check-recordings.js (each recording plays instead of the phone voice).
+- 21 Oct, desktop menu fix (cache herbbridge-v36): the menu jumped between pages because the slogan
+  (My cabinet only) widened the logo and pushed the menu to a second row there, and the active tab was
+  bold. Now the slogan's space is kept on every page (shown on My cabinet only), the active tab changes
+  colour/background only, the column is min(68rem, 1200px) in both modes, and desktop reserves the
+  scrollbar gutter. tools/check-flow.js fails if a menu button or header part moves >1px between pages
+  (390/1024/1440). WebKit not testable here (Playwright download blocked by the network policy).
