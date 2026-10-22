@@ -20,7 +20,7 @@
       footer_privacy: 'No accounts, no tracking. Your list stays on this device.',
 
       cabinet_title: 'My medicine cabinet',
-      cabinet_for: 'For people taking heart, blood pressure, cholesterol or blood-thinning medicines.',
+      cabinet_for: 'Many people take Chinese herbs alongside heart medicines. HerbBridge shows what is known about each combination, so you can use both with your doctor informed.',
       used_for: 'Commonly taken for: {x}',
       cabinet_lede: 'Saved only on this device. Add what you take, and HerbBridge warns you straight away if anything clashes.',
       cabinet_empty: 'Your cabinet is empty. Add the Chinese herbs and Western medicines you take below.',
@@ -178,7 +178,7 @@
       summary_empty: 'Your cabinet is empty. Add your herbs and medicines first.',
 
       about_title: 'About HerbBridge',
-      about_intro: 'Many people in Hong Kong take Chinese herbs alongside Western medicines, and their doctor may not know. Some combinations can be dangerous. HerbBridge shows what is known about each combination, and where that information comes from.',
+      about_intro: 'Many people take Chinese herbs alongside heart medicines. HerbBridge shows what is known about each combination, so you can use both with your doctor informed. HerbBridge is not against Chinese medicine. It helps patients, families and doctors talk about both.',
       about_heart_title: 'Why heart patients?',
       about_heart_1: 'Heart patients often take several medicines, and some (like warfarin) have a very small safe range.',
       about_heart_2: 'Many popular herbs are sold for “blood circulation” or heart health, so heart patients are more likely to take them.',
@@ -266,7 +266,7 @@
       footer_privacy: '唔使開帳戶，冇追蹤。你嘅清單只會儲存喺呢部裝置。',
 
       cabinet_title: '我嘅藥箱',
-      cabinet_for: '適合正在食心臟、血壓、膽固醇或者薄血藥嘅人。',
+      cabinet_for: '好多人會一邊食中藥，一邊食心臟科西藥。中西通會話你知每個配搭有咩已知資料，等你可以同醫生商量，兩樣一齊用。',
       used_for: '常見用途：{x}',
       cabinet_lede: '只會儲存喺呢部裝置。加入你食緊嘅藥，如果有相沖，中西通會即刻提你。',
       cabinet_empty: '你嘅藥箱仲係空嘅。請喺下面加入你食緊嘅中藥同西藥。',
@@ -413,7 +413,7 @@
       summary_empty: '你嘅藥箱仲係空嘅。請先加入你嘅中藥同西藥。',
 
       about_title: '關於中西通',
-      about_intro: '香港有好多人一邊食中藥，一邊食西藥，但醫生未必知道。有啲配搭可能有危險。中西通會話你知每個配搭有咩已知資料，同埋資料嘅出處。',
+      about_intro: '好多人會一邊食中藥，一邊食心臟科西藥。中西通會話你知每個配搭有咩已知資料，等你可以同醫生商量，兩樣一齊用。中西通唔係反對中醫藥，而係幫病人、家人同醫生一齊傾清楚兩樣藥。',
       about_heart_title: '點解關注心臟病人？',
       about_heart_1: '心臟病人通常食緊幾種藥，有啲藥（例如華法林）嘅安全範圍好窄。',
       about_heart_2: '好多常見中藥都標榜「活血」或者有益心臟，所以心臟病人更有機會食。',
