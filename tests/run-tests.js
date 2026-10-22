@@ -16,6 +16,7 @@ var data = {
   interactions: load('data/interactions.json'),
   official: load('data/official.json'),
   reviews: load('data/reviews.json'),
+  uses: load('data/uses.json'),
   cases: load('tests/test-cases.json'),
   i18n: require('../js/i18n.js').HerbBridgeI18n
 };
@@ -33,7 +34,7 @@ results.push({ group: 'Installable app', name: 'manifest icons exist', pass: bad
 
 // Read aloud: the spoken script for every herb × drug pair is easy to listen to (Node only).
 var speech = require('../js/speech.js');
-var sdb = lookup.createDb(data.herbs, data.drugs, data.interactions, data.official, data.reviews);
+var sdb = lookup.createDb(data.herbs, data.drugs, data.interactions, data.official, data.reviews, data.uses);
 var badSpoken = [];
 data.herbs.herbs.forEach(function (h) {
   data.drugs.drugs.forEach(function (d) {

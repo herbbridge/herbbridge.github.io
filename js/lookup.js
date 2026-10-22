@@ -42,7 +42,7 @@
       .filter(Boolean);
   }
 
-  function createDb(herbsJson, drugsJson, interactionsJson, officialJson, reviewsJson) {
+  function createDb(herbsJson, drugsJson, interactionsJson, officialJson, reviewsJson, usesJson) {
     var db = {
       herbs: herbsJson.herbs,
       drugs: drugsJson.drugs,
@@ -52,6 +52,9 @@
       // General Hospital Authority advice per medicine (leaflets for groups of heart medicines). Never a rating.
       generalAdvice: (officialJson && officialJson.general_advice) || [],
       reviews: (reviewsJson && reviewsJson.reviews) || [],
+      // What people take a herb for (data/uses.json). Shown after the risk; never a rating.
+      uses: (usesJson && usesJson.uses) || [],
+      usesByHerb: Object.create(null),
       statementById: Object.create(null),
       lastUpdated: interactionsJson.last_updated || null,
       // Plain maps (no prototype), so ids like "constructor" can never match anything.
@@ -61,6 +64,7 @@
     db.herbs.forEach(function (h) { db.herbById[h.id] = h; });
     db.drugs.forEach(function (d) { db.drugById[d.id] = d; });
     db.statements.forEach(function (s) { db.statementById[s.id] = s; });
+    db.uses.forEach(function (u) { db.usesByHerb[u.herb_id] = u; });
     return db;
   }
 
@@ -128,7 +132,8 @@
       herb: herbId, drug: drugId,
       entry: findInteraction(db, herbId, drugId),
       official: official ? { kind: official.kind, statements: official.statements.map(function (id) { return db.statementById[id] || id; }) } : null,
-      advice: findAdvice(db, drugId)
+      advice: findAdvice(db, drugId),
+      uses: (db.usesByHerb && db.usesByHerb[herbId]) || null
     });
     var h = 0x811c9dc5; // FNV-1a, 32-bit
     for (var i = 0; i < text.length; i++) { h ^= text.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
@@ -316,6 +321,22 @@
         if (adviceFor[d]) problem(where + ': ' + d + ' already has general advice (' + adviceFor[d] + ')');
         adviceFor[d] = a.id;
       });
+    });
+
+    // What people take a herb for: both languages, Simple and Full text, at least one https source.
+    var usesFor = {};
+    (db.uses || []).forEach(function (u, i) {
+      var where = 'uses #' + (i + 1) + ' (' + u.herb_id + ')';
+      if (!db.herbById[u.herb_id]) problem(where + ': unknown herb_id');
+      if (usesFor[u.herb_id]) problem(where + ': this herb already has a uses entry');
+      usesFor[u.herb_id] = true;
+      ['simple_en', 'simple_zh', 'full_en', 'full_zh'].forEach(function (f) { if (!isText(u[f])) problem(where + ': missing ' + f); });
+      if (!Array.isArray(u.sources) || !u.sources.length) problem(where + ': needs at least one source');
+      else u.sources.forEach(function (src, si) {
+        if (!isText(src.label)) problem(where + ': source ' + (si + 1) + ' has no label');
+        if (!/^https:\/\/[^\s]+$/.test(src.url || '')) problem(where + ': source ' + (si + 1) + ' url must start with https://');
+      });
+      if (typeof u.zh_reviewed !== 'boolean') problem(where + ': zh_reviewed must be true or false');
     });
 
     // Pharmacist reviews: who, role, when, and the fingerprint of the card they saw.

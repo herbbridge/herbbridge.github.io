@@ -2,8 +2,8 @@
  * HerbBridge spoken script: a listening version of one pair, separate from the on-screen text.
  * Pure functions, no DOM: used by the app (window.HerbBridgeSpeech) and by the tests (Node).
  *
- * Order: names + rating → the official quote → What to do (our own advice) → why it matters → "Next:
- * show your doctor" with the sentence to say. Nothing else
+ * Order: names + rating → the official quote → What to do (our own advice) → why it matters → what people
+ * take the herb for (Simple line, then "not a recommendation") → "Next: show your doctor" with the sentence to say. Nothing else
  * (no evidence lists, sources, S/N numbers or links). Each section is its own short utterance,
  * so the voice pauses between them. Official quotes keep their own words; only brackets,
  * citations and "INR" are made easier to listen to.
@@ -98,6 +98,13 @@
     return t('next_say', { names: listNames(names, lang) });
   }
 
+  // What people take the herb for (data/uses.json): the Simple line, then "This is not a recommendation to take it."
+  function usesParts(db, r, zh, t, own, colon) {
+    var u = db.usesByHerb && db.usesByHerb[r.herb.id];
+    if (!u) return [];
+    return [t('uses_title') + colon + own(zh ? u.simple_zh : u.simple_en), t('uses_not_rec')];
+  }
+
   /* The spoken script for one result row r (from lookup.checkPairs) as a list of short utterances.
      t(key) and name(item) come from the app, in the current language. */
   function script(db, r, lang, t, name) {
@@ -114,6 +121,7 @@
     if (!r.entry && !r.official) {
       parts.push(pair + ' ' + t('risk_not_in_database') + stop + ' ' + t('not_in_db_text'));
       sentences(own(t('unknown_next_text')), zh).forEach(function (x, i) { parts.push(i === 0 ? t('label_what_to_do') + colon + x : x); });
+      usesParts(db, r, zh, t, own, colon).forEach(function (x) { parts.push(x); });
       parts.push(t('next_title') + ' ' + youCanSay([r], lang, t));
       return parts.map(function (p) { return zh ? p.replace(/\s+/g, '') : p; });
     }
@@ -150,6 +158,7 @@
       var heart = fresh(sentences(own(pick(r.entry, 'heart_impact')), zh));
       if (heart.length) parts.push(t('speak_why') + colon + heart.join(zh ? '' : ' '));
     }
+    usesParts(db, r, zh, t, own, colon).forEach(function (x) { parts.push(x); });
     parts.push(t('next_title') + ' ' + youCanSay([r], lang, t));
     return parts.map(function (p) { return zh ? p.replace(/\s+/g, '') : p; });
   }
