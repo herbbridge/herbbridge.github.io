@@ -123,6 +123,16 @@
     ['bleeding', 'S-A', 'If you have a fall or bump your head, closely monitor for signs of internal bleeding (e.g. sudden severe headache, unusual bruising, or blood in urine or stools) and consult your doctor immediately if necessary.', null, null],
     ['footer', 'S-B', 'This leaflet is for reference only. Please consult dietitian for individual advice.', null, null]
   ];
+  // What people take a herb for (data/uses.json): the owner's exact wording, locked (22 Oct).
+  var USES_LOCKED = {
+    danshen: {
+      simple_en: "In China, a danshen product is approved for angina (chest pain from heart disease).",
+      simple_zh: "喺中國，有丹參產品獲批用嚟治心絞痛（心臟病引致嘅胸口痛）。",
+      full_en: "Compound danshen dripping pills (which also contain sanqi and borneol) are approved in China for angina (chest pain from heart disease). A 2023 review of 29 small trials found the pills may improve angina symptoms more than nitrates, but the authors rated the evidence very low to low. Most trials had under 100 patients, and several review authors worked for the pills' maker.",
+      full_zh: "複方丹參滴丸（另含三七同冰片）喺中國獲批用嚟治心絞痛（心臟病引致嘅胸口痛）。2023年一份綜合29個細規模研究嘅分析發現，呢種藥丸紓緩心絞痛症狀可能比硝酸鹽類藥好，但作者評定證據質素為極低至低。大部分研究少過100個病人，而且有幾位作者喺藥廠工作。",
+      source_url: "https://doi.org/10.3389/fcvm.2023.1168730"
+    }
+  };
   var BRIEF_RATINGS = {
     // 19 Oct 2026: relabelled as a team rating and raised to High by the owner (the SCMP 'HA Moderate'
     // claim could not be confirmed; two HK case reports with major bleeding).
@@ -224,7 +234,7 @@
       results.push({ group: group, name: name, pass: pass, detail: detail });
     }
 
-    var db = lookup.createDb(data.herbs, data.drugs, data.interactions, data.official, data.reviews);
+    var db = lookup.createDb(data.herbs, data.drugs, data.interactions, data.official, data.reviews, data.uses);
 
     // 1. The data files themselves.
     check('Data files', 'herbs.json, drugs.json and interactions.json are valid', function () {
@@ -412,6 +422,35 @@
       });
       if (Object.keys(wf.approved_extra_names.names).length) bad.push('approved_extra_names is not empty: check the owner approved: ' + Object.keys(wf.approved_extra_names.names).join(', '));
       return { pass: bad.length === 0, detail: bad.join('\n') };
+    });
+    check('What people take it for', 'uses text is exactly the approved wording, with its source', function () {
+      var bad = [];
+      Object.keys(USES_LOCKED).forEach(function (h) {
+        var u = db.usesByHerb[h], want = USES_LOCKED[h];
+        if (!u) { bad.push(h + ': missing'); return; }
+        ['simple_en', 'simple_zh', 'full_en', 'full_zh'].forEach(function (f) { if (u[f] !== want[f]) bad.push(h + ' ' + f + ' differs'); });
+        if (!u.sources.some(function (x) { return x.url === want.source_url; })) bad.push(h + ': source missing');
+      });
+      db.uses.forEach(function (u) { if (!USES_LOCKED[u.herb_id]) bad.push(u.herb_id + ': not approved (add to USES_LOCKED only after the owner approves the wording)'); });
+      return { pass: bad.length === 0, detail: bad.join('\n') };
+    });
+    check('What people take it for', 'uses never say works/treats/prevents/helps/safe unless as "may", and never change a result', function () {
+      var bad = [];
+      db.uses.forEach(function (u) {
+        [u.simple_en, u.full_en].forEach(function (x) {
+          if (/\b(safe|safely|prevents?|diagnos\w*|proves?)\b/i.test(x)) bad.push(u.herb_id + ': banned word');
+          (x.match(/[^.]*\b(works?|treats?|helps?|improves?)\b[^.]*/gi) || []).forEach(function (sen) { if (!/\bmay\b/i.test(sen)) bad.push(u.herb_id + ': "' + sen.trim() + '" needs "may"'); });
+        });
+      });
+      var plain = lookup.createDb(data.herbs, data.drugs, data.interactions, data.official, data.reviews);
+      var withUses = lookup.checkPairs(db, ids(db.herbs), ids(db.drugs)).map(function (r) { return r.status; }).join();
+      var without = lookup.checkPairs(plain, ids(plain.herbs), ids(plain.drugs)).map(function (r) { return r.status; }).join();
+      if (withUses !== without) bad.push('uses changed a result');
+      return { pass: bad.length === 0, detail: bad.join('\n') };
+    });
+    check('What people take it for', 'the box always ends with "not a recommendation", in both languages', function () {
+      var en = data.i18n.strings.en.uses_not_rec, zh = data.i18n.strings.zh.uses_not_rec;
+      return { pass: en === 'This is not a recommendation to take it.' && zh === '呢個唔係建議你服用。', detail: en + ' / ' + zh };
     });
     check('Pharmacist reviews', 'every review still matches its card (re-review any card changed after review)', function () {
       var stale = db.reviews.filter(function (rv) { return lookup.findReview(db, rv.herb_id, rv.drug_id).stale; })

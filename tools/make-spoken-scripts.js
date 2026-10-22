@@ -11,7 +11,7 @@ var i18n = require('../js/i18n.js').HerbBridgeI18n;
 function load(rel) { return JSON.parse(fs.readFileSync(path.join(root, rel), 'utf8')); }
 
 var herbs = load('data/herbs.json'), drugs = load('data/drugs.json');
-var db = lookup.createDb(herbs, drugs, load('data/interactions.json'), load('data/official.json'), load('data/reviews.json'));
+var db = lookup.createDb(herbs, drugs, load('data/interactions.json'), load('data/official.json'), load('data/reviews.json'), load('data/uses.json'));
 var rows = [];
 herbs.herbs.forEach(function (h) {
   drugs.drugs.forEach(function (d) {

@@ -36,7 +36,7 @@
       }
       function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text) e.textContent = text; return e; }
       var summary = document.getElementById('summary'), out = document.getElementById('out');
-      Promise.all(['../data/herbs.json', '../data/drugs.json', '../data/interactions.json', '../data/official.json', '../data/reviews.json', 'test-cases.json', '../data/warfarin.json'].map(get))
+      Promise.all(['../data/herbs.json', '../data/drugs.json', '../data/interactions.json', '../data/official.json', '../data/reviews.json', 'test-cases.json', '../data/warfarin.json', '../data/uses.json'].map(get))
         .catch(function (err) {
           summary.className = 'summary fail';
           summary.textContent = 'Could not load the data files (' + err.message + '). ' +
@@ -44,7 +44,7 @@
           throw null;
         })
         .then(function (d) {
-          var results = HerbBridgeTests.runAll(HerbBridgeLookup, { herbs: d[0], drugs: d[1], interactions: d[2], official: d[3], reviews: d[4], cases: d[5], warfarin: d[6], i18n: HerbBridgeI18n });
+          var results = HerbBridgeTests.runAll(HerbBridgeLookup, { herbs: d[0], drugs: d[1], interactions: d[2], official: d[3], reviews: d[4], cases: d[5], warfarin: d[6], uses: d[7], i18n: HerbBridgeI18n });
           var failed = results.filter(function (r) { return !r.pass; }).length, group = null, ul;
           results.forEach(function (r) {
             if (r.group !== group) { group = r.group; out.appendChild(el('h2', '', group)); ul = out.appendChild(el('ul')); }

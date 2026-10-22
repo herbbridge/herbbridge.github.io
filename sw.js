@@ -6,12 +6,12 @@
  * Nothing is sent anywhere: this only caches files HerbBridge already loads.
  * Change VERSION whenever the list of app files changes.
  */
-var VERSION = 'herbbridge-v46';
+var VERSION = 'herbbridge-v47';
 var FONTS = 'herbbridge-fonts-v1';
 var APP_FILES = [
   './', 'index.html', 'css/styles.css', 'js/lookup.js', 'js/i18n.js', 'js/speech.js', 'js/app.js',
   'manifest.webmanifest', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/apple-touch-icon.png',
-  'data/herbs.json', 'data/drugs.json', 'data/interactions.json', 'data/official.json', 'data/reviews.json', 'data/warfarin.json', 'audio/manifest.json',
+  'data/herbs.json', 'data/drugs.json', 'data/interactions.json', 'data/official.json', 'data/reviews.json', 'data/uses.json', 'data/warfarin.json', 'audio/manifest.json',
   'fonts/inter-latin-400-normal.woff2', 'fonts/inter-latin-600-normal.woff2', 'fonts/inter-latin-700-normal.woff2',
   'fonts/noto-sans-tc-herbbridge-400.woff2', 'fonts/noto-sans-tc-herbbridge-700.woff2'
 ];

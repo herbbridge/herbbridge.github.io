@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "last_updated": "2026-10-22",
+  "about": "What people take a herb for, shown on pair pages AFTER the risk ('What people take it for'). Never a rating and never advice to take it. Only wording from a cited source (owner's rule, 22 Oct 2026): regulators' 'uses'/'indications' quoted or closely paraphrased, plus the owner-approved danshen text. A herb with no entry gets no box. simple_*: one line for Simple mode; full_*: the text for Full details, shown with its sources.",
+  "uses": [
+    {
+      "herb_id": "danshen",
+      "simple_en": "In China, a danshen product is approved for angina (chest pain from heart disease).",
+      "simple_zh": "喺中國，有丹參產品獲批用嚟治心絞痛（心臟病引致嘅胸口痛）。",
+      "full_en": "Compound danshen dripping pills (which also contain sanqi and borneol) are approved in China for angina (chest pain from heart disease). A 2023 review of 29 small trials found the pills may improve angina symptoms more than nitrates, but the authors rated the evidence very low to low. Most trials had under 100 patients, and several review authors worked for the pills' maker.",
+      "full_zh": "複方丹參滴丸（另含三七同冰片）喺中國獲批用嚟治心絞痛（心臟病引致嘅胸口痛）。2023年一份綜合29個細規模研究嘅分析發現，呢種藥丸紓緩心絞痛症狀可能比硝酸鹽類藥好，但作者評定證據質素為極低至低。大部分研究少過100個病人，而且有幾位作者喺藥廠工作。",
+      "sources": [
+        {
+          "label": "Zhang M, Wang W, Sun H, Zhai J, Hu Y. Compound danshen dripping pills vs. nitrates for stable angina pectoris: a systematic review and meta-analysis. Front Cardiovasc Med. 2023;10:1168730.",
+          "url": "https://doi.org/10.3389/fcvm.2023.1168730"
+        }
+      ],
+      "zh_reviewed": false
+    }
+  ]
+}

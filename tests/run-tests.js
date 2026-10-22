@@ -17,6 +17,7 @@ var data = {
   official: load('data/official.json'),
   reviews: load('data/reviews.json'),
   warfarin: load('data/warfarin.json'),
+  uses: load('data/uses.json'),
   cases: load('tests/test-cases.json'),
   i18n: require('../js/i18n.js').HerbBridgeI18n
 };
@@ -34,7 +35,7 @@ results.push({ group: 'Installable app', name: 'manifest icons exist', pass: bad
 
 // Read aloud: the spoken script for every herb × drug pair is easy to listen to (Node only).
 var speech = require('../js/speech.js');
-var sdb = lookup.createDb(data.herbs, data.drugs, data.interactions, data.official, data.reviews);
+var sdb = lookup.createDb(data.herbs, data.drugs, data.interactions, data.official, data.reviews, data.uses);
 var badSpoken = [];
 data.herbs.herbs.forEach(function (h) {
   data.drugs.drugs.forEach(function (d) {
@@ -107,7 +108,26 @@ rules.push(['warfarin page Read aloud: every section key line, all bleeding sign
   bleedSec.signs.every(function (x) { return wfText.indexOf(x.en.replace(/\s*\(.*$/, '').replace(/ \/.*$/, '')) !== -1; }) &&
   wfText.indexOf('In an emergency, call 999.') !== -1 && (wfMissingZh ? wfZh.length === 0 : wfZh.length > 0),
   wfText.slice(0, 300)]);
+var S = data.i18n.strings, dwEn = spoken('danshen', 'warfarin', 'en'), dwZh = spoken('danshen', 'warfarin', 'zh');
+rules.push(['"Next" names the doctor and the Chinese medicine practitioner (screen and spoken), and the summary says who it is for',
+  S.en.next_title === 'Next: show your doctor and your Chinese medicine practitioner' && S.zh.next_title === '下一步：俾醫生同中醫師睇' &&
+  S.en.summary_for === 'For your doctor and your Chinese medicine practitioner.' && S.zh.summary_for === '俾你嘅醫生同中醫師睇。' &&
+  dwEn[dwEn.length - 1].indexOf('Next: show your doctor and your Chinese medicine practitioner. You can say:') === 0 &&
+  dwZh[dwZh.length - 1].indexOf('下一步：俾醫生同中醫師睇。你可以咁講：') === 0]);
 rules.forEach(function (x) { results.push({ group: 'Read aloud', name: x[0], pass: !!x[1], detail: x[2] || '' }); });
+// "What people take it for" (box and spoken lines): rated pairs only, never on a pair with no record (owner, 22 Oct).
+var usesBad = [], usesSeen = { rated: 0, grey: 0 };
+sdb.uses.forEach(function (u) { data.drugs.drugs.forEach(function (d) { ['en', 'zh'].forEach(function (lang) {
+  var r = lookup.checkPairs(sdb, [u.herb_id], [d.id])[0], grey = r.status === 'not_in_database';
+  var box = lookup.usesFor(sdb, r);
+  var said = spoken(u.herb_id, d.id, lang).some(function (p) { return p.indexOf(lang === 'zh' ? '一般用嚟做咩' : 'What people take it for') === 0; });
+  usesSeen[grey ? 'grey' : 'rated']++;
+  if (grey && (box || said)) usesBad.push(u.herb_id + '+' + d.id + ' ' + lang + ': shown on a pair with no record');
+  if (!grey && (!box || !said)) usesBad.push(u.herb_id + '+' + d.id + ' ' + lang + ': missing on a rated pair');
+}); }); });
+results.push({ group: 'What people take it for', name: 'box and Read aloud lines only on rated pairs, never on "not in our database"',
+  pass: usesBad.length === 0 && usesSeen.grey > 0 && usesSeen.rated > 0, detail: usesBad.slice(0, 10).join('\n') + ' (rated ' + usesSeen.rated + ', no record ' + usesSeen.grey + ')' });
+
 results.push({ group: 'Read aloud', name: 'spoken script has no brackets, INR, source labels or links', pass: badSpoken.length === 0, detail: badSpoken.slice(0, 10).join('\n') });
 var audioList = load('audio/manifest.json').files || [];
 var badAudio = audioList.filter(function (f) {

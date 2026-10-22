@@ -1100,6 +1100,19 @@
       el('a', { class: 'btn btn-primary btn-next', href: '#/summary' }, [el('span', { text: t('next_button') }), icon('arrow')])
     ]);
   }
+  // What people take the herb for (data/uses.json): after the risk, never instead of it. Simple: one line;
+  // Full details: the full text and its sources. Always ends with "not a recommendation". Not printed.
+  function usesBox(r, full) {
+    var u = L.usesFor(db, r);
+    if (!u) return null;
+    var zh = state.lang === 'zh';
+    return el('section', { class: 'uses-box no-print', 'aria-labelledby': 'h-uses' }, [
+      el('h2', { id: 'h-uses', text: t('uses_title') }),
+      el('p', { class: 'uses-text', text: full ? (zh ? u.full_zh : u.full_en) : (zh ? u.simple_zh : u.simple_en) }),
+      full ? el('div', { class: 'uses-sources' }, [el('h3', { class: 'block-label', text: t('uses_source') }), sourceList(u.sources)]) : null,
+      el('p', { class: 'uses-note', text: t('uses_not_rec') })
+    ]);
+  }
   // When reading aloud finishes on a pair page, bring the next step into view.
   function showNextStep() {
     var next = document.getElementById('next-step');
@@ -1251,6 +1264,8 @@
     if (full) {
       Array.prototype.forEach.call(whole.querySelectorAll('details'), function (d) { d.open = true; });
       app.appendChild(whole);
+      var usesFull = usesBox(r, true);
+      if (usesFull) app.appendChild(usesFull);
       app.appendChild(nextStep([r]));
       return;
     }
@@ -1279,6 +1294,8 @@
       grey ? el('a', { class: 'btn btn-primary', href: '#/summary' }, [el('span', { text: t('unknown_next_button') }), icon('arrow')]) : null,
       el('p', { class: 'disclaimer-box' }, disclaimerText(r))
     ]));
+    var usesSimple = usesBox(r, false);
+    if (usesSimple) app.appendChild(usesSimple);
     app.appendChild(moreBtn);
     app.appendChild(more);
     app.appendChild(nextStep([r]));
@@ -1498,6 +1515,7 @@
       el('h1', { tabindex: '-1', text: t('summary_headline') }),
       el('p', { class: 'muted', text: t('summary_generated', { date: formatDate(new Date()) }) })
     ]));
+    page.appendChild(el('p', { class: 'summary-for', text: t('summary_for') }));
 
     if (!state.herbs.length && !state.drugs.length) {
       page.appendChild(el('p', { class: 'lede', text: t('summary_empty') }));
@@ -1908,10 +1926,10 @@
     });
   }
 
-  Promise.all(['data/herbs.json', 'data/drugs.json', 'data/interactions.json', 'data/official.json', 'data/reviews.json', 'data/warfarin.json'].map(getJson))
+  Promise.all(['data/herbs.json', 'data/drugs.json', 'data/interactions.json', 'data/official.json', 'data/reviews.json', 'data/uses.json', 'data/warfarin.json'].map(getJson))
     .then(function (d) {
-      db = L.createDb(d[0], d[1], d[2], d[3], d[4]);
-      wf = d[5];
+      db = L.createDb(d[0], d[1], d[2], d[3], d[4], d[5]);
+      wf = d[6];
       drugGroups = Array.isArray(d[1].groups) ? d[1].groups : [];
       load();
       I.setLang(state.lang);
