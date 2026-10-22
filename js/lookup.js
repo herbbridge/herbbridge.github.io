@@ -134,6 +134,34 @@
     for (var i = 0; i < text.length; i++) { h ^= text.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
     return ('0000000' + h.toString(16)).slice(-8);
   }
+  /* "Is this food on the list?" (data/warfarin.json, the Hospital Authority's warfarin food table).
+     Exact match only, on the item's own wording in English or Chinese (case, spaces, hyphens and the
+     source's * mark ignored), plus search names taken from that same wording and names the owner
+     approved. Returns [] when the food is not on the list: never "safe". */
+  function foodKey(s) {
+    return String(s || '').toLowerCase().replace(/[*＊\s　\-‐–()（）]/g, '');
+  }
+  function warfarinFoodNames(wf, item) {
+    var names = [item.en, item.zh];
+    [item.en, item.zh].forEach(function (text) {
+      var extra = (wf.search_names && wf.search_names[text]) || [];
+      var ok = (wf.approved_extra_names && wf.approved_extra_names.names && wf.approved_extra_names.names[text]) || [];
+      names = names.concat(Array.isArray(extra) ? extra : [], Array.isArray(ok) ? ok : []);
+    });
+    return names;
+  }
+  function warfarinFoodSearch(wf, query) {
+    var q = foodKey(query);
+    if (!q || !wf || !wf.food_table) return [];
+    var hits = [];
+    wf.food_table.groups.forEach(function (g) {
+      g.items.forEach(function (item) {
+        var match = warfarinFoodNames(wf, item).some(function (n) { return foodKey(n) === q; });
+        if (match) hits.push({ group: g, item: item, sparing: !!item.sparing, star: /[*＊]/.test(item.en + item.zh) });
+      });
+    });
+    return hits;
+  }
   /* The pharmacist review for a pair: { review, stale }. A stale review is never shown. */
   function findReview(db, herbId, drugId) {
     var rev = db.reviews.filter(function (x) { return x.herb_id === herbId && x.drug_id === drugId; })[0] || null;
@@ -352,6 +380,9 @@
     EVIDENCE_LEVELS: EVIDENCE_LEVELS,
     normalise: normalise,
     createDb: createDb,
+    warfarinFoodSearch: warfarinFoodSearch,
+    warfarinFoodNames: warfarinFoodNames,
+    foodKey: foodKey,
     search: search,
     findInteraction: findInteraction,
     findOfficial: findOfficial,

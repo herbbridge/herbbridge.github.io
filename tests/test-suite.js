@@ -74,6 +74,55 @@
   };
 
   // The ratings given in the brief. Changing a rating must be a deliberate edit here too.
+  // "What else can change your warfarin" (data/warfarin.json): the Hospital Authority's own wording,
+  // typed here from the owner's message (22 Oct 2026). S-A = warfarin leaflet 019Ev10/019Cv10, S-B = diet guidelines 9/2016.
+  var WF_TABLE = {
+    heading_en: 'The following food are rich in vitamin K or contain nutrients that may affect the efficacy of warfarin and should be avoided',
+    heading_zh: '以下食物含高維他命K或其成份會影響華法林的功效，應避免進食。',
+    note_en: '*These food may not be high in vitamin K but may affect the efficacy of warfarin',
+    note_zh: '* 這些食物維他命K含量未必很高，但亦可能影響華法林的功效',
+    sparing_en: 'Use sparingly or as garnish only:', sparing_zh: '只可用少量：',
+    groups: [
+      ['Vegetables and Dry Beans', '蔬菜及乾豆類', ['Amaranth', 'Chives', 'Green yard-long beans', 'Kale', 'Spinach', 'Water spinach', 'Swiss chard', 'Purslane', 'Pea shoots', 'Wolfberry leaves'], ['莧菜', '韮菜', '青豆角', '芥蘭', '菠菜', '通菜', '君達菜(豬乸菜)', '馬齒莧', '豆苗', '枸杞'], []],
+      ['Nuts', '果仁類', ['Gingko*', 'Pine nuts'], ['白果*', '松子仁'], []],
+      ['Fruits', '水果類', ['Avocado*', 'Papaya*', 'Cranberry Juice*', 'Cranberry Jam*', 'Mango*', 'Pomegranate*', 'Grapefruit*', 'Dried prunes', 'Kiwifruit'], ['牛油果*', '木瓜*', '紅莓汁*', '紅莓醬*', '芒果*', '石榴*', '西柚*', '西梅乾', '奇異果'], []],
+      ['Meat', '肉類', ['Liver*', 'Chinese liver sausage*', 'Liver pate*'], ['肝臟*', '膶腸*', '肝醬*'], []],
+      ['Fats & Oils', '油類', ['Soybean oil', 'Canola oil'], ['黃豆油', '芥花籽油'], []],
+      ['Others', '其他', ['Green tea powder & its products such as green tea ice-cream', 'Tonic water* and bitter lemon*', 'Mint leaves', 'Green tea leaves', 'Wood ear*', 'Purple laver', 'Algae kombu', 'Garlic*', 'Ginger', 'Spring onion', 'Coriander', 'Parsley'],
+        ['綠茶粉及其製成品如綠茶雪糕', '湯力水(tonic water)*及檸檬湯力(bitter lemon)*', '薄荷葉', '綠茶葉', '木耳*', '紫菜', '海帶', '蒜頭*', '薑', '蔥', '芫茜', '番芫茜'], [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]]
+    ]
+  };
+  // [section, source_en, en, source_zh, zh] for every quoted line (zh null = no Chinese source wording yet).
+  var HA_TCM_ZH = '不可隨便服用中藥材，中成藥，藥材湯或涼茶，或含中藥成份的食品如龜苓膏，因為很多中藥 ( 如人參、當歸、丹參、赤芍 )，會與「華法林」產生相互作用，影響抗凝血藥的功效。';
+  var WF_QUOTES = [
+    ['food', 'S-B', 'Vitamin K plays an important role in blood clotting. A fluctuation in vitamin K intake will affect the efficacy of warfarin. Hence, patient on warfarin should maintain a consistent vitamin K intake.', null, null],
+    ['food', 'S-B', 'Avoid any drastic changes in habitual dietary intake, especially the quantity of green leafy vegetables even when having hotpots or salads in order to maintain a consistent intake of vitamin K', 'S-B', '要保持穩定的維他命K攝取量，服用華法林人仕在飲食上不宜有大改動，尤其是綠葉菜進食的份量。吃火鍋和沙律菜時，仍須維持平時食用的份量。'],
+    ['drinks', 'S-A', 'Avoid alcohol (including beer, red wine, white wine and spirits).', 'S-B', '酒類（包括啤酒、紅酒、白酒及烈酒）'],
+    ['drinks', 'S-A', 'Do not take any Traditional Chinese Medicines (TCM), Proprietary Chinese Medicines, herbal drinks, or food that contains TCM, such as Guilinggao.', 'S-A', HA_TCM_ZH],
+    ['tcm', 'S-A', 'Many TCM such as ginseng, Dong quai, Danshen, Chishao can interact with warfarin.', 'S-A', HA_TCM_ZH],
+    ['tcm', 'S-B', 'Avoid the following: Traditional Chinese medicine/over-the-counter medications; Chinese herbal tonic and remedies', 'S-B', '避免使用：中、西成藥；中國補品及藥材'],
+    ['supplements', 'S-A', 'Some vitamins, supplements, nutritional or health products (such as probiotics, green tea extract, glucosamine, and fish oil) can interact with warfarin.', null, null],
+    ['supplements', 'S-A', 'Consult your healthcare professionals before taking any of these products.', null, null],
+    ['supplements', 'S-B', 'Fish oil supplement', 'S-B', '魚油丸'],
+    ['supplements', 'S-B', 'Vitamin supplements (vitamin K and large amount of vitamin C and E consumption can affect the efficacy of warfarin)', 'S-B', '維他命丸（維他命K、大量的維他命C和維他命E亦會影響華法林的功效）'],
+    ['supplements', 'S-B', 'Consult your doctor or dietitian before taking any nutritional supplements', 'S-B', '在進食營養奶或營養補充品前，需請教醫生或營養師。'],
+    ['medicines', 'S-A', 'Do not take any other medications, including over-the-counter medications, without consulting your doctor or pharmacist.', null, null],
+    ['medicines', 'S-A', 'Many drugs can interact with warfarin, such as aspirin and some painkillers.', null, null],
+    ['bleeding', 'S-A', 'The most common side effect associated with the use of warfarin is bleeding.', null, null],
+    ['bleeding', 'S-A', 'Unusual bruising', null, null],
+    ['bleeding', 'S-A', 'Prolonged nosebleed (for more than 10 minutes)', null, null],
+    ['bleeding', 'S-A', 'Blood in urine or have red / dark brown urine', null, null],
+    ['bleeding', 'S-A', 'Vomiting blood or matter that looks like coffee grounds', null, null],
+    ['bleeding', 'S-A', 'Coughing up blood', null, null],
+    ['bleeding', 'S-A', 'Abdominal pain or swelling', null, null],
+    ['bleeding', 'S-A', 'Excessive bleeding from gums when brushing the teeth', null, null],
+    ['bleeding', 'S-A', 'Blood in stools or passing black stools', null, null],
+    ['bleeding', 'S-A', 'Heavy or increased menstrual bleeding or unusual vaginal bleeding between periods', null, null],
+    ['bleeding', 'S-A', 'Prolonged bleeding from cuts or wounds that does not stop', null, null],
+    ['bleeding', 'S-A', 'If bleeding persists or becomes severe, you should seek immediate medical attention.', null, null],
+    ['bleeding', 'S-A', 'If you have a fall or bump your head, closely monitor for signs of internal bleeding (e.g. sudden severe headache, unusual bruising, or blood in urine or stools) and consult your doctor immediately if necessary.', null, null],
+    ['footer', 'S-B', 'This leaflet is for reference only. Please consult dietitian for individual advice.', null, null]
+  ];
   var BRIEF_RATINGS = {
     // 19 Oct 2026: relabelled as a team rating and raised to High by the owner (the SCMP 'HA Moderate'
     // claim could not be confirmed; two HK case reports with major bleeding).
@@ -295,6 +344,74 @@
     check('Safety rules', 'every medicine has HA leaflet advice', function () {
       var bad = db.drugs.filter(function (d) { return !lookup.findAdvice(db, d.id); }).map(function (d) { return d.id; });
       return { pass: bad.length === 0, detail: bad.join(', ') };
+    });
+    // "What else can change your warfarin" (data/warfarin.json).
+    var wf = data.warfarin;
+    function wfLines() {
+      var out = [];
+      wf.sections.forEach(function (sec) {
+        [sec.key].concat(sec.signs || [], sec.items).forEach(function (x) { out.push([sec.id, x]); });
+      });
+      out.push(['footer', wf.footer]);
+      return out;
+    }
+    check('Warfarin page', 'every food-table item, heading and note matches the Hospital Authority wording exactly (EN and ZH)', function () {
+      var ft = wf.food_table, bad = [];
+      ['heading_en', 'heading_zh', 'note_en', 'note_zh'].forEach(function (k) { if (ft[k] !== WF_TABLE[k]) bad.push(k + ': ' + ft[k]); });
+      if (ft.sparing_label_en !== WF_TABLE.sparing_en || ft.sparing_label_zh !== WF_TABLE.sparing_zh) bad.push('sparing label');
+      if (ft.source !== 'S-B') bad.push('table source is not S-B');
+      if (ft.groups.length !== WF_TABLE.groups.length) bad.push('number of groups');
+      WF_TABLE.groups.forEach(function (want, gi) {
+        var g = ft.groups[gi];
+        if (!g) return;
+        if (g.name_en !== want[0] || g.name_zh !== want[1]) bad.push('group ' + gi + ' name: ' + g.name_en + ' / ' + g.name_zh);
+        var en = g.items.map(function (x) { return x.en; }), zh = g.items.map(function (x) { return x.zh; });
+        if (en.join('|') !== want[2].join('|')) bad.push(want[0] + ' EN: ' + en.join(', '));
+        if (zh.join('|') !== want[3].join('|')) bad.push(want[1] + ' ZH: ' + zh.join('、'));
+        var sparing = g.items.map(function (x, i) { return x.sparing ? i : -1; }).filter(function (i) { return i !== -1; });
+        if (sparing.join() !== want[4].join()) bad.push(want[0] + ': wrong "use sparingly" items');
+      });
+      return { pass: bad.length === 0, detail: bad.join('\n') };
+    });
+    check('Warfarin page', 'every quote is the Hospital Authority wording, attributed to S-A or S-B', function () {
+      var bad = [], got = wfLines();
+      ['S-A', 'S-B'].forEach(function (id) { if (!wf.sources[id] || !/^https:\/\//.test(wf.sources[id].url_en) || !/^https:\/\//.test(wf.sources[id].url_zh)) bad.push(id + ': missing source details or PDF links'); });
+      if (wf.sources['S-B'].edition_en !== '9/2016 edition') bad.push('S-B edition');
+      if (got.length !== WF_QUOTES.length) bad.push('number of quoted lines: ' + got.length + ', expected ' + WF_QUOTES.length);
+      got.forEach(function (g, i) {
+        var want = WF_QUOTES[i], x = g[1];
+        if (!want) return;
+        if (g[0] !== want[0] || x.en !== want[2] || x.source_en !== want[1]) bad.push(want[0] + ' #' + i + ' EN: ' + x.source_en + ' ' + x.en);
+        if ((x.zh || null) !== want[4] || (x.zh == null ? null : x.source_zh) !== want[3]) bad.push(want[0] + ' #' + i + ' ZH: ' + x.source_zh + ' ' + x.zh);
+        if (['S-A', 'S-B'].indexOf(x.source_en) === -1 || (x.zh != null && ['S-A', 'S-B'].indexOf(x.source_zh) === -1)) bad.push('#' + i + ': not attributed to S-A or S-B');
+      });
+      var drinks = wf.sections.filter(function (s) { return s.id === 'drinks'; })[0];
+      if (!drinks || drinks.key.zh_label !== '避免使用') bad.push('drinks: S-B heading 避免使用 missing');
+      return { pass: bad.length === 0, detail: bad.join('\n') };
+    });
+    check('Warfarin page', 'food search: exact EN and ZH names, case-insensitive; not on the list gives nothing', function () {
+      var bad = [];
+      function first(q) { var h = lookup.warfarinFoodSearch(wf, q); return h.length ? h[0].item.en : null; }
+      [['菠菜', 'Spinach'], ['SPINACH', 'Spinach'], ['spinach', 'Spinach'], ['Water Spinach', 'Water spinach'], ['君達菜', 'Swiss chard'], ['豬乸菜', 'Swiss chard'],
+       ['kiwifruit', 'Kiwifruit'], ['KIWIFRUIT', 'Kiwifruit'], ['奇異果', 'Kiwifruit'], ['Gingko', 'Gingko*'], ['白果', 'Gingko*'], ['green tea ice-cream', 'Green tea powder & its products such as green tea ice-cream'],
+       ['Bitter Lemon', 'Tonic water* and bitter lemon*'], ['檸檬湯力', 'Tonic water* and bitter lemon*'], ['蒜頭', 'Garlic*']].forEach(function (c) {
+        if (first(c[0]) !== c[1]) bad.push('"' + c[0] + '" → ' + first(c[0]) + ' (expected ' + c[1] + ')');
+      });
+      ['lemon', 'apple', '杞子', 'tea', ''].forEach(function (q) { if (lookup.warfarinFoodSearch(wf, q).length) bad.push('"' + q + '" should not be on the list'); });
+      var garlic = lookup.warfarinFoodSearch(wf, 'garlic')[0];
+      if (!garlic || !garlic.sparing || !garlic.star) bad.push('garlic: should be "use sparingly" with the * note');
+      var sp = lookup.warfarinFoodSearch(wf, 'spinach')[0];
+      if (!sp || sp.sparing || sp.star) bad.push('spinach: should be "should be avoided" without the * note');
+      return { pass: bad.length === 0, detail: bad.join('\n') };
+    });
+    check('Warfarin page', 'search names come only from the source wording; no extra names without the owner\'s OK', function () {
+      var bad = [];
+      Object.keys(wf.search_names).forEach(function (text) {
+        if (text === 'about') return;
+        wf.search_names[text].forEach(function (n) { if (lookup.foodKey(text).indexOf(lookup.foodKey(n)) === -1) bad.push(text + ': "' + n + '" is not in the source wording'); });
+      });
+      if (Object.keys(wf.approved_extra_names.names).length) bad.push('approved_extra_names is not empty: check the owner approved: ' + Object.keys(wf.approved_extra_names.names).join(', '));
+      return { pass: bad.length === 0, detail: bad.join('\n') };
     });
     check('Pharmacist reviews', 'every review still matches its card (re-review any card changed after review)', function () {
       var stale = db.reviews.filter(function (rv) { return lookup.findReview(db, rv.herb_id, rv.drug_id).stale; })

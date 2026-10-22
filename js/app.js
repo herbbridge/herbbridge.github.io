@@ -12,6 +12,7 @@
   var STORAGE_KEY = 'herbsafe.v1';
 
   var db = null;
+  var wf = null;   // data/warfarin.json: the "What else can change your warfarin" page
   var drugGroups = [];   // condition headings for the medicine picker, from data/drugs.json
   var state = { herbs: [], drugs: [], lang: 'en', demo: false };
   // Display mode: "simple" (default, for older users) or "full". Kept on this device only.
@@ -223,6 +224,7 @@
     var key = active && active.getAttribute ? active.getAttribute('data-key') : null;
     renderCard('herbs');
     renderCard('drugs');
+    renderWarfarinCard();
     renderDemo();
     renderStatus();
     renderWarning();
@@ -622,7 +624,8 @@
     statusTile = el('section', { class: 'status', 'aria-labelledby': 'h-status' });
     cards = {
       herbs: el('section', { class: 'cab-card', 'aria-labelledby': 'h-herbs' }),
-      drugs: el('section', { class: 'cab-card', 'aria-labelledby': 'h-drugs' })
+      drugs: el('section', { class: 'cab-card', 'aria-labelledby': 'h-drugs' }),
+      warfarin: el('div', { class: 'wf-slot', hidden: true })
     };
     app.appendChild(el('div', { class: 'dash' }, [
       el('div', { class: 'dash-main' }, [
@@ -634,7 +637,7 @@
         ]),
         demoBox, warningPanel, statusTile
       ]),
-      el('div', { class: 'dash-side' }, [cards.herbs, cards.drugs])
+      el('div', { class: 'dash-side' }, [cards.herbs, cards.drugs, cards.warfarin])
     ]));
     checkBar.bar = el('div', { class: 'check-bar' }, [
       el('div', { class: 'check-bar-inner' }, [notice, status, button])
@@ -643,6 +646,7 @@
     app.appendChild(el('div', { class: 'below-bar' }, [clear]));
     renderCard('herbs');
     renderCard('drugs');
+    renderWarfarinCard();
     renderDemo();
     renderStatus();
     renderWarning();
@@ -888,9 +892,13 @@
     btn.setAttribute('aria-pressed', 'false');
     btn.querySelector('.read-label').textContent = t('read_aloud');
   }
-  function readButton(r) {
-    var recKey = r.herb.id + '-' + r.drug.id + '.' + state.lang;
-    if (!speechOk() && !recordings[recKey]) return null;
+  // opts.parts: the lines to read instead of a pair's script (no recording); opts.onEnd: what happens after.
+  function readButton(r, opts) {
+    opts = opts || {};
+    var recKey = opts.parts ? null : r.herb.id + '-' + r.drug.id + '.' + state.lang;
+    var getParts = opts.parts || function () { return speechParts(r); };
+    var onEnd = opts.parts ? (opts.onEnd || function () {}) : showNextStep;
+    if (!speechOk() && !(recKey && recordings[recKey])) return null;
     var msg = el('p', { class: 'read-msg', role: 'status', hidden: true });
     var btn = el('button', { type: 'button', class: 'read-aloud', 'aria-pressed': 'false', onclick: function () {
       if (speaking === btn) { stopSpeaking(); return; }
@@ -910,11 +918,11 @@
         btn.querySelector('.read-label').textContent = t('read_stop');
       }
       // A recording for this pair and language: play it instead of the phone voice.
-      var rec = recordings[r.herb.id + '-' + r.drug.id + '.' + state.lang];
+      var rec = recKey ? recordings[recKey] : null;
       if (rec) {
         var audio = new Audio(rec);
         playing = audio; begin();
-        audio.onended = function () { if (mine()) { stopSpeaking(); showNextStep(); } };
+        audio.onended = function () { if (mine()) { stopSpeaking(); onEnd(); } };
         audio.onplaying = function () { started = true; };
         var p = audio.play();
         if (p && p.catch) p.catch(function () { if (mine() && playing === audio) fail(); });
@@ -925,7 +933,7 @@
       var choice = voiceFor(state.lang);
       if (!choice) return; // only online voices: the button is hidden by updateVoiceAvailability()
       // One short utterance per section, so the voice pauses naturally between them.
-      var parts = speechParts(r);
+      var parts = getParts();
       begin();
       parts.forEach(function (text, i) {
         var u = new window.SpeechSynthesisUtterance(text);
@@ -934,7 +942,7 @@
         u.rate = state.lang === 'zh' ? 0.85 : 0.9;
         u.pitch = 1;
         u.onstart = function () { started = true; };
-        if (i === parts.length - 1) u.onend = function () { if (mine()) { stopSpeaking(); showNextStep(); } };
+        if (i === parts.length - 1) u.onend = function () { if (mine()) { stopSpeaking(); onEnd(); } };
         u.onerror = function (ev) {
           if (ev && (ev.error === 'interrupted' || ev.error === 'canceled')) { if (mine()) stopSpeaking(); return; }
           fail();
@@ -1276,6 +1284,173 @@
     app.appendChild(nextStep([r]));
   }
 
+  /* ---------- What else can change your warfarin (#/warfarin) ---------- */
+  // Only Hospital Authority wording (data/warfarin.json): S-A = warfarin leaflet, S-B = diet guidelines.
+  // Simple: one section per part, key line first; the bleeding section is always shown in full.
+
+  var wfStep = 0;
+  function wfSource(id, lang) {
+    var s = wf.sources[id], zh = lang === 'zh';
+    var tpl = function (key, vars) { return I.strings[lang][key].replace(/\{(\w+)\}/g, function (m, k) { return vars[k]; }); };
+    var text = id === 'S-A'
+      ? tpl('wf_cite_a', { publisher: zh ? s.publisher_zh : s.publisher_en, title: zh ? s.title_zh : s.title_en, sn: zh ? s.sn_zh : s.sn_en, date: zh ? s.date_zh : s.date_en })
+      : tpl('wf_cite_b', { publisher: zh ? s.publisher_zh : s.publisher_en, title: zh ? s.title_zh : s.title_en, edition: zh ? s.edition_zh : s.edition_en });
+    return { text: text, url: zh ? s.url_zh : s.url_en };
+  }
+  function wfCite(id, lang) {
+    var src = wfSource(id, lang);
+    return el('p', { class: 'wf-cite' }, [
+      el('span', { text: t('wf_quote_from') + ' ' }),
+      el('a', { href: src.url, target: '_blank', rel: 'noopener noreferrer' }, [
+        el('span', { text: src.text }), icon('external', 'ext'), el('span', { class: 'visually-hidden', text: ' ' + t('opens_new_tab') })
+      ])
+    ]);
+  }
+  // One quoted line, in the current language; a line with no Chinese source wording shows the English original.
+  function wfQuote(item, cls, noNote) {
+    var zh = state.lang === 'zh';
+    var useZh = zh && item.zh != null;
+    var lang = useZh ? 'zh' : 'en';
+    var kids = [];
+    if (zh && !useZh && !noNote) kids.push(el('p', { class: 'wf-placeholder', text: t('wf_zh_missing') }));
+    if (useZh && item.zh_label) kids.push(el('p', { class: 'wf-label', lang: 'zh-HK', text: item.zh_label }));
+    kids.push(el('p', { class: 'wf-text', lang: useZh ? 'zh-HK' : 'en-GB', text: useZh ? item.zh : item.en }));
+    kids.push(wfCite(useZh ? item.source_zh : item.source_en, lang));
+    return el('blockquote', { class: 'wf-quote' + (cls ? ' ' + cls : ''), 'data-source': useZh ? item.source_zh : item.source_en }, kids);
+  }
+  function wfFoodName(item, zh) { return zh ? item.zh : item.en; }
+  function wfTable() {
+    var ft = wf.food_table, zh = state.lang === 'zh', sep = zh ? '、' : ', ';
+    var dl = el('dl', { class: 'wf-food' });
+    ft.groups.forEach(function (g) {
+      var plain = g.items.filter(function (x) { return !x.sparing; }).map(function (x) { return wfFoodName(x, zh); });
+      var sparing = g.items.filter(function (x) { return x.sparing; }).map(function (x) { return wfFoodName(x, zh); });
+      dl.appendChild(el('dt', { text: zh ? g.name_zh : g.name_en }));
+      dl.appendChild(el('dd', null, [
+        plain.length ? el('span', { text: plain.join(zh ? '；' : '; ') }) : null,
+        sparing.length ? el('span', { class: 'wf-sparing' }, [el('strong', { text: (plain.length ? (zh ? '；' : '; ') : '') + (zh ? ft.sparing_label_zh : ft.sparing_label_en) + ' ' }), el('span', { text: sparing.join(sep) })]) : null
+      ]));
+    });
+    return el('figure', { class: 'wf-quote wf-table', 'data-source': ft.source, lang: zh ? 'zh-HK' : 'en-GB' }, [
+      el('figcaption', { class: 'wf-text', text: zh ? ft.heading_zh : ft.heading_en }),
+      dl,
+      el('p', { class: 'wf-note', text: zh ? ft.note_zh : ft.note_en }),
+      wfCite(ft.source, zh ? 'zh' : 'en')
+    ]);
+  }
+  function wfSearch() {
+    var zh = state.lang === 'zh';
+    var out = el('div', { class: 'wf-result', 'aria-live': 'polite' });
+    var input = el('input', { type: 'search', id: 'wf-food-search', class: 'wf-input', autocomplete: 'off', spellcheck: 'false' });
+    function show() {
+      out.textContent = '';
+      if (!input.value.trim()) return;
+      var hits = L.warfarinFoodSearch(wf, input.value);
+      if (!hits.length) {
+        out.appendChild(el('div', { class: 'wf-notfound', 'data-result': 'not-found' }, [icon('not_in_database'), el('p', { text: t('wf_not_found') })]));
+        return;
+      }
+      hits.forEach(function (h) {
+        out.appendChild(el('div', { class: 'wf-found', 'data-result': 'found' }, [
+          el('p', { class: 'wf-found-name' }, [el('strong', { text: wfFoodName(h.item, zh) }), ' ', el('span', { class: 'muted', lang: zh ? 'en-GB' : 'zh-HK', text: wfFoodName(h.item, !zh) })]),
+          el('p', { class: 'wf-found-group', text: zh ? h.group.name_zh : h.group.name_en }),
+          el('p', { class: 'wf-found-status', text: t(h.sparing ? 'wf_found_sparing' : 'wf_found_avoid') }),
+          h.star ? el('p', { class: 'wf-note', text: zh ? wf.food_table.note_zh : wf.food_table.note_en }) : null
+        ]));
+      });
+    }
+    input.addEventListener('input', show);
+    return el('div', { class: 'wf-search' }, [el('label', { for: 'wf-food-search', class: 'wf-search-label', text: t('wf_search_label') }), input, out]);
+  }
+  function wfHerbLinks(sec) {
+    var zh = state.lang === 'zh';
+    var ul = el('ul', { class: 'wf-herbs' });
+    sec.herb_links.forEach(function (h) {
+      var name = zh ? h.name_zh : h.name_en;
+      if (h.herb_id && db.herbById[h.herb_id]) {
+        ul.appendChild(el('li', null, [el('a', { href: '#/pair/' + h.herb_id + '-warfarin' }, [el('span', { text: t('wf_herb_link', { herb: primaryName(db.herbById[h.herb_id]) }) })])]));
+      } else {
+        ul.appendChild(el('li', { text: name }));
+      }
+    });
+    return el('div', { class: 'wf-herb-links' }, [el('p', { class: 'block-label', text: t('wf_herbs_named') }), ul]);
+  }
+  function wfFooter() {
+    return el('footer', { class: 'wf-footer' }, [wfQuote(wf.footer, 'wf-small'), el('p', { class: 'wf-ours', text: t('card_disclaimer') })]);
+  }
+  function wfSection(sec, hidden) {
+    var kids = [el('h2', { id: 'wf-h-' + sec.id, tabindex: '-1', text: t('wf_sec_' + sec.id) }), wfQuote(sec.key, 'wf-key')];
+    if (sec.id === 'food') kids.push(wfSearch());
+    if (sec.herb_links) kids.push(wfHerbLinks(sec));
+    if (sec.signs) {
+      var signs = el('ul', { class: 'wf-signs' });
+      // A list with no Chinese source wording yet says so once, above the list, not on every line.
+      var noZh = state.lang === 'zh' && sec.signs.some(function (x) { return x.zh == null; });
+      sec.signs.forEach(function (x) { var q = wfQuote(x, 'wf-sign', noZh); signs.appendChild(el('li', null, [q])); });
+      kids.push(el('p', { class: 'block-label', text: t('wf_signs') }), noZh ? el('p', { class: 'wf-placeholder', text: t('wf_zh_missing') }) : null, signs);
+    }
+    sec.items.forEach(function (x) { kids.push(wfQuote(x)); });
+    if (sec.food_table) kids.push(wfTable());
+    if (sec.id === 'bleeding') kids.push(el('p', { class: 'wf-999', text: t('wf_999') }));
+    kids.push(wfFooter());
+    return el('section', { class: 'wf-section wf-' + sec.id + (hidden ? ' wf-other-step' : ''), 'data-section': sec.id, 'aria-labelledby': 'wf-h-' + sec.id }, kids);
+  }
+  function renderWarfarin() {
+    app.textContent = '';
+    var full = mode === 'full';
+    var page = el('article', { class: 'wf-page' });
+    app.appendChild(page);
+    var parts = window.HerbBridgeSpeech.warfarinScript(wf, state.lang, t);
+    var read = parts.length ? readButton(null, { parts: function () { return window.HerbBridgeSpeech.warfarinScript(wf, state.lang, t); } }) : null;
+    page.appendChild(el('header', { class: 'page-head' }, [
+      el('div', { class: 'page-nav' }, [homeLink()]),
+      el('h1', { tabindex: '-1', text: t('wf_title') }),
+      el('p', { class: 'lede', text: t('wf_intro') }),
+      read
+    ]));
+    var stepped = wf.sections.filter(function (s) { return !s.always_visible; });
+    var always = wf.sections.filter(function (s) { return s.always_visible; });
+    if (wfStep >= stepped.length) wfStep = 0;
+    if (full) {
+      wf.sections.forEach(function (sec) { page.appendChild(wfSection(sec, false)); });
+    } else {
+      page.appendChild(el('p', { class: 'step-line', text: t('wf_part', { n: wfStep + 1, total: stepped.length }) }));
+      // Every part is in the page (so the page prints whole); only the current one shows on screen.
+      stepped.forEach(function (sec, i) { page.appendChild(wfSection(sec, i !== wfStep)); });
+      function go(d) {
+        wfStep = Math.max(0, Math.min(stepped.length - 1, wfStep + d));
+        render(false);
+        var h = document.getElementById('wf-h-' + stepped[wfStep].id);
+        if (h) { h.focus({ preventScroll: true }); h.scrollIntoView({ block: 'start' }); }
+      }
+      page.appendChild(el('div', { class: 'wf-nav no-print' }, [
+        wfStep > 0 ? el('button', { type: 'button', class: 'btn btn-secondary', onclick: function () { go(-1); } }, [el('span', { text: t('wf_prev') })]) : null,
+        wfStep < stepped.length - 1 ? el('button', { type: 'button', class: 'btn btn-primary', onclick: function () { go(1); } }, [el('span', { text: t('wf_next') }), icon('arrow')]) : null
+      ]));
+      always.forEach(function (sec) { page.appendChild(wfSection(sec, false)); });
+    }
+    // Where every quote comes from, with the original PDFs (English and Chinese).
+    var srcList = el('ol', { class: 'sources' });
+    ['S-A', 'S-B'].forEach(function (id) {
+      ['en', 'zh'].forEach(function (lang) {
+        var src = wfSource(id, lang);
+        srcList.appendChild(el('li', { 'data-source': id }, [el('a', { href: src.url, target: '_blank', rel: 'noopener noreferrer' }, [
+          el('span', { lang: lang === 'zh' ? 'zh-HK' : 'en-GB', text: src.text }), icon('external', 'ext'), el('span', { class: 'visually-hidden', text: ' ' + t('opens_new_tab') })
+        ])]));
+      });
+    });
+    page.appendChild(el('section', { class: 'wf-sources', 'aria-labelledby': 'wf-h-sources' }, [el('h2', { id: 'wf-h-sources', text: t('wf_sources_title') }), srcList]));
+  }
+  // The cabinet card: only when warfarin is on the list.
+  function renderWarfarinCard() {
+    var slot = cards.warfarin;
+    if (!slot) return;
+    slot.textContent = '';
+    if (state.drugs.indexOf('warfarin') === -1) { slot.hidden = true; return; }
+    slot.hidden = false;
+    slot.appendChild(el('a', { class: 'wf-card', href: '#/warfarin', 'data-key': 'wf-card' }, [el('span', { text: t('wf_card') }), icon('arrow')]));
+  }
+
   /* ---------- Doctor summary (printable) ---------- */
 
   function formatDate(d) {
@@ -1451,7 +1626,7 @@
     why.appendChild(el('li', { text: t('about_heart_2') }));
     why.appendChild(el('li', null, [el('span', { text: t('about_heart_3') + ' ' }), sourceLinkInline(BACKGROUND_SOURCES[0], t('about_heart_3_src'))]));
     why.appendChild(el('li', null, [el('span', { text: t('about_heart_4') + ' ' }), sourceLinkInline(BACKGROUND_SOURCES[1], t('about_heart_4_src'))]));
-    page.appendChild(section('about_heart_title', [why]));
+    page.appendChild(section('about_heart_title', [why, el('p', { class: 'wf-about-link' }, [el('a', { href: '#/warfarin' }, [el('span', { text: t('wf_card') })])])]));
 
     page.appendChild(section('about_how_title', [el('p', { text: t('about_how') })]));
 
@@ -1605,7 +1780,7 @@
 
   /* ---------- routing ---------- */
 
-  // Screens: #/cabinet (also #/check), #/results, #/pair/<herb>-<drug>, #/summary, #/about.
+  // Screens: #/cabinet (also #/check), #/results, #/pair/<herb>-<drug>, #/summary, #/about, #/warfarin.
   var routeParam = null;
   function currentRoute() {
     var r = (location.hash || '').replace(/^#\/?/, '');
@@ -1613,7 +1788,7 @@
     if (r === 'cabinet') return 'check';
     var m = /^pair\/([a-z_]+)-([a-z_]+)$/.exec(r);
     if (m) { routeParam = { herb: m[1], drug: m[2] }; return 'pair'; }
-    return ['check', 'results', 'summary', 'about'].indexOf(r) !== -1 ? r : 'check';
+    return ['check', 'results', 'summary', 'about', 'warfarin'].indexOf(r) !== -1 ? r : 'check';
   }
 
   function applyStaticText() {
@@ -1685,6 +1860,7 @@
     else if (route === 'pair') renderPair(routeParam);
     else if (route === 'summary') renderSummary();
     else if (route === 'about') renderAbout();
+    else if (route === 'warfarin') renderWarfarin();
     else renderCheck();
     app.insertBefore(modeStrip(), app.firstChild);
     keepEndTogether(app);
@@ -1732,9 +1908,10 @@
     });
   }
 
-  Promise.all(['data/herbs.json', 'data/drugs.json', 'data/interactions.json', 'data/official.json', 'data/reviews.json'].map(getJson))
+  Promise.all(['data/herbs.json', 'data/drugs.json', 'data/interactions.json', 'data/official.json', 'data/reviews.json', 'data/warfarin.json'].map(getJson))
     .then(function (d) {
       db = L.createDb(d[0], d[1], d[2], d[3], d[4]);
+      wf = d[5];
       drugGroups = Array.isArray(d[1].groups) ? d[1].groups : [];
       load();
       I.setLang(state.lang);

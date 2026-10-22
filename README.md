@@ -128,6 +128,15 @@ Two display modes, switched in the header and remembered on the device:
 - **Full details**: same screens and content, with icons, a step bar, short transitions (off when
   the phone asks for reduced motion) and every detail open.
 
+## What else can change your warfarin (`data/warfarin.json`, `#/warfarin`)
+
+A page with ONLY Hospital Authority wording: the warfarin leaflet (S-A, 019Ev10 / 019Cv10) and the
+Warfarin Dietary Guidelines (S-B, 9/2016 edition). Every line keeps its source's own words and spelling
+and names its source (`source_en` / `source_zh`). A line with no HA Chinese wording yet has `zh: null`
+and shows the English original under a note. The food search matches only the item's own wording
+(`search_names`) and names the owner has approved (`approved_extra_names`). Tests lock every line;
+`node tools/check-warfarin.js` checks the page in a browser.
+
 ## Fonts
 
 `fonts/` holds Inter (latin) and a subset of Noto Sans TC. **Whenever new Chinese text is added

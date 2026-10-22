@@ -154,5 +154,34 @@
     return parts.map(function (p) { return zh ? p.replace(/\s+/g, '') : p; });
   }
 
-  return { script: script, listenEn: listenEn, listenZh: listenZh, youCanSay: youCanSay, sentenceName: sentenceName };
+  /* "What else can change your warfarin" (data/warfarin.json): the key line of each section, then the
+     whole bleeding section, then the emergency line. Quotes keep their own words; only brackets, slashes
+     and "e.g." are made easier to listen to. Returns [] when a line has no Chinese source wording yet
+     (the app then offers no Read aloud in Chinese, rather than skip part of the bleeding section). */
+  function warfarinScript(wf, lang, t) {
+    var zh = lang === 'zh';
+    var stop = zh ? '。' : '.';
+    var missing = false;
+    function say(item) {
+      var text = zh ? item.zh : item.en;
+      if (text == null) { missing = true; return ''; }
+      if (zh) return listenZh((item.zh_label ? item.zh_label + '：' : '') + text);
+      return listenEn(String(text).replace(/\be\.g\.\s*/g, 'for example, '));
+    }
+    function end(x) { return /[.。！？!?]$/.test(x) ? x : x + stop; }
+    var parts = [end(t('wf_title'))];
+    wf.sections.forEach(function (sec) {
+      var title = t('wf_sec_' + sec.id);
+      if (sec.id !== 'bleeding') { parts.push(end(title) + ' ' + end(say(sec.key))); return; }
+      parts.push(end(title) + ' ' + end(say(sec.key)));
+      parts.push(t('wf_signs'));
+      sec.signs.forEach(function (x) { parts.push(end(say(x))); });
+      sec.items.forEach(function (x) { parts.push(end(say(x))); });
+    });
+    parts.push(t('wf_999'));
+    if (missing) return [];
+    return parts.map(function (p) { return zh ? p.replace(/\s+/g, '') : p.replace(/\s{2,}/g, ' ').replace(/,\s*\./g, '.'); });
+  }
+
+  return { script: script, warfarinScript: warfarinScript, listenEn: listenEn, listenZh: listenZh, youCanSay: youCanSay, sentenceName: sentenceName };
 });

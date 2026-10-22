@@ -1068,3 +1068,60 @@ html[data-mode="full"] .pair-cards { gap: 0.625rem; }
   .page-nav, .next-step { display: none !important; }
   .summary-say { background: none !important; border: 0.75pt solid #000; padding: 1.5pt 5pt !important; margin: 1pt 0 2pt !important; font-size: 8.5pt; line-height: 1.2; }
 }
+
+/* ---------- What else can change your warfarin (#/warfarin) ----------
+   Hospital Authority wording only. Quotes look like quotes (left rule, source line); our own lines do not.
+   "Not on this list" is grey and dashed like "not in our database": never green, never an OK. */
+.wf-page { max-width: 46rem; }
+.wf-section { margin: 1.5rem 0; padding-top: 1rem; border-top: 1px solid var(--line); }
+.wf-section h2 { margin: 0 0 0.75rem; }
+.wf-other-step { display: none; }
+.wf-quote { margin: 0.75rem 0; padding: 0.625rem 0.875rem; border-left: 4px solid var(--line-strong); background: var(--surface); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+.wf-quote p { margin: 0; }
+.wf-quote .wf-text { white-space: pre-line; }
+.wf-key { border-left-color: var(--ink); }
+.wf-key .wf-text { font-size: 1.125rem; font-weight: 600; }
+.wf-label { font-weight: 700; }
+.wf-cite { margin-top: 0.375rem !important; font-size: 0.875rem; color: var(--ink-2); }
+.wf-placeholder { font-size: 0.875rem; color: var(--ink-2); font-style: italic; margin-bottom: 0.25rem !important; }
+.wf-small .wf-text { font-size: 0.9375rem; }
+.wf-signs { list-style: none; margin: 0; padding: 0; }
+.wf-signs .wf-quote { margin: 0.375rem 0; }
+.wf-signs .wf-cite { display: none; } /* one source line per list is enough; it shows under the heading's quote */
+.wf-signs li:last-child .wf-cite { display: block; }
+.wf-bleeding { background: var(--high-soft); border: 2px solid var(--high); border-radius: var(--radius-sm); padding: 1rem; }
+.wf-bleeding h2 { color: var(--high-text); }
+.wf-999 { font-size: 1.25rem; font-weight: 700; margin: 0.75rem 0; }
+.wf-food { margin: 0.5rem 0; }
+.wf-food dt { font-weight: 700; margin-top: 0.5rem; }
+.wf-food dd { margin: 0.125rem 0 0; }
+.wf-note { font-size: 0.9375rem; margin-top: 0.5rem !important; }
+.wf-table figcaption { font-weight: 600; }
+.wf-search { margin: 1rem 0; padding: 1rem; border: 1px solid var(--line-strong); border-radius: var(--radius-sm); background: var(--surface); }
+.wf-search-label { display: block; font-weight: 700; margin-bottom: 0.5rem; }
+.wf-input { width: 100%; min-height: 48px; font: inherit; font-size: 1.125rem; padding: 0.5rem 0.75rem; border: 2px solid var(--line-strong); border-radius: var(--radius-sm); background: #fff; color: var(--ink); }
+.wf-input:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.wf-result:not(:empty) { margin-top: 0.75rem; }
+.wf-found { border: 2px solid var(--ink); border-radius: var(--radius-sm); padding: 0.75rem 0.875rem; background: var(--surface); margin-bottom: 0.5rem; }
+.wf-found p { margin: 0 0 0.25rem; }
+.wf-found-status { font-weight: 700; }
+.wf-notfound { display: flex; gap: 0.5rem; align-items: flex-start; background: var(--sunken); border: 1.5px dashed var(--unknown-line); border-radius: var(--radius-sm); padding: 0.75rem 0.875rem; color: var(--unknown-ink); }
+.wf-notfound p { margin: 0; font-weight: 500; }
+.wf-notfound svg { width: 1.5rem; height: 1.5rem; flex: none; }
+.wf-herb-links { margin: 0.75rem 0; }
+.wf-herbs { margin: 0; padding-left: 1.25rem; }
+.wf-herbs li { margin: 0.375rem 0; }
+.wf-herbs a { display: inline-block; min-height: 44px; line-height: 44px; }
+.wf-footer { margin-top: 1rem; padding-top: 0.5rem; border-top: 1px dashed var(--line); font-size: 0.9375rem; }
+.wf-ours { margin: 0.5rem 0 0; color: var(--ink-2); }
+.wf-nav { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 1rem 0 1.5rem; }
+.wf-nav .btn { flex: 1 1 12rem; min-height: 3.25rem; justify-content: center; }
+.wf-sources ol { padding-left: 1.25rem; }
+.wf-card { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; min-height: 3.5rem; margin-top: 1rem; padding: 0.875rem 1.125rem; border-radius: var(--radius-sm); background: var(--accent-soft); color: var(--ink); font-weight: 700; text-decoration: none; box-shadow: inset 0 0 0 2px var(--accent); }
+.wf-card svg { flex: none; width: 1.25rem; height: 1.25rem; color: var(--accent); }
+.wf-about-link a { display: inline-block; min-height: 44px; line-height: 1.4; padding: 0.5rem 0; font-weight: 600; }
+@media print {
+  .wf-other-step { display: block !important; }
+  .wf-search, .wf-nav, .wf-page .read-row, .wf-page .page-nav { display: none !important; }
+  .wf-quote, .wf-bleeding { background: #fff !important; break-inside: avoid; }
+}

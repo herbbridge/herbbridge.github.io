@@ -16,6 +16,7 @@ var data = {
   interactions: load('data/interactions.json'),
   official: load('data/official.json'),
   reviews: load('data/reviews.json'),
+  warfarin: load('data/warfarin.json'),
   cases: load('tests/test-cases.json'),
   i18n: require('../js/i18n.js').HerbBridgeI18n
 };
@@ -92,6 +93,20 @@ data.herbs.herbs.forEach(function (h) { data.drugs.drugs.forEach(function (d) { 
   spoken(h.id, d.id, lang).forEach(function (p) { if (p.indexOf(lang === 'zh' ? '應該點做' : 'What to do') === 0 && (lang === 'zh' ? (p.match(/[。！？]/g) || []).length : p.split(/(?<=[.!?])\s+/).length) > 1) long.push(h.id + '+' + d.id + ' ' + lang); });
 }); }); });
 rules.push(['What to do is one sentence per spoken piece', long.length === 0 && goji.length > 4, long.slice(0, 5).join(', ')]);
+// Warfarin page: key line of each section, then the whole bleeding section; easy to listen to.
+data.i18n.setLang('en');
+var wfEn = speech.warfarinScript(data.warfarin, 'en', data.i18n.t), wfText = wfEn.join(' ');
+data.i18n.setLang('zh');
+var wfZh = speech.warfarinScript(data.warfarin, 'zh', data.i18n.t);
+data.i18n.setLang('en');
+var bleedSec = data.warfarin.sections.filter(function (x) { return x.id === 'bleeding'; })[0];
+var wfMissingZh = bleedSec.signs.concat(bleedSec.items, [bleedSec.key]).some(function (x) { return x.zh == null; });
+rules.push(['warfarin page Read aloud: every section key line, all bleeding signs and 999; no brackets, slashes, "e.g." or links; no Chinese reading while bleeding lines lack Chinese',
+  wfEn.length > 0 && !/[()\[\]\/]|\be\.g\.|https?:/.test(wfText) &&
+  data.warfarin.sections.filter(function (x) { return x.id !== 'bleeding'; }).every(function (sec) { return wfText.indexOf(sec.key.en.slice(0, 12)) !== -1; }) &&
+  bleedSec.signs.every(function (x) { return wfText.indexOf(x.en.replace(/\s*\(.*$/, '').replace(/ \/.*$/, '')) !== -1; }) &&
+  wfText.indexOf('In an emergency, call 999.') !== -1 && (wfMissingZh ? wfZh.length === 0 : wfZh.length > 0),
+  wfText.slice(0, 300)]);
 rules.forEach(function (x) { results.push({ group: 'Read aloud', name: x[0], pass: !!x[1], detail: x[2] || '' }); });
 results.push({ group: 'Read aloud', name: 'spoken script has no brackets, INR, source labels or links', pass: badSpoken.length === 0, detail: badSpoken.slice(0, 10).join('\n') });
 var audioList = load('audio/manifest.json').files || [];

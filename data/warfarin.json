@@ -1,0 +1,552 @@
+{
+  "schema_version": 1,
+  "last_updated": "2026-10-22",
+  "about": "Page 'What else can change your warfarin' (#/warfarin). ONLY Hospital Authority wording (owner, 22 Oct 2026): S-A = HA warfarin leaflet 019Ev10/019Cv10; S-B = HA Warfarin Dietary Guidelines 9/2016. Each line keeps its source's own words and spelling. zh null = no Chinese source wording yet (the page shows the English original under a placeholder note).",
+  "sources": {
+    "S-A": {
+      "publisher_en": "Hospital Authority",
+      "publisher_zh": "醫院管理局",
+      "title_en": "Warfarin (Oral Anticoagulant)",
+      "title_zh": "華法林 (Warfarin) 口服抗凝血藥",
+      "sn_en": "019Ev10",
+      "sn_zh": "019Cv10",
+      "date_en": "10/2025",
+      "date_zh": "2025年10月",
+      "url_en": "https://www.ha.org.hk/hadf/Content/uploads/docs/mcfDfgqUQ5320084.pdf",
+      "url_zh": "https://www.ha.org.hk/hadf/Content/uploads/docs/eGOLcFArB5505364.pdf"
+    },
+    "S-B": {
+      "publisher_en": "Hospital Authority, COC – Grade (Dietetics)",
+      "publisher_zh": "醫院管理局",
+      "title_en": "Warfarin Dietary Guidelines",
+      "title_zh": "薄血藥(WARFARIN)飲食重點指引",
+      "edition_en": "9/2016 edition",
+      "edition_zh": "2016年9月版",
+      "url_en": "https://www3.ha.org.hk/dic/files/sdn_27.pdf",
+      "url_zh": "https://www3.ha.org.hk/dic/files/sdn_30.pdf"
+    }
+  },
+  "sections": [
+    {
+      "id": "food",
+      "key": {
+        "kind": "quote",
+        "source_en": "S-B",
+        "en": "Vitamin K plays an important role in blood clotting. A fluctuation in vitamin K intake will affect the efficacy of warfarin. Hence, patient on warfarin should maintain a consistent vitamin K intake.",
+        "source_zh": null,
+        "zh": null
+      },
+      "items": [
+        {
+          "kind": "quote",
+          "source_en": "S-B",
+          "en": "Avoid any drastic changes in habitual dietary intake, especially the quantity of green leafy vegetables even when having hotpots or salads in order to maintain a consistent intake of vitamin K",
+          "source_zh": "S-B",
+          "zh": "要保持穩定的維他命K攝取量，服用華法林人仕在飲食上不宜有大改動，尤其是綠葉菜進食的份量。吃火鍋和沙律菜時，仍須維持平時食用的份量。"
+        }
+      ],
+      "food_table": true
+    },
+    {
+      "id": "drinks",
+      "key": {
+        "kind": "quote",
+        "source_en": "S-A",
+        "en": "Avoid alcohol (including beer, red wine, white wine and spirits).",
+        "source_zh": "S-B",
+        "zh": "酒類（包括啤酒、紅酒、白酒及烈酒）",
+        "zh_label": "避免使用"
+      },
+      "items": [
+        {
+          "kind": "quote",
+          "source_en": "S-A",
+          "en": "Do not take any Traditional Chinese Medicines (TCM), Proprietary Chinese Medicines, herbal drinks, or food that contains TCM, such as Guilinggao.",
+          "source_zh": "S-A",
+          "zh": "不可隨便服用中藥材，中成藥，藥材湯或涼茶，或含中藥成份的食品如龜苓膏，因為很多中藥 ( 如人參、當歸、丹參、赤芍 )，會與「華法林」產生相互作用，影響抗凝血藥的功效。",
+          "zh_is_source_original": true
+        }
+      ]
+    },
+    {
+      "id": "tcm",
+      "key": {
+        "kind": "quote",
+        "source_en": "S-A",
+        "en": "Many TCM such as ginseng, Dong quai, Danshen, Chishao can interact with warfarin.",
+        "source_zh": "S-A",
+        "zh": "不可隨便服用中藥材，中成藥，藥材湯或涼茶，或含中藥成份的食品如龜苓膏，因為很多中藥 ( 如人參、當歸、丹參、赤芍 )，會與「華法林」產生相互作用，影響抗凝血藥的功效。",
+        "zh_is_source_original": true
+      },
+      "herb_links": [
+        {
+          "name_en": "ginseng",
+          "name_zh": "人參",
+          "herb_id": "asian_ginseng"
+        },
+        {
+          "name_en": "Dong quai",
+          "name_zh": "當歸",
+          "herb_id": "dong_quai"
+        },
+        {
+          "name_en": "Danshen",
+          "name_zh": "丹參",
+          "herb_id": "danshen"
+        },
+        {
+          "name_en": "Chishao",
+          "name_zh": "赤芍",
+          "herb_id": null
+        }
+      ],
+      "items": [
+        {
+          "kind": "quote",
+          "source_en": "S-B",
+          "en": "Avoid the following: Traditional Chinese medicine/over-the-counter medications; Chinese herbal tonic and remedies",
+          "source_zh": "S-B",
+          "zh": "避免使用：中、西成藥；中國補品及藥材"
+        }
+      ]
+    },
+    {
+      "id": "supplements",
+      "key": {
+        "kind": "quote",
+        "source_en": "S-A",
+        "en": "Some vitamins, supplements, nutritional or health products (such as probiotics, green tea extract, glucosamine, and fish oil) can interact with warfarin.",
+        "source_zh": null,
+        "zh": null
+      },
+      "items": [
+        {
+          "kind": "quote",
+          "source_en": "S-A",
+          "en": "Consult your healthcare professionals before taking any of these products.",
+          "source_zh": null,
+          "zh": null
+        },
+        {
+          "kind": "quote",
+          "source_en": "S-B",
+          "en": "Fish oil supplement",
+          "source_zh": "S-B",
+          "zh": "魚油丸"
+        },
+        {
+          "kind": "quote",
+          "source_en": "S-B",
+          "en": "Vitamin supplements (vitamin K and large amount of vitamin C and E consumption can affect the efficacy of warfarin)",
+          "source_zh": "S-B",
+          "zh": "維他命丸（維他命K、大量的維他命C和維他命E亦會影響華法林的功效）"
+        },
+        {
+          "kind": "quote",
+          "source_en": "S-B",
+          "en": "Consult your doctor or dietitian before taking any nutritional supplements",
+          "source_zh": "S-B",
+          "zh": "在進食營養奶或營養補充品前，需請教醫生或營養師。"
+        }
+      ]
+    },
+    {
+      "id": "medicines",
+      "key": {
+        "kind": "quote",
+        "source_en": "S-A",
+        "en": "Do not take any other medications, including over-the-counter medications, without consulting your doctor or pharmacist.",
+        "source_zh": null,
+        "zh": null
+      },
+      "items": [
+        {
+          "kind": "quote",
+          "source_en": "S-A",
+          "en": "Many drugs can interact with warfarin, such as aspirin and some painkillers.",
+          "source_zh": null,
+          "zh": null
+        }
+      ]
+    },
+    {
+      "id": "bleeding",
+      "always_visible": true,
+      "key": {
+        "kind": "quote",
+        "source_en": "S-A",
+        "en": "The most common side effect associated with the use of warfarin is bleeding.",
+        "source_zh": null,
+        "zh": null
+      },
+      "signs": [
+        {
+          "kind": "sign",
+          "source_en": "S-A",
+          "en": "Unusual bruising",
+          "source_zh": null,
+          "zh": null
+        },
+        {
+          "kind": "sign",
+          "source_en": "S-A",
+          "en": "Prolonged nosebleed (for more than 10 minutes)",
+          "source_zh": null,
+          "zh": null
+        },
+        {
+          "kind": "sign",
+          "source_en": "S-A",
+          "en": "Blood in urine or have red / dark brown urine",
+          "source_zh": null,
+          "zh": null
+        },
+        {
+          "kind": "sign",
+          "source_en": "S-A",
+          "en": "Vomiting blood or matter that looks like coffee grounds",
+          "source_zh": null,
+          "zh": null
+        },
+        {
+          "kind": "sign",
+          "source_en": "S-A",
+          "en": "Coughing up blood",
+          "source_zh": null,
+          "zh": null
+        },
+        {
+          "kind": "sign",
+          "source_en": "S-A",
+          "en": "Abdominal pain or swelling",
+          "source_zh": null,
+          "zh": null
+        },
+        {
+          "kind": "sign",
+          "source_en": "S-A",
+          "en": "Excessive bleeding from gums when brushing the teeth",
+          "source_zh": null,
+          "zh": null
+        },
+        {
+          "kind": "sign",
+          "source_en": "S-A",
+          "en": "Blood in stools or passing black stools",
+          "source_zh": null,
+          "zh": null
+        },
+        {
+          "kind": "sign",
+          "source_en": "S-A",
+          "en": "Heavy or increased menstrual bleeding or unusual vaginal bleeding between periods",
+          "source_zh": null,
+          "zh": null
+        },
+        {
+          "kind": "sign",
+          "source_en": "S-A",
+          "en": "Prolonged bleeding from cuts or wounds that does not stop",
+          "source_zh": null,
+          "zh": null
+        }
+      ],
+      "items": [
+        {
+          "kind": "quote",
+          "source_en": "S-A",
+          "en": "If bleeding persists or becomes severe, you should seek immediate medical attention.",
+          "source_zh": null,
+          "zh": null
+        },
+        {
+          "kind": "quote",
+          "source_en": "S-A",
+          "en": "If you have a fall or bump your head, closely monitor for signs of internal bleeding (e.g. sudden severe headache, unusual bruising, or blood in urine or stools) and consult your doctor immediately if necessary.",
+          "source_zh": null,
+          "zh": null
+        }
+      ]
+    }
+  ],
+  "footer": {
+    "kind": "quote",
+    "source_en": "S-B",
+    "en": "This leaflet is for reference only. Please consult dietitian for individual advice.",
+    "source_zh": null,
+    "zh": null
+  },
+  "food_table": {
+    "source": "S-B",
+    "heading_en": "The following food are rich in vitamin K or contain nutrients that may affect the efficacy of warfarin and should be avoided",
+    "heading_zh": "以下食物含高維他命K或其成份會影響華法林的功效，應避免進食。",
+    "sparing_label_en": "Use sparingly or as garnish only:",
+    "sparing_label_zh": "只可用少量：",
+    "note_en": "*These food may not be high in vitamin K but may affect the efficacy of warfarin",
+    "note_zh": "* 這些食物維他命K含量未必很高，但亦可能影響華法林的功效",
+    "groups": [
+      {
+        "id": "vegetables",
+        "name_en": "Vegetables and Dry Beans",
+        "name_zh": "蔬菜及乾豆類",
+        "items": [
+          {
+            "en": "Amaranth",
+            "zh": "莧菜",
+            "sparing": false
+          },
+          {
+            "en": "Chives",
+            "zh": "韮菜",
+            "sparing": false
+          },
+          {
+            "en": "Green yard-long beans",
+            "zh": "青豆角",
+            "sparing": false
+          },
+          {
+            "en": "Kale",
+            "zh": "芥蘭",
+            "sparing": false
+          },
+          {
+            "en": "Spinach",
+            "zh": "菠菜",
+            "sparing": false
+          },
+          {
+            "en": "Water spinach",
+            "zh": "通菜",
+            "sparing": false
+          },
+          {
+            "en": "Swiss chard",
+            "zh": "君達菜(豬乸菜)",
+            "sparing": false
+          },
+          {
+            "en": "Purslane",
+            "zh": "馬齒莧",
+            "sparing": false
+          },
+          {
+            "en": "Pea shoots",
+            "zh": "豆苗",
+            "sparing": false
+          },
+          {
+            "en": "Wolfberry leaves",
+            "zh": "枸杞",
+            "sparing": false
+          }
+        ]
+      },
+      {
+        "id": "nuts",
+        "name_en": "Nuts",
+        "name_zh": "果仁類",
+        "items": [
+          {
+            "en": "Gingko*",
+            "zh": "白果*",
+            "sparing": false
+          },
+          {
+            "en": "Pine nuts",
+            "zh": "松子仁",
+            "sparing": false
+          }
+        ]
+      },
+      {
+        "id": "fruits",
+        "name_en": "Fruits",
+        "name_zh": "水果類",
+        "items": [
+          {
+            "en": "Avocado*",
+            "zh": "牛油果*",
+            "sparing": false
+          },
+          {
+            "en": "Papaya*",
+            "zh": "木瓜*",
+            "sparing": false
+          },
+          {
+            "en": "Cranberry Juice*",
+            "zh": "紅莓汁*",
+            "sparing": false
+          },
+          {
+            "en": "Cranberry Jam*",
+            "zh": "紅莓醬*",
+            "sparing": false
+          },
+          {
+            "en": "Mango*",
+            "zh": "芒果*",
+            "sparing": false
+          },
+          {
+            "en": "Pomegranate*",
+            "zh": "石榴*",
+            "sparing": false
+          },
+          {
+            "en": "Grapefruit*",
+            "zh": "西柚*",
+            "sparing": false
+          },
+          {
+            "en": "Dried prunes",
+            "zh": "西梅乾",
+            "sparing": false
+          },
+          {
+            "en": "Kiwifruit",
+            "zh": "奇異果",
+            "sparing": false
+          }
+        ]
+      },
+      {
+        "id": "meat",
+        "name_en": "Meat",
+        "name_zh": "肉類",
+        "items": [
+          {
+            "en": "Liver*",
+            "zh": "肝臟*",
+            "sparing": false
+          },
+          {
+            "en": "Chinese liver sausage*",
+            "zh": "膶腸*",
+            "sparing": false
+          },
+          {
+            "en": "Liver pate*",
+            "zh": "肝醬*",
+            "sparing": false
+          }
+        ]
+      },
+      {
+        "id": "fats",
+        "name_en": "Fats & Oils",
+        "name_zh": "油類",
+        "items": [
+          {
+            "en": "Soybean oil",
+            "zh": "黃豆油",
+            "sparing": false
+          },
+          {
+            "en": "Canola oil",
+            "zh": "芥花籽油",
+            "sparing": false
+          }
+        ]
+      },
+      {
+        "id": "others",
+        "name_en": "Others",
+        "name_zh": "其他",
+        "items": [
+          {
+            "en": "Green tea powder & its products such as green tea ice-cream",
+            "zh": "綠茶粉及其製成品如綠茶雪糕",
+            "sparing": false
+          },
+          {
+            "en": "Tonic water* and bitter lemon*",
+            "zh": "湯力水(tonic water)*及檸檬湯力(bitter lemon)*",
+            "sparing": false
+          },
+          {
+            "en": "Mint leaves",
+            "zh": "薄荷葉",
+            "sparing": true
+          },
+          {
+            "en": "Green tea leaves",
+            "zh": "綠茶葉",
+            "sparing": true
+          },
+          {
+            "en": "Wood ear*",
+            "zh": "木耳*",
+            "sparing": true
+          },
+          {
+            "en": "Purple laver",
+            "zh": "紫菜",
+            "sparing": true
+          },
+          {
+            "en": "Algae kombu",
+            "zh": "海帶",
+            "sparing": true
+          },
+          {
+            "en": "Garlic*",
+            "zh": "蒜頭*",
+            "sparing": true
+          },
+          {
+            "en": "Ginger",
+            "zh": "薑",
+            "sparing": true
+          },
+          {
+            "en": "Spring onion",
+            "zh": "蔥",
+            "sparing": true
+          },
+          {
+            "en": "Coriander",
+            "zh": "芫茜",
+            "sparing": true
+          },
+          {
+            "en": "Parsley",
+            "zh": "番芫茜",
+            "sparing": true
+          }
+        ]
+      }
+    ]
+  },
+  "search_names": {
+    "about": "Extra search names for an item, taken only from that item's own source wording (owner's rule: no other names without approval).",
+    "Green tea powder & its products such as green tea ice-cream": [
+      "Green tea powder",
+      "green tea ice-cream"
+    ],
+    "Tonic water* and bitter lemon*": [
+      "Tonic water",
+      "bitter lemon"
+    ],
+    "綠茶粉及其製成品如綠茶雪糕": [
+      "綠茶粉",
+      "綠茶雪糕"
+    ],
+    "湯力水(tonic water)*及檸檬湯力(bitter lemon)*": [
+      "湯力水",
+      "檸檬湯力",
+      "tonic water",
+      "bitter lemon"
+    ],
+    "君達菜(豬乸菜)": [
+      "君達菜",
+      "豬乸菜"
+    ]
+  },
+  "approved_extra_names": {
+    "about": "Common extra names approved by the owner (e.g. 杞子 → 枸杞). Empty until the owner approves a list.",
+    "names": {}
+  },
+  "zh_reviewed": false
+}
