@@ -94,6 +94,19 @@ data.herbs.herbs.forEach(function (h) { data.drugs.drugs.forEach(function (d) { 
 }); }); });
 rules.push(['What to do is one sentence per spoken piece', long.length === 0 && goji.length > 4, long.slice(0, 5).join(', ')]);
 rules.forEach(function (x) { results.push({ group: 'Read aloud', name: x[0], pass: !!x[1], detail: x[2] || '' }); });
+// "What people take it for" (box and spoken lines): rated pairs only, never on a pair with no record (owner, 22 Oct).
+var usesBad = [], usesSeen = { rated: 0, grey: 0 };
+sdb.uses.forEach(function (u) { data.drugs.drugs.forEach(function (d) { ['en', 'zh'].forEach(function (lang) {
+  var r = lookup.checkPairs(sdb, [u.herb_id], [d.id])[0], grey = r.status === 'not_in_database';
+  var box = lookup.usesFor(sdb, r);
+  var said = spoken(u.herb_id, d.id, lang).some(function (p) { return p.indexOf(lang === 'zh' ? '一般用嚟做咩' : 'What people take it for') === 0; });
+  usesSeen[grey ? 'grey' : 'rated']++;
+  if (grey && (box || said)) usesBad.push(u.herb_id + '+' + d.id + ' ' + lang + ': shown on a pair with no record');
+  if (!grey && (!box || !said)) usesBad.push(u.herb_id + '+' + d.id + ' ' + lang + ': missing on a rated pair');
+}); }); });
+results.push({ group: 'What people take it for', name: 'box and Read aloud lines only on rated pairs, never on "not in our database"',
+  pass: usesBad.length === 0 && usesSeen.grey > 0 && usesSeen.rated > 0, detail: usesBad.slice(0, 10).join('\n') + ' (rated ' + usesSeen.rated + ', no record ' + usesSeen.grey + ')' });
+
 results.push({ group: 'Read aloud', name: 'spoken script has no brackets, INR, source labels or links', pass: badSpoken.length === 0, detail: badSpoken.slice(0, 10).join('\n') });
 var audioList = load('audio/manifest.json').files || [];
 var badAudio = audioList.filter(function (f) {

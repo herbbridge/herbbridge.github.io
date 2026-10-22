@@ -99,8 +99,9 @@
   }
 
   // What people take the herb for (data/uses.json): the Simple line, then "This is not a recommendation to take it."
+  // Rated pairs only, never on a pair with no record (same rule as the box on screen).
   function usesParts(db, r, zh, t, own, colon) {
-    var u = db.usesByHerb && db.usesByHerb[r.herb.id];
+    var u = r.status !== 'not_in_database' && db.usesByHerb && db.usesByHerb[r.herb.id];
     if (!u) return [];
     return [t('uses_title') + colon + own(zh ? u.simple_zh : u.simple_en), t('uses_not_rec')];
   }
@@ -121,7 +122,6 @@
     if (!r.entry && !r.official) {
       parts.push(pair + ' ' + t('risk_not_in_database') + stop + ' ' + t('not_in_db_text'));
       sentences(own(t('unknown_next_text')), zh).forEach(function (x, i) { parts.push(i === 0 ? t('label_what_to_do') + colon + x : x); });
-      usesParts(db, r, zh, t, own, colon).forEach(function (x) { parts.push(x); });
       parts.push(t('next_title') + ' ' + youCanSay([r], lang, t));
       return parts.map(function (p) { return zh ? p.replace(/\s+/g, '') : p; });
     }

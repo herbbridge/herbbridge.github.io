@@ -139,6 +139,12 @@
     for (var i = 0; i < text.length; i++) { h ^= text.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
     return ('0000000' + h.toString(16)).slice(-8);
   }
+  /* What people take the herb for (data/uses.json), for a result row r. Only on rated pairs: never on a
+     pair with no record (owner, 22 Oct), so it can never sit next to "not in our database" as reassurance. */
+  function usesFor(db, r) {
+    if (!r || r.status === NOT_IN_DATABASE || !db.usesByHerb) return null;
+    return db.usesByHerb[r.herb.id] || null;
+  }
   /* The pharmacist review for a pair: { review, stale }. A stale review is never shown. */
   function findReview(db, herbId, drugId) {
     var rev = db.reviews.filter(function (x) { return x.herb_id === herbId && x.drug_id === drugId; })[0] || null;
@@ -373,6 +379,7 @@
     EVIDENCE_LEVELS: EVIDENCE_LEVELS,
     normalise: normalise,
     createDb: createDb,
+    usesFor: usesFor,
     search: search,
     findInteraction: findInteraction,
     findOfficial: findOfficial,

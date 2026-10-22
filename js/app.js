@@ -1094,8 +1094,8 @@
   }
   // What people take the herb for (data/uses.json): after the risk, never instead of it. Simple: one line;
   // Full details: the full text and its sources. Always ends with "not a recommendation". Not printed.
-  function usesBox(herb, full) {
-    var u = db.usesByHerb[herb.id];
+  function usesBox(r, full) {
+    var u = L.usesFor(db, r);
     if (!u) return null;
     var zh = state.lang === 'zh';
     return el('section', { class: 'uses-box no-print', 'aria-labelledby': 'h-uses' }, [
@@ -1256,7 +1256,7 @@
     if (full) {
       Array.prototype.forEach.call(whole.querySelectorAll('details'), function (d) { d.open = true; });
       app.appendChild(whole);
-      var usesFull = usesBox(r.herb, true);
+      var usesFull = usesBox(r, true);
       if (usesFull) app.appendChild(usesFull);
       app.appendChild(nextStep([r]));
       return;
@@ -1286,7 +1286,7 @@
       grey ? el('a', { class: 'btn btn-primary', href: '#/summary' }, [el('span', { text: t('unknown_next_button') }), icon('arrow')]) : null,
       el('p', { class: 'disclaimer-box' }, disclaimerText(r))
     ]));
-    var usesSimple = usesBox(r.herb, false);
+    var usesSimple = usesBox(r, false);
     if (usesSimple) app.appendChild(usesSimple);
     app.appendChild(moreBtn);
     app.appendChild(more);
