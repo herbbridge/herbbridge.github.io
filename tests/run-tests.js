@@ -93,6 +93,12 @@ data.herbs.herbs.forEach(function (h) { data.drugs.drugs.forEach(function (d) { 
   spoken(h.id, d.id, lang).forEach(function (p) { if (p.indexOf(lang === 'zh' ? '應該點做' : 'What to do') === 0 && (lang === 'zh' ? (p.match(/[。！？]/g) || []).length : p.split(/(?<=[.!?])\s+/).length) > 1) long.push(h.id + '+' + d.id + ' ' + lang); });
 }); }); });
 rules.push(['What to do is one sentence per spoken piece', long.length === 0 && goji.length > 4, long.slice(0, 5).join(', ')]);
+var S = data.i18n.strings, dwEn = spoken('danshen', 'warfarin', 'en'), dwZh = spoken('danshen', 'warfarin', 'zh');
+rules.push(['"Next" names the doctor and the Chinese medicine practitioner (screen and spoken), and the summary says who it is for',
+  S.en.next_title === 'Next: show your doctor and your Chinese medicine practitioner' && S.zh.next_title === '下一步：俾醫生同中醫師睇' &&
+  S.en.summary_for === 'For your doctor and your Chinese medicine practitioner.' && S.zh.summary_for === '俾你嘅醫生同中醫師睇。' &&
+  dwEn[dwEn.length - 1].indexOf('Next: show your doctor and your Chinese medicine practitioner. You can say:') === 0 &&
+  dwZh[dwZh.length - 1].indexOf('下一步：俾醫生同中醫師睇。你可以咁講：') === 0]);
 rules.forEach(function (x) { results.push({ group: 'Read aloud', name: x[0], pass: !!x[1], detail: x[2] || '' }); });
 // "What people take it for" (box and spoken lines): rated pairs only, never on a pair with no record (owner, 22 Oct).
 var usesBad = [], usesSeen = { rated: 0, grey: 0 };

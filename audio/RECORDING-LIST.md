@@ -36,7 +36,7 @@ Every pair the demo shows: 2 pairs, 2 need attention, 0 "no record" card(s).
 4. Why this matters for your heart: serious bleeding, including internal bleeding.
 5. What people take it for: in China, a danshen product is approved for angina, chest pain from heart disease.
 6. This is not a recommendation to take it.
-7. Next: show your doctor. You can say: ‘I take danshen and warfarin. Can you check if that’s OK for me?’
+7. Next: show your doctor and your Chinese medicine practitioner. You can say: ‘I take danshen and warfarin. Can you check if that’s OK for me?’
 
 **Cantonese 廣東話**: save as `audio/danshen-warfarin.zh.mp3`
 
@@ -46,7 +46,7 @@ Every pair the demo shows: 2 pairs, 2 need attention, 0 "no record" card(s).
 4. 對心臟有咩影響：嚴重出血，包括內出血。
 5. 一般用嚟做咩：喺中國，有丹參產品獲批用嚟治心絞痛，心臟病引致嘅胸口痛。
 6. 呢個唔係建議你服用。
-7. 下一步：俾醫生睇。你可以咁講：『我有食丹參同華法林，可唔可以幫我睇吓有冇問題？』
+7. 下一步：俾醫生同中醫師睇。你可以咁講：『我有食丹參同華法林，可唔可以幫我睇吓有冇問題？』
 
 ## Danshen + Amlodipine (丹參 + 氨氯地平)
 
@@ -57,7 +57,7 @@ Every pair the demo shows: 2 pairs, 2 need attention, 0 "no record" card(s).
 3. Why this matters for your heart: amlodipine controls your blood pressure. Whether danshen weakens it in people is not known.
 4. What people take it for: in China, a danshen product is approved for angina, chest pain from heart disease.
 5. This is not a recommendation to take it.
-6. Next: show your doctor. You can say: ‘I take danshen and amlodipine. Can you check if that’s OK for me?’
+6. Next: show your doctor and your Chinese medicine practitioner. You can say: ‘I take danshen and amlodipine. Can you check if that’s OK for me?’
 
 **Cantonese 廣東話**: save as `audio/danshen-amlodipine.zh.mp3`
 
@@ -66,4 +66,4 @@ Every pair the demo shows: 2 pairs, 2 need attention, 0 "no record" card(s).
 3. 對心臟有咩影響：氨氯地平用嚟控制血壓。丹參喺人體會唔會減弱佢嘅效果，仲未知道。
 4. 一般用嚟做咩：喺中國，有丹參產品獲批用嚟治心絞痛，心臟病引致嘅胸口痛。
 5. 呢個唔係建議你服用。
-6. 下一步：俾醫生睇。你可以咁講：『我有食丹參同氨氯地平，可唔可以幫我睇吓有冇問題？』
+6. 下一步：俾醫生同中醫師睇。你可以咁講：『我有食丹參同氨氯地平，可唔可以幫我睇吓有冇問題？』

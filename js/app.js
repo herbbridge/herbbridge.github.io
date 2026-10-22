@@ -1340,6 +1340,7 @@
       el('h1', { tabindex: '-1', text: t('summary_headline') }),
       el('p', { class: 'muted', text: t('summary_generated', { date: formatDate(new Date()) }) })
     ]));
+    page.appendChild(el('p', { class: 'summary-for', text: t('summary_for') }));
 
     if (!state.herbs.length && !state.drugs.length) {
       page.appendChild(el('p', { class: 'lede', text: t('summary_empty') }));
