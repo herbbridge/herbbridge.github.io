@@ -69,7 +69,7 @@ const greenish = c => {
       await setList(p, ['warfarin'], lang, mode);
       await p.goto(BASE + '?w=' + lang + mode + '#/warfarin'); await p.reload(); await p.waitForSelector('.wf-page');
       const parts = mode === 'simple' ? 5 : 1;
-      const bleedOk = [], oneSection = [];
+      const bleedOk = [], oneSection = [], footerOk = [], noPlaceholder = [];
       for (let i = 0; i < parts; i++) {
         const r = await p.evaluate(() => {
           const vis = x => !!x && x.offsetParent !== null && getComputedStyle(x).visibility !== 'hidden';
@@ -81,10 +81,16 @@ const greenish = c => {
           return {
             secs,
             bleed: vis(bleed) && !bleed.closest('details') && !bleed.closest('[hidden]') && signs.length === 10 && signs.every(vis) && !!bleed.querySelector('.wf-999') && vis(bleed.querySelector('.wf-999')),
-            keyFirst: firstQuote.every(Boolean)
+            keyFirst: firstQuote.every(Boolean),
+            // The S-B footer: once per view, after everything else (Full: page bottom; Simple: end of each part).
+            footers: [...document.querySelectorAll('.wf-footer')].filter(vis).length,
+            footerLast: (() => { const f = [...document.querySelectorAll('.wf-footer')].filter(vis)[0]; const l = [...document.querySelectorAll('.wf-section')].filter(vis).pop(); return !!f && !!l && !!(l.compareDocumentPosition(f) & Node.DOCUMENT_POSITION_FOLLOWING) && !f.closest('.wf-section'); })(),
+            placeholders: [...document.querySelectorAll('.wf-placeholder')].filter(vis).length
           };
         });
         bleedOk.push(r.bleed);
+        footerOk.push(r.footers === 1 && r.footerLast);
+        noPlaceholder.push(r.placeholders === 0);
         oneSection.push(mode === 'simple' ? r.secs.length === 2 && r.secs[1] === 'bleeding' && r.keyFirst : r.secs.length === 6 && r.keyFirst);
         if (i < parts - 1) { await p.click('.wf-nav .btn-primary'); await p.waitForTimeout(150); }
       }
@@ -92,6 +98,9 @@ const greenish = c => {
       check(oneSection.every(Boolean), mode === 'simple' ? 'Simple: one section per part (plus bleeding), key line first' : 'Full: every section shown, key line first', JSON.stringify(oneSection));
       if (mode === 'simple') { for (let i = 0; i < parts - 1; i++) { await p.click('.wf-nav .btn-secondary'); await p.waitForTimeout(100); } }
 
+      check(footerOk.every(Boolean), `footer once per ${mode === 'simple' ? 'part' : 'page'}, after the sections, not inside them`, JSON.stringify(footerOk));
+      check(noPlaceholder.every(Boolean), 'no "no Chinese wording yet" placeholders', JSON.stringify(noPlaceholder));
+      check(await p.locator('.wf-page .read-aloud').count() === 1, 'Read aloud offered on the page (' + lang + ')');
       // 4. Search: found and not found.
       await p.fill('#wf-food-search', lang === 'zh' ? '菠菜' : 'SPINACH');
       const found = await p.evaluate(() => { const f = document.querySelector('.wf-found'); return f ? { text: f.innerText, bg: getComputedStyle(f).backgroundColor, border: getComputedStyle(f).borderTopColor } : null; });
@@ -105,6 +114,17 @@ const greenish = c => {
       });
       check(!!nf && nf.text === NOT_FOUND[lang] && nf.style === 'dashed' && !nf.found && ![nf.bg, nf.border, nf.color, nf.icon].some(greenish),
         'not found: exact wording, grey and dashed, never green', JSON.stringify(nf));
+      // 杞子 / goji: grey "not on this list" box PLUS a link to goji + warfarin.
+      for (const q of ['杞子', lang === 'zh' ? '枸杞子' : 'goji']) {
+        await p.fill('#wf-food-search', q);
+        const g = await p.evaluate(() => {
+          const box = document.querySelector('.wf-notfound'), a = document.querySelector('.wf-pointer a');
+          return { box: !!box && getComputedStyle(box).borderTopStyle === 'dashed', found: !!document.querySelector('.wf-found'), href: a ? a.getAttribute('href') : null, h: a ? a.getBoundingClientRect().height : 0, text: (document.querySelector('.wf-pointer') || {}).innerText || '' };
+        });
+        check(g.box && !g.found && g.href === '#/pair/goji-warfarin' && g.h >= 44 && /(Goji is in HerbBridge|枸杞喺中西通)/.test(g.text), `"${q}": not on the list (grey) plus a link to goji + warfarin`, JSON.stringify(g));
+      }
+      await p.fill('#wf-food-search', lang === 'zh' ? '蘋果' : 'apple');
+      check(await p.locator('.wf-pointer').count() === 0, 'no herb link for a food that is not a herb');
       const inputH = await p.locator('#wf-food-search').evaluate(e => e.getBoundingClientRect().height);
       check(inputH >= 44, 'search box is a big tap target (≥44px)', String(inputH));
 

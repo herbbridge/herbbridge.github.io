@@ -155,6 +155,14 @@
     });
     return names;
   }
+  /* A search that is not a food on the list but is a herb in HerbBridge (e.g. 杞子 / goji: the list means
+     wolfberry LEAVES): the herb + drug pair to point to, or null. Shown only with "Not on this list". */
+  function warfarinHerbPointer(wf, query) {
+    var q = foodKey(query);
+    if (!q || !wf || !Array.isArray(wf.herb_pointers)) return null;
+    var hit = wf.herb_pointers.filter(function (x) { return x.names.some(function (n) { return foodKey(n) === q; }); })[0];
+    return hit ? { herb_id: hit.herb_id, drug_id: hit.drug_id } : null;
+  }
   function warfarinFoodSearch(wf, query) {
     var q = foodKey(query);
     if (!q || !wf || !wf.food_table) return [];
@@ -408,6 +416,7 @@
     normalise: normalise,
     createDb: createDb,
     warfarinFoodSearch: warfarinFoodSearch,
+    warfarinHerbPointer: warfarinHerbPointer,
     warfarinFoodNames: warfarinFoodNames,
     foodKey: foodKey,
     usesFor: usesFor,

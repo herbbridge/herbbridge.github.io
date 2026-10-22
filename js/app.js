@@ -1365,6 +1365,12 @@
       var hits = L.warfarinFoodSearch(wf, input.value);
       if (!hits.length) {
         out.appendChild(el('div', { class: 'wf-notfound', 'data-result': 'not-found' }, [icon('not_in_database'), el('p', { text: t('wf_not_found') })]));
+        // Not a food on the list, but a herb in HerbBridge (e.g. 杞子 / goji): point to that pair as well.
+        var ptr = L.warfarinHerbPointer(wf, input.value);
+        if (ptr && db.herbById[ptr.herb_id] && db.drugById[ptr.drug_id]) {
+          out.appendChild(el('p', { class: 'wf-pointer' }, [el('span', { text: t('wf_goji_note') + (zh ? '' : ' ') }),
+            el('a', { href: '#/pair/' + ptr.herb_id + '-' + ptr.drug_id, 'data-pointer': ptr.herb_id }, [el('span', { text: t('wf_goji_link') })])]));
+        }
         return;
       }
       hits.forEach(function (h) {
@@ -1409,7 +1415,6 @@
     sec.items.forEach(function (x) { kids.push(wfQuote(x)); });
     if (sec.food_table) kids.push(wfTable());
     if (sec.id === 'bleeding') kids.push(el('p', { class: 'wf-999', text: t('wf_999') }));
-    kids.push(wfFooter());
     return el('section', { class: 'wf-section wf-' + sec.id + (hidden ? ' wf-other-step' : ''), 'data-section': sec.id, 'aria-labelledby': 'wf-h-' + sec.id }, kids);
   }
   function renderWarfarin() {
@@ -1430,6 +1435,7 @@
     if (wfStep >= stepped.length) wfStep = 0;
     if (full) {
       wf.sections.forEach(function (sec) { page.appendChild(wfSection(sec, false)); });
+      page.appendChild(wfFooter()); // once, at the bottom of the page
     } else {
       page.appendChild(el('p', { class: 'step-line', text: t('wf_part', { n: wfStep + 1, total: stepped.length }) }));
       // Every part is in the page (so the page prints whole); only the current one shows on screen.
@@ -1445,6 +1451,7 @@
         wfStep < stepped.length - 1 ? el('button', { type: 'button', class: 'btn btn-primary', onclick: function () { go(1); } }, [el('span', { text: t('wf_next') }), icon('arrow')]) : null
       ]));
       always.forEach(function (sec) { page.appendChild(wfSection(sec, false)); });
+      page.appendChild(wfFooter()); // once, at the end of each part
     }
     // Where every quote comes from, with the original PDFs (English and Chinese).
     var srcList = el('ol', { class: 'sources' });

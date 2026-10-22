@@ -94,34 +94,41 @@
   };
   // [section, source_en, en, source_zh, zh] for every quoted line (zh null = no Chinese source wording yet).
   var HA_TCM_ZH = '不可隨便服用中藥材，中成藥，藥材湯或涼茶，或含中藥成份的食品如龜苓膏，因為很多中藥 ( 如人參、當歸、丹參、赤芍 )，會與「華法林」產生相互作用，影響抗凝血藥的功效。';
+  // Extra search names the owner approved (22 Oct), keyed by the item's own wording; and names the owner rejected.
+  var WF_APPROVED_NAMES = { '韮菜': ['韭菜'], '蔥': ['葱'], '芫茜': ['芫荽', '香菜'], '蒜頭*': ['蒜'], '紅莓汁*': ['紅莓'], '紅莓醬*': ['紅莓'],
+    'Gingko*': ['ginkgo'], 'Kiwifruit': ['kiwi'], 'Dried prunes': ['prunes'], 'Cranberry Juice*': ['cranberry'], 'Cranberry Jam*': ['cranberry'],
+    'Coriander': ['cilantro'], 'Spring onion': ['scallion'] };
+  var WF_REJECTED_NAMES = ['杞子', '枸杞子', '西梅'];
+  var WF_SOURCES_ZH = { 'S-A': { url_zh: 'https://www.ha.org.hk/hadf/Portals/0/Docs/Leaflets/TC/Warfarin-oral_anticoagulant.pdf', sn_zh: '019Cv10', title_zh: '華法林 (Warfarin) 口服抗凝血藥' },
+    'S-B': { url_zh: 'https://www3.ha.org.hk/dic/files/sdn_30.pdf', title_zh: '服用「華法林」(WARFARIN) 飲食指引', publisher_zh: '醫院管理局 營養職系及服務統籌委員會', edition_zh: '2016年9月修訂' } };
   var WF_QUOTES = [
-    ['food', 'S-B', 'Vitamin K plays an important role in blood clotting. A fluctuation in vitamin K intake will affect the efficacy of warfarin. Hence, patient on warfarin should maintain a consistent vitamin K intake.', null, null],
+    ['food', 'S-B', 'Vitamin K plays an important role in blood clotting. A fluctuation in vitamin K intake will affect the efficacy of warfarin. Hence, patient on warfarin should maintain a consistent vitamin K intake.', 'S-B', '維他命K的功能是幫助血液凝固，其攝入量的變化會影響華法林的功效，所以服用華法林人仕需固定維他命K的攝取量。'],
     ['food', 'S-B', 'Avoid any drastic changes in habitual dietary intake, especially the quantity of green leafy vegetables even when having hotpots or salads in order to maintain a consistent intake of vitamin K', 'S-B', '要保持穩定的維他命K攝取量，服用華法林人仕在飲食上不宜有大改動，尤其是綠葉菜進食的份量。吃火鍋和沙律菜時，仍須維持平時食用的份量。'],
     ['drinks', 'S-A', 'Avoid alcohol (including beer, red wine, white wine and spirits).', 'S-B', '酒類（包括啤酒、紅酒、白酒及烈酒）'],
     ['drinks', 'S-A', 'Do not take any Traditional Chinese Medicines (TCM), Proprietary Chinese Medicines, herbal drinks, or food that contains TCM, such as Guilinggao.', 'S-A', HA_TCM_ZH],
     ['tcm', 'S-A', 'Many TCM such as ginseng, Dong quai, Danshen, Chishao can interact with warfarin.', 'S-A', HA_TCM_ZH],
     ['tcm', 'S-B', 'Avoid the following: Traditional Chinese medicine/over-the-counter medications; Chinese herbal tonic and remedies', 'S-B', '避免使用：中、西成藥；中國補品及藥材'],
-    ['supplements', 'S-A', 'Some vitamins, supplements, nutritional or health products (such as probiotics, green tea extract, glucosamine, and fish oil) can interact with warfarin.', null, null],
-    ['supplements', 'S-A', 'Consult your healthcare professionals before taking any of these products.', null, null],
+    ['supplements', 'S-A', 'Some vitamins, supplements, nutritional or health products (such as probiotics, green tea extract, glucosamine, and fish oil) can interact with warfarin.', 'S-A', '一些維他命或其它補充劑、營養補充品或保健產品 ( 如益生菌、綠茶素、葡萄糖胺、魚油丸 ) 會與「華法林」產生相互作用。'],
+    ['supplements', 'S-A', 'Consult your healthcare professionals before taking any of these products.', 'S-A', '病人在服用這些產品前，請先徵詢醫護人員的意見。'],
     ['supplements', 'S-B', 'Fish oil supplement', 'S-B', '魚油丸'],
     ['supplements', 'S-B', 'Vitamin supplements (vitamin K and large amount of vitamin C and E consumption can affect the efficacy of warfarin)', 'S-B', '維他命丸（維他命K、大量的維他命C和維他命E亦會影響華法林的功效）'],
     ['supplements', 'S-B', 'Consult your doctor or dietitian before taking any nutritional supplements', 'S-B', '在進食營養奶或營養補充品前，需請教醫生或營養師。'],
-    ['medicines', 'S-A', 'Do not take any other medications, including over-the-counter medications, without consulting your doctor or pharmacist.', null, null],
-    ['medicines', 'S-A', 'Many drugs can interact with warfarin, such as aspirin and some painkillers.', null, null],
-    ['bleeding', 'S-A', 'The most common side effect associated with the use of warfarin is bleeding.', null, null],
-    ['bleeding', 'S-A', 'Unusual bruising', null, null],
-    ['bleeding', 'S-A', 'Prolonged nosebleed (for more than 10 minutes)', null, null],
-    ['bleeding', 'S-A', 'Blood in urine or have red / dark brown urine', null, null],
-    ['bleeding', 'S-A', 'Vomiting blood or matter that looks like coffee grounds', null, null],
-    ['bleeding', 'S-A', 'Coughing up blood', null, null],
-    ['bleeding', 'S-A', 'Abdominal pain or swelling', null, null],
-    ['bleeding', 'S-A', 'Excessive bleeding from gums when brushing the teeth', null, null],
-    ['bleeding', 'S-A', 'Blood in stools or passing black stools', null, null],
-    ['bleeding', 'S-A', 'Heavy or increased menstrual bleeding or unusual vaginal bleeding between periods', null, null],
-    ['bleeding', 'S-A', 'Prolonged bleeding from cuts or wounds that does not stop', null, null],
-    ['bleeding', 'S-A', 'If bleeding persists or becomes severe, you should seek immediate medical attention.', null, null],
-    ['bleeding', 'S-A', 'If you have a fall or bump your head, closely monitor for signs of internal bleeding (e.g. sudden severe headache, unusual bruising, or blood in urine or stools) and consult your doctor immediately if necessary.', null, null],
-    ['footer', 'S-B', 'This leaflet is for reference only. Please consult dietitian for individual advice.', null, null]
+    ['medicines', 'S-A', 'Do not take any other medications, including over-the-counter medications, without consulting your doctor or pharmacist.', 'S-A', '不可隨便服用其他藥物，包括非處方藥物。如有需要，應先徵詢醫生或藥劑師。'],
+    ['medicines', 'S-A', 'Many drugs can interact with warfarin, such as aspirin and some painkillers.', 'S-A', '因為很多藥物，如亞士匹靈及一些止痛藥，會與「華法林」產生相互作用，影響抗凝血藥的功效。'],
+    ['bleeding', 'S-A', 'The most common side effect associated with the use of warfarin is bleeding.', 'S-A', '服用「華法林」最常見的副作用是出血，所以服藥的病人都應留意與出血有關的徵兆及症狀 :'],
+    ['bleeding', 'S-A', 'Unusual bruising', 'S-A', '不正常的瘀痕'],
+    ['bleeding', 'S-A', 'Prolonged nosebleed (for more than 10 minutes)', 'S-A', '持續流鼻血 (10 分鐘以上 )'],
+    ['bleeding', 'S-A', 'Blood in urine or have red / dark brown urine', 'S-A', '小便帶血、呈紅色或暗棕色 ( 血尿 )'],
+    ['bleeding', 'S-A', 'Vomiting blood or matter that looks like coffee grounds', 'S-A', '吐血或嘔出像咖啡渣一樣的東西'],
+    ['bleeding', 'S-A', 'Coughing up blood', 'S-A', '咳嗽時出血'],
+    ['bleeding', 'S-A', 'Abdominal pain or swelling', 'S-A', '腹痛或腫脹'],
+    ['bleeding', 'S-A', 'Excessive bleeding from gums when brushing the teeth', 'S-A', '刷牙時出血比平常多'],
+    ['bleeding', 'S-A', 'Blood in stools or passing black stools', 'S-A', '大便帶血或呈黑色'],
+    ['bleeding', 'S-A', 'Heavy or increased menstrual bleeding or unusual vaginal bleeding between periods', 'S-A', '經血份量比正常多或有不正常陰道出血'],
+    ['bleeding', 'S-A', 'Prolonged bleeding from cuts or wounds that does not stop', 'S-A', '割傷流血不止 ( 用清潔紗布用力持續按壓受傷部位，如 10 分鐘後仍然流血不止 )'],
+    ['bleeding', 'S-A', 'If bleeding persists or becomes severe, you should seek immediate medical attention.', 'S-A', '若出血的情況嚴重或持續發生，應立即求醫。'],
+    ['bleeding', 'S-A', 'If you have a fall or bump your head, closely monitor for signs of internal bleeding (e.g. sudden severe headache, unusual bruising, or blood in urine or stools) and consult your doctor immediately if necessary.', 'S-A', '如不慎跌倒或撞傷頭部，便要特別注意內部出血徵兆 ( 例如突發性的劇烈頭痛、不正常的瘀痕、小便或大便帶血 )，並因應情況就醫。'],
+    ['footer', 'S-B', 'This leaflet is for reference only. Please consult dietitian for individual advice.', 'S-B', '本單張只作參考用途，如有需要請諮詢營養師作個別輔導。']
   ];
   // What people take a herb for (data/uses.json): the owner's exact wording, locked (22 Oct).
   var USES_LOCKED = {
@@ -414,13 +421,45 @@
       if (!sp || sp.sparing || sp.star) bad.push('spinach: should be "should be avoided" without the * note');
       return { pass: bad.length === 0, detail: bad.join('\n') };
     });
-    check('Warfarin page', 'search names come only from the source wording; no extra names without the owner\'s OK', function () {
+    check('Warfarin page', 'search names: from the source wording, or approved by the owner; rejected names (杞子, 枸杞子, 西梅) never match', function () {
       var bad = [];
       Object.keys(wf.search_names).forEach(function (text) {
         if (text === 'about') return;
         wf.search_names[text].forEach(function (n) { if (lookup.foodKey(text).indexOf(lookup.foodKey(n)) === -1) bad.push(text + ': "' + n + '" is not in the source wording'); });
       });
-      if (Object.keys(wf.approved_extra_names.names).length) bad.push('approved_extra_names is not empty: check the owner approved: ' + Object.keys(wf.approved_extra_names.names).join(', '));
+      var got = wf.approved_extra_names.names;
+      if (JSON.stringify(got) !== JSON.stringify(WF_APPROVED_NAMES)) bad.push('approved names differ from the owner\'s list: ' + JSON.stringify(got));
+      WF_REJECTED_NAMES.forEach(function (n) {
+        var hits = lookup.warfarinFoodSearch(wf, n);
+        if (hits.length) bad.push('rejected name "' + n + '" matches ' + hits.map(function (h) { return h.item.zh; }).join(', '));
+      });
+      if (JSON.stringify(wf.rejected_names.names) !== JSON.stringify(WF_REJECTED_NAMES)) bad.push('rejected list changed');
+      [['韭菜', 'Chives'], ['葱', 'Spring onion'], ['芫荽', 'Coriander'], ['香菜', 'Coriander'], ['蒜', 'Garlic*'], ['ginkgo', 'Gingko*'], ['Kiwi', 'Kiwifruit'],
+       ['prunes', 'Dried prunes'], ['西梅乾', 'Dried prunes'], ['Cilantro', 'Coriander'], ['scallion', 'Spring onion']].forEach(function (c) {
+        var h = lookup.warfarinFoodSearch(wf, c[0]);
+        if (h.length !== 1 || h[0].item.en !== c[1]) bad.push('"' + c[0] + '" → ' + h.map(function (x) { return x.item.en; }).join(', ') + ' (expected ' + c[1] + ')');
+      });
+      [['cranberry', 'Cranberry Juice*|Cranberry Jam*'], ['紅莓', 'Cranberry Juice*|Cranberry Jam*']].forEach(function (c) {
+        var h = lookup.warfarinFoodSearch(wf, c[0]).map(function (x) { return x.item.en; }).join('|');
+        if (h !== c[1]) bad.push('"' + c[0] + '" → ' + h);
+      });
+      return { pass: bad.length === 0, detail: bad.join('\n') };
+    });
+    check('Warfarin page', 'goji searches (杞子, 枸杞子, goji, wolfberry berries) are "not on this list" and point to goji + warfarin', function () {
+      var bad = [];
+      ['杞子', '枸杞子', 'goji', 'Goji', 'wolfberry berries', 'Wolfberry Berries'].forEach(function (q) {
+        var p = lookup.warfarinHerbPointer(wf, q);
+        if (lookup.warfarinFoodSearch(wf, q).length) bad.push(q + ': should not be on the list');
+        if (!p || p.herb_id !== 'goji' || p.drug_id !== 'warfarin' || !db.herbById.goji) bad.push(q + ': no pointer to goji + warfarin');
+      });
+      ['枸杞', 'apple', '西梅'].forEach(function (q) { if (lookup.warfarinHerbPointer(wf, q)) bad.push(q + ': should not point to a herb'); });
+      return { pass: bad.length === 0, detail: bad.join('\n') };
+    });
+    check('Warfarin page', 'every line has its Hospital Authority Chinese (no placeholders), with the v10 / 2016 Chinese source details', function () {
+      var bad = wfLines().filter(function (g) { return g[1].zh == null; }).map(function (g) { return g[0] + ': ' + g[1].en; });
+      ['S-A', 'S-B'].forEach(function (id) {
+        Object.keys(WF_SOURCES_ZH[id]).forEach(function (k) { if (wf.sources[id][k] !== WF_SOURCES_ZH[id][k]) bad.push(id + ' ' + k + ': ' + wf.sources[id][k]); });
+      });
       return { pass: bad.length === 0, detail: bad.join('\n') };
     });
     check('What people take it for', 'uses text is exactly the approved wording, with its source', function () {

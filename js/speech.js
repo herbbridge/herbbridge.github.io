@@ -181,10 +181,11 @@
     function say(item) {
       var text = zh ? item.zh : item.en;
       if (text == null) { missing = true; return ''; }
-      if (zh) return listenZh((item.zh_label ? item.zh_label + '：' : '') + text);
+      // The HA's own " :" before a list is said as a pause (：), not doubled with 。.
+      if (zh) return listenZh((item.zh_label ? item.zh_label + '：' : '') + String(text).replace(/\s*[:：]\s*$/, '：'));
       return listenEn(String(text).replace(/\be\.g\.\s*/g, 'for example, '));
     }
-    function end(x) { return /[.。！？!?]$/.test(x) ? x : x + stop; }
+    function end(x) { x = String(x).replace(/[，,]\s*$/, ''); return /[.。！？!?：]$/.test(x) ? x : x + stop; }
     var parts = [end(t('wf_title'))];
     wf.sections.forEach(function (sec) {
       var title = t('wf_sec_' + sec.id);
@@ -196,7 +197,7 @@
     });
     parts.push(t('wf_999'));
     if (missing) return [];
-    return parts.map(function (p) { return zh ? p.replace(/\s+/g, '') : p.replace(/\s{2,}/g, ' ').replace(/,\s*\./g, '.'); });
+    return parts.map(function (p) { return zh ? p.replace(/\s+/g, '').replace(/，([。！？：])/g, '$1') : p.replace(/\s{2,}/g, ' ').replace(/,\s*\./g, '.'); });
   }
 
   return { script: script, warfarinScript: warfarinScript, listenEn: listenEn, listenZh: listenZh, youCanSay: youCanSay, sentenceName: sentenceName };

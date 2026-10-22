@@ -108,6 +108,13 @@ rules.push(['warfarin page Read aloud: every section key line, all bleeding sign
   bleedSec.signs.every(function (x) { return wfText.indexOf(x.en.replace(/\s*\(.*$/, '').replace(/ \/.*$/, '')) !== -1; }) &&
   wfText.indexOf('In an emergency, call 999.') !== -1 && (wfMissingZh ? wfZh.length === 0 : wfZh.length > 0),
   wfText.slice(0, 300)]);
+var wfZhText = wfZh.join('');
+function zhNorm(x) { return String(x).replace(/[\s()（）「」，、。：:]/g, ''); } // compare words, not punctuation
+rules.push(['warfarin page Read aloud in Chinese: same lines (every key line, all 10 bleeding signs, 999); no brackets or English punctuation',
+  wfZh.length === wfEn.length && !/[()（）\[\]\/,:;]/.test(wfZhText) &&
+  data.warfarin.sections.every(function (sec) { return zhNorm(wfZhText).indexOf(zhNorm(sec.key.zh).slice(0, 8)) !== -1; }) &&
+  bleedSec.signs.every(function (x) { return zhNorm(wfZhText).indexOf(zhNorm(x.zh)) !== -1; }) && wfZhText.indexOf('緊急情況請打999。') !== -1,
+  wfZhText.slice(0, 300)]);
 var S = data.i18n.strings, dwEn = spoken('danshen', 'warfarin', 'en'), dwZh = spoken('danshen', 'warfarin', 'zh');
 rules.push(['"Next" names the doctor and the Chinese medicine practitioner (screen and spoken), and the summary says who it is for',
   S.en.next_title === 'Next: show your doctor and your Chinese medicine practitioner' && S.zh.next_title === '下一步：俾醫生同中醫師睇' &&

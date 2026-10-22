@@ -13,15 +13,15 @@
       "date_en": "10/2025",
       "date_zh": "2025年10月",
       "url_en": "https://www.ha.org.hk/hadf/Content/uploads/docs/mcfDfgqUQ5320084.pdf",
-      "url_zh": "https://www.ha.org.hk/hadf/Content/uploads/docs/eGOLcFArB5505364.pdf"
+      "url_zh": "https://www.ha.org.hk/hadf/Portals/0/Docs/Leaflets/TC/Warfarin-oral_anticoagulant.pdf"
     },
     "S-B": {
       "publisher_en": "Hospital Authority, COC – Grade (Dietetics)",
-      "publisher_zh": "醫院管理局",
+      "publisher_zh": "醫院管理局 營養職系及服務統籌委員會",
       "title_en": "Warfarin Dietary Guidelines",
-      "title_zh": "薄血藥(WARFARIN)飲食重點指引",
+      "title_zh": "服用「華法林」(WARFARIN) 飲食指引",
       "edition_en": "9/2016 edition",
-      "edition_zh": "2016年9月版",
+      "edition_zh": "2016年9月修訂",
       "url_en": "https://www3.ha.org.hk/dic/files/sdn_27.pdf",
       "url_zh": "https://www3.ha.org.hk/dic/files/sdn_30.pdf"
     }
@@ -33,8 +33,8 @@
         "kind": "quote",
         "source_en": "S-B",
         "en": "Vitamin K plays an important role in blood clotting. A fluctuation in vitamin K intake will affect the efficacy of warfarin. Hence, patient on warfarin should maintain a consistent vitamin K intake.",
-        "source_zh": null,
-        "zh": null
+        "source_zh": "S-B",
+        "zh": "維他命K的功能是幫助血液凝固，其攝入量的變化會影響華法林的功效，所以服用華法林人仕需固定維他命K的攝取量。"
       },
       "items": [
         {
@@ -116,16 +116,16 @@
         "kind": "quote",
         "source_en": "S-A",
         "en": "Some vitamins, supplements, nutritional or health products (such as probiotics, green tea extract, glucosamine, and fish oil) can interact with warfarin.",
-        "source_zh": null,
-        "zh": null
+        "source_zh": "S-A",
+        "zh": "一些維他命或其它補充劑、營養補充品或保健產品 ( 如益生菌、綠茶素、葡萄糖胺、魚油丸 ) 會與「華法林」產生相互作用。"
       },
       "items": [
         {
           "kind": "quote",
           "source_en": "S-A",
           "en": "Consult your healthcare professionals before taking any of these products.",
-          "source_zh": null,
-          "zh": null
+          "source_zh": "S-A",
+          "zh": "病人在服用這些產品前，請先徵詢醫護人員的意見。"
         },
         {
           "kind": "quote",
@@ -156,16 +156,16 @@
         "kind": "quote",
         "source_en": "S-A",
         "en": "Do not take any other medications, including over-the-counter medications, without consulting your doctor or pharmacist.",
-        "source_zh": null,
-        "zh": null
+        "source_zh": "S-A",
+        "zh": "不可隨便服用其他藥物，包括非處方藥物。如有需要，應先徵詢醫生或藥劑師。"
       },
       "items": [
         {
           "kind": "quote",
           "source_en": "S-A",
           "en": "Many drugs can interact with warfarin, such as aspirin and some painkillers.",
-          "source_zh": null,
-          "zh": null
+          "source_zh": "S-A",
+          "zh": "因為很多藥物，如亞士匹靈及一些止痛藥，會與「華法林」產生相互作用，影響抗凝血藥的功效。"
         }
       ]
     },
@@ -176,79 +176,79 @@
         "kind": "quote",
         "source_en": "S-A",
         "en": "The most common side effect associated with the use of warfarin is bleeding.",
-        "source_zh": null,
-        "zh": null
+        "source_zh": "S-A",
+        "zh": "服用「華法林」最常見的副作用是出血，所以服藥的病人都應留意與出血有關的徵兆及症狀 :"
       },
       "signs": [
         {
           "kind": "sign",
           "source_en": "S-A",
           "en": "Unusual bruising",
-          "source_zh": null,
-          "zh": null
+          "source_zh": "S-A",
+          "zh": "不正常的瘀痕"
         },
         {
           "kind": "sign",
           "source_en": "S-A",
           "en": "Prolonged nosebleed (for more than 10 minutes)",
-          "source_zh": null,
-          "zh": null
+          "source_zh": "S-A",
+          "zh": "持續流鼻血 (10 分鐘以上 )"
         },
         {
           "kind": "sign",
           "source_en": "S-A",
           "en": "Blood in urine or have red / dark brown urine",
-          "source_zh": null,
-          "zh": null
+          "source_zh": "S-A",
+          "zh": "小便帶血、呈紅色或暗棕色 ( 血尿 )"
         },
         {
           "kind": "sign",
           "source_en": "S-A",
           "en": "Vomiting blood or matter that looks like coffee grounds",
-          "source_zh": null,
-          "zh": null
+          "source_zh": "S-A",
+          "zh": "吐血或嘔出像咖啡渣一樣的東西"
         },
         {
           "kind": "sign",
           "source_en": "S-A",
           "en": "Coughing up blood",
-          "source_zh": null,
-          "zh": null
+          "source_zh": "S-A",
+          "zh": "咳嗽時出血"
         },
         {
           "kind": "sign",
           "source_en": "S-A",
           "en": "Abdominal pain or swelling",
-          "source_zh": null,
-          "zh": null
+          "source_zh": "S-A",
+          "zh": "腹痛或腫脹"
         },
         {
           "kind": "sign",
           "source_en": "S-A",
           "en": "Excessive bleeding from gums when brushing the teeth",
-          "source_zh": null,
-          "zh": null
+          "source_zh": "S-A",
+          "zh": "刷牙時出血比平常多"
         },
         {
           "kind": "sign",
           "source_en": "S-A",
           "en": "Blood in stools or passing black stools",
-          "source_zh": null,
-          "zh": null
+          "source_zh": "S-A",
+          "zh": "大便帶血或呈黑色"
         },
         {
           "kind": "sign",
           "source_en": "S-A",
           "en": "Heavy or increased menstrual bleeding or unusual vaginal bleeding between periods",
-          "source_zh": null,
-          "zh": null
+          "source_zh": "S-A",
+          "zh": "經血份量比正常多或有不正常陰道出血"
         },
         {
           "kind": "sign",
           "source_en": "S-A",
           "en": "Prolonged bleeding from cuts or wounds that does not stop",
-          "source_zh": null,
-          "zh": null
+          "source_zh": "S-A",
+          "zh": "割傷流血不止 ( 用清潔紗布用力持續按壓受傷部位，如 10 分鐘後仍然流血不止 )"
         }
       ],
       "items": [
@@ -256,15 +256,15 @@
           "kind": "quote",
           "source_en": "S-A",
           "en": "If bleeding persists or becomes severe, you should seek immediate medical attention.",
-          "source_zh": null,
-          "zh": null
+          "source_zh": "S-A",
+          "zh": "若出血的情況嚴重或持續發生，應立即求醫。"
         },
         {
           "kind": "quote",
           "source_en": "S-A",
           "en": "If you have a fall or bump your head, closely monitor for signs of internal bleeding (e.g. sudden severe headache, unusual bruising, or blood in urine or stools) and consult your doctor immediately if necessary.",
-          "source_zh": null,
-          "zh": null
+          "source_zh": "S-A",
+          "zh": "如不慎跌倒或撞傷頭部，便要特別注意內部出血徵兆 ( 例如突發性的劇烈頭痛、不正常的瘀痕、小便或大便帶血 )，並因應情況就醫。"
         }
       ]
     }
@@ -273,8 +273,8 @@
     "kind": "quote",
     "source_en": "S-B",
     "en": "This leaflet is for reference only. Please consult dietitian for individual advice.",
-    "source_zh": null,
-    "zh": null
+    "source_zh": "S-B",
+    "zh": "本單張只作參考用途，如有需要請諮詢營養師作個別輔導。"
   },
   "food_table": {
     "source": "S-B",
@@ -545,8 +545,69 @@
     ]
   },
   "approved_extra_names": {
-    "about": "Common extra names approved by the owner (e.g. 杞子 → 枸杞). Empty until the owner approves a list.",
-    "names": {}
+    "about": "Common extra names approved by the owner on 22 Oct 2026, keyed by the item's own wording.",
+    "names": {
+      "韮菜": [
+        "韭菜"
+      ],
+      "蔥": [
+        "葱"
+      ],
+      "芫茜": [
+        "芫荽",
+        "香菜"
+      ],
+      "蒜頭*": [
+        "蒜"
+      ],
+      "紅莓汁*": [
+        "紅莓"
+      ],
+      "紅莓醬*": [
+        "紅莓"
+      ],
+      "Gingko*": [
+        "ginkgo"
+      ],
+      "Kiwifruit": [
+        "kiwi"
+      ],
+      "Dried prunes": [
+        "prunes"
+      ],
+      "Cranberry Juice*": [
+        "cranberry"
+      ],
+      "Cranberry Jam*": [
+        "cranberry"
+      ],
+      "Coriander": [
+        "cilantro"
+      ],
+      "Spring onion": [
+        "scallion"
+      ]
+    }
   },
+  "rejected_names": {
+    "about": "Names the owner rejected (22 Oct 2026): the list means wolfberry LEAVES (not goji berries), and dried prunes only (not fresh).",
+    "names": [
+      "杞子",
+      "枸杞子",
+      "西梅"
+    ]
+  },
+  "herb_pointers": [
+    {
+      "names": [
+        "杞子",
+        "枸杞子",
+        "goji",
+        "wolfberry berries"
+      ],
+      "herb_id": "goji",
+      "drug_id": "warfarin"
+    }
+  ],
   "zh_reviewed": false
 }
