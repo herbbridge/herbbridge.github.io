@@ -2,8 +2,8 @@
   "_note": "Expected results are listed in the order the Results screen must show them: high → official → moderate → low → none_reported → not_in_database, then herb order, then drug order. entry is the interaction id, or null when the pair is not in the database. Keep tests/test-cases.md in step with this file.",
   "cases": [
     {
-      "id": "1-mrs-wong",
-      "name": "Mrs Wong (demo case)",
+      "id": "1-mr-wong",
+      "name": "Mr Wong (demo case)",
       "story": "Fictional 72-year-old with atrial fibrillation, on warfarin and amlodipine, who buys danshen.",
       "herbs": ["danshen"],
       "drugs": ["warfarin", "amlodipine"],

@@ -24,7 +24,7 @@ Clone the repo and read README.md, HANDOVER.md and proposals/README.md before do
   - Every rated card has a "Main evidence" line and a "Why this matters for your heart" line.
 - Interface: the "Calm dashboard" design.
   - Screens: "My medicine cabinet" home, with medicines grouped by heart condition and a "Commonly taken for" line under each herb; instant clash warnings; results; a printable one-page doctor summary; an About page with "Why heart patients?".
-  - There is a Mrs Wong demo, and the app installs on phones as a PWA (cache sw.js VERSION = herbsafe-v4).
+  - There is a Mr Wong demo, and the app installs on phones as a PWA (cache sw.js VERSION = herbsafe-v4).
 - Tests: `node tests/run-tests.js` gives 93 passed. BRIEF_RATINGS in tests/test-suite.js locks every rating.
 
 ## Task 1: put the 15 approved pairs live
@@ -36,7 +36,7 @@ Follow the "To put them live" steps in proposals/README.md exactly:
 1. Append the entries unchanged.
 2. Add them to BRIEF_RATINGS.
 3. Update the test cases that expected "not in database" for these pairs, and regenerate tests/test-cases.md.
-4. Fix the Mrs Wong doctor summary so it prints on one A4 page again.
+4. Fix the Mr Wong doctor summary so it prints on one A4 page again.
 5. Bump sw.js to herbsafe-v5.
 6. Run the tests, then check in a real browser at phone width (320 and 390 px) in English and 中文 that:
    - every rated card has its heart line;

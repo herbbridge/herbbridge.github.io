@@ -134,6 +134,14 @@ sdb.uses.forEach(function (u) { data.drugs.drugs.forEach(function (d) { ['en', '
 }); }); });
 results.push({ group: 'What people take it for', name: 'box and Read aloud lines only on rated pairs, never on "not in our database"',
   pass: usesBad.length === 0 && usesSeen.grey > 0 && usesSeen.rated > 0, detail: usesBad.slice(0, 10).join('\n') + ' (rated ' + usesSeen.rated + ', no record ' + usesSeen.grey + ')' });
+// The demo patient is Mr Wong (a man, 72) / 黃伯伯 (owner, 23 Oct): no Mrs Wong, 黃太, she or her anywhere in the interface text.
+var DS = data.i18n.strings, demoKeys = Object.keys(DS.en).filter(function (k) { return /^demo_/.test(k); });
+var demoText = demoKeys.map(function (k) { return DS.en[k] + ' ' + DS.zh[k]; }).join(' ') + ' ' + JSON.stringify(DS);
+results.push({ group: 'Demo', name: 'the demo is Mr Wong / 黃伯伯 (no Mrs Wong, 黃太, she or her)',
+  pass: DS.en.demo_story === 'Mr Wong is 72 and has atrial fibrillation. He takes warfarin and amlodipine. Today he bought danshen 丹參 at a herbal shop.' &&
+    DS.en.demo_button === 'Demo: Mr Wong' && DS.zh.demo_button === '示範：黃伯伯' && DS.zh.demo_story.indexOf('黃伯伯今年72歲') === 0 &&
+    !/Mrs\b|黃太|婆婆/.test(demoText) && !demoKeys.some(function (k) { return /\b(she|her|hers|herself)\b/i.test(DS.en[k]); }),
+  detail: DS.en.demo_story + ' / ' + DS.zh.demo_story });
 
 results.push({ group: 'Read aloud', name: 'spoken script has no brackets, INR, source labels or links', pass: badSpoken.length === 0, detail: badSpoken.slice(0, 10).join('\n') });
 var audioList = load('audio/manifest.json').files || [];

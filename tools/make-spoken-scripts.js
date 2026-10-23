@@ -42,9 +42,9 @@ rows.forEach(function (r, n) {
 fs.writeFileSync(path.join(root, 'docs', 'spoken-scripts.txt'), out.join('\n'));
 console.log('wrote docs/spoken-scripts.txt (' + rows.length + ' pairs)');
 
-// audio/RECORDING-LIST.md: what to record for the demo (Mrs Wong takes warfarin and amlodipine and adds
+// audio/RECORDING-LIST.md: what to record for the demo (Mr Wong takes warfarin and amlodipine and adds
 // danshen), with the same text as the app's Read aloud, so a recording and the phone voice say the same.
-// Every pair the demo shows: Mrs Wong's medicines (startDemo in js/app.js) with danshen added,
+// Every pair the demo shows: Mr Wong's medicines (startDemo in js/app.js) with danshen added,
 // in the order the results screen lists them; a "no record" pair would be included too.
 var DEMO_LIST = { herbs: ['danshen'], drugs: ['warfarin', 'amlodipine'] };
 var demoRows = lookup.checkPairs(db, DEMO_LIST.herbs, DEMO_LIST.drugs);
@@ -52,7 +52,7 @@ var DEMO = demoRows.map(function (r) { return [r.herb.id, r.drug.id]; });
 var rec = [
   '# Recording list (Read aloud)',
   '',
-  'Human recordings for the demo pairs (Mrs Wong: warfarin and amlodipine, then danshen). A recording',
+  'Human recordings for the demo pairs (Mr Wong: warfarin and amlodipine, then danshen). A recording',
   'is played instead of the phone voice for that pair and language; any pair or language without one',
   'uses the phone voice. Made by `tools/make-spoken-scripts.js` from the same script as the app',
   '(`js/speech.js`, see `docs/spoken-scripts.txt`). Do not use AI-generated voices.',

@@ -9,9 +9,9 @@ Paste the original project brief into the new session together with this file.
 3. Lookup logic + tests: done (`node tests/run-tests.js`, or tests/test.html via a local server)
 4. Check → Results: done, reshaped as "My medicine cabinet" (see below)
 5. Language toggle: done (Chinese drafted, flagged unreviewed: ZH_REVIEWED in js/i18n.js)
-6. Doctor summary (print): done (#/summary; Mrs Wong prints on one A4 page)
+6. Doctor summary (print): done (#/summary; Mr Wong prints on one A4 page)
 7. About page: done (#/about; scale, evidence levels, privacy, all sources, roadmap)
-   Extra: "Demo: Mrs Wong" button (warfarin + amlodipine preloaded; tap "Add danshen" on camera)
+   Extra: "Demo: Mr Wong" button (warfarin + amlodipine preloaded; tap "Add danshen" on camera)
 8. GitHub Pages deploy: not started
 
 ## Decisions already made by the owner
@@ -97,7 +97,7 @@ For Sunday this is done WITHOUT accounts, a server or scanning:
 - 15 approved pairs now LIVE (24 entries in data/interactions.json, all team ratings;
   danshen + warfarin is still the only HA rating). Tests updated (cases 1, 4, 10; the
   goji/sanqi/safflower check now lists only medicines still without a record).
-  Mrs Wong's summary fits one A4 page again (print line-height 1.4). Cache herbsafe-v5.
+  Mr Wong's summary fits one A4 page again (print line-height 1.4). Cache herbsafe-v5.
   Checked in Chromium at 320 and 390 px, EN and 中文: every rated card has its heart line,
   no sideways overflow, grey cards identical to before.
 - First visit simplified (owner, 18 Oct, after "no one knows what to press"): with an empty or
@@ -135,7 +135,7 @@ For Sunday this is done WITHOUT accounts, a server or scanning:
   (2) Hospital Authority warfarin leaflet 019Ev10/019Cv10 (Oct 2025, current per the HA Drug
   Education page): "Do not take any TCM… Many TCM such as ginseng, Dong quai, Danshen,
   Chishao can interact with warfarin." Its Chinese text is the HA's own (quote_zh_is_original)
-  and is locked in VERIFIED_QUOTES_ZH. Applied to danshen + warfarin (Mrs Wong; Moderate kept
+  and is locked in VERIFIED_QUOTES_ZH. Applied to danshen + warfarin (Mr Wong; Moderate kept
   underneath), dong quai + warfarin (High kept as the badge) and Asian ginseng (人參) +
   warfarin ("sources disagree" with team Low). The leaflet does NOT give a rating, so it does
   not confirm the "HA rated Moderate" claim (still SCMP-only; open Task 2 item 1).
@@ -215,7 +215,7 @@ rating, quote, source, S/N or date changed.
   CHINESE, then bump sw.js VERSION.
 - Fixed: headings breaking mid-word at large text; Chinese headings/names splitting (華法 / 林,
   虛構人 / 物); controls running off screen at 200% text.
-- Checked: Mrs Wong demo end to end in both modes and languages; Back closes picker; offline with
+- Checked: Mr Wong demo end to end in both modes and languages; Back closes picker; offline with
   the service worker (fonts cached, zero outside requests); 390/195/1280 px and 200% text, all
   screens, both modes and languages: no sideways scroll, no clipped headings, no console errors;
   doctor summary prints on one A4 page in black and white. Cache herbsafe-v20.
@@ -248,7 +248,7 @@ rating, quote, source, S/N or date changed.
      still quotes the HA leaflet ("ginseng") first under the general intro: owner to decide.
   3. Simple cabinet: once both lists are filled, only the clash pop-up and "Check my list" remain
      (the status card stays if the list cannot be saved).
-  4. Phones: mode toggle and language button on one row; "Demo: Mrs Wong" button under the cabinet title.
+  4. Phones: mode toggle and language button on one row; "Demo: Mr Wong" button under the cabinet title.
   5. Simple pair screen shows the official quote block without "More details".
   6. Chinese labels use full-width "："; HA leaflet sources carry label_zh/url_zh (019Cv10), shown in
      Chinese mode (screen and printed summary).
@@ -314,7 +314,7 @@ rating, quote, source, S/N or date changed.
   tools/make-spoken-scripts.js) lists what to record for the demo pairs. Checks: tools/check-flow.js,
   tools/check-modes.js (Read aloud on the first screen). Print spacing tightened to keep one A4 page.
 - 20 Oct, recordings workflow (cache herbbridge-v35): Chinese headings keep their last character and
-  closing 。！？ together (no lone 。). audio/RECORDING-LIST.md is built from Mrs Wong's demo list
+  closing 。！？ together (no lone 。). audio/RECORDING-LIST.md is built from Mr Wong's demo list
   (every pair the demo shows). New recordings: put <herb>-<drug>.<en|zh>.m4a in audio/, run
   python3 tools/add-recordings.py (MP3 mono 44.1 kHz 64–96 kbps under 1 MB, adds to manifest, bumps the
   cache), then node tools/check-recordings.js (each recording plays instead of the phone voice).
@@ -339,3 +339,5 @@ rating, quote, source, S/N or date changed.
 - 22 Oct (branch diary, cut from main, NOT merged): new page "What else can change your warfarin" / 「仲有咩會影響華法林」 (#/warfarin). ONLY Hospital Authority wording, in data/warfarin.json: S-A = warfarin leaflet 019Ev10/019Cv10 (10/2025), S-B = Warfarin Dietary Guidelines / 薄血藥(WARFARIN)飲食重點指引 (COC – Grade (Dietetics), 9/2016 edition); PDFs linked on the page. Six sections (food and vitamin K with the HA food table and a food search; drinks and alcohol; Chinese medicine with links to ginseng (Asian ginseng), dong quai and danshen + warfarin, Chishao as text; supplements; other medicines; bleeding). Simple: one section per part (5 parts), key line first; the bleeding section is always shown in full under every part. Full: everything. Footer on every section: S-B "This leaflet is for reference only…" + our disclaimer. Our only own advice line: "In an emergency, call 999." / 「緊急情況請打999。」. Food search: exact names in EN and ZH (case, spaces, hyphens and * ignored), plus search names taken only from the item's own wording; approved_extra_names is empty until the owner approves a list. Not found = grey dashed box with the owner's wording, never green. Cabinet card "Taking warfarin? See what else can change how it works." only when warfarin is on the list; About links to the page. Read aloud: English only for now (key line of each section + the whole bleeding section + 999); no Chinese reading until the bleeding lines have HA Chinese wording. Lines with no HA Chinese wording yet show the English original under a placeholder note (list in the owner report). Not on the doctor summary; the page prints whole (all parts). No diary feature exists, so no diary entry type was added. Tests: 5 new in tests/ (table, quotes + attribution, search, search names, spoken script) and tools/check-warfarin.js (card, About link, bleeding always visible, one section per part, search found/not found never green, no sideways scroll 390/320/195 EN+ZH both modes); each made to fail once on purpose. Font subset rebuilt (814 characters). New Chinese UI text NOT YET REVIEWED. Cache herbbridge-v46 (v40–v45 are used on herb-uses).
 - 22 Oct: merged herb-uses into diary (both kept: "What people take it for", framing lines, doctor + Chinese medicine practitioner, and the warfarin page). Conflicts were all "both added" (i18n, lookup, tests, app data loading, sw.js file list). Font subset rebuilt for both (828 characters). Cache herbbridge-v47 (above herb-uses v45 and diary v46).
 - 22 Oct (diary): warfarin page Chinese filled from the owner's exact HA wording (19 lines; no placeholders left): S-A 019Cv10 (10/2025), Chinese PDF now https://www.ha.org.hk/hadf/Portals/0/Docs/Leaflets/TC/Warfarin-oral_anticoagulant.pdf (v10, not 019Cv9); S-B sdn_30 「服用「華法林」(WARFARIN) 飲食指引」, 醫院管理局 營養職系及服務統籌委員會, 2016年9月修訂. Chinese Read aloud on (same lines as English). Footer now once: page bottom in Full, end of each part in Simple. Search names approved by the owner (韭菜, 葱, 芫荽, 香菜, 蒜, 紅莓, ginkgo, kiwi, prunes, cranberry, cilantro, scallion); rejected 杞子, 枸杞子 (list means wolfberry LEAVES) and 西梅 (dried prunes only). Searching 杞子, 枸杞子, goji or wolfberry berries shows the grey "Not on this list" box plus "Goji is in HerbBridge's herb list. Check goji with warfarin." / 「枸杞喺中西通嘅中藥清單入面，睇吓枸杞同華法林。」 → goji + warfarin. Tests lock all of it (130 passed; a test fails if 杞子 is ever approved for 枸杞). Font subset rebuilt (878 characters). Cache herbbridge-v48.
+- 23 Oct (main): demo patient is now MR Wong (a man, 72) / 黃伯伯 (was Mrs Wong / 黃太): button, title, story ("Mr Wong is 72 and has atrial fibrillation. He takes warfarin and amlodipine. Today he bought danshen 丹參 at a herbal shop."), "Add danshen to his cabinet", "See an example (Mr Wong)"; Chinese 黃太 → 黃伯伯 and 佢 → 黃伯伯 in the demo lines. Same change in comments, tests, tools, proposals and this file. Recording file names unchanged. No medical content changed. New test: no Mrs Wong / 黃太 / she / her in the demo text. Cache herbbridge-v49 (diary becomes v50 after merging main).
+- 23 Oct: merged main (Mr Wong / 黃伯伯) into diary. Kept diary's newer wording (step 1 line, print line-height 1.3). Font subset rebuilt. Cache herbbridge-v50 (above main v49 and diary v48).
