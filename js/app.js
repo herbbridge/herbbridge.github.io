@@ -234,7 +234,7 @@
     }
   }
 
-  /* Demo for the video: Mrs Wong already takes warfarin and amlodipine; danshen is added on camera.
+  /* Demo for the video: Mr Wong already takes warfarin and amlodipine; danshen is added on camera.
      The user's own list is put aside and comes back when the demo ends. */
   function startDemo() {
     if (!state.demo) state.demoBackup = { herbs: state.herbs.slice(), drugs: state.drugs.slice() };

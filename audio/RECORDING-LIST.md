@@ -1,6 +1,6 @@
 # Recording list (Read aloud)
 
-Human recordings for the demo pairs (Mrs Wong: warfarin and amlodipine, then danshen). A recording
+Human recordings for the demo pairs (Mr Wong: warfarin and amlodipine, then danshen). A recording
 is played instead of the phone voice for that pair and language; any pair or language without one
 uses the phone voice. Made by `tools/make-spoken-scripts.js` from the same script as the app
 (`js/speech.js`, see `docs/spoken-scripts.txt`). Do not use AI-generated voices.

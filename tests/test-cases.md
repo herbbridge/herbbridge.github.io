@@ -12,7 +12,7 @@ The 15 owner-approved pairs went live on 18 Oct 2026. Cases 1, 4 and 10 now expe
 
 Official cautions (18 Oct 2026, owner-approved): where a government health agency has written about a pair, the result is "Official caution" and the card quotes the agency word for word (`data/official.json`). Team ratings are unchanged and still shown under the official quotes; a High team rating is never replaced. Cases 4, 7 and 9 changed.
 
-## 1. Mrs Wong (demo case)
+## 1. Mr Wong (demo case)
 
 Fictional 72-year-old with atrial fibrillation, on warfarin and amlodipine, who buys danshen.
 

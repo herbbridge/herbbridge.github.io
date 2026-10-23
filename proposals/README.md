@@ -29,7 +29,7 @@ claims were removed, and what the owner was told before approving.
 | danshen + digoxin | Low | Blood-test interference, not a drug effect |
 | danshen + rosuvastatin | Low | One study in 6 healthy men |
 | danshen + atorvastatin | Low | Two rat studies that disagree |
-| danshen + amlodipine | Low | One rat study; changes the Mrs Wong demo |
+| danshen + amlodipine | Low | One rat study; changes the Mr Wong demo |
 | dong quai + aspirin | Low | A nursing drug guide says avoid; a trial found no added platelet effect |
 | dong quai + clopidogrel | Low | Only source: a drug guide's warning for the whole antiplatelet group |
 
@@ -40,14 +40,14 @@ claims were removed, and what the owner was told before approving.
    the app ignores `watch` unless the rating is Low).
 2. Add each id, rating, watch flag and `"team"` to `BRIEF_RATINGS` in `tests/test-suite.js`.
 3. Update what the tests expect:
-   - `tests/test-cases.json`: case 1 (Mrs Wong: danshen + amlodipine is now Low), case 4
+   - `tests/test-cases.json`: case 1 (Mr Wong: danshen + amlodipine is now Low), case 4
      (dong quai + aspirin is now Low), case 10 (danshen/sanqi/safflower with warfarin and
      aspirin are now rated). Rename stories that say "no record" where that is no longer true.
    - The check "goji, sanqi and safflower show not_in_database with every drug" in
      `tests/test-suite.js`: limit it to the drugs that still have no record (for example
      amlodipine, digoxin, furosemide and the statins).
    - Regenerate `tests/test-cases.md`.
-4. Mrs Wong's printed doctor summary now spills one line (the disclaimer) onto a second
+4. Mr Wong's printed doctor summary now spills one line (the disclaimer) onto a second
    page. Tighten the print CSS so it fits on one A4 page again.
 5. Bump `VERSION` in `sw.js` (herbsafe-v4 → herbsafe-v5).
 6. Run `node tests/run-tests.js` and check the app in a browser in English and 中文.

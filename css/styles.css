@@ -341,7 +341,7 @@ html[data-route="check"] { scroll-padding-bottom: calc(var(--check-bar-h, 9rem) 
 .warning-list .clash-row:last-child { border-bottom: 0; }
 .alert-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.75rem; margin-top: 0.75rem; }
 
-/* Demo: Mrs Wong */
+/* Demo: Mr Wong */
 .demo-banner {
   border: 1px solid var(--accent); background: var(--accent-soft); border-radius: var(--radius);
   padding: 1.125rem var(--pad); margin: 0 0 1rem;
@@ -644,7 +644,7 @@ html.sheet-open, html.sheet-open body { overflow: hidden; }
   .wrap { max-width: none; padding: 0; }
   main { padding: 0; }
   a { color: #000; text-decoration: none; }
-  .summary { max-width: none; padding: 0; line-height: 1.32; } /* keeps Mrs Wong on one A4 page */
+  .summary { max-width: none; padding: 0; line-height: 1.32; } /* keeps Mr Wong on one A4 page */
   .summary-head h1 { font-size: 16pt; margin-bottom: 2pt; }
   .summary-kicker { color: #000; margin-bottom: 2pt; }
   .summary-lists, .summary-section { border-top: 1pt solid #000; margin-top: 5pt; padding-top: 4pt; }

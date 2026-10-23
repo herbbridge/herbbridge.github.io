@@ -9,9 +9,9 @@ Paste the original project brief into the new session together with this file.
 3. Lookup logic + tests: done (`node tests/run-tests.js`, or tests/test.html via a local server)
 4. Check → Results: done, reshaped as "My medicine cabinet" (see below)
 5. Language toggle: done (Chinese drafted, flagged unreviewed: ZH_REVIEWED in js/i18n.js)
-6. Doctor summary (print): done (#/summary; Mrs Wong prints on one A4 page)
+6. Doctor summary (print): done (#/summary; Mr Wong prints on one A4 page)
 7. About page: done (#/about; scale, evidence levels, privacy, all sources, roadmap)
-   Extra: "Demo: Mrs Wong" button (warfarin + amlodipine preloaded; tap "Add danshen" on camera)
+   Extra: "Demo: Mr Wong" button (warfarin + amlodipine preloaded; tap "Add danshen" on camera)
 8. GitHub Pages deploy: not started
 
 ## Decisions already made by the owner
@@ -97,7 +97,7 @@ For Sunday this is done WITHOUT accounts, a server or scanning:
 - 15 approved pairs now LIVE (24 entries in data/interactions.json, all team ratings;
   danshen + warfarin is still the only HA rating). Tests updated (cases 1, 4, 10; the
   goji/sanqi/safflower check now lists only medicines still without a record).
-  Mrs Wong's summary fits one A4 page again (print line-height 1.4). Cache herbsafe-v5.
+  Mr Wong's summary fits one A4 page again (print line-height 1.4). Cache herbsafe-v5.
   Checked in Chromium at 320 and 390 px, EN and 中文: every rated card has its heart line,
   no sideways overflow, grey cards identical to before.
 - First visit simplified (owner, 18 Oct, after "no one knows what to press"): with an empty or
@@ -135,7 +135,7 @@ For Sunday this is done WITHOUT accounts, a server or scanning:
   (2) Hospital Authority warfarin leaflet 019Ev10/019Cv10 (Oct 2025, current per the HA Drug
   Education page): "Do not take any TCM… Many TCM such as ginseng, Dong quai, Danshen,
   Chishao can interact with warfarin." Its Chinese text is the HA's own (quote_zh_is_original)
-  and is locked in VERIFIED_QUOTES_ZH. Applied to danshen + warfarin (Mrs Wong; Moderate kept
+  and is locked in VERIFIED_QUOTES_ZH. Applied to danshen + warfarin (Mr Wong; Moderate kept
   underneath), dong quai + warfarin (High kept as the badge) and Asian ginseng (人參) +
   warfarin ("sources disagree" with team Low). The leaflet does NOT give a rating, so it does
   not confirm the "HA rated Moderate" claim (still SCMP-only; open Task 2 item 1).
@@ -215,7 +215,7 @@ rating, quote, source, S/N or date changed.
   CHINESE, then bump sw.js VERSION.
 - Fixed: headings breaking mid-word at large text; Chinese headings/names splitting (華法 / 林,
   虛構人 / 物); controls running off screen at 200% text.
-- Checked: Mrs Wong demo end to end in both modes and languages; Back closes picker; offline with
+- Checked: Mr Wong demo end to end in both modes and languages; Back closes picker; offline with
   the service worker (fonts cached, zero outside requests); 390/195/1280 px and 200% text, all
   screens, both modes and languages: no sideways scroll, no clipped headings, no console errors;
   doctor summary prints on one A4 page in black and white. Cache herbsafe-v20.
@@ -248,7 +248,7 @@ rating, quote, source, S/N or date changed.
      still quotes the HA leaflet ("ginseng") first under the general intro: owner to decide.
   3. Simple cabinet: once both lists are filled, only the clash pop-up and "Check my list" remain
      (the status card stays if the list cannot be saved).
-  4. Phones: mode toggle and language button on one row; "Demo: Mrs Wong" button under the cabinet title.
+  4. Phones: mode toggle and language button on one row; "Demo: Mr Wong" button under the cabinet title.
   5. Simple pair screen shows the official quote block without "More details".
   6. Chinese labels use full-width "："; HA leaflet sources carry label_zh/url_zh (019Cv10), shown in
      Chinese mode (screen and printed summary).
@@ -314,7 +314,7 @@ rating, quote, source, S/N or date changed.
   tools/make-spoken-scripts.js) lists what to record for the demo pairs. Checks: tools/check-flow.js,
   tools/check-modes.js (Read aloud on the first screen). Print spacing tightened to keep one A4 page.
 - 20 Oct, recordings workflow (cache herbbridge-v35): Chinese headings keep their last character and
-  closing 。！？ together (no lone 。). audio/RECORDING-LIST.md is built from Mrs Wong's demo list
+  closing 。！？ together (no lone 。). audio/RECORDING-LIST.md is built from Mr Wong's demo list
   (every pair the demo shows). New recordings: put <herb>-<drug>.<en|zh>.m4a in audio/, run
   python3 tools/add-recordings.py (MP3 mono 44.1 kHz 64–96 kbps under 1 MB, adds to manifest, bumps the
   cache), then node tools/check-recordings.js (each recording plays instead of the phone voice).
@@ -330,3 +330,4 @@ rating, quote, source, S/N or date changed.
   Storage keys herbsafe.v1 / herbsafe.mode unchanged. redesign branch kept.
 - 21 Oct, renamed on GitHub (by the owner): organisation herbsafe → herbbridge, repository herbbridge/herbbridge.github.io, live site https://herbbridge.github.io/ (cache herbbridge-v39). The old address no longer serves the app; lists saved there stay with the old address. Storage keys herbsafe.v1 / herbsafe.mode unchanged (same names on the new address).
 - 21 Oct, tools/check-print.js now saves its PDFs in a temporary folder outside the repo (path printed at the end); .gitignore ignores print-*.pdf as a backstop. Tools only, no app files changed, cache stays herbbridge-v39.
+- 23 Oct (main): demo patient is now MR Wong (a man, 72) / 黃伯伯 (was Mrs Wong / 黃太): button, title, story ("Mr Wong is 72 and has atrial fibrillation. He takes warfarin and amlodipine. Today he bought danshen 丹參 at a herbal shop."), "Add danshen to his cabinet", "See an example (Mr Wong)"; Chinese 黃太 → 黃伯伯 and 佢 → 黃伯伯 in the demo lines. Same change in comments, tests, tools, proposals and this file. Recording file names unchanged. No medical content changed. New test: no Mrs Wong / 黃太 / she / her in the demo text. Cache herbbridge-v49 (diary becomes v50 after merging main).
