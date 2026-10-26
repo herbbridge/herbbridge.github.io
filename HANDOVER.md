@@ -362,3 +362,10 @@ rating, quote, source, S/N or date changed.
   on 27 new entries, 19 new cautions, hawthorn, astragalus, 心絞痛藥). The 14 new medicine names stay
   unreviewed and carry zh_name_with_en: in Chinese their English name shows next to them everywhere a name
   is shown on screen (not in Read aloud). Tests: 166.
+- 26 Oct, Task 1 owner review 2 (branch, cache herbbridge-v53): owner approved the R10 wording (danshen-doac
+  now zh_reviewed true). In Chinese, the first mention of a new medicine inside a sentence now shows its
+  English name on screen (利伐沙班 Rivaroxaban; 達比加群酯 Dabigatran etexilate, EMA's wording), in our text and
+  our translations of official quotes. Never in Read aloud, never in an agency's own Chinese original
+  (HA leaflets). 10 sentences affected, sent to the owner for sign-off. check-flow checks it on
+  ginkgo + dabigatran. To do after Task 1 is live (owner): check-flow should wait for the page to finish
+  loading instead of fixed waits, so it also passes on the real site.

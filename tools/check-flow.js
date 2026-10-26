@@ -69,6 +69,17 @@ const SUMMARY_SAY = {
       check(note.includes(lang === 'zh' ? '山楂葉同花' : 'leaf and flower extracts'), `${pair}: hawthorn note shown`);
     }
 
+    // New medicine names (zh_name_with_en): English next to the Chinese on screen, never in Read aloud
+    if (lang === 'zh') {
+      await p.goto(BASE + '#/pair/ginkgo-dabigatran'); await p.reload(); await p.waitForTimeout(600);
+      await p.evaluate(() => { window.__spoken = []; document.querySelectorAll('.official-more-toggle[aria-expanded="false"]').forEach(x => x.click()); });
+      const shown = await p.evaluate(() => document.getElementById('app').innerText);
+      check(shown.includes('達比加群 Dabigatran'), 'ginkgo + dabigatran: Chinese name shown with "Dabigatran" next to it');
+      await p.click('.read-aloud'); await p.waitForTimeout(800);
+      const heard = await p.evaluate(() => window.__spoken.join(' '));
+      check(heard.includes('達比加群') && !/Dabigatran/i.test(heard), 'ginkgo + dabigatran: Read aloud says only the Chinese name');
+    }
+
     // Summary sentence, once
     await p.goto(BASE + '#/summary'); await p.reload(); await p.waitForTimeout(500);
     const say = await p.$$eval('.summary-say', xs => xs.map(x => x.innerText.trim()));

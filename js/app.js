@@ -86,8 +86,33 @@
   function labelText(key) { return t(key) + (state.lang === 'zh' ? '：' : ': '); }
   function field(entry, base) {
     var zh = entry[base + '_zh'];
-    return state.lang === 'zh' && zh ? zh : entry[base + '_en'];
+    return state.lang === 'zh' && zh ? withEnglishNames(zh) : entry[base + '_en'];
   }
+  // On screen only (Read aloud keeps the Chinese): the first mention of a medicine marked
+  // zh_name_with_en inside a Chinese sentence gets its English name, e.g. 利伐沙班 Rivaroxaban.
+  // 達比加群酯 is EMA's "dabigatran etexilate". Never used on an agency's own Chinese original.
+  var EXTRA_EN = { '達比加群酯': 'Dabigatran etexilate' };
+  var namesInText = null;
+  function withEnglishNames(text) {
+    if (!namesInText) {
+      var pairs = {};
+      db.drugs.forEach(function (d) { if (d.zh_name_with_en === true) pairs[d.name_zh] = d.name_en; });
+      Object.keys(EXTRA_EN).forEach(function (k) { pairs[k] = EXTRA_EN[k]; });
+      var keys = Object.keys(pairs).sort(function (x, y) { return y.length - x.length; }); // 單硝酸異山梨酯 before 硝酸異山梨酯
+      namesInText = { pairs: pairs, re: keys.length ? new RegExp(keys.join('|'), 'g') : null };
+    }
+    if (!namesInText.re || !text) return text;
+    var done = {};
+    return text.replace(namesInText.re, function (m, at, all) {
+      var en = namesInText.pairs[m];
+      if (done[m] || all.slice(at + m.length, at + m.length + en.length + 1) === ' ' + en) { done[m] = true; return m; }
+      done[m] = true;
+      // A space after the English too when Chinese follows (Rivaroxaban 喺, not Rivaroxaban喺).
+      return m + ' ' + en + (/^[\u3400-\u9fff]/.test(all.charAt(at + m.length)) ? ' ' : '');
+    });
+  }
+  // An official quote in Chinese: our translation gets the English names; the agency's own Chinese is word for word.
+  function quoteZh(s) { return s.quote_zh_is_original ? s.quote_zh : withEnglishNames(s.quote_zh); }
 
   /* ---------- storage (this device only) ---------- */
 
@@ -786,7 +811,7 @@
       var s = db.statementById[id];
       var zh = state.lang === 'zh';
       (i === 0 ? box : more).appendChild(el('figure', { class: 'official-statement' }, [
-        el('blockquote', { class: 'official-quote', lang: zh ? 'zh-HK' : 'en-GB', text: '“' + (zh ? s.quote_zh : s.quote_en) + '”' }),
+        el('blockquote', { class: 'official-quote', lang: zh ? 'zh-HK' : 'en-GB', text: '“' + (zh ? quoteZh(s) : s.quote_en) + '”' }),
         zh ? el('p', { class: 'official-original' }, [
           el('span', { text: t(s.quote_zh_is_original ? 'official_zh_original_note' : 'official_translation_note') + ' ' }),
           el('span', { lang: 'en-GB', text: '“' + s.quote_en + '”' })
@@ -1152,7 +1177,7 @@
     }
     if (r.entry && field(r.entry, 'heart_impact')) return el('p', { class: 'pair-line', text: field(r.entry, 'heart_impact') });
     var s = db.statementById[r.official.statements[0]];
-    return el('p', { class: 'pair-line pair-line-quote' }, [el('strong', { text: (zh ? s.body_zh + '：' : s.body_en + ': ') }), el('span', { text: '“' + (zh ? s.quote_zh : s.quote_en) + '”' })]);
+    return el('p', { class: 'pair-line pair-line-quote' }, [el('strong', { text: (zh ? s.body_zh + '：' : s.body_en + ': ') }), el('span', { text: '“' + (zh ? quoteZh(s) : s.quote_en) + '”' })]);
   }
   // Full details only: What to do in full, the evidence levels and how many sources, on the card itself.
   function fullFacts(r) {
@@ -1388,7 +1413,7 @@
           var s = db.statementById[id], zh = state.lang === 'zh';
           officialRows.push(el('dt', { text: t('label_official') }));
           officialRows.push(el('dd', null, [
-            el('span', { text: '“' + (zh ? s.quote_zh : s.quote_en) + '” ' }),
+            el('span', { text: '“' + (zh ? quoteZh(s) : s.quote_en) + '” ' }),
             el('span', { class: 'muted', text: zh ? '（' + s.body_zh + '，' + s.document_zh + '，' + s.date_zh + '）' : '(' + s.body_en + ', ' + s.document_en + ', ' + s.date_en + ')' })
           ]));
         });
