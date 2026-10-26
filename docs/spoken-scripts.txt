@@ -1,5 +1,5 @@
 HerbBridge Read aloud: spoken scripts for review
-Made by tools/make-spoken-scripts.js from js/speech.js and data/ (31 pairs).
+Made by tools/make-spoken-scripts.js from js/speech.js and data/ (94 pairs).
 Each numbered line is said as a separate piece, with a short pause between pieces.
 The words on screen are not changed by this script.
 
@@ -111,7 +111,142 @@ The words on screen are not changed by this script.
   [4] 下一步：俾醫生睇。你可以咁講：『我有食丹參同氨氯地平，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-8. Dong quai + Warfarin  (dong_quai-warfarin, status: high)
+8. Danshen + Apixaban  (danshen-apixaban, status: moderate)
+
+  English
+  [1] Danshen and apixaban. Moderate risk.
+  [2] What to do: talk to your doctor before taking danshen with this medicine, and tell them about any unusual bruising or bleeding.
+  [3] Why this matters for your heart: bleeding, including in the gut or brain.
+  [4] Next: show your doctor. You can say: ‘I take danshen and apixaban. Can you check if that’s OK for me?’
+
+  中文
+  [1] 丹參同阿哌沙班。中度風險。
+  [2] 應該點做：同呢隻藥一齊食丹參之前，請先同醫生傾；如果有唔尋常嘅瘀傷或者出血，要話俾醫生知。
+  [3] 對心臟有咩影響：出血，包括腸胃或者腦出血。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食丹參同阿哌沙班，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+9. Danshen + Rivaroxaban  (danshen-rivaroxaban, status: moderate)
+
+  English
+  [1] Danshen and rivaroxaban. Moderate risk.
+  [2] What to do: talk to your doctor before taking danshen with this medicine, and tell them about any unusual bruising or bleeding.
+  [3] Why this matters for your heart: bleeding, including in the gut or brain.
+  [4] Next: show your doctor. You can say: ‘I take danshen and rivaroxaban. Can you check if that’s OK for me?’
+
+  中文
+  [1] 丹參同利伐沙班。中度風險。
+  [2] 應該點做：同呢隻藥一齊食丹參之前，請先同醫生傾；如果有唔尋常嘅瘀傷或者出血，要話俾醫生知。
+  [3] 對心臟有咩影響：出血，包括腸胃或者腦出血。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食丹參同利伐沙班，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+10. Danshen + Dabigatran  (danshen-dabigatran, status: moderate)
+
+  English
+  [1] Danshen and dabigatran. Moderate risk.
+  [2] What to do: talk to your doctor before taking danshen with this medicine, and tell them about any unusual bruising or bleeding.
+  [3] Why this matters for your heart: bleeding, including in the gut or brain.
+  [4] Next: show your doctor. You can say: ‘I take danshen and dabigatran. Can you check if that’s OK for me?’
+
+  中文
+  [1] 丹參同達比加群。中度風險。
+  [2] 應該點做：同呢隻藥一齊食丹參之前，請先同醫生傾；如果有唔尋常嘅瘀傷或者出血，要話俾醫生知。
+  [3] 對心臟有咩影響：出血，包括腸胃或者腦出血。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食丹參同達比加群，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+11. Danshen + Edoxaban  (danshen-edoxaban, status: moderate)
+
+  English
+  [1] Danshen and edoxaban. Moderate risk.
+  [2] What to do: talk to your doctor before taking danshen with this medicine, and tell them about any unusual bruising or bleeding.
+  [3] Why this matters for your heart: bleeding, including in the gut or brain.
+  [4] Next: show your doctor. You can say: ‘I take danshen and edoxaban. Can you check if that’s OK for me?’
+
+  中文
+  [1] 丹參同依度沙班。中度風險。
+  [2] 應該點做：同呢隻藥一齊食丹參之前，請先同醫生傾；如果有唔尋常嘅瘀傷或者出血，要話俾醫生知。
+  [3] 對心臟有咩影響：出血，包括腸胃或者腦出血。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食丹參同依度沙班，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+12. Danshen + Ticagrelor  (danshen-ticagrelor, status: low)
+
+  English
+  [1] Danshen and ticagrelor. Low risk. Keep an eye on it.
+  [2] What to do: talk to your doctor or pharmacist before using danshen.
+  [3] Why this matters for your heart: watch for unusual bruising or bleeding.
+  [4] Next: show your doctor. You can say: ‘I take danshen and ticagrelor. Can you check if that’s OK for me?’
+
+  中文
+  [1] 丹參同替格瑞洛。低度風險。要留意。
+  [2] 應該點做：食丹參之前，請先同醫生或者藥劑師傾。
+  [3] 對心臟有咩影響：留意有冇唔尋常嘅瘀傷或者出血。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食丹參同替格瑞洛，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+13. Danshen + Bisoprolol  (danshen-bisoprolol, status: low)
+
+  English
+  [1] Danshen and bisoprolol. Low risk. Keep an eye on it.
+  [2] What to do: tell your doctor or pharmacist that you take danshen, so they can keep an eye on your blood pressure and heart rate.
+  [3] Why this matters for your heart: blood pressure may drop too low, and the heartbeat may become too slow.
+  [4] Next: show your doctor. You can say: ‘I take danshen and bisoprolol. Can you check if that’s OK for me?’
+
+  中文
+  [1] 丹參同比索洛爾。低度風險。要留意。
+  [2] 應該點做：話俾醫生或者藥劑師知你有食丹參，等佢哋留意你嘅血壓同心跳。
+  [3] 對心臟有咩影響：血壓可能跌得太低，心跳亦可能變得太慢。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食丹參同比索洛爾，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+14. Danshen + Metoprolol  (danshen-metoprolol, status: low)
+
+  English
+  [1] Danshen and metoprolol. Low risk. Keep an eye on it.
+  [2] What to do: tell your doctor or pharmacist that you take danshen, so they can keep an eye on your blood pressure and heart rate.
+  [3] Why this matters for your heart: blood pressure may drop too low, and the heartbeat may become too slow.
+  [4] Next: show your doctor. You can say: ‘I take danshen and metoprolol. Can you check if that’s OK for me?’
+
+  中文
+  [1] 丹參同美托洛爾。低度風險。要留意。
+  [2] 應該點做：話俾醫生或者藥劑師知你有食丹參，等佢哋留意你嘅血壓同心跳。
+  [3] 對心臟有咩影響：血壓可能跌得太低，心跳亦可能變得太慢。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食丹參同美托洛爾，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+15. Danshen + Perindopril  (danshen-perindopril, status: low)
+
+  English
+  [1] Danshen and perindopril. Low risk. Keep an eye on it.
+  [2] What to do: tell your doctor or pharmacist that you take danshen, so they can keep an eye on your blood pressure.
+  [3] Why this matters for your heart: blood pressure may drop too low.
+  [4] Next: show your doctor. You can say: ‘I take danshen and perindopril. Can you check if that’s OK for me?’
+
+  中文
+  [1] 丹參同培哚普利。低度風險。要留意。
+  [2] 應該點做：話俾醫生或者藥劑師知你有食丹參，等佢哋留意你嘅血壓。
+  [3] 對心臟有咩影響：血壓可能跌得太低。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食丹參同培哚普利，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+16. Danshen + Enalapril  (danshen-enalapril, status: low)
+
+  English
+  [1] Danshen and enalapril. Low risk. Keep an eye on it.
+  [2] What to do: tell your doctor or pharmacist that you take danshen, so they can keep an eye on your blood pressure.
+  [3] Why this matters for your heart: blood pressure may drop too low.
+  [4] Next: show your doctor. You can say: ‘I take danshen and enalapril. Can you check if that’s OK for me?’
+
+  中文
+  [1] 丹參同依那普利。低度風險。要留意。
+  [2] 應該點做：話俾醫生或者藥劑師知你有食丹參，等佢哋留意你嘅血壓。
+  [3] 對心臟有咩影響：血壓可能跌得太低。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食丹參同依那普利，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+17. Dong quai + Warfarin  (dong_quai-warfarin, status: high)
 
   English
   [1] Dong quai and warfarin. High risk.
@@ -128,7 +263,7 @@ The words on screen are not changed by this script.
   [5] 下一步：俾醫生睇。你可以咁講：『我有食當歸同華法林，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-9. Dong quai + Aspirin  (dong_quai-aspirin, status: low)
+18. Dong quai + Aspirin  (dong_quai-aspirin, status: low)
 
   English
   [1] Dong quai and aspirin. Low risk. Keep an eye on it.
@@ -144,7 +279,7 @@ The words on screen are not changed by this script.
   [4] 下一步：俾醫生睇。你可以咁講：『我有食當歸同阿士匹靈，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-10. Dong quai + Clopidogrel  (dong_quai-clopidogrel, status: low)
+19. Dong quai + Clopidogrel  (dong_quai-clopidogrel, status: low)
 
   English
   [1] Dong quai and clopidogrel. Low risk. Keep an eye on it.
@@ -160,7 +295,67 @@ The words on screen are not changed by this script.
   [4] 下一步：俾醫生睇。你可以咁講：『我有食當歸同氯吡格雷，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-11. American ginseng + Warfarin  (american_ginseng-warfarin, status: official)
+20. Dong quai + Apixaban  (dong_quai-apixaban, status: official)
+
+  English
+  [1] Dong quai and apixaban. Official caution.
+  [2] Health Canada says: Ask a health care practitioner prior to use if you are taking any medications including blood thinners, birth control pills or hormone therapy.
+  [3] What to do: talk to your doctor or pharmacist.
+  [4] Next: show your doctor. You can say: ‘I take dong quai and apixaban. Can you check if that’s OK for me?’
+
+  中文
+  [1] 當歸同阿哌沙班。官方提醒。
+  [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊任何藥物，包括薄血藥、避孕藥或者荷爾蒙治療，用之前要先問醫護人員或者醫生。
+  [3] 應該點做：同醫生或者藥劑師傾吓。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食當歸同阿哌沙班，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+21. Dong quai + Rivaroxaban  (dong_quai-rivaroxaban, status: official)
+
+  English
+  [1] Dong quai and rivaroxaban. Official caution.
+  [2] Health Canada says: Ask a health care practitioner prior to use if you are taking any medications including blood thinners, birth control pills or hormone therapy.
+  [3] What to do: talk to your doctor or pharmacist.
+  [4] Next: show your doctor. You can say: ‘I take dong quai and rivaroxaban. Can you check if that’s OK for me?’
+
+  中文
+  [1] 當歸同利伐沙班。官方提醒。
+  [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊任何藥物，包括薄血藥、避孕藥或者荷爾蒙治療，用之前要先問醫護人員或者醫生。
+  [3] 應該點做：同醫生或者藥劑師傾吓。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食當歸同利伐沙班，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+22. Dong quai + Dabigatran  (dong_quai-dabigatran, status: official)
+
+  English
+  [1] Dong quai and dabigatran. Official caution.
+  [2] Health Canada says: Ask a health care practitioner prior to use if you are taking any medications including blood thinners, birth control pills or hormone therapy.
+  [3] What to do: talk to your doctor or pharmacist.
+  [4] Next: show your doctor. You can say: ‘I take dong quai and dabigatran. Can you check if that’s OK for me?’
+
+  中文
+  [1] 當歸同達比加群。官方提醒。
+  [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊任何藥物，包括薄血藥、避孕藥或者荷爾蒙治療，用之前要先問醫護人員或者醫生。
+  [3] 應該點做：同醫生或者藥劑師傾吓。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食當歸同達比加群，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+23. Dong quai + Edoxaban  (dong_quai-edoxaban, status: official)
+
+  English
+  [1] Dong quai and edoxaban. Official caution.
+  [2] Health Canada says: Ask a health care practitioner prior to use if you are taking any medications including blood thinners, birth control pills or hormone therapy.
+  [3] What to do: talk to your doctor or pharmacist.
+  [4] Next: show your doctor. You can say: ‘I take dong quai and edoxaban. Can you check if that’s OK for me?’
+
+  中文
+  [1] 當歸同依度沙班。官方提醒。
+  [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊任何藥物，包括薄血藥、避孕藥或者荷爾蒙治療，用之前要先問醫護人員或者醫生。
+  [3] 應該點做：同醫生或者藥劑師傾吓。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食當歸同依度沙班，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+24. American ginseng + Warfarin  (american_ginseng-warfarin, status: official)
 
   English
   [1] American ginseng and warfarin. Official caution.
@@ -179,7 +374,7 @@ The words on screen are not changed by this script.
   [6] 下一步：俾醫生睇。你可以咁講：『我有食花旗參同華法林，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-12. American ginseng + Digoxin  (american_ginseng-digoxin, status: official)
+25. American ginseng + Digoxin  (american_ginseng-digoxin, status: official)
 
   English
   [1] American ginseng and digoxin. Official caution.
@@ -194,7 +389,172 @@ The words on screen are not changed by this script.
   [4] 下一步：俾醫生睇。你可以咁講：『我有食花旗參同地高辛，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-13. Asian ginseng + Warfarin  (asian_ginseng-warfarin, status: official)
+26. American ginseng + Amlodipine  (american_ginseng-amlodipine, status: none_reported)
+
+  English
+  [1] American ginseng and amlodipine. No reported risk.
+  [2] What to do: tell your doctor or pharmacist that you take American ginseng.
+  [3] Why this matters for your heart: no effect on blood pressure was found in these studies.
+  [4] Next: show your doctor. You can say: ‘I take American ginseng and amlodipine. Can you check if that’s OK for me?’
+
+  中文
+  [1] 花旗參同氨氯地平。未有報告風險。
+  [2] 應該點做：話俾醫生或者藥劑師知你有食花旗參。
+  [3] 對心臟有咩影響：呢啲研究冇發現對血壓有影響。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食花旗參同氨氯地平，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+27. American ginseng + Apixaban  (american_ginseng-apixaban, status: official)
+
+  English
+  [1] American ginseng and apixaban. Official caution.
+  [2] Health Canada says: Ask a health care practitioner before use if you are taking blood thinners or digoxin.
+  [3] What to do: talk to your doctor or pharmacist.
+  [4] Next: show your doctor. You can say: ‘I take American ginseng and apixaban. Can you check if that’s OK for me?’
+
+  中文
+  [1] 花旗參同阿哌沙班。官方提醒。
+  [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊薄血藥或者地高辛，用之前要先問醫護人員或者醫生。
+  [3] 應該點做：同醫生或者藥劑師傾吓。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食花旗參同阿哌沙班，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+28. American ginseng + Rivaroxaban  (american_ginseng-rivaroxaban, status: official)
+
+  English
+  [1] American ginseng and rivaroxaban. Official caution.
+  [2] Health Canada says: Ask a health care practitioner before use if you are taking blood thinners or digoxin.
+  [3] What to do: talk to your doctor or pharmacist.
+  [4] Next: show your doctor. You can say: ‘I take American ginseng and rivaroxaban. Can you check if that’s OK for me?’
+
+  中文
+  [1] 花旗參同利伐沙班。官方提醒。
+  [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊薄血藥或者地高辛，用之前要先問醫護人員或者醫生。
+  [3] 應該點做：同醫生或者藥劑師傾吓。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食花旗參同利伐沙班，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+29. American ginseng + Dabigatran  (american_ginseng-dabigatran, status: official)
+
+  English
+  [1] American ginseng and dabigatran. Official caution.
+  [2] Health Canada says: Ask a health care practitioner before use if you are taking blood thinners or digoxin.
+  [3] What to do: talk to your doctor or pharmacist.
+  [4] Next: show your doctor. You can say: ‘I take American ginseng and dabigatran. Can you check if that’s OK for me?’
+
+  中文
+  [1] 花旗參同達比加群。官方提醒。
+  [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊薄血藥或者地高辛，用之前要先問醫護人員或者醫生。
+  [3] 應該點做：同醫生或者藥劑師傾吓。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食花旗參同達比加群，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+30. American ginseng + Edoxaban  (american_ginseng-edoxaban, status: official)
+
+  English
+  [1] American ginseng and edoxaban. Official caution.
+  [2] Health Canada says: Ask a health care practitioner before use if you are taking blood thinners or digoxin.
+  [3] What to do: talk to your doctor or pharmacist.
+  [4] Next: show your doctor. You can say: ‘I take American ginseng and edoxaban. Can you check if that’s OK for me?’
+
+  中文
+  [1] 花旗參同依度沙班。官方提醒。
+  [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊薄血藥或者地高辛，用之前要先問醫護人員或者醫生。
+  [3] 應該點做：同醫生或者藥劑師傾吓。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食花旗參同依度沙班，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+31. American ginseng + Bisoprolol  (american_ginseng-bisoprolol, status: none_reported)
+
+  English
+  [1] American ginseng and bisoprolol. No reported risk.
+  [2] What to do: tell your doctor or pharmacist that you take American ginseng.
+  [3] Why this matters for your heart: no effect on blood pressure was found in these studies.
+  [4] Next: show your doctor. You can say: ‘I take American ginseng and bisoprolol. Can you check if that’s OK for me?’
+
+  中文
+  [1] 花旗參同比索洛爾。未有報告風險。
+  [2] 應該點做：話俾醫生或者藥劑師知你有食花旗參。
+  [3] 對心臟有咩影響：呢啲研究冇發現對血壓有影響。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食花旗參同比索洛爾，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+32. American ginseng + Metoprolol  (american_ginseng-metoprolol, status: none_reported)
+
+  English
+  [1] American ginseng and metoprolol. No reported risk.
+  [2] What to do: tell your doctor or pharmacist that you take American ginseng.
+  [3] Why this matters for your heart: no effect on blood pressure was found in these studies.
+  [4] Next: show your doctor. You can say: ‘I take American ginseng and metoprolol. Can you check if that’s OK for me?’
+
+  中文
+  [1] 花旗參同美托洛爾。未有報告風險。
+  [2] 應該點做：話俾醫生或者藥劑師知你有食花旗參。
+  [3] 對心臟有咩影響：呢啲研究冇發現對血壓有影響。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食花旗參同美托洛爾，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+33. American ginseng + Perindopril  (american_ginseng-perindopril, status: none_reported)
+
+  English
+  [1] American ginseng and perindopril. No reported risk.
+  [2] What to do: tell your doctor or pharmacist that you take American ginseng.
+  [3] Why this matters for your heart: no effect on blood pressure was found in these studies.
+  [4] Next: show your doctor. You can say: ‘I take American ginseng and perindopril. Can you check if that’s OK for me?’
+
+  中文
+  [1] 花旗參同培哚普利。未有報告風險。
+  [2] 應該點做：話俾醫生或者藥劑師知你有食花旗參。
+  [3] 對心臟有咩影響：呢啲研究冇發現對血壓有影響。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食花旗參同培哚普利，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+34. American ginseng + Enalapril  (american_ginseng-enalapril, status: none_reported)
+
+  English
+  [1] American ginseng and enalapril. No reported risk.
+  [2] What to do: tell your doctor or pharmacist that you take American ginseng.
+  [3] Why this matters for your heart: no effect on blood pressure was found in these studies.
+  [4] Next: show your doctor. You can say: ‘I take American ginseng and enalapril. Can you check if that’s OK for me?’
+
+  中文
+  [1] 花旗參同依那普利。未有報告風險。
+  [2] 應該點做：話俾醫生或者藥劑師知你有食花旗參。
+  [3] 對心臟有咩影響：呢啲研究冇發現對血壓有影響。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食花旗參同依那普利，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+35. American ginseng + Losartan  (american_ginseng-losartan, status: none_reported)
+
+  English
+  [1] American ginseng and losartan. No reported risk.
+  [2] What to do: tell your doctor or pharmacist that you take American ginseng.
+  [3] Why this matters for your heart: no effect on blood pressure was found in these studies.
+  [4] Next: show your doctor. You can say: ‘I take American ginseng and losartan. Can you check if that’s OK for me?’
+
+  中文
+  [1] 花旗參同氯沙坦。未有報告風險。
+  [2] 應該點做：話俾醫生或者藥劑師知你有食花旗參。
+  [3] 對心臟有咩影響：呢啲研究冇發現對血壓有影響。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食花旗參同氯沙坦，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+36. American ginseng + Valsartan  (american_ginseng-valsartan, status: none_reported)
+
+  English
+  [1] American ginseng and valsartan. No reported risk.
+  [2] What to do: tell your doctor or pharmacist that you take American ginseng.
+  [3] Why this matters for your heart: no effect on blood pressure was found in these studies.
+  [4] Next: show your doctor. You can say: ‘I take American ginseng and valsartan. Can you check if that’s OK for me?’
+
+  中文
+  [1] 花旗參同纈沙坦。未有報告風險。
+  [2] 應該點做：話俾醫生或者藥劑師知你有食花旗參。
+  [3] 對心臟有咩影響：呢啲研究冇發現對血壓有影響。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食花旗參同纈沙坦，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+37. Asian ginseng + Warfarin  (asian_ginseng-warfarin, status: official)
 
   English
   [1] Asian ginseng and warfarin. Official caution, sources disagree.
@@ -211,7 +571,7 @@ The words on screen are not changed by this script.
   [5] 下一步：俾醫生睇。你可以咁講：『我有食人參同華法林，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-14. Asian ginseng + Digoxin  (asian_ginseng-digoxin, status: official)
+38. Asian ginseng + Digoxin  (asian_ginseng-digoxin, status: official)
 
   English
   [1] Asian ginseng and digoxin. Official caution.
@@ -226,7 +586,172 @@ The words on screen are not changed by this script.
   [4] 下一步：俾醫生睇。你可以咁講：『我有食人參同地高辛，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-15. Ginkgo + Warfarin  (ginkgo-warfarin, status: official)
+39. Asian ginseng + Amlodipine  (asian_ginseng-amlodipine, status: none_reported)
+
+  English
+  [1] Asian ginseng and amlodipine. No reported risk.
+  [2] What to do: tell your doctor or pharmacist that you take Asian ginseng.
+  [3] Why this matters for your heart: no effect on blood pressure was found in these studies.
+  [4] Next: show your doctor. You can say: ‘I take Asian ginseng and amlodipine. Can you check if that’s OK for me?’
+
+  中文
+  [1] 人參同氨氯地平。未有報告風險。
+  [2] 應該點做：話俾醫生或者藥劑師知你有食人參。
+  [3] 對心臟有咩影響：呢啲研究冇發現對血壓有影響。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食人參同氨氯地平，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+40. Asian ginseng + Apixaban  (asian_ginseng-apixaban, status: official)
+
+  English
+  [1] Asian ginseng and apixaban. Official caution.
+  [2] Health Canada says: Ask a health care practitioner before use if you are taking antidepressant medication, blood thinners or digoxin.
+  [3] What to do: talk to your doctor or pharmacist.
+  [4] Next: show your doctor. You can say: ‘I take Asian ginseng and apixaban. Can you check if that’s OK for me?’
+
+  中文
+  [1] 人參同阿哌沙班。官方提醒。
+  [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊抗抑鬱藥、薄血藥或者地高辛，用之前要先問醫護人員或者醫生。
+  [3] 應該點做：同醫生或者藥劑師傾吓。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食人參同阿哌沙班，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+41. Asian ginseng + Rivaroxaban  (asian_ginseng-rivaroxaban, status: official)
+
+  English
+  [1] Asian ginseng and rivaroxaban. Official caution.
+  [2] Health Canada says: Ask a health care practitioner before use if you are taking antidepressant medication, blood thinners or digoxin.
+  [3] What to do: talk to your doctor or pharmacist.
+  [4] Next: show your doctor. You can say: ‘I take Asian ginseng and rivaroxaban. Can you check if that’s OK for me?’
+
+  中文
+  [1] 人參同利伐沙班。官方提醒。
+  [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊抗抑鬱藥、薄血藥或者地高辛，用之前要先問醫護人員或者醫生。
+  [3] 應該點做：同醫生或者藥劑師傾吓。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食人參同利伐沙班，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+42. Asian ginseng + Dabigatran  (asian_ginseng-dabigatran, status: official)
+
+  English
+  [1] Asian ginseng and dabigatran. Official caution.
+  [2] Health Canada says: Ask a health care practitioner before use if you are taking antidepressant medication, blood thinners or digoxin.
+  [3] What to do: talk to your doctor or pharmacist.
+  [4] Next: show your doctor. You can say: ‘I take Asian ginseng and dabigatran. Can you check if that’s OK for me?’
+
+  中文
+  [1] 人參同達比加群。官方提醒。
+  [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊抗抑鬱藥、薄血藥或者地高辛，用之前要先問醫護人員或者醫生。
+  [3] 應該點做：同醫生或者藥劑師傾吓。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食人參同達比加群，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+43. Asian ginseng + Edoxaban  (asian_ginseng-edoxaban, status: official)
+
+  English
+  [1] Asian ginseng and edoxaban. Official caution.
+  [2] Health Canada says: Ask a health care practitioner before use if you are taking antidepressant medication, blood thinners or digoxin.
+  [3] What to do: talk to your doctor or pharmacist.
+  [4] Next: show your doctor. You can say: ‘I take Asian ginseng and edoxaban. Can you check if that’s OK for me?’
+
+  中文
+  [1] 人參同依度沙班。官方提醒。
+  [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊抗抑鬱藥、薄血藥或者地高辛，用之前要先問醫護人員或者醫生。
+  [3] 應該點做：同醫生或者藥劑師傾吓。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食人參同依度沙班，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+44. Asian ginseng + Bisoprolol  (asian_ginseng-bisoprolol, status: none_reported)
+
+  English
+  [1] Asian ginseng and bisoprolol. No reported risk.
+  [2] What to do: tell your doctor or pharmacist that you take Asian ginseng.
+  [3] Why this matters for your heart: no effect on blood pressure was found in these studies.
+  [4] Next: show your doctor. You can say: ‘I take Asian ginseng and bisoprolol. Can you check if that’s OK for me?’
+
+  中文
+  [1] 人參同比索洛爾。未有報告風險。
+  [2] 應該點做：話俾醫生或者藥劑師知你有食人參。
+  [3] 對心臟有咩影響：呢啲研究冇發現對血壓有影響。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食人參同比索洛爾，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+45. Asian ginseng + Metoprolol  (asian_ginseng-metoprolol, status: none_reported)
+
+  English
+  [1] Asian ginseng and metoprolol. No reported risk.
+  [2] What to do: tell your doctor or pharmacist that you take Asian ginseng.
+  [3] Why this matters for your heart: no effect on blood pressure was found in these studies.
+  [4] Next: show your doctor. You can say: ‘I take Asian ginseng and metoprolol. Can you check if that’s OK for me?’
+
+  中文
+  [1] 人參同美托洛爾。未有報告風險。
+  [2] 應該點做：話俾醫生或者藥劑師知你有食人參。
+  [3] 對心臟有咩影響：呢啲研究冇發現對血壓有影響。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食人參同美托洛爾，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+46. Asian ginseng + Perindopril  (asian_ginseng-perindopril, status: none_reported)
+
+  English
+  [1] Asian ginseng and perindopril. No reported risk.
+  [2] What to do: tell your doctor or pharmacist that you take Asian ginseng.
+  [3] Why this matters for your heart: no effect on blood pressure was found in these studies.
+  [4] Next: show your doctor. You can say: ‘I take Asian ginseng and perindopril. Can you check if that’s OK for me?’
+
+  中文
+  [1] 人參同培哚普利。未有報告風險。
+  [2] 應該點做：話俾醫生或者藥劑師知你有食人參。
+  [3] 對心臟有咩影響：呢啲研究冇發現對血壓有影響。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食人參同培哚普利，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+47. Asian ginseng + Enalapril  (asian_ginseng-enalapril, status: none_reported)
+
+  English
+  [1] Asian ginseng and enalapril. No reported risk.
+  [2] What to do: tell your doctor or pharmacist that you take Asian ginseng.
+  [3] Why this matters for your heart: no effect on blood pressure was found in these studies.
+  [4] Next: show your doctor. You can say: ‘I take Asian ginseng and enalapril. Can you check if that’s OK for me?’
+
+  中文
+  [1] 人參同依那普利。未有報告風險。
+  [2] 應該點做：話俾醫生或者藥劑師知你有食人參。
+  [3] 對心臟有咩影響：呢啲研究冇發現對血壓有影響。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食人參同依那普利，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+48. Asian ginseng + Losartan  (asian_ginseng-losartan, status: none_reported)
+
+  English
+  [1] Asian ginseng and losartan. No reported risk.
+  [2] What to do: tell your doctor or pharmacist that you take Asian ginseng.
+  [3] Why this matters for your heart: no effect on blood pressure was found in these studies.
+  [4] Next: show your doctor. You can say: ‘I take Asian ginseng and losartan. Can you check if that’s OK for me?’
+
+  中文
+  [1] 人參同氯沙坦。未有報告風險。
+  [2] 應該點做：話俾醫生或者藥劑師知你有食人參。
+  [3] 對心臟有咩影響：呢啲研究冇發現對血壓有影響。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食人參同氯沙坦，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+49. Asian ginseng + Valsartan  (asian_ginseng-valsartan, status: none_reported)
+
+  English
+  [1] Asian ginseng and valsartan. No reported risk.
+  [2] What to do: tell your doctor or pharmacist that you take Asian ginseng.
+  [3] Why this matters for your heart: no effect on blood pressure was found in these studies.
+  [4] Next: show your doctor. You can say: ‘I take Asian ginseng and valsartan. Can you check if that’s OK for me?’
+
+  中文
+  [1] 人參同纈沙坦。未有報告風險。
+  [2] 應該點做：話俾醫生或者藥劑師知你有食人參。
+  [3] 對心臟有咩影響：呢啲研究冇發現對血壓有影響。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食人參同纈沙坦，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+50. Ginkgo + Warfarin  (ginkgo-warfarin, status: official)
 
   English
   [1] Ginkgo and warfarin. Official caution, sources disagree.
@@ -243,7 +768,7 @@ The words on screen are not changed by this script.
   [5] 下一步：俾醫生睇。你可以咁講：『我有食銀杏同華法林，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-16. Ginkgo + Aspirin  (ginkgo-aspirin, status: official)
+51. Ginkgo + Aspirin  (ginkgo-aspirin, status: official)
 
   English
   [1] Ginkgo and aspirin. Official caution, sources disagree.
@@ -260,7 +785,7 @@ The words on screen are not changed by this script.
   [5] 下一步：俾醫生睇。你可以咁講：『我有食銀杏同阿士匹靈，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-17. Ginkgo + Clopidogrel  (ginkgo-clopidogrel, status: official)
+52. Ginkgo + Clopidogrel  (ginkgo-clopidogrel, status: official)
 
   English
   [1] Ginkgo and clopidogrel. Official caution.
@@ -275,7 +800,7 @@ The words on screen are not changed by this script.
   [4] 下一步：俾醫生睇。你可以咁講：『我有食銀杏同氯吡格雷，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-18. Ginkgo + Amlodipine  (ginkgo-amlodipine, status: official)
+53. Ginkgo + Amlodipine  (ginkgo-amlodipine, status: official)
 
   English
   [1] Ginkgo and amlodipine. Official caution.
@@ -290,7 +815,92 @@ The words on screen are not changed by this script.
   [4] 下一步：俾醫生睇。你可以咁講：『我有食銀杏同氨氯地平，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-19. Liquorice + Digoxin  (liquorice-digoxin, status: official)
+54. Ginkgo + Apixaban  (ginkgo-apixaban, status: official)
+
+  English
+  [1] Ginkgo and apixaban. Official caution, sources disagree.
+  [2] Health Canada says: Do not use if you are taking blood thinners or other health products that affect blood coagulation.
+  [3] What to do: mention it to your doctor.
+  [4] Watch for unusual bruising or bleeding.
+  [5] Next: show your doctor. You can say: ‘I take ginkgo and apixaban. Can you check if that’s OK for me?’
+
+  中文
+  [1] 銀杏同阿哌沙班。官方提醒，資料講法唔一致。
+  [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊薄血藥，或者其他會影響血液凝固嘅健康產品，就唔好用。
+  [3] 應該點做：話俾醫生知。
+  [4] 留意有冇唔尋常嘅瘀傷或者出血。
+  [5] 下一步：俾醫生睇。你可以咁講：『我有食銀杏同阿哌沙班，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+55. Ginkgo + Rivaroxaban  (ginkgo-rivaroxaban, status: official)
+
+  English
+  [1] Ginkgo and rivaroxaban. Official caution, sources disagree.
+  [2] Health Canada says: Do not use if you are taking blood thinners or other health products that affect blood coagulation.
+  [3] What to do: mention it to your doctor.
+  [4] Watch for unusual bruising or bleeding.
+  [5] Next: show your doctor. You can say: ‘I take ginkgo and rivaroxaban. Can you check if that’s OK for me?’
+
+  中文
+  [1] 銀杏同利伐沙班。官方提醒，資料講法唔一致。
+  [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊薄血藥，或者其他會影響血液凝固嘅健康產品，就唔好用。
+  [3] 應該點做：話俾醫生知。
+  [4] 留意有冇唔尋常嘅瘀傷或者出血。
+  [5] 下一步：俾醫生睇。你可以咁講：『我有食銀杏同利伐沙班，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+56. Ginkgo + Dabigatran  (ginkgo-dabigatran, status: official)
+
+  English
+  [1] Ginkgo and dabigatran. Official caution, sources disagree.
+  [2] Health Canada says: Do not use if you are taking blood thinners or other health products that affect blood coagulation.
+  [3] What to do: mention it to your doctor.
+  [4] Watch for unusual bruising or bleeding.
+  [5] Next: show your doctor. You can say: ‘I take ginkgo and dabigatran. Can you check if that’s OK for me?’
+
+  中文
+  [1] 銀杏同達比加群。官方提醒，資料講法唔一致。
+  [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊薄血藥，或者其他會影響血液凝固嘅健康產品，就唔好用。
+  [3] 應該點做：話俾醫生知。
+  [4] 留意有冇唔尋常嘅瘀傷或者出血。
+  [5] 下一步：俾醫生睇。你可以咁講：『我有食銀杏同達比加群，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+57. Ginkgo + Edoxaban  (ginkgo-edoxaban, status: official)
+
+  English
+  [1] Ginkgo and edoxaban. Official caution, sources disagree.
+  [2] Health Canada says: Do not use if you are taking blood thinners or other health products that affect blood coagulation.
+  [3] What to do: mention it to your doctor.
+  [4] Watch for unusual bruising or bleeding.
+  [5] Next: show your doctor. You can say: ‘I take ginkgo and edoxaban. Can you check if that’s OK for me?’
+
+  中文
+  [1] 銀杏同依度沙班。官方提醒，資料講法唔一致。
+  [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊薄血藥，或者其他會影響血液凝固嘅健康產品，就唔好用。
+  [3] 應該點做：話俾醫生知。
+  [4] 留意有冇唔尋常嘅瘀傷或者出血。
+  [5] 下一步：俾醫生睇。你可以咁講：『我有食銀杏同依度沙班，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+58. Ginkgo + Ticagrelor  (ginkgo-ticagrelor, status: official)
+
+  English
+  [1] Ginkgo and ticagrelor. Official caution, sources disagree.
+  [2] Health Canada says: Do not use if you are taking blood thinners or other health products that affect blood coagulation.
+  [3] What to do: mention it to your doctor.
+  [4] Watch for unusual bruising or bleeding.
+  [5] Next: show your doctor. You can say: ‘I take ginkgo and ticagrelor. Can you check if that’s OK for me?’
+
+  中文
+  [1] 銀杏同替格瑞洛。官方提醒，資料講法唔一致。
+  [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊薄血藥，或者其他會影響血液凝固嘅健康產品，就唔好用。
+  [3] 應該點做：話俾醫生知。
+  [4] 留意有冇唔尋常嘅瘀傷或者出血。
+  [5] 下一步：俾醫生睇。你可以咁講：『我有食銀杏同替格瑞洛，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+59. Liquorice + Digoxin  (liquorice-digoxin, status: official)
 
   English
   [1] Liquorice and digoxin. Official caution.
@@ -309,22 +919,26 @@ The words on screen are not changed by this script.
   [6] 下一步：俾醫生睇。你可以咁講：『我有食甘草同地高辛，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-20. Liquorice + Amlodipine  (liquorice-amlodipine, status: official)
+60. Liquorice + Amlodipine  (liquorice-amlodipine, status: official)
 
   English
   [1] Liquorice and amlodipine. Official caution.
   [2] The European Medicines Agency says: Liquorice root may counteract antihypertensive action of prescribed medications.
-  [3] What to do: talk to your doctor or pharmacist.
-  [4] Next: show your doctor. You can say: ‘I take liquorice and amlodipine. Can you check if that’s OK for me?’
+  [3] What to do: talk to your doctor before taking liquorice.
+  [4] It may work against your blood pressure or heart medicine.
+  [5] Why this matters for your heart: your blood pressure may not be as well controlled.
+  [6] Next: show your doctor. You can say: ‘I take liquorice and amlodipine. Can you check if that’s OK for me?’
 
   中文
   [1] 甘草同氨氯地平。官方提醒。
   [2] 歐洲藥品管理局話（英文原文翻譯）：甘草根可能會抵消處方降血壓藥嘅作用。
-  [3] 應該點做：同醫生或者藥劑師傾吓。
-  [4] 下一步：俾醫生睇。你可以咁講：『我有食甘草同氨氯地平，可唔可以幫我睇吓有冇問題？』
+  [3] 應該點做：食甘草之前，請先同醫生傾。
+  [4] 甘草可能抵消你嘅降血壓藥或者心臟藥嘅作用。
+  [5] 對心臟有咩影響：你嘅血壓可能冇咁受控。
+  [6] 下一步：俾醫生睇。你可以咁講：『我有食甘草同氨氯地平，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-21. Liquorice + Furosemide  (liquorice-furosemide, status: official)
+61. Liquorice + Furosemide  (liquorice-furosemide, status: official)
 
   English
   [1] Liquorice and furosemide. Official caution.
@@ -343,7 +957,178 @@ The words on screen are not changed by this script.
   [6] 下一步：俾醫生睇。你可以咁講：『我有食甘草同呋塞米，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-22. Red yeast rice + Atorvastatin  (red_yeast_rice-atorvastatin, status: high)
+62. Liquorice + Bisoprolol  (liquorice-bisoprolol, status: official)
+
+  English
+  [1] Liquorice and bisoprolol. Official caution.
+  [2] The European Medicines Agency says: Liquorice root may counteract antihypertensive action of prescribed medications.
+  [3] What to do: talk to your doctor before taking liquorice.
+  [4] It may work against your blood pressure or heart medicine.
+  [5] Why this matters for your heart: your blood pressure may not be as well controlled.
+  [6] Next: show your doctor. You can say: ‘I take liquorice and bisoprolol. Can you check if that’s OK for me?’
+
+  中文
+  [1] 甘草同比索洛爾。官方提醒。
+  [2] 歐洲藥品管理局話（英文原文翻譯）：甘草根可能會抵消處方降血壓藥嘅作用。
+  [3] 應該點做：食甘草之前，請先同醫生傾。
+  [4] 甘草可能抵消你嘅降血壓藥或者心臟藥嘅作用。
+  [5] 對心臟有咩影響：你嘅血壓可能冇咁受控。
+  [6] 下一步：俾醫生睇。你可以咁講：『我有食甘草同比索洛爾，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+63. Liquorice + Metoprolol  (liquorice-metoprolol, status: official)
+
+  English
+  [1] Liquorice and metoprolol. Official caution.
+  [2] The European Medicines Agency says: Liquorice root may counteract antihypertensive action of prescribed medications.
+  [3] What to do: talk to your doctor before taking liquorice.
+  [4] It may work against your blood pressure or heart medicine.
+  [5] Why this matters for your heart: your blood pressure may not be as well controlled.
+  [6] Next: show your doctor. You can say: ‘I take liquorice and metoprolol. Can you check if that’s OK for me?’
+
+  中文
+  [1] 甘草同美托洛爾。官方提醒。
+  [2] 歐洲藥品管理局話（英文原文翻譯）：甘草根可能會抵消處方降血壓藥嘅作用。
+  [3] 應該點做：食甘草之前，請先同醫生傾。
+  [4] 甘草可能抵消你嘅降血壓藥或者心臟藥嘅作用。
+  [5] 對心臟有咩影響：你嘅血壓可能冇咁受控。
+  [6] 下一步：俾醫生睇。你可以咁講：『我有食甘草同美托洛爾，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+64. Liquorice + Perindopril  (liquorice-perindopril, status: official)
+
+  English
+  [1] Liquorice and perindopril. Official caution.
+  [2] The European Medicines Agency says: Liquorice root may counteract antihypertensive action of prescribed medications.
+  [3] What to do: talk to your doctor before taking liquorice.
+  [4] It may work against your blood pressure or heart medicine.
+  [5] Why this matters for your heart: your blood pressure may not be as well controlled.
+  [6] Next: show your doctor. You can say: ‘I take liquorice and perindopril. Can you check if that’s OK for me?’
+
+  中文
+  [1] 甘草同培哚普利。官方提醒。
+  [2] 歐洲藥品管理局話（英文原文翻譯）：甘草根可能會抵消處方降血壓藥嘅作用。
+  [3] 應該點做：食甘草之前，請先同醫生傾。
+  [4] 甘草可能抵消你嘅降血壓藥或者心臟藥嘅作用。
+  [5] 對心臟有咩影響：你嘅血壓可能冇咁受控。
+  [6] 下一步：俾醫生睇。你可以咁講：『我有食甘草同培哚普利，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+65. Liquorice + Enalapril  (liquorice-enalapril, status: official)
+
+  English
+  [1] Liquorice and enalapril. Official caution.
+  [2] The European Medicines Agency says: Liquorice root may counteract antihypertensive action of prescribed medications.
+  [3] What to do: talk to your doctor before taking liquorice.
+  [4] It may work against your blood pressure or heart medicine.
+  [5] Why this matters for your heart: your blood pressure may not be as well controlled.
+  [6] Next: show your doctor. You can say: ‘I take liquorice and enalapril. Can you check if that’s OK for me?’
+
+  中文
+  [1] 甘草同依那普利。官方提醒。
+  [2] 歐洲藥品管理局話（英文原文翻譯）：甘草根可能會抵消處方降血壓藥嘅作用。
+  [3] 應該點做：食甘草之前，請先同醫生傾。
+  [4] 甘草可能抵消你嘅降血壓藥或者心臟藥嘅作用。
+  [5] 對心臟有咩影響：你嘅血壓可能冇咁受控。
+  [6] 下一步：俾醫生睇。你可以咁講：『我有食甘草同依那普利，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+66. Liquorice + Losartan  (liquorice-losartan, status: official)
+
+  English
+  [1] Liquorice and losartan. Official caution.
+  [2] The European Medicines Agency says: Liquorice root may counteract antihypertensive action of prescribed medications.
+  [3] What to do: talk to your doctor before taking liquorice.
+  [4] It may work against your blood pressure or heart medicine.
+  [5] Why this matters for your heart: your blood pressure may not be as well controlled.
+  [6] Next: show your doctor. You can say: ‘I take liquorice and losartan. Can you check if that’s OK for me?’
+
+  中文
+  [1] 甘草同氯沙坦。官方提醒。
+  [2] 歐洲藥品管理局話（英文原文翻譯）：甘草根可能會抵消處方降血壓藥嘅作用。
+  [3] 應該點做：食甘草之前，請先同醫生傾。
+  [4] 甘草可能抵消你嘅降血壓藥或者心臟藥嘅作用。
+  [5] 對心臟有咩影響：你嘅血壓可能冇咁受控。
+  [6] 下一步：俾醫生睇。你可以咁講：『我有食甘草同氯沙坦，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+67. Liquorice + Valsartan  (liquorice-valsartan, status: official)
+
+  English
+  [1] Liquorice and valsartan. Official caution.
+  [2] The European Medicines Agency says: Liquorice root may counteract antihypertensive action of prescribed medications.
+  [3] What to do: talk to your doctor before taking liquorice.
+  [4] It may work against your blood pressure or heart medicine.
+  [5] Why this matters for your heart: your blood pressure may not be as well controlled.
+  [6] Next: show your doctor. You can say: ‘I take liquorice and valsartan. Can you check if that’s OK for me?’
+
+  中文
+  [1] 甘草同纈沙坦。官方提醒。
+  [2] 歐洲藥品管理局話（英文原文翻譯）：甘草根可能會抵消處方降血壓藥嘅作用。
+  [3] 應該點做：食甘草之前，請先同醫生傾。
+  [4] 甘草可能抵消你嘅降血壓藥或者心臟藥嘅作用。
+  [5] 對心臟有咩影響：你嘅血壓可能冇咁受控。
+  [6] 下一步：俾醫生睇。你可以咁講：『我有食甘草同纈沙坦，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+68. Liquorice + Isosorbide mononitrate  (liquorice-isosorbide_mononitrate, status: official)
+
+  English
+  [1] Liquorice and isosorbide mononitrate. Official caution.
+  [2] Health Canada says: Do not use if you are taking heart medications, corticosteroids, stimulant laxatives, or other health products that may contribute electrolyte imbalance.
+  [3] What to do: talk to your doctor before taking liquorice.
+  [4] It may work against your blood pressure or heart medicine.
+  [5] Why this matters for your heart: it may work against your heart medicine.
+  [6] Next: show your doctor. You can say: ‘I take liquorice and isosorbide mononitrate. Can you check if that’s OK for me?’
+
+  中文
+  [1] 甘草同單硝酸異山梨酯。官方提醒。
+  [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊心臟藥、類固醇、刺激性瀉藥，或者其他可能引致電解質失衡嘅健康產品，就唔好用。
+  [3] 應該點做：食甘草之前，請先同醫生傾。
+  [4] 甘草可能抵消你嘅降血壓藥或者心臟藥嘅作用。
+  [5] 對心臟有咩影響：可能抵消心臟藥嘅作用。
+  [6] 下一步：俾醫生睇。你可以咁講：『我有食甘草同單硝酸異山梨酯，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+69. Liquorice + Isosorbide dinitrate  (liquorice-isosorbide_dinitrate, status: official)
+
+  English
+  [1] Liquorice and isosorbide dinitrate. Official caution.
+  [2] Health Canada says: Do not use if you are taking heart medications, corticosteroids, stimulant laxatives, or other health products that may contribute electrolyte imbalance.
+  [3] What to do: talk to your doctor before taking liquorice.
+  [4] It may work against your blood pressure or heart medicine.
+  [5] Why this matters for your heart: it may work against your heart medicine.
+  [6] Next: show your doctor. You can say: ‘I take liquorice and isosorbide dinitrate. Can you check if that’s OK for me?’
+
+  中文
+  [1] 甘草同硝酸異山梨酯。官方提醒。
+  [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊心臟藥、類固醇、刺激性瀉藥，或者其他可能引致電解質失衡嘅健康產品，就唔好用。
+  [3] 應該點做：食甘草之前，請先同醫生傾。
+  [4] 甘草可能抵消你嘅降血壓藥或者心臟藥嘅作用。
+  [5] 對心臟有咩影響：可能抵消心臟藥嘅作用。
+  [6] 下一步：俾醫生睇。你可以咁講：『我有食甘草同硝酸異山梨酯，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+70. Liquorice + Glyceryl trinitrate  (liquorice-glyceryl_trinitrate, status: official)
+
+  English
+  [1] Liquorice and glyceryl trinitrate. Official caution.
+  [2] Health Canada says: Do not use if you are taking heart medications, corticosteroids, stimulant laxatives, or other health products that may contribute electrolyte imbalance.
+  [3] What to do: talk to your doctor before taking liquorice.
+  [4] It may work against your blood pressure or heart medicine.
+  [5] Why this matters for your heart: it may work against your heart medicine.
+  [6] Next: show your doctor. You can say: ‘I take liquorice and glyceryl trinitrate. Can you check if that’s OK for me?’
+
+  中文
+  [1] 甘草同硝酸甘油。官方提醒。
+  [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊心臟藥、類固醇、刺激性瀉藥，或者其他可能引致電解質失衡嘅健康產品，就唔好用。
+  [3] 應該點做：食甘草之前，請先同醫生傾。
+  [4] 甘草可能抵消你嘅降血壓藥或者心臟藥嘅作用。
+  [5] 對心臟有咩影響：可能抵消心臟藥嘅作用。
+  [6] 下一步：俾醫生睇。你可以咁講：『我有食甘草同硝酸甘油，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+71. Red yeast rice + Atorvastatin  (red_yeast_rice-atorvastatin, status: high)
 
   English
   [1] Red yeast rice and atorvastatin. High risk.
@@ -358,7 +1143,7 @@ The words on screen are not changed by this script.
   [4] 下一步：俾醫生睇。你可以咁講：『我有食紅麴同阿托伐他汀，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-23. Red yeast rice + Simvastatin  (red_yeast_rice-simvastatin, status: high)
+72. Red yeast rice + Simvastatin  (red_yeast_rice-simvastatin, status: high)
 
   English
   [1] Red yeast rice and simvastatin. High risk.
@@ -373,7 +1158,7 @@ The words on screen are not changed by this script.
   [4] 下一步：俾醫生睇。你可以咁講：『我有食紅麴同辛伐他汀，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-24. Red yeast rice + Rosuvastatin  (red_yeast_rice-rosuvastatin, status: high)
+73. Red yeast rice + Rosuvastatin  (red_yeast_rice-rosuvastatin, status: high)
 
   English
   [1] Red yeast rice and rosuvastatin. High risk.
@@ -388,7 +1173,22 @@ The words on screen are not changed by this script.
   [4] 下一步：俾醫生睇。你可以咁講：『我有食紅麴同瑞舒伐他汀，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-25. Goji + Warfarin  (goji-warfarin, status: high)
+74. Red yeast rice + Ticagrelor  (red_yeast_rice-ticagrelor, status: low)
+
+  English
+  [1] Red yeast rice and ticagrelor. Low risk. Keep an eye on it.
+  [2] What to do: tell your doctor or pharmacist that you take red yeast rice.
+  [3] Why this matters for your heart: higher statin levels in the blood could cause statin side effects.
+  [4] Next: show your doctor. You can say: ‘I take red yeast rice and ticagrelor. Can you check if that’s OK for me?’
+
+  中文
+  [1] 紅麴同替格瑞洛。低度風險。要留意。
+  [2] 應該點做：話俾醫生或者藥劑師知你有食紅麴。
+  [3] 對心臟有咩影響：血液入面嘅他汀水平升高，可能引致他汀類藥物嘅副作用。
+  [4] 下一步：俾醫生睇。你可以咁講：『我有食紅麴同替格瑞洛，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+75. Goji + Warfarin  (goji-warfarin, status: high)
 
   English
   [1] Goji and warfarin. High risk.
@@ -409,7 +1209,7 @@ The words on screen are not changed by this script.
   [7] 下一步：俾醫生睇。你可以咁講：『我有食枸杞同華法林，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-26. Sanqi + Warfarin  (sanqi-warfarin, status: low)
+76. Sanqi + Warfarin  (sanqi-warfarin, status: low)
 
   English
   [1] Sanqi and warfarin. Low risk. Keep an eye on it.
@@ -428,7 +1228,7 @@ The words on screen are not changed by this script.
   [6] 下一步：俾醫生睇。你可以咁講：『我有食三七同華法林，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-27. Sanqi + Aspirin  (sanqi-aspirin, status: moderate)
+77. Sanqi + Aspirin  (sanqi-aspirin, status: moderate)
 
   English
   [1] Sanqi and aspirin. Moderate risk.
@@ -445,7 +1245,7 @@ The words on screen are not changed by this script.
   [5] 下一步：俾醫生睇。你可以咁講：『我有食三七同阿士匹靈，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-28. Sanqi + Clopidogrel  (sanqi-clopidogrel, status: low)
+78. Sanqi + Clopidogrel  (sanqi-clopidogrel, status: low)
 
   English
   [1] Sanqi and clopidogrel. Low risk. Keep an eye on it.
@@ -460,7 +1260,7 @@ The words on screen are not changed by this script.
   [4] 下一步：俾醫生睇。你可以咁講：『我有食三七同氯吡格雷，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-29. Safflower + Warfarin  (safflower-warfarin, status: moderate)
+79. Safflower + Warfarin  (safflower-warfarin, status: moderate)
 
   English
   [1] Safflower and warfarin. Moderate risk.
@@ -479,7 +1279,7 @@ The words on screen are not changed by this script.
   [6] 下一步：俾醫生睇。你可以咁講：『我有食紅花同華法林，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-30. Safflower + Aspirin  (safflower-aspirin, status: low)
+80. Safflower + Aspirin  (safflower-aspirin, status: low)
 
   English
   [1] Safflower and aspirin. Low risk. Keep an eye on it.
@@ -494,7 +1294,7 @@ The words on screen are not changed by this script.
   [4] 下一步：俾醫生睇。你可以咁講：『我有食紅花同阿士匹靈，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-31. Safflower + Clopidogrel  (safflower-clopidogrel, status: low)
+81. Safflower + Clopidogrel  (safflower-clopidogrel, status: low)
 
   English
   [1] Safflower and clopidogrel. Low risk. Keep an eye on it.
@@ -507,3 +1307,224 @@ The words on screen are not changed by this script.
   [2] 應該點做：食紅花之前，請先同醫生或者藥劑師傾。
   [3] 留意有冇唔尋常嘅瘀傷或者出血。
   [4] 下一步：俾醫生睇。你可以咁講：『我有食紅花同氯吡格雷，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+82. Hawthorn + Warfarin  (hawthorn-warfarin, status: low)
+
+  English
+  [1] Hawthorn and warfarin. Low risk. Keep an eye on it.
+  [2] What to do: tell your doctor that you take hawthorn.
+  [3] Ask whether you need a clotting test.
+  [4] Why this matters for your heart: watch for unusual bruising or bleeding.
+  [5] Next: show your doctor. You can say: ‘I take hawthorn and warfarin. Can you check if that’s OK for me?’
+
+  中文
+  [1] 山楂同華法林。低度風險。要留意。
+  [2] 應該點做：話俾醫生知你有食山楂。
+  [3] 問吓需唔需要驗凝血指數。
+  [4] 對心臟有咩影響：留意有冇唔尋常嘅瘀傷或者出血。
+  [5] 下一步：俾醫生睇。你可以咁講：『我有食山楂同華法林，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+83. Hawthorn + Digoxin  (hawthorn-digoxin, status: official)
+
+  English
+  [1] Hawthorn and digoxin. Official caution.
+  [2] Health Canada says: Ask a health care practitioner before use if you are taking cardiac glycosides, e.g., digoxin, or blood pressure or heart medications.
+  [3] What to do: tell your doctor or pharmacist that you take hawthorn, because it can affect some digoxin blood tests.
+  [4] Why this matters for your heart: a wrong result could hide a digoxin level that is too high, and too much digoxin can cause a dangerous heart rhythm.
+  [5] Next: show your doctor. You can say: ‘I take hawthorn and digoxin. Can you check if that’s OK for me?’
+
+  中文
+  [1] 山楂同地高辛。官方提醒。
+  [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊強心苷類藥物，例如地高辛，或者降血壓藥或心臟藥，用之前要先問醫護人員或者醫生。
+  [3] 應該點做：話俾醫生或者藥劑師知你有食山楂，因為山楂可能影響某啲地高辛驗血結果。
+  [4] 對心臟有咩影響：驗血結果唔準，可能睇唔出地高辛過高；地高辛過量可以引致危險嘅心律不正。
+  [5] 下一步：俾醫生睇。你可以咁講：『我有食山楂同地高辛，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+84. Hawthorn + Amlodipine  (hawthorn-amlodipine, status: official)
+
+  English
+  [1] Hawthorn and amlodipine. Official caution.
+  [2] Health Canada says: Ask a health care practitioner before use if you are taking cardiac glycosides, e.g., digoxin, or blood pressure or heart medications.
+  [3] What to do: tell your doctor or pharmacist that you take hawthorn, so they can keep an eye on your blood pressure.
+  [4] Why this matters for your heart: blood pressure may drop a little more than expected.
+  [5] Next: show your doctor. You can say: ‘I take hawthorn and amlodipine. Can you check if that’s OK for me?’
+
+  中文
+  [1] 山楂同氨氯地平。官方提醒。
+  [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊強心苷類藥物，例如地高辛，或者降血壓藥或心臟藥，用之前要先問醫護人員或者醫生。
+  [3] 應該點做：話俾醫生或者藥劑師知你有食山楂，等佢哋留意你嘅血壓。
+  [4] 對心臟有咩影響：血壓可能比預期再低少少。
+  [5] 下一步：俾醫生睇。你可以咁講：『我有食山楂同氨氯地平，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+85. Hawthorn + Furosemide  (hawthorn-furosemide, status: official)
+
+  English
+  [1] Hawthorn and furosemide. Official caution.
+  [2] Health Canada says: Ask a health care practitioner before use if you are taking cardiac glycosides, e.g., digoxin, or blood pressure or heart medications.
+  [3] What to do: tell your doctor or pharmacist that you take hawthorn, so they can keep an eye on your blood pressure.
+  [4] Why this matters for your heart: blood pressure may drop a little more than expected.
+  [5] Next: show your doctor. You can say: ‘I take hawthorn and furosemide. Can you check if that’s OK for me?’
+
+  中文
+  [1] 山楂同呋塞米。官方提醒。
+  [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊強心苷類藥物，例如地高辛，或者降血壓藥或心臟藥，用之前要先問醫護人員或者醫生。
+  [3] 應該點做：話俾醫生或者藥劑師知你有食山楂，等佢哋留意你嘅血壓。
+  [4] 對心臟有咩影響：血壓可能比預期再低少少。
+  [5] 下一步：俾醫生睇。你可以咁講：『我有食山楂同呋塞米，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+86. Hawthorn + Bisoprolol  (hawthorn-bisoprolol, status: official)
+
+  English
+  [1] Hawthorn and bisoprolol. Official caution.
+  [2] Health Canada says: Ask a health care practitioner before use if you are taking cardiac glycosides, e.g., digoxin, or blood pressure or heart medications.
+  [3] What to do: tell your doctor or pharmacist that you take hawthorn, so they can keep an eye on your blood pressure.
+  [4] Why this matters for your heart: blood pressure may drop a little more than expected.
+  [5] Next: show your doctor. You can say: ‘I take hawthorn and bisoprolol. Can you check if that’s OK for me?’
+
+  中文
+  [1] 山楂同比索洛爾。官方提醒。
+  [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊強心苷類藥物，例如地高辛，或者降血壓藥或心臟藥，用之前要先問醫護人員或者醫生。
+  [3] 應該點做：話俾醫生或者藥劑師知你有食山楂，等佢哋留意你嘅血壓。
+  [4] 對心臟有咩影響：血壓可能比預期再低少少。
+  [5] 下一步：俾醫生睇。你可以咁講：『我有食山楂同比索洛爾，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+87. Hawthorn + Metoprolol  (hawthorn-metoprolol, status: official)
+
+  English
+  [1] Hawthorn and metoprolol. Official caution.
+  [2] Health Canada says: Ask a health care practitioner before use if you are taking cardiac glycosides, e.g., digoxin, or blood pressure or heart medications.
+  [3] What to do: tell your doctor or pharmacist that you take hawthorn, so they can keep an eye on your blood pressure.
+  [4] Why this matters for your heart: blood pressure may drop a little more than expected.
+  [5] Next: show your doctor. You can say: ‘I take hawthorn and metoprolol. Can you check if that’s OK for me?’
+
+  中文
+  [1] 山楂同美托洛爾。官方提醒。
+  [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊強心苷類藥物，例如地高辛，或者降血壓藥或心臟藥，用之前要先問醫護人員或者醫生。
+  [3] 應該點做：話俾醫生或者藥劑師知你有食山楂，等佢哋留意你嘅血壓。
+  [4] 對心臟有咩影響：血壓可能比預期再低少少。
+  [5] 下一步：俾醫生睇。你可以咁講：『我有食山楂同美托洛爾，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+88. Hawthorn + Perindopril  (hawthorn-perindopril, status: official)
+
+  English
+  [1] Hawthorn and perindopril. Official caution.
+  [2] Health Canada says: Ask a health care practitioner before use if you are taking cardiac glycosides, e.g., digoxin, or blood pressure or heart medications.
+  [3] What to do: tell your doctor or pharmacist that you take hawthorn, so they can keep an eye on your blood pressure.
+  [4] Why this matters for your heart: blood pressure may drop a little more than expected.
+  [5] Next: show your doctor. You can say: ‘I take hawthorn and perindopril. Can you check if that’s OK for me?’
+
+  中文
+  [1] 山楂同培哚普利。官方提醒。
+  [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊強心苷類藥物，例如地高辛，或者降血壓藥或心臟藥，用之前要先問醫護人員或者醫生。
+  [3] 應該點做：話俾醫生或者藥劑師知你有食山楂，等佢哋留意你嘅血壓。
+  [4] 對心臟有咩影響：血壓可能比預期再低少少。
+  [5] 下一步：俾醫生睇。你可以咁講：『我有食山楂同培哚普利，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+89. Hawthorn + Enalapril  (hawthorn-enalapril, status: official)
+
+  English
+  [1] Hawthorn and enalapril. Official caution.
+  [2] Health Canada says: Ask a health care practitioner before use if you are taking cardiac glycosides, e.g., digoxin, or blood pressure or heart medications.
+  [3] What to do: tell your doctor or pharmacist that you take hawthorn, so they can keep an eye on your blood pressure.
+  [4] Why this matters for your heart: blood pressure may drop a little more than expected.
+  [5] Next: show your doctor. You can say: ‘I take hawthorn and enalapril. Can you check if that’s OK for me?’
+
+  中文
+  [1] 山楂同依那普利。官方提醒。
+  [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊強心苷類藥物，例如地高辛，或者降血壓藥或心臟藥，用之前要先問醫護人員或者醫生。
+  [3] 應該點做：話俾醫生或者藥劑師知你有食山楂，等佢哋留意你嘅血壓。
+  [4] 對心臟有咩影響：血壓可能比預期再低少少。
+  [5] 下一步：俾醫生睇。你可以咁講：『我有食山楂同依那普利，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+90. Hawthorn + Losartan  (hawthorn-losartan, status: official)
+
+  English
+  [1] Hawthorn and losartan. Official caution.
+  [2] Health Canada says: Ask a health care practitioner before use if you are taking cardiac glycosides, e.g., digoxin, or blood pressure or heart medications.
+  [3] What to do: tell your doctor or pharmacist that you take hawthorn, so they can keep an eye on your blood pressure.
+  [4] Why this matters for your heart: blood pressure may drop a little more than expected.
+  [5] Next: show your doctor. You can say: ‘I take hawthorn and losartan. Can you check if that’s OK for me?’
+
+  中文
+  [1] 山楂同氯沙坦。官方提醒。
+  [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊強心苷類藥物，例如地高辛，或者降血壓藥或心臟藥，用之前要先問醫護人員或者醫生。
+  [3] 應該點做：話俾醫生或者藥劑師知你有食山楂，等佢哋留意你嘅血壓。
+  [4] 對心臟有咩影響：血壓可能比預期再低少少。
+  [5] 下一步：俾醫生睇。你可以咁講：『我有食山楂同氯沙坦，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+91. Hawthorn + Valsartan  (hawthorn-valsartan, status: official)
+
+  English
+  [1] Hawthorn and valsartan. Official caution.
+  [2] Health Canada says: Ask a health care practitioner before use if you are taking cardiac glycosides, e.g., digoxin, or blood pressure or heart medications.
+  [3] What to do: tell your doctor or pharmacist that you take hawthorn, so they can keep an eye on your blood pressure.
+  [4] Why this matters for your heart: blood pressure may drop a little more than expected.
+  [5] Next: show your doctor. You can say: ‘I take hawthorn and valsartan. Can you check if that’s OK for me?’
+
+  中文
+  [1] 山楂同纈沙坦。官方提醒。
+  [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊強心苷類藥物，例如地高辛，或者降血壓藥或心臟藥，用之前要先問醫護人員或者醫生。
+  [3] 應該點做：話俾醫生或者藥劑師知你有食山楂，等佢哋留意你嘅血壓。
+  [4] 對心臟有咩影響：血壓可能比預期再低少少。
+  [5] 下一步：俾醫生睇。你可以咁講：『我有食山楂同纈沙坦，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+92. Hawthorn + Isosorbide mononitrate  (hawthorn-isosorbide_mononitrate, status: official)
+
+  English
+  [1] Hawthorn and isosorbide mononitrate. Official caution.
+  [2] Health Canada says: Ask a health care practitioner before use if you are taking cardiac glycosides, e.g., digoxin, or blood pressure or heart medications.
+  [3] What to do: tell your doctor or pharmacist that you take hawthorn, so they can keep an eye on your blood pressure.
+  [4] Why this matters for your heart: blood pressure may drop a little more than expected.
+  [5] Next: show your doctor. You can say: ‘I take hawthorn and isosorbide mononitrate. Can you check if that’s OK for me?’
+
+  中文
+  [1] 山楂同單硝酸異山梨酯。官方提醒。
+  [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊強心苷類藥物，例如地高辛，或者降血壓藥或心臟藥，用之前要先問醫護人員或者醫生。
+  [3] 應該點做：話俾醫生或者藥劑師知你有食山楂，等佢哋留意你嘅血壓。
+  [4] 對心臟有咩影響：血壓可能比預期再低少少。
+  [5] 下一步：俾醫生睇。你可以咁講：『我有食山楂同單硝酸異山梨酯，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+93. Hawthorn + Isosorbide dinitrate  (hawthorn-isosorbide_dinitrate, status: official)
+
+  English
+  [1] Hawthorn and isosorbide dinitrate. Official caution.
+  [2] Health Canada says: Ask a health care practitioner before use if you are taking cardiac glycosides, e.g., digoxin, or blood pressure or heart medications.
+  [3] What to do: tell your doctor or pharmacist that you take hawthorn, so they can keep an eye on your blood pressure.
+  [4] Why this matters for your heart: blood pressure may drop a little more than expected.
+  [5] Next: show your doctor. You can say: ‘I take hawthorn and isosorbide dinitrate. Can you check if that’s OK for me?’
+
+  中文
+  [1] 山楂同硝酸異山梨酯。官方提醒。
+  [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊強心苷類藥物，例如地高辛，或者降血壓藥或心臟藥，用之前要先問醫護人員或者醫生。
+  [3] 應該點做：話俾醫生或者藥劑師知你有食山楂，等佢哋留意你嘅血壓。
+  [4] 對心臟有咩影響：血壓可能比預期再低少少。
+  [5] 下一步：俾醫生睇。你可以咁講：『我有食山楂同硝酸異山梨酯，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+94. Hawthorn + Glyceryl trinitrate  (hawthorn-glyceryl_trinitrate, status: official)
+
+  English
+  [1] Hawthorn and glyceryl trinitrate. Official caution.
+  [2] Health Canada says: Ask a health care practitioner before use if you are taking cardiac glycosides, e.g., digoxin, or blood pressure or heart medications.
+  [3] What to do: tell your doctor or pharmacist that you take hawthorn, so they can keep an eye on your blood pressure.
+  [4] Why this matters for your heart: blood pressure may drop a little more than expected.
+  [5] Next: show your doctor. You can say: ‘I take hawthorn and glyceryl trinitrate. Can you check if that’s OK for me?’
+
+  中文
+  [1] 山楂同硝酸甘油。官方提醒。
+  [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊強心苷類藥物，例如地高辛，或者降血壓藥或心臟藥，用之前要先問醫護人員或者醫生。
+  [3] 應該點做：話俾醫生或者藥劑師知你有食山楂，等佢哋留意你嘅血壓。
+  [4] 對心臟有咩影響：血壓可能比預期再低少少。
+  [5] 下一步：俾醫生睇。你可以咁講：『我有食山楂同硝酸甘油，可唔可以幫我睇吓有冇問題？』

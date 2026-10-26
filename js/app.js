@@ -1109,6 +1109,14 @@
   }
   // Simple: one step at a time, said in words ("Step 2 of 3").
   function stepLine(n) { return el('p', { class: 'step-line', text: t('step_of', { n: n, total: 3 }) }); }
+  // The herb name with the + joined to its last word by a no-break space, so the + never sits
+  // alone on a line (Hawthorn 山楂 / + / Digoxin).
+  function herbWithPlus(herb) {
+    var node = nameNode(herb), last = node.lastElementChild;
+    last.appendChild(document.createTextNode('\u00a0'));
+    last.appendChild(el('span', { class: 'pair-plus', 'aria-hidden': 'true', text: '+' }));
+    return node;
+  }
   function pairHref(r) { return '#/pair/' + r.herb.id + '-' + r.drug.id; }
   function stepsBar(current) {
     var labels = ['nav_check', 'step_results', 'step_details'];
@@ -1238,7 +1246,7 @@
       el('div', { class: 'page-nav' }, [back, homeLink()]),
       full ? stepsBar(3) : stepLine(3),
       el('h1', { tabindex: '-1', class: 'pair-h1' }, [
-        nameNode(r.herb), ' ', el('span', { class: 'pair-plus', 'aria-hidden': 'true', text: '+' }), ' ',
+        herbWithPlus(r.herb), ' ',
         el('span', { class: 'visually-hidden', text: t('and_sr') + ' ' }), nameNode(r.drug)
       ])
     ]));

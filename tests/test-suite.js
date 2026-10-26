@@ -30,9 +30,48 @@
     'ginkgo|amlodipine':         { kind: 'official', statements: ['hc-ginkgo-blood-pressure'] },
     'american_ginseng|digoxin':  { kind: 'official', statements: ['hc-american-ginseng'] },
     'asian_ginseng|digoxin':     { kind: 'official', statements: ['hc-panax-ginseng'] },
-    'liquorice|amlodipine':      { kind: 'official', statements: ['ema-liquorice-blood-pressure'] },
+    'liquorice|amlodipine':      { kind: 'official', statements: ['ema-liquorice-blood-pressure', 'hc-licorice'] },
     'liquorice|furosemide':      { kind: 'official', statements: ['ema-liquorice-electrolytes'] },
-    'liquorice|digoxin':         { kind: 'official', statements: ['ema-liquorice-electrolytes'] }
+    'liquorice|digoxin':         { kind: 'official', statements: ['ema-liquorice-electrolytes'] },
+    // Brief 26 Oct 2026, section 6 (new medicines and hawthorn), quotes verified 26 Oct 2026.
+    'ginkgo|apixaban':           { kind: 'disagree', statements: ['hc-ginkgo-contraindication'] },
+    'ginkgo|rivaroxaban':        { kind: 'disagree', statements: ['hc-ginkgo-contraindication'] },
+    'ginkgo|edoxaban':           { kind: 'disagree', statements: ['hc-ginkgo-contraindication'] },
+    'ginkgo|dabigatran':         { kind: 'disagree', statements: ['hc-ginkgo-contraindication', 'ema-ginkgo-dabigatran'] },
+    'ginkgo|ticagrelor':         { kind: 'disagree', statements: ['hc-ginkgo-contraindication', 'ema-ginkgo-4.5'] },
+    'dong_quai|apixaban':        { kind: 'official', statements: ['hc-dong-quai'] },
+    'dong_quai|rivaroxaban':     { kind: 'official', statements: ['hc-dong-quai'] },
+    'dong_quai|dabigatran':      { kind: 'official', statements: ['hc-dong-quai'] },
+    'dong_quai|edoxaban':        { kind: 'official', statements: ['hc-dong-quai'] },
+    'american_ginseng|apixaban': { kind: 'official', statements: ['hc-american-ginseng'] },
+    'american_ginseng|rivaroxaban': { kind: 'official', statements: ['hc-american-ginseng'] },
+    'american_ginseng|dabigatran': { kind: 'official', statements: ['hc-american-ginseng'] },
+    'american_ginseng|edoxaban': { kind: 'official', statements: ['hc-american-ginseng'] },
+    'asian_ginseng|apixaban':    { kind: 'official', statements: ['hc-panax-ginseng'] },
+    'asian_ginseng|rivaroxaban': { kind: 'official', statements: ['hc-panax-ginseng'] },
+    'asian_ginseng|dabigatran':  { kind: 'official', statements: ['hc-panax-ginseng'] },
+    'asian_ginseng|edoxaban':    { kind: 'official', statements: ['hc-panax-ginseng'] },
+    'liquorice|bisoprolol':      { kind: 'official', statements: ['ema-liquorice-blood-pressure', 'hc-licorice'] },
+    'liquorice|metoprolol':      { kind: 'official', statements: ['ema-liquorice-blood-pressure', 'hc-licorice'] },
+    'liquorice|perindopril':     { kind: 'official', statements: ['ema-liquorice-blood-pressure', 'hc-licorice'] },
+    'liquorice|enalapril':       { kind: 'official', statements: ['ema-liquorice-blood-pressure', 'hc-licorice'] },
+    'liquorice|losartan':        { kind: 'official', statements: ['ema-liquorice-blood-pressure', 'hc-licorice'] },
+    'liquorice|valsartan':       { kind: 'official', statements: ['ema-liquorice-blood-pressure', 'hc-licorice'] },
+    'liquorice|isosorbide_mononitrate': { kind: 'official', statements: ['hc-licorice'] },
+    'liquorice|isosorbide_dinitrate':   { kind: 'official', statements: ['hc-licorice'] },
+    'liquorice|glyceryl_trinitrate':    { kind: 'official', statements: ['hc-licorice'] },
+    'hawthorn|bisoprolol':       { kind: 'official', statements: ['hc-hawthorn'] },
+    'hawthorn|metoprolol':       { kind: 'official', statements: ['hc-hawthorn'] },
+    'hawthorn|perindopril':      { kind: 'official', statements: ['hc-hawthorn'] },
+    'hawthorn|enalapril':        { kind: 'official', statements: ['hc-hawthorn'] },
+    'hawthorn|losartan':         { kind: 'official', statements: ['hc-hawthorn'] },
+    'hawthorn|valsartan':        { kind: 'official', statements: ['hc-hawthorn'] },
+    'hawthorn|amlodipine':       { kind: 'official', statements: ['hc-hawthorn'] },
+    'hawthorn|isosorbide_mononitrate': { kind: 'official', statements: ['hc-hawthorn'] },
+    'hawthorn|isosorbide_dinitrate':   { kind: 'official', statements: ['hc-hawthorn'] },
+    'hawthorn|glyceryl_trinitrate':    { kind: 'official', statements: ['hc-hawthorn'] },
+    'hawthorn|furosemide':       { kind: 'official', statements: ['hc-hawthorn'] },
+    'hawthorn|digoxin':          { kind: 'official', statements: ['hc-hawthorn'] }
   };
   // The regulators' own words, copied from the documents on 18 Oct 2026. Never paraphrase:
   // changing a quote must be a deliberate edit here too, after re-checking the document.
@@ -46,7 +85,12 @@
     'hc-american-ginseng': 'Ask a health care practitioner/health care provider/health care professional/doctor/physician before use if you are taking blood thinners or digoxin (Brinker 2010; Dasgupta et al. 2007; Elmer et al. 2007; Yuan et al. 2004).',
     'hc-panax-ginseng': 'Ask a health care practitioner/health care provider/health care professional/doctor/physician before use if you are taking antidepressant medication, blood thinners or digoxin (Brinker 2010; Lee et al. 2008a; Dasgupta and Reyes 2005; Janetzki and Morreale 1997; Gonzalez-Seijo et al. 1995; Shader and Greenblatt 1988; Jones and Runikis 1987; Shader and Greenblatt 1985).',
     'ema-liquorice-blood-pressure': 'Liquorice root may counteract antihypertensive action of prescribed medications.',
-    'ema-liquorice-electrolytes': 'Not to be used concomitantly with diuretics, cardiac glycosides, corticosteroids, stimulant laxatives or other medications which may aggravate electrolyte imbalance (see section with 4.4).'
+    'ema-liquorice-electrolytes': 'Not to be used concomitantly with diuretics, cardiac glycosides, corticosteroids, stimulant laxatives or other medications which may aggravate electrolyte imbalance (see section with 4.4).',
+    // Copied from the documents on 26 Oct 2026 (brief section 6).
+    'hc-licorice': 'Do not use if you are taking heart medications, corticosteroids, stimulant laxatives, or other health products that may contribute electrolyte imbalance (Brinker 2010; ESCOP 2003; Hoffmann 2003; Blumenthal et al. 2000).',
+    'hc-dong-quai': 'Ask a health care practitioner/health care provider/health care professional/doctor/physician prior to use if you are taking any medications including blood thinners, birth control pills or hormone therapy (NS 2021; Brinker 2010; WHO 2002).',
+    'hc-hawthorn': 'Ask a health care practitioner/health care provider/health care professional/doctor/physician before use if you are taking cardiac glycosides (e.g., digoxin) or blood pressure or heart medications (Brinker 2010; Bradley 2006).',
+    'ema-ginkgo-dabigatran': 'An interaction study with talinolol indicates that G. biloba may inhibit P-glycoprotein at the intestinal level. This may give rise to increased exposure of drugs markedly affected by P-glycoprotein in the intestine such as dabigatran etexilate. Caution is advised if combining G. biloba and dabigatran.'
   };
   // Hospital Authority leaflets for groups of heart medicines (owner-approved 19 Oct 2026), both
   // languages exactly as the HA wrote them. General advice only: never a rating, never an Official caution.
@@ -54,16 +98,17 @@
     'ha-warfarin': { drugs: ['warfarin'],
       en: 'Do not take any Traditional Chinese Medicines (TCM), Proprietary Chinese Medicines, herbal drinks, or food that contains TCM, such as Guilinggao. Many TCM such as ginseng, Dong quai, Danshen, Chishao can interact with warfarin.',
       zh: '不可隨便服用中藥材，中成藥，藥材湯或涼茶，或含中藥成份的食品如龜苓膏，因為很多中藥 ( 如人參、當歸、丹參、赤芍 )，會與「華法林」產生相互作用，影響抗凝血藥的功效。' },
-    'ha-antianginal': { drugs: ['aspirin', 'clopidogrel'],
+    // 26 Oct 2026: new medicines mapped to leaflets by app group (owner).
+    'ha-antianginal': { drugs: ['aspirin', 'clopidogrel', 'ticagrelor', 'isosorbide_mononitrate', 'isosorbide_dinitrate', 'glyceryl_trinitrate'],
       en: 'Consult your doctor before using any other medications, including health supplements, Traditional Chinese Medicine, Proprietary Chinese Medicines and over-the-counter medications.',
       zh: '未經醫生指示，切勿隨便使用其他藥物，包括保健產品、中藥、中成藥或西藥。' },
     'ha-cholesterol': { drugs: ['atorvastatin', 'simvastatin', 'rosuvastatin'],
       en: 'Consult your doctor or pharmacist before using any other medications, including health supplements, Traditional Chinese Medicines, Proprietary Chinese Medicines and over-the-counter medications.',
       zh: '未經醫生或藥劑師指示，切勿隨便使用其他藥物，包括保健產品、中藥、中成藥或西藥。' },
-    'ha-heart-failure-digoxin': { drugs: ['digoxin'],
+    'ha-heart-failure-digoxin': { drugs: ['digoxin', 'bisoprolol'],
       en: 'Do not take any other medications, including health supplements, Traditional Chinese Medicines, Proprietary Chinese Medicines and over-the-counter medications as these may affect the absorption of digoxin. Consult your doctor or pharmacist if necessary.',
       zh: '為避免影響此藥的吸收，令體內含量過高或不足，切勿隨便使用其他藥物，包括保健產品、中藥、中成藥或西藥。如有需要，應先諮詢醫生或藥劑師。' },
-    'ha-antihypertensive': { drugs: ['amlodipine', 'furosemide'],
+    'ha-antihypertensive': { drugs: ['amlodipine', 'furosemide', 'metoprolol', 'perindopril', 'enalapril', 'losartan', 'valsartan'],
       en: 'Consult your doctor or pharmacist before using any other medications, including health supplements, Traditional Chinese Medicines, Proprietary Chinese Medicines and over-the-counter medications.',
       zh: '未經醫生或藥劑師指示，切勿隨便使用其他藥物，包括保健產品、中藥、中成藥或西藥。' }
   };
@@ -102,7 +147,36 @@
     'danshen-atorvastatin':      { risk: 'low',      watch: false, rating_source: 'team' },
     'danshen-amlodipine':        { risk: 'low',      watch: false, rating_source: 'team' },
     'dong_quai-aspirin':         { risk: 'low',      watch: false, rating_source: 'team' },
-    'dong_quai-clopidogrel':     { risk: 'low',      watch: false, rating_source: 'team' }
+    'dong_quai-clopidogrel':     { risk: 'low',      watch: false, rating_source: 'team' },
+    // Brief 26 Oct 2026, section 6.
+    'danshen-doac':              { risk: 'moderate', watch: false, rating_source: 'team' },
+    'danshen-ticagrelor':        { risk: 'low',      watch: true,  rating_source: 'team' },
+    'danshen-beta_blocker':      { risk: 'low',      watch: true,  rating_source: 'team' },
+    'danshen-ace_inhibitor':     { risk: 'low',      watch: true,  rating_source: 'team' },
+    'ginkgo-doac':               { risk: 'low',      watch: true,  rating_source: 'team' },
+    'ginkgo-ticagrelor':         { risk: 'low',      watch: true,  rating_source: 'team' },
+    'american_ginseng-beta_blocker':            { risk: 'none_reported', watch: false, rating_source: 'team' },
+    'american_ginseng-ace_inhibitor':           { risk: 'none_reported', watch: false, rating_source: 'team' },
+    'american_ginseng-arb':                     { risk: 'none_reported', watch: false, rating_source: 'team' },
+    'american_ginseng-calcium_channel_blocker': { risk: 'none_reported', watch: false, rating_source: 'team' },
+    'asian_ginseng-beta_blocker':               { risk: 'none_reported', watch: false, rating_source: 'team' },
+    'asian_ginseng-ace_inhibitor':              { risk: 'none_reported', watch: false, rating_source: 'team' },
+    'asian_ginseng-arb':                        { risk: 'none_reported', watch: false, rating_source: 'team' },
+    'asian_ginseng-calcium_channel_blocker':    { risk: 'none_reported', watch: false, rating_source: 'team' },
+    'liquorice-beta_blocker':    { risk: 'moderate', watch: false, rating_source: 'team' },
+    'liquorice-ace_inhibitor':   { risk: 'moderate', watch: false, rating_source: 'team' },
+    'liquorice-arb':             { risk: 'moderate', watch: false, rating_source: 'team' },
+    'liquorice-calcium_channel_blocker': { risk: 'moderate', watch: false, rating_source: 'team' },
+    'liquorice-nitrate':         { risk: 'moderate', watch: false, rating_source: 'team' },
+    'red_yeast_rice-ticagrelor': { risk: 'low',      watch: true,  rating_source: 'team' },
+    'hawthorn-beta_blocker':     { risk: 'low',      watch: true,  rating_source: 'team' },
+    'hawthorn-ace_inhibitor':    { risk: 'low',      watch: true,  rating_source: 'team' },
+    'hawthorn-arb':              { risk: 'low',      watch: true,  rating_source: 'team' },
+    'hawthorn-calcium_channel_blocker': { risk: 'low', watch: true, rating_source: 'team' },
+    'hawthorn-nitrate':          { risk: 'low',      watch: true,  rating_source: 'team' },
+    'hawthorn-diuretic':         { risk: 'low',      watch: true,  rating_source: 'team' },
+    'hawthorn-digoxin':          { risk: 'low',      watch: true,  rating_source: 'team' },
+    'hawthorn-warfarin':         { risk: 'low',      watch: true,  rating_source: 'team' }
   };
 
   var SEARCH_CASES = [
@@ -334,10 +408,9 @@
       });
       return { pass: bad.length === 0, detail: bad.map(function (r) { return r.herb.id + ' × ' + r.drug.id; }).join('\n') };
     });
-    // Medicines added on 26 Oct have no HA leaflet yet: which leaflet names them must be read first.
-    var AWAITING_HA_LEAFLET = ['apixaban', 'rivaroxaban', 'dabigatran', 'edoxaban', 'ticagrelor', 'bisoprolol', 'metoprolol',
-      'perindopril', 'enalapril', 'losartan', 'valsartan', 'isosorbide_mononitrate', 'isosorbide_dinitrate', 'glyceryl_trinitrate'];
-    check('Safety rules', 'every medicine has HA leaflet advice (except the new ones awaiting a leaflet check)', function () {
+    // No Hospital Authority leaflet we hold names the newer blood thinners (checked 26 Oct 2026).
+    var AWAITING_HA_LEAFLET = ['apixaban', 'rivaroxaban', 'dabigatran', 'edoxaban'];
+    check('Safety rules', 'every medicine has HA leaflet advice (except the newer blood thinners, which no leaflet names)', function () {
       var bad = db.drugs.filter(function (d) { return !lookup.findAdvice(db, d.id) && AWAITING_HA_LEAFLET.indexOf(d.id) === -1; }).map(function (d) { return d.id; });
       return { pass: bad.length === 0, detail: bad.join(', ') };
     });
@@ -539,6 +612,17 @@
     check('Heart focus', 'every medicine belongs to one of the groups', function () {
       var bad = db.drugs.filter(function (d) { return REQUIRED_GROUPS.indexOf(d.group) === -1; }).map(function (d) { return d.id + ' (' + d.group + ')'; });
       return { pass: bad.length === 0, detail: bad.join(', ') };
+    });
+    check('New medicines (26 Oct)', 'liquorice + amlodipine shows Moderate with an Official caution', function () {
+      var r = lookup.checkPairs(db, ['liquorice'], ['amlodipine'])[0];
+      return { pass: r.status === 'official' && !!r.official && !!r.entry && r.entry.risk === 'moderate',
+        detail: r.status + ', team ' + (r.entry && r.entry.risk) };
+    });
+    check('New medicines (26 Oct)', 'danshen + rivaroxaban (and the other newer blood thinners) shows Moderate', function () {
+      var bad = lookup.checkPairs(db, ['danshen'], ['rivaroxaban', 'apixaban', 'dabigatran', 'edoxaban'])
+        .filter(function (r) { return r.status !== 'moderate' || r.official; })
+        .map(function (r) { return r.drug.id + ' → ' + r.status; });
+      return { pass: bad.length === 0, detail: bad.join('\n') };
     });
     check('New medicines (26 Oct)', 'astragalus + warfarin shows the grey "not in our database" card', function () {
       var r = lookup.checkPairs(db, ['astragalus'], ['warfarin'])[0];

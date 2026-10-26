@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-10-20",
+  "last_updated": "2026-10-26",
   "interactions": [
     {
       "id": "danshen-warfarin",
@@ -21,13 +21,34 @@
       "main_source": 1,
       "main_finding_en": "Case report: after taking danshen daily for 2 weeks on a herbalist’s advice, a patient on warfarin had INR rise from 3.0 to over 8.4, with major bleeding into the chest.",
       "main_finding_zh": "病例報告：一位食緊華法林嘅病人聽草藥師建議，每日食丹參，兩個星期之後INR由3.0升到超過8.4，胸腔大量出血。",
-      "evidence_level": ["case_reports", "review", "lab_animal"],
+      "evidence_level": [
+        "case_reports",
+        "review",
+        "lab_animal"
+      ],
       "sources": [
-        { "label": "Yu, Chan & Sanderson. J Intern Med 1997", "url": "https://doi.org/10.1046/j.1365-2796.1997.134137000.x" },
-        { "label": "Izzat et al. Ann Thorac Surg 1998", "url": "https://pubmed.ncbi.nlm.nih.gov/9768962/" },
-        { "label": "Chan. Ann Pharmacother 2001", "url": "https://pubmed.ncbi.nlm.nih.gov/11302416/" },
-        { "label": "Zhuang et al. Front Pharmacol 2021", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8489681/" },
-        { "label": "Hong Kong Hospital Authority: Warfarin – Oral Anticoagulant, patient leaflet (S/N 019Ev10), October 2025", "url": "https://www.ha.org.hk/hadf/Content/uploads/docs/mcfDfgqUQ5320084.pdf", "label_zh": "香港醫院管理局：華法林 (Warfarin) 口服抗凝血藥，病人資料單張（S/N 019Cv10），2025年10月", "url_zh": "https://www.ha.org.hk/hadf/Content/uploads/docs/eGOLcFArB5505364.pdf" }
+        {
+          "label": "Yu, Chan & Sanderson. J Intern Med 1997",
+          "url": "https://doi.org/10.1046/j.1365-2796.1997.134137000.x"
+        },
+        {
+          "label": "Izzat et al. Ann Thorac Surg 1998",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/9768962/"
+        },
+        {
+          "label": "Chan. Ann Pharmacother 2001",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/11302416/"
+        },
+        {
+          "label": "Zhuang et al. Front Pharmacol 2021",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8489681/"
+        },
+        {
+          "label": "Hong Kong Hospital Authority: Warfarin – Oral Anticoagulant, patient leaflet (S/N 019Ev10), October 2025",
+          "url": "https://www.ha.org.hk/hadf/Content/uploads/docs/mcfDfgqUQ5320084.pdf",
+          "label_zh": "香港醫院管理局：華法林 (Warfarin) 口服抗凝血藥，病人資料單張（S/N 019Cv10），2025年10月",
+          "url_zh": "https://www.ha.org.hk/hadf/Content/uploads/docs/eGOLcFArB5505364.pdf"
+        }
       ],
       "zh_reviewed": false
     },
@@ -52,11 +73,25 @@
       "main_source": 0,
       "main_finding_en": "Case report: INR more than doubled after 4 weeks of dong quai.",
       "main_finding_zh": "病例報告：食咗當歸4個星期之後，INR升高超過一倍。",
-      "evidence_level": ["case_reports", "review"],
+      "evidence_level": [
+        "case_reports",
+        "review"
+      ],
       "sources": [
-        { "label": "Page & Lawrence. Pharmacotherapy 1999", "url": "https://pubmed.ncbi.nlm.nih.gov/10417036/" },
-        { "label": "Zhuang et al. Front Pharmacol 2021", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8489681/" },
-        { "label": "Hong Kong Hospital Authority: Warfarin – Oral Anticoagulant, patient leaflet (S/N 019Ev10), October 2025", "url": "https://www.ha.org.hk/hadf/Content/uploads/docs/mcfDfgqUQ5320084.pdf", "label_zh": "香港醫院管理局：華法林 (Warfarin) 口服抗凝血藥，病人資料單張（S/N 019Cv10），2025年10月", "url_zh": "https://www.ha.org.hk/hadf/Content/uploads/docs/eGOLcFArB5505364.pdf" }
+        {
+          "label": "Page & Lawrence. Pharmacotherapy 1999",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/10417036/"
+        },
+        {
+          "label": "Zhuang et al. Front Pharmacol 2021",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8489681/"
+        },
+        {
+          "label": "Hong Kong Hospital Authority: Warfarin – Oral Anticoagulant, patient leaflet (S/N 019Ev10), October 2025",
+          "url": "https://www.ha.org.hk/hadf/Content/uploads/docs/mcfDfgqUQ5320084.pdf",
+          "label_zh": "香港醫院管理局：華法林 (Warfarin) 口服抗凝血藥，病人資料單張（S/N 019Cv10），2025年10月",
+          "url_zh": "https://www.ha.org.hk/hadf/Content/uploads/docs/eGOLcFArB5505364.pdf"
+        }
       ],
       "zh_reviewed": false
     },
@@ -79,10 +114,20 @@
       "main_source": 0,
       "main_finding_en": "Randomised trial in 20 healthy volunteers: American ginseng lowered warfarin’s effect on INR.",
       "main_finding_zh": "隨機對照試驗（20名健康志願者）：花旗參減弱咗華法林對INR嘅作用。",
-      "evidence_level": ["human_trial"],
+      "evidence_level": [
+        "human_trial"
+      ],
       "sources": [
-        { "label": "Yuan et al. Ann Intern Med 2004", "url": "https://pubmed.ncbi.nlm.nih.gov/15238367/" },
-        { "label": "Hospital Authority patient talk (undated): 當中藥師遇見藥劑師, slide 19", "url": "https://www.smartpatient.ha.org.hk/docs/default-source/default-document-library/%E7%95%B6%E4%B8%AD%E8%97%A5%E5%B8%AB%E9%81%87%E8%A6%8B%E8%97%A5%E5%8A%91%E5%B8%AB_final(for-posting).pdf?sfvrsn=eb4858f8_1", "label_zh": "醫院管理局病人講座（無日期）：當中藥師遇見藥劑師，第19頁", "url_zh": "https://www.smartpatient.ha.org.hk/docs/default-source/default-document-library/%E7%95%B6%E4%B8%AD%E8%97%A5%E5%B8%AB%E9%81%87%E8%A6%8B%E8%97%A5%E5%8A%91%E5%B8%AB_final(for-posting).pdf?sfvrsn=eb4858f8_1" }
+        {
+          "label": "Yuan et al. Ann Intern Med 2004",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/15238367/"
+        },
+        {
+          "label": "Hospital Authority patient talk (undated): 當中藥師遇見藥劑師, slide 19",
+          "url": "https://www.smartpatient.ha.org.hk/docs/default-source/default-document-library/%E7%95%B6%E4%B8%AD%E8%97%A5%E5%B8%AB%E9%81%87%E8%A6%8B%E8%97%A5%E5%8A%91%E5%B8%AB_final(for-posting).pdf?sfvrsn=eb4858f8_1",
+          "label_zh": "醫院管理局病人講座（無日期）：當中藥師遇見藥劑師，第19頁",
+          "url_zh": "https://www.smartpatient.ha.org.hk/docs/default-source/default-document-library/%E7%95%B6%E4%B8%AD%E8%97%A5%E5%B8%AB%E9%81%87%E8%A6%8B%E8%97%A5%E5%8A%91%E5%B8%AB_final(for-posting).pdf?sfvrsn=eb4858f8_1"
+        }
       ],
       "zh_reviewed": false
     },
@@ -105,10 +150,19 @@
       "main_source": 0,
       "main_finding_en": "Review: clinical trials found that Asian ginseng did not change INR.",
       "main_finding_zh": "文獻綜述：臨床試驗發現人參冇改變INR。",
-      "evidence_level": ["human_trial", "case_reports"],
+      "evidence_level": [
+        "human_trial",
+        "case_reports"
+      ],
       "sources": [
-        { "label": "Lim et al. Singapore Med J 2018", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5966631/" },
-        { "label": "Leonard. Interactions Between Herbs and Cardiac Medications. Cleveland Clinic Pharmacotherapy Update, Mar/Apr 2001", "url": "https://www.clevelandclinicmeded.com/medicalpubs/pharmacy/MarApr2001/herbs_cardiac.htm" }
+        {
+          "label": "Lim et al. Singapore Med J 2018",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5966631/"
+        },
+        {
+          "label": "Leonard. Interactions Between Herbs and Cardiac Medications. Cleveland Clinic Pharmacotherapy Update, Mar/Apr 2001",
+          "url": "https://www.clevelandclinicmeded.com/medicalpubs/pharmacy/MarApr2001/herbs_cardiac.htm"
+        }
       ],
       "zh_reviewed": false
     },
@@ -131,9 +185,15 @@
       "main_source": 0,
       "main_finding_en": "Review: case reports have linked ginkgo to bleeding, but controlled trials found no significant effect on clotting tests.",
       "main_finding_zh": "文獻綜述：有病例報告將銀杏同出血拉上關係，但有對照嘅臨床試驗發現凝血測試冇明顯影響。",
-      "evidence_level": ["case_reports", "human_trial"],
+      "evidence_level": [
+        "case_reports",
+        "human_trial"
+      ],
       "sources": [
-        { "label": "Lim et al. Singapore Med J 2018", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5966631/" }
+        {
+          "label": "Lim et al. Singapore Med J 2018",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5966631/"
+        }
       ],
       "zh_reviewed": false
     },
@@ -156,9 +216,15 @@
       "main_source": 0,
       "main_finding_en": "Review: a controlled trial of ginkgo with aspirin found no significant increase in bleeding.",
       "main_finding_zh": "文獻綜述：一項銀杏同阿士匹靈一齊用嘅對照試驗，未有發現出血明顯增加。",
-      "evidence_level": ["case_reports", "human_trial"],
+      "evidence_level": [
+        "case_reports",
+        "human_trial"
+      ],
       "sources": [
-        { "label": "Lim et al. Singapore Med J 2018", "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5966631/" }
+        {
+          "label": "Lim et al. Singapore Med J 2018",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5966631/"
+        }
       ],
       "zh_reviewed": false
     },
@@ -181,10 +247,18 @@
       "main_source": 1,
       "main_finding_en": "Interaction table: lists liquorice with digoxin (loss of serum potassium) and with cardiac glycosides, the group digoxin belongs to (strengthens their action).",
       "main_finding_zh": "藥物相互作用表：列出甘草同地高辛（血鉀流失），同埋同強心苷類藥物，即係地高辛所屬嘅類別（加強藥效）。",
-      "evidence_level": ["review"],
+      "evidence_level": [
+        "review"
+      ],
       "sources": [
-        { "label": "Yoshino et al. Front Nutr 2021", "url": "https://pubmed.ncbi.nlm.nih.gov/34604277/" },
-        { "label": "Leonard. Interactions Between Herbs and Cardiac Medications. Cleveland Clinic Pharmacotherapy Update, Mar/Apr 2001", "url": "https://www.clevelandclinicmeded.com/medicalpubs/pharmacy/MarApr2001/herbs_cardiac.htm" }
+        {
+          "label": "Yoshino et al. Front Nutr 2021",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/34604277/"
+        },
+        {
+          "label": "Leonard. Interactions Between Herbs and Cardiac Medications. Cleveland Clinic Pharmacotherapy Update, Mar/Apr 2001",
+          "url": "https://www.clevelandclinicmeded.com/medicalpubs/pharmacy/MarApr2001/herbs_cardiac.htm"
+        }
       ],
       "zh_reviewed": false
     },
@@ -207,10 +281,18 @@
       "main_source": 1,
       "main_finding_en": "Interaction table: liquorice with potassium-losing diuretics has an additive effect.",
       "main_finding_zh": "相互作用表：甘草同排鉀利尿藥一齊用，效果會疊加。",
-      "evidence_level": ["review"],
+      "evidence_level": [
+        "review"
+      ],
       "sources": [
-        { "label": "Yoshino et al. Front Nutr 2021", "url": "https://pubmed.ncbi.nlm.nih.gov/34604277/" },
-        { "label": "Leonard. Interactions Between Herbs and Cardiac Medications. Cleveland Clinic Pharmacotherapy Update, Mar/Apr 2001", "url": "https://www.clevelandclinicmeded.com/medicalpubs/pharmacy/MarApr2001/herbs_cardiac.htm" }
+        {
+          "label": "Yoshino et al. Front Nutr 2021",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/34604277/"
+        },
+        {
+          "label": "Leonard. Interactions Between Herbs and Cardiac Medications. Cleveland Clinic Pharmacotherapy Update, Mar/Apr 2001",
+          "url": "https://www.clevelandclinicmeded.com/medicalpubs/pharmacy/MarApr2001/herbs_cardiac.htm"
+        }
       ],
       "zh_reviewed": false
     },
@@ -233,9 +315,14 @@
       "main_source": 0,
       "main_finding_en": "US NIH (NCCIH): monacolin K is structurally identical to lovastatin, and products containing it can have the same potential side effects and the same types of drug interactions as statin drugs.",
       "main_finding_zh": "美國國家衞生研究院（NCCIH）：莫納可林K同洛伐他汀結構上一樣，含有佢嘅產品可能有同他汀類藥物一樣嘅副作用同藥物相互作用。",
-      "evidence_level": ["official_guidance"],
+      "evidence_level": [
+        "official_guidance"
+      ],
       "sources": [
-        { "label": "US NIH National Center for Complementary and Integrative Health (NCCIH): Red yeast rice", "url": "https://www.nccih.nih.gov/health/red-yeast-rice" }
+        {
+          "label": "US NIH National Center for Complementary and Integrative Health (NCCIH): Red yeast rice",
+          "url": "https://www.nccih.nih.gov/health/red-yeast-rice"
+        }
       ],
       "zh_reviewed": false
     },
@@ -292,7 +379,12 @@
           "label": "Memorial Sloan Kettering: About Herbs, Lycium",
           "url": "https://www.mskcc.org/cancer-care/integrative-medicine/herbs/lycium"
         },
-        { "label": "Hong Kong Hospital Authority: Warfarin – Oral Anticoagulant, patient leaflet (S/N 019Ev10), October 2025", "url": "https://www.ha.org.hk/hadf/Content/uploads/docs/mcfDfgqUQ5320084.pdf", "label_zh": "香港醫院管理局：華法林 (Warfarin) 口服抗凝血藥，病人資料單張（S/N 019Cv10），2025年10月", "url_zh": "https://www.ha.org.hk/hadf/Content/uploads/docs/eGOLcFArB5505364.pdf" }
+        {
+          "label": "Hong Kong Hospital Authority: Warfarin – Oral Anticoagulant, patient leaflet (S/N 019Ev10), October 2025",
+          "url": "https://www.ha.org.hk/hadf/Content/uploads/docs/mcfDfgqUQ5320084.pdf",
+          "label_zh": "香港醫院管理局：華法林 (Warfarin) 口服抗凝血藥，病人資料單張（S/N 019Cv10），2025年10月",
+          "url_zh": "https://www.ha.org.hk/hadf/Content/uploads/docs/eGOLcFArB5505364.pdf"
+        }
       ],
       "zh_reviewed": false
     },
@@ -333,7 +425,12 @@
           "label": "Liu et al. Xenobiotica 2024",
           "url": "https://pubmed.ncbi.nlm.nih.gov/38445636/"
         },
-        { "label": "Hong Kong Hospital Authority: Warfarin – Oral Anticoagulant, patient leaflet (S/N 019Ev10), October 2025", "url": "https://www.ha.org.hk/hadf/Content/uploads/docs/mcfDfgqUQ5320084.pdf", "label_zh": "香港醫院管理局：華法林 (Warfarin) 口服抗凝血藥，病人資料單張（S/N 019Cv10），2025年10月", "url_zh": "https://www.ha.org.hk/hadf/Content/uploads/docs/eGOLcFArB5505364.pdf" }
+        {
+          "label": "Hong Kong Hospital Authority: Warfarin – Oral Anticoagulant, patient leaflet (S/N 019Ev10), October 2025",
+          "url": "https://www.ha.org.hk/hadf/Content/uploads/docs/mcfDfgqUQ5320084.pdf",
+          "label_zh": "香港醫院管理局：華法林 (Warfarin) 口服抗凝血藥，病人資料單張（S/N 019Cv10），2025年10月",
+          "url_zh": "https://www.ha.org.hk/hadf/Content/uploads/docs/eGOLcFArB5505364.pdf"
+        }
       ],
       "zh_reviewed": false
     },
@@ -818,6 +915,975 @@
         {
           "label": "Davis's Drug Guide: dong quai",
           "url": "https://www.unboundmedicine.com/washingtonmanual/view/Davis-Drug-Guide/51239/all/dong_quai"
+        }
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "danshen-doac",
+      "herb_id": "danshen",
+      "drug_class": "doac",
+      "risk": "moderate",
+      "watch": false,
+      "rating_source": "team",
+      "effect_en": "A study in people found bleeding was more likely after they started taking danshen with an oral anticoagulant, including the newer ones. A lab study found danshen slows how the body breaks down rivaroxaban.",
+      "effect_zh": "一項人類研究發現，開始一齊用丹參同口服抗凝血藥（包括新一代藥物）之後，出血機會較高。一項實驗室研究發現，丹參會減慢身體分解利伐沙班。",
+      "heart_impact_en": "Bleeding, including in the gut or brain.",
+      "heart_impact_zh": "出血，包括腸胃或者腦出血。",
+      "why_en": "Danshen can slow blood clotting on its own, and a lab study found it slows the breakdown of rivaroxaban.",
+      "why_zh": "丹參本身可能令血液較難凝固，而實驗室研究發現丹參會減慢身體分解利伐沙班。",
+      "why_pro_en": "Liao et al., Ther Adv Drug Saf 2026 (self-controlled case series, Chang Gung Research Database, Taiwan; 146 patients with bleeding events among 525 co-prescribed danshen and an oral anticoagulant; anticoagulants: warfarin, dabigatran, rivaroxaban, apixaban, edoxaban): adjusted incidence rate ratio for any bleeding 3.98 (95% CI 3.29-4.77) at days 1-14 and 3.99 (3.23-4.79) at days 15-28; intracranial haemorrhage 3.59 (2.79-5.03) and gastrointestinal bleeding 3.79 (2.95-4.53) at days 1-14; results consistent across anticoagulant types. Wang et al., Front Pharmacol 2022: a danshen tablet inhibited rivaroxaban metabolism in rat and human liver microsomes (mixed inhibition). EMA assessment report 2022: danshen may increase the risk of bleeding when taken with anticoagulants.",
+      "action_en": "Talk to your doctor before taking danshen with this medicine, and tell them about any unusual bruising or bleeding.",
+      "action_zh": "同呢隻藥一齊食丹參之前，請先同醫生傾；如果有唔尋常嘅瘀傷或者出血，要話俾醫生知。",
+      "main_source": 0,
+      "main_finding_en": "A 2026 study of 146 people in Taiwan who bled while taking an oral anticoagulant, including the newer ones, found bleeding (including in the gut and brain) was more likely in the first 28 days after they started taking both.",
+      "main_finding_zh": "2026年一項台灣研究，對象係146個食緊口服抗凝血藥（包括新一代藥物）期間出血嘅人，發現開始一齊用兩樣之後嘅頭28日，出血（包括腸胃同腦出血）機會較高。",
+      "evidence_level": [
+        "case_reports",
+        "review",
+        "lab_animal"
+      ],
+      "sources": [
+        {
+          "label": "Liao et al. Ther Adv Drug Saf 2026",
+          "url": "https://doi.org/10.1177/20420986261446497"
+        },
+        {
+          "label": "Wang et al. Front Pharmacol 2022",
+          "url": "https://doi.org/10.3389/fphar.2022.950525"
+        },
+        {
+          "label": "EMA HMPC. Assessment report on Salvia miltiorrhiza (EMA/HMPC/509932/2019), 2022",
+          "url": "https://www.ema.europa.eu/en/documents/herbal-report/assessment-report-salvia-miltiorrhiza-bunge-radix-et-rhizoma_en.pdf"
+        }
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "danshen-ticagrelor",
+      "herb_id": "danshen",
+      "drug_id": "ticagrelor",
+      "risk": "low",
+      "watch": true,
+      "rating_source": "team",
+      "effect_en": "An EMA report says danshen may increase the risk of bleeding with anti-platelet medicines such as clopidogrel. The report does not name ticagrelor.",
+      "effect_zh": "歐洲藥品管理局一份報告指，丹參同抗血小板藥（例如氯吡格雷）一齊用可能增加出血風險。報告冇提到替格瑞洛。",
+      "heart_impact_en": "Watch for unusual bruising or bleeding.",
+      "heart_impact_zh": "留意有冇唔尋常嘅瘀傷或者出血。",
+      "why_en": "The report says danshen may raise bleeding risk when taken with other medicines that can also cause bleeding, such as anti-platelet medicines.",
+      "why_zh": "報告指，丹參同其他都會引致出血嘅藥物（例如抗血小板藥）一齊用，可能增加出血風險。",
+      "why_pro_en": "EMA assessment report on Salvia miltiorrhiza (2022): \"Danshen may increase the risk of bleeding when taken with other drugs sharing this side effect. Examples include aspirin, anticoagulants such as warfarin or heparin, anti-platelet drugs like clopidogrel and non-steroidal anti-inflammatory drugs such as ibuprofen or naproxen.\" Ticagrelor is not named.",
+      "action_en": "Talk to your doctor or pharmacist before using danshen.",
+      "action_zh": "食丹參之前，請先同醫生或者藥劑師傾。",
+      "main_source": 0,
+      "main_finding_en": "EMA assessment report: danshen may increase bleeding risk with anti-platelet medicines such as clopidogrel.",
+      "main_finding_zh": "歐洲藥品管理局評估報告：丹參同抗血小板藥（例如氯吡格雷）一齊用可能增加出血風險。",
+      "evidence_level": [
+        "review"
+      ],
+      "sources": [
+        {
+          "label": "EMA HMPC. Assessment report on Salvia miltiorrhiza (EMA/HMPC/509932/2019), 2022",
+          "url": "https://www.ema.europa.eu/en/documents/herbal-report/assessment-report-salvia-miltiorrhiza-bunge-radix-et-rhizoma_en.pdf"
+        }
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "danshen-beta_blocker",
+      "herb_id": "danshen",
+      "drug_class": "beta_blocker",
+      "risk": "low",
+      "watch": true,
+      "rating_source": "team",
+      "effect_en": "An EMA report says blood pressure may drop too far when danshen is taken with beta-blockers, and the heartbeat may become too slow. The report quotes other published literature, not a study of these medicines.",
+      "effect_zh": "歐洲藥品管理局一份報告指，丹參同β受體阻斷劑一齊用，血壓可能會跌得太低，心跳亦可能變得太慢。報告係引用其他文獻，唔係直接研究呢啲藥。",
+      "heart_impact_en": "Blood pressure may drop too low, and the heartbeat may become too slow.",
+      "heart_impact_zh": "血壓可能跌得太低，心跳亦可能變得太慢。",
+      "why_en": "The report lists low blood pressure among the side effects reported with danshen.",
+      "why_zh": "報告列出低血壓係丹參嘅已報告副作用之一。",
+      "why_pro_en": "EMA assessment report on Salvia miltiorrhiza (2022): \"Excessive hypotension may occur if taken with antihypertensives, such as ACE-inhibitors like captopril or lisinopril and beta-blockers like atenolol or propranolol. In combination with beta-blockers bradycardia may result (Hu et al., 2005).\" The report quotes other literature; it does not describe a study of the medicines in this app.",
+      "action_en": "Tell your doctor or pharmacist that you take danshen, so they can keep an eye on your blood pressure and heart rate.",
+      "action_zh": "話俾醫生或者藥劑師知你有食丹參，等佢哋留意你嘅血壓同心跳。",
+      "main_source": 0,
+      "main_finding_en": "EMA assessment report (quoting other literature): danshen with beta-blockers may lower blood pressure too much and slow the heartbeat.",
+      "main_finding_zh": "歐洲藥品管理局評估報告（引用其他文獻）：丹參同β受體阻斷劑一齊用，可能令血壓過低同心跳過慢。",
+      "evidence_level": [
+        "review"
+      ],
+      "sources": [
+        {
+          "label": "EMA HMPC. Assessment report on Salvia miltiorrhiza (EMA/HMPC/509932/2019), 2022",
+          "url": "https://www.ema.europa.eu/en/documents/herbal-report/assessment-report-salvia-miltiorrhiza-bunge-radix-et-rhizoma_en.pdf"
+        }
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "danshen-ace_inhibitor",
+      "herb_id": "danshen",
+      "drug_class": "ace_inhibitor",
+      "risk": "low",
+      "watch": true,
+      "rating_source": "team",
+      "effect_en": "An EMA report says blood pressure may drop too far when danshen is taken with ACE inhibitors. The report quotes other published literature, not a study of these medicines.",
+      "effect_zh": "歐洲藥品管理局一份報告指，丹參同ACE抑制劑一齊用，血壓可能會跌得太低。報告係引用其他文獻，唔係直接研究呢啲藥。",
+      "heart_impact_en": "Blood pressure may drop too low.",
+      "heart_impact_zh": "血壓可能跌得太低。",
+      "why_en": "The report lists low blood pressure among the side effects reported with danshen.",
+      "why_zh": "報告列出低血壓係丹參嘅已報告副作用之一。",
+      "why_pro_en": "EMA assessment report on Salvia miltiorrhiza (2022): \"Excessive hypotension may occur if taken with antihypertensives, such as ACE-inhibitors like captopril or lisinopril and beta-blockers like atenolol or propranolol. In combination with beta-blockers bradycardia may result (Hu et al., 2005).\" The report quotes other literature; it does not describe a study of the medicines in this app.",
+      "action_en": "Tell your doctor or pharmacist that you take danshen, so they can keep an eye on your blood pressure.",
+      "action_zh": "話俾醫生或者藥劑師知你有食丹參，等佢哋留意你嘅血壓。",
+      "main_source": 0,
+      "main_finding_en": "EMA assessment report (quoting other literature): danshen with ACE inhibitors may lower blood pressure too much.",
+      "main_finding_zh": "歐洲藥品管理局評估報告（引用其他文獻）：丹參同ACE抑制劑一齊用，可能令血壓過低。",
+      "evidence_level": [
+        "review"
+      ],
+      "sources": [
+        {
+          "label": "EMA HMPC. Assessment report on Salvia miltiorrhiza (EMA/HMPC/509932/2019), 2022",
+          "url": "https://www.ema.europa.eu/en/documents/herbal-report/assessment-report-salvia-miltiorrhiza-bunge-radix-et-rhizoma_en.pdf"
+        }
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "ginkgo-doac",
+      "herb_id": "ginkgo",
+      "drug_class": "doac",
+      "risk": "low",
+      "watch": true,
+      "rating_source": "team",
+      "effect_en": "A study in 41 healthy people found a ginkgo leaf extract (EGb 761) did not change rivaroxaban levels or how well it worked. The other newer blood thinners were not tested.",
+      "effect_zh": "一項研究以41個健康人士做測試，發現銀杏葉提取物（EGb 761）冇改變利伐沙班喺血液入面嘅水平，亦冇影響佢嘅藥效。其他新一代薄血藥未有測試。",
+      "heart_impact_en": "Watch for unusual bruising or bleeding.",
+      "heart_impact_zh": "留意有冇唔尋常嘅瘀傷或者出血。",
+      "why_en": null,
+      "why_zh": null,
+      "why_pro_en": "Hoerr et al., Front Pharmacol 2022: single-centre, two-period, fixed-sequence trial in 41 healthy subjects; single and repeated doses of EGb 761 did not affect the pharmacokinetics or pharmacodynamics (anti-Factor Xa activity) of rivaroxaban. EMA ginkgo monograph, section 4.5: G. biloba may inhibit intestinal P-glycoprotein, which may increase exposure to dabigatran etexilate; \"Caution is advised if combining G. biloba and dabigatran.\"",
+      "action_en": "Mention it to your doctor. Watch for unusual bruising or bleeding.",
+      "action_zh": "話俾醫生知。留意有冇唔尋常嘅瘀傷或者出血。",
+      "main_source": 0,
+      "main_finding_en": "Study in healthy people: a ginkgo leaf extract did not change rivaroxaban levels or its effect on clotting.",
+      "main_finding_zh": "健康人士研究：銀杏葉提取物冇改變利伐沙班嘅血藥水平，亦冇影響佢嘅抗凝血效果。",
+      "evidence_level": [
+        "human_trial",
+        "official_guidance"
+      ],
+      "sources": [
+        {
+          "label": "Hoerr et al. Front Pharmacol 2022",
+          "url": "https://doi.org/10.3389/fphar.2022.868843"
+        },
+        {
+          "label": "Health Canada. Ginkgo monograph, 2025",
+          "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/dbImages/mono_ginkgo-biloba_english.pdf"
+        },
+        {
+          "label": "EMA HMPC. EU herbal monograph on ginkgo leaf (EMA/HMPC/321097/2012), 2015",
+          "url": "https://www.ema.europa.eu/en/documents/herbal-monograph/final-european-union-herbal-monograph-ginkgo-biloba-l-folium_en.pdf"
+        }
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "ginkgo-ticagrelor",
+      "herb_id": "ginkgo",
+      "drug_id": "ticagrelor",
+      "risk": "low",
+      "watch": true,
+      "rating_source": "team",
+      "effect_en": "The EMA says ginkgo may influence the effect of anti-platelet medicines. No study of ginkgo with ticagrelor is cited.",
+      "effect_zh": "歐洲藥品管理局指，銀杏可能影響抗血小板藥嘅效果。冇引用銀杏同替格瑞洛嘅研究。",
+      "heart_impact_en": "Watch for unusual bruising or bleeding.",
+      "heart_impact_zh": "留意有冇唔尋常嘅瘀傷或者出血。",
+      "why_en": null,
+      "why_zh": null,
+      "why_pro_en": null,
+      "action_en": "Mention it to your doctor. Watch for unusual bruising or bleeding.",
+      "action_zh": "話俾醫生知。留意有冇唔尋常嘅瘀傷或者出血。",
+      "main_source": 0,
+      "main_finding_en": "EMA ginkgo monograph: the effect of anti-platelet medicines taken with ginkgo may be influenced.",
+      "main_finding_zh": "歐洲藥品管理局銀杏專論：抗血小板藥同銀杏一齊用，效果可能會受到影響。",
+      "evidence_level": [
+        "official_guidance"
+      ],
+      "sources": [
+        {
+          "label": "EMA HMPC. EU herbal monograph on ginkgo leaf (EMA/HMPC/321097/2012), 2015",
+          "url": "https://www.ema.europa.eu/en/documents/herbal-monograph/final-european-union-herbal-monograph-ginkgo-biloba-l-folium_en.pdf"
+        },
+        {
+          "label": "Health Canada. Ginkgo monograph, 2025",
+          "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/dbImages/mono_ginkgo-biloba_english.pdf"
+        }
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "american_ginseng-beta_blocker",
+      "herb_id": "american_ginseng",
+      "drug_class": "beta_blocker",
+      "risk": "none_reported",
+      "watch": false,
+      "rating_source": "team",
+      "effect_en": "A review of 17 trials found ginseng had no significant effect on blood pressure, and a trial in people with high blood pressure, most of them on blood pressure medicines, found North American ginseng had a neutral effect.",
+      "effect_zh": "一項綜合17個研究嘅分析發現，人參類對血壓冇顯著影響；另一項針對高血壓人士（大部分有食降血壓藥）嘅研究發現，北美花旗參對血壓冇影響。",
+      "heart_impact_en": "No effect on blood pressure was found in these studies.",
+      "heart_impact_zh": "呢啲研究冇發現對血壓有影響。",
+      "why_en": null,
+      "why_zh": null,
+      "why_pro_en": "Komishon et al., J Hum Hypertens 2016 (abstract): systematic review and meta-analysis of 17 randomised controlled trials (n=1381): \"No significant effect of ginseng on SBP, DBP and MAP was found.\" Stavro et al., Hypertension 2005 (abstract): randomised, double-blind trial in 16 hypertensive individuals (13 on antihypertensives); North American ginseng exerted a neutral effect on blood pressure. Neither study looked at this medicine class specifically.",
+      "action_en": "Tell your doctor or pharmacist that you take American ginseng.",
+      "action_zh": "話俾醫生或者藥劑師知你有食花旗參。",
+      "main_source": 0,
+      "main_finding_en": "Review of 17 trials: ginseng had no significant effect on blood pressure.",
+      "main_finding_zh": "綜合17個研究嘅分析：人參類對血壓冇顯著影響。",
+      "evidence_level": [
+        "review",
+        "human_trial"
+      ],
+      "sources": [
+        {
+          "label": "Komishon et al. J Hum Hypertens 2016 (abstract)",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/27074879/"
+        },
+        {
+          "label": "Stavro et al. Hypertension 2005 (abstract)",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/15998708/"
+        }
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "american_ginseng-ace_inhibitor",
+      "herb_id": "american_ginseng",
+      "drug_class": "ace_inhibitor",
+      "risk": "none_reported",
+      "watch": false,
+      "rating_source": "team",
+      "effect_en": "A review of 17 trials found ginseng had no significant effect on blood pressure, and a trial in people with high blood pressure, most of them on blood pressure medicines, found North American ginseng had a neutral effect.",
+      "effect_zh": "一項綜合17個研究嘅分析發現，人參類對血壓冇顯著影響；另一項針對高血壓人士（大部分有食降血壓藥）嘅研究發現，北美花旗參對血壓冇影響。",
+      "heart_impact_en": "No effect on blood pressure was found in these studies.",
+      "heart_impact_zh": "呢啲研究冇發現對血壓有影響。",
+      "why_en": null,
+      "why_zh": null,
+      "why_pro_en": "Komishon et al., J Hum Hypertens 2016 (abstract): systematic review and meta-analysis of 17 randomised controlled trials (n=1381): \"No significant effect of ginseng on SBP, DBP and MAP was found.\" Stavro et al., Hypertension 2005 (abstract): randomised, double-blind trial in 16 hypertensive individuals (13 on antihypertensives); North American ginseng exerted a neutral effect on blood pressure. Neither study looked at this medicine class specifically.",
+      "action_en": "Tell your doctor or pharmacist that you take American ginseng.",
+      "action_zh": "話俾醫生或者藥劑師知你有食花旗參。",
+      "main_source": 0,
+      "main_finding_en": "Review of 17 trials: ginseng had no significant effect on blood pressure.",
+      "main_finding_zh": "綜合17個研究嘅分析：人參類對血壓冇顯著影響。",
+      "evidence_level": [
+        "review",
+        "human_trial"
+      ],
+      "sources": [
+        {
+          "label": "Komishon et al. J Hum Hypertens 2016 (abstract)",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/27074879/"
+        },
+        {
+          "label": "Stavro et al. Hypertension 2005 (abstract)",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/15998708/"
+        }
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "american_ginseng-arb",
+      "herb_id": "american_ginseng",
+      "drug_class": "arb",
+      "risk": "none_reported",
+      "watch": false,
+      "rating_source": "team",
+      "effect_en": "A review of 17 trials found ginseng had no significant effect on blood pressure, and a trial in people with high blood pressure, most of them on blood pressure medicines, found North American ginseng had a neutral effect.",
+      "effect_zh": "一項綜合17個研究嘅分析發現，人參類對血壓冇顯著影響；另一項針對高血壓人士（大部分有食降血壓藥）嘅研究發現，北美花旗參對血壓冇影響。",
+      "heart_impact_en": "No effect on blood pressure was found in these studies.",
+      "heart_impact_zh": "呢啲研究冇發現對血壓有影響。",
+      "why_en": null,
+      "why_zh": null,
+      "why_pro_en": "Komishon et al., J Hum Hypertens 2016 (abstract): systematic review and meta-analysis of 17 randomised controlled trials (n=1381): \"No significant effect of ginseng on SBP, DBP and MAP was found.\" Stavro et al., Hypertension 2005 (abstract): randomised, double-blind trial in 16 hypertensive individuals (13 on antihypertensives); North American ginseng exerted a neutral effect on blood pressure. Neither study looked at this medicine class specifically.",
+      "action_en": "Tell your doctor or pharmacist that you take American ginseng.",
+      "action_zh": "話俾醫生或者藥劑師知你有食花旗參。",
+      "main_source": 0,
+      "main_finding_en": "Review of 17 trials: ginseng had no significant effect on blood pressure.",
+      "main_finding_zh": "綜合17個研究嘅分析：人參類對血壓冇顯著影響。",
+      "evidence_level": [
+        "review",
+        "human_trial"
+      ],
+      "sources": [
+        {
+          "label": "Komishon et al. J Hum Hypertens 2016 (abstract)",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/27074879/"
+        },
+        {
+          "label": "Stavro et al. Hypertension 2005 (abstract)",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/15998708/"
+        }
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "american_ginseng-calcium_channel_blocker",
+      "herb_id": "american_ginseng",
+      "drug_class": "calcium_channel_blocker",
+      "risk": "none_reported",
+      "watch": false,
+      "rating_source": "team",
+      "effect_en": "A review of 17 trials found ginseng had no significant effect on blood pressure, and a trial in people with high blood pressure, most of them on blood pressure medicines, found North American ginseng had a neutral effect.",
+      "effect_zh": "一項綜合17個研究嘅分析發現，人參類對血壓冇顯著影響；另一項針對高血壓人士（大部分有食降血壓藥）嘅研究發現，北美花旗參對血壓冇影響。",
+      "heart_impact_en": "No effect on blood pressure was found in these studies.",
+      "heart_impact_zh": "呢啲研究冇發現對血壓有影響。",
+      "why_en": null,
+      "why_zh": null,
+      "why_pro_en": "Komishon et al., J Hum Hypertens 2016 (abstract): systematic review and meta-analysis of 17 randomised controlled trials (n=1381): \"No significant effect of ginseng on SBP, DBP and MAP was found.\" Stavro et al., Hypertension 2005 (abstract): randomised, double-blind trial in 16 hypertensive individuals (13 on antihypertensives); North American ginseng exerted a neutral effect on blood pressure. Neither study looked at this medicine class specifically.",
+      "action_en": "Tell your doctor or pharmacist that you take American ginseng.",
+      "action_zh": "話俾醫生或者藥劑師知你有食花旗參。",
+      "main_source": 0,
+      "main_finding_en": "Review of 17 trials: ginseng had no significant effect on blood pressure.",
+      "main_finding_zh": "綜合17個研究嘅分析：人參類對血壓冇顯著影響。",
+      "evidence_level": [
+        "review",
+        "human_trial"
+      ],
+      "sources": [
+        {
+          "label": "Komishon et al. J Hum Hypertens 2016 (abstract)",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/27074879/"
+        },
+        {
+          "label": "Stavro et al. Hypertension 2005 (abstract)",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/15998708/"
+        }
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "asian_ginseng-beta_blocker",
+      "herb_id": "asian_ginseng",
+      "drug_class": "beta_blocker",
+      "risk": "none_reported",
+      "watch": false,
+      "rating_source": "team",
+      "effect_en": "A review of 17 trials found ginseng had no significant effect on blood pressure.",
+      "effect_zh": "一項綜合17個研究嘅分析發現，人參類對血壓冇顯著影響。",
+      "heart_impact_en": "No effect on blood pressure was found in these studies.",
+      "heart_impact_zh": "呢啲研究冇發現對血壓有影響。",
+      "why_en": null,
+      "why_zh": null,
+      "why_pro_en": "Komishon et al., J Hum Hypertens 2016 (abstract): systematic review and meta-analysis of 17 randomised controlled trials (n=1381) of ginseng (genus Panax): \"No significant effect of ginseng on SBP, DBP and MAP was found.\" The review did not look at this medicine class specifically.",
+      "action_en": "Tell your doctor or pharmacist that you take Asian ginseng.",
+      "action_zh": "話俾醫生或者藥劑師知你有食人參。",
+      "main_source": 0,
+      "main_finding_en": "Review of 17 trials: ginseng had no significant effect on blood pressure.",
+      "main_finding_zh": "綜合17個研究嘅分析：人參類對血壓冇顯著影響。",
+      "evidence_level": [
+        "review"
+      ],
+      "sources": [
+        {
+          "label": "Komishon et al. J Hum Hypertens 2016 (abstract)",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/27074879/"
+        }
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "asian_ginseng-ace_inhibitor",
+      "herb_id": "asian_ginseng",
+      "drug_class": "ace_inhibitor",
+      "risk": "none_reported",
+      "watch": false,
+      "rating_source": "team",
+      "effect_en": "A review of 17 trials found ginseng had no significant effect on blood pressure.",
+      "effect_zh": "一項綜合17個研究嘅分析發現，人參類對血壓冇顯著影響。",
+      "heart_impact_en": "No effect on blood pressure was found in these studies.",
+      "heart_impact_zh": "呢啲研究冇發現對血壓有影響。",
+      "why_en": null,
+      "why_zh": null,
+      "why_pro_en": "Komishon et al., J Hum Hypertens 2016 (abstract): systematic review and meta-analysis of 17 randomised controlled trials (n=1381) of ginseng (genus Panax): \"No significant effect of ginseng on SBP, DBP and MAP was found.\" The review did not look at this medicine class specifically.",
+      "action_en": "Tell your doctor or pharmacist that you take Asian ginseng.",
+      "action_zh": "話俾醫生或者藥劑師知你有食人參。",
+      "main_source": 0,
+      "main_finding_en": "Review of 17 trials: ginseng had no significant effect on blood pressure.",
+      "main_finding_zh": "綜合17個研究嘅分析：人參類對血壓冇顯著影響。",
+      "evidence_level": [
+        "review"
+      ],
+      "sources": [
+        {
+          "label": "Komishon et al. J Hum Hypertens 2016 (abstract)",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/27074879/"
+        }
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "asian_ginseng-arb",
+      "herb_id": "asian_ginseng",
+      "drug_class": "arb",
+      "risk": "none_reported",
+      "watch": false,
+      "rating_source": "team",
+      "effect_en": "A review of 17 trials found ginseng had no significant effect on blood pressure.",
+      "effect_zh": "一項綜合17個研究嘅分析發現，人參類對血壓冇顯著影響。",
+      "heart_impact_en": "No effect on blood pressure was found in these studies.",
+      "heart_impact_zh": "呢啲研究冇發現對血壓有影響。",
+      "why_en": null,
+      "why_zh": null,
+      "why_pro_en": "Komishon et al., J Hum Hypertens 2016 (abstract): systematic review and meta-analysis of 17 randomised controlled trials (n=1381) of ginseng (genus Panax): \"No significant effect of ginseng on SBP, DBP and MAP was found.\" The review did not look at this medicine class specifically.",
+      "action_en": "Tell your doctor or pharmacist that you take Asian ginseng.",
+      "action_zh": "話俾醫生或者藥劑師知你有食人參。",
+      "main_source": 0,
+      "main_finding_en": "Review of 17 trials: ginseng had no significant effect on blood pressure.",
+      "main_finding_zh": "綜合17個研究嘅分析：人參類對血壓冇顯著影響。",
+      "evidence_level": [
+        "review"
+      ],
+      "sources": [
+        {
+          "label": "Komishon et al. J Hum Hypertens 2016 (abstract)",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/27074879/"
+        }
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "asian_ginseng-calcium_channel_blocker",
+      "herb_id": "asian_ginseng",
+      "drug_class": "calcium_channel_blocker",
+      "risk": "none_reported",
+      "watch": false,
+      "rating_source": "team",
+      "effect_en": "A review of 17 trials found ginseng had no significant effect on blood pressure.",
+      "effect_zh": "一項綜合17個研究嘅分析發現，人參類對血壓冇顯著影響。",
+      "heart_impact_en": "No effect on blood pressure was found in these studies.",
+      "heart_impact_zh": "呢啲研究冇發現對血壓有影響。",
+      "why_en": null,
+      "why_zh": null,
+      "why_pro_en": "Komishon et al., J Hum Hypertens 2016 (abstract): systematic review and meta-analysis of 17 randomised controlled trials (n=1381) of ginseng (genus Panax): \"No significant effect of ginseng on SBP, DBP and MAP was found.\" The review did not look at this medicine class specifically.",
+      "action_en": "Tell your doctor or pharmacist that you take Asian ginseng.",
+      "action_zh": "話俾醫生或者藥劑師知你有食人參。",
+      "main_source": 0,
+      "main_finding_en": "Review of 17 trials: ginseng had no significant effect on blood pressure.",
+      "main_finding_zh": "綜合17個研究嘅分析：人參類對血壓冇顯著影響。",
+      "evidence_level": [
+        "review"
+      ],
+      "sources": [
+        {
+          "label": "Komishon et al. J Hum Hypertens 2016 (abstract)",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/27074879/"
+        }
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "liquorice-beta_blocker",
+      "herb_id": "liquorice",
+      "drug_class": "beta_blocker",
+      "risk": "moderate",
+      "watch": false,
+      "rating_source": "team",
+      "effect_en": "Liquorice can raise blood pressure, and the EMA says it may work against blood pressure medicines.",
+      "effect_zh": "甘草可能令血壓上升，歐洲藥品管理局指佢可能抵消降血壓藥嘅作用。",
+      "heart_impact_en": "Your blood pressure may not be as well controlled.",
+      "heart_impact_zh": "你嘅血壓可能冇咁受控。",
+      "why_en": "Liquorice contains glycyrrhizic acid, which a review of 8 trials found raised blood pressure.",
+      "why_zh": "甘草含有甘草酸，一項綜合8個研究嘅分析發現甘草酸會令血壓上升。",
+      "why_pro_en": "Wu et al., Nutrients 2024: meta-analysis of 8 RCTs (541 participants); interventions with glycyrrhizic acid as the main component increased SBP (WMD 3.48 mmHg, 95% CI 2.74-4.21) and DBP (WMD 1.27 mmHg, 0.76-1.78); interventions dominated by licorice flavonoids had no significant effect. EMA liquorice monograph (2026), section 4.5: \"Liquorice root may counteract antihypertensive action of prescribed medications.\" Health Canada licorice monograph (2024): \"Do not use if you are taking heart medications…\"",
+      "action_en": "Talk to your doctor before taking liquorice. It may work against your blood pressure or heart medicine.",
+      "action_zh": "食甘草之前，請先同醫生傾。甘草可能抵消你嘅降血壓藥或者心臟藥嘅作用。",
+      "main_source": 0,
+      "main_finding_en": "Review of 8 trials: liquorice products based on glycyrrhizic acid raised blood pressure (on average by 3.5 mmHg systolic).",
+      "main_finding_zh": "綜合8個研究嘅分析：以甘草酸為主嘅甘草產品會令血壓上升（上壓平均高3.5毫米水銀柱）。",
+      "evidence_level": [
+        "review",
+        "official_guidance"
+      ],
+      "sources": [
+        {
+          "label": "Wu et al. Nutrients 2024",
+          "url": "https://doi.org/10.3390/nu16213768"
+        },
+        {
+          "label": "EMA HMPC. EU herbal monograph on liquorice root, Revision 1 (EMA/HMPC/108399/2024), 2026",
+          "url": "https://www.ema.europa.eu/en/documents/herbal-monograph/final-european-union-herbal-monograph-glycyrrhiza-glabra-l-glycyrrhiza-inflata-bat-glycyrrhiza-uralensis-fisch-radix-revision-1_en.pdf"
+        },
+        {
+          "label": "Health Canada. Licorice monograph, 2024",
+          "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/dbImages/mono_licorice_english.pdf"
+        }
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "liquorice-ace_inhibitor",
+      "herb_id": "liquorice",
+      "drug_class": "ace_inhibitor",
+      "risk": "moderate",
+      "watch": false,
+      "rating_source": "team",
+      "effect_en": "Liquorice can raise blood pressure, and the EMA says it may work against blood pressure medicines.",
+      "effect_zh": "甘草可能令血壓上升，歐洲藥品管理局指佢可能抵消降血壓藥嘅作用。",
+      "heart_impact_en": "Your blood pressure may not be as well controlled.",
+      "heart_impact_zh": "你嘅血壓可能冇咁受控。",
+      "why_en": "Liquorice contains glycyrrhizic acid, which a review of 8 trials found raised blood pressure.",
+      "why_zh": "甘草含有甘草酸，一項綜合8個研究嘅分析發現甘草酸會令血壓上升。",
+      "why_pro_en": "Wu et al., Nutrients 2024: meta-analysis of 8 RCTs (541 participants); interventions with glycyrrhizic acid as the main component increased SBP (WMD 3.48 mmHg, 95% CI 2.74-4.21) and DBP (WMD 1.27 mmHg, 0.76-1.78); interventions dominated by licorice flavonoids had no significant effect. EMA liquorice monograph (2026), section 4.5: \"Liquorice root may counteract antihypertensive action of prescribed medications.\" Health Canada licorice monograph (2024): \"Do not use if you are taking heart medications…\"",
+      "action_en": "Talk to your doctor before taking liquorice. It may work against your blood pressure or heart medicine.",
+      "action_zh": "食甘草之前，請先同醫生傾。甘草可能抵消你嘅降血壓藥或者心臟藥嘅作用。",
+      "main_source": 0,
+      "main_finding_en": "Review of 8 trials: liquorice products based on glycyrrhizic acid raised blood pressure (on average by 3.5 mmHg systolic).",
+      "main_finding_zh": "綜合8個研究嘅分析：以甘草酸為主嘅甘草產品會令血壓上升（上壓平均高3.5毫米水銀柱）。",
+      "evidence_level": [
+        "review",
+        "official_guidance"
+      ],
+      "sources": [
+        {
+          "label": "Wu et al. Nutrients 2024",
+          "url": "https://doi.org/10.3390/nu16213768"
+        },
+        {
+          "label": "EMA HMPC. EU herbal monograph on liquorice root, Revision 1 (EMA/HMPC/108399/2024), 2026",
+          "url": "https://www.ema.europa.eu/en/documents/herbal-monograph/final-european-union-herbal-monograph-glycyrrhiza-glabra-l-glycyrrhiza-inflata-bat-glycyrrhiza-uralensis-fisch-radix-revision-1_en.pdf"
+        },
+        {
+          "label": "Health Canada. Licorice monograph, 2024",
+          "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/dbImages/mono_licorice_english.pdf"
+        }
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "liquorice-arb",
+      "herb_id": "liquorice",
+      "drug_class": "arb",
+      "risk": "moderate",
+      "watch": false,
+      "rating_source": "team",
+      "effect_en": "Liquorice can raise blood pressure, and the EMA says it may work against blood pressure medicines.",
+      "effect_zh": "甘草可能令血壓上升，歐洲藥品管理局指佢可能抵消降血壓藥嘅作用。",
+      "heart_impact_en": "Your blood pressure may not be as well controlled.",
+      "heart_impact_zh": "你嘅血壓可能冇咁受控。",
+      "why_en": "Liquorice contains glycyrrhizic acid, which a review of 8 trials found raised blood pressure.",
+      "why_zh": "甘草含有甘草酸，一項綜合8個研究嘅分析發現甘草酸會令血壓上升。",
+      "why_pro_en": "Wu et al., Nutrients 2024: meta-analysis of 8 RCTs (541 participants); interventions with glycyrrhizic acid as the main component increased SBP (WMD 3.48 mmHg, 95% CI 2.74-4.21) and DBP (WMD 1.27 mmHg, 0.76-1.78); interventions dominated by licorice flavonoids had no significant effect. EMA liquorice monograph (2026), section 4.5: \"Liquorice root may counteract antihypertensive action of prescribed medications.\" Health Canada licorice monograph (2024): \"Do not use if you are taking heart medications…\"",
+      "action_en": "Talk to your doctor before taking liquorice. It may work against your blood pressure or heart medicine.",
+      "action_zh": "食甘草之前，請先同醫生傾。甘草可能抵消你嘅降血壓藥或者心臟藥嘅作用。",
+      "main_source": 0,
+      "main_finding_en": "Review of 8 trials: liquorice products based on glycyrrhizic acid raised blood pressure (on average by 3.5 mmHg systolic).",
+      "main_finding_zh": "綜合8個研究嘅分析：以甘草酸為主嘅甘草產品會令血壓上升（上壓平均高3.5毫米水銀柱）。",
+      "evidence_level": [
+        "review",
+        "official_guidance"
+      ],
+      "sources": [
+        {
+          "label": "Wu et al. Nutrients 2024",
+          "url": "https://doi.org/10.3390/nu16213768"
+        },
+        {
+          "label": "EMA HMPC. EU herbal monograph on liquorice root, Revision 1 (EMA/HMPC/108399/2024), 2026",
+          "url": "https://www.ema.europa.eu/en/documents/herbal-monograph/final-european-union-herbal-monograph-glycyrrhiza-glabra-l-glycyrrhiza-inflata-bat-glycyrrhiza-uralensis-fisch-radix-revision-1_en.pdf"
+        },
+        {
+          "label": "Health Canada. Licorice monograph, 2024",
+          "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/dbImages/mono_licorice_english.pdf"
+        }
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "liquorice-calcium_channel_blocker",
+      "herb_id": "liquorice",
+      "drug_class": "calcium_channel_blocker",
+      "risk": "moderate",
+      "watch": false,
+      "rating_source": "team",
+      "effect_en": "Liquorice can raise blood pressure, and the EMA says it may work against blood pressure medicines.",
+      "effect_zh": "甘草可能令血壓上升，歐洲藥品管理局指佢可能抵消降血壓藥嘅作用。",
+      "heart_impact_en": "Your blood pressure may not be as well controlled.",
+      "heart_impact_zh": "你嘅血壓可能冇咁受控。",
+      "why_en": "Liquorice contains glycyrrhizic acid, which a review of 8 trials found raised blood pressure.",
+      "why_zh": "甘草含有甘草酸，一項綜合8個研究嘅分析發現甘草酸會令血壓上升。",
+      "why_pro_en": "Wu et al., Nutrients 2024: meta-analysis of 8 RCTs (541 participants); interventions with glycyrrhizic acid as the main component increased SBP (WMD 3.48 mmHg, 95% CI 2.74-4.21) and DBP (WMD 1.27 mmHg, 0.76-1.78); interventions dominated by licorice flavonoids had no significant effect. EMA liquorice monograph (2026), section 4.5: \"Liquorice root may counteract antihypertensive action of prescribed medications.\" Health Canada licorice monograph (2024): \"Do not use if you are taking heart medications…\"",
+      "action_en": "Talk to your doctor before taking liquorice. It may work against your blood pressure or heart medicine.",
+      "action_zh": "食甘草之前，請先同醫生傾。甘草可能抵消你嘅降血壓藥或者心臟藥嘅作用。",
+      "main_source": 0,
+      "main_finding_en": "Review of 8 trials: liquorice products based on glycyrrhizic acid raised blood pressure (on average by 3.5 mmHg systolic).",
+      "main_finding_zh": "綜合8個研究嘅分析：以甘草酸為主嘅甘草產品會令血壓上升（上壓平均高3.5毫米水銀柱）。",
+      "evidence_level": [
+        "review",
+        "official_guidance"
+      ],
+      "sources": [
+        {
+          "label": "Wu et al. Nutrients 2024",
+          "url": "https://doi.org/10.3390/nu16213768"
+        },
+        {
+          "label": "EMA HMPC. EU herbal monograph on liquorice root, Revision 1 (EMA/HMPC/108399/2024), 2026",
+          "url": "https://www.ema.europa.eu/en/documents/herbal-monograph/final-european-union-herbal-monograph-glycyrrhiza-glabra-l-glycyrrhiza-inflata-bat-glycyrrhiza-uralensis-fisch-radix-revision-1_en.pdf"
+        },
+        {
+          "label": "Health Canada. Licorice monograph, 2024",
+          "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/dbImages/mono_licorice_english.pdf"
+        }
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "liquorice-nitrate",
+      "herb_id": "liquorice",
+      "drug_class": "nitrate",
+      "risk": "moderate",
+      "watch": false,
+      "rating_source": "team",
+      "effect_en": "Liquorice can raise blood pressure, and Health Canada says not to use it if you are taking heart medicines.",
+      "effect_zh": "甘草可能令血壓上升，加拿大衞生部指如果你食緊心臟藥就唔好用。",
+      "heart_impact_en": "It may work against your heart medicine.",
+      "heart_impact_zh": "可能抵消心臟藥嘅作用。",
+      "why_en": "Liquorice contains glycyrrhizic acid, which a review of 8 trials found raised blood pressure.",
+      "why_zh": "甘草含有甘草酸，一項綜合8個研究嘅分析發現甘草酸會令血壓上升。",
+      "why_pro_en": "Wu et al., Nutrients 2024: meta-analysis of 8 RCTs (541 participants); interventions with glycyrrhizic acid as the main component increased SBP (WMD 3.48 mmHg, 95% CI 2.74-4.21) and DBP (WMD 1.27 mmHg, 0.76-1.78); interventions dominated by licorice flavonoids had no significant effect. EMA liquorice monograph (2026), section 4.5: \"Liquorice root may counteract antihypertensive action of prescribed medications.\" Health Canada licorice monograph (2024): \"Do not use if you are taking heart medications…\"",
+      "action_en": "Talk to your doctor before taking liquorice. It may work against your blood pressure or heart medicine.",
+      "action_zh": "食甘草之前，請先同醫生傾。甘草可能抵消你嘅降血壓藥或者心臟藥嘅作用。",
+      "main_source": 0,
+      "main_finding_en": "Review of 8 trials: liquorice products based on glycyrrhizic acid raised blood pressure (on average by 3.5 mmHg systolic).",
+      "main_finding_zh": "綜合8個研究嘅分析：以甘草酸為主嘅甘草產品會令血壓上升（上壓平均高3.5毫米水銀柱）。",
+      "evidence_level": [
+        "review",
+        "official_guidance"
+      ],
+      "sources": [
+        {
+          "label": "Wu et al. Nutrients 2024",
+          "url": "https://doi.org/10.3390/nu16213768"
+        },
+        {
+          "label": "Health Canada. Licorice monograph, 2024",
+          "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/dbImages/mono_licorice_english.pdf"
+        }
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "red_yeast_rice-ticagrelor",
+      "herb_id": "red_yeast_rice",
+      "drug_id": "ticagrelor",
+      "risk": "low",
+      "watch": true,
+      "rating_source": "team",
+      "effect_en": "Red yeast rice contains monacolin K, the active ingredient in the statin lovastatin. The ticagrelor product information says ticagrelor raises simvastatin levels and may have a similar effect on lovastatin.",
+      "effect_zh": "紅麴含有莫納可林K（monacolin K），即係他汀類藥物「洛伐他汀」嘅有效成分。替格瑞洛嘅藥物資料指，替格瑞洛會令辛伐他汀水平上升，對洛伐他汀可能有類似影響。",
+      "heart_impact_en": "Higher statin levels in the blood could cause statin side effects.",
+      "heart_impact_zh": "血液入面嘅他汀水平升高，可能引致他汀類藥物嘅副作用。",
+      "why_en": "This is based on drug information, not a study of red yeast rice with ticagrelor.",
+      "why_zh": "呢個係根據藥物資料推斷，唔係直接研究紅麴同替格瑞洛。",
+      "why_pro_en": "Brilique (ticagrelor) EMA product information, section 4.5: co-administration with simvastatin increased simvastatin Cmax by 81% and AUC by 56%; \"Ticagrelor may have similar effect on lovastatin. The concomitant use of ticagrelor with doses of simvastatin or lovastatin greater than 40 mg is not recommended.\" Memorial Sloan Kettering (2023): red yeast rice supplements contain variable amounts of monacolin K, the active ingredient in lovastatin. Based on drug information, not a direct study.",
+      "action_en": "Tell your doctor or pharmacist that you take red yeast rice.",
+      "action_zh": "話俾醫生或者藥劑師知你有食紅麴。",
+      "main_source": 0,
+      "main_finding_en": "Ticagrelor product information: ticagrelor may have a similar effect on lovastatin as on simvastatin; use with more than 40 mg of either is not recommended.",
+      "main_finding_zh": "替格瑞洛藥物資料：替格瑞洛對洛伐他汀可能有同辛伐他汀類似嘅影響；唔建議同每日超過40毫克嘅辛伐他汀或洛伐他汀一齊用。",
+      "evidence_level": [
+        "official_guidance",
+        "review"
+      ],
+      "sources": [
+        {
+          "label": "EMA. Brilique (ticagrelor) product information, section 4.5",
+          "url": "https://www.ema.europa.eu/en/documents/product-information/brilique-epar-product-information_en.pdf"
+        },
+        {
+          "label": "Memorial Sloan Kettering. About Herbs: Red yeast rice (updated 2023)",
+          "url": "https://www.mskcc.org/cancer-care/integrative-medicine/herbs/red-yeast-rice"
+        }
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "hawthorn-beta_blocker",
+      "herb_id": "hawthorn",
+      "drug_class": "beta_blocker",
+      "risk": "low",
+      "watch": true,
+      "rating_source": "team",
+      "effect_en": "In a trial of people with diabetes, most of them taking blood pressure medicines, hawthorn lowered diastolic blood pressure slightly and no herb–drug interaction was found.",
+      "effect_zh": "一項針對糖尿病人士（大部分有食降血壓藥）嘅研究發現，山楂令下壓輕微下降，冇發現草藥同藥物有相互作用。",
+      "heart_impact_en": "Blood pressure may drop a little more than expected.",
+      "heart_impact_zh": "血壓可能比預期再低少少。",
+      "why_en": "Hawthorn may lower blood pressure slightly.",
+      "why_zh": "山楂可能令血壓輕微下降。",
+      "why_pro_en": "Walker et al., Br J Gen Pract 2006: randomised controlled trial in people with type 2 diabetes, 71% taking hypotensive drugs; the hawthorn group had a greater reduction in diastolic blood pressure (P = 0.035); \"No herb–drug interaction was found\". Health Canada hawthorn monograph (2026): \"Ask a health care practitioner/health care provider/health care professional/doctor/physician before use if you are taking cardiac glycosides (e.g., digoxin) or blood pressure or heart medications.\"",
+      "action_en": "Tell your doctor or pharmacist that you take hawthorn, so they can keep an eye on your blood pressure.",
+      "action_zh": "話俾醫生或者藥劑師知你有食山楂，等佢哋留意你嘅血壓。",
+      "main_source": 0,
+      "main_finding_en": "Randomised trial in people with diabetes taking prescription drugs: “No herb–drug interaction was found.”",
+      "main_finding_zh": "隨機對照試驗（糖尿病患者，有食處方藥）：冇發現草藥同藥物有相互作用。",
+      "evidence_level": [
+        "human_trial",
+        "official_guidance"
+      ],
+      "sources": [
+        {
+          "label": "Walker et al. Br J Gen Pract 2006",
+          "url": "https://bjgp.org/content/56/527/437"
+        },
+        {
+          "label": "Health Canada. Hawthorn monograph, 2026",
+          "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/atReq?atid=crataegus.monogyna&lang=eng"
+        }
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "hawthorn-ace_inhibitor",
+      "herb_id": "hawthorn",
+      "drug_class": "ace_inhibitor",
+      "risk": "low",
+      "watch": true,
+      "rating_source": "team",
+      "effect_en": "In a trial of people with diabetes, most of them taking blood pressure medicines, hawthorn lowered diastolic blood pressure slightly and no herb–drug interaction was found.",
+      "effect_zh": "一項針對糖尿病人士（大部分有食降血壓藥）嘅研究發現，山楂令下壓輕微下降，冇發現草藥同藥物有相互作用。",
+      "heart_impact_en": "Blood pressure may drop a little more than expected.",
+      "heart_impact_zh": "血壓可能比預期再低少少。",
+      "why_en": "Hawthorn may lower blood pressure slightly.",
+      "why_zh": "山楂可能令血壓輕微下降。",
+      "why_pro_en": "Walker et al., Br J Gen Pract 2006: randomised controlled trial in people with type 2 diabetes, 71% taking hypotensive drugs; the hawthorn group had a greater reduction in diastolic blood pressure (P = 0.035); \"No herb–drug interaction was found\". Health Canada hawthorn monograph (2026): \"Ask a health care practitioner/health care provider/health care professional/doctor/physician before use if you are taking cardiac glycosides (e.g., digoxin) or blood pressure or heart medications.\"",
+      "action_en": "Tell your doctor or pharmacist that you take hawthorn, so they can keep an eye on your blood pressure.",
+      "action_zh": "話俾醫生或者藥劑師知你有食山楂，等佢哋留意你嘅血壓。",
+      "main_source": 0,
+      "main_finding_en": "Randomised trial in people with diabetes taking prescription drugs: “No herb–drug interaction was found.”",
+      "main_finding_zh": "隨機對照試驗（糖尿病患者，有食處方藥）：冇發現草藥同藥物有相互作用。",
+      "evidence_level": [
+        "human_trial",
+        "official_guidance"
+      ],
+      "sources": [
+        {
+          "label": "Walker et al. Br J Gen Pract 2006",
+          "url": "https://bjgp.org/content/56/527/437"
+        },
+        {
+          "label": "Health Canada. Hawthorn monograph, 2026",
+          "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/atReq?atid=crataegus.monogyna&lang=eng"
+        }
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "hawthorn-arb",
+      "herb_id": "hawthorn",
+      "drug_class": "arb",
+      "risk": "low",
+      "watch": true,
+      "rating_source": "team",
+      "effect_en": "In a trial of people with diabetes, most of them taking blood pressure medicines, hawthorn lowered diastolic blood pressure slightly and no herb–drug interaction was found.",
+      "effect_zh": "一項針對糖尿病人士（大部分有食降血壓藥）嘅研究發現，山楂令下壓輕微下降，冇發現草藥同藥物有相互作用。",
+      "heart_impact_en": "Blood pressure may drop a little more than expected.",
+      "heart_impact_zh": "血壓可能比預期再低少少。",
+      "why_en": "Hawthorn may lower blood pressure slightly.",
+      "why_zh": "山楂可能令血壓輕微下降。",
+      "why_pro_en": "Walker et al., Br J Gen Pract 2006: randomised controlled trial in people with type 2 diabetes, 71% taking hypotensive drugs; the hawthorn group had a greater reduction in diastolic blood pressure (P = 0.035); \"No herb–drug interaction was found\". Health Canada hawthorn monograph (2026): \"Ask a health care practitioner/health care provider/health care professional/doctor/physician before use if you are taking cardiac glycosides (e.g., digoxin) or blood pressure or heart medications.\"",
+      "action_en": "Tell your doctor or pharmacist that you take hawthorn, so they can keep an eye on your blood pressure.",
+      "action_zh": "話俾醫生或者藥劑師知你有食山楂，等佢哋留意你嘅血壓。",
+      "main_source": 0,
+      "main_finding_en": "Randomised trial in people with diabetes taking prescription drugs: “No herb–drug interaction was found.”",
+      "main_finding_zh": "隨機對照試驗（糖尿病患者，有食處方藥）：冇發現草藥同藥物有相互作用。",
+      "evidence_level": [
+        "human_trial",
+        "official_guidance"
+      ],
+      "sources": [
+        {
+          "label": "Walker et al. Br J Gen Pract 2006",
+          "url": "https://bjgp.org/content/56/527/437"
+        },
+        {
+          "label": "Health Canada. Hawthorn monograph, 2026",
+          "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/atReq?atid=crataegus.monogyna&lang=eng"
+        }
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "hawthorn-calcium_channel_blocker",
+      "herb_id": "hawthorn",
+      "drug_class": "calcium_channel_blocker",
+      "risk": "low",
+      "watch": true,
+      "rating_source": "team",
+      "effect_en": "In a trial of people with diabetes, most of them taking blood pressure medicines, hawthorn lowered diastolic blood pressure slightly and no herb–drug interaction was found.",
+      "effect_zh": "一項針對糖尿病人士（大部分有食降血壓藥）嘅研究發現，山楂令下壓輕微下降，冇發現草藥同藥物有相互作用。",
+      "heart_impact_en": "Blood pressure may drop a little more than expected.",
+      "heart_impact_zh": "血壓可能比預期再低少少。",
+      "why_en": "Hawthorn may lower blood pressure slightly.",
+      "why_zh": "山楂可能令血壓輕微下降。",
+      "why_pro_en": "Walker et al., Br J Gen Pract 2006: randomised controlled trial in people with type 2 diabetes, 71% taking hypotensive drugs; the hawthorn group had a greater reduction in diastolic blood pressure (P = 0.035); \"No herb–drug interaction was found\". Health Canada hawthorn monograph (2026): \"Ask a health care practitioner/health care provider/health care professional/doctor/physician before use if you are taking cardiac glycosides (e.g., digoxin) or blood pressure or heart medications.\"",
+      "action_en": "Tell your doctor or pharmacist that you take hawthorn, so they can keep an eye on your blood pressure.",
+      "action_zh": "話俾醫生或者藥劑師知你有食山楂，等佢哋留意你嘅血壓。",
+      "main_source": 0,
+      "main_finding_en": "Randomised trial in people with diabetes taking prescription drugs: “No herb–drug interaction was found.”",
+      "main_finding_zh": "隨機對照試驗（糖尿病患者，有食處方藥）：冇發現草藥同藥物有相互作用。",
+      "evidence_level": [
+        "human_trial",
+        "official_guidance"
+      ],
+      "sources": [
+        {
+          "label": "Walker et al. Br J Gen Pract 2006",
+          "url": "https://bjgp.org/content/56/527/437"
+        },
+        {
+          "label": "Health Canada. Hawthorn monograph, 2026",
+          "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/atReq?atid=crataegus.monogyna&lang=eng"
+        }
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "hawthorn-nitrate",
+      "herb_id": "hawthorn",
+      "drug_class": "nitrate",
+      "risk": "low",
+      "watch": true,
+      "rating_source": "team",
+      "effect_en": "In a trial of people with diabetes, most of them taking blood pressure medicines, hawthorn lowered diastolic blood pressure slightly and no herb–drug interaction was found.",
+      "effect_zh": "一項針對糖尿病人士（大部分有食降血壓藥）嘅研究發現，山楂令下壓輕微下降，冇發現草藥同藥物有相互作用。",
+      "heart_impact_en": "Blood pressure may drop a little more than expected.",
+      "heart_impact_zh": "血壓可能比預期再低少少。",
+      "why_en": "Hawthorn may lower blood pressure slightly.",
+      "why_zh": "山楂可能令血壓輕微下降。",
+      "why_pro_en": "Walker et al., Br J Gen Pract 2006: randomised controlled trial in people with type 2 diabetes, 71% taking hypotensive drugs; the hawthorn group had a greater reduction in diastolic blood pressure (P = 0.035); \"No herb–drug interaction was found\". Health Canada hawthorn monograph (2026): \"Ask a health care practitioner/health care provider/health care professional/doctor/physician before use if you are taking cardiac glycosides (e.g., digoxin) or blood pressure or heart medications.\"",
+      "action_en": "Tell your doctor or pharmacist that you take hawthorn, so they can keep an eye on your blood pressure.",
+      "action_zh": "話俾醫生或者藥劑師知你有食山楂，等佢哋留意你嘅血壓。",
+      "main_source": 0,
+      "main_finding_en": "Randomised trial in people with diabetes taking prescription drugs: “No herb–drug interaction was found.”",
+      "main_finding_zh": "隨機對照試驗（糖尿病患者，有食處方藥）：冇發現草藥同藥物有相互作用。",
+      "evidence_level": [
+        "human_trial",
+        "official_guidance"
+      ],
+      "sources": [
+        {
+          "label": "Walker et al. Br J Gen Pract 2006",
+          "url": "https://bjgp.org/content/56/527/437"
+        },
+        {
+          "label": "Health Canada. Hawthorn monograph, 2026",
+          "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/atReq?atid=crataegus.monogyna&lang=eng"
+        }
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "hawthorn-diuretic",
+      "herb_id": "hawthorn",
+      "drug_class": "diuretic",
+      "risk": "low",
+      "watch": true,
+      "rating_source": "team",
+      "effect_en": "In a trial of people with diabetes, most of them taking blood pressure medicines, hawthorn lowered diastolic blood pressure slightly and no herb–drug interaction was found.",
+      "effect_zh": "一項針對糖尿病人士（大部分有食降血壓藥）嘅研究發現，山楂令下壓輕微下降，冇發現草藥同藥物有相互作用。",
+      "heart_impact_en": "Blood pressure may drop a little more than expected.",
+      "heart_impact_zh": "血壓可能比預期再低少少。",
+      "why_en": "Hawthorn may lower blood pressure slightly.",
+      "why_zh": "山楂可能令血壓輕微下降。",
+      "why_pro_en": "Walker et al., Br J Gen Pract 2006: randomised controlled trial in people with type 2 diabetes, 71% taking hypotensive drugs; the hawthorn group had a greater reduction in diastolic blood pressure (P = 0.035); \"No herb–drug interaction was found\". Health Canada hawthorn monograph (2026): \"Ask a health care practitioner/health care provider/health care professional/doctor/physician before use if you are taking cardiac glycosides (e.g., digoxin) or blood pressure or heart medications.\"",
+      "action_en": "Tell your doctor or pharmacist that you take hawthorn, so they can keep an eye on your blood pressure.",
+      "action_zh": "話俾醫生或者藥劑師知你有食山楂，等佢哋留意你嘅血壓。",
+      "main_source": 0,
+      "main_finding_en": "Randomised trial in people with diabetes taking prescription drugs: “No herb–drug interaction was found.”",
+      "main_finding_zh": "隨機對照試驗（糖尿病患者，有食處方藥）：冇發現草藥同藥物有相互作用。",
+      "evidence_level": [
+        "human_trial",
+        "official_guidance"
+      ],
+      "sources": [
+        {
+          "label": "Walker et al. Br J Gen Pract 2006",
+          "url": "https://bjgp.org/content/56/527/437"
+        },
+        {
+          "label": "Health Canada. Hawthorn monograph, 2026",
+          "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/atReq?atid=crataegus.monogyna&lang=eng"
+        }
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "hawthorn-digoxin",
+      "herb_id": "hawthorn",
+      "drug_id": "digoxin",
+      "risk": "low",
+      "watch": true,
+      "rating_source": "team",
+      "effect_en": "A small study in 8 healthy people found a hawthorn leaf-and-flower extract did not change digoxin levels. A lab study found hawthorn can interfere with one type of digoxin blood test.",
+      "effect_zh": "一項以8個健康人士做嘅小型研究發現，山楂葉同花提取物冇改變地高辛水平。一項實驗室研究發現，山楂可能干擾其中一種地高辛驗血方法。",
+      "heart_impact_en": "A wrong result could hide a digoxin level that is too high, and too much digoxin can cause a dangerous heart rhythm.",
+      "heart_impact_zh": "驗血結果唔準，可能睇唔出地高辛過高；地高辛過量可以引致危險嘅心律不正。",
+      "why_en": "Hawthorn contains substances similar in structure to digoxin, which can interfere with some digoxin blood tests.",
+      "why_zh": "山楂含有結構同地高辛相似嘅物質，可能會干擾某啲地高辛驗血方法。",
+      "why_pro_en": "Tankanow et al., J Clin Pharmacol 2003 (abstract): randomised crossover trial in 8 healthy volunteers, digoxin 0.25 mg with Crataegus special extract WS 1442 (leaves with flowers) 450 mg twice daily; no statistically significant differences in digoxin pharmacokinetics. Dasgupta et al., Arch Pathol Lab Med 2010 (abstract): hawthorn interfered with the Digoxin III immunoassay but not the Tina-Quant assay; hawthorn contains alkaloids structurally similar to digoxin.",
+      "action_en": "Tell your doctor or pharmacist that you take hawthorn, because it can affect some digoxin blood tests.",
+      "action_zh": "話俾醫生或者藥劑師知你有食山楂，因為山楂可能影響某啲地高辛驗血結果。",
+      "main_source": 0,
+      "main_finding_en": "Study in 8 healthy volunteers: a hawthorn leaf-and-flower extract did not significantly change digoxin levels.",
+      "main_finding_zh": "8個健康人士嘅研究：山楂葉同花提取物冇顯著改變地高辛水平。",
+      "evidence_level": [
+        "human_trial",
+        "lab_animal",
+        "official_guidance"
+      ],
+      "sources": [
+        {
+          "label": "Tankanow et al. J Clin Pharmacol 2003 (abstract)",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/12817526/"
+        },
+        {
+          "label": "Dasgupta et al. Arch Pathol Lab Med 2010 (abstract)",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/20670141/"
+        },
+        {
+          "label": "Health Canada. Hawthorn monograph, 2026",
+          "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/atReq?atid=crataegus.monogyna&lang=eng"
+        }
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "hawthorn-warfarin",
+      "herb_id": "hawthorn",
+      "drug_id": "warfarin",
+      "risk": "low",
+      "watch": true,
+      "rating_source": "team",
+      "effect_en": "One study at a warfarin clinic in Jordan linked hawthorn to a raised INR (clotting test) in 11 patients and to serious bleeding needing hospital care in 2. It did not say which part of the plant was used.",
+      "effect_zh": "約旦一間華法林診所嘅研究發現，山楂同11個病人INR（凝血指數）偏高有關，另外有2人嚴重出血要入院。研究冇講用咗植物邊個部分。",
+      "heart_impact_en": "Watch for unusual bruising or bleeding.",
+      "heart_impact_zh": "留意有冇唔尋常嘅瘀傷或者出血。",
+      "why_en": null,
+      "why_zh": null,
+      "why_pro_en": "Al-Momany et al., Clin Appl Thromb Hemost 2019: anticoagulation clinic monitoring Jordanian patients; hawthorn (Crataegus) \"corresponded to an elevated INR <8 in 11 patients, and serious bleeding events that required hospitalization in 2 cases\". Species and plant part not reported.",
+      "action_en": "Tell your doctor that you take hawthorn. Ask whether you need an INR (clotting) test.",
+      "action_zh": "話俾醫生知你有食山楂。問吓需唔需要驗INR（凝血指數）。",
+      "main_source": 0,
+      "main_finding_en": "Observational study (warfarin clinic, Jordan): hawthorn use corresponded to a raised INR in 11 patients and serious bleeding needing hospital care in 2.",
+      "main_finding_zh": "觀察性研究（約旦華法林診所）：食山楂同11個病人INR偏高有關，另有2人嚴重出血要入院。",
+      "evidence_level": [
+        "case_reports"
+      ],
+      "sources": [
+        {
+          "label": "Al-Momany et al. Clin Appl Thromb Hemost 2019",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6829640/"
         }
       ],
       "zh_reviewed": false

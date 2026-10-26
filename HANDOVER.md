@@ -338,3 +338,18 @@ rating, quote, source, S/N or date changed.
   group "Angina" / 心絞痛藥. Hawthorn's leaf-and-flower note shows on every hawthorn pair page. No ratings
   yet: every new pair shows the grey card until its source is checked. New medicines have no HA leaflet
   advice until the leaflets are checked (listed in tests as awaiting a leaflet check).
+- 26 Oct, Task 1 part 2 (branch task1-new-medicines, cache herbbridge-v51; not on main yet): ratings from brief
+  section 6, every quote and fact re-checked against the original documents on 26 Oct. 28 new team entries
+  (52 in all): danshen + DOACs Moderate (R10 accurate wording, owner-chosen; no "no major bleeds" line);
+  danshen + ticagrelor / beta-blockers (with the slow-heartbeat line, owner) / ACE inhibitors Low watch;
+  ginkgo + DOACs / ticagrelor Low watch; American and Asian ginseng + beta-blockers, ACE inhibitors, ARBs,
+  calcium channel blockers No reported risk; liquorice + those four classes and nitrates Moderate;
+  red yeast rice + ticagrelor Low watch; hawthorn + 6 heart classes, digoxin and warfarin Low watch.
+  4 new Health Canada / EMA statements (hc-licorice, hc-dong-quai, hc-hawthorn, ema-ginkgo-dabigatran) and
+  19 new Official cautions (ginkgo + DOACs / ticagrelor are "sources disagree"). HA leaflets by app group
+  (owner): ticagrelor and nitrates → antianginal; metoprolol, perindopril, enalapril, losartan, valsartan →
+  antihypertensive; bisoprolol → heart failure. No HA leaflet names the DOACs, so they have none.
+  Layout (no content change): at 200% text the results list and pair heading no longer scroll sideways
+  (Health Canada's "practitioner/…/physician" and 單硝酸異山梨酯 were too wide; the first was also on main);
+  long Chinese names may now break as a last resort; the + in the pair heading stays with the herb name.
+  Tests: lock tables updated by hand; new tests for liquorice + amlodipine and danshen + DOACs.
