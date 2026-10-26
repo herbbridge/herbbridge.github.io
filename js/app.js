@@ -1085,7 +1085,8 @@
   // of the plant the evidence is about).
   function herbNote(r) {
     if (!r.herb.pair_note_en) return null;
-    return el('p', { class: 'herb-note' }, [icon('low', 'herb-note-icon'), el('span', { text: field(r.herb, 'pair_note') })]);
+    // No icon: the Low badge's "i" icon could make a grey card look like a Low rating.
+    return el('p', { class: 'herb-note', text: field(r.herb, 'pair_note') });
   }
   function homeLink() {
     return el('a', { class: 'home-link', href: '#/cabinet' }, [icon('home'), el('span', { text: t('nav_home') })]);
