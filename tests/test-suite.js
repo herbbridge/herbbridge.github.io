@@ -636,6 +636,18 @@
       return { pass: !!e && /needed a hospital stay or a blood transfusion/.test(e.main_finding_en) && /冇一宗需要入院或者輸血/.test(e.main_finding_zh),
         detail: e ? e.main_finding_en : 'missing' };
     });
+    check('New medicines (26 Oct)', 'Liao 2026 and Al-Momany 2019 are tagged "Observational study", not case reports (owner, 26 Oct)', function () {
+      var bad = ['danshen-doac', 'hawthorn-warfarin'].filter(function (id) {
+        var e = db.interactions.filter(function (x) { return x.id === id; })[0];
+        return !e || e.evidence_level.indexOf('observational') === -1 || e.evidence_level.indexOf('case_reports') !== -1;
+      });
+      return { pass: bad.length === 0, detail: bad.join(', ') };
+    });
+    check('New medicines (26 Oct)', 'danshen + the newer blood thinners has the Simple heart note in both languages', function () {
+      var e = db.interactions.filter(function (x) { return x.id === 'danshen-doac'; })[0];
+      return { pass: !!e && e.heart_note_en === 'None of the bleeds while taking both needed a hospital stay or a blood transfusion.' &&
+        e.heart_note_zh === '一齊用兩樣期間嘅出血，冇一宗需要入院或者輸血。', detail: e ? e.heart_note_en + ' / ' + e.heart_note_zh : 'missing' };
+    });
     check('New medicines (26 Oct)', 'astragalus + warfarin shows the grey "not in our database" card', function () {
       var r = lookup.checkPairs(db, ['astragalus'], ['warfarin'])[0];
       return { pass: r.status === 'not_in_database' && !r.entry && !r.official, detail: r.status };

@@ -373,3 +373,11 @@ rating, quote, source, S/N or date changed.
   mention only). Their entries (danshen-doac, danshen-ticagrelor, ginkgo-doac, ginkgo-ticagrelor,
   red_yeast_rice-ticagrelor) and the ginkgo-dabigatran caution were already zh_reviewed true; no data
   change. Still unreviewed in Chinese: the 14 new medicine names (zh_name_with_en) and the older entries.
+- 26 Oct, owner's phone check of the preview (branch, cache herbbridge-v54): new evidence level "observational"
+  (Observational study / 觀察性研究; About text approved by the owner). Liao 2026 (danshen + newer blood
+  thinners, a self-controlled case series) and Al-Momany 2019 (hawthorn + warfarin, clinic patients) were
+  tagged "case reports"; now "observational". Other new entries checked: tags match the study designs.
+  Doctor summary "你可以咁講" line shows English next to new medicine names (on screen only). Simple mode:
+  danshen + newer blood thinners shows heart_note under the heart line ("None of the bleeds while taking
+  both needed a hospital stay or a blood transfusion." / 「一齊用兩樣期間嘅出血，冇一宗需要入院或者輸血。」);
+  Full details already has it in the main evidence. Tests: 168.

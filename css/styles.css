@@ -735,6 +735,8 @@ html.sheet-open, html.sheet-open body { overflow: hidden; }
   padding: 0.75rem 0.875rem; margin: 0 0 1rem;
 }
 .heart-impact p { margin: 0; font-size: 1.0556rem; line-height: 1.5; }
+.heart-lines { min-width: 0; }
+.heart-impact .heart-note { margin-top: 0.375rem; color: var(--ink-2); }
 .heart-impact .heart-icon { width: 1.375rem; height: 1.375rem; flex: none; margin-top: 0.1em; color: var(--ink); }
 @media print { .heart-impact { border-left-width: 2pt; padding: 3pt 6pt; margin-bottom: 4pt; } .heart-impact .heart-icon { display: none; } }
 .about-heart { padding-left: 1.25rem; margin: 0; }

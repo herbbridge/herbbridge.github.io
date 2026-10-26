@@ -78,7 +78,17 @@ const SUMMARY_SAY = {
       await p.click('.read-aloud'); await p.waitForTimeout(800);
       const heard = await p.evaluate(() => window.__spoken.join(' '));
       check(heard.includes('達比加群') && !/Dabigatran/i.test(heard), 'ginkgo + dabigatran: Read aloud says only the Chinese name');
+      await setList(['danshen'], ['apixaban']);
+      await p.goto(BASE + '#/summary'); await p.reload(); await p.waitForTimeout(500);
+      const sumSay = await p.evaluate(() => (document.querySelector('.summary-say') || {}).innerText || '');
+      check(sumSay.includes('阿哌沙班 Apixaban'), `summary "you can say" line has the English name: ${sumSay}`);
+      await setList(['danshen'], ['warfarin', 'amlodipine']);
     }
+    // Danshen + newer blood thinners: the short "no hospital stay" note under the heart line, Simple only
+    await p.goto(BASE + '#/pair/danshen-apixaban'); await p.reload(); await p.waitForTimeout(500);
+    const heartNote = await p.evaluate(() => { const n = document.querySelector('#app .heart-note'); return n ? n.textContent : ''; });
+    check(mode === 'simple' ? heartNote === (lang === 'zh' ? '一齊用兩樣期間嘅出血，冇一宗需要入院或者輸血。' : 'None of the bleeds while taking both needed a hospital stay or a blood transfusion.') : heartNote === '',
+      `danshen + apixaban: heart note ${mode === 'simple' ? 'shown under the heart line' : 'not repeated in Full details'}`);
 
     // Summary sentence, once
     await p.goto(BASE + '#/summary'); await p.reload(); await p.waitForTimeout(500);
