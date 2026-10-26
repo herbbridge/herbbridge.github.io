@@ -62,6 +62,13 @@ const SUMMARY_SAY = {
     check(after.focus === 'next-step', 'when reading aloud finishes, the next step comes into view (focused)');
     check(after.spoken.length > 0 && after.spoken[after.spoken.length - 1].includes(SAY[lang].replace(/\s/g, lang === 'zh' ? '' : ' ')), 'reading aloud ends with the "You can say" sentence');
 
+    // Hawthorn: the leaf-and-flower note on every hawthorn pair page
+    for (const pair of ['hawthorn-digoxin', 'hawthorn-warfarin', 'hawthorn-amlodipine']) {
+      await p.goto(BASE + '#/pair/' + pair); await p.waitForTimeout(400);
+      const note = await p.evaluate(() => { const n = document.querySelector('#app .herb-note'); return n && n.offsetParent ? n.innerText.trim() : ''; });
+      check(note.includes(lang === 'zh' ? '山楂葉同花' : 'leaf and flower extracts'), `${pair}: hawthorn note shown`);
+    }
+
     // Summary sentence, once
     await p.goto(BASE + '#/summary'); await p.reload(); await p.waitForTimeout(500);
     const say = await p.$$eval('.summary-say', xs => xs.map(x => x.innerText.trim()));

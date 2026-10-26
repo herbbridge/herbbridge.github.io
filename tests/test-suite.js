@@ -132,7 +132,49 @@
     { query: '田七', kind: 'herbs', first: 'sanqi' },
     { query: 'gau gei', kind: 'herbs', first: 'goji' },
     { query: '紅花', kind: 'herbs', first: 'safflower' },
-    { query: '', kind: 'herbs', count: 10 },
+    { query: '', kind: 'herbs', count: 12 },
+    { query: 'Eliquis', kind: 'drugs', first: 'apixaban' },
+    { query: '阿哌沙班', kind: 'drugs', first: 'apixaban' },
+    { query: 'apixaban', kind: 'drugs', first: 'apixaban' },
+    { query: 'Xarelto', kind: 'drugs', first: 'rivaroxaban' },
+    { query: '利伐沙班', kind: 'drugs', first: 'rivaroxaban' },
+    { query: 'Pradaxa', kind: 'drugs', first: 'dabigatran' },
+    { query: '達比加群', kind: 'drugs', first: 'dabigatran' },
+    { query: 'Lixiana', kind: 'drugs', first: 'edoxaban' },
+    { query: 'Savaysa', kind: 'drugs', first: 'edoxaban' },
+    { query: '依度沙班', kind: 'drugs', first: 'edoxaban' },
+    { query: 'Brilique', kind: 'drugs', first: 'ticagrelor' },
+    { query: 'Brilinta', kind: 'drugs', first: 'ticagrelor' },
+    { query: '替格瑞洛', kind: 'drugs', first: 'ticagrelor' },
+    { query: 'Concor', kind: 'drugs', first: 'bisoprolol' },
+    { query: '比索洛爾', kind: 'drugs', first: 'bisoprolol' },
+    { query: 'Betaloc', kind: 'drugs', first: 'metoprolol' },
+    { query: '美托洛爾', kind: 'drugs', first: 'metoprolol' },
+    { query: 'Coversyl', kind: 'drugs', first: 'perindopril' },
+    { query: '培哚普利', kind: 'drugs', first: 'perindopril' },
+    { query: 'Renitec', kind: 'drugs', first: 'enalapril' },
+    { query: '依那普利', kind: 'drugs', first: 'enalapril' },
+    { query: 'Cozaar', kind: 'drugs', first: 'losartan' },
+    { query: '氯沙坦', kind: 'drugs', first: 'losartan' },
+    { query: 'Diovan', kind: 'drugs', first: 'valsartan' },
+    { query: '纈沙坦', kind: 'drugs', first: 'valsartan' },
+    { query: 'isosorbide mononitrate', kind: 'drugs', first: 'isosorbide_mononitrate' },
+    { query: '單硝酸異山梨酯', kind: 'drugs', first: 'isosorbide_mononitrate' },
+    { query: 'isosorbide dinitrate', kind: 'drugs', first: 'isosorbide_dinitrate' },
+    { query: '硝酸異山梨酯', kind: 'drugs', first: 'isosorbide_dinitrate' },
+    { query: 'glyceryl trinitrate', kind: 'drugs', first: 'glyceryl_trinitrate' },
+    { query: '硝酸甘油', kind: 'drugs', first: 'glyceryl_trinitrate' },
+    { query: 'GTN', kind: 'drugs', first: 'glyceryl_trinitrate' },
+    { query: 'Hawthorn', kind: 'herbs', first: 'hawthorn' },
+    { query: '山楂', kind: 'herbs', first: 'hawthorn' },
+    { query: 'shanzha', kind: 'herbs', first: 'hawthorn' },
+    { query: 'saan zaa', kind: 'herbs', first: 'hawthorn' },
+    { query: '山查', kind: 'herbs', first: 'hawthorn' },
+    { query: 'Astragalus', kind: 'herbs', first: 'astragalus' },
+    { query: '黃芪', kind: 'herbs', first: 'astragalus' },
+    { query: '黄芪', kind: 'herbs', first: 'astragalus' },
+    { query: 'huangqi', kind: 'herbs', first: 'astragalus' },
+    { query: 'milkvetch root', kind: 'herbs', first: 'astragalus' },
     { query: 'warf', kind: 'drugs', first: 'warfarin' },
     { query: '華法林', kind: 'drugs', first: 'warfarin' },
     { query: 'frusemide', kind: 'drugs', first: 'furosemide' },
@@ -292,8 +334,11 @@
       });
       return { pass: bad.length === 0, detail: bad.map(function (r) { return r.herb.id + ' × ' + r.drug.id; }).join('\n') };
     });
-    check('Safety rules', 'every medicine has HA leaflet advice', function () {
-      var bad = db.drugs.filter(function (d) { return !lookup.findAdvice(db, d.id); }).map(function (d) { return d.id; });
+    // Medicines added on 26 Oct have no HA leaflet yet: which leaflet names them must be read first.
+    var AWAITING_HA_LEAFLET = ['apixaban', 'rivaroxaban', 'dabigatran', 'edoxaban', 'ticagrelor', 'bisoprolol', 'metoprolol',
+      'perindopril', 'enalapril', 'losartan', 'valsartan', 'isosorbide_mononitrate', 'isosorbide_dinitrate', 'glyceryl_trinitrate'];
+    check('Safety rules', 'every medicine has HA leaflet advice (except the new ones awaiting a leaflet check)', function () {
+      var bad = db.drugs.filter(function (d) { return !lookup.findAdvice(db, d.id) && AWAITING_HA_LEAFLET.indexOf(d.id) === -1; }).map(function (d) { return d.id; });
       return { pass: bad.length === 0, detail: bad.join(', ') };
     });
     check('Pharmacist reviews', 'every review still matches its card (re-review any card changed after review)', function () {
@@ -477,7 +522,7 @@
     }
 
     // 8. Heart-disease focus (Challenge 4: cardiovascular disease). None of this may change a rating.
-    var REQUIRED_GROUPS = ['blood_thinners', 'cholesterol', 'heart_rhythm', 'blood_pressure'];
+    var REQUIRED_GROUPS = ['blood_thinners', 'cholesterol', 'heart_rhythm', 'angina', 'blood_pressure'];
     var groups = (data.drugs && data.drugs.groups) || [];
     check('Heart focus', 'every rated pair has "Why this matters for your heart" in English and Chinese', function () {
       var bad = db.interactions.filter(function (e) {
@@ -494,6 +539,14 @@
     check('Heart focus', 'every medicine belongs to one of the groups', function () {
       var bad = db.drugs.filter(function (d) { return REQUIRED_GROUPS.indexOf(d.group) === -1; }).map(function (d) { return d.id + ' (' + d.group + ')'; });
       return { pass: bad.length === 0, detail: bad.join(', ') };
+    });
+    check('New medicines (26 Oct)', 'astragalus + warfarin shows the grey "not in our database" card', function () {
+      var r = lookup.checkPairs(db, ['astragalus'], ['warfarin'])[0];
+      return { pass: r.status === 'not_in_database' && !r.entry && !r.official, detail: r.status };
+    });
+    check('New medicines (26 Oct)', 'hawthorn carries its leaf-and-flower note in English and Chinese', function () {
+      var h = db.herbById.hawthorn;
+      return { pass: !!h && /leaf and flower extracts/.test(h.pair_note_en) && /山楂葉同花/.test(h.pair_note_zh), detail: h ? h.pair_note_en : 'no hawthorn' };
     });
     check('Heart focus', 'every herb has "commonly taken for" in English and Chinese', function () {
       var bad = db.herbs.filter(function (h) { return !h.used_for_en || !h.used_for_zh; }).map(function (h) { return h.id; });

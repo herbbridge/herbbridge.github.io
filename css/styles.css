@@ -1068,3 +1068,7 @@ html[data-mode="full"] .pair-cards { gap: 0.625rem; }
   .page-nav, .next-step { display: none !important; }
   .summary-say { background: none !important; border: 0.75pt solid #000; padding: 1.5pt 5pt !important; margin: 1pt 0 2pt !important; font-size: 8.5pt; line-height: 1.2; }
 }
+
+/* A note about the herb itself (e.g. hawthorn: which part of the plant the evidence is about). */
+.herb-note { display: flex; gap: 0.5rem; align-items: flex-start; margin: 0 0 1rem; padding: 0.75rem 0.875rem; border-radius: var(--radius-sm); background: var(--surface); box-shadow: inset 0 0 0 1.5px var(--line); color: var(--ink); }
+.herb-note .herb-note-icon { flex: none; width: 1.25rem; height: 1.25rem; margin-top: 0.1em; color: var(--ink-2); }

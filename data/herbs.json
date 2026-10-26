@@ -8,7 +8,14 @@
       "latin": "Salvia miltiorrhiza",
       "used_for_en": "blood circulation and heart health",
       "used_for_zh": "血液循環同心臟健康",
-      "aliases": ["dan shen", "daan sam", "daan1 sam1", "丹参", "red sage", "Chinese sage"],
+      "aliases": [
+        "dan shen",
+        "daan sam",
+        "daan1 sam1",
+        "丹参",
+        "red sage",
+        "Chinese sage"
+      ],
       "zh_reviewed": false
     },
     {
@@ -18,7 +25,15 @@
       "latin": "Angelica sinensis",
       "used_for_en": "blood health, women's health",
       "used_for_zh": "補血、婦女健康",
-      "aliases": ["danggui", "dang gui", "dong gwai", "dong1 gwai1", "tang kuei", "当归", "female ginseng"],
+      "aliases": [
+        "danggui",
+        "dang gui",
+        "dong gwai",
+        "dong1 gwai1",
+        "tang kuei",
+        "当归",
+        "female ginseng"
+      ],
       "zh_reviewed": false
     },
     {
@@ -28,7 +43,17 @@
       "latin": "Panax quinquefolius",
       "used_for_en": "energy and general health",
       "used_for_zh": "增強體力同整體健康",
-      "aliases": ["huaqishen", "hua qi shen", "fa kei sam", "faa1 kei4 sam1", "xiyangshen", "xi yang shen", "西洋參", "花旗参", "西洋参"],
+      "aliases": [
+        "huaqishen",
+        "hua qi shen",
+        "fa kei sam",
+        "faa1 kei4 sam1",
+        "xiyangshen",
+        "xi yang shen",
+        "西洋參",
+        "花旗参",
+        "西洋参"
+      ],
       "zh_reviewed": false
     },
     {
@@ -38,7 +63,20 @@
       "latin": "Panax ginseng",
       "used_for_en": "energy and general health",
       "used_for_zh": "增強體力同整體健康",
-      "aliases": ["renshen", "ren shen", "yan sam", "jan4 sam1", "Korean ginseng", "Chinese ginseng", "red ginseng", "高麗參", "gou lai sam", "gou1 lai6 sam1", "人参", "高丽参"],
+      "aliases": [
+        "renshen",
+        "ren shen",
+        "yan sam",
+        "jan4 sam1",
+        "Korean ginseng",
+        "Chinese ginseng",
+        "red ginseng",
+        "高麗參",
+        "gou lai sam",
+        "gou1 lai6 sam1",
+        "人参",
+        "高丽参"
+      ],
       "zh_reviewed": false
     },
     {
@@ -48,7 +86,16 @@
       "latin": "Ginkgo biloba",
       "used_for_en": "circulation and memory",
       "used_for_zh": "血液循環同記憶力",
-      "aliases": ["yinxing", "yin xing", "ngan hang", "ngan4 hang6", "ginkgo biloba", "ginkgo leaf", "银杏", "銀杏葉"],
+      "aliases": [
+        "yinxing",
+        "yin xing",
+        "ngan hang",
+        "ngan4 hang6",
+        "ginkgo biloba",
+        "ginkgo leaf",
+        "银杏",
+        "銀杏葉"
+      ],
       "zh_reviewed": false
     },
     {
@@ -58,7 +105,14 @@
       "latin": "Glycyrrhiza uralensis / Glycyrrhiza glabra",
       "used_for_en": "used in many herbal formulas and teas",
       "used_for_zh": "好多中藥方同涼茶都會用到",
-      "aliases": ["licorice", "gancao", "gan cao", "gam chou", "gam1 cou2", "liquorice root"],
+      "aliases": [
+        "licorice",
+        "gancao",
+        "gan cao",
+        "gam chou",
+        "gam1 cou2",
+        "liquorice root"
+      ],
       "zh_reviewed": false
     },
     {
@@ -68,7 +122,16 @@
       "latin": "Monascus purpureus",
       "used_for_en": "lowering cholesterol",
       "used_for_zh": "降膽固醇",
-      "aliases": ["hongqu", "hong qu", "hung kuk", "hung4 kuk1", "紅曲", "红曲", "红麴", "red rice yeast"],
+      "aliases": [
+        "hongqu",
+        "hong qu",
+        "hung kuk",
+        "hung4 kuk1",
+        "紅曲",
+        "红曲",
+        "红麴",
+        "red rice yeast"
+      ],
       "zh_reviewed": false
     },
     {
@@ -78,7 +141,16 @@
       "latin": "Lycium barbarum",
       "used_for_en": "general health, often in soups and teas",
       "used_for_zh": "整體健康，經常用嚟煲湯或者沖茶",
-      "aliases": ["gouqi", "gou qi", "gau gei", "gau2 gei2", "goji berry", "wolfberry", "枸杞子", "杞子"],
+      "aliases": [
+        "gouqi",
+        "gou qi",
+        "gau gei",
+        "gau2 gei2",
+        "goji berry",
+        "wolfberry",
+        "枸杞子",
+        "杞子"
+      ],
       "zh_reviewed": false
     },
     {
@@ -88,7 +160,17 @@
       "latin": "Panax notoginseng",
       "used_for_en": "blood circulation and bruising",
       "used_for_zh": "血液循環同瘀傷",
-      "aliases": ["san qi", "saam chat", "saam1 cat1", "tianqi", "tin chat", "tin4 cat1", "田七", "notoginseng", "pseudoginseng"],
+      "aliases": [
+        "san qi",
+        "saam chat",
+        "saam1 cat1",
+        "tianqi",
+        "tin chat",
+        "tin4 cat1",
+        "田七",
+        "notoginseng",
+        "pseudoginseng"
+      ],
       "zh_reviewed": false
     },
     {
@@ -98,7 +180,49 @@
       "latin": "Carthamus tinctorius",
       "used_for_en": "blood circulation",
       "used_for_zh": "血液循環",
-      "aliases": ["honghua", "hong hua", "hung fa", "hung4 faa1", "红花"],
+      "aliases": [
+        "honghua",
+        "hong hua",
+        "hung fa",
+        "hung4 faa1",
+        "红花"
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "hawthorn",
+      "name_en": "Hawthorn",
+      "name_zh": "山楂",
+      "latin": "Crataegus spp.",
+      "used_for_en": "heart and circulation, and digestion",
+      "used_for_zh": "心臟同血液循環、幫助消化",
+      "aliases": [
+        "shanzha",
+        "shan zha",
+        "saan zaa",
+        "saan1 zaa1",
+        "hawthorn fruit",
+        "hawthorn berry",
+        "山查"
+      ],
+      "pair_note_en": "Most of the evidence is for hawthorn leaf and flower extracts, not the hawthorn fruit used in soups and teas.",
+      "pair_note_zh": "大部分證據係關於山楂葉同花嘅提取物，唔係煲湯或沖茶用嘅山楂果。",
+      "zh_reviewed": false
+    },
+    {
+      "id": "astragalus",
+      "name_en": "Astragalus",
+      "name_zh": "黃芪",
+      "latin": "Astragalus membranaceus",
+      "used_for_en": "energy (qi) and the immune system",
+      "used_for_zh": "補氣同增強免疫力",
+      "aliases": [
+        "huangqi",
+        "huang qi",
+        "黄芪",
+        "milkvetch root",
+        "astragalus root"
+      ],
       "zh_reviewed": false
     }
   ]

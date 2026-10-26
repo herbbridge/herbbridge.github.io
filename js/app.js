@@ -1075,11 +1075,17 @@
   function keepEndTogether(root) {
     if (state.lang !== 'zh') return;
     Array.prototype.forEach.call(root.querySelectorAll('h1, h2'), function (h) {
-      if (h.children.length || !/[㐀-鿿][。！？]$/.test(h.textContent)) return;
+      if (h.children.length || !/[\u3400-\u9fff][。！？]$/.test(h.textContent)) return;
       var text = h.textContent;
       h.textContent = text.slice(0, -2);
       h.appendChild(el('span', { class: 'keep-end', text: text.slice(-2) }));
     });
+  }
+  // A note that belongs to the herb, shown on every pair page with that herb (e.g. hawthorn: which part
+  // of the plant the evidence is about).
+  function herbNote(r) {
+    if (!r.herb.pair_note_en) return null;
+    return el('p', { class: 'herb-note' }, [icon('low', 'herb-note-icon'), el('span', { text: field(r.herb, 'pair_note') })]);
   }
   function homeLink() {
     return el('a', { class: 'home-link', href: '#/cabinet' }, [icon('home'), el('span', { text: t('nav_home') })]);
@@ -1242,6 +1248,11 @@
     if (title) title.parentNode.removeChild(title);
     if (full) {
       Array.prototype.forEach.call(whole.querySelectorAll('details'), function (d) { d.open = true; });
+      var note = herbNote(r);
+      if (note) {
+        var after = whole.querySelector('.todo') || whole.querySelector('.unknown-text') || whole.querySelector('.effect') || whole.querySelector('.read-row');
+        if (after) after.parentNode.insertBefore(note, after.nextSibling); else whole.appendChild(note);
+      }
       app.appendChild(whole);
       app.appendChild(nextStep([r]));
       return;
@@ -1267,6 +1278,7 @@
       readButton(r),
       grey ? el('p', { class: 'unknown-text', text: t('not_in_db_text') }) : null,
       el('div', { class: 'todo' }, [el('h2', { text: t('label_what_to_do') }), el('p', { text: todo })]),
+      herbNote(r),
       r.official ? officialBlock(r) : null,
       grey ? el('a', { class: 'btn btn-primary', href: '#/summary' }, [el('span', { text: t('unknown_next_button') }), icon('arrow')]) : null,
       el('p', { class: 'disclaimer-box' }, disclaimerText(r))

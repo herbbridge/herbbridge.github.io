@@ -331,3 +331,10 @@ rating, quote, source, S/N or date changed.
 - 21 Oct, renamed on GitHub (by the owner): organisation herbsafe → herbbridge, repository herbbridge/herbbridge.github.io, live site https://herbbridge.github.io/ (cache herbbridge-v39). The old address no longer serves the app; lists saved there stay with the old address. Storage keys herbsafe.v1 / herbsafe.mode unchanged (same names on the new address).
 - 21 Oct, tools/check-print.js now saves its PDFs in a temporary folder outside the repo (path printed at the end); .gitignore ignores print-*.pdf as a backstop. Tools only, no app files changed, cache stays herbbridge-v39.
 - 23 Oct (main): demo patient is now MR Wong (a man, 72) / 黃伯伯 (was Mrs Wong / 黃太): button, title, story ("Mr Wong is 72 and has atrial fibrillation. He takes warfarin and amlodipine. Today he bought danshen 丹參 at a herbal shop."), "Add danshen to his cabinet", "See an example (Mr Wong)"; Chinese 黃太 → 黃伯伯 and 佢 → 黃伯伯 in the demo lines. Same change in comments, tests, tools, proposals and this file. Recording file names unchanged. No medical content changed. New test: no Mrs Wong / 黃太 / she / her in the demo text. Cache herbbridge-v49 (diary becomes v50 after merging main).
+- 26 Oct, Task 1 part 1 (branch task1-new-medicines, cache herbbridge-v50; not on main yet): 14 medicines
+  (apixaban, rivaroxaban, dabigatran, edoxaban [doac]; ticagrelor [antiplatelet]; bisoprolol, metoprolol
+  [beta_blocker]; perindopril, enalapril [ace_inhibitor]; losartan, valsartan [arb]; isosorbide mononitrate,
+  isosorbide dinitrate, glyceryl trinitrate [nitrate]) and 2 herbs (hawthorn 山楂, astragalus 黃芪). New
+  group "Angina" / 心絞痛藥. Hawthorn's leaf-and-flower note shows on every hawthorn pair page. No ratings
+  yet: every new pair shows the grey card until its source is checked. New medicines have no HA leaflet
+  advice until the leaflets are checked (listed in tests as awaiting a leaflet check).
