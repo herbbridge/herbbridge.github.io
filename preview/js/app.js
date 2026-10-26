@@ -980,6 +980,12 @@
   }
   window.addEventListener('hashchange', stopSpeaking);
 
+  // The heart line, plus its short note in Simple (Full details already says it in the main evidence).
+  function heartLines(e) {
+    var line = el('p', null, [el('strong', { text: t('label_heart_impact') + ' ' }), el('span', { text: field(e, 'heart_impact') })]);
+    if (mode !== 'simple' || !e.heart_note_en) return line;
+    return el('div', { class: 'heart-lines' }, [line, el('p', { class: 'heart-note', text: field(e, 'heart_note') })]);
+  }
   function card(r) {
     var key = pairKey(r);
     if (r.official && !r.entry) {
@@ -1059,7 +1065,7 @@
       el('p', { class: 'effect', text: field(e, 'effect') }),
       field(e, 'heart_impact') ? el('div', { class: 'heart-impact' }, [
         icon('heart', 'heart-icon'),
-        el('p', null, [el('strong', { text: t('label_heart_impact') + ' ' }), el('span', { text: field(e, 'heart_impact') })])
+        heartLines(e)
       ]) : null,
       el('dl', { class: 'facts' }, [
         el('div', null, [el('dt', { text: t('label_evidence') }), el('dd', null, [evidence])]),
@@ -1385,7 +1391,7 @@
     var sayRows = L.checkPairs(db, state.herbs, state.drugs);
     if (sayRows.length) {
       var needs = sayRows.filter(isFlagged);
-      page.appendChild(el('p', { class: 'summary-say' }, [window.HerbBridgeSpeech.youCanSay(needs.length ? needs : sayRows, state.lang, t)]));
+      page.appendChild(el('p', { class: 'summary-say' }, [window.HerbBridgeSpeech.youCanSay(needs.length ? needs : sayRows, state.lang, t, true)]));
     }
 
     page.appendChild(el('div', { class: 'no-print summary-actions' }, [

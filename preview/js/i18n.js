@@ -156,6 +156,7 @@
       card_disclaimer: 'HerbBridge gives information, not medical advice. Never stop or change a medicine without talking to your doctor or pharmacist.',
 
       ev_case_reports: 'Case reports',
+      ev_observational: 'Observational study',
       ev_human_trial: 'Human trial',
       ev_review: 'Review',
       ev_lab_animal: 'Lab/animal studies',
@@ -197,6 +198,7 @@
       about_not_in_db: '“Not in our database” means we have no record of the combination. It never means the combination is safe. Please ask your pharmacist or doctor.',
       about_evidence_title: 'Evidence levels',
       ev_case_reports_desc: 'Reports of what happened to individual patients.',
+      ev_observational_desc: 'A study of what happened to a group of patients in everyday care, without giving them a test treatment.',
       ev_human_trial_desc: 'A study in people, often comparing the herb with a dummy treatment (placebo).',
       ev_review_desc: 'An article that brings together the findings of other studies.',
       ev_lab_animal_desc: 'Studies in cells or animals. The results may not apply to people.',
@@ -391,6 +393,7 @@
       card_disclaimer: '中西通只提供資訊，唔係醫療建議。未同醫生或者藥劑師傾過之前，千祈唔好自行停藥或者改藥。',
 
       ev_case_reports: '病例報告',
+      ev_observational: '觀察性研究',
       ev_human_trial: '臨床試驗',
       ev_review: '文獻綜述',
       ev_lab_animal: '實驗室／動物研究',
@@ -432,6 +435,7 @@
       about_not_in_db: '「資料庫未有記錄」即係我哋冇呢個配搭嘅記錄，絕對唔代表安全。請問你嘅藥劑師或者醫生。',
       about_evidence_title: '證據等級',
       ev_case_reports_desc: '個別病人情況嘅報告。',
+      ev_observational_desc: '觀察一班病人喺日常治療入面嘅情況，研究人員唔會安排佢哋試用某種治療。',
       ev_human_trial_desc: '喺人身上做嘅研究，通常會將中藥同冇藥效嘅「安慰劑」比較。',
       ev_review_desc: '綜合其他研究結果嘅文章。',
       ev_lab_animal_desc: '喺細胞或者動物身上做嘅研究，結果未必適用於人。',

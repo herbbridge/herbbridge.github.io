@@ -930,6 +930,8 @@
       "effect_zh": "一項人類研究發現，開始一齊用丹參同口服抗凝血藥（包括新一代藥物）之後，出血機會較高。一項實驗室研究發現，丹參會減慢身體分解利伐沙班。",
       "heart_impact_en": "Bleeding, including in the gut or brain.",
       "heart_impact_zh": "出血，包括腸胃或者腦出血。",
+      "heart_note_en": "None of the bleeds while taking both needed a hospital stay or a blood transfusion.",
+      "heart_note_zh": "一齊用兩樣期間嘅出血，冇一宗需要入院或者輸血。",
       "why_en": "Danshen can slow blood clotting on its own, and a lab study found it slows the breakdown of rivaroxaban.",
       "why_zh": "丹參本身可能令血液較難凝固，而實驗室研究發現丹參會減慢身體分解利伐沙班。",
       "why_pro_en": "Liao et al., Ther Adv Drug Saf 2026 (self-controlled case series, Chang Gung Research Database, Taiwan; 146 patients with bleeding events among 525 co-prescribed danshen and an oral anticoagulant; anticoagulants: warfarin, dabigatran, rivaroxaban, apixaban, edoxaban): adjusted incidence rate ratio for any bleeding 3.98 (95% CI 3.29-4.77) at days 1-14 and 3.99 (3.23-4.79) at days 15-28; intracranial haemorrhage 3.59 (2.79-5.03) and gastrointestinal bleeding 3.79 (2.95-4.53) at days 1-14; results consistent across anticoagulant types. Wang et al., Front Pharmacol 2022: a danshen tablet inhibited rivaroxaban metabolism in rat and human liver microsomes (mixed inhibition). EMA assessment report 2022: danshen may increase the risk of bleeding when taken with anticoagulants.",
@@ -939,7 +941,7 @@
       "main_finding_en": "A 2026 study of 146 people in Taiwan who bled while taking an oral anticoagulant, including the newer ones, found bleeding (including in the gut and brain) was more likely in the first 28 days after they started taking both. None of the bleeds while taking both needed a hospital stay or a blood transfusion.",
       "main_finding_zh": "2026年一項台灣研究，對象係146個食緊口服抗凝血藥（包括新一代藥物）期間出血嘅人，發現開始一齊用兩樣之後嘅頭28日，出血（包括腸胃同腦出血）機會較高。一齊用兩樣期間嘅出血，冇一宗需要入院或者輸血。",
       "evidence_level": [
-        "case_reports",
+        "observational",
         "review",
         "lab_animal"
       ],
@@ -1878,7 +1880,7 @@
       "main_finding_en": "Observational study (warfarin clinic, Jordan): hawthorn use corresponded to a raised INR in 11 patients and serious bleeding needing hospital care in 2.",
       "main_finding_zh": "觀察性研究（約旦華法林診所）：食山楂同11個病人INR偏高有關，另有2人嚴重出血要入院。",
       "evidence_level": [
-        "case_reports"
+        "observational"
       ],
       "sources": [
         {
