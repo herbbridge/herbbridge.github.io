@@ -6,7 +6,7 @@
  * Nothing is sent anywhere: this only caches files HerbBridge already loads.
  * Change VERSION whenever the list of app files changes.
  */
-var VERSION = 'herbbridge-v55';
+var VERSION = 'herbbridge-v56';
 var FONTS = 'herbbridge-fonts-v1';
 var APP_FILES = [
   './', 'index.html', 'css/styles.css', 'js/lookup.js', 'js/i18n.js', 'js/speech.js', 'js/app.js',
@@ -67,8 +67,6 @@ self.addEventListener('fetch', function (event) {
   var url = new URL(request.url);
 
   if (url.origin === self.location.origin) {
-    // The phone test copy (/preview/) is never cached or intercepted by the live app.
-    if (/^\/preview\//.test(url.pathname)) return;
     if (request.mode === 'navigate') {
       // Opening the app: try the network, fall back to the saved page when offline.
       event.respondWith(fetch(request).catch(function () { return caches.match('index.html'); }));

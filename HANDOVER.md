@@ -386,3 +386,4 @@ rating, quote, source, S/N or date changed.
   both needed a hospital stay or a blood transfusion." / 「一齊用兩樣期間嘅出血，冇一宗需要入院或者輸血。」);
   Full details already has it in the main evidence. Tests: 168.
 - 26 Oct, Task 1 merged to main (owner said "merge" after the phone check). Cache herbbridge-v55.
+- 26 Oct, preview/ removed and the /preview/ rule taken out of sw.js (owner). Cache herbbridge-v56.
