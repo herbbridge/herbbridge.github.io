@@ -91,10 +91,31 @@ const SUMMARY_SAY = {
     check(mode === 'simple' ? heartNote === (lang === 'zh' ? '一齊用兩樣期間嘅出血，冇一宗需要入院或者輸血。' : 'None of the bleeds while taking both needed a hospital stay or a blood transfusion.') : heartNote === '',
       `danshen + apixaban: heart note ${mode === 'simple' ? 'shown under the heart line' : 'not repeated in Full details'}`);
 
+    // "What people take it for" (Task 2): after the risk, What to do and Read aloud; sources only in Full
+    // details; ends "not a recommendation"; read aloud just before "Next"; never on goji or the summary.
+    await p.goto(BASE + '#/pair/danshen-warfarin'); await p.reload(); await ready(p);
+    const uses = await p.evaluate(() => {
+      const box = document.querySelector('#app .uses-box'); if (!box) return null;
+      const after = (sel) => { const n = document.querySelector('#app ' + sel); return !n || !!(n.compareDocumentPosition(box) & Node.DOCUMENT_POSITION_FOLLOWING); };
+      return { afterRisk: after('.badge') && after('.read-aloud') && after('.todo'), sources: box.querySelectorAll('.uses-sources a').length,
+        last: box.lastElementChild.textContent, title: box.querySelector('h2').textContent };
+    });
+    const full = mode === 'full';
+    check(uses && uses.afterRisk && uses.title === (lang === 'zh' ? '一般用嚟做咩' : 'What people take it for') &&
+      uses.last === (lang === 'zh' ? '呢個唔係建議你服用。' : 'This is not a recommendation to take it.') && uses.sources === (full ? 2 : 0),
+      `danshen + warfarin: "What people take it for" after the risk, ${full ? 'with its 2 sources' : 'one line, no sources'}, ends "not a recommendation"`);
+    await p.evaluate(() => { window.__spoken = []; }); await p.click('.read-aloud'); await p.waitForTimeout(800);
+    const spokenUses = await p.evaluate(() => window.__spoken);
+    const ui = spokenUses.findIndex(x => x.startsWith(lang === 'zh' ? '一般用嚟做咩' : 'What people take it for'));
+    check(ui > 0 && spokenUses[ui + 2] && spokenUses[ui + 2].startsWith(lang === 'zh' ? '下一步' : 'Next'), 'Read aloud says "What people take it for" after What to do, just before "Next"');
+    await p.goto(BASE + '#/pair/goji-warfarin'); await p.reload(); await ready(p);
+    check(!(await p.$('#app .uses-box')), 'goji + warfarin: no box (no source for its uses)');
+
     // Summary sentence, once
     await p.goto(BASE + '#/summary'); await p.reload(); await ready(p);
     const say = await p.$$eval('.summary-say', xs => xs.map(x => x.innerText.trim()));
     check(say.length === 1 && say[0] === SUMMARY_SAY[lang], `summary says it once: ${say[0] || '(missing)'}`);
+    check(!(await p.$('#app .uses-box')), 'summary has no "What people take it for" box');
 
     // 2. Removing a herb: no jump, focus moves on
     await setList(['danshen', 'goji', 'ginkgo'], ['warfarin', 'amlodipine']);

@@ -34,7 +34,9 @@ Every pair the demo shows: 2 pairs, 2 need attention, 0 "no record" card(s).
 2. The Hospital Authority says: Do not take any Traditional Chinese Medicines, Proprietary Chinese Medicines, herbal drinks, or food that contains TCM, such as Guilinggao. Many TCM such as ginseng, Dong quai, Danshen, Chishao can interact with warfarin.
 3. What to do: tell your doctor that you take danshen, and ask about a clotting test.
 4. Why this matters for your heart: serious bleeding, including internal bleeding.
-5. Next: show your doctor. You can say: ‘I take danshen and warfarin. Can you check if that’s OK for me?’
+5. What people take it for: Used in China for angina, chest pain from heart disease. A 2023 review of 29 small trials found danshen pills eased angina symptoms more than nitrates, but the authors rated the evidence very low to low quality.
+6. This is not a recommendation to take it.
+7. Next: show your doctor. You can say: ‘I take danshen and warfarin. Can you check if that’s OK for me?’
 
 **Cantonese 廣東話**: save as `audio/danshen-warfarin.zh.mp3`
 
@@ -42,7 +44,9 @@ Every pair the demo shows: 2 pairs, 2 need attention, 0 "no record" card(s).
 2. 醫院管理局話：不可隨便服用中藥材，中成藥，藥材湯或涼茶，或含中藥成份的食品如龜苓膏，因為很多中藥，如人參、當歸、丹參、赤芍，會與「華法林」產生相互作用，影響抗凝血藥的功效。
 3. 應該點做：話俾醫生知你有食丹參，同埋問吓需唔需要驗凝血指數。
 4. 對心臟有咩影響：嚴重出血，包括內出血。
-5. 下一步：俾醫生睇。你可以咁講：『我有食丹參同華法林，可唔可以幫我睇吓有冇問題？』
+5. 一般用嚟做咩：喺中國用嚟治心絞痛，心臟病引致嘅胸口痛。2023年一份綜合29個細規模研究嘅分析發現，丹參滴丸紓緩心絞痛症狀比硝酸鹽類藥好，但作者評定證據質素為極低至低。
+6. 呢個唔係建議你服用。
+7. 下一步：俾醫生睇。你可以咁講：『我有食丹參同華法林，可唔可以幫我睇吓有冇問題？』
 
 ## Danshen + Amlodipine (丹參 + 氨氯地平)
 
@@ -51,11 +55,15 @@ Every pair the demo shows: 2 pairs, 2 need attention, 0 "no record" card(s).
 1. Danshen and amlodipine. Low risk. Keep an eye on it.
 2. What to do: tell your doctor or pharmacist that you take danshen, so they can keep an eye on your blood pressure.
 3. Why this matters for your heart: amlodipine controls your blood pressure. Whether danshen weakens it in people is not known.
-4. Next: show your doctor. You can say: ‘I take danshen and amlodipine. Can you check if that’s OK for me?’
+4. What people take it for: Used in China for angina, chest pain from heart disease. A 2023 review of 29 small trials found danshen pills eased angina symptoms more than nitrates, but the authors rated the evidence very low to low quality.
+5. This is not a recommendation to take it.
+6. Next: show your doctor. You can say: ‘I take danshen and amlodipine. Can you check if that’s OK for me?’
 
 **Cantonese 廣東話**: save as `audio/danshen-amlodipine.zh.mp3`
 
 1. 丹參同氨氯地平。低度風險。要留意。
 2. 應該點做：話俾醫生或者藥劑師知你有食丹參，等佢哋留意你嘅血壓。
 3. 對心臟有咩影響：氨氯地平用嚟控制血壓。丹參喺人體會唔會減弱佢嘅效果，仲未知道。
-4. 下一步：俾醫生睇。你可以咁講：『我有食丹參同氨氯地平，可唔可以幫我睇吓有冇問題？』
+4. 一般用嚟做咩：喺中國用嚟治心絞痛，心臟病引致嘅胸口痛。2023年一份綜合29個細規模研究嘅分析發現，丹參滴丸紓緩心絞痛症狀比硝酸鹽類藥好，但作者評定證據質素為極低至低。
+5. 呢個唔係建議你服用。
+6. 下一步：俾醫生睇。你可以咁講：『我有食丹參同氨氯地平，可唔可以幫我睇吓有冇問題？』

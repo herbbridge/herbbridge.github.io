@@ -115,10 +115,16 @@
     var own = zh ? listenZh : ownEn;
     var drugName = zh ? name(r.drug) : name(r.drug).toLowerCase(); // "Danshen and warfarin."
     var pair = name(r.herb) + (zh ? t('and_sr') : ' ' + t('and_sr') + ' ') + drugName + stop;
+    // "What people take it for": after the risk and What to do, just before "Next" (Task 2).
+    var usesParts = function () {
+      var u = r.herb.uses;
+      return u ? [t('uses_title') + colon + listen(pick(u, 'line')), t('uses_not_advice')] : [];
+    };
 
     if (!r.entry && !r.official) {
       parts.push(pair + ' ' + t('risk_not_in_database') + stop + ' ' + t('not_in_db_text'));
       sentences(own(t('unknown_next_text')), zh).forEach(function (x, i) { parts.push(i === 0 ? t('label_what_to_do') + colon + x : x); });
+      parts = parts.concat(usesParts());
       parts.push(t('next_title') + ' ' + youCanSay([r], lang, t));
       return parts.map(function (p) { return zh ? p.replace(/\s+/g, '') : p; });
     }
@@ -155,6 +161,7 @@
       var heart = fresh(sentences(own(pick(r.entry, 'heart_impact')), zh));
       if (heart.length) parts.push(t('speak_why') + colon + heart.join(zh ? '' : ' '));
     }
+    parts = parts.concat(usesParts());
     parts.push(t('next_title') + ' ' + youCanSay([r], lang, t));
     return parts.map(function (p) { return zh ? p.replace(/\s+/g, '') : p; });
   }

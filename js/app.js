@@ -1123,6 +1123,22 @@
     // No icon: the Low badge's "i" icon could make a grey card look like a Low rating.
     return el('p', { class: 'herb-note', text: field(r.herb, 'pair_note') });
   }
+  // "What people take it for" (Task 2): never before the risk. One line in Simple; in Full details also the
+  // extra line and the sources. Always ends "This is not a recommendation to take it." Not on the summary.
+  function usesBox(r) {
+    var u = r.herb.uses;
+    if (!u) return null;
+    var full = mode === 'full';
+    var srcs = [];
+    if (full) u.sources.forEach(function (s, i) { if (i) srcs.push(document.createTextNode(state.lang === 'zh' ? '；' : '; ')); srcs.push(sourceLink(s)); });
+    return el('section', { class: 'uses-box', 'aria-labelledby': 'uses-title' }, [
+      el('h2', { id: 'uses-title', class: 'uses-title', text: t('uses_title') }),
+      el('p', { class: 'uses-line', text: field(u, 'line') }),
+      full && u.full_en ? el('p', { class: 'uses-more', text: field(u, 'full') }) : null,
+      full ? el('p', { class: 'uses-sources' }, [el('strong', { text: t('label_sources') + (state.lang === 'zh' ? '：' : ': ') })].concat(srcs)) : null,
+      el('p', { class: 'uses-not-advice', text: t('uses_not_advice') })
+    ]);
+  }
   function homeLink() {
     return el('a', { class: 'home-link', href: '#/cabinet' }, [icon('home'), el('span', { text: t('nav_home') })]);
   }
@@ -1299,6 +1315,8 @@
         if (after) after.parentNode.insertBefore(note, after.nextSibling); else whole.appendChild(note);
       }
       app.appendChild(whole);
+      var usesFull = usesBox(r);
+      if (usesFull) app.appendChild(usesFull);
       app.appendChild(nextStep([r]));
       return;
     }
@@ -1326,6 +1344,7 @@
       herbNote(r),
       r.official ? officialBlock(r) : null,
       grey ? el('a', { class: 'btn btn-primary', href: '#/summary' }, [el('span', { text: t('unknown_next_button') }), icon('arrow')]) : null,
+      usesBox(r),
       el('p', { class: 'disclaimer-box' }, disclaimerText(r))
     ]));
     app.appendChild(moreBtn);

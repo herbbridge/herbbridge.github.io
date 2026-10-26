@@ -388,3 +388,12 @@ rating, quote, source, S/N or date changed.
 - 26 Oct, Task 1 merged to main (owner said "merge" after the phone check). Cache herbbridge-v55.
 - 26 Oct, preview/ removed and the /preview/ rule taken out of sw.js (owner). Cache herbbridge-v56.
 - 26 Oct, tools (owner): check-flow, check-modes, check-recordings and check-print now wait for each page to finish loading (tools/wait-ready.js: network quiet, screen drawn, fonts ready) instead of fixed pauses, so they also pass on the real site (checked twice on https://herbbridge.github.io/). Short waits after clicks stay. No app change; cache stays herbbridge-v56.
+- 26 Oct, Task 2 (branch task2-what-people-take, cache herbbridge-v57; not on main yet): "What people take it
+  for" / 「一般用嚟做咩」 box on pair pages, after the badge, What to do, Read aloud and any official caution.
+  Simple: one line; Full details: the line, an extra line (danshen: Luo 2015; astragalus: WHO) and the
+  sources. Always ends "This is not a recommendation to take it." / 「呢個唔係建議你服用。」 Read aloud says it
+  after What to do and the heart line, just before "Next". Not on the summary. Data: herbs.json "uses"
+  (danshen, hawthorn, astragalus only; zh_reviewed false). Sources checked 26 Oct: Zhang 2023 (PMC full
+  text), Luo 2015 (abstract), Health Canada hawthorn (R8) and astragalus (R3), WHO vol. 1 Radix Astragali
+  (R21, via the IRIS API). Astragalus: "to help maintain a healthy immune system" is Health Canada's
+  Herbal Medicine use, not TCM, so the line says so. Tests: 172.

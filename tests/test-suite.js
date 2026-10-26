@@ -648,6 +648,37 @@
       return { pass: !!e && e.heart_note_en === 'None of the bleeds while taking both needed a hospital stay or a blood transfusion.' &&
         e.heart_note_zh === '一齊用兩樣期間嘅出血，冇一宗需要入院或者輸血。', detail: e ? e.heart_note_en + ' / ' + e.heart_note_zh : 'missing' };
     });
+    // Task 2: "What people take it for". Only herbs with a source for their uses have the box.
+    check('What people take it for', 'only danshen, hawthorn and astragalus have the box (the others have no source for their uses yet)', function () {
+      var got = db.herbs.filter(function (h) { return h.uses; }).map(function (h) { return h.id; });
+      return { pass: JSON.stringify(got.sort()) === JSON.stringify(['astragalus', 'danshen', 'hawthorn']), detail: got.join(', ') };
+    });
+    check('What people take it for', 'danshen uses the owner\'s exact wording (brief, Task 2)', function () {
+      var u = db.herbById.danshen.uses;
+      return { pass: u.line_en === 'Used in China for angina (chest pain from heart disease). A 2023 review of 29 small trials found danshen pills eased angina symptoms more than nitrates, but the authors rated the evidence very low to low quality.' &&
+        u.full_en === 'A 2015 overview judged the evidence poor, and benefits on heart attacks or deaths unproved.', detail: u.line_en };
+    });
+    check('What people take it for', 'quoted words are word for word from Health Canada and WHO (checked 26 Oct 2026)', function () {
+      var QUOTED = {
+        hawthorn: ['Traditionally used in Herbal Medicine to help maintain and/or support cardiovascular health in adults'],
+        astragalus: ['to tonify the spleen and lungs in cases of qi deficiency', 'to help maintain a healthy immune system', 'Uses supported by clinical data: None.']
+      };
+      var bad = [];
+      Object.keys(QUOTED).forEach(function (id) {
+        var u = db.herbById[id].uses, all = u.line_en + ' ' + (u.full_en || '');
+        var inQuotes = (all.match(/“([^”]*)”/g) || []).map(function (q) { return q.slice(1, -1); });
+        QUOTED[id].forEach(function (q) { if (inQuotes.indexOf(q) === -1) bad.push(id + ': missing or changed quote "' + q + '"'); });
+        inQuotes.forEach(function (q) { if (QUOTED[id].indexOf(q) === -1) bad.push(id + ': unverified quote "' + q + '"'); });
+      });
+      return { pass: bad.length === 0, detail: bad.join('\n') };
+    });
+    check('What people take it for', 'outside the quotes, never "works", "treats", "prevents", "helps" or "safe"', function () {
+      var bad = db.herbs.filter(function (h) { return h.uses; }).filter(function (h) {
+        var own = (h.uses.line_en + ' ' + (h.uses.full_en || '')).replace(/“[^”]*”/g, '');
+        return /\b(works?|treats?|prevents?|helps?|safe|safely)\b/i.test(own);
+      }).map(function (h) { return h.id; });
+      return { pass: bad.length === 0, detail: bad.join(', ') };
+    });
     check('New medicines (26 Oct)', 'astragalus + warfarin shows the grey "not in our database" card', function () {
       var r = lookup.checkPairs(db, ['astragalus'], ['warfarin'])[0];
       return { pass: r.status === 'not_in_database' && !r.entry && !r.official, detail: r.status };

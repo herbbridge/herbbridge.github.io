@@ -11,14 +11,18 @@ The words on screen are not changed by this script.
   [2] The Hospital Authority says: Do not take any Traditional Chinese Medicines, Proprietary Chinese Medicines, herbal drinks, or food that contains TCM, such as Guilinggao. Many TCM such as ginseng, Dong quai, Danshen, Chishao can interact with warfarin.
   [3] What to do: tell your doctor that you take danshen, and ask about a clotting test.
   [4] Why this matters for your heart: serious bleeding, including internal bleeding.
-  [5] Next: show your doctor. You can say: ‘I take danshen and warfarin. Can you check if that’s OK for me?’
+  [5] What people take it for: Used in China for angina, chest pain from heart disease. A 2023 review of 29 small trials found danshen pills eased angina symptoms more than nitrates, but the authors rated the evidence very low to low quality.
+  [6] This is not a recommendation to take it.
+  [7] Next: show your doctor. You can say: ‘I take danshen and warfarin. Can you check if that’s OK for me?’
 
   中文
   [1] 丹參同華法林。高度風險。
   [2] 醫院管理局話：不可隨便服用中藥材，中成藥，藥材湯或涼茶，或含中藥成份的食品如龜苓膏，因為很多中藥，如人參、當歸、丹參、赤芍，會與「華法林」產生相互作用，影響抗凝血藥的功效。
   [3] 應該點做：話俾醫生知你有食丹參，同埋問吓需唔需要驗凝血指數。
   [4] 對心臟有咩影響：嚴重出血，包括內出血。
-  [5] 下一步：俾醫生睇。你可以咁講：『我有食丹參同華法林，可唔可以幫我睇吓有冇問題？』
+  [5] 一般用嚟做咩：喺中國用嚟治心絞痛，心臟病引致嘅胸口痛。2023年一份綜合29個細規模研究嘅分析發現，丹參滴丸紓緩心絞痛症狀比硝酸鹽類藥好，但作者評定證據質素為極低至低。
+  [6] 呢個唔係建議你服用。
+  [7] 下一步：俾醫生睇。你可以咁講：『我有食丹參同華法林，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 2. Danshen + Aspirin  (danshen-aspirin, status: low)
@@ -27,13 +31,17 @@ The words on screen are not changed by this script.
   [1] Danshen and aspirin. Low risk. Keep an eye on it.
   [2] What to do: talk to your doctor or pharmacist before using danshen, and tell them about any unusual bruising or bleeding.
   [3] Why this matters for your heart: watch for unusual bruising or bleeding.
-  [4] Next: show your doctor. You can say: ‘I take danshen and aspirin. Can you check if that’s OK for me?’
+  [4] What people take it for: Used in China for angina, chest pain from heart disease. A 2023 review of 29 small trials found danshen pills eased angina symptoms more than nitrates, but the authors rated the evidence very low to low quality.
+  [5] This is not a recommendation to take it.
+  [6] Next: show your doctor. You can say: ‘I take danshen and aspirin. Can you check if that’s OK for me?’
 
   中文
   [1] 丹參同阿士匹靈。低度風險。要留意。
   [2] 應該點做：食丹參之前，請先同醫生或者藥劑師傾；如果有唔尋常嘅瘀傷或者出血，要話俾佢哋知。
   [3] 對心臟有咩影響：留意有冇唔尋常嘅瘀傷或者出血。
-  [4] 下一步：俾醫生睇。你可以咁講：『我有食丹參同阿士匹靈，可唔可以幫我睇吓有冇問題？』
+  [4] 一般用嚟做咩：喺中國用嚟治心絞痛，心臟病引致嘅胸口痛。2023年一份綜合29個細規模研究嘅分析發現，丹參滴丸紓緩心絞痛症狀比硝酸鹽類藥好，但作者評定證據質素為極低至低。
+  [5] 呢個唔係建議你服用。
+  [6] 下一步：俾醫生睇。你可以咁講：『我有食丹參同阿士匹靈，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 3. Danshen + Clopidogrel  (danshen-clopidogrel, status: low)
@@ -42,13 +50,17 @@ The words on screen are not changed by this script.
   [1] Danshen and clopidogrel. Low risk. Keep an eye on it.
   [2] What to do: talk to your doctor or pharmacist before using danshen.
   [3] Why this matters for your heart: watch for unusual bruising or bleeding.
-  [4] Next: show your doctor. You can say: ‘I take danshen and clopidogrel. Can you check if that’s OK for me?’
+  [4] What people take it for: Used in China for angina, chest pain from heart disease. A 2023 review of 29 small trials found danshen pills eased angina symptoms more than nitrates, but the authors rated the evidence very low to low quality.
+  [5] This is not a recommendation to take it.
+  [6] Next: show your doctor. You can say: ‘I take danshen and clopidogrel. Can you check if that’s OK for me?’
 
   中文
   [1] 丹參同氯吡格雷。低度風險。要留意。
   [2] 應該點做：食丹參之前，請先同醫生或者藥劑師傾。
   [3] 對心臟有咩影響：留意有冇唔尋常嘅瘀傷或者出血。
-  [4] 下一步：俾醫生睇。你可以咁講：『我有食丹參同氯吡格雷，可唔可以幫我睇吓有冇問題？』
+  [4] 一般用嚟做咩：喺中國用嚟治心絞痛，心臟病引致嘅胸口痛。2023年一份綜合29個細規模研究嘅分析發現，丹參滴丸紓緩心絞痛症狀比硝酸鹽類藥好，但作者評定證據質素為極低至低。
+  [5] 呢個唔係建議你服用。
+  [6] 下一步：俾醫生睇。你可以咁講：『我有食丹參同氯吡格雷，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 4. Danshen + Atorvastatin  (danshen-atorvastatin, status: low)
@@ -57,13 +69,17 @@ The words on screen are not changed by this script.
   [1] Danshen and atorvastatin. Low risk. Keep an eye on it.
   [2] What to do: tell your doctor or pharmacist that you take danshen, so they can keep an eye on your cholesterol results.
   [3] Why this matters for your heart: statins protect your heart by lowering cholesterol. Lower statin levels could weaken that protection, and higher levels could raise the risk of side effects. The effect in people is not known.
-  [4] Next: show your doctor. You can say: ‘I take danshen and atorvastatin. Can you check if that’s OK for me?’
+  [4] What people take it for: Used in China for angina, chest pain from heart disease. A 2023 review of 29 small trials found danshen pills eased angina symptoms more than nitrates, but the authors rated the evidence very low to low quality.
+  [5] This is not a recommendation to take it.
+  [6] Next: show your doctor. You can say: ‘I take danshen and atorvastatin. Can you check if that’s OK for me?’
 
   中文
   [1] 丹參同阿托伐他汀。低度風險。要留意。
   [2] 應該點做：話俾醫生或者藥劑師知你有食丹參，等佢哋留意你嘅膽固醇指數。
   [3] 對心臟有咩影響：他汀類藥物靠降膽固醇保護心臟。他汀類藥物水平降低可能減弱保護作用，升高就可能增加副作用風險。對人嘅影響仲未知道。
-  [4] 下一步：俾醫生睇。你可以咁講：『我有食丹參同阿托伐他汀，可唔可以幫我睇吓有冇問題？』
+  [4] 一般用嚟做咩：喺中國用嚟治心絞痛，心臟病引致嘅胸口痛。2023年一份綜合29個細規模研究嘅分析發現，丹參滴丸紓緩心絞痛症狀比硝酸鹽類藥好，但作者評定證據質素為極低至低。
+  [5] 呢個唔係建議你服用。
+  [6] 下一步：俾醫生睇。你可以咁講：『我有食丹參同阿托伐他汀，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 5. Danshen + Rosuvastatin  (danshen-rosuvastatin, status: low)
@@ -72,13 +88,17 @@ The words on screen are not changed by this script.
   [1] Danshen and rosuvastatin. Low risk. Keep an eye on it.
   [2] What to do: tell your doctor or pharmacist that you take danshen, so they can keep an eye on your cholesterol results.
   [3] Why this matters for your heart: statins protect your heart by lowering cholesterol. Whether this weakens that protection is not known.
-  [4] Next: show your doctor. You can say: ‘I take danshen and rosuvastatin. Can you check if that’s OK for me?’
+  [4] What people take it for: Used in China for angina, chest pain from heart disease. A 2023 review of 29 small trials found danshen pills eased angina symptoms more than nitrates, but the authors rated the evidence very low to low quality.
+  [5] This is not a recommendation to take it.
+  [6] Next: show your doctor. You can say: ‘I take danshen and rosuvastatin. Can you check if that’s OK for me?’
 
   中文
   [1] 丹參同瑞舒伐他汀。低度風險。要留意。
   [2] 應該點做：話俾醫生或者藥劑師知你有食丹參，等佢哋留意你嘅膽固醇指數。
   [3] 對心臟有咩影響：他汀類藥物靠降膽固醇保護心臟。呢個會唔會減弱保護作用，仲未知道。
-  [4] 下一步：俾醫生睇。你可以咁講：『我有食丹參同瑞舒伐他汀，可唔可以幫我睇吓有冇問題？』
+  [4] 一般用嚟做咩：喺中國用嚟治心絞痛，心臟病引致嘅胸口痛。2023年一份綜合29個細規模研究嘅分析發現，丹參滴丸紓緩心絞痛症狀比硝酸鹽類藥好，但作者評定證據質素為極低至低。
+  [5] 呢個唔係建議你服用。
+  [6] 下一步：俾醫生睇。你可以咁講：『我有食丹參同瑞舒伐他汀，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 6. Danshen + Digoxin  (danshen-digoxin, status: low)
@@ -87,13 +107,17 @@ The words on screen are not changed by this script.
   [1] Danshen and digoxin. Low risk. Keep an eye on it.
   [2] What to do: tell your doctor or pharmacist that you take danshen, because it can affect some digoxin blood tests.
   [3] Why this matters for your heart: a wrong result could hide a digoxin level that is too high, and too much digoxin can cause a dangerous heart rhythm.
-  [4] Next: show your doctor. You can say: ‘I take danshen and digoxin. Can you check if that’s OK for me?’
+  [4] What people take it for: Used in China for angina, chest pain from heart disease. A 2023 review of 29 small trials found danshen pills eased angina symptoms more than nitrates, but the authors rated the evidence very low to low quality.
+  [5] This is not a recommendation to take it.
+  [6] Next: show your doctor. You can say: ‘I take danshen and digoxin. Can you check if that’s OK for me?’
 
   中文
   [1] 丹參同地高辛。低度風險。要留意。
   [2] 應該點做：話俾醫生或者藥劑師知你有食丹參，因為丹參可能影響某啲地高辛驗血結果。
   [3] 對心臟有咩影響：驗血結果唔準，可能睇唔出地高辛過高；地高辛過量可以引致危險嘅心律不正。
-  [4] 下一步：俾醫生睇。你可以咁講：『我有食丹參同地高辛，可唔可以幫我睇吓有冇問題？』
+  [4] 一般用嚟做咩：喺中國用嚟治心絞痛，心臟病引致嘅胸口痛。2023年一份綜合29個細規模研究嘅分析發現，丹參滴丸紓緩心絞痛症狀比硝酸鹽類藥好，但作者評定證據質素為極低至低。
+  [5] 呢個唔係建議你服用。
+  [6] 下一步：俾醫生睇。你可以咁講：『我有食丹參同地高辛，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 7. Danshen + Amlodipine  (danshen-amlodipine, status: low)
@@ -102,13 +126,17 @@ The words on screen are not changed by this script.
   [1] Danshen and amlodipine. Low risk. Keep an eye on it.
   [2] What to do: tell your doctor or pharmacist that you take danshen, so they can keep an eye on your blood pressure.
   [3] Why this matters for your heart: amlodipine controls your blood pressure. Whether danshen weakens it in people is not known.
-  [4] Next: show your doctor. You can say: ‘I take danshen and amlodipine. Can you check if that’s OK for me?’
+  [4] What people take it for: Used in China for angina, chest pain from heart disease. A 2023 review of 29 small trials found danshen pills eased angina symptoms more than nitrates, but the authors rated the evidence very low to low quality.
+  [5] This is not a recommendation to take it.
+  [6] Next: show your doctor. You can say: ‘I take danshen and amlodipine. Can you check if that’s OK for me?’
 
   中文
   [1] 丹參同氨氯地平。低度風險。要留意。
   [2] 應該點做：話俾醫生或者藥劑師知你有食丹參，等佢哋留意你嘅血壓。
   [3] 對心臟有咩影響：氨氯地平用嚟控制血壓。丹參喺人體會唔會減弱佢嘅效果，仲未知道。
-  [4] 下一步：俾醫生睇。你可以咁講：『我有食丹參同氨氯地平，可唔可以幫我睇吓有冇問題？』
+  [4] 一般用嚟做咩：喺中國用嚟治心絞痛，心臟病引致嘅胸口痛。2023年一份綜合29個細規模研究嘅分析發現，丹參滴丸紓緩心絞痛症狀比硝酸鹽類藥好，但作者評定證據質素為極低至低。
+  [5] 呢個唔係建議你服用。
+  [6] 下一步：俾醫生睇。你可以咁講：『我有食丹參同氨氯地平，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 8. Danshen + Apixaban  (danshen-apixaban, status: moderate)
@@ -117,13 +145,17 @@ The words on screen are not changed by this script.
   [1] Danshen and apixaban. Moderate risk.
   [2] What to do: talk to your doctor before taking danshen with this medicine, and tell them about any unusual bruising or bleeding.
   [3] Why this matters for your heart: bleeding, including in the gut or brain.
-  [4] Next: show your doctor. You can say: ‘I take danshen and apixaban. Can you check if that’s OK for me?’
+  [4] What people take it for: Used in China for angina, chest pain from heart disease. A 2023 review of 29 small trials found danshen pills eased angina symptoms more than nitrates, but the authors rated the evidence very low to low quality.
+  [5] This is not a recommendation to take it.
+  [6] Next: show your doctor. You can say: ‘I take danshen and apixaban. Can you check if that’s OK for me?’
 
   中文
   [1] 丹參同阿哌沙班。中度風險。
   [2] 應該點做：同呢隻藥一齊食丹參之前，請先同醫生傾；如果有唔尋常嘅瘀傷或者出血，要話俾醫生知。
   [3] 對心臟有咩影響：出血，包括腸胃或者腦出血。
-  [4] 下一步：俾醫生睇。你可以咁講：『我有食丹參同阿哌沙班，可唔可以幫我睇吓有冇問題？』
+  [4] 一般用嚟做咩：喺中國用嚟治心絞痛，心臟病引致嘅胸口痛。2023年一份綜合29個細規模研究嘅分析發現，丹參滴丸紓緩心絞痛症狀比硝酸鹽類藥好，但作者評定證據質素為極低至低。
+  [5] 呢個唔係建議你服用。
+  [6] 下一步：俾醫生睇。你可以咁講：『我有食丹參同阿哌沙班，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 9. Danshen + Rivaroxaban  (danshen-rivaroxaban, status: moderate)
@@ -132,13 +164,17 @@ The words on screen are not changed by this script.
   [1] Danshen and rivaroxaban. Moderate risk.
   [2] What to do: talk to your doctor before taking danshen with this medicine, and tell them about any unusual bruising or bleeding.
   [3] Why this matters for your heart: bleeding, including in the gut or brain.
-  [4] Next: show your doctor. You can say: ‘I take danshen and rivaroxaban. Can you check if that’s OK for me?’
+  [4] What people take it for: Used in China for angina, chest pain from heart disease. A 2023 review of 29 small trials found danshen pills eased angina symptoms more than nitrates, but the authors rated the evidence very low to low quality.
+  [5] This is not a recommendation to take it.
+  [6] Next: show your doctor. You can say: ‘I take danshen and rivaroxaban. Can you check if that’s OK for me?’
 
   中文
   [1] 丹參同利伐沙班。中度風險。
   [2] 應該點做：同呢隻藥一齊食丹參之前，請先同醫生傾；如果有唔尋常嘅瘀傷或者出血，要話俾醫生知。
   [3] 對心臟有咩影響：出血，包括腸胃或者腦出血。
-  [4] 下一步：俾醫生睇。你可以咁講：『我有食丹參同利伐沙班，可唔可以幫我睇吓有冇問題？』
+  [4] 一般用嚟做咩：喺中國用嚟治心絞痛，心臟病引致嘅胸口痛。2023年一份綜合29個細規模研究嘅分析發現，丹參滴丸紓緩心絞痛症狀比硝酸鹽類藥好，但作者評定證據質素為極低至低。
+  [5] 呢個唔係建議你服用。
+  [6] 下一步：俾醫生睇。你可以咁講：『我有食丹參同利伐沙班，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 10. Danshen + Dabigatran  (danshen-dabigatran, status: moderate)
@@ -147,13 +183,17 @@ The words on screen are not changed by this script.
   [1] Danshen and dabigatran. Moderate risk.
   [2] What to do: talk to your doctor before taking danshen with this medicine, and tell them about any unusual bruising or bleeding.
   [3] Why this matters for your heart: bleeding, including in the gut or brain.
-  [4] Next: show your doctor. You can say: ‘I take danshen and dabigatran. Can you check if that’s OK for me?’
+  [4] What people take it for: Used in China for angina, chest pain from heart disease. A 2023 review of 29 small trials found danshen pills eased angina symptoms more than nitrates, but the authors rated the evidence very low to low quality.
+  [5] This is not a recommendation to take it.
+  [6] Next: show your doctor. You can say: ‘I take danshen and dabigatran. Can you check if that’s OK for me?’
 
   中文
   [1] 丹參同達比加群。中度風險。
   [2] 應該點做：同呢隻藥一齊食丹參之前，請先同醫生傾；如果有唔尋常嘅瘀傷或者出血，要話俾醫生知。
   [3] 對心臟有咩影響：出血，包括腸胃或者腦出血。
-  [4] 下一步：俾醫生睇。你可以咁講：『我有食丹參同達比加群，可唔可以幫我睇吓有冇問題？』
+  [4] 一般用嚟做咩：喺中國用嚟治心絞痛，心臟病引致嘅胸口痛。2023年一份綜合29個細規模研究嘅分析發現，丹參滴丸紓緩心絞痛症狀比硝酸鹽類藥好，但作者評定證據質素為極低至低。
+  [5] 呢個唔係建議你服用。
+  [6] 下一步：俾醫生睇。你可以咁講：『我有食丹參同達比加群，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 11. Danshen + Edoxaban  (danshen-edoxaban, status: moderate)
@@ -162,13 +202,17 @@ The words on screen are not changed by this script.
   [1] Danshen and edoxaban. Moderate risk.
   [2] What to do: talk to your doctor before taking danshen with this medicine, and tell them about any unusual bruising or bleeding.
   [3] Why this matters for your heart: bleeding, including in the gut or brain.
-  [4] Next: show your doctor. You can say: ‘I take danshen and edoxaban. Can you check if that’s OK for me?’
+  [4] What people take it for: Used in China for angina, chest pain from heart disease. A 2023 review of 29 small trials found danshen pills eased angina symptoms more than nitrates, but the authors rated the evidence very low to low quality.
+  [5] This is not a recommendation to take it.
+  [6] Next: show your doctor. You can say: ‘I take danshen and edoxaban. Can you check if that’s OK for me?’
 
   中文
   [1] 丹參同依度沙班。中度風險。
   [2] 應該點做：同呢隻藥一齊食丹參之前，請先同醫生傾；如果有唔尋常嘅瘀傷或者出血，要話俾醫生知。
   [3] 對心臟有咩影響：出血，包括腸胃或者腦出血。
-  [4] 下一步：俾醫生睇。你可以咁講：『我有食丹參同依度沙班，可唔可以幫我睇吓有冇問題？』
+  [4] 一般用嚟做咩：喺中國用嚟治心絞痛，心臟病引致嘅胸口痛。2023年一份綜合29個細規模研究嘅分析發現，丹參滴丸紓緩心絞痛症狀比硝酸鹽類藥好，但作者評定證據質素為極低至低。
+  [5] 呢個唔係建議你服用。
+  [6] 下一步：俾醫生睇。你可以咁講：『我有食丹參同依度沙班，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 12. Danshen + Ticagrelor  (danshen-ticagrelor, status: low)
@@ -177,13 +221,17 @@ The words on screen are not changed by this script.
   [1] Danshen and ticagrelor. Low risk. Keep an eye on it.
   [2] What to do: talk to your doctor or pharmacist before using danshen.
   [3] Why this matters for your heart: watch for unusual bruising or bleeding.
-  [4] Next: show your doctor. You can say: ‘I take danshen and ticagrelor. Can you check if that’s OK for me?’
+  [4] What people take it for: Used in China for angina, chest pain from heart disease. A 2023 review of 29 small trials found danshen pills eased angina symptoms more than nitrates, but the authors rated the evidence very low to low quality.
+  [5] This is not a recommendation to take it.
+  [6] Next: show your doctor. You can say: ‘I take danshen and ticagrelor. Can you check if that’s OK for me?’
 
   中文
   [1] 丹參同替格瑞洛。低度風險。要留意。
   [2] 應該點做：食丹參之前，請先同醫生或者藥劑師傾。
   [3] 對心臟有咩影響：留意有冇唔尋常嘅瘀傷或者出血。
-  [4] 下一步：俾醫生睇。你可以咁講：『我有食丹參同替格瑞洛，可唔可以幫我睇吓有冇問題？』
+  [4] 一般用嚟做咩：喺中國用嚟治心絞痛，心臟病引致嘅胸口痛。2023年一份綜合29個細規模研究嘅分析發現，丹參滴丸紓緩心絞痛症狀比硝酸鹽類藥好，但作者評定證據質素為極低至低。
+  [5] 呢個唔係建議你服用。
+  [6] 下一步：俾醫生睇。你可以咁講：『我有食丹參同替格瑞洛，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 13. Danshen + Bisoprolol  (danshen-bisoprolol, status: low)
@@ -192,13 +240,17 @@ The words on screen are not changed by this script.
   [1] Danshen and bisoprolol. Low risk. Keep an eye on it.
   [2] What to do: tell your doctor or pharmacist that you take danshen, so they can keep an eye on your blood pressure and heart rate.
   [3] Why this matters for your heart: blood pressure may drop too low, and the heartbeat may become too slow.
-  [4] Next: show your doctor. You can say: ‘I take danshen and bisoprolol. Can you check if that’s OK for me?’
+  [4] What people take it for: Used in China for angina, chest pain from heart disease. A 2023 review of 29 small trials found danshen pills eased angina symptoms more than nitrates, but the authors rated the evidence very low to low quality.
+  [5] This is not a recommendation to take it.
+  [6] Next: show your doctor. You can say: ‘I take danshen and bisoprolol. Can you check if that’s OK for me?’
 
   中文
   [1] 丹參同比索洛爾。低度風險。要留意。
   [2] 應該點做：話俾醫生或者藥劑師知你有食丹參，等佢哋留意你嘅血壓同心跳。
   [3] 對心臟有咩影響：血壓可能跌得太低，心跳亦可能變得太慢。
-  [4] 下一步：俾醫生睇。你可以咁講：『我有食丹參同比索洛爾，可唔可以幫我睇吓有冇問題？』
+  [4] 一般用嚟做咩：喺中國用嚟治心絞痛，心臟病引致嘅胸口痛。2023年一份綜合29個細規模研究嘅分析發現，丹參滴丸紓緩心絞痛症狀比硝酸鹽類藥好，但作者評定證據質素為極低至低。
+  [5] 呢個唔係建議你服用。
+  [6] 下一步：俾醫生睇。你可以咁講：『我有食丹參同比索洛爾，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 14. Danshen + Metoprolol  (danshen-metoprolol, status: low)
@@ -207,13 +259,17 @@ The words on screen are not changed by this script.
   [1] Danshen and metoprolol. Low risk. Keep an eye on it.
   [2] What to do: tell your doctor or pharmacist that you take danshen, so they can keep an eye on your blood pressure and heart rate.
   [3] Why this matters for your heart: blood pressure may drop too low, and the heartbeat may become too slow.
-  [4] Next: show your doctor. You can say: ‘I take danshen and metoprolol. Can you check if that’s OK for me?’
+  [4] What people take it for: Used in China for angina, chest pain from heart disease. A 2023 review of 29 small trials found danshen pills eased angina symptoms more than nitrates, but the authors rated the evidence very low to low quality.
+  [5] This is not a recommendation to take it.
+  [6] Next: show your doctor. You can say: ‘I take danshen and metoprolol. Can you check if that’s OK for me?’
 
   中文
   [1] 丹參同美托洛爾。低度風險。要留意。
   [2] 應該點做：話俾醫生或者藥劑師知你有食丹參，等佢哋留意你嘅血壓同心跳。
   [3] 對心臟有咩影響：血壓可能跌得太低，心跳亦可能變得太慢。
-  [4] 下一步：俾醫生睇。你可以咁講：『我有食丹參同美托洛爾，可唔可以幫我睇吓有冇問題？』
+  [4] 一般用嚟做咩：喺中國用嚟治心絞痛，心臟病引致嘅胸口痛。2023年一份綜合29個細規模研究嘅分析發現，丹參滴丸紓緩心絞痛症狀比硝酸鹽類藥好，但作者評定證據質素為極低至低。
+  [5] 呢個唔係建議你服用。
+  [6] 下一步：俾醫生睇。你可以咁講：『我有食丹參同美托洛爾，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 15. Danshen + Perindopril  (danshen-perindopril, status: low)
@@ -222,13 +278,17 @@ The words on screen are not changed by this script.
   [1] Danshen and perindopril. Low risk. Keep an eye on it.
   [2] What to do: tell your doctor or pharmacist that you take danshen, so they can keep an eye on your blood pressure.
   [3] Why this matters for your heart: blood pressure may drop too low.
-  [4] Next: show your doctor. You can say: ‘I take danshen and perindopril. Can you check if that’s OK for me?’
+  [4] What people take it for: Used in China for angina, chest pain from heart disease. A 2023 review of 29 small trials found danshen pills eased angina symptoms more than nitrates, but the authors rated the evidence very low to low quality.
+  [5] This is not a recommendation to take it.
+  [6] Next: show your doctor. You can say: ‘I take danshen and perindopril. Can you check if that’s OK for me?’
 
   中文
   [1] 丹參同培哚普利。低度風險。要留意。
   [2] 應該點做：話俾醫生或者藥劑師知你有食丹參，等佢哋留意你嘅血壓。
   [3] 對心臟有咩影響：血壓可能跌得太低。
-  [4] 下一步：俾醫生睇。你可以咁講：『我有食丹參同培哚普利，可唔可以幫我睇吓有冇問題？』
+  [4] 一般用嚟做咩：喺中國用嚟治心絞痛，心臟病引致嘅胸口痛。2023年一份綜合29個細規模研究嘅分析發現，丹參滴丸紓緩心絞痛症狀比硝酸鹽類藥好，但作者評定證據質素為極低至低。
+  [5] 呢個唔係建議你服用。
+  [6] 下一步：俾醫生睇。你可以咁講：『我有食丹參同培哚普利，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 16. Danshen + Enalapril  (danshen-enalapril, status: low)
@@ -237,13 +297,17 @@ The words on screen are not changed by this script.
   [1] Danshen and enalapril. Low risk. Keep an eye on it.
   [2] What to do: tell your doctor or pharmacist that you take danshen, so they can keep an eye on your blood pressure.
   [3] Why this matters for your heart: blood pressure may drop too low.
-  [4] Next: show your doctor. You can say: ‘I take danshen and enalapril. Can you check if that’s OK for me?’
+  [4] What people take it for: Used in China for angina, chest pain from heart disease. A 2023 review of 29 small trials found danshen pills eased angina symptoms more than nitrates, but the authors rated the evidence very low to low quality.
+  [5] This is not a recommendation to take it.
+  [6] Next: show your doctor. You can say: ‘I take danshen and enalapril. Can you check if that’s OK for me?’
 
   中文
   [1] 丹參同依那普利。低度風險。要留意。
   [2] 應該點做：話俾醫生或者藥劑師知你有食丹參，等佢哋留意你嘅血壓。
   [3] 對心臟有咩影響：血壓可能跌得太低。
-  [4] 下一步：俾醫生睇。你可以咁講：『我有食丹參同依那普利，可唔可以幫我睇吓有冇問題？』
+  [4] 一般用嚟做咩：喺中國用嚟治心絞痛，心臟病引致嘅胸口痛。2023年一份綜合29個細規模研究嘅分析發現，丹參滴丸紓緩心絞痛症狀比硝酸鹽類藥好，但作者評定證據質素為極低至低。
+  [5] 呢個唔係建議你服用。
+  [6] 下一步：俾醫生睇。你可以咁講：『我有食丹參同依那普利，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 17. Dong quai + Warfarin  (dong_quai-warfarin, status: high)
@@ -1316,14 +1380,18 @@ The words on screen are not changed by this script.
   [2] What to do: tell your doctor that you take hawthorn.
   [3] Ask whether you need a clotting test.
   [4] Why this matters for your heart: watch for unusual bruising or bleeding.
-  [5] Next: show your doctor. You can say: ‘I take hawthorn and warfarin. Can you check if that’s OK for me?’
+  [5] What people take it for: Health Canada says hawthorn fruit is “Traditionally used in Herbal Medicine to help maintain and, or support cardiovascular health in adults”.
+  [6] This is not a recommendation to take it.
+  [7] Next: show your doctor. You can say: ‘I take hawthorn and warfarin. Can you check if that’s OK for me?’
 
   中文
   [1] 山楂同華法林。低度風險。要留意。
   [2] 應該點做：話俾醫生知你有食山楂。
   [3] 問吓需唔需要驗凝血指數。
   [4] 對心臟有咩影響：留意有冇唔尋常嘅瘀傷或者出血。
-  [5] 下一步：俾醫生睇。你可以咁講：『我有食山楂同華法林，可唔可以幫我睇吓有冇問題？』
+  [5] 一般用嚟做咩：加拿大衞生部話，英文原文翻譯，山楂果「傳統上喺草藥醫學用嚟幫助成年人維持及、或支持心血管健康」。
+  [6] 呢個唔係建議你服用。
+  [7] 下一步：俾醫生睇。你可以咁講：『我有食山楂同華法林，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 83. Hawthorn + Digoxin  (hawthorn-digoxin, status: official)
@@ -1333,14 +1401,18 @@ The words on screen are not changed by this script.
   [2] Health Canada says: Ask a health care practitioner before use if you are taking cardiac glycosides, e.g., digoxin, or blood pressure or heart medications.
   [3] What to do: tell your doctor or pharmacist that you take hawthorn, because it can affect some digoxin blood tests.
   [4] Why this matters for your heart: a wrong result could hide a digoxin level that is too high, and too much digoxin can cause a dangerous heart rhythm.
-  [5] Next: show your doctor. You can say: ‘I take hawthorn and digoxin. Can you check if that’s OK for me?’
+  [5] What people take it for: Health Canada says hawthorn fruit is “Traditionally used in Herbal Medicine to help maintain and, or support cardiovascular health in adults”.
+  [6] This is not a recommendation to take it.
+  [7] Next: show your doctor. You can say: ‘I take hawthorn and digoxin. Can you check if that’s OK for me?’
 
   中文
   [1] 山楂同地高辛。官方提醒。
   [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊強心苷類藥物，例如地高辛，或者降血壓藥或心臟藥，用之前要先問醫護人員或者醫生。
   [3] 應該點做：話俾醫生或者藥劑師知你有食山楂，因為山楂可能影響某啲地高辛驗血結果。
   [4] 對心臟有咩影響：驗血結果唔準，可能睇唔出地高辛過高；地高辛過量可以引致危險嘅心律不正。
-  [5] 下一步：俾醫生睇。你可以咁講：『我有食山楂同地高辛，可唔可以幫我睇吓有冇問題？』
+  [5] 一般用嚟做咩：加拿大衞生部話，英文原文翻譯，山楂果「傳統上喺草藥醫學用嚟幫助成年人維持及、或支持心血管健康」。
+  [6] 呢個唔係建議你服用。
+  [7] 下一步：俾醫生睇。你可以咁講：『我有食山楂同地高辛，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 84. Hawthorn + Amlodipine  (hawthorn-amlodipine, status: official)
@@ -1350,14 +1422,18 @@ The words on screen are not changed by this script.
   [2] Health Canada says: Ask a health care practitioner before use if you are taking cardiac glycosides, e.g., digoxin, or blood pressure or heart medications.
   [3] What to do: tell your doctor or pharmacist that you take hawthorn, so they can keep an eye on your blood pressure.
   [4] Why this matters for your heart: blood pressure may drop a little more than expected.
-  [5] Next: show your doctor. You can say: ‘I take hawthorn and amlodipine. Can you check if that’s OK for me?’
+  [5] What people take it for: Health Canada says hawthorn fruit is “Traditionally used in Herbal Medicine to help maintain and, or support cardiovascular health in adults”.
+  [6] This is not a recommendation to take it.
+  [7] Next: show your doctor. You can say: ‘I take hawthorn and amlodipine. Can you check if that’s OK for me?’
 
   中文
   [1] 山楂同氨氯地平。官方提醒。
   [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊強心苷類藥物，例如地高辛，或者降血壓藥或心臟藥，用之前要先問醫護人員或者醫生。
   [3] 應該點做：話俾醫生或者藥劑師知你有食山楂，等佢哋留意你嘅血壓。
   [4] 對心臟有咩影響：血壓可能比預期再低少少。
-  [5] 下一步：俾醫生睇。你可以咁講：『我有食山楂同氨氯地平，可唔可以幫我睇吓有冇問題？』
+  [5] 一般用嚟做咩：加拿大衞生部話，英文原文翻譯，山楂果「傳統上喺草藥醫學用嚟幫助成年人維持及、或支持心血管健康」。
+  [6] 呢個唔係建議你服用。
+  [7] 下一步：俾醫生睇。你可以咁講：『我有食山楂同氨氯地平，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 85. Hawthorn + Furosemide  (hawthorn-furosemide, status: official)
@@ -1367,14 +1443,18 @@ The words on screen are not changed by this script.
   [2] Health Canada says: Ask a health care practitioner before use if you are taking cardiac glycosides, e.g., digoxin, or blood pressure or heart medications.
   [3] What to do: tell your doctor or pharmacist that you take hawthorn, so they can keep an eye on your blood pressure.
   [4] Why this matters for your heart: blood pressure may drop a little more than expected.
-  [5] Next: show your doctor. You can say: ‘I take hawthorn and furosemide. Can you check if that’s OK for me?’
+  [5] What people take it for: Health Canada says hawthorn fruit is “Traditionally used in Herbal Medicine to help maintain and, or support cardiovascular health in adults”.
+  [6] This is not a recommendation to take it.
+  [7] Next: show your doctor. You can say: ‘I take hawthorn and furosemide. Can you check if that’s OK for me?’
 
   中文
   [1] 山楂同呋塞米。官方提醒。
   [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊強心苷類藥物，例如地高辛，或者降血壓藥或心臟藥，用之前要先問醫護人員或者醫生。
   [3] 應該點做：話俾醫生或者藥劑師知你有食山楂，等佢哋留意你嘅血壓。
   [4] 對心臟有咩影響：血壓可能比預期再低少少。
-  [5] 下一步：俾醫生睇。你可以咁講：『我有食山楂同呋塞米，可唔可以幫我睇吓有冇問題？』
+  [5] 一般用嚟做咩：加拿大衞生部話，英文原文翻譯，山楂果「傳統上喺草藥醫學用嚟幫助成年人維持及、或支持心血管健康」。
+  [6] 呢個唔係建議你服用。
+  [7] 下一步：俾醫生睇。你可以咁講：『我有食山楂同呋塞米，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 86. Hawthorn + Bisoprolol  (hawthorn-bisoprolol, status: official)
@@ -1384,14 +1464,18 @@ The words on screen are not changed by this script.
   [2] Health Canada says: Ask a health care practitioner before use if you are taking cardiac glycosides, e.g., digoxin, or blood pressure or heart medications.
   [3] What to do: tell your doctor or pharmacist that you take hawthorn, so they can keep an eye on your blood pressure.
   [4] Why this matters for your heart: blood pressure may drop a little more than expected.
-  [5] Next: show your doctor. You can say: ‘I take hawthorn and bisoprolol. Can you check if that’s OK for me?’
+  [5] What people take it for: Health Canada says hawthorn fruit is “Traditionally used in Herbal Medicine to help maintain and, or support cardiovascular health in adults”.
+  [6] This is not a recommendation to take it.
+  [7] Next: show your doctor. You can say: ‘I take hawthorn and bisoprolol. Can you check if that’s OK for me?’
 
   中文
   [1] 山楂同比索洛爾。官方提醒。
   [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊強心苷類藥物，例如地高辛，或者降血壓藥或心臟藥，用之前要先問醫護人員或者醫生。
   [3] 應該點做：話俾醫生或者藥劑師知你有食山楂，等佢哋留意你嘅血壓。
   [4] 對心臟有咩影響：血壓可能比預期再低少少。
-  [5] 下一步：俾醫生睇。你可以咁講：『我有食山楂同比索洛爾，可唔可以幫我睇吓有冇問題？』
+  [5] 一般用嚟做咩：加拿大衞生部話，英文原文翻譯，山楂果「傳統上喺草藥醫學用嚟幫助成年人維持及、或支持心血管健康」。
+  [6] 呢個唔係建議你服用。
+  [7] 下一步：俾醫生睇。你可以咁講：『我有食山楂同比索洛爾，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 87. Hawthorn + Metoprolol  (hawthorn-metoprolol, status: official)
@@ -1401,14 +1485,18 @@ The words on screen are not changed by this script.
   [2] Health Canada says: Ask a health care practitioner before use if you are taking cardiac glycosides, e.g., digoxin, or blood pressure or heart medications.
   [3] What to do: tell your doctor or pharmacist that you take hawthorn, so they can keep an eye on your blood pressure.
   [4] Why this matters for your heart: blood pressure may drop a little more than expected.
-  [5] Next: show your doctor. You can say: ‘I take hawthorn and metoprolol. Can you check if that’s OK for me?’
+  [5] What people take it for: Health Canada says hawthorn fruit is “Traditionally used in Herbal Medicine to help maintain and, or support cardiovascular health in adults”.
+  [6] This is not a recommendation to take it.
+  [7] Next: show your doctor. You can say: ‘I take hawthorn and metoprolol. Can you check if that’s OK for me?’
 
   中文
   [1] 山楂同美托洛爾。官方提醒。
   [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊強心苷類藥物，例如地高辛，或者降血壓藥或心臟藥，用之前要先問醫護人員或者醫生。
   [3] 應該點做：話俾醫生或者藥劑師知你有食山楂，等佢哋留意你嘅血壓。
   [4] 對心臟有咩影響：血壓可能比預期再低少少。
-  [5] 下一步：俾醫生睇。你可以咁講：『我有食山楂同美托洛爾，可唔可以幫我睇吓有冇問題？』
+  [5] 一般用嚟做咩：加拿大衞生部話，英文原文翻譯，山楂果「傳統上喺草藥醫學用嚟幫助成年人維持及、或支持心血管健康」。
+  [6] 呢個唔係建議你服用。
+  [7] 下一步：俾醫生睇。你可以咁講：『我有食山楂同美托洛爾，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 88. Hawthorn + Perindopril  (hawthorn-perindopril, status: official)
@@ -1418,14 +1506,18 @@ The words on screen are not changed by this script.
   [2] Health Canada says: Ask a health care practitioner before use if you are taking cardiac glycosides, e.g., digoxin, or blood pressure or heart medications.
   [3] What to do: tell your doctor or pharmacist that you take hawthorn, so they can keep an eye on your blood pressure.
   [4] Why this matters for your heart: blood pressure may drop a little more than expected.
-  [5] Next: show your doctor. You can say: ‘I take hawthorn and perindopril. Can you check if that’s OK for me?’
+  [5] What people take it for: Health Canada says hawthorn fruit is “Traditionally used in Herbal Medicine to help maintain and, or support cardiovascular health in adults”.
+  [6] This is not a recommendation to take it.
+  [7] Next: show your doctor. You can say: ‘I take hawthorn and perindopril. Can you check if that’s OK for me?’
 
   中文
   [1] 山楂同培哚普利。官方提醒。
   [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊強心苷類藥物，例如地高辛，或者降血壓藥或心臟藥，用之前要先問醫護人員或者醫生。
   [3] 應該點做：話俾醫生或者藥劑師知你有食山楂，等佢哋留意你嘅血壓。
   [4] 對心臟有咩影響：血壓可能比預期再低少少。
-  [5] 下一步：俾醫生睇。你可以咁講：『我有食山楂同培哚普利，可唔可以幫我睇吓有冇問題？』
+  [5] 一般用嚟做咩：加拿大衞生部話，英文原文翻譯，山楂果「傳統上喺草藥醫學用嚟幫助成年人維持及、或支持心血管健康」。
+  [6] 呢個唔係建議你服用。
+  [7] 下一步：俾醫生睇。你可以咁講：『我有食山楂同培哚普利，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 89. Hawthorn + Enalapril  (hawthorn-enalapril, status: official)
@@ -1435,14 +1527,18 @@ The words on screen are not changed by this script.
   [2] Health Canada says: Ask a health care practitioner before use if you are taking cardiac glycosides, e.g., digoxin, or blood pressure or heart medications.
   [3] What to do: tell your doctor or pharmacist that you take hawthorn, so they can keep an eye on your blood pressure.
   [4] Why this matters for your heart: blood pressure may drop a little more than expected.
-  [5] Next: show your doctor. You can say: ‘I take hawthorn and enalapril. Can you check if that’s OK for me?’
+  [5] What people take it for: Health Canada says hawthorn fruit is “Traditionally used in Herbal Medicine to help maintain and, or support cardiovascular health in adults”.
+  [6] This is not a recommendation to take it.
+  [7] Next: show your doctor. You can say: ‘I take hawthorn and enalapril. Can you check if that’s OK for me?’
 
   中文
   [1] 山楂同依那普利。官方提醒。
   [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊強心苷類藥物，例如地高辛，或者降血壓藥或心臟藥，用之前要先問醫護人員或者醫生。
   [3] 應該點做：話俾醫生或者藥劑師知你有食山楂，等佢哋留意你嘅血壓。
   [4] 對心臟有咩影響：血壓可能比預期再低少少。
-  [5] 下一步：俾醫生睇。你可以咁講：『我有食山楂同依那普利，可唔可以幫我睇吓有冇問題？』
+  [5] 一般用嚟做咩：加拿大衞生部話，英文原文翻譯，山楂果「傳統上喺草藥醫學用嚟幫助成年人維持及、或支持心血管健康」。
+  [6] 呢個唔係建議你服用。
+  [7] 下一步：俾醫生睇。你可以咁講：『我有食山楂同依那普利，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 90. Hawthorn + Losartan  (hawthorn-losartan, status: official)
@@ -1452,14 +1548,18 @@ The words on screen are not changed by this script.
   [2] Health Canada says: Ask a health care practitioner before use if you are taking cardiac glycosides, e.g., digoxin, or blood pressure or heart medications.
   [3] What to do: tell your doctor or pharmacist that you take hawthorn, so they can keep an eye on your blood pressure.
   [4] Why this matters for your heart: blood pressure may drop a little more than expected.
-  [5] Next: show your doctor. You can say: ‘I take hawthorn and losartan. Can you check if that’s OK for me?’
+  [5] What people take it for: Health Canada says hawthorn fruit is “Traditionally used in Herbal Medicine to help maintain and, or support cardiovascular health in adults”.
+  [6] This is not a recommendation to take it.
+  [7] Next: show your doctor. You can say: ‘I take hawthorn and losartan. Can you check if that’s OK for me?’
 
   中文
   [1] 山楂同氯沙坦。官方提醒。
   [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊強心苷類藥物，例如地高辛，或者降血壓藥或心臟藥，用之前要先問醫護人員或者醫生。
   [3] 應該點做：話俾醫生或者藥劑師知你有食山楂，等佢哋留意你嘅血壓。
   [4] 對心臟有咩影響：血壓可能比預期再低少少。
-  [5] 下一步：俾醫生睇。你可以咁講：『我有食山楂同氯沙坦，可唔可以幫我睇吓有冇問題？』
+  [5] 一般用嚟做咩：加拿大衞生部話，英文原文翻譯，山楂果「傳統上喺草藥醫學用嚟幫助成年人維持及、或支持心血管健康」。
+  [6] 呢個唔係建議你服用。
+  [7] 下一步：俾醫生睇。你可以咁講：『我有食山楂同氯沙坦，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 91. Hawthorn + Valsartan  (hawthorn-valsartan, status: official)
@@ -1469,14 +1569,18 @@ The words on screen are not changed by this script.
   [2] Health Canada says: Ask a health care practitioner before use if you are taking cardiac glycosides, e.g., digoxin, or blood pressure or heart medications.
   [3] What to do: tell your doctor or pharmacist that you take hawthorn, so they can keep an eye on your blood pressure.
   [4] Why this matters for your heart: blood pressure may drop a little more than expected.
-  [5] Next: show your doctor. You can say: ‘I take hawthorn and valsartan. Can you check if that’s OK for me?’
+  [5] What people take it for: Health Canada says hawthorn fruit is “Traditionally used in Herbal Medicine to help maintain and, or support cardiovascular health in adults”.
+  [6] This is not a recommendation to take it.
+  [7] Next: show your doctor. You can say: ‘I take hawthorn and valsartan. Can you check if that’s OK for me?’
 
   中文
   [1] 山楂同纈沙坦。官方提醒。
   [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊強心苷類藥物，例如地高辛，或者降血壓藥或心臟藥，用之前要先問醫護人員或者醫生。
   [3] 應該點做：話俾醫生或者藥劑師知你有食山楂，等佢哋留意你嘅血壓。
   [4] 對心臟有咩影響：血壓可能比預期再低少少。
-  [5] 下一步：俾醫生睇。你可以咁講：『我有食山楂同纈沙坦，可唔可以幫我睇吓有冇問題？』
+  [5] 一般用嚟做咩：加拿大衞生部話，英文原文翻譯，山楂果「傳統上喺草藥醫學用嚟幫助成年人維持及、或支持心血管健康」。
+  [6] 呢個唔係建議你服用。
+  [7] 下一步：俾醫生睇。你可以咁講：『我有食山楂同纈沙坦，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 92. Hawthorn + Isosorbide mononitrate  (hawthorn-isosorbide_mononitrate, status: official)
@@ -1486,14 +1590,18 @@ The words on screen are not changed by this script.
   [2] Health Canada says: Ask a health care practitioner before use if you are taking cardiac glycosides, e.g., digoxin, or blood pressure or heart medications.
   [3] What to do: tell your doctor or pharmacist that you take hawthorn, so they can keep an eye on your blood pressure.
   [4] Why this matters for your heart: blood pressure may drop a little more than expected.
-  [5] Next: show your doctor. You can say: ‘I take hawthorn and isosorbide mononitrate. Can you check if that’s OK for me?’
+  [5] What people take it for: Health Canada says hawthorn fruit is “Traditionally used in Herbal Medicine to help maintain and, or support cardiovascular health in adults”.
+  [6] This is not a recommendation to take it.
+  [7] Next: show your doctor. You can say: ‘I take hawthorn and isosorbide mononitrate. Can you check if that’s OK for me?’
 
   中文
   [1] 山楂同單硝酸異山梨酯。官方提醒。
   [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊強心苷類藥物，例如地高辛，或者降血壓藥或心臟藥，用之前要先問醫護人員或者醫生。
   [3] 應該點做：話俾醫生或者藥劑師知你有食山楂，等佢哋留意你嘅血壓。
   [4] 對心臟有咩影響：血壓可能比預期再低少少。
-  [5] 下一步：俾醫生睇。你可以咁講：『我有食山楂同單硝酸異山梨酯，可唔可以幫我睇吓有冇問題？』
+  [5] 一般用嚟做咩：加拿大衞生部話，英文原文翻譯，山楂果「傳統上喺草藥醫學用嚟幫助成年人維持及、或支持心血管健康」。
+  [6] 呢個唔係建議你服用。
+  [7] 下一步：俾醫生睇。你可以咁講：『我有食山楂同單硝酸異山梨酯，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 93. Hawthorn + Isosorbide dinitrate  (hawthorn-isosorbide_dinitrate, status: official)
@@ -1503,14 +1611,18 @@ The words on screen are not changed by this script.
   [2] Health Canada says: Ask a health care practitioner before use if you are taking cardiac glycosides, e.g., digoxin, or blood pressure or heart medications.
   [3] What to do: tell your doctor or pharmacist that you take hawthorn, so they can keep an eye on your blood pressure.
   [4] Why this matters for your heart: blood pressure may drop a little more than expected.
-  [5] Next: show your doctor. You can say: ‘I take hawthorn and isosorbide dinitrate. Can you check if that’s OK for me?’
+  [5] What people take it for: Health Canada says hawthorn fruit is “Traditionally used in Herbal Medicine to help maintain and, or support cardiovascular health in adults”.
+  [6] This is not a recommendation to take it.
+  [7] Next: show your doctor. You can say: ‘I take hawthorn and isosorbide dinitrate. Can you check if that’s OK for me?’
 
   中文
   [1] 山楂同硝酸異山梨酯。官方提醒。
   [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊強心苷類藥物，例如地高辛，或者降血壓藥或心臟藥，用之前要先問醫護人員或者醫生。
   [3] 應該點做：話俾醫生或者藥劑師知你有食山楂，等佢哋留意你嘅血壓。
   [4] 對心臟有咩影響：血壓可能比預期再低少少。
-  [5] 下一步：俾醫生睇。你可以咁講：『我有食山楂同硝酸異山梨酯，可唔可以幫我睇吓有冇問題？』
+  [5] 一般用嚟做咩：加拿大衞生部話，英文原文翻譯，山楂果「傳統上喺草藥醫學用嚟幫助成年人維持及、或支持心血管健康」。
+  [6] 呢個唔係建議你服用。
+  [7] 下一步：俾醫生睇。你可以咁講：『我有食山楂同硝酸異山梨酯，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 94. Hawthorn + Glyceryl trinitrate  (hawthorn-glyceryl_trinitrate, status: official)
@@ -1520,11 +1632,15 @@ The words on screen are not changed by this script.
   [2] Health Canada says: Ask a health care practitioner before use if you are taking cardiac glycosides, e.g., digoxin, or blood pressure or heart medications.
   [3] What to do: tell your doctor or pharmacist that you take hawthorn, so they can keep an eye on your blood pressure.
   [4] Why this matters for your heart: blood pressure may drop a little more than expected.
-  [5] Next: show your doctor. You can say: ‘I take hawthorn and glyceryl trinitrate. Can you check if that’s OK for me?’
+  [5] What people take it for: Health Canada says hawthorn fruit is “Traditionally used in Herbal Medicine to help maintain and, or support cardiovascular health in adults”.
+  [6] This is not a recommendation to take it.
+  [7] Next: show your doctor. You can say: ‘I take hawthorn and glyceryl trinitrate. Can you check if that’s OK for me?’
 
   中文
   [1] 山楂同硝酸甘油。官方提醒。
   [2] 加拿大衞生部話（英文原文翻譯）：如果你食緊強心苷類藥物，例如地高辛，或者降血壓藥或心臟藥，用之前要先問醫護人員或者醫生。
   [3] 應該點做：話俾醫生或者藥劑師知你有食山楂，等佢哋留意你嘅血壓。
   [4] 對心臟有咩影響：血壓可能比預期再低少少。
-  [5] 下一步：俾醫生睇。你可以咁講：『我有食山楂同硝酸甘油，可唔可以幫我睇吓有冇問題？』
+  [5] 一般用嚟做咩：加拿大衞生部話，英文原文翻譯，山楂果「傳統上喺草藥醫學用嚟幫助成年人維持及、或支持心血管健康」。
+  [6] 呢個唔係建議你服用。
+  [7] 下一步：俾醫生睇。你可以咁講：『我有食山楂同硝酸甘油，可唔可以幫我睇吓有冇問題？』
