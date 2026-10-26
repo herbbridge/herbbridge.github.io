@@ -335,3 +335,54 @@ rating, quote, source, S/N or date changed.
   herbbridge-v52), built with tools/make-preview.py: PREVIEW banner, no service worker, its own storage keys
   (herbsafe.preview.*), noindex. Live sw.js skips /preview/ and is now herbbridge-v50. No live app content
   changed. Delete preview/ and the /preview/ rule in sw.js when Task 1 is merged.
+- 26 Oct, Task 1 part 1 (branch task1-new-medicines, cache herbbridge-v50; not on main yet): 14 medicines
+  (apixaban, rivaroxaban, dabigatran, edoxaban [doac]; ticagrelor [antiplatelet]; bisoprolol, metoprolol
+  [beta_blocker]; perindopril, enalapril [ace_inhibitor]; losartan, valsartan [arb]; isosorbide mononitrate,
+  isosorbide dinitrate, glyceryl trinitrate [nitrate]) and 2 herbs (hawthorn 山楂, astragalus 黃芪). New
+  group "Angina" / 心絞痛藥. Hawthorn's leaf-and-flower note shows on every hawthorn pair page. No ratings
+  yet: every new pair shows the grey card until its source is checked. New medicines have no HA leaflet
+  advice until the leaflets are checked (listed in tests as awaiting a leaflet check).
+- 26 Oct, Task 1 part 2 (branch task1-new-medicines, cache herbbridge-v51; not on main yet): ratings from brief
+  section 6, every quote and fact re-checked against the original documents on 26 Oct. 28 new team entries
+  (52 in all): danshen + DOACs Moderate (R10 accurate wording, owner-chosen; no "no major bleeds" line);
+  danshen + ticagrelor / beta-blockers (with the slow-heartbeat line, owner) / ACE inhibitors Low watch;
+  ginkgo + DOACs / ticagrelor Low watch; American and Asian ginseng + beta-blockers, ACE inhibitors, ARBs,
+  calcium channel blockers No reported risk; liquorice + those four classes and nitrates Moderate;
+  red yeast rice + ticagrelor Low watch; hawthorn + 6 heart classes, digoxin and warfarin Low watch.
+  4 new Health Canada / EMA statements (hc-licorice, hc-dong-quai, hc-hawthorn, ema-ginkgo-dabigatran) and
+  19 new Official cautions (ginkgo + DOACs / ticagrelor are "sources disagree"). HA leaflets by app group
+  (owner): ticagrelor and nitrates → antianginal; metoprolol, perindopril, enalapril, losartan, valsartan →
+  antihypertensive; bisoprolol → heart failure. No HA leaflet names the DOACs, so they have none.
+  Layout (no content change): at 200% text the results list and pair heading no longer scroll sideways
+  (Health Canada's "practitioner/…/physician" and 單硝酸異山梨酯 were too wide; the first was also on main);
+  long Chinese names may now break as a last resort; the + in the pair heading stays with the herb name.
+  Tests: lock tables updated by hand; new tests for liquorice + amlodipine and danshen + DOACs.
+- 26 Oct, Task 1 owner review (branch, cache herbbridge-v52): R10 rechecked in Liao 2026. Both are in the
+  paper: gut and brain bleeds were more likely ("any bleeding" = a diagnosis at 2 clinic visits or 1 A&E
+  visit), and "No major bleeding events were observed during any episode of the exposure period" ("major" =
+  needing a hospital admission or a red cell transfusion). So gut and brain stay, and danshen + the newer
+  blood thinners adds "None of the bleeds while taking both needed a hospital stay or a blood transfusion."
+  (entry stays zh_reviewed false). 北美花旗參 → 花旗參. Owner approved the other new Chinese (zh_reviewed true
+  on 27 new entries, 19 new cautions, hawthorn, astragalus, 心絞痛藥). The 14 new medicine names stay
+  unreviewed and carry zh_name_with_en: in Chinese their English name shows next to them everywhere a name
+  is shown on screen (not in Read aloud). Tests: 166.
+- 26 Oct, Task 1 owner review 2 (branch, cache herbbridge-v53): owner approved the R10 wording (danshen-doac
+  now zh_reviewed true). In Chinese, the first mention of a new medicine inside a sentence now shows its
+  English name on screen (利伐沙班 Rivaroxaban; 達比加群酯 Dabigatran etexilate, EMA's wording), in our text and
+  our translations of official quotes. Never in Read aloud, never in an agency's own Chinese original
+  (HA leaflets). 10 sentences affected, sent to the owner for sign-off. check-flow checks it on
+  ginkgo + dabigatran. To do after Task 1 is live (owner): check-flow should wait for the page to finish
+  loading instead of fixed waits, so it also passes on the real site.
+- 26 Oct, owner signed off the 10 Chinese lines with the English medicine names as shown on screen (first
+  mention only). Their entries (danshen-doac, danshen-ticagrelor, ginkgo-doac, ginkgo-ticagrelor,
+  red_yeast_rice-ticagrelor) and the ginkgo-dabigatran caution were already zh_reviewed true; no data
+  change. Still unreviewed in Chinese: the 14 new medicine names (zh_name_with_en) and the older entries.
+- 26 Oct, owner's phone check of the preview (branch, cache herbbridge-v54): new evidence level "observational"
+  (Observational study / 觀察性研究; About text approved by the owner). Liao 2026 (danshen + newer blood
+  thinners, a self-controlled case series) and Al-Momany 2019 (hawthorn + warfarin, clinic patients) were
+  tagged "case reports"; now "observational". Other new entries checked: tags match the study designs.
+  Doctor summary "你可以咁講" line shows English next to new medicine names (on screen only). Simple mode:
+  danshen + newer blood thinners shows heart_note under the heart line ("None of the bleeds while taking
+  both needed a hospital stay or a blood transfusion." / 「一齊用兩樣期間嘅出血，冇一宗需要入院或者輸血。」);
+  Full details already has it in the main evidence. Tests: 168.
+- 26 Oct, Task 1 merged to main (owner said "merge" after the phone check). Cache herbbridge-v55.

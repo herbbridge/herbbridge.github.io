@@ -71,6 +71,10 @@
 
   function primaryName(item) { return state.lang === 'zh' ? item.name_zh : item.name_en; }
   function secondaryName(item) { return state.lang === 'zh' ? item.name_en : item.name_zh; }
+  // Medicines whose Chinese name is not yet checked (zh_name_with_en, owner 26 Oct) always show the
+  // English name next to it in Chinese; the HA leaflets for the newer blood thinners use English only.
+  function withEnglish(item) { return state.lang === 'zh' && item.zh_name_with_en === true; }
+  function shownName(item) { return withEnglish(item) ? item.name_zh + ' ' + item.name_en : primaryName(item); }
   function nameNode(item) {
     return el('span', { class: 'name' }, [
       el('span', { class: 'name-primary', text: primaryName(item), lang: state.lang === 'zh' ? 'zh-HK' : 'en-GB' }),
@@ -82,8 +86,33 @@
   function labelText(key) { return t(key) + (state.lang === 'zh' ? '：' : ': '); }
   function field(entry, base) {
     var zh = entry[base + '_zh'];
-    return state.lang === 'zh' && zh ? zh : entry[base + '_en'];
+    return state.lang === 'zh' && zh ? withEnglishNames(zh) : entry[base + '_en'];
   }
+  // On screen only (Read aloud keeps the Chinese): the first mention of a medicine marked
+  // zh_name_with_en inside a Chinese sentence gets its English name, e.g. 利伐沙班 Rivaroxaban.
+  // 達比加群酯 is EMA's "dabigatran etexilate". Never used on an agency's own Chinese original.
+  var EXTRA_EN = { '達比加群酯': 'Dabigatran etexilate' };
+  var namesInText = null;
+  function withEnglishNames(text) {
+    if (!namesInText) {
+      var pairs = {};
+      db.drugs.forEach(function (d) { if (d.zh_name_with_en === true) pairs[d.name_zh] = d.name_en; });
+      Object.keys(EXTRA_EN).forEach(function (k) { pairs[k] = EXTRA_EN[k]; });
+      var keys = Object.keys(pairs).sort(function (x, y) { return y.length - x.length; }); // 單硝酸異山梨酯 before 硝酸異山梨酯
+      namesInText = { pairs: pairs, re: keys.length ? new RegExp(keys.join('|'), 'g') : null };
+    }
+    if (!namesInText.re || !text) return text;
+    var done = {};
+    return text.replace(namesInText.re, function (m, at, all) {
+      var en = namesInText.pairs[m];
+      if (done[m] || all.slice(at + m.length, at + m.length + en.length + 1) === ' ' + en) { done[m] = true; return m; }
+      done[m] = true;
+      // A space after the English too when Chinese follows (Rivaroxaban 喺, not Rivaroxaban喺).
+      return m + ' ' + en + (/^[\u3400-\u9fff]/.test(all.charAt(at + m.length)) ? ' ' : '');
+    });
+  }
+  // An official quote in Chinese: our translation gets the English names; the agency's own Chinese is word for word.
+  function quoteZh(s) { return s.quote_zh_is_original ? s.quote_zh : withEnglishNames(s.quote_zh); }
 
   /* ---------- storage (this device only) ---------- */
 
@@ -201,7 +230,7 @@
     live.textContent = '';
     rows = rows.slice().sort(function (a, b) { return L.STATUS_ORDER.indexOf(a.status) - L.STATUS_ORDER.indexOf(b.status); });
     var msg = rows.map(function (r) {
-      return t('warn_sr', { herb: primaryName(r.herb), drug: primaryName(r.drug), risk: riskLabel(r) });
+      return t('warn_sr', { herb: primaryName(r.herb), drug: shownName(r.drug), risk: riskLabel(r) });
     }).join(' ');
     window.setTimeout(function () { live.textContent = msg; }, 50);
   }
@@ -272,7 +301,7 @@
   function pairText(r) {
     return el('span', { class: 'clash-pair' }, [
       el('span', { text: primaryName(r.herb) }), ' ', el('span', { class: 'pair-plus', 'aria-hidden': 'true', text: '+' }), ' ',
-      el('span', { class: 'visually-hidden', text: t('and_sr') + ' ' }), el('span', { text: primaryName(r.drug) })
+      el('span', { class: 'visually-hidden', text: t('and_sr') + ' ' }), el('span', { text: shownName(r.drug) })
     ]);
   }
 
@@ -701,7 +730,7 @@
      language as the HA wrote it), with the leaflet's own S/N and date. Not a rating. */
   function adviceBlock(adv, drugs) {
     var zh = state.lang === 'zh';
-    var names = drugs.map(primaryName).join(t('list_sep'));
+    var names = drugs.map(shownName).join(t('list_sep'));
     return el('div', { class: 'advice-box' }, [
       el('h4', { class: 'advice-title', text: adv.single_drug ? t('advice_title_single', { drugs: names }) : t('advice_title', { group: zh ? adv.group_zh : adv.group_en, drugs: names }) }),
       el('blockquote', { class: 'advice-quote', lang: zh ? 'zh-HK' : 'en-GB', text: '“' + (zh ? adv.quote_zh : adv.quote_en) + '”' }),
@@ -782,7 +811,7 @@
       var s = db.statementById[id];
       var zh = state.lang === 'zh';
       (i === 0 ? box : more).appendChild(el('figure', { class: 'official-statement' }, [
-        el('blockquote', { class: 'official-quote', lang: zh ? 'zh-HK' : 'en-GB', text: '“' + (zh ? s.quote_zh : s.quote_en) + '”' }),
+        el('blockquote', { class: 'official-quote', lang: zh ? 'zh-HK' : 'en-GB', text: '“' + (zh ? quoteZh(s) : s.quote_en) + '”' }),
         zh ? el('p', { class: 'official-original' }, [
           el('span', { text: t(s.quote_zh_is_original ? 'official_zh_original_note' : 'official_translation_note') + ' ' }),
           el('span', { lang: 'en-GB', text: '“' + s.quote_en + '”' })
@@ -951,6 +980,12 @@
   }
   window.addEventListener('hashchange', stopSpeaking);
 
+  // The heart line, plus its short note in Simple (Full details already says it in the main evidence).
+  function heartLines(e) {
+    var line = el('p', null, [el('strong', { text: t('label_heart_impact') + ' ' }), el('span', { text: field(e, 'heart_impact') })]);
+    if (mode !== 'simple' || !e.heart_note_en) return line;
+    return el('div', { class: 'heart-lines' }, [line, el('p', { class: 'heart-note', text: field(e, 'heart_note') })]);
+  }
   function card(r) {
     var key = pairKey(r);
     if (r.official && !r.entry) {
@@ -1030,7 +1065,7 @@
       el('p', { class: 'effect', text: field(e, 'effect') }),
       field(e, 'heart_impact') ? el('div', { class: 'heart-impact' }, [
         icon('heart', 'heart-icon'),
-        el('p', null, [el('strong', { text: t('label_heart_impact') + ' ' }), el('span', { text: field(e, 'heart_impact') })])
+        heartLines(e)
       ]) : null,
       el('dl', { class: 'facts' }, [
         el('div', null, [el('dt', { text: t('label_evidence') }), el('dd', null, [evidence])]),
@@ -1075,11 +1110,18 @@
   function keepEndTogether(root) {
     if (state.lang !== 'zh') return;
     Array.prototype.forEach.call(root.querySelectorAll('h1, h2'), function (h) {
-      if (h.children.length || !/[㐀-鿿][。！？]$/.test(h.textContent)) return;
+      if (h.children.length || !/[\u3400-\u9fff][。！？]$/.test(h.textContent)) return;
       var text = h.textContent;
       h.textContent = text.slice(0, -2);
       h.appendChild(el('span', { class: 'keep-end', text: text.slice(-2) }));
     });
+  }
+  // A note that belongs to the herb, shown on every pair page with that herb (e.g. hawthorn: which part
+  // of the plant the evidence is about).
+  function herbNote(r) {
+    if (!r.herb.pair_note_en) return null;
+    // No icon: the Low badge's "i" icon could make a grey card look like a Low rating.
+    return el('p', { class: 'herb-note', text: field(r.herb, 'pair_note') });
   }
   function homeLink() {
     return el('a', { class: 'home-link', href: '#/cabinet' }, [icon('home'), el('span', { text: t('nav_home') })]);
@@ -1088,7 +1130,7 @@
   function nextStep(rows) {
     return el('section', { class: 'next-step', id: 'next-step', tabindex: '-1', 'aria-labelledby': 'h-next' }, [
       el('h2', { id: 'h-next', text: t('next_title') }),
-      el('p', { class: 'next-say', text: window.HerbBridgeSpeech.youCanSay(rows, state.lang, t) }),
+      el('p', { class: 'next-say', text: window.HerbBridgeSpeech.youCanSay(rows, state.lang, t, true) }),
       el('a', { class: 'btn btn-primary btn-next', href: '#/summary' }, [el('span', { text: t('next_button') }), icon('arrow')])
     ]);
   }
@@ -1102,6 +1144,14 @@
   }
   // Simple: one step at a time, said in words ("Step 2 of 3").
   function stepLine(n) { return el('p', { class: 'step-line', text: t('step_of', { n: n, total: 3 }) }); }
+  // The herb name with the + joined to its last word by a no-break space, so the + never sits
+  // alone on a line (Hawthorn 山楂 / + / Digoxin).
+  function herbWithPlus(herb) {
+    var node = nameNode(herb), last = node.lastElementChild;
+    last.appendChild(document.createTextNode('\u00a0'));
+    last.appendChild(el('span', { class: 'pair-plus', 'aria-hidden': 'true', text: '+' }));
+    return node;
+  }
   function pairHref(r) { return '#/pair/' + r.herb.id + '-' + r.drug.id; }
   function stepsBar(current) {
     var labels = ['nav_check', 'step_results', 'step_details'];
@@ -1121,6 +1171,7 @@
   }
   function cardName(item, kind) {
     if (mode === 'full') return el('span', { class: 'name-with-icon' }, [icon(kind === 'herb' ? 'leaf' : 'pill', 'kind-icon'), nameNode(item)]);
+    if (withEnglish(item)) return nameNode(item);
     return el('span', { class: 'name' }, [el('span', { class: 'name-primary', text: primaryName(item), lang: state.lang === 'zh' ? 'zh-HK' : 'en-GB' })]);
   }
   function shortLine(r) {
@@ -1132,7 +1183,7 @@
     }
     if (r.entry && field(r.entry, 'heart_impact')) return el('p', { class: 'pair-line', text: field(r.entry, 'heart_impact') });
     var s = db.statementById[r.official.statements[0]];
-    return el('p', { class: 'pair-line pair-line-quote' }, [el('strong', { text: (zh ? s.body_zh + '：' : s.body_en + ': ') }), el('span', { text: '“' + (zh ? s.quote_zh : s.quote_en) + '”' })]);
+    return el('p', { class: 'pair-line pair-line-quote' }, [el('strong', { text: (zh ? s.body_zh + '：' : s.body_en + ': ') }), el('span', { text: '“' + (zh ? quoteZh(s) : s.quote_en) + '”' })]);
   }
   // Full details only: What to do in full, the evidence levels and how many sources, on the card itself.
   function fullFacts(r) {
@@ -1167,7 +1218,7 @@
     rows.forEach(function (r) {
       list.appendChild(el('li', null, [el('a', { href: pairHref(r), 'data-pair': pairKey(r) }, [
         icon('not_in_database', 'unknown-mark'),
-        el('span', { class: 'unknown-pair' }, [primaryName(r.herb), ' + ', primaryName(r.drug)]),
+        el('span', { class: 'unknown-pair' }, [primaryName(r.herb), ' + ', shownName(r.drug)]),
         icon('chevron', 'row-go')
       ])]));
     });
@@ -1231,7 +1282,7 @@
       el('div', { class: 'page-nav' }, [back, homeLink()]),
       full ? stepsBar(3) : stepLine(3),
       el('h1', { tabindex: '-1', class: 'pair-h1' }, [
-        nameNode(r.herb), ' ', el('span', { class: 'pair-plus', 'aria-hidden': 'true', text: '+' }), ' ',
+        herbWithPlus(r.herb), ' ',
         el('span', { class: 'visually-hidden', text: t('and_sr') + ' ' }), nameNode(r.drug)
       ])
     ]));
@@ -1242,6 +1293,11 @@
     if (title) title.parentNode.removeChild(title);
     if (full) {
       Array.prototype.forEach.call(whole.querySelectorAll('details'), function (d) { d.open = true; });
+      var note = herbNote(r);
+      if (note) {
+        var after = whole.querySelector('.todo') || whole.querySelector('.unknown-text') || whole.querySelector('.effect') || whole.querySelector('.read-row');
+        if (after) after.parentNode.insertBefore(note, after.nextSibling); else whole.appendChild(note);
+      }
       app.appendChild(whole);
       app.appendChild(nextStep([r]));
       return;
@@ -1267,6 +1323,7 @@
       readButton(r),
       grey ? el('p', { class: 'unknown-text', text: t('not_in_db_text') }) : null,
       el('div', { class: 'todo' }, [el('h2', { text: t('label_what_to_do') }), el('p', { text: todo })]),
+      herbNote(r),
       r.official ? officialBlock(r) : null,
       grey ? el('a', { class: 'btn btn-primary', href: '#/summary' }, [el('span', { text: t('unknown_next_button') }), icon('arrow')]) : null,
       el('p', { class: 'disclaimer-box' }, disclaimerText(r))
@@ -1334,7 +1391,7 @@
     var sayRows = L.checkPairs(db, state.herbs, state.drugs);
     if (sayRows.length) {
       var needs = sayRows.filter(isFlagged);
-      page.appendChild(el('p', { class: 'summary-say' }, [window.HerbBridgeSpeech.youCanSay(needs.length ? needs : sayRows, state.lang, t)]));
+      page.appendChild(el('p', { class: 'summary-say' }, [window.HerbBridgeSpeech.youCanSay(needs.length ? needs : sayRows, state.lang, t, true)]));
     }
 
     page.appendChild(el('div', { class: 'no-print summary-actions' }, [
@@ -1362,7 +1419,7 @@
           var s = db.statementById[id], zh = state.lang === 'zh';
           officialRows.push(el('dt', { text: t('label_official') }));
           officialRows.push(el('dd', null, [
-            el('span', { text: '“' + (zh ? s.quote_zh : s.quote_en) + '” ' }),
+            el('span', { text: '“' + (zh ? quoteZh(s) : s.quote_en) + '” ' }),
             el('span', { class: 'muted', text: zh ? '（' + s.body_zh + '，' + s.document_zh + '，' + s.date_zh + '）' : '(' + s.body_en + ', ' + s.document_en + ', ' + s.date_en + ')' })
           ]));
         });
@@ -1416,7 +1473,7 @@
 
   function pairLabel(e) {
     var herb = db.herbById[e.herb_id];
-    var other = e.drug_id ? primaryName(db.drugById[e.drug_id]) : t('class_' + e.drug_class);
+    var other = e.drug_id ? shownName(db.drugById[e.drug_id]) : t('class_' + e.drug_class);
     return primaryName(herb) + ' + ' + other;
   }
 
@@ -1514,7 +1571,7 @@
     // Official documents quoted on "Official caution" cards, one line per document.
     var docs = [], docByUrl = {};
     db.cautions.forEach(function (c) {
-      var pairName = primaryName(db.herbById[c.herb_id]) + ' + ' + (c.drug_id ? primaryName(db.drugById[c.drug_id]) : t('class_' + c.drug_class));
+      var pairName = primaryName(db.herbById[c.herb_id]) + ' + ' + (c.drug_id ? shownName(db.drugById[c.drug_id]) : t('class_' + c.drug_class));
       c.statements.forEach(function (id) {
         var s = db.statementById[id], zh = state.lang === 'zh';
         if (!docByUrl[s.url]) {

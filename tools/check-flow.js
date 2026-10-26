@@ -62,6 +62,34 @@ const SUMMARY_SAY = {
     check(after.focus === 'next-step', 'when reading aloud finishes, the next step comes into view (focused)');
     check(after.spoken.length > 0 && after.spoken[after.spoken.length - 1].includes(SAY[lang].replace(/\s/g, lang === 'zh' ? '' : ' ')), 'reading aloud ends with the "You can say" sentence');
 
+    // Hawthorn: the leaf-and-flower note on every hawthorn pair page
+    for (const pair of ['hawthorn-digoxin', 'hawthorn-warfarin', 'hawthorn-amlodipine']) {
+      await p.goto(BASE + '#/pair/' + pair); await p.waitForTimeout(400);
+      const note = await p.evaluate(() => { const n = document.querySelector('#app .herb-note'); return n && n.offsetParent ? n.innerText.trim() : ''; });
+      check(note.includes(lang === 'zh' ? '山楂葉同花' : 'leaf and flower extracts'), `${pair}: hawthorn note shown`);
+    }
+
+    // New medicine names (zh_name_with_en): English next to the Chinese on screen, never in Read aloud
+    if (lang === 'zh') {
+      await p.goto(BASE + '#/pair/ginkgo-dabigatran'); await p.reload(); await p.waitForTimeout(600);
+      await p.evaluate(() => { window.__spoken = []; document.querySelectorAll('.official-more-toggle[aria-expanded="false"]').forEach(x => x.click()); });
+      const shown = await p.evaluate(() => document.getElementById('app').innerText);
+      check(shown.includes('達比加群 Dabigatran'), 'ginkgo + dabigatran: Chinese name shown with "Dabigatran" next to it');
+      await p.click('.read-aloud'); await p.waitForTimeout(800);
+      const heard = await p.evaluate(() => window.__spoken.join(' '));
+      check(heard.includes('達比加群') && !/Dabigatran/i.test(heard), 'ginkgo + dabigatran: Read aloud says only the Chinese name');
+      await setList(['danshen'], ['apixaban']);
+      await p.goto(BASE + '#/summary'); await p.reload(); await p.waitForTimeout(500);
+      const sumSay = await p.evaluate(() => (document.querySelector('.summary-say') || {}).innerText || '');
+      check(sumSay.includes('阿哌沙班 Apixaban'), `summary "you can say" line has the English name: ${sumSay}`);
+      await setList(['danshen'], ['warfarin', 'amlodipine']);
+    }
+    // Danshen + newer blood thinners: the short "no hospital stay" note under the heart line, Simple only
+    await p.goto(BASE + '#/pair/danshen-apixaban'); await p.reload(); await p.waitForTimeout(500);
+    const heartNote = await p.evaluate(() => { const n = document.querySelector('#app .heart-note'); return n ? n.textContent : ''; });
+    check(mode === 'simple' ? heartNote === (lang === 'zh' ? '一齊用兩樣期間嘅出血，冇一宗需要入院或者輸血。' : 'None of the bleeds while taking both needed a hospital stay or a blood transfusion.') : heartNote === '',
+      `danshen + apixaban: heart note ${mode === 'simple' ? 'shown under the heart line' : 'not repeated in Full details'}`);
+
     // Summary sentence, once
     await p.goto(BASE + '#/summary'); await p.reload(); await p.waitForTimeout(500);
     const say = await p.$$eval('.summary-say', xs => xs.map(x => x.innerText.trim()));

@@ -19,7 +19,7 @@
   // Results are sorted in this order: High → Official caution → Moderate → Low → No reported risk
   // → Not in database. An official caution sorts high so a pair never looks safer than an agency says.
   var STATUS_ORDER = ['high', OFFICIAL, 'moderate', 'low', 'none_reported', NOT_IN_DATABASE];
-  var EVIDENCE_LEVELS = ['case_reports', 'human_trial', 'review', 'lab_animal', 'official_guidance'];
+  var EVIDENCE_LEVELS = ['case_reports', 'observational', 'human_trial', 'review', 'lab_animal', 'official_guidance'];
   var RATING_SOURCES = ['HA', 'team'];
 
   /* Lower-case, strip accents, spaces, punctuation and Jyutping tone numbers,
@@ -207,6 +207,7 @@
         if (!isText(item.name_zh)) problem(where + ': missing name_zh');
         if (!Array.isArray(item.aliases)) problem(where + ': aliases must be a list');
         if (typeof item.zh_reviewed !== 'boolean') problem(where + ': zh_reviewed must be true or false');
+        if ('zh_name_with_en' in item && typeof item.zh_name_with_en !== 'boolean') problem(where + ': zh_name_with_en must be true or false');
         if (kind === 'drug') {
           if (!Array.isArray(item.classes)) problem(where + ': classes must be a list, e.g. ["statin"]');
           else item.classes.forEach(function (c) {
@@ -264,6 +265,7 @@
         if (s.url_zh != null && !/^https:\/\/[^\s]+$/.test(s.url_zh)) problem(where + ': source ' + (si + 1) + ' url_zh must start with https://');
       });
       if (typeof e.zh_reviewed !== 'boolean') problem(where + ': zh_reviewed must be true or false');
+      if (('heart_note_en' in e) !== ('heart_note_zh' in e) || ('heart_note_en' in e && !(isText(e.heart_note_en) && isText(e.heart_note_zh)))) problem(where + ': heart_note needs both heart_note_en and heart_note_zh');
     });
 
     // Official cautions: every quote has its source; every caution points at known statements.

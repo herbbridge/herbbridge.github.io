@@ -677,8 +677,8 @@ html.sheet-open, html.sheet-open body { overflow: hidden; }
 
 /* Names never split mid-name (e.g. 華法 / 林): every name is its own span. */
 .name-primary, .name-secondary { word-break: keep-all; }
-/* Chinese names are at most a few characters: keep each on one line, everywhere (chips too). */
-.name-primary:lang(zh-HK), .name-secondary:lang(zh-HK),
+/* Chinese names stay on one line in the summary. Elsewhere they keep whole (keep-all) and break
+   only when a long one (單硝酸異山梨酯) would otherwise run off the screen: see "names never split". */
 .summary-pair span:lang(zh-HK), .si-zh { white-space: nowrap; overflow-wrap: normal; }
 /* Cabinet chips are narrow: there a Chinese name may wrap, but only as a last resort, so an
    extreme text size never makes the page scroll sideways. Card titles keep names whole. */
@@ -735,6 +735,8 @@ html.sheet-open, html.sheet-open body { overflow: hidden; }
   padding: 0.75rem 0.875rem; margin: 0 0 1rem;
 }
 .heart-impact p { margin: 0; font-size: 1.0556rem; line-height: 1.5; }
+.heart-lines { min-width: 0; }
+.heart-impact .heart-note { margin-top: 0.375rem; color: var(--ink-2); }
 .heart-impact .heart-icon { width: 1.375rem; height: 1.375rem; flex: none; margin-top: 0.1em; color: var(--ink); }
 @media print { .heart-impact { border-left-width: 2pt; padding: 3pt 6pt; margin-bottom: 4pt; } .heart-impact .heart-icon { display: none; } }
 .about-heart { padding-left: 1.25rem; margin: 0; }
@@ -770,6 +772,7 @@ html.sheet-open, html.sheet-open body { overflow: hidden; }
   border: 1.5px solid var(--official); border-radius: var(--radius-sm); font: inherit; font-weight: 700; text-align: left; cursor: pointer;
 }
 .official-more-toggle:hover { background: var(--accent-soft); }
+.official-more-toggle > span { min-width: 0; overflow-wrap: anywhere; }
 .official-more-toggle .toggle-chev { flex: none; width: 1.25rem; height: 1.25rem; transform: rotate(90deg); }
 .official-more-toggle[aria-expanded="true"] .toggle-chev { transform: rotate(-90deg); }
 @media print {
@@ -880,7 +883,7 @@ html[data-mode="simple"] .btn { min-height: 3.75rem; font-size: 1.1rem; }
 .badge-not_in_database .icon { background: transparent; color: var(--unknown-ink); box-shadow: inset 0 0 0 1.5px var(--unknown-line); }
 
 /* ---------- results: compact pair cards ---------- */
-.pair-cards { list-style: none; margin: 0 0 1rem; padding: 0; display: grid; gap: 1rem; }
+.pair-cards { list-style: none; margin: 0 0 1rem; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 1rem; }
 .pair-card {
   position: relative; display: block; overflow: hidden; color: var(--ink); text-decoration: none;
   background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.25rem var(--pad) 1.125rem calc(var(--pad) + 6px);
@@ -900,7 +903,8 @@ a.pair-card:hover { color: var(--ink); }
 .name-with-icon { display: inline-flex; align-items: center; gap: 0.375rem; }
 .kind-icon { width: 1.375rem; height: 1.375rem; color: var(--ink-2); }
 .pair-plus { color: var(--ink-2); font-weight: 400; }
-.pair-line { margin: 0; color: var(--ink-2); }
+/* "anywhere": Health Canada's "practitioner/health care provider/…" has no space to break at. */
+.pair-line { margin: 0; color: var(--ink-2); overflow-wrap: anywhere; }
 .pair-line strong { color: var(--ink); }
 .pair-line-quote { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .pair-line-unknown { color: var(--ink); font-weight: 700; }
@@ -950,8 +954,10 @@ html[data-mode="simple"] .status, html[data-mode="simple"] .cab-card, html[data-
 .more-btn[aria-expanded="true"] .toggle-chev { transform: rotate(-90deg); }
 
 /* ---------- names never split mid-name (華法 / 林) ---------- */
-.name-primary:lang(zh-HK), .name-secondary:lang(zh-HK), .unknown-pair:lang(zh-HK) { white-space: nowrap; }
-.pair-card-names .name, .pair-h1 .name { display: inline-flex; flex-wrap: wrap; gap: 0 0.35em; }
+/* A long name (單硝酸異山梨酯) may still break at 200% text rather than run off the screen. */
+.name-primary:lang(zh-HK), .name-secondary:lang(zh-HK), .unknown-pair:lang(zh-HK) { word-break: keep-all; overflow-wrap: anywhere; }
+.pair-card-names .name, .pair-h1 .name { display: inline-flex; flex-wrap: wrap; gap: 0 0.35em; min-width: 0; max-width: 100%; overflow-wrap: anywhere; }
+.pair-card-names .name > span, .pair-h1 .name > span { min-width: 0; max-width: 100%; }
 
 /* ---------- motion: Full details only, and never with "reduce motion" ---------- */
 html[data-mode="full"] .pair-card { transition: transform .18s ease, box-shadow .18s ease; animation: hs-rise .32s ease both; }
@@ -1068,3 +1074,7 @@ html[data-mode="full"] .pair-cards { gap: 0.625rem; }
   .page-nav, .next-step { display: none !important; }
   .summary-say { background: none !important; border: 0.75pt solid #000; padding: 1.5pt 5pt !important; margin: 1pt 0 2pt !important; font-size: 8.5pt; line-height: 1.2; }
 }
+
+/* A note about the herb itself (e.g. hawthorn: which part of the plant the evidence is about). */
+.herb-note { display: flex; gap: 0.5rem; align-items: flex-start; margin: 0 0 1rem; padding: 0.75rem 0.875rem; border-radius: var(--radius-sm); background: var(--surface); box-shadow: inset 0 0 0 1.5px var(--line); color: var(--ink); }
+.herb-note .herb-note-icon { flex: none; width: 1.25rem; height: 1.25rem; margin-top: 0.1em; color: var(--ink-2); }

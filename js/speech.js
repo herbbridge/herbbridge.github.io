@@ -90,10 +90,15 @@
     return names.slice(0, -1).join(lang === 'zh' ? '、' : ', ') + and + names[names.length - 1];
   }
   // "You can say: 'I take danshen and warfarin. Can you check if that's OK for me?'" for a list of rows.
-  function youCanSay(rows, lang, t) {
+  // onScreen: medicines marked zh_name_with_en also show their English name (never spoken).
+  function youCanSay(rows, lang, t, onScreen) {
     var names = [];
     rows.forEach(function (r) {
-      [r.herb, r.drug].forEach(function (item) { var n = sentenceName(item, lang); if (names.indexOf(n) === -1) names.push(n); });
+      [r.herb, r.drug].forEach(function (item) {
+        var n = sentenceName(item, lang);
+        if (onScreen && lang === 'zh' && item.zh_name_with_en === true) n += ' ' + item.name_en;
+        if (names.indexOf(n) === -1) names.push(n);
+      });
     });
     return t('next_say', { names: listNames(names, lang) });
   }
