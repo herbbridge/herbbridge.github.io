@@ -10,6 +10,7 @@
  */
 let chromium;
 try { ({ chromium } = require('playwright')); } catch (e) { ({ chromium } = require('/opt/node-tools/node_modules/playwright')); }
+const ready = require('./wait-ready');
 const BASE = process.argv[2] || 'http://localhost:8000/';
 const KEY = BASE.includes('/preview/') ? 'herbsafe.preview' : 'herbsafe';
 const SAY = {
@@ -41,12 +42,12 @@ const SUMMARY_SAY = {
 
     // 1. Home
     for (const hash of ['#/results', '#/pair/danshen-warfarin', '#/summary', '#/about']) {
-      await p.goto(BASE + hash); await p.reload(); await p.waitForTimeout(500);
+      await p.goto(BASE + hash); await p.reload(); await ready(p);
       await p.click('.brand'); await p.waitForTimeout(300);
       check(new URL(p.url()).hash === '#/cabinet' && await p.$('.cab-card'), `HerbBridge name on ${hash} goes to My cabinet`);
     }
     for (const hash of ['#/results', '#/pair/danshen-warfarin']) {
-      await p.goto(BASE + hash); await p.reload(); await p.waitForTimeout(500);
+      await p.goto(BASE + hash); await p.reload(); await ready(p);
       const home = await p.$('#app .home-link');
       const label = home ? (await home.innerText()).trim() : '';
       if (home) { await home.click(); await p.waitForTimeout(300); }
@@ -54,7 +55,7 @@ const SUMMARY_SAY = {
     }
 
     // 4. Next: show your doctor
-    await p.goto(BASE + '#/pair/danshen-warfarin'); await p.reload(); await p.waitForTimeout(600);
+    await p.goto(BASE + '#/pair/danshen-warfarin'); await p.reload(); await ready(p);
     const next = await p.evaluate(() => { const n = document.getElementById('next-step'); return n ? { text: n.innerText.replace(/\s+/g, ' '), href: n.querySelector('a.btn-next').getAttribute('href') } : null; });
     check(next && next.text.includes(SAY[lang]) && next.href === '#/summary', 'pair page ends with "Next: show your doctor", names filled in, button to #/summary');
     await p.click('.read-aloud'); await p.waitForTimeout(800);
@@ -64,14 +65,14 @@ const SUMMARY_SAY = {
 
     // Hawthorn: the leaf-and-flower note on every hawthorn pair page
     for (const pair of ['hawthorn-digoxin', 'hawthorn-warfarin', 'hawthorn-amlodipine']) {
-      await p.goto(BASE + '#/pair/' + pair); await p.waitForTimeout(400);
+      await p.goto(BASE + '#/pair/' + pair); await ready(p);
       const note = await p.evaluate(() => { const n = document.querySelector('#app .herb-note'); return n && n.offsetParent ? n.innerText.trim() : ''; });
       check(note.includes(lang === 'zh' ? '山楂葉同花' : 'leaf and flower extracts'), `${pair}: hawthorn note shown`);
     }
 
     // New medicine names (zh_name_with_en): English next to the Chinese on screen, never in Read aloud
     if (lang === 'zh') {
-      await p.goto(BASE + '#/pair/ginkgo-dabigatran'); await p.reload(); await p.waitForTimeout(600);
+      await p.goto(BASE + '#/pair/ginkgo-dabigatran'); await p.reload(); await ready(p);
       await p.evaluate(() => { window.__spoken = []; document.querySelectorAll('.official-more-toggle[aria-expanded="false"]').forEach(x => x.click()); });
       const shown = await p.evaluate(() => document.getElementById('app').innerText);
       check(shown.includes('達比加群 Dabigatran'), 'ginkgo + dabigatran: Chinese name shown with "Dabigatran" next to it');
@@ -79,25 +80,25 @@ const SUMMARY_SAY = {
       const heard = await p.evaluate(() => window.__spoken.join(' '));
       check(heard.includes('達比加群') && !/Dabigatran/i.test(heard), 'ginkgo + dabigatran: Read aloud says only the Chinese name');
       await setList(['danshen'], ['apixaban']);
-      await p.goto(BASE + '#/summary'); await p.reload(); await p.waitForTimeout(500);
+      await p.goto(BASE + '#/summary'); await p.reload(); await ready(p);
       const sumSay = await p.evaluate(() => (document.querySelector('.summary-say') || {}).innerText || '');
       check(sumSay.includes('阿哌沙班 Apixaban'), `summary "you can say" line has the English name: ${sumSay}`);
       await setList(['danshen'], ['warfarin', 'amlodipine']);
     }
     // Danshen + newer blood thinners: the short "no hospital stay" note under the heart line, Simple only
-    await p.goto(BASE + '#/pair/danshen-apixaban'); await p.reload(); await p.waitForTimeout(500);
+    await p.goto(BASE + '#/pair/danshen-apixaban'); await p.reload(); await ready(p);
     const heartNote = await p.evaluate(() => { const n = document.querySelector('#app .heart-note'); return n ? n.textContent : ''; });
     check(mode === 'simple' ? heartNote === (lang === 'zh' ? '一齊用兩樣期間嘅出血，冇一宗需要入院或者輸血。' : 'None of the bleeds while taking both needed a hospital stay or a blood transfusion.') : heartNote === '',
       `danshen + apixaban: heart note ${mode === 'simple' ? 'shown under the heart line' : 'not repeated in Full details'}`);
 
     // Summary sentence, once
-    await p.goto(BASE + '#/summary'); await p.reload(); await p.waitForTimeout(500);
+    await p.goto(BASE + '#/summary'); await p.reload(); await ready(p);
     const say = await p.$$eval('.summary-say', xs => xs.map(x => x.innerText.trim()));
     check(say.length === 1 && say[0] === SUMMARY_SAY[lang], `summary says it once: ${say[0] || '(missing)'}`);
 
     // 2. Removing a herb: no jump, focus moves on
     await setList(['danshen', 'goji', 'ginkgo'], ['warfarin', 'amlodipine']);
-    await p.goto(BASE + '#/cabinet'); await p.reload(); await p.waitForTimeout(600);
+    await p.goto(BASE + '#/cabinet'); await p.reload(); await ready(p);
     await p.evaluate(() => { const c = document.querySelector('[data-key="chip-herbs-goji"]'); window.scrollTo(0, c.getBoundingClientRect().top + scrollY - 300); });
     await p.waitForTimeout(200);
     const remove = async id => {
@@ -128,7 +129,7 @@ const SUMMARY_SAY = {
       await p.evaluate(([k, l, m]) => { localStorage.setItem(k + '.v1', JSON.stringify({ herbs: ['danshen'], drugs: ['warfarin', 'amlodipine'], lang: l })); localStorage.setItem(k + '.mode', m); }, [KEY, lang, mode]);
       let first = null, worst = 0, where = '';
       for (const hash of PAGES) {
-        await p.goto(BASE + hash); await p.reload(); await p.waitForTimeout(400); await p.evaluate(() => document.fonts.ready);
+        await p.goto(BASE + hash); await p.reload(); await ready(p);
         const boxes = await p.evaluate(parts => parts.map(s => { const r = document.querySelector(s).getBoundingClientRect(); return [r.left, r.top, r.width, r.height]; }), PARTS);
         if (!first) { first = boxes; continue; }
         boxes.forEach((bx, i) => bx.forEach((v, k) => { const d = Math.abs(v - first[i][k]); if (d > worst) { worst = d; where = `${PARTS[i]} on ${hash}`; } }));

@@ -9,6 +9,7 @@ const fs = require('fs');
 const path = require('path');
 let chromium;
 try { ({ chromium } = require('playwright')); } catch (e) { ({ chromium } = require('/opt/node-tools/node_modules/playwright')); }
+const ready = require('./wait-ready');
 const BASE = process.argv[2] || 'http://localhost:8000/';
 const KEY = BASE.includes('/preview/') ? 'herbsafe.preview' : 'herbsafe';
 const files = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'audio', 'manifest.json'), 'utf8')).files || [];
@@ -34,7 +35,7 @@ async function read(b, pair, lang) {
   const p = await ctx.newPage(); const errs = []; p.on('pageerror', e => errs.push(e.message));
   await p.goto(BASE);
   await p.evaluate(([k, l]) => localStorage.setItem(k + '.v1', JSON.stringify({ herbs: [], drugs: [], lang: l })), [KEY, lang]);
-  await p.goto(BASE + '#/pair/' + pair); await p.reload(); await p.waitForTimeout(1500); // recordings load in the background
+  await p.goto(BASE + '#/pair/' + pair); await p.reload(); await ready(p);
   await p.click('.read-aloud'); await p.waitForTimeout(1500);
   const r = await p.evaluate(() => ({ audio: window.__audio, spoken: window.__spoken.length }));
   await ctx.close();

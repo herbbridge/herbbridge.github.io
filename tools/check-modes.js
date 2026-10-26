@@ -10,6 +10,7 @@
  */
 let chromium;
 try { ({ chromium } = require('playwright')); } catch (e) { ({ chromium } = require('/opt/node-tools/node_modules/playwright')); }
+const ready = require('./wait-ready');
 const BASE = process.argv[2] || 'http://localhost:8000/';
 const KEY = BASE.includes('/preview/') ? 'herbsafe.preview' : 'herbsafe';
 const NOT_IN_DB = {
@@ -34,7 +35,7 @@ const PAIRS = ['danshen-warfarin', 'danshen-amlodipine', 'american_ginseng-warfa
       await p.evaluate(([k, l, m]) => { localStorage.setItem(k + '.v1', JSON.stringify({ herbs: [], drugs: [], lang: l })); localStorage.setItem(k + '.mode', m); }, [KEY, lang, mode]);
       console.log(`\n${lang} ${mode}`);
       for (const pair of PAIRS) {
-        await p.goto(BASE + '#/pair/' + pair); await p.reload(); await p.waitForTimeout(600);
+        await p.goto(BASE + '#/pair/' + pair); await p.reload(); await ready(p);
         const r = await p.evaluate(() => {
           const vis = x => !!x && x.offsetParent !== null;
           const badge = [...document.querySelectorAll('#app .badge')].find(vis);
@@ -59,7 +60,7 @@ const PAIRS = ['danshen-warfarin', 'danshen-amlodipine', 'american_ginseng-warfa
       await page.goto(BASE);
       await page.evaluate(([k, l]) => localStorage.setItem(k + '.v1', JSON.stringify({ herbs: ['danshen', 'goji'], drugs: ['warfarin', 'amlodipine'], lang: l })), [KEY, lang]);
       for (const [name, hash] of [['home', '#/cabinet'], ['results', '#/results'], ['pair', '#/pair/danshen-warfarin']]) {
-        await page.goto(BASE + hash); await page.reload(); await page.waitForTimeout(700);
+        await page.goto(BASE + hash); await page.reload(); await ready(page);
         await page.evaluate(() => document.fonts.ready);
         const f = await page.evaluate(() => {
           const box = s => { const x = document.querySelector(s); return x ? x.getBoundingClientRect() : null; };

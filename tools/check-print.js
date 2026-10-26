@@ -6,6 +6,7 @@
  */
 let chromium;
 try { ({ chromium } = require('playwright')); } catch (e) { ({ chromium } = require('/opt/node-tools/node_modules/playwright')); }
+const ready = require('./wait-ready');
 const { execFileSync } = require('child_process');
 const fs = require('fs'), os = require('os'), path = require('path');
 const OUT = fs.mkdtempSync(path.join(os.tmpdir(), 'herbbridge-print-'));
@@ -16,7 +17,7 @@ const LISTS = { demo: { herbs: ['danshen'], drugs: ['warfarin', 'amlodipine'] },
     const ctx = await b.newContext({ serviceWorkers: 'block' }); const p = await ctx.newPage(); const errs = []; p.on('pageerror', e => errs.push(e.message));
     await p.goto('http://localhost:8000/');
     await p.evaluate(([l, lang, mode]) => { localStorage.setItem('herbsafe.v1', JSON.stringify({ herbs: l.herbs, drugs: l.drugs, lang })); localStorage.setItem('herbsafe.mode', mode); }, [l, lang, mode]);
-    await p.goto('http://localhost:8000/#/summary'); await p.reload(); await p.waitForTimeout(1000);
+    await p.goto('http://localhost:8000/#/summary'); await p.reload(); await ready(p);
     await p.evaluate(() => document.fonts.ready);
     const rows = await p.$$eval('.summary tr, .summary .sum-row, .summary li', x => x.length).catch(() => 0);
     await p.emulateMedia({ media: 'print' });

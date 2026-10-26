@@ -387,3 +387,4 @@ rating, quote, source, S/N or date changed.
   Full details already has it in the main evidence. Tests: 168.
 - 26 Oct, Task 1 merged to main (owner said "merge" after the phone check). Cache herbbridge-v55.
 - 26 Oct, preview/ removed and the /preview/ rule taken out of sw.js (owner). Cache herbbridge-v56.
+- 26 Oct, tools (owner): check-flow, check-modes, check-recordings and check-print now wait for each page to finish loading (tools/wait-ready.js: network quiet, screen drawn, fonts ready) instead of fixed pauses, so they also pass on the real site (checked twice on https://herbbridge.github.io/). Short waits after clicks stay. No app change; cache stays herbbridge-v56.
