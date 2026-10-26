@@ -369,3 +369,7 @@ rating, quote, source, S/N or date changed.
   (HA leaflets). 10 sentences affected, sent to the owner for sign-off. check-flow checks it on
   ginkgo + dabigatran. To do after Task 1 is live (owner): check-flow should wait for the page to finish
   loading instead of fixed waits, so it also passes on the real site.
+- 26 Oct, owner signed off the 10 Chinese lines with the English medicine names as shown on screen (first
+  mention only). Their entries (danshen-doac, danshen-ticagrelor, ginkgo-doac, ginkgo-ticagrelor,
+  red_yeast_rice-ticagrelor) and the ginkgo-dabigatran caution were already zh_reviewed true; no data
+  change. Still unreviewed in Chinese: the 14 new medicine names (zh_name_with_en) and the older entries.
