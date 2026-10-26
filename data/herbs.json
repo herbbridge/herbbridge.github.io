@@ -207,7 +207,7 @@
       ],
       "pair_note_en": "Most of the evidence is for hawthorn leaf and flower extracts, not the hawthorn fruit used in soups and teas.",
       "pair_note_zh": "大部分證據係關於山楂葉同花嘅提取物，唔係煲湯或沖茶用嘅山楂果。",
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "astragalus",
@@ -223,7 +223,7 @@
         "milkvetch root",
         "astragalus root"
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     }
   ]
 }

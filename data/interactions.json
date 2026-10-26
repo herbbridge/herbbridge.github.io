@@ -936,8 +936,8 @@
       "action_en": "Talk to your doctor before taking danshen with this medicine, and tell them about any unusual bruising or bleeding.",
       "action_zh": "同呢隻藥一齊食丹參之前，請先同醫生傾；如果有唔尋常嘅瘀傷或者出血，要話俾醫生知。",
       "main_source": 0,
-      "main_finding_en": "A 2026 study of 146 people in Taiwan who bled while taking an oral anticoagulant, including the newer ones, found bleeding (including in the gut and brain) was more likely in the first 28 days after they started taking both.",
-      "main_finding_zh": "2026年一項台灣研究，對象係146個食緊口服抗凝血藥（包括新一代藥物）期間出血嘅人，發現開始一齊用兩樣之後嘅頭28日，出血（包括腸胃同腦出血）機會較高。",
+      "main_finding_en": "A 2026 study of 146 people in Taiwan who bled while taking an oral anticoagulant, including the newer ones, found bleeding (including in the gut and brain) was more likely in the first 28 days after they started taking both. None of the bleeds while taking both needed a hospital stay or a blood transfusion.",
+      "main_finding_zh": "2026年一項台灣研究，對象係146個食緊口服抗凝血藥（包括新一代藥物）期間出血嘅人，發現開始一齊用兩樣之後嘅頭28日，出血（包括腸胃同腦出血）機會較高。一齊用兩樣期間嘅出血，冇一宗需要入院或者輸血。",
       "evidence_level": [
         "case_reports",
         "review",
@@ -987,7 +987,7 @@
           "url": "https://www.ema.europa.eu/en/documents/herbal-report/assessment-report-salvia-miltiorrhiza-bunge-radix-et-rhizoma_en.pdf"
         }
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "danshen-beta_blocker",
@@ -1017,7 +1017,7 @@
           "url": "https://www.ema.europa.eu/en/documents/herbal-report/assessment-report-salvia-miltiorrhiza-bunge-radix-et-rhizoma_en.pdf"
         }
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "danshen-ace_inhibitor",
@@ -1047,7 +1047,7 @@
           "url": "https://www.ema.europa.eu/en/documents/herbal-report/assessment-report-salvia-miltiorrhiza-bunge-radix-et-rhizoma_en.pdf"
         }
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "ginkgo-doac",
@@ -1086,7 +1086,7 @@
           "url": "https://www.ema.europa.eu/en/documents/herbal-monograph/final-european-union-herbal-monograph-ginkgo-biloba-l-folium_en.pdf"
         }
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "ginkgo-ticagrelor",
@@ -1120,7 +1120,7 @@
           "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/dbImages/mono_ginkgo-biloba_english.pdf"
         }
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "american_ginseng-beta_blocker",
@@ -1130,7 +1130,7 @@
       "watch": false,
       "rating_source": "team",
       "effect_en": "A review of 17 trials found ginseng had no significant effect on blood pressure, and a trial in people with high blood pressure, most of them on blood pressure medicines, found North American ginseng had a neutral effect.",
-      "effect_zh": "一項綜合17個研究嘅分析發現，人參類對血壓冇顯著影響；另一項針對高血壓人士（大部分有食降血壓藥）嘅研究發現，北美花旗參對血壓冇影響。",
+      "effect_zh": "一項綜合17個研究嘅分析發現，人參類對血壓冇顯著影響；另一項針對高血壓人士（大部分有食降血壓藥）嘅研究發現，花旗參對血壓冇影響。",
       "heart_impact_en": "No effect on blood pressure was found in these studies.",
       "heart_impact_zh": "呢啲研究冇發現對血壓有影響。",
       "why_en": null,
@@ -1155,7 +1155,7 @@
           "url": "https://pubmed.ncbi.nlm.nih.gov/15998708/"
         }
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "american_ginseng-ace_inhibitor",
@@ -1165,7 +1165,7 @@
       "watch": false,
       "rating_source": "team",
       "effect_en": "A review of 17 trials found ginseng had no significant effect on blood pressure, and a trial in people with high blood pressure, most of them on blood pressure medicines, found North American ginseng had a neutral effect.",
-      "effect_zh": "一項綜合17個研究嘅分析發現，人參類對血壓冇顯著影響；另一項針對高血壓人士（大部分有食降血壓藥）嘅研究發現，北美花旗參對血壓冇影響。",
+      "effect_zh": "一項綜合17個研究嘅分析發現，人參類對血壓冇顯著影響；另一項針對高血壓人士（大部分有食降血壓藥）嘅研究發現，花旗參對血壓冇影響。",
       "heart_impact_en": "No effect on blood pressure was found in these studies.",
       "heart_impact_zh": "呢啲研究冇發現對血壓有影響。",
       "why_en": null,
@@ -1190,7 +1190,7 @@
           "url": "https://pubmed.ncbi.nlm.nih.gov/15998708/"
         }
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "american_ginseng-arb",
@@ -1200,7 +1200,7 @@
       "watch": false,
       "rating_source": "team",
       "effect_en": "A review of 17 trials found ginseng had no significant effect on blood pressure, and a trial in people with high blood pressure, most of them on blood pressure medicines, found North American ginseng had a neutral effect.",
-      "effect_zh": "一項綜合17個研究嘅分析發現，人參類對血壓冇顯著影響；另一項針對高血壓人士（大部分有食降血壓藥）嘅研究發現，北美花旗參對血壓冇影響。",
+      "effect_zh": "一項綜合17個研究嘅分析發現，人參類對血壓冇顯著影響；另一項針對高血壓人士（大部分有食降血壓藥）嘅研究發現，花旗參對血壓冇影響。",
       "heart_impact_en": "No effect on blood pressure was found in these studies.",
       "heart_impact_zh": "呢啲研究冇發現對血壓有影響。",
       "why_en": null,
@@ -1225,7 +1225,7 @@
           "url": "https://pubmed.ncbi.nlm.nih.gov/15998708/"
         }
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "american_ginseng-calcium_channel_blocker",
@@ -1235,7 +1235,7 @@
       "watch": false,
       "rating_source": "team",
       "effect_en": "A review of 17 trials found ginseng had no significant effect on blood pressure, and a trial in people with high blood pressure, most of them on blood pressure medicines, found North American ginseng had a neutral effect.",
-      "effect_zh": "一項綜合17個研究嘅分析發現，人參類對血壓冇顯著影響；另一項針對高血壓人士（大部分有食降血壓藥）嘅研究發現，北美花旗參對血壓冇影響。",
+      "effect_zh": "一項綜合17個研究嘅分析發現，人參類對血壓冇顯著影響；另一項針對高血壓人士（大部分有食降血壓藥）嘅研究發現，花旗參對血壓冇影響。",
       "heart_impact_en": "No effect on blood pressure was found in these studies.",
       "heart_impact_zh": "呢啲研究冇發現對血壓有影響。",
       "why_en": null,
@@ -1260,7 +1260,7 @@
           "url": "https://pubmed.ncbi.nlm.nih.gov/15998708/"
         }
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "asian_ginseng-beta_blocker",
@@ -1290,7 +1290,7 @@
           "url": "https://pubmed.ncbi.nlm.nih.gov/27074879/"
         }
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "asian_ginseng-ace_inhibitor",
@@ -1320,7 +1320,7 @@
           "url": "https://pubmed.ncbi.nlm.nih.gov/27074879/"
         }
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "asian_ginseng-arb",
@@ -1350,7 +1350,7 @@
           "url": "https://pubmed.ncbi.nlm.nih.gov/27074879/"
         }
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "asian_ginseng-calcium_channel_blocker",
@@ -1380,7 +1380,7 @@
           "url": "https://pubmed.ncbi.nlm.nih.gov/27074879/"
         }
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "liquorice-beta_blocker",
@@ -1419,7 +1419,7 @@
           "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/dbImages/mono_licorice_english.pdf"
         }
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "liquorice-ace_inhibitor",
@@ -1458,7 +1458,7 @@
           "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/dbImages/mono_licorice_english.pdf"
         }
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "liquorice-arb",
@@ -1497,7 +1497,7 @@
           "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/dbImages/mono_licorice_english.pdf"
         }
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "liquorice-calcium_channel_blocker",
@@ -1536,7 +1536,7 @@
           "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/dbImages/mono_licorice_english.pdf"
         }
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "liquorice-nitrate",
@@ -1571,7 +1571,7 @@
           "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/dbImages/mono_licorice_english.pdf"
         }
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "red_yeast_rice-ticagrelor",
@@ -1606,7 +1606,7 @@
           "url": "https://www.mskcc.org/cancer-care/integrative-medicine/herbs/red-yeast-rice"
         }
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "hawthorn-beta_blocker",
@@ -1641,7 +1641,7 @@
           "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/atReq?atid=crataegus.monogyna&lang=eng"
         }
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "hawthorn-ace_inhibitor",
@@ -1676,7 +1676,7 @@
           "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/atReq?atid=crataegus.monogyna&lang=eng"
         }
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "hawthorn-arb",
@@ -1711,7 +1711,7 @@
           "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/atReq?atid=crataegus.monogyna&lang=eng"
         }
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "hawthorn-calcium_channel_blocker",
@@ -1746,7 +1746,7 @@
           "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/atReq?atid=crataegus.monogyna&lang=eng"
         }
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "hawthorn-nitrate",
@@ -1781,7 +1781,7 @@
           "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/atReq?atid=crataegus.monogyna&lang=eng"
         }
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "hawthorn-diuretic",
@@ -1816,7 +1816,7 @@
           "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/atReq?atid=crataegus.monogyna&lang=eng"
         }
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "hawthorn-digoxin",
@@ -1856,7 +1856,7 @@
           "url": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/atReq?atid=crataegus.monogyna&lang=eng"
         }
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "hawthorn-warfarin",
@@ -1886,7 +1886,7 @@
           "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6829640/"
         }
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     }
   ]
 }

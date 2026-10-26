@@ -23,7 +23,7 @@
       "id": "angina",
       "name_en": "Angina",
       "name_zh": "心絞痛藥",
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "blood_pressure",
@@ -175,7 +175,8 @@
       "aliases": [
         "Eliquis"
       ],
-      "zh_reviewed": false
+      "zh_reviewed": false,
+      "zh_name_with_en": true
     },
     {
       "id": "rivaroxaban",
@@ -188,7 +189,8 @@
       "aliases": [
         "Xarelto"
       ],
-      "zh_reviewed": false
+      "zh_reviewed": false,
+      "zh_name_with_en": true
     },
     {
       "id": "dabigatran",
@@ -201,7 +203,8 @@
       "aliases": [
         "Pradaxa"
       ],
-      "zh_reviewed": false
+      "zh_reviewed": false,
+      "zh_name_with_en": true
     },
     {
       "id": "edoxaban",
@@ -215,7 +218,8 @@
         "Lixiana",
         "Savaysa"
       ],
-      "zh_reviewed": false
+      "zh_reviewed": false,
+      "zh_name_with_en": true
     },
     {
       "id": "ticagrelor",
@@ -229,7 +233,8 @@
         "Brilinta",
         "Brilique"
       ],
-      "zh_reviewed": false
+      "zh_reviewed": false,
+      "zh_name_with_en": true
     },
     {
       "id": "bisoprolol",
@@ -242,7 +247,8 @@
       "aliases": [
         "Concor"
       ],
-      "zh_reviewed": false
+      "zh_reviewed": false,
+      "zh_name_with_en": true
     },
     {
       "id": "metoprolol",
@@ -255,7 +261,8 @@
       "aliases": [
         "Betaloc"
       ],
-      "zh_reviewed": false
+      "zh_reviewed": false,
+      "zh_name_with_en": true
     },
     {
       "id": "perindopril",
@@ -268,7 +275,8 @@
       "aliases": [
         "Coversyl"
       ],
-      "zh_reviewed": false
+      "zh_reviewed": false,
+      "zh_name_with_en": true
     },
     {
       "id": "enalapril",
@@ -281,7 +289,8 @@
       "aliases": [
         "Renitec"
       ],
-      "zh_reviewed": false
+      "zh_reviewed": false,
+      "zh_name_with_en": true
     },
     {
       "id": "losartan",
@@ -294,7 +303,8 @@
       "aliases": [
         "Cozaar"
       ],
-      "zh_reviewed": false
+      "zh_reviewed": false,
+      "zh_name_with_en": true
     },
     {
       "id": "valsartan",
@@ -307,7 +317,8 @@
       "aliases": [
         "Diovan"
       ],
-      "zh_reviewed": false
+      "zh_reviewed": false,
+      "zh_name_with_en": true
     },
     {
       "id": "isosorbide_mononitrate",
@@ -320,7 +331,8 @@
       "aliases": [
         "ISMN"
       ],
-      "zh_reviewed": false
+      "zh_reviewed": false,
+      "zh_name_with_en": true
     },
     {
       "id": "isosorbide_dinitrate",
@@ -333,7 +345,8 @@
       "aliases": [
         "ISDN"
       ],
-      "zh_reviewed": false
+      "zh_reviewed": false,
+      "zh_name_with_en": true
     },
     {
       "id": "glyceryl_trinitrate",
@@ -347,7 +360,8 @@
         "GTN",
         "nitroglycerin"
       ],
-      "zh_reviewed": false
+      "zh_reviewed": false,
+      "zh_name_with_en": true
     }
   ]
 }

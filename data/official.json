@@ -363,7 +363,7 @@
       "statements": [
         "hc-ginkgo-contraindication"
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "ginkgo-rivaroxaban-official",
@@ -373,7 +373,7 @@
       "statements": [
         "hc-ginkgo-contraindication"
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "ginkgo-edoxaban-official",
@@ -383,7 +383,7 @@
       "statements": [
         "hc-ginkgo-contraindication"
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "ginkgo-dabigatran-official",
@@ -394,7 +394,7 @@
         "hc-ginkgo-contraindication",
         "ema-ginkgo-dabigatran"
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "ginkgo-ticagrelor-official",
@@ -405,7 +405,7 @@
         "hc-ginkgo-contraindication",
         "ema-ginkgo-4.5"
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "dong_quai-doac-official",
@@ -415,7 +415,7 @@
       "statements": [
         "hc-dong-quai"
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "american_ginseng-doac-official",
@@ -425,7 +425,7 @@
       "statements": [
         "hc-american-ginseng"
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "asian_ginseng-doac-official",
@@ -435,7 +435,7 @@
       "statements": [
         "hc-panax-ginseng"
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "liquorice-beta_blocker-official",
@@ -446,7 +446,7 @@
         "ema-liquorice-blood-pressure",
         "hc-licorice"
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "liquorice-ace_inhibitor-official",
@@ -457,7 +457,7 @@
         "ema-liquorice-blood-pressure",
         "hc-licorice"
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "liquorice-arb-official",
@@ -468,7 +468,7 @@
         "ema-liquorice-blood-pressure",
         "hc-licorice"
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "liquorice-nitrate-official",
@@ -478,7 +478,7 @@
       "statements": [
         "hc-licorice"
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "hawthorn-beta_blocker-official",
@@ -488,7 +488,7 @@
       "statements": [
         "hc-hawthorn"
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "hawthorn-ace_inhibitor-official",
@@ -498,7 +498,7 @@
       "statements": [
         "hc-hawthorn"
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "hawthorn-arb-official",
@@ -508,7 +508,7 @@
       "statements": [
         "hc-hawthorn"
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "hawthorn-calcium_channel_blocker-official",
@@ -518,7 +518,7 @@
       "statements": [
         "hc-hawthorn"
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "hawthorn-nitrate-official",
@@ -528,7 +528,7 @@
       "statements": [
         "hc-hawthorn"
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "hawthorn-diuretic-official",
@@ -538,7 +538,7 @@
       "statements": [
         "hc-hawthorn"
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     },
     {
       "id": "hawthorn-digoxin-official",
@@ -548,7 +548,7 @@
       "statements": [
         "hc-hawthorn"
       ],
-      "zh_reviewed": false
+      "zh_reviewed": true
     }
   ],
   "general_advice": [

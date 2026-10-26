@@ -207,6 +207,7 @@
         if (!isText(item.name_zh)) problem(where + ': missing name_zh');
         if (!Array.isArray(item.aliases)) problem(where + ': aliases must be a list');
         if (typeof item.zh_reviewed !== 'boolean') problem(where + ': zh_reviewed must be true or false');
+        if ('zh_name_with_en' in item && typeof item.zh_name_with_en !== 'boolean') problem(where + ': zh_name_with_en must be true or false');
         if (kind === 'drug') {
           if (!Array.isArray(item.classes)) problem(where + ': classes must be a list, e.g. ["statin"]');
           else item.classes.forEach(function (c) {

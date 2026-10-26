@@ -353,3 +353,12 @@ rating, quote, source, S/N or date changed.
   (Health Canada's "practitioner/…/physician" and 單硝酸異山梨酯 were too wide; the first was also on main);
   long Chinese names may now break as a last resort; the + in the pair heading stays with the herb name.
   Tests: lock tables updated by hand; new tests for liquorice + amlodipine and danshen + DOACs.
+- 26 Oct, Task 1 owner review (branch, cache herbbridge-v52): R10 rechecked in Liao 2026. Both are in the
+  paper: gut and brain bleeds were more likely ("any bleeding" = a diagnosis at 2 clinic visits or 1 A&E
+  visit), and "No major bleeding events were observed during any episode of the exposure period" ("major" =
+  needing a hospital admission or a red cell transfusion). So gut and brain stay, and danshen + the newer
+  blood thinners adds "None of the bleeds while taking both needed a hospital stay or a blood transfusion."
+  (entry stays zh_reviewed false). 北美花旗參 → 花旗參. Owner approved the other new Chinese (zh_reviewed true
+  on 27 new entries, 19 new cautions, hawthorn, astragalus, 心絞痛藥). The 14 new medicine names stay
+  unreviewed and carry zh_name_with_en: in Chinese their English name shows next to them everywhere a name
+  is shown on screen (not in Read aloud). Tests: 166.

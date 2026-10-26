@@ -624,6 +624,18 @@
         .map(function (r) { return r.drug.id + ' → ' + r.status; });
       return { pass: bad.length === 0, detail: bad.join('\n') };
     });
+    check('New medicines (26 Oct)', 'the 14 new medicines show their English name next to the Chinese (owner, 26 Oct)', function () {
+      var want = ['apixaban', 'rivaroxaban', 'dabigatran', 'edoxaban', 'ticagrelor', 'bisoprolol', 'metoprolol', 'perindopril',
+        'enalapril', 'losartan', 'valsartan', 'isosorbide_mononitrate', 'isosorbide_dinitrate', 'glyceryl_trinitrate'];
+      var got = db.drugs.filter(function (d) { return d.zh_name_with_en === true; }).map(function (d) { return d.id; });
+      var bad = want.filter(function (id) { return got.indexOf(id) === -1 || db.drugById[id].zh_reviewed !== false; });
+      return { pass: bad.length === 0 && got.length === want.length, detail: 'marked: ' + got.join(', ') + (bad.length ? '\nwrong: ' + bad.join(', ') : '') };
+    });
+    check('New medicines (26 Oct)', 'danshen + the newer blood thinners says no bleed needed a hospital stay or transfusion (Liao 2026)', function () {
+      var e = db.interactions.filter(function (x) { return x.id === 'danshen-doac'; })[0];
+      return { pass: !!e && /needed a hospital stay or a blood transfusion/.test(e.main_finding_en) && /冇一宗需要入院或者輸血/.test(e.main_finding_zh),
+        detail: e ? e.main_finding_en : 'missing' };
+    });
     check('New medicines (26 Oct)', 'astragalus + warfarin shows the grey "not in our database" card', function () {
       var r = lookup.checkPairs(db, ['astragalus'], ['warfarin'])[0];
       return { pass: r.status === 'not_in_database' && !r.entry && !r.official, detail: r.status };

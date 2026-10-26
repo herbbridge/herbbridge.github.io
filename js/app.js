@@ -71,6 +71,10 @@
 
   function primaryName(item) { return state.lang === 'zh' ? item.name_zh : item.name_en; }
   function secondaryName(item) { return state.lang === 'zh' ? item.name_en : item.name_zh; }
+  // Medicines whose Chinese name is not yet checked (zh_name_with_en, owner 26 Oct) always show the
+  // English name next to it in Chinese; the HA leaflets for the newer blood thinners use English only.
+  function withEnglish(item) { return state.lang === 'zh' && item.zh_name_with_en === true; }
+  function shownName(item) { return withEnglish(item) ? item.name_zh + ' ' + item.name_en : primaryName(item); }
   function nameNode(item) {
     return el('span', { class: 'name' }, [
       el('span', { class: 'name-primary', text: primaryName(item), lang: state.lang === 'zh' ? 'zh-HK' : 'en-GB' }),
@@ -201,7 +205,7 @@
     live.textContent = '';
     rows = rows.slice().sort(function (a, b) { return L.STATUS_ORDER.indexOf(a.status) - L.STATUS_ORDER.indexOf(b.status); });
     var msg = rows.map(function (r) {
-      return t('warn_sr', { herb: primaryName(r.herb), drug: primaryName(r.drug), risk: riskLabel(r) });
+      return t('warn_sr', { herb: primaryName(r.herb), drug: shownName(r.drug), risk: riskLabel(r) });
     }).join(' ');
     window.setTimeout(function () { live.textContent = msg; }, 50);
   }
@@ -272,7 +276,7 @@
   function pairText(r) {
     return el('span', { class: 'clash-pair' }, [
       el('span', { text: primaryName(r.herb) }), ' ', el('span', { class: 'pair-plus', 'aria-hidden': 'true', text: '+' }), ' ',
-      el('span', { class: 'visually-hidden', text: t('and_sr') + ' ' }), el('span', { text: primaryName(r.drug) })
+      el('span', { class: 'visually-hidden', text: t('and_sr') + ' ' }), el('span', { text: shownName(r.drug) })
     ]);
   }
 
@@ -701,7 +705,7 @@
      language as the HA wrote it), with the leaflet's own S/N and date. Not a rating. */
   function adviceBlock(adv, drugs) {
     var zh = state.lang === 'zh';
-    var names = drugs.map(primaryName).join(t('list_sep'));
+    var names = drugs.map(shownName).join(t('list_sep'));
     return el('div', { class: 'advice-box' }, [
       el('h4', { class: 'advice-title', text: adv.single_drug ? t('advice_title_single', { drugs: names }) : t('advice_title', { group: zh ? adv.group_zh : adv.group_en, drugs: names }) }),
       el('blockquote', { class: 'advice-quote', lang: zh ? 'zh-HK' : 'en-GB', text: '“' + (zh ? adv.quote_zh : adv.quote_en) + '”' }),
@@ -1095,7 +1099,7 @@
   function nextStep(rows) {
     return el('section', { class: 'next-step', id: 'next-step', tabindex: '-1', 'aria-labelledby': 'h-next' }, [
       el('h2', { id: 'h-next', text: t('next_title') }),
-      el('p', { class: 'next-say', text: window.HerbBridgeSpeech.youCanSay(rows, state.lang, t) }),
+      el('p', { class: 'next-say', text: window.HerbBridgeSpeech.youCanSay(rows, state.lang, t, true) }),
       el('a', { class: 'btn btn-primary btn-next', href: '#/summary' }, [el('span', { text: t('next_button') }), icon('arrow')])
     ]);
   }
@@ -1136,6 +1140,7 @@
   }
   function cardName(item, kind) {
     if (mode === 'full') return el('span', { class: 'name-with-icon' }, [icon(kind === 'herb' ? 'leaf' : 'pill', 'kind-icon'), nameNode(item)]);
+    if (withEnglish(item)) return nameNode(item);
     return el('span', { class: 'name' }, [el('span', { class: 'name-primary', text: primaryName(item), lang: state.lang === 'zh' ? 'zh-HK' : 'en-GB' })]);
   }
   function shortLine(r) {
@@ -1182,7 +1187,7 @@
     rows.forEach(function (r) {
       list.appendChild(el('li', null, [el('a', { href: pairHref(r), 'data-pair': pairKey(r) }, [
         icon('not_in_database', 'unknown-mark'),
-        el('span', { class: 'unknown-pair' }, [primaryName(r.herb), ' + ', primaryName(r.drug)]),
+        el('span', { class: 'unknown-pair' }, [primaryName(r.herb), ' + ', shownName(r.drug)]),
         icon('chevron', 'row-go')
       ])]));
     });
@@ -1437,7 +1442,7 @@
 
   function pairLabel(e) {
     var herb = db.herbById[e.herb_id];
-    var other = e.drug_id ? primaryName(db.drugById[e.drug_id]) : t('class_' + e.drug_class);
+    var other = e.drug_id ? shownName(db.drugById[e.drug_id]) : t('class_' + e.drug_class);
     return primaryName(herb) + ' + ' + other;
   }
 
@@ -1535,7 +1540,7 @@
     // Official documents quoted on "Official caution" cards, one line per document.
     var docs = [], docByUrl = {};
     db.cautions.forEach(function (c) {
-      var pairName = primaryName(db.herbById[c.herb_id]) + ' + ' + (c.drug_id ? primaryName(db.drugById[c.drug_id]) : t('class_' + c.drug_class));
+      var pairName = primaryName(db.herbById[c.herb_id]) + ' + ' + (c.drug_id ? shownName(db.drugById[c.drug_id]) : t('class_' + c.drug_class));
       c.statements.forEach(function (id) {
         var s = db.statementById[id], zh = state.lang === 'zh';
         if (!docByUrl[s.url]) {
