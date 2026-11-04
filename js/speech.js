@@ -118,7 +118,8 @@
     // "What people take it for": after the risk and What to do, just before "Next" (Task 2).
     var usesParts = function () {
       var u = r.herb.uses;
-      return u ? [t('uses_title') + colon + listen(pick(u, 'line')), t('uses_not_advice')] : [];
+      if (!u || r.status === 'not_in_database') return []; // rated pairs only, as on screen
+      return [t('uses_title') + colon + listen(pick(u, 'line')), t('uses_not_advice')];
     };
 
     if (!r.entry && !r.official) {

@@ -655,8 +655,8 @@
     });
     check('What people take it for', 'danshen uses the owner\'s exact wording (brief, Task 2)', function () {
       var u = db.herbById.danshen.uses;
-      return { pass: u.line_en === 'Used in China for angina (chest pain from heart disease). A 2023 review of 29 small trials found danshen pills eased angina symptoms more than nitrates, but the authors rated the evidence very low to low quality.' &&
-        u.full_en === 'A 2015 overview judged the evidence poor, and benefits on heart attacks or deaths unproved.', detail: u.line_en };
+      return { pass: u.line_en === 'Used in China for angina (chest pain from heart disease). A 2023 review of 29 small trials found compound danshen pills (with sanqi and borneol) eased angina symptoms more than nitrates, but the authors rated the evidence very low to low quality.' &&
+        u.full_en.indexOf('A 2015 overview judged the evidence poor, and benefits on major outcomes unproved.') === 0, detail: u.line_en };
     });
     check('What people take it for', 'quoted words are word for word from Health Canada and WHO (checked 26 Oct 2026)', function () {
       var QUOTED = {

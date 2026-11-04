@@ -110,6 +110,8 @@ const SUMMARY_SAY = {
     check(ui > 0 && spokenUses[ui + 2] && spokenUses[ui + 2].startsWith(lang === 'zh' ? '下一步' : 'Next'), 'Read aloud says "What people take it for" after What to do, just before "Next"');
     await p.goto(BASE + '#/pair/goji-warfarin'); await p.reload(); await ready(p);
     check(!(await p.$('#app .uses-box')), 'goji + warfarin: no box (no source for its uses)');
+    await p.goto(BASE + '#/pair/astragalus-warfarin'); await p.reload(); await ready(p);
+    check(!(await p.$('#app .uses-box')), 'astragalus + warfarin (grey card): no box, even though astragalus has a source for its uses');
 
     // Summary sentence, once
     await p.goto(BASE + '#/summary'); await p.reload(); await ready(p);

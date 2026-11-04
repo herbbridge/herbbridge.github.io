@@ -1125,9 +1125,11 @@
   }
   // "What people take it for" (Task 2): never before the risk. One line in Simple; in Full details also the
   // extra line and the sources. Always ends "This is not a recommendation to take it." Not on the summary.
+  // Rated pairs only: never on a grey "not in our database" card (a herb's uses next to "no record"
+  // could read like encouragement).
   function usesBox(r) {
     var u = r.herb.uses;
-    if (!u) return null;
+    if (!u || r.status === L.NOT_IN_DATABASE) return null;
     var full = mode === 'full';
     var srcs = [];
     if (full) u.sources.forEach(function (s, i) { if (i) srcs.push(document.createTextNode(state.lang === 'zh' ? '；' : '; ')); srcs.push(sourceLink(s)); });
