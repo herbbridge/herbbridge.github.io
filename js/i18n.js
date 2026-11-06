@@ -177,6 +177,10 @@
       summary_unknown: 'Not in our database',
       summary_unknown_text: 'We have no record of these combinations. This does not mean they are safe. Please ask your pharmacist or doctor.',
       summary_print: 'Print or save as PDF',
+      summary_show_details: 'Show details',
+      summary_hide_details: 'Hide details',
+      summary_expand_all: 'Expand all',
+      summary_collapse_all: 'Collapse all',
       col_effect: 'Effect',
       summary_empty: 'Your cabinet is empty. Add your herbs and medicines first.',
 
@@ -416,6 +420,10 @@
       summary_unknown: '資料庫未有記錄',
       summary_unknown_text: '我哋冇以下配搭嘅記錄。咁唔代表安全。請問你嘅藥劑師或者醫生。',
       summary_print: '列印或者儲存做 PDF',
+      summary_show_details: '顯示詳情',
+      summary_hide_details: '收起詳情',
+      summary_expand_all: '全部展開',
+      summary_collapse_all: '全部收起',
       col_effect: '影響',
       summary_empty: '你嘅藥箱仲係空嘅。請先加入你嘅中藥同西藥。',
 

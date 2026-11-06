@@ -20,7 +20,18 @@ const LISTS = { demo: { herbs: ['danshen'], drugs: ['warfarin', 'amlodipine'] },
     await p.goto('http://localhost:8000/#/summary'); await p.reload(); await ready(p);
     await p.evaluate(() => document.fonts.ready);
     const rows = await p.$$eval('.summary tr, .summary .sum-row, .summary li', x => x.length).catch(() => 0);
+    const colours = () => p.evaluate(() => ({
+      badges: [...document.querySelectorAll('.summary .badge')].map(node => {
+        const s = getComputedStyle(node); return [node.className, s.color, s.backgroundColor];
+      }),
+      stripes: [...document.querySelectorAll('.summary-row')].map(node => getComputedStyle(node, '::before').backgroundColor)
+    }));
+    const screenColours = await colours();
     await p.emulateMedia({ media: 'print' });
+    const printColours = await colours();
+    const colourOK = JSON.stringify(screenColours) === JSON.stringify(printColours);
+    if (!colourOK) bad++;
+    console.log(`${colourOK ? '✓' : '✗'} ${lang} ${mode} ${name}: PDF keeps the on-screen risk colours`);
     const file = path.join(OUT, `print-${lang}-${mode}-${name}.pdf`);
     await p.pdf({ path: file, format: 'A4', printBackground: true, preferCSSPageSize: true });
     const pages = parseInt(execFileSync('python3', ['-I', '-c', 'import sys,pypdf;print(len(pypdf.PdfReader(sys.argv[1]).pages))', file]).toString());

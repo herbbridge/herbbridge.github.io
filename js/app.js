@@ -1589,6 +1589,10 @@
 
     page.appendChild(el('p', { class: 'disclaimer-box summary-disclaimer' }, disclaimerText()));
     if (state.lang === 'zh' && zhUnreviewed()) page.appendChild(el('p', { class: 'muted zh-note', text: t('zh_unreviewed_note') }));
+    if (window.HerbBridgeSummary) window.HerbBridgeSummary.enhance(page, {
+      rows: rows, t: t, tn: I.tn, el: el, order: L.STATUS_ORDER,
+      field: field, firstSentence: firstSentence, badgeFor: badgeFor, bilingualPair: bilingualPair
+    });
   }
 
   /* ---------- About ---------- */

@@ -117,6 +117,9 @@ const SUMMARY_SAY = {
     await p.goto(BASE + '#/summary'); await p.reload(); await ready(p);
     const say = await p.$$eval('.summary-say', xs => xs.map(x => x.innerText.trim()));
     check(say.length === 1 && say[0] === SUMMARY_SAY[lang], `summary says it once: ${say[0] || '(missing)'}`);
+    const folded = await p.$$eval('.summary-row .summary-toggle', buttons => buttons.length > 0 && buttons.every(button => button.getAttribute('aria-expanded') === 'false' && document.getElementById(button.getAttribute('aria-controls')).hidden));
+    check(folded, 'doctor summary starts with detailed evidence collapsed');
+    check(await p.locator('.summary-actions button').count() === 2, 'doctor summary has print actions at the top and bottom');
     check(!(await p.$('#app .uses-box')), 'summary has no "What people take it for" box');
 
     // 2. Removing a herb: no jump, focus moves on
