@@ -1665,6 +1665,7 @@
     page.appendChild(section('about_heart_title', [why]));
 
     page.appendChild(section('about_how_title', [el('p', { text: t('about_how') })]));
+    page.appendChild(section('about_ai_title', [el('p', { text: t('about_ai') })]));
 
     var scale = el('ol', { class: 'scale' });
     L.RISKS.forEach(function (risk) { scale.appendChild(el('li', null, [badge(risk), levelMeaning(risk)])); });

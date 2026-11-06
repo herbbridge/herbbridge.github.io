@@ -2,6 +2,9 @@
 
 *Bridging you from East to West, easing worries in your chest.* 「中西相通，心頭放鬆。」
 
+HerbBridge draws on published research and official health guidance. AI assists with
+summaries, translations and team ratings, which have not yet been reviewed by a pharmacist.
+
 ## Offline QR sharing
 
 Summary links carry only herb and medicine IDs in the URL fragment. Incoming lists open
@@ -35,8 +38,9 @@ Built for the Imperial College London Hackathon (Hong Kong & Macau 2026), Challe
 
 ## Safety rules (more important than any feature)
 
-1. **No generated answers.** Every result comes from the hand-checked files in `data/`.
-   The app only looks things up.
+1. **No live AI answer generation.** Every result is looked up from saved files in `data/`.
+   AI assists with preparing summaries, translations and team ratings; this content
+   has not yet been reviewed by a pharmacist.
 2. **"Not in our database" is never "safe".** Missing pairs get a grey card with their own
    icon and the text: "We have no record of this combination. This does not mean it is
    safe. Please ask your pharmacist or doctor."
