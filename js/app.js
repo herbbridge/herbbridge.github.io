@@ -12,6 +12,7 @@
   var STORAGE_KEY = 'herbsafe.v1';
 
   var db = null;
+  var sharedView = null; // An incoming list is displayed without replacing the saved cabinet.
   var drugGroups = [];   // condition headings for the medicine picker, from data/drugs.json
   var state = { herbs: [], drugs: [], lang: 'en', demo: false };
   // Display mode: "simple" (default, for older users) or "full". Kept on this device only.
@@ -145,6 +146,7 @@
 
   var storageOk = true;
   function save() {
+    if (sharedView) return true; // Preview controls (e.g. language) never save an imported list.
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); storageOk = true; }
     catch (e) { storageOk = false; /* private mode or blocked storage: the cabinet says so */ }
     return storageOk;
@@ -1494,6 +1496,7 @@
   }
 
   function renderSummary() {
+    var list = sharedView ? { herbs: sharedView.herbs, drugs: sharedView.drugs } : state;
     app.textContent = '';
     var page = el('article', { class: 'summary' });
     app.appendChild(page);
@@ -1503,14 +1506,14 @@
       el('p', { class: 'muted', text: t('summary_generated', { date: formatDate(new Date()) }) })
     ]));
 
-    if (!state.herbs.length && !state.drugs.length) {
+    if (!list.herbs.length && !list.drugs.length) {
       page.appendChild(el('p', { class: 'lede', text: t('summary_empty') }));
       page.appendChild(el('a', { class: 'btn btn-primary no-print', href: '#/cabinet', text: t('back_to_check') }));
       return;
     }
 
     // The sentence to say to the doctor, once, for the pairs that need attention (all pairs if none do).
-    var sayRows = L.checkPairs(db, state.herbs, state.drugs);
+    var sayRows = L.checkPairs(db, list.herbs, list.drugs);
     if (sayRows.length) {
       var needs = sayRows.filter(isFlagged);
       page.appendChild(el('p', { class: 'summary-say' }, [window.HerbBridgeSpeech.youCanSay(needs.length ? needs : sayRows, state.lang, t, true)]));
@@ -1518,20 +1521,20 @@
 
     page.appendChild(el('div', { class: 'no-print summary-actions' }, [
       el('button', { type: 'button', class: 'btn btn-primary', onclick: function () { window.print(); } }, [el('span', { text: t('summary_print') })]),
-      el('a', { class: 'btn btn-secondary', href: '#/cabinet', text: t('edit_list') })
+      sharedView ? null : el('a', { class: 'btn btn-secondary', href: '#/cabinet', text: t('edit_list') })
     ]));
 
     page.appendChild(el('section', { class: 'summary-lists' }, [
-      el('div', null, [el('h2', { text: t('summary_herbs') }), itemList(state.herbs.map(function (id) { return db.herbById[id]; }))]),
-      el('div', null, [el('h2', { text: t('summary_drugs') }), itemList(state.drugs.map(function (id) { return db.drugById[id]; }))])
+      el('div', null, [el('h2', { text: t('summary_herbs') }), itemList(list.herbs.map(function (id) { return db.herbById[id]; }))]),
+      el('div', null, [el('h2', { text: t('summary_drugs') }), itemList(list.drugs.map(function (id) { return db.drugById[id]; }))])
     ]));
 
-    var rows = L.checkPairs(db, state.herbs, state.drugs);
+    var rows = L.checkPairs(db, list.herbs, list.drugs);
     var rated = rows.filter(function (r) { return r.entry || r.official; });
     var unknown = rows.filter(function (r) { return r.status === L.NOT_IN_DATABASE; });
 
     var flaggedSection = el('section', { class: 'summary-section' }, [el('h2', { text: t('summary_flagged') })]);
-    if (!rated.length) flaggedSection.appendChild(el('p', { text: state.herbs.length && state.drugs.length ? t('summary_flagged_none') : t('cabinet_need_both') }));
+    if (!rated.length) flaggedSection.appendChild(el('p', { text: list.herbs.length && list.drugs.length ? t('summary_flagged_none') : t('cabinet_need_both') }));
     rated.forEach(function (r) {
       var e = r.entry;
       // Official cautions: each agency's own words with document and date, before any team rating.
@@ -1593,6 +1596,31 @@
       rows: rows, t: t, tn: I.tn, el: el, order: L.STATUS_ORDER,
       field: field, firstSentence: firstSentence, badgeFor: badgeFor, bilingualPair: bilingualPair
     });
+    if (window.HerbBridgeShare) window.HerbBridgeShare.attach(page, {
+      list: list, rows: rows, t: t, el: el, shared: !!sharedView,
+      onSave: saveSharedList, onSaved: chooseMainAction, riskLabel: riskLabel,
+      formatPair: function (row) { return primaryName(row.herb) + ' + ' + primaryName(row.drug); }
+    });
+  }
+
+  function saveSharedList() {
+    if (!sharedView || !sharedView.valid) return { ok: false };
+    try {
+      // Read at click time: another tab may have changed the recipient's cabinet meanwhile.
+      var saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+      var existingHerbs = cleanIds(saved && saved.herbs, db.herbById);
+      var existingDrugs = cleanIds(saved && saved.drugs, db.drugById);
+      function same(a, b) { return a.slice().sort().join('|') === b.slice().sort().join('|'); }
+      var different = !same(existingHerbs, sharedView.herbs) || !same(existingDrugs, sharedView.drugs);
+      if (different && (existingHerbs.length || existingDrugs.length) && !window.confirm(t('share_replace_confirm'))) return { ok: false, cancelled: true };
+      var next = { herbs: sharedView.herbs.slice(), drugs: sharedView.drugs.slice(), lang: state.lang, demo: false };
+      var json = JSON.stringify(next);
+      localStorage.setItem(STORAGE_KEY, json);
+      if (localStorage.getItem(STORAGE_KEY) !== json) return { ok: false };
+      state = next;
+      storageOk = true;
+      return { ok: true };
+    } catch (error) { return { ok: false }; }
   }
 
   /* ---------- About ---------- */
@@ -1791,7 +1819,7 @@
   // Screens: #/cabinet (also #/check), #/results, #/pair/<herb>-<drug>, #/summary, #/about.
   var routeParam = null;
   function currentRoute() {
-    var r = (location.hash || '').replace(/^#\/?/, '');
+    var r = (location.hash || '').replace(/^#\/?/, '').split('?')[0];
     routeParam = null;
     if (r === 'cabinet') return 'check';
     var m = /^pair\/([a-z_]+)-([a-z_]+)$/.exec(r);
@@ -1849,6 +1877,7 @@
 
   function render(focus) {
     var route = currentRoute();
+    sharedView = route === 'summary' && window.HerbBridgeShare ? window.HerbBridgeShare.read(location.hash, db) : null;
     closeSheet(true);
     checkBar = null;
     statusTile = null;
@@ -1864,7 +1893,15 @@
     document.body.setAttribute('data-route', route);
     document.documentElement.setAttribute('data-route', route);
     var target = null;
-    if (route === 'results') target = renderResults();
+    if (sharedView && !sharedView.valid) {
+      app.textContent = '';
+      app.appendChild(el('section', { class: 'shared-list-error' }, [
+        el('h1', { tabindex: '-1', text: t('share_invalid') }),
+        el('p', { text: t('share_invalid_body') }),
+        el('a', { class: 'btn btn-primary', href: '#/cabinet', text: t('nav_check') })
+      ]));
+    }
+    else if (route === 'results') target = renderResults();
     else if (route === 'pair') renderPair(routeParam);
     else if (route === 'summary') renderSummary();
     else if (route === 'about') renderAbout();

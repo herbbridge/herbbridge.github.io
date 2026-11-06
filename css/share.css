@@ -1,0 +1,28 @@
+/* Sharing controls use the neutral secondary palette. The QR is generated locally. */
+.share-panel { margin: 1rem 0; padding: 1rem; border: 1px solid var(--line-strong); border-radius: var(--radius-sm); background: var(--surface); }
+.share-panel h2 { margin: 0 0 .5rem; }
+.share-notice { margin: 0 0 .75rem; font-weight: 600; }
+.share-qr { width: min(180px, 100%); margin: 0 0 .75rem; }
+.share-qr svg, .share-qr-print svg { display: block; width: 100%; height: auto; background: #fff; }
+.share-qr figcaption, .share-qr-print figcaption { margin-top: .25rem; color: var(--ink-2); font-size: .875rem; line-height: 1.3; }
+.share-link { display: block; width: 100%; min-width: 0; min-height: 44px; margin: .75rem 0; padding: .5rem .75rem; border: 1px solid var(--line-strong); border-radius: var(--radius-sm); background: var(--bg); color: var(--ink); font: inherit; font-size: .875rem; }
+.share-actions { display: flex; flex-wrap: wrap; gap: .5rem; }
+.share-actions .btn { min-height: 44px; max-width: 100%; text-align: center; }
+.share-status, .shared-save-status { margin: .5rem 0 0; font-size: .9rem; }
+.share-status:empty, .shared-save-status:empty { display: none; }
+.shared-list-banner { margin: 1rem 0; padding: 1rem; border: 2px solid var(--line-strong); border-radius: var(--radius-sm); background: var(--sunken); }
+.shared-list-banner p { margin: 0 0 .75rem; }
+.shared-list-banner .btn { max-width: 100%; }
+.share-qr-print { display: none; }
+
+@media print {
+  .share-panel, .shared-list-banner { display: none !important; }
+  /* Reclaim spacing for the QR without reducing the medical text size. */
+  .summary-head .muted { margin-top: 2pt; margin-bottom: 3pt; }
+  .summary .summary-disclaimer { margin-top: 5pt; }
+  .summary .summary-row { padding-top: 4pt; padding-bottom: 4pt; margin-bottom: 4pt; }
+  .summary .summary-dl dt, .summary .summary-dl dd { margin-top: 2pt; }
+  .summary-head::after { content: ''; display: table; clear: both; }
+  .share-qr-print { display: block; float: right; width: var(--share-qr-print-size, 24mm); margin: 0 0 2mm 4mm; break-inside: avoid; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .share-qr-print figcaption { color: #000; font-size: 6.5pt; line-height: 1.1; text-align: center; }
+}

@@ -2,6 +2,18 @@
 
 *Bridging you from East to West, easing worries in your chest.* 「中西相通，心頭放鬆。」
 
+## Offline QR sharing
+
+Summary links carry only herb and medicine IDs in the URL fragment. Incoming lists open
+read-only and do not replace the saved cabinet until the recipient chooses Save; replacing
+an existing different list requires confirmation. Anyone with the shared link can read it.
+WhatsApp and system sharing transmit the list only when the user chooses those actions.
+
+QR generation runs locally using Kazuhiko Arase's **qrcode-generator 2.0.4**
+([source](https://github.com/kazuhikoarase/qrcode-generator/tree/js2.0.4), MIT licence).
+The unmodified browser build is vendored as `js/vendor/qrcode.js`; its full licence is in
+`js/vendor/qrcode.LICENSE`. No QR service or CDN receives the list.
+
 HerbBridge is built for **heart patients**: people taking heart, blood pressure, cholesterol or
 blood-thinning medicines (Challenge 4: cardiovascular disease).
 
