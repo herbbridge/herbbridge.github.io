@@ -20,6 +20,13 @@
   try { var savedMode = localStorage.getItem(MODE_KEY); if (savedMode === 'full' || savedMode === 'simple') mode = savedMode; } catch (e) { /* default */ }
   document.documentElement.setAttribute('data-mode', mode);
   var app = document.getElementById('app');
+  var siteHeader = document.querySelector('.site-header');
+  function measureHeader() {
+    if (siteHeader) document.documentElement.style.setProperty('--header-h', Math.ceil(siteHeader.getBoundingClientRect().height) + 'px');
+  }
+  if (window.ResizeObserver && siteHeader) new ResizeObserver(measureHeader).observe(siteHeader);
+  else window.addEventListener('resize', measureHeader);
+  measureHeader();
 
   /* ---------- small helpers ---------- */
 
@@ -182,6 +189,8 @@
     var index = removing ? state[kind].indexOf(id) : -1;
     var cardTop = removing ? cards[kind].getBoundingClientRect().top : null;
     var added = toggle(kind, id);
+    enteringChipKey = added && motionAllowed() ? 'chip-' + kind + '-' + id : null;
+    if (removing && sourceEl) leaveChip(sourceEl);
     if (added) {
       var clashes = clashesFor(kind, id);
       if (clashes.length) {
@@ -201,6 +210,7 @@
       if (!alertState.rows.length) alertState = null;
     }
     refreshCheck();
+    enteringChipKey = null;
     if (removing) {
       // No jump: the card stays where it was on screen. Focus: the next item, else the one before,
       // else the list heading (screen readers then hear where they are).
@@ -246,6 +256,94 @@
   var warningPanel = null;
   var checkBar = null;
   var sheet = null;
+  var enteringChipKey = null;
+  var revealObserver = null;
+
+  function chooseMainAction() {
+    var actions = Array.prototype.slice.call(app.querySelectorAll('.btn-primary, [data-primary-action]'));
+    actions.forEach(function (node) {
+      node.setAttribute('data-primary-action', '');
+      node.classList.remove('btn-secondary');
+      node.classList.add('btn-primary');
+    });
+    var visible = actions.filter(function (node) { return !node.disabled && node.offsetParent !== null; });
+    var main = visible.find(function (node) { return node.classList.contains('btn-check') || node.classList.contains('btn-next'); }) || visible[0];
+    visible.forEach(function (node) {
+      if (node === main) return;
+      node.classList.remove('btn-primary');
+      node.classList.add('btn-secondary');
+    });
+  }
+
+  function motionAllowed() {
+    return mode === 'full' && window.matchMedia && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+
+  // Only the chip copy moves; cabinet layout, keyboard focus and warnings update immediately.
+  function leaveChip(source) {
+    if (!motionAllowed()) return;
+    var rect = source.getBoundingClientRect();
+    var copy = source.cloneNode(true);
+    copy.removeAttribute('data-key');
+    copy.removeAttribute('id');
+    copy.setAttribute('aria-hidden', 'true');
+    copy.setAttribute('inert', '');
+    copy.setAttribute('tabindex', '-1');
+    copy.classList.add('chip-motion');
+    copy.style.cssText = 'position:fixed;pointer-events:none;z-index:5;margin:0;left:' + rect.left + 'px;top:' + rect.top + 'px;width:' + rect.width + 'px;height:' + rect.height + 'px';
+    document.body.appendChild(copy);
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () { copy.classList.add('chip-leave'); });
+    });
+    window.setTimeout(function () { copy.remove(); }, 200);
+  }
+
+  function enterChip(node) {
+    node.classList.add('chip-motion', 'chip-enter-from');
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () { node.classList.remove('chip-enter-from'); });
+    });
+  }
+
+  // A strict allowlist keeps all ratings, warnings, disclaimers and summary content still.
+  // Content starts visible; only cards below the viewport opt into the brief reveal.
+  function revealCards(route) {
+    if (revealObserver) { revealObserver.disconnect(); revealObserver = null; }
+    if (!motionAllowed() || !window.IntersectionObserver || (route !== 'check' && route !== 'about')) return;
+    var selector = route === 'check' ? '.cab-card' : '.about-section';
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.remove('is-reveal-pending');
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0 });
+    revealObserver = observer;
+    Array.prototype.forEach.call(app.querySelectorAll(selector), function (card) {
+      // About sections containing rating examples or medical disclaimers must also stay still.
+      if (card.querySelector('.badge, .disclaimer-box')) return;
+      card.classList.add('reveal-card');
+      if (card.getBoundingClientRect().top >= window.innerHeight) {
+        card.classList.add('is-reveal-pending');
+        revealObserver.observe(card);
+      }
+    });
+  }
+
+  app.addEventListener('focusin', function (event) {
+    var card = event.target.closest('.is-reveal-pending');
+    if (card) card.classList.remove('is-reveal-pending');
+  });
+
+  if (window.matchMedia) {
+    var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var stopReveals = function () {
+      if (!reducedMotion.matches) return;
+      if (revealObserver) { revealObserver.disconnect(); revealObserver = null; }
+      Array.prototype.forEach.call(document.querySelectorAll('.is-reveal-pending'), function (node) { node.classList.remove('is-reveal-pending'); });
+    };
+    if (reducedMotion.addEventListener) reducedMotion.addEventListener('change', stopReveals);
+  }
 
   function refreshCheck() {
     var active = document.activeElement;
@@ -257,6 +355,7 @@
     renderWarning();
     updateCheckBar();
     renderSheet();
+    chooseMainAction();
     if (key) {
       var target = findByKey(key);
       if (target && target !== document.activeElement) target.focus({ preventScroll: true });
@@ -369,13 +468,15 @@
       var chips = el('ul', { class: 'chips', 'aria-labelledby': 'h-' + kind });
       ids.forEach(function (id) {
         var item = byId[id];
-        chips.appendChild(el('li', null, [
+        var chip = el('li', null, [
           el('button', {
             type: 'button', class: 'chip', 'data-key': 'chip-' + kind + '-' + id,
             'aria-label': t('remove_item', { name: primaryName(item) + ' ' + secondaryName(item) }),
             onclick: function (ev) { addOrRemove(kind, id, ev.currentTarget); }
           }, [nameNode(item), icon('close', 'chip-x')])
-        ]));
+        ]);
+        chips.appendChild(chip);
+        if (enteringChipKey === 'chip-' + kind + '-' + id) enterChip(chip);
       });
       box.appendChild(chips);
     }
@@ -573,7 +674,7 @@
 
   function showWarning() {
     if (!warningPanel || warningPanel.hidden) return;
-    warningPanel.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    warningPanel.scrollIntoView({ block: 'start', behavior: 'auto' });
     warningPanel.focus({ preventScroll: true });
   }
 
@@ -1123,6 +1224,24 @@
     // No icon: the Low badge's "i" icon could make a grey card look like a Low rating.
     return el('p', { class: 'herb-note', text: field(r.herb, 'pair_note') });
   }
+  // "What people take it for" (Task 2): never before the risk. One line in Simple; in Full details also the
+  // extra line and the sources. Always ends "This is not a recommendation to take it." Not on the summary.
+  // Rated pairs only: never on a grey "not in our database" card (a herb's uses next to "no record"
+  // could read like encouragement).
+  function usesBox(r) {
+    var u = r.herb.uses;
+    if (!u || r.status === L.NOT_IN_DATABASE) return null;
+    var full = mode === 'full';
+    var srcs = [];
+    if (full) u.sources.forEach(function (s, i) { if (i) srcs.push(document.createTextNode(state.lang === 'zh' ? '；' : '; ')); srcs.push(sourceLink(s)); });
+    return el('section', { class: 'uses-box', 'aria-labelledby': 'uses-title' }, [
+      el('h2', { id: 'uses-title', class: 'uses-title', text: t('uses_title') }),
+      el('p', { class: 'uses-line', text: field(u, 'line') }),
+      full && u.full_en ? el('p', { class: 'uses-more', text: field(u, 'full') }) : null,
+      full ? el('p', { class: 'uses-sources' }, [el('strong', { text: t('label_sources') + (state.lang === 'zh' ? '：' : ': ') })].concat(srcs)) : null,
+      el('p', { class: 'uses-not-advice', text: t('uses_not_advice') })
+    ]);
+  }
   function homeLink() {
     return el('a', { class: 'home-link', href: '#/cabinet' }, [icon('home'), el('span', { text: t('nav_home') })]);
   }
@@ -1139,7 +1258,7 @@
     var next = document.getElementById('next-step');
     if (!next) return;
     next.classList.add('is-now');
-    next.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    next.scrollIntoView({ block: 'center', behavior: 'auto' });
     next.focus({ preventScroll: true });
   }
   // Simple: one step at a time, said in words ("Step 2 of 3").
@@ -1299,6 +1418,8 @@
         if (after) after.parentNode.insertBefore(note, after.nextSibling); else whole.appendChild(note);
       }
       app.appendChild(whole);
+      var usesFull = usesBox(r);
+      if (usesFull) app.appendChild(usesFull);
       app.appendChild(nextStep([r]));
       return;
     }
@@ -1326,6 +1447,7 @@
       herbNote(r),
       r.official ? officialBlock(r) : null,
       grey ? el('a', { class: 'btn btn-primary', href: '#/summary' }, [el('span', { text: t('unknown_next_button') }), icon('arrow')]) : null,
+      usesBox(r),
       el('p', { class: 'disclaimer-box' }, disclaimerText(r))
     ]));
     app.appendChild(moreBtn);
@@ -1745,9 +1867,7 @@
     else renderCheck();
     app.insertBefore(modeStrip(), app.firstChild);
     keepEndTogether(app);
-    // Full details: a short fade between screens (CSS turns it off for "reduce motion").
-    app.classList.remove('screen-in');
-    if (mode === 'full' && focus) { void app.offsetWidth; app.classList.add('screen-in'); }
+    chooseMainAction();
     if (focus) {
       window.scrollTo(0, 0);
       // From a dashboard row: go straight to that pair's (opened) card.
@@ -1759,6 +1879,7 @@
       var h1 = app.querySelector('h1');
       if (h1) h1.focus({ preventScroll: true });
     }
+    revealCards(route);
   }
 
   function getJson(url) {

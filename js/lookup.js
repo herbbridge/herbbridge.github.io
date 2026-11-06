@@ -208,6 +208,15 @@
         if (!Array.isArray(item.aliases)) problem(where + ': aliases must be a list');
         if (typeof item.zh_reviewed !== 'boolean') problem(where + ': zh_reviewed must be true or false');
         if ('zh_name_with_en' in item && typeof item.zh_name_with_en !== 'boolean') problem(where + ': zh_name_with_en must be true or false');
+        if (kind === 'herb' && item.uses) {
+          // "What people take it for": both languages, a source for every line, never without one.
+          var u = item.uses;
+          if (!isText(u.line_en) || !isText(u.line_zh)) problem(where + ': uses needs line_en and line_zh');
+          if (('full_en' in u) !== ('full_zh' in u)) problem(where + ': uses full_en and full_zh go together');
+          if (!Array.isArray(u.sources) || !u.sources.length || u.sources.some(function (s) { return !s || !isText(s.label) || !/^https:\/\//.test(s.url || ''); }))
+            problem(where + ': uses needs at least one source, each with a label and an https link');
+          if (typeof u.zh_reviewed !== 'boolean') problem(where + ': uses zh_reviewed must be true or false');
+        }
         if (kind === 'drug') {
           if (!Array.isArray(item.classes)) problem(where + ': classes must be a list, e.g. ["statin"]');
           else item.classes.forEach(function (c) {

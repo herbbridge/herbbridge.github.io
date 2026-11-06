@@ -31,6 +31,24 @@ var manifest = load('manifest.webmanifest');
 var badIcons = manifest.icons.filter(function (i) { return !fs.existsSync(path.join(__dirname, '..', i.src)); });
 results.push({ group: 'Installable app', name: 'manifest icons exist', pass: badIcons.length === 0, detail: badIcons.map(function (i) { return i.src; }).join(', ') });
 
+// "What people take it for" in Read aloud: rated pairs only, never on a grey card; nitrate pairs use their own line.
+(function () {
+  var sp = require('../js/speech.js');
+  var db2 = lookup.createDb(data.herbs, data.drugs, data.interactions, data.official, data.reviews);
+  var tr = function (lang) { var T = data.i18n.strings ? data.i18n.strings[lang] : null; return function (k) { return (T && T[k]) || k; }; };
+  var nm = function (lang) { return function (x) { return lang === 'zh' ? x.name_zh : x.name_en; }; };
+  var said = function (h, d, lang) {
+    var r = lookup.checkPairs(db2, [h], [d])[0];
+    return { r: r, text: sp.script(db2, r, lang, tr(lang), nm(lang)).join(' ') };
+  };
+  var grey = said('astragalus', 'warfarin', 'en');
+  results.push({ group: 'What people take it for', name: 'astragalus + warfarin (grey): no uses line read aloud', pass: grey.r.status === 'not_in_database' && grey.text.indexOf('tonify') === -1, detail: grey.text });
+  var rated = said('danshen', 'warfarin', 'en');
+  results.push({ group: 'What people take it for', name: 'danshen + warfarin (rated): uses line read aloud', pass: rated.text.indexOf('compound danshen pills') !== -1, detail: rated.text });
+  var nit = said('danshen', 'glyceryl_trinitrate', 'en');
+  results.push({ group: 'What people take it for', name: 'danshen + a nitrate (grey): no uses line, so no nitrate comparison', pass: nit.r.status === 'not_in_database' && nit.text.indexOf('more than nitrates') === -1, detail: nit.text });
+})();
+
 // Read aloud: the spoken script for every herb × drug pair is easy to listen to (Node only).
 var speech = require('../js/speech.js');
 var sdb = lookup.createDb(data.herbs, data.drugs, data.interactions, data.official, data.reviews);
