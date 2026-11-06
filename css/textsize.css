@@ -1,0 +1,52 @@
+.textsize-toggle {
+  min-height: 44px; padding: .375rem .75rem; max-width: 100%;
+  border: 1px solid var(--line-strong); border-radius: 999px;
+  background: var(--surface); color: var(--ink); font: inherit;
+  font-size: .875rem; font-weight: 600; line-height: 1.3;
+  cursor: pointer; white-space: normal;
+}
+.textsize-toggle[aria-pressed="true"] { border: 2px solid var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+html[data-mode="simple"] .textsize-toggle { font-size: .75rem; }
+
+@media screen {
+  /* Percentages keep the browser's chosen base size. Larger is 125% of each mode. */
+  html[data-textsize="large"] { font-size: 132.8125%; }
+  html[data-mode="simple"][data-textsize="large"] { font-size: 156.25%; }
+  html[data-textsize="large"] {
+    --ink: #101216; --ink-2: #303640; --line: #646A74; --line-strong: #444B55;
+    --unknown-line: #5B6068;
+  }
+  /* Allow words to wrap at larger sizes instead of retaining the phone-size caps. */
+  html[data-textsize="large"] #app h1 { font-size: 2.25rem; overflow-wrap: anywhere; }
+  html[data-mode="simple"][data-textsize="large"] #app h1 { font-size: 2.4rem; }
+  html[data-textsize="large"] #app h1.pair-h1 { font-size: 1.625rem; }
+  html[data-textsize="large"] .pair-card-names { font-size: 1.25rem; }
+  html[data-mode="simple"][data-textsize="large"] .pair-card-names { font-size: 1.375rem; }
+  html[data-textsize="large"] #app .summary-head h1,
+  html[data-mode="simple"][data-textsize="large"] #app .summary-head h1 { font-size: 1.875rem; }
+  html[data-textsize="large"] .mode-strip { font-size: .8125rem; }
+  html[data-textsize="large"] .mode-strip-btn { flex: 0 1 auto; max-width: 100%; }
+  html[data-textsize="large"] .keep-end { white-space: normal; }
+  html[data-textsize="large"] .brand-slogan { font-size: .8125rem; }
+  html[data-textsize="large"] .brand { min-width: 0; max-width: 100%; }
+  html[data-textsize="large"] .brand-text { min-width: 0; }
+  html[data-textsize="large"] .brand-name { overflow-wrap: anywhere; }
+  html[data-textsize="large"] .scale { grid-template-columns: minmax(0, 1fr); }
+  html[data-textsize="large"] .badge { max-width: 100%; overflow-wrap: anywhere; }
+  html[data-textsize="large"] .badge .icon { flex-shrink: 0; }
+  html[data-mode="simple"][data-textsize="large"] .pair-card .badge { font-size: 1.125rem; }
+}
+@media screen and (prefers-contrast: more) {
+  :root, html[data-mode="simple"] { --ink: #101216; --ink-2: #303640; --line: #646A74; --line-strong: #444B55; --unknown-line: #5B6068; }
+}
+@media screen and (max-width: 47.99rem) {
+  /* Use spacing for the larger labels; keep the text and 44px tap targets. */
+  html[data-textsize="large"] .site-nav { width: 100%; justify-content: space-between; }
+  html[data-textsize="large"] .site-nav a { padding-left: 0; padding-right: 0; }
+  html[data-textsize="large"] .mode-strip-detail { display: none; }
+  html[data-textsize="large"] #app h1 { margin-bottom: .5rem; }
+  html[data-textsize="large"] .pair-simple { padding-top: .75rem; }
+  html[data-textsize="large"] .pair-simple-badge { margin-bottom: .5rem; }
+  html[data-textsize="large"] .summary-lists { grid-template-columns: minmax(0, 1fr); }
+  html[data-textsize="large"] .pair-head { padding-top: .5rem; padding-bottom: .25rem; }
+}

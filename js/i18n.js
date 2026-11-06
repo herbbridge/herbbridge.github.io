@@ -12,6 +12,7 @@
   var STRINGS = {
     en: {
       loading: 'Loading…',
+      bigger_text: 'A+ Bigger text',
       nav_check: 'My cabinet',
       nav_summary: 'Doctor summary',
       nav_about: 'About',
@@ -284,6 +285,7 @@
     },
     zh: {
       loading: '載入中…',
+      bigger_text: 'A+ 放大字體',
       nav_check: '我嘅藥箱',
       nav_summary: '醫生摘要',
       nav_about: '關於',

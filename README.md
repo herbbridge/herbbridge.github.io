@@ -14,6 +14,14 @@ QR generation runs locally using Kazuhiko Arase's **qrcode-generator 2.0.4**
 The unmodified browser build is vendored as `js/vendor/qrcode.js`; its full licence is in
 `js/vendor/qrcode.LICENSE`. No QR service or CDN receives the list.
 
+## Bigger text
+
+The header's **A+ Bigger text** toggle enlarges the chosen display mode's base text
+by 25% and strengthens neutral text and borders. Risk colours retain their meaning.
+The `herbsafe.textsize` preference is stored separately from the medicine cabinet;
+blocked storage still allows it to work for the current visit. Browser font preferences
+and `prefers-contrast: more` remain supported. Print uses its standard A4 layout.
+
 HerbBridge is built for **heart patients**: people taking heart, blood pressure, cholesterol or
 blood-thinning medicines (Challenge 4: cardiovascular disease).
 

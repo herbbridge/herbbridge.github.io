@@ -48,8 +48,8 @@
 
 html {
   font-size: 106.25%; /* Full details: 17px base */
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
+  -webkit-text-size-adjust: auto;
+  text-size-adjust: auto;
 }
 
 body {
