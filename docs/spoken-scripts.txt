@@ -1,5 +1,5 @@
 HerbBridge Read aloud: spoken scripts for review
-Made by tools/make-spoken-scripts.js from js/speech.js and data/ (94 pairs).
+Made by tools/make-spoken-scripts.js from js/speech.js and data/ (95 pairs).
 Each numbered line is said as a separate piece, with a short pause between pieces.
 The words on screen are not changed by this script.
 
@@ -852,16 +852,22 @@ The words on screen are not changed by this script.
 52. Ginkgo + Clopidogrel  (ginkgo-clopidogrel, status: official)
 
   English
-  [1] Ginkgo and clopidogrel. Official caution.
+  [1] Ginkgo and clopidogrel. Official caution, sources disagree.
   [2] The European Medicines Agency says: If the medicinal product is taken concomitantly with anticoagulants, e.g. phenprocoumon and warfarin, or antiplatelet drugs, e.g. clopidogrel, acetylsalicylic acid and other non-steroidal anti-inflammatory drugs, their effect may be influenced.
-  [3] What to do: talk to your doctor or pharmacist.
-  [4] Next: show your doctor. You can say: ‘I take ginkgo and clopidogrel. Can you check if that’s OK for me?’
+  [3] What to do: ask your doctor or pharmacist before combining them.
+  [4] Health Canada says not to use ginkgo with blood thinners.
+  [5] Tell your clinician about any unusual bruising or bleeding.
+  [6] Why this matters for your heart: watch for unusual bruising or bleeding.
+  [7] Next: show your doctor. You can say: ‘I take ginkgo and clopidogrel. Can you check if that’s OK for me?’
 
   中文
-  [1] 銀杏同氯吡格雷。官方提醒。
+  [1] 銀杏同氯吡格雷。官方提醒，資料講法唔一致。
   [2] 歐洲藥品管理局話（英文原文翻譯）：如果呢種藥同抗凝血藥，例如苯丙香豆素同華法林，或者抗血小板藥，例如氯吡格雷、乙醯水楊酸，阿士匹靈，同其他非類固醇消炎藥，一齊用，佢哋嘅效果可能會受到影響。
-  [3] 應該點做：同醫生或者藥劑師傾吓。
-  [4] 下一步：俾醫生睇。你可以咁講：『我有食銀杏同氯吡格雷，可唔可以幫我睇吓有冇問題？』
+  [3] 應該點做：一齊食之前，請先問醫生或者藥劑師。
+  [4] 加拿大衞生部提醒，食薄血藥期間唔好用銀杏。
+  [5] 如有唔尋常嘅瘀傷或者出血，請話俾醫護人員知。
+  [6] 對心臟有咩影響：留意有冇唔尋常嘅瘀傷或者出血。
+  [7] 下一步：俾醫生睇。你可以咁講：『我有食銀杏同氯吡格雷，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
 53. Ginkgo + Amlodipine  (ginkgo-amlodipine, status: official)
@@ -964,7 +970,24 @@ The words on screen are not changed by this script.
   [5] 下一步：俾醫生睇。你可以咁講：『我有食銀杏同替格瑞洛，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-59. Liquorice + Digoxin  (liquorice-digoxin, status: official)
+59. Liquorice + Warfarin  (liquorice-warfarin, status: moderate)
+
+  English
+  [1] Liquorice and warfarin. Moderate risk.
+  [2] What to do: ask your doctor or pharmacist before taking liquorice with warfarin.
+  [3] Tell them about liquorice in herbal products, foods or sweets.
+  [4] Why this matters for your heart: possible bleeding; the evidence is one case report involving a large amount of black liquorice.
+  [5] Next: show your doctor. You can say: ‘I take liquorice and warfarin. Can you check if that’s OK for me?’
+
+  中文
+  [1] 甘草同華法林。中度風險。
+  [2] 應該點做：食華法林期間，食甘草之前請先問醫生或者藥劑師。
+  [3] 話俾佢哋知你有冇食含甘草嘅中藥、食物或者糖果。
+  [4] 對心臟有咩影響：可能有出血風險；證據只係一個食咗大量黑甘草糖嘅病例。
+  [5] 下一步：俾醫生睇。你可以咁講：『我有食甘草同華法林，可唔可以幫我睇吓有冇問題？』
+
+================================================================
+60. Liquorice + Digoxin  (liquorice-digoxin, status: official)
 
   English
   [1] Liquorice and digoxin. Official caution.
@@ -983,7 +1006,7 @@ The words on screen are not changed by this script.
   [6] 下一步：俾醫生睇。你可以咁講：『我有食甘草同地高辛，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-60. Liquorice + Amlodipine  (liquorice-amlodipine, status: official)
+61. Liquorice + Amlodipine  (liquorice-amlodipine, status: official)
 
   English
   [1] Liquorice and amlodipine. Official caution.
@@ -1002,7 +1025,7 @@ The words on screen are not changed by this script.
   [6] 下一步：俾醫生睇。你可以咁講：『我有食甘草同氨氯地平，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-61. Liquorice + Furosemide  (liquorice-furosemide, status: official)
+62. Liquorice + Furosemide  (liquorice-furosemide, status: official)
 
   English
   [1] Liquorice and furosemide. Official caution.
@@ -1021,7 +1044,7 @@ The words on screen are not changed by this script.
   [6] 下一步：俾醫生睇。你可以咁講：『我有食甘草同呋塞米，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-62. Liquorice + Bisoprolol  (liquorice-bisoprolol, status: official)
+63. Liquorice + Bisoprolol  (liquorice-bisoprolol, status: official)
 
   English
   [1] Liquorice and bisoprolol. Official caution.
@@ -1040,7 +1063,7 @@ The words on screen are not changed by this script.
   [6] 下一步：俾醫生睇。你可以咁講：『我有食甘草同比索洛爾，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-63. Liquorice + Metoprolol  (liquorice-metoprolol, status: official)
+64. Liquorice + Metoprolol  (liquorice-metoprolol, status: official)
 
   English
   [1] Liquorice and metoprolol. Official caution.
@@ -1059,7 +1082,7 @@ The words on screen are not changed by this script.
   [6] 下一步：俾醫生睇。你可以咁講：『我有食甘草同美托洛爾，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-64. Liquorice + Perindopril  (liquorice-perindopril, status: official)
+65. Liquorice + Perindopril  (liquorice-perindopril, status: official)
 
   English
   [1] Liquorice and perindopril. Official caution.
@@ -1078,7 +1101,7 @@ The words on screen are not changed by this script.
   [6] 下一步：俾醫生睇。你可以咁講：『我有食甘草同培哚普利，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-65. Liquorice + Enalapril  (liquorice-enalapril, status: official)
+66. Liquorice + Enalapril  (liquorice-enalapril, status: official)
 
   English
   [1] Liquorice and enalapril. Official caution.
@@ -1097,7 +1120,7 @@ The words on screen are not changed by this script.
   [6] 下一步：俾醫生睇。你可以咁講：『我有食甘草同依那普利，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-66. Liquorice + Losartan  (liquorice-losartan, status: official)
+67. Liquorice + Losartan  (liquorice-losartan, status: official)
 
   English
   [1] Liquorice and losartan. Official caution.
@@ -1116,7 +1139,7 @@ The words on screen are not changed by this script.
   [6] 下一步：俾醫生睇。你可以咁講：『我有食甘草同氯沙坦，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-67. Liquorice + Valsartan  (liquorice-valsartan, status: official)
+68. Liquorice + Valsartan  (liquorice-valsartan, status: official)
 
   English
   [1] Liquorice and valsartan. Official caution.
@@ -1135,7 +1158,7 @@ The words on screen are not changed by this script.
   [6] 下一步：俾醫生睇。你可以咁講：『我有食甘草同纈沙坦，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-68. Liquorice + Isosorbide mononitrate  (liquorice-isosorbide_mononitrate, status: official)
+69. Liquorice + Isosorbide mononitrate  (liquorice-isosorbide_mononitrate, status: official)
 
   English
   [1] Liquorice and isosorbide mononitrate. Official caution.
@@ -1154,7 +1177,7 @@ The words on screen are not changed by this script.
   [6] 下一步：俾醫生睇。你可以咁講：『我有食甘草同單硝酸異山梨酯，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-69. Liquorice + Isosorbide dinitrate  (liquorice-isosorbide_dinitrate, status: official)
+70. Liquorice + Isosorbide dinitrate  (liquorice-isosorbide_dinitrate, status: official)
 
   English
   [1] Liquorice and isosorbide dinitrate. Official caution.
@@ -1173,7 +1196,7 @@ The words on screen are not changed by this script.
   [6] 下一步：俾醫生睇。你可以咁講：『我有食甘草同硝酸異山梨酯，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-70. Liquorice + Glyceryl trinitrate  (liquorice-glyceryl_trinitrate, status: official)
+71. Liquorice + Glyceryl trinitrate  (liquorice-glyceryl_trinitrate, status: official)
 
   English
   [1] Liquorice and glyceryl trinitrate. Official caution.
@@ -1192,7 +1215,7 @@ The words on screen are not changed by this script.
   [6] 下一步：俾醫生睇。你可以咁講：『我有食甘草同硝酸甘油，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-71. Red yeast rice + Atorvastatin  (red_yeast_rice-atorvastatin, status: high)
+72. Red yeast rice + Atorvastatin  (red_yeast_rice-atorvastatin, status: high)
 
   English
   [1] Red yeast rice and atorvastatin. High risk.
@@ -1207,7 +1230,7 @@ The words on screen are not changed by this script.
   [4] 下一步：俾醫生睇。你可以咁講：『我有食紅麴同阿托伐他汀，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-72. Red yeast rice + Simvastatin  (red_yeast_rice-simvastatin, status: high)
+73. Red yeast rice + Simvastatin  (red_yeast_rice-simvastatin, status: high)
 
   English
   [1] Red yeast rice and simvastatin. High risk.
@@ -1222,7 +1245,7 @@ The words on screen are not changed by this script.
   [4] 下一步：俾醫生睇。你可以咁講：『我有食紅麴同辛伐他汀，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-73. Red yeast rice + Rosuvastatin  (red_yeast_rice-rosuvastatin, status: high)
+74. Red yeast rice + Rosuvastatin  (red_yeast_rice-rosuvastatin, status: high)
 
   English
   [1] Red yeast rice and rosuvastatin. High risk.
@@ -1237,7 +1260,7 @@ The words on screen are not changed by this script.
   [4] 下一步：俾醫生睇。你可以咁講：『我有食紅麴同瑞舒伐他汀，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-74. Red yeast rice + Ticagrelor  (red_yeast_rice-ticagrelor, status: low)
+75. Red yeast rice + Ticagrelor  (red_yeast_rice-ticagrelor, status: low)
 
   English
   [1] Red yeast rice and ticagrelor. Low risk. Keep an eye on it.
@@ -1252,7 +1275,7 @@ The words on screen are not changed by this script.
   [4] 下一步：俾醫生睇。你可以咁講：『我有食紅麴同替格瑞洛，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-75. Goji + Warfarin  (goji-warfarin, status: high)
+76. Goji + Warfarin  (goji-warfarin, status: high)
 
   English
   [1] Goji and warfarin. High risk.
@@ -1273,7 +1296,7 @@ The words on screen are not changed by this script.
   [7] 下一步：俾醫生睇。你可以咁講：『我有食枸杞同華法林，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-76. Sanqi + Warfarin  (sanqi-warfarin, status: low)
+77. Sanqi + Warfarin  (sanqi-warfarin, status: low)
 
   English
   [1] Sanqi and warfarin. Low risk. Keep an eye on it.
@@ -1292,7 +1315,7 @@ The words on screen are not changed by this script.
   [6] 下一步：俾醫生睇。你可以咁講：『我有食三七同華法林，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-77. Sanqi + Aspirin  (sanqi-aspirin, status: moderate)
+78. Sanqi + Aspirin  (sanqi-aspirin, status: moderate)
 
   English
   [1] Sanqi and aspirin. Moderate risk.
@@ -1309,7 +1332,7 @@ The words on screen are not changed by this script.
   [5] 下一步：俾醫生睇。你可以咁講：『我有食三七同阿士匹靈，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-78. Sanqi + Clopidogrel  (sanqi-clopidogrel, status: low)
+79. Sanqi + Clopidogrel  (sanqi-clopidogrel, status: low)
 
   English
   [1] Sanqi and clopidogrel. Low risk. Keep an eye on it.
@@ -1324,7 +1347,7 @@ The words on screen are not changed by this script.
   [4] 下一步：俾醫生睇。你可以咁講：『我有食三七同氯吡格雷，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-79. Safflower + Warfarin  (safflower-warfarin, status: moderate)
+80. Safflower + Warfarin  (safflower-warfarin, status: moderate)
 
   English
   [1] Safflower and warfarin. Moderate risk.
@@ -1343,7 +1366,7 @@ The words on screen are not changed by this script.
   [6] 下一步：俾醫生睇。你可以咁講：『我有食紅花同華法林，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-80. Safflower + Aspirin  (safflower-aspirin, status: low)
+81. Safflower + Aspirin  (safflower-aspirin, status: low)
 
   English
   [1] Safflower and aspirin. Low risk. Keep an eye on it.
@@ -1358,7 +1381,7 @@ The words on screen are not changed by this script.
   [4] 下一步：俾醫生睇。你可以咁講：『我有食紅花同阿士匹靈，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-81. Safflower + Clopidogrel  (safflower-clopidogrel, status: low)
+82. Safflower + Clopidogrel  (safflower-clopidogrel, status: low)
 
   English
   [1] Safflower and clopidogrel. Low risk. Keep an eye on it.
@@ -1373,7 +1396,7 @@ The words on screen are not changed by this script.
   [4] 下一步：俾醫生睇。你可以咁講：『我有食紅花同氯吡格雷，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-82. Hawthorn + Warfarin  (hawthorn-warfarin, status: low)
+83. Hawthorn + Warfarin  (hawthorn-warfarin, status: low)
 
   English
   [1] Hawthorn and warfarin. Low risk. Keep an eye on it.
@@ -1394,7 +1417,7 @@ The words on screen are not changed by this script.
   [7] 下一步：俾醫生睇。你可以咁講：『我有食山楂同華法林，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-83. Hawthorn + Digoxin  (hawthorn-digoxin, status: official)
+84. Hawthorn + Digoxin  (hawthorn-digoxin, status: official)
 
   English
   [1] Hawthorn and digoxin. Official caution.
@@ -1415,7 +1438,7 @@ The words on screen are not changed by this script.
   [7] 下一步：俾醫生睇。你可以咁講：『我有食山楂同地高辛，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-84. Hawthorn + Amlodipine  (hawthorn-amlodipine, status: official)
+85. Hawthorn + Amlodipine  (hawthorn-amlodipine, status: official)
 
   English
   [1] Hawthorn and amlodipine. Official caution.
@@ -1436,7 +1459,7 @@ The words on screen are not changed by this script.
   [7] 下一步：俾醫生睇。你可以咁講：『我有食山楂同氨氯地平，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-85. Hawthorn + Furosemide  (hawthorn-furosemide, status: official)
+86. Hawthorn + Furosemide  (hawthorn-furosemide, status: official)
 
   English
   [1] Hawthorn and furosemide. Official caution.
@@ -1457,7 +1480,7 @@ The words on screen are not changed by this script.
   [7] 下一步：俾醫生睇。你可以咁講：『我有食山楂同呋塞米，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-86. Hawthorn + Bisoprolol  (hawthorn-bisoprolol, status: official)
+87. Hawthorn + Bisoprolol  (hawthorn-bisoprolol, status: official)
 
   English
   [1] Hawthorn and bisoprolol. Official caution.
@@ -1478,7 +1501,7 @@ The words on screen are not changed by this script.
   [7] 下一步：俾醫生睇。你可以咁講：『我有食山楂同比索洛爾，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-87. Hawthorn + Metoprolol  (hawthorn-metoprolol, status: official)
+88. Hawthorn + Metoprolol  (hawthorn-metoprolol, status: official)
 
   English
   [1] Hawthorn and metoprolol. Official caution.
@@ -1499,7 +1522,7 @@ The words on screen are not changed by this script.
   [7] 下一步：俾醫生睇。你可以咁講：『我有食山楂同美托洛爾，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-88. Hawthorn + Perindopril  (hawthorn-perindopril, status: official)
+89. Hawthorn + Perindopril  (hawthorn-perindopril, status: official)
 
   English
   [1] Hawthorn and perindopril. Official caution.
@@ -1520,7 +1543,7 @@ The words on screen are not changed by this script.
   [7] 下一步：俾醫生睇。你可以咁講：『我有食山楂同培哚普利，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-89. Hawthorn + Enalapril  (hawthorn-enalapril, status: official)
+90. Hawthorn + Enalapril  (hawthorn-enalapril, status: official)
 
   English
   [1] Hawthorn and enalapril. Official caution.
@@ -1541,7 +1564,7 @@ The words on screen are not changed by this script.
   [7] 下一步：俾醫生睇。你可以咁講：『我有食山楂同依那普利，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-90. Hawthorn + Losartan  (hawthorn-losartan, status: official)
+91. Hawthorn + Losartan  (hawthorn-losartan, status: official)
 
   English
   [1] Hawthorn and losartan. Official caution.
@@ -1562,7 +1585,7 @@ The words on screen are not changed by this script.
   [7] 下一步：俾醫生睇。你可以咁講：『我有食山楂同氯沙坦，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-91. Hawthorn + Valsartan  (hawthorn-valsartan, status: official)
+92. Hawthorn + Valsartan  (hawthorn-valsartan, status: official)
 
   English
   [1] Hawthorn and valsartan. Official caution.
@@ -1583,7 +1606,7 @@ The words on screen are not changed by this script.
   [7] 下一步：俾醫生睇。你可以咁講：『我有食山楂同纈沙坦，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-92. Hawthorn + Isosorbide mononitrate  (hawthorn-isosorbide_mononitrate, status: official)
+93. Hawthorn + Isosorbide mononitrate  (hawthorn-isosorbide_mononitrate, status: official)
 
   English
   [1] Hawthorn and isosorbide mononitrate. Official caution.
@@ -1604,7 +1627,7 @@ The words on screen are not changed by this script.
   [7] 下一步：俾醫生睇。你可以咁講：『我有食山楂同單硝酸異山梨酯，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-93. Hawthorn + Isosorbide dinitrate  (hawthorn-isosorbide_dinitrate, status: official)
+94. Hawthorn + Isosorbide dinitrate  (hawthorn-isosorbide_dinitrate, status: official)
 
   English
   [1] Hawthorn and isosorbide dinitrate. Official caution.
@@ -1625,7 +1648,7 @@ The words on screen are not changed by this script.
   [7] 下一步：俾醫生睇。你可以咁講：『我有食山楂同硝酸異山梨酯，可唔可以幫我睇吓有冇問題？』
 
 ================================================================
-94. Hawthorn + Glyceryl trinitrate  (hawthorn-glyceryl_trinitrate, status: official)
+95. Hawthorn + Glyceryl trinitrate  (hawthorn-glyceryl_trinitrate, status: official)
 
   English
   [1] Hawthorn and glyceryl trinitrate. Official caution.

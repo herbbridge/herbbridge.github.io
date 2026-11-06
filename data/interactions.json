@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-10-26",
+  "last_updated": "2026-11-06",
   "interactions": [
     {
       "id": "danshen-warfarin",
@@ -1889,6 +1889,71 @@
         }
       ],
       "zh_reviewed": true
+    },
+    {
+      "id": "liquorice-warfarin",
+      "herb_id": "liquorice",
+      "drug_id": "warfarin",
+      "risk": "moderate",
+      "watch": false,
+      "rating_source": "team",
+      "effect_en": "Raised INR and serious bleeding were reported after a large amount of black liquorice in one person taking warfarin. A case report cannot establish cause and effect.",
+      "effect_zh": "有一位食緊華法林嘅病人，食咗大量黑甘草糖之後，出現INR（凝血指數）升高同嚴重出血。單一病例報告唔能夠證實因果關係。",
+      "heart_impact_en": "Possible bleeding; the evidence is one case report involving a large amount of black liquorice.",
+      "heart_impact_zh": "可能有出血風險；證據只係一個食咗大量黑甘草糖嘅病例。",
+      "why_en": null,
+      "why_zh": null,
+      "why_pro_en": null,
+      "action_en": "Ask your doctor or pharmacist before taking liquorice with warfarin. Tell them about liquorice in herbal products, foods or sweets.",
+      "action_zh": "食華法林期間，食甘草之前請先問醫生或者藥劑師。話俾佢哋知你有冇食含甘草嘅中藥、食物或者糖果。",
+      "main_source": 0,
+      "main_finding_en": "Case report: an 80-year-old woman on warfarin had INR 5.5 (previously 2.1) and a bleeding stomach ulcer after eating a pound of black liquorice. The unusually large amount and the ulcer limit what this tells us about other products or amounts.",
+      "main_finding_zh": "病例報告：一位80歲、食緊華法林嘅女士，食咗一磅黑甘草糖之後，INR由之前嘅2.1升到5.5，並有胃潰瘍出血。由於份量特別大，而且病人有胃潰瘍，唔可以直接推論其他產品或者份量都會有相同影響。",
+      "evidence_level": [
+        "case_reports"
+      ],
+      "sources": [
+        {
+          "label": "Liu, Srivatsa & Kaul. World J Gastrointest Surg 2010;2:30–31 (case report)",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2999197/"
+        }
+      ],
+      "zh_reviewed": false
+    },
+    {
+      "id": "ginkgo-clopidogrel",
+      "herb_id": "ginkgo",
+      "drug_id": "clopidogrel",
+      "risk": "low",
+      "watch": true,
+      "rating_source": "team",
+      "effect_en": "Evidence is mixed. A small single-dose trial found no extra platelet inhibition, while a hospital-record study reported a bleeding association. Official cautions still apply.",
+      "effect_zh": "證據未有一致結論。一項細規模、單次用藥試驗未有發現血小板抑制作用額外增加；但一項醫院病歷研究報告咗同出血有關聯。官方提醒仍然適用。",
+      "heart_impact_en": "Watch for unusual bruising or bleeding.",
+      "heart_impact_zh": "留意有冇唔尋常嘅瘀傷或者出血。",
+      "why_en": null,
+      "why_zh": null,
+      "why_pro_en": null,
+      "action_en": "Ask your doctor or pharmacist before combining them. Health Canada says not to use ginkgo with blood thinners. Tell your clinician about any unusual bruising or bleeding.",
+      "action_zh": "一齊食之前，請先問醫生或者藥劑師。加拿大衞生部提醒，食薄血藥期間唔好用銀杏。如有唔尋常嘅瘀傷或者出血，請話俾醫護人員知。",
+      "main_source": 0,
+      "main_finding_en": "Single-dose trial in 10 healthy men: ginkgo with clopidogrel did not significantly increase platelet inhibition compared with the drugs alone. This does not establish the effects of longer use in heart patients. Only the abstract and indexed results were accessible for this check.",
+      "main_finding_zh": "10位健康男士嘅單次用藥試驗：銀杏加氯吡格雷，同單獨用藥比較，未有令血小板抑制作用明顯增加。呢個結果唔能夠確定心臟病人長期一齊食嘅影響。今次核對只讀到摘要同已收錄嘅結果內容。",
+      "evidence_level": [
+        "human_trial",
+        "observational"
+      ],
+      "sources": [
+        {
+          "label": "Aruna & Naidu. Br J Clin Pharmacol 2007;63:333–338 (abstract and indexed results)",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2000722/"
+        },
+        {
+          "label": "Mai et al. PLoS One 2025;20:e0321804 (hospital-record study)",
+          "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0321804"
+        }
+      ],
+      "zh_reviewed": false
     }
   ]
 }

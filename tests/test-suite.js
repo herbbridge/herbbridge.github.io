@@ -26,7 +26,7 @@
     // shown as Hospital Authority advice on this card instead.
     'american_ginseng|warfarin': { kind: 'official', statements: ['hc-american-ginseng'] },
     'ginkgo|aspirin':            { kind: 'disagree', statements: ['hc-ginkgo-contraindication', 'ema-ginkgo-4.5'] },
-    'ginkgo|clopidogrel':        { kind: 'official', statements: ['ema-ginkgo-4.5', 'hc-ginkgo-contraindication'] },
+    'ginkgo|clopidogrel':        { kind: 'disagree', statements: ['ema-ginkgo-4.5', 'hc-ginkgo-contraindication'] },
     'ginkgo|amlodipine':         { kind: 'official', statements: ['hc-ginkgo-blood-pressure'] },
     'american_ginseng|digoxin':  { kind: 'official', statements: ['hc-american-ginseng'] },
     'asian_ginseng|digoxin':     { kind: 'official', statements: ['hc-panax-ginseng'] },
@@ -128,6 +128,9 @@
     'asian_ginseng-warfarin':    { risk: 'low',      watch: false, rating_source: 'team' },
     'ginkgo-warfarin':           { risk: 'low',      watch: true,  rating_source: 'team' },
     'ginkgo-aspirin':            { risk: 'low',      watch: true,  rating_source: 'team' },
+    // 6 Nov: source-checked expansion; both are unreviewed team judgements.
+    'ginkgo-clopidogrel':        { risk: 'low',      watch: true,  rating_source: 'team' },
+    'liquorice-warfarin':        { risk: 'moderate', watch: false, rating_source: 'team' },
     'liquorice-digoxin':         { risk: 'moderate', watch: false, rating_source: 'team' },
     'liquorice-diuretic':        { risk: 'moderate', watch: false, rating_source: 'team' },
     'red_yeast_rice-statin':     { risk: 'high',     watch: false, rating_source: 'team' },
@@ -292,6 +295,17 @@
     }
 
     var db = lookup.createDb(data.herbs, data.drugs, data.interactions, data.official, data.reviews);
+
+    check('Safety rules', 'the liquorice case report does not create ratings for other blood thinners', function () {
+      return lookup.checkPairs(db, ['liquorice'], ['aspirin', 'clopidogrel', 'ticagrelor', 'apixaban', 'rivaroxaban', 'dabigatran', 'edoxaban'])
+        .every(function (r) { return r.status === lookup.NOT_IN_DATABASE && !r.entry; });
+    });
+    check('Safety rules', 'November source additions remain unreviewed team judgements', function () {
+      return [['liquorice', 'warfarin'], ['ginkgo', 'clopidogrel']].every(function (pair) {
+        var r = lookup.checkPairs(db, [pair[0]], [pair[1]])[0];
+        return r.entry && r.entry.rating_source === 'team' && r.entry.zh_reviewed === false && !r.review;
+      });
+    });
 
     // 1. The data files themselves.
     check('Data files', 'herbs.json, drugs.json and interactions.json are valid', function () {

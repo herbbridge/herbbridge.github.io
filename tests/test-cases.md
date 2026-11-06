@@ -12,6 +12,8 @@ The 15 owner-approved pairs went live on 18 Oct 2026. Cases 1, 4 and 10 now expe
 
 Official cautions (18 Oct 2026, owner-approved): where a government health agency has written about a pair, the result is "Official caution" and the card quotes the agency word for word (`data/official.json`). Team ratings are unchanged and still shown under the official quotes; a High team rating is never replaced. Cases 4, 7 and 9 changed.
 
+6 Nov 2026: liquorice + warfarin now has a Moderate team entry based on a limited case report. Ginkgo + clopidogrel gains a Low · watch team entry with mixed evidence, while its Official caution remains the displayed status. Source access and limitations are recorded in `proposals/data-expansion-2026-11-06.md`.
+
 ## 1. Mr Wong (demo case)
 
 Fictional 72-year-old with atrial fibrillation, on warfarin and amlodipine, who buys danshen.
@@ -63,12 +65,12 @@ Heart failure and atrial fibrillation: warfarin, aspirin, digoxin and furosemide
 | Ginkgo | Aspirin | Official caution · sources disagree | `ginkgo-aspirin` + `ginkgo-aspirin-official` | Watch for unusual bruising or bleeding. |
 | Liquorice | Digoxin | Official caution | `liquorice-digoxin` + `liquorice-digoxin-official` | Low potassium can lead to a dangerous heart rhythm. |
 | Liquorice | Furosemide | Official caution | `liquorice-diuretic` + `liquorice-diuretic-official` | Low potassium can lead to a dangerous heart rhythm. |
+| Liquorice | Warfarin | Moderate | `liquorice-warfarin` | Possible bleeding; the evidence is one case report involving a large amount of black liquorice. |
 | Dong quai | Aspirin | Low | `dong_quai-aspirin` | Watch for unusual bruising or bleeding. |
 | Dong quai | Digoxin | Not in database | none | (not shown on grey cards) |
 | Dong quai | Furosemide | Not in database | none | (not shown on grey cards) |
 | Ginkgo | Digoxin | Not in database | none | (not shown on grey cards) |
 | Ginkgo | Furosemide | Not in database | none | (not shown on grey cards) |
-| Liquorice | Warfarin | Not in database | none | (not shown on grey cards) |
 | Liquorice | Aspirin | Not in database | none | (not shown on grey cards) |
 
 ## 5. American ginseng with warfarin
@@ -119,7 +121,7 @@ Switched from atorvastatin to rosuvastatin and still has both on the list, plus 
 
 ## 9. Ginkgo with aspirin and clopidogrel
 
-Takes ginkgo for memory, on aspirin and clopidogrel. Both show an official caution: ginkgo + aspirin quotes Health Canada and the EMA over the team rating (sources disagree); ginkgo + clopidogrel has no team rating, only the official quotes.
+Takes ginkgo for memory, on aspirin and clopidogrel. Both show an official caution over the secondary team rating. Ginkgo + clopidogrel includes limited single-dose trial evidence and a hospital-record study, without implying that longer use is safe.
 
 - **Chinese herbs:** Ginkgo 銀杏
 - **Western medicines:** Aspirin – Blood thinners (stroke and heart valve protection), Clopidogrel – Blood thinners (stroke and heart valve protection)
@@ -127,7 +129,7 @@ Takes ginkgo for memory, on aspirin and clopidogrel. Both show an official cauti
 | Herb | Medicine | Expected result | Entry | Why this matters for your heart |
 |---|---|---|---|---|
 | Ginkgo | Aspirin | Official caution · sources disagree | `ginkgo-aspirin` + `ginkgo-aspirin-official` | Watch for unusual bruising or bleeding. |
-| Ginkgo | Clopidogrel | Official caution | `ginkgo-clopidogrel-official` | (official quote shown) |
+| Ginkgo | Clopidogrel | Official caution | `ginkgo-clopidogrel` + `ginkgo-clopidogrel-official` | Watch for unusual bruising or bleeding. |
 
 ## 10. Danshen, sanqi and safflower with warfarin and aspirin
 

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "last_updated": "2026-10-26",
+  "last_updated": "2026-11-06",
   "about": "Official cautions: the exact words of government health agencies, quoted, never paraphrased. Each statement was checked against the official document on 18–19 Oct 2026 (see proposals/official-warnings-verified.json). quote_zh is a translation, unless quote_zh_is_original is true (the agency's own Chinese version, e.g. the Hospital Authority leaflet). Approved by the owner on 18–19 Oct 2026. general_advice: Hospital Authority patient leaflets for groups of heart medicines; general advice about all Chinese medicines, never a rating and never an Official caution (an Official caution needs an official source that names the herb). Both languages are the HA's own wording.",
   "statements": [
     {
@@ -277,7 +277,7 @@
       "id": "ginkgo-clopidogrel-official",
       "herb_id": "ginkgo",
       "drug_id": "clopidogrel",
-      "kind": "official",
+      "kind": "disagree",
       "statements": [
         "ema-ginkgo-4.5",
         "hc-ginkgo-contraindication"
