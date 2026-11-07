@@ -1,6 +1,7 @@
 import {createClient} from '@supabase/supabase-js';
 import {createAuthService,createTabStorage,readEmailChallenge} from './auth-service.mjs';
 import {createRoomUI,ROOM_WORDS,roomErrorKey} from './room-ui.mjs';
+import {createChecker,CHECK_WORDS} from './checker.mjs';
 import {validateConfig} from '../client.mjs';
 const config=__HERBBRIDGE_CONFIG__;
 let emailChallenge=readEmailChallenge(location.href);
@@ -37,8 +38,8 @@ Object.assign(words.zh,{
  enterCode:'輸入確認電郵驗證碼',confirmLink:'確認並繼續',linkConfirm:'確認你嘅電郵',linkRecovery:'繼續重設密碼',linkBody:'只喺你曾經提出要求嘅情況下繼續。呢個瀏覽器會登入電郵所屬嘅帳戶，並取代而家開緊嘅帳戶。',cancelLink:'取消並返回登入'
 });
 Object.assign(words.en,{reviewDesign:'Review the design without signing in'});Object.assign(words.zh,{reviewDesign:'唔登入都可以查看設計'});
-Object.assign(words.en,ROOM_WORDS.en);Object.assign(words.zh,ROOM_WORDS.zh);
-const rooms=createRoomUI({client,getProfile:()=>state.profile,getLang:()=>state.lang,run,renderRoot:render,notify:showNotice,clearNotice:()=>{state.notice=null;},isBusy:()=>state.busy});
+Object.assign(words.en,CHECK_WORDS.en,ROOM_WORDS.en);Object.assign(words.zh,CHECK_WORDS.zh,ROOM_WORDS.zh);
+const rooms=createRoomUI({client,getProfile:()=>state.profile,getLang:()=>state.lang,run,renderRoot:render,notify:showNotice,clearNotice:()=>{state.notice=null;},isBusy:()=>state.busy,checker:createChecker()});
 const t=k=>words[state.lang][k]||k;
 function el(tag,attrs={},children=[]){const node=document.createElement(tag);for(const[k,v]of Object.entries(attrs)){if(k==='text')node.textContent=v;else if(k==='on')node.onclick=v;else if(v!==false&&v!=null)node.setAttribute(k,v===true?'':v);}for(const child of [].concat(children))if(child!=null)node.append(child instanceof Node?child:document.createTextNode(child));return node;}
 const p=(key,cls='')=>el('p',{text:t(key),class:cls});
