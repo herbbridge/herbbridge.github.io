@@ -2,9 +2,9 @@
 
 Status: the Singapore development database has five verified migrations, including
 account registration and private room operations. The working account UI is in
-`app/`. The public review release is being prepared; publication is tracked in
+`app/`. The public review release is live at https://herbbridge.org/accounts/; publication is tracked in
 `../chatgpt update/PROGRESS.md`. This is for fictional data only. Real two-account
-verification, independent-session race tests and production readiness remain open.
+verification and production readiness remain open. Independent-session race tests pass locally; hosted race verification remains open.
 
 Canonical workspace source is this `05_Backend` folder. `tools/prepare-review.mjs`
 exports an explicit public allowlist to the existing app repository: built assets
@@ -197,3 +197,17 @@ HERBBRIDGE_PG_TEST_RUNTIME=/private/tmp/herbbridge-pg-test node tools/check-conc
 The test uses loopback only, a random temporary password, fictional users and a
 new temporary cluster. It does not read `.env.local` or connect to Supabase. It
 stops the cluster and removes its fictional data in `finally`.
+
+## Cross-browser email confirmation and recovery
+
+New email templates in `supabase/email-templates/` include both a token-hash link
+and a numeric code. Deploy the account app before saving these templates in the
+hosted development project's Confirm sign up and Reset password email settings.
+The links target the exact HTTPS accounts address, keeping their one-time token
+in the URL fragment. The app removes it from the address immediately and waits
+for an explicit confirmation click before calling `verifyOtp`. Manual code entry
+uses the account email and `email` or `recovery` verification type. No database
+migration or privileged browser key is required. Older PKCE email links remain
+supported but may require the original browser. Both alternatives consume the
+same one-time challenge; use only the newest email. Email confirmation and
+professional approval requirements are unchanged.

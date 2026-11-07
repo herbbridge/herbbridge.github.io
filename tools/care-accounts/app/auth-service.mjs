@@ -14,6 +14,11 @@ export function createAuthService(client,origin){
   signin:async(email,password)=>{const {data,error}=await client.auth.signInWithPassword({email:email.trim(),password});if(error)throw error;return data;},
   resend:async email=>{const {error}=await client.auth.resend({type:'signup',email:email.trim(),options:{emailRedirectTo:redirectTo}});if(error&&!['user_not_found','email_not_found','email_already_confirmed'].includes(error.code))throw error;},
   recover:async email=>{const {error}=await client.auth.resetPasswordForEmail(email.trim(),{redirectTo});if(error&&!['user_not_found','email_not_found'].includes(error.code))throw error;},
+  verify:async({email,token,token_hash,type})=>{
+   if(!['email','recovery'].includes(type))throw new Error('invalid_confirmation');
+   const payload=token_hash?{token_hash,type}:{email:email.trim(),token:token.trim(),type};
+   const {data,error}=await client.auth.verifyOtp(payload);if(error)throw error;return data;
+  },
   password:async password=>{const {error}=await client.auth.updateUser({password});if(error)throw error;},
   signout:async()=>{const {error}=await client.auth.signOut({scope:'local'});if(error)throw error;},
   profile:async(verifiedUser=null)=>{
@@ -37,4 +42,14 @@ export function createAuthService(client,origin){
 export function createTabStorage(session,local){
  // Session tokens stay in this tab. Only the PKCE verifier crosses confirmation tabs.
  return {getItem:key=>(key.endsWith('-code-verifier')?local:session).getItem(key),setItem:(key,value)=>(key.endsWith('-code-verifier')?local:session).setItem(key,value),removeItem:key=>(key.endsWith('-code-verifier')?local:session).removeItem(key)};
+}
+
+// Read before creating the Auth client; token hashes never enter storage or host requests.
+export function readEmailChallenge(href){
+ const url=new URL(href),query=url.searchParams,hash=new URLSearchParams(url.hash.slice(1));
+ const source=hash.has('token_hash')?hash:query;
+ if(!source.has('token_hash'))return null;
+ const token_hash=source.get('token_hash'),type=source.get('type');
+ if(!token_hash||token_hash.length>512||!['email','recovery'].includes(type))return {invalid:true};
+ return {token_hash,type};
 }

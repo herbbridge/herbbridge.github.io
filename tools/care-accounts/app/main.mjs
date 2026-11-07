@@ -1,8 +1,10 @@
 import {createClient} from '@supabase/supabase-js';
-import {createAuthService,createTabStorage} from './auth-service.mjs';
+import {createAuthService,createTabStorage,readEmailChallenge} from './auth-service.mjs';
 import {createRoomUI,ROOM_WORDS,roomErrorKey} from './room-ui.mjs';
 import {validateConfig} from '../client.mjs';
 const config=__HERBBRIDGE_CONFIG__;
+let emailChallenge=readEmailChallenge(location.href);
+if(emailChallenge)history.replaceState({},'',location.pathname);
 let callbackPending=new URLSearchParams(location.search).has('code');
 validateConfig(config);
 const storageKey='herbbridge-development-auth';
@@ -15,16 +17,24 @@ const words={
  zh:{development:'開發版本 · 只可以用虛構病人資料',footer:'呢個帳戶版本同公開藥物查詢、設計預覽分開運作。',bigger:'A+ 放大字體',loading:'載入緊你嘅帳戶…',signin:'登入',signup:'建立帳戶',intro:'用同一個帳戶管理藥物清單同照護團隊。',email:'電郵',password:'密碼',passwordAgain:'再次輸入密碼',newPassword:'新密碼',passwordHelp:'請用最少10個字元。密碼會安全傳送去 Supabase，唔會儲存喺呢個頁面。',name:'顯示名稱',role:'註冊身份',patient:'病人',practitioner:'醫生／中醫師',category:'專業類別',western_medicine:'西醫',chinese_medicine:'中醫師',registration:'專業註冊編號',forgot:'唔記得密碼？',back:'返回登入',verify:'請查看電郵',verifyBody:'如果可以繼續註冊，你會收到確認連結。請喺呢個瀏覽器打開連結再繼續。已有帳戶可以登入或者重設密碼。',resend:'重新寄出確認電郵',resendDone:'如果呢個電郵可以重新確認，系統已提出寄信要求。',confirmNeeded:'請先確認電郵再登入。你可以喺下面重新索取確認電郵。',recovery:'重設帳戶登入',recoveryBody:'請輸入自己嘅電郵。系統唔會透露其他人有冇帳戶。',recoverySend:'寄出重設指示',recoveryDone:'如果帳戶存在而且可以重設，你會收到載有指示嘅電郵。',reset:'設定新密碼',resetBody:'呢個重設連線可以更新你嘅密碼，完成之前請保持頁面開啟。',savePassword:'儲存新密碼',passwordSaved:'密碼已更新，請用新密碼登入。',finish:'完成帳戶設定',finishBody:'請確認帳戶身份同資料。醫護申請需要另外核實專業身份。',finishSubmit:'儲存帳戶資料',pending:'申請等待審批',pendingBody:'你嘅專業身份核實之前，唔可以連結病人。確認電郵唔代表專業身份已獲核實。',rejected:'申請未獲批准',rejectedBody:'你嘅醫護申請未獲批准，暫時無法存取病人照護室。',suspended:'醫護存取已暫停',suspendedBody:'醫護帳戶暫停期間，唔可以存取病人照護室。',ready:'你嘅帳戶已經準備好',patientReady:'病人帳戶資料已儲存。連結醫護同管理共同清單係下一個開發步驟。',doctorReady:'帳戶已獲批准，已連結病人嘅照護室功能係下一個開發步驟。',signout:'登出',signedout:'你已經喺呢部裝置登出。',signedoutLocal:'你已經喺呢部裝置登出，但伺服器未能確認撤銷登入；呢度唔會繼續顯示帳戶資料。',retry:'再試',loadFailed:'未能載入帳戶，請檢查網絡再試。',signinFailed:'未能登入，請核對電郵同密碼，或者重設帳戶登入。',failed:'未能完成，請檢查網絡再試。',rate:'要求太頻密，請稍後再試。',delivery:'未能寄出確認電郵。開發版本可能只可以寄俾專案擁有者，或者需要設定寄信服務。',weak:'請設定最少10個字元嘅密碼。',mismatch:'兩次輸入嘅密碼唔相同。',expired:'連結無效、已過期，或者喺另一個瀏覽器打開。請重新索取確認或者重設電郵。',offline:'你而家離線，請重新連線再繼續。',confirmConfig:'開發版本必須確認電郵，請專案擁有者檢查設定。',roleSet:'帳戶身份已經設定，請登出再登入以載入帳戶。',testOnly:'呢個係開發帳戶，暫時唔好輸入病人藥物資料。',account:'帳戶',confirmed:'電郵已確認',enrolFailed:'未能儲存帳戶資料。你仍然保持登入，請核對資料再試。',noRecovery:'請先打開有效嘅重設電郵連結，再更改密碼。'}
 };
 Object.assign(words.en,{
- verifyBody:'Open the confirmation link in this browser. If you already opened it in another browser, try signing in here with your original password. Your email may already be confirmed.',
+ verifyBody:'Use the link in your newest confirmation email in any browser, or enter its code below. Your email may already be confirmed; you can also try signing in with your original password.',
+ recoveryBody:'Request a recovery email, then open its link in any browser or enter its code below. We will not reveal whether an account exists.',
  resendDone:'This request does not guarantee another email. If your email is already confirmed, sign in instead. Otherwise, check your inbox and spam folder.',
- emailLimit:'The development email service has reached its sending limit. Check your latest confirmation email. If you already opened it, try signing in with your original password.',
- expired:'This link could not finish signing you in. If you opened a confirmation link, try signing in with your original password. Otherwise, request a new confirmation or recovery email in this browser.'
+ emailLimit:'The email service has reached its sending limit. Wait before requesting another email. Check your latest email, or sign in if you already confirmed your address.',
+ delivery:'The email could not be sent. Please wait and try again, or contact the project owner.',
+ expired:'This link or code is invalid, expired or already used. Try signing in if you already confirmed your email, or request a new email. Older links may require the browser where you started.',
+ emailCode:'Code from your email',verifyCode:'Confirm email with code',recoverCode:'Continue recovery with code',codeHelp:'Use the newest email only. The link and code are two ways to use the same one-time confirmation. Keep them private.',
+ enterCode:'Enter a confirmation email code',confirmLink:'Confirm and continue',linkConfirm:'Confirm your email',linkRecovery:'Continue password recovery',linkBody:'Continue only if you requested this email. This will sign this browser into the account linked to the email, replacing any account currently open here.',cancelLink:'Cancel and return to sign in'
 });
 Object.assign(words.zh,{
- verifyBody:'請喺呢個瀏覽器打開確認連結。如果你已經喺另一個瀏覽器打開過，試吓喺呢度用原本密碼登入；你嘅電郵可能已經確認。',
+ verifyBody:'你可以喺任何瀏覽器打開最新確認電郵嘅連結，或者喺下面輸入電郵驗證碼。你嘅電郵可能已經確認，亦可以試吓用原本密碼登入。',
+ recoveryBody:'索取重設電郵後，可以喺任何瀏覽器打開連結，或者喺下面輸入電郵驗證碼。系統唔會透露帳戶係咪存在。',
  resendDone:'提出要求唔代表一定會再寄電郵。如果電郵已經確認，請直接登入；否則請查看收件匣同垃圾郵件。',
- emailLimit:'開發版本嘅寄信服務已達發送上限。請查看最近收到嘅確認電郵。如果已經打開過連結，可以試吓用原本密碼登入。',
- expired:'呢個連結未能完成登入。如果你打開過確認連結，請試吓用原本密碼登入；否則請喺呢個瀏覽器重新索取確認或者重設電郵。'
+ emailLimit:'寄信服務已達發送上限，請稍後再索取電郵。請查看最近收到嘅電郵；如果已確認地址，可以直接登入。',
+ delivery:'未能寄出電郵，請稍後再試，或者聯絡專案擁有者。',
+ expired:'連結或驗證碼無效、已過期或已使用。如果已確認電郵，可以直接登入，否則請重新索取電郵。舊連結可能需要用返原本嘅瀏覽器。',
+ emailCode:'電郵驗證碼',verifyCode:'用驗證碼確認電郵',recoverCode:'用驗證碼繼續重設',codeHelp:'請只用最新電郵。連結同驗證碼係同一次確認嘅兩種方法，只可以用一次，請勿分享。',
+ enterCode:'輸入確認電郵驗證碼',confirmLink:'確認並繼續',linkConfirm:'確認你嘅電郵',linkRecovery:'繼續重設密碼',linkBody:'只喺你曾經提出要求嘅情況下繼續。呢個瀏覽器會登入電郵所屬嘅帳戶，並取代而家開緊嘅帳戶。',cancelLink:'取消並返回登入'
 });
 Object.assign(words.en,{reviewDesign:'Review the design without signing in'});Object.assign(words.zh,{reviewDesign:'唔登入都可以查看設計'});
 Object.assign(words.en,ROOM_WORDS.en);Object.assign(words.zh,ROOM_WORDS.zh);
@@ -38,7 +48,7 @@ const card=(...nodes)=>el('section',{class:'card'},nodes);
 function field(key,id,type='text',value='',options={}){return el('div',{class:'field'},[el('label',{for:id,text:t(key)}),el('input',{id,name:id,type,value,required:true,maxlength:type==='password'?128:120,autocomplete:type==='email'?'email':type==='password'?(state.screen==='signin'?'current-password':'new-password'):'off',...options})]);}
 const submit=key=>el('button',{type:'submit',class:'button primary',text:t(key)});
 function showNotice(key,error=false){state.notice={key,error};document.querySelector('#notice')?.remove();const node=el('div',{id:'notice',class:'notice'+(error?' error':''),role:error?'alert':'status','aria-live':'polite',text:t(key)});main.querySelector('h1')?.after(node);}
-function go(screen){if(state.busy)return;state.screen=screen;state.notice=null;render();main.querySelector('h1')?.focus();window.scrollTo(0,0);}
+function go(screen){if(state.busy)return;emailChallenge=null;state.screen=screen;state.notice=null;render();main.querySelector('h1')?.focus();window.scrollTo(0,0);}
 function preservedRender(){const fields=[...main.querySelectorAll('input,select')].map(n=>({id:n.id,value:n.value,checked:n.checked}));render();for(const f of fields){const n=document.getElementById(f.id);if(n){n.value=f.value;if(n.type==='checkbox')n.checked=f.checked;}}}
 function failure(error,fallback='failed'){
  const code=error?.code||'';
@@ -56,7 +66,7 @@ function failure(error,fallback='failed'){
 async function run(work,success,fallback='failed'){
  if(state.busy)return;const operationGeneration=generation;state.busy=true;main.setAttribute('aria-busy','true');
  const controls=[...document.querySelectorAll('button,input,select,textarea')].map(n=>[n,n.disabled]);controls.forEach(([n])=>n.disabled=true);
- try{if(!navigator.onLine)throw new Error('offline');const result=await work();state.busy=false;await success?.(result);}
+ try{if(!navigator.onLine)throw new Error('offline');const result=await work();if(operationGeneration!==generation)return;state.busy=false;await success?.(result);}
  catch(error){if(operationGeneration===generation&&error?.code!=='HB_stale')showNotice(failure(error,fallback),true);}
  finally{state.busy=false;main.setAttribute('aria-busy','false');controls.forEach(([n,disabled])=>{n.disabled=disabled;});if(operationGeneration!==generation)render();}
 }
@@ -71,18 +81,31 @@ function identityFields(setup=false){
 function signin(){
  const form=el('form',{},[field('email','email','email',state.email),field('password','password','password'),submit('signin')]);
  form.onsubmit=e=>{e.preventDefault();const f=new FormData(form);state.email=f.get('email').trim();run(()=>service.signin(state.email,f.get('password')),async()=>{await refreshAccount();},'signinFailed');};
- return [p('intro','intro'),el('p',{},[el('a',{href:'./design/',text:t('reviewDesign')})]),card(form,actions(button('signup',()=>go('signup')),button('forgot',()=>go('recovery'))),el('button',{type:'button',class:'link',text:t('resend'),on:()=>go('verify')}))];
+ return [p('intro','intro'),el('p',{},[el('a',{href:'./design/',text:t('reviewDesign')})]),card(form,actions(button('signup',()=>go('signup')),button('forgot',()=>go('recovery'))),el('button',{type:'button',class:'link',text:t('enterCode'),on:()=>go('verify')}))];
 }
 function signup(){
  const form=el('form',{},[...identityFields(),field('email','email','email',state.email),field('password','password','password','',{minlength:10}),field('passwordAgain','confirm-password','password','',{minlength:10}),p('passwordHelp','small muted'),submit('signup')]);
  form.onsubmit=e=>{e.preventDefault();const f=new FormData(form);if(f.get('password')!==f.get('confirm-password'))return showNotice('mismatch',true);state.email=f.get('email').trim();state.hint={role:f.get('account-role'),name:f.get('display-name').trim(),category:f.get('category')||'chinese_medicine'};run(()=>service.signup({email:state.email,password:f.get('password'),...state.hint}),()=>go('verify'));};
  return [p('intro','intro'),card(form),actions(button('back',()=>go('signin')))];
 }
+async function completeEmailVerification(payload){
+ // Hide the previous identity before any account switch; never enrol from email contents.
+ const ticket=generation;rooms.clear();state.user=null;state.profile=null;state.recovery=false;
+ const data=await service.verify(payload);if(ticket!==generation)throw Object.assign(new Error("stale_confirmation"),{code:"HB_stale"});
+ if(!data?.session)throw new Error('invalid_confirmation');
+ emailChallenge=null;state.recovery=payload.type==='recovery';
+ document.querySelector('#email-code')?.remove();
+}
 function emailForm(kind){
- const send=submit(kind==='verify'?'resend':'recoverySend');if(kind==='verify')send.className='button';
- const form=el('form',{},[field('email','email','email',state.email),send]);
- form.onsubmit=e=>{e.preventDefault();state.email=new FormData(form).get('email').trim();run(()=>kind==='verify'?service.resend(state.email):service.recover(state.email),()=>showNotice(kind==='verify'?'resendDone':'recoveryDone'));};
- return [p(kind==='verify'?'verifyBody':'recoveryBody','intro'),...(kind==='verify'?[actions(button('back',()=>go('signin'),true))]:[]),card(form),...(kind==='recovery'?[actions(button('back',()=>go('signin')))]:[])];
+ const input=field('email','email','email',state.email);
+ const code=field('emailCode','email-code','text','',{inputmode:'numeric',autocomplete:'one-time-code',pattern:'[0-9]{6,10}',minlength:6,maxlength:10});
+ const form=el('form',{},[input,code,p('codeHelp','small muted'),submit(kind==='verify'?'verifyCode':'recoverCode')]);
+ form.onsubmit=e=>{e.preventDefault();const f=new FormData(form);state.email=f.get('email').trim();run(()=>completeEmailVerification({email:state.email,token:f.get('email-code'),type:kind==='verify'?'email':'recovery'}),()=>refreshAccount(),'expired');};
+ const send=button(kind==='verify'?'resend':'recoverySend',()=>{const email=form.querySelector('#email');if(!email.reportValidity())return;state.email=email.value.trim();run(()=>kind==='verify'?service.resend(state.email):service.recover(state.email),()=>showNotice(kind==='verify'?'resendDone':'recoveryDone'));});
+ return [p(kind==='verify'?'verifyBody':'recoveryBody','intro'),card(form,actions(send)),actions(button('back',()=>go('signin')))];
+}
+function emailLink(){
+ return [p('linkBody','intro'),card(actions(button('confirmLink',()=>run(()=>completeEmailVerification(emailChallenge),()=>refreshAccount(),'expired'),true))),actions(button('cancelLink',()=>go('signin')))];
 }
 function finish(){
  const form=el('form',{},[...identityFields(true),submit('finishSubmit')]);
@@ -104,9 +127,9 @@ function account(){
 function render(){
  document.documentElement.lang=state.lang==='zh'?'zh-HK':'en-GB';document.documentElement.classList.toggle('large',state.large);
  document.querySelector('#development').textContent=t('development');document.querySelector('#footer').textContent=t('footer');document.querySelector('#bigger').textContent=t('bigger');document.querySelector('#bigger').setAttribute('aria-pressed',String(state.large));document.querySelector('#language').textContent=state.lang==='en'?'繁體中文':'English';document.querySelector('#language').disabled=state.busy;document.querySelector('#bigger').disabled=state.busy;
- let title=state.screen;
+ let title=state.screen==='emailLink'?(emailChallenge?.type==='recovery'?'linkRecovery':'linkConfirm'):state.screen;
  if(title==='account'){const status=state.profile?.approval_status;title=['pending','rejected','suspended'].includes(status)?status:'ready';}
- const view={signin,signup,verify:()=>emailForm('verify'),recovery:()=>emailForm('recovery'),finish,reset:resetPassword,account,loading:()=>[p('loading')],loadError:()=>[p('loadFailed'),actions(button('retry',()=>refreshAccount()),button('signout',signout))]};
+ const view={signin,signup,emailLink,verify:()=>emailForm('verify'),recovery:()=>emailForm('recovery'),finish,reset:resetPassword,account,loading:()=>[p('loading')],loadError:()=>[p('loadFailed'),actions(button('retry',()=>refreshAccount()),button('signout',signout))]};
  main.replaceChildren(el('p',{class:'eyebrow',text:'HerbBridge'}),el('h1',{text:state.screen==='account'&&rooms.active?rooms.title():t(title),tabindex:'-1'}),...(view[state.screen]||signin)().filter(node=>node!=null));main.setAttribute('aria-busy',String(state.busy));if(state.busy)document.querySelectorAll('button,input,select,textarea').forEach(n=>n.disabled=true);if(state.notice)showNotice(state.notice.key,state.notice.error);
 }
 let generation=0;
@@ -141,6 +164,7 @@ client.auth.onAuthStateChange((event,session)=>{
  if(event==='PASSWORD_RECOVERY')state.recovery=true;
  if(event==='SIGNED_OUT'){generation++;rooms.clear();eraseLocalSession();state.user=null;state.profile=null;state.recovery=false;state.screen='signin';render();}
  else if(event==='SIGNED_IN'||event==='PASSWORD_RECOVERY'){
+  if(emailChallenge||state.busy)return;
   if(event==='SIGNED_IN'&&state.screen==='account'&&state.profile&&state.user?.id===session?.user?.id)return;
   if(state.user?.id!==session?.user?.id){rooms.clear();state.profile=null;state.user=null;}
   setTimeout(()=>{if(!state.busy)void refreshAccount();},0);
@@ -149,6 +173,12 @@ client.auth.onAuthStateChange((event,session)=>{
 document.querySelector('#language').onclick=()=>{if(state.busy)return;state.lang=state.lang==='en'?'zh':'en';localStorage.setItem('herbbridge.auth.language',state.lang);preservedRender();};
 document.querySelector('#bigger').onclick=()=>{if(state.busy)return;state.large=!state.large;localStorage.setItem('herbbridge.auth.large',String(state.large));preservedRender();};
 window.addEventListener('offline',()=>{rooms.connectionLost();showNotice('offline',true);});
+window.addEventListener('hashchange',()=>{
+ const challenge=readEmailChallenge(location.href);if(!challenge)return;
+ emailChallenge=challenge;history.replaceState({},'',location.pathname);generation++;rooms.clear();state.user=null;state.profile=null;state.recovery=false;state.notice=null;state.busy=false;
+ state.screen=challenge.invalid?'signin':'emailLink';if(challenge.invalid){emailChallenge=null;state.notice={key:'expired',error:true};}render();
+});
 const authError=new URLSearchParams(location.search).has('error')||new URLSearchParams(location.hash.slice(1)).has('error');
-if(authError){history.replaceState({},'',location.pathname);state.screen='signin';state.notice={key:'expired',error:true};render();}
+if(emailChallenge&&!emailChallenge.invalid){state.screen='emailLink';render();}
+else if(authError||emailChallenge?.invalid){emailChallenge=null;history.replaceState({},'',location.pathname);state.screen='signin';state.notice={key:'expired',error:true};render();}
 else void refreshAccount();

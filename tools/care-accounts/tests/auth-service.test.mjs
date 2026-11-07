@@ -31,3 +31,22 @@ test('hosted account callbacks stay inside the accounts folder',async()=>{
  await createAuthService(client,'https://herbbridge.org/accounts/').resend('fictional@example.test');
  assert.equal(options.options.emailRedirectTo,'https://herbbridge.org/accounts/');
 });
+
+test('email codes and token links use independent-browser verification without a PKCE verifier',async()=>{
+ const payloads=[];const api=createAuthService({auth:{verifyOtp:async p=>{payloads.push(p);return {data:{session:{}},error:null};}}},origin);
+ await api.verify({email:' fictional@example.test ',token:' 123456 ',type:'email'});
+ await api.verify({token_hash:'fictional-token-hash',type:'recovery'});
+ assert.deepEqual(payloads,[{email:'fictional@example.test',token:'123456',type:'email'},{token_hash:'fictional-token-hash',type:'recovery'}]);
+ await assert.rejects(()=>api.verify({token_hash:'fictional',type:'invite'}),/invalid_confirmation/);
+});
+test('expired code is surfaced without returning a fabricated session',async()=>{
+ const expired={code:'otp_expired'};const api=createAuthService({auth:{verifyOtp:async()=>({data:null,error:expired})}},origin);
+ await assert.rejects(()=>api.verify({email:'fictional@example.test',token:'123456',type:'email'}),e=>e===expired);
+});
+test('email callback accepts only confirmation and recovery and keeps legacy PKCE untouched',async()=>{
+ const {readEmailChallenge}=await import('../app/auth-service.mjs');
+ assert.deepEqual(readEmailChallenge(origin+'/#token_hash=fictional&type=email'),{token_hash:'fictional',type:'email'});
+ assert.deepEqual(readEmailChallenge(origin+'/?token_hash=fictional&type=recovery'),{token_hash:'fictional',type:'recovery'});
+ for(const tail of ['#token_hash=&type=email','#token_hash=fictional&type=invite','#token_hash=fictional'])assert.deepEqual(readEmailChallenge(origin+'/'+tail),{invalid:true});
+ assert.equal(readEmailChallenge(origin+'/?code=legacy-code'),null);
+});
