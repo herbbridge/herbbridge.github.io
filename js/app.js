@@ -1625,6 +1625,8 @@
       ].concat(adviceBlocks(unknown))));
     }
 
+    // The patient's own health log (last 14 days) for the doctor; never on a shared list from someone else.
+    if (!sharedView && window.HerbBridgeLog) { var logSection = window.HerbBridgeLog.summarySection({ el: el, lang: state.lang, db: db }); if (logSection) page.appendChild(logSection); }
     page.appendChild(el('p', { class: 'disclaimer-box summary-disclaimer' }, disclaimerText()));
     if (state.lang === 'zh' && zhUnreviewed()) page.appendChild(el('p', { class: 'muted zh-note', text: t('zh_unreviewed_note') }));
     if (window.HerbBridgeSummary) window.HerbBridgeSummary.enhance(page, {
@@ -1839,6 +1841,14 @@
     return el('section', { class: 'about-section', id: 'install' }, children);
   }
 
+  /* ---------- Daily health log (js/healthlog.js): records only, kept on this device ---------- */
+
+  function renderLog() {
+    app.textContent = '';
+    if (!window.HerbBridgeLog) { renderCheck(); return; }
+    window.HerbBridgeLog.render(app, { el: el, lang: state.lang, db: db, list: { herbs: state.herbs.slice(), drugs: state.drugs.slice() } });
+  }
+
   /* ---------- error screen ---------- */
 
   function renderError() {
@@ -1852,7 +1862,7 @@
 
   /* ---------- routing ---------- */
 
-  // Screens: #/cabinet (also #/check), #/results, #/pair/<herb>-<drug>, #/summary, #/about.
+  // Screens: #/cabinet (also #/check), #/results, #/pair/<herb>-<drug>, #/summary, #/about, #/log.
   var routeParam = null;
   function currentRoute() {
     var r = (location.hash || '').replace(/^#\/?/, '').split('?')[0];
@@ -1860,7 +1870,7 @@
     if (r === 'cabinet') return 'check';
     var m = /^pair\/([a-z_]+)-([a-z_]+)$/.exec(r);
     if (m) { routeParam = { herb: m[1], drug: m[2] }; return 'pair'; }
-    return ['check', 'results', 'summary', 'about'].indexOf(r) !== -1 ? r : 'check';
+    return ['check', 'results', 'summary', 'about', 'log'].indexOf(r) !== -1 ? r : 'check';
   }
 
   function applyStaticText() {
@@ -1941,6 +1951,7 @@
     else if (route === 'pair') renderPair(routeParam);
     else if (route === 'summary') renderSummary();
     else if (route === 'about') renderAbout();
+    else if (route === 'log') renderLog();
     else renderCheck();
     app.insertBefore(modeStrip(), app.firstChild);
     keepEndTogether(app);
