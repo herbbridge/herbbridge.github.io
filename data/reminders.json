@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "about": "General reminders shown with results. Each quote is copied word for word from the named source; never reword, shorten or merge them. Shown only when the list has at least one Chinese herb and one Western medicine.",
+  "reminders": [
+    {
+      "id": "gap_ha_haslink132",
+      "applies": "herb_and_drug",
+      "quote_en": "In general, Chinese medicines should be administered at least 1-2 hours before or after the western medicines. However, this can only avoid the potential drug-drug interactions occurred due to direct contact in the stomach, and cannot avoid any potential interactions occurred after the drugs are absorbed into the body.",
+      "quote_zh": "一般而言，服用中藥和西藥要相隔至少一至兩小時。不過，這只能避免藥物在胃部因直接接觸所產生的相互作用，而無法避免藥物在吸收進入人體後所產生的任何潛在相互作用。",
+      "source": {
+        "publisher_en": "Hospital Authority",
+        "publisher_zh": "醫院管理局",
+        "title_en": "Learn more about interactions between Chinese medicines and western medicines",
+        "title_zh": "中西藥相互作用知多少",
+        "publication": "HASLink issue 132",
+        "url_en": "https://www3.ha.org.hk/ehaslink/issue132/en/feature-3.html",
+        "url_zh": "https://www3.ha.org.hk/ehaslink/issue132/tc/feature-3.html",
+        "retrieved": "2026-11-08",
+        "section_en": "Important notes",
+        "section_zh": "注意事項"
+      },
+      "team_checked": true,
+      "checked_by": "Ayden (project owner) approved publication after the source was shown, 2026-11-08"
+    }
+  ]
+}
