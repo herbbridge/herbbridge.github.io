@@ -176,3 +176,24 @@ applied and recorded with matching source hashes. Practitioners start pending;
 no room is automatically created yet. See ../chatgpt update/STEP-04-ACCOUNTS.md
 for scope, evidence and remaining real-email/account verification. Automated
 browser tests mock all Auth traffic and must not be described as live Auth tests.
+
+
+## Independent-connection checks — 7 November 2026
+
+`tools/check-concurrency.mjs` runs seven deterministic races using separate real
+PostgreSQL connections against the same migrations. It checks a stale save,
+patient capacity, practitioner capacity, single-use invitation consumption,
+disconnection, editing downgrade and suspension while a save is waiting. Result:
+21/21 checks passed on local PostgreSQL 17.11. Hosted-session race verification
+and the real patient/practitioner browser journey remain separate checks.
+
+The runtime is optional and installed outside the application. To reproduce:
+
+```sh
+npm install --prefix /private/tmp/herbbridge-pg-test --save-exact embedded-postgres@17.11.0-beta.19
+HERBBRIDGE_PG_TEST_RUNTIME=/private/tmp/herbbridge-pg-test node tools/check-concurrency.mjs
+```
+
+The test uses loopback only, a random temporary password, fictional users and a
+new temporary cluster. It does not read `.env.local` or connect to Supabase. It
+stops the cluster and removes its fictional data in `finally`.
