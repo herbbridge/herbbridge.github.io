@@ -212,3 +212,20 @@ stored in `fonts/` (Inter, and Noto Sans TC cut down to the characters HerbBridg
 
 HerbBridge gives information, not medical advice. Never stop or change a medicine without
 talking to your doctor or pharmacist.
+
+
+## Patient and practitioner accounts — development review
+
+Open [/accounts/](https://herbbridge.org/accounts/) for the account review version,
+or [/accounts/design/](https://herbbridge.org/accounts/design/) to walk through the
+fictional design without signing in. Use fictional patient information only.
+
+The account version uses the Singapore development database. Patients control
+practitioner view/edit access; limits are three practitioners per patient and
+twenty patients per practitioner. Private lists have authored history and reject
+stale saves. Practitioner approval is separate from email confirmation.
+
+Development email delivery remains restricted. Real two-account/two-device checks,
+production readiness, guest-checker integration and actual notifications remain
+unfinished. The design walkthrough simulates features and creates no accounts.
+See [review limits](accounts/REVIEW.md) and [source](tools/care-accounts/README.md).

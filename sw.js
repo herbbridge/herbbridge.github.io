@@ -6,7 +6,7 @@
  * Nothing is sent anywhere: this only caches files HerbBridge already loads.
  * Change VERSION whenever the list of app files changes.
  */
-var VERSION = 'herbbridge-v65';
+var VERSION = 'herbbridge-v66';
 var FONTS = 'herbbridge-fonts-v1';
 var APP_FILES = [
   './', 'index.html', 'css/styles.css', 'js/lookup.js', 'js/i18n.js', 'js/speech.js', 'js/app.js',
@@ -68,6 +68,9 @@ self.addEventListener('fetch', function (event) {
   var request = event.request;
   if (request.method !== 'GET') return;
   var url = new URL(request.url);
+
+  // Private account pages must never enter the guest/offline cache or fallback.
+  if (url.origin === self.location.origin && /\/(accounts|tools\/care-accounts)(\/|$)/.test(url.pathname)) return;
 
   if (url.origin === self.location.origin) {
     if (request.mode === 'navigate') {
