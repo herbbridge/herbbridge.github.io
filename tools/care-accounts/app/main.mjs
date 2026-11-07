@@ -48,7 +48,7 @@ const card=(...nodes)=>el('section',{class:'card'},nodes);
 function field(key,id,type='text',value='',options={}){return el('div',{class:'field'},[el('label',{for:id,text:t(key)}),el('input',{id,name:id,type,value,required:true,maxlength:type==='password'?128:120,autocomplete:type==='email'?'email':type==='password'?(state.screen==='signin'?'current-password':'new-password'):'off',...options})]);}
 const submit=key=>el('button',{type:'submit',class:'button primary',text:t(key)});
 function showNotice(key,error=false){state.notice={key,error};document.querySelector('#notice')?.remove();const node=el('div',{id:'notice',class:'notice'+(error?' error':''),role:error?'alert':'status','aria-live':'polite',text:t(key)});main.querySelector('h1')?.after(node);}
-function go(screen){if(state.busy)return;emailChallenge=null;state.screen=screen;state.notice=null;render();main.querySelector('h1')?.focus();window.scrollTo(0,0);}
+function go(screen){if(state.busy)return;const email=main.querySelector('#email');if(email)state.email=email.value.trim();emailChallenge=null;state.screen=screen;state.notice=null;render();main.querySelector('h1')?.focus();window.scrollTo(0,0);}
 function preservedRender(){const fields=[...main.querySelectorAll('input,select')].map(n=>({id:n.id,value:n.value,checked:n.checked}));render();for(const f of fields){const n=document.getElementById(f.id);if(n){n.value=f.value;if(n.type==='checkbox')n.checked=f.checked;}}}
 function failure(error,fallback='failed'){
  const code=error?.code||'';
@@ -67,7 +67,7 @@ async function run(work,success,fallback='failed'){
  if(state.busy)return;const operationGeneration=generation;state.busy=true;main.setAttribute('aria-busy','true');
  const controls=[...document.querySelectorAll('button,input,select,textarea')].map(n=>[n,n.disabled]);controls.forEach(([n])=>n.disabled=true);
  try{if(!navigator.onLine)throw new Error('offline');const result=await work();if(operationGeneration!==generation)return;state.busy=false;await success?.(result);}
- catch(error){if(operationGeneration===generation&&error?.code!=='HB_stale')showNotice(failure(error,fallback),true);}
+ catch(error){if(operationGeneration===generation&&error?.code!=='HB_stale'){if(error?.code==='email_not_confirmed'&&state.screen==='signin'){state.busy=false;go('verify');}showNotice(failure(error,fallback),true);}}
  finally{state.busy=false;main.setAttribute('aria-busy','false');controls.forEach(([n,disabled])=>{n.disabled=disabled;});if(operationGeneration!==generation)render();}
 }
 function identityFields(setup=false){

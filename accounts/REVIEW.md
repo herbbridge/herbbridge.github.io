@@ -8,7 +8,7 @@ Email-confirmed patient/practitioner accounts; operator-reviewed practitioner ap
 
 ## Review limits
 
-Practitioners remain pending until reviewed. Custom email delivery is configured. Confirmation and recovery support cross-browser links and email codes once the hosted email templates are enabled. Real two-account/two-device verification remains pending. Independent-session races have been tested locally; hosted race verification remains pending. Reminders, timers and notifications are design demonstrations only. Patient-created invitations, QR invitations and integration with the guest medicine checker remain unfinished. No real patient information.
+Practitioners remain pending until reviewed. Custom email delivery is configured. Confirmation and recovery support cross-browser links and email codes with the hosted email templates enabled. Real two-account/two-device verification remains pending. Independent-session races have been tested locally; hosted race verification remains pending. Reminders, timers and notifications are design demonstrations only. Patient-created invitations, QR invitations and integration with the guest medicine checker remain unfinished. No real patient information.
 
 The design walkthrough at ./design/ is a separate fictional simulation; it creates no account and sends no medical data.
 

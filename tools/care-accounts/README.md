@@ -211,3 +211,13 @@ migration or privileged browser key is required. Older PKCE email links remain
 supported but may require the original browser. Both alternatives consume the
 same one-time challenge; use only the newest email. Email confirmation and
 professional approval requirements are unchanged.
+
+## Email account experiments — 7 November 2026
+
+`tools/check-email-flows.cjs` uses separate fictional patient/practitioner email
+addresses and a stateful intercepted Auth service. Its 17 checks cover independent
+confirmation browsers, wrong-address and superseded codes, used links, unknown
+and already-confirmed resend behaviour, duplicate signup, and identity isolation.
+They also reproduce and guard two UI fixes: typed email now survives navigation
+to recovery/confirmation; an unconfirmed sign-in opens confirmation/resend directly.
+These checks do not establish live provider delivery or real inbox receipt.
