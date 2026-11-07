@@ -1413,7 +1413,8 @@
     if (greys.length === 1) list.appendChild(el('li', null, [compactCard(greys[0])]));
     else if (greys.length > 1) list.appendChild(el('li', null, [compactUnknownGroup(greys)]));
     app.appendChild(list);
-    if (window.HerbBridgeReminders) app.appendChild(window.HerbBridgeReminders.block(el, state.lang, state));
+    if (window.HerbBridgeConditions) app.appendChild(window.HerbBridgeConditions.block(el, state.lang, state, db));
+    if (window.HerbBridgeReminders) app.appendChild(window.HerbBridgeReminders.block(el, state.lang, state, db));
     app.appendChild(el('p', { class: 'disclaimer-box' }, disclaimerText()));
 
     app.appendChild(el('div', { class: 'actions actions-stack' }, [
@@ -1626,7 +1627,8 @@
       ].concat(adviceBlocks(unknown))));
     }
 
-    if (window.HerbBridgeReminders) page.appendChild(window.HerbBridgeReminders.block(el, state.lang, list));
+    if (!sharedView && window.HerbBridgeConditions) page.appendChild(window.HerbBridgeConditions.block(el, state.lang, list, db));
+    if (window.HerbBridgeReminders) page.appendChild(window.HerbBridgeReminders.block(el, state.lang, list, db));
     // The patient's own health log (last 14 days) for the doctor; never on a shared list from someone else.
     if (!sharedView && window.HerbBridgeLog) { var logSection = window.HerbBridgeLog.summarySection({ el: el, lang: state.lang, db: db }); if (logSection) page.appendChild(logSection); }
     page.appendChild(el('p', { class: 'disclaimer-box summary-disclaimer' }, disclaimerText()));
@@ -1849,6 +1851,7 @@
     app.textContent = '';
     if (!window.HerbBridgeLog) { renderCheck(); return; }
     window.HerbBridgeLog.render(app, { el: el, lang: state.lang, db: db, list: { herbs: state.herbs.slice(), drugs: state.drugs.slice() } });
+    if (window.HerbBridgeConditions) app.appendChild(window.HerbBridgeConditions.editor(el, state.lang));
   }
 
   /* ---------- error screen ---------- */
