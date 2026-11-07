@@ -766,7 +766,7 @@
         ]),
         demoBox, warningPanel, statusTile
       ]),
-      el('div', { class: 'dash-side' }, [cards.herbs, cards.drugs])
+      el('div', { class: 'dash-side' }, [el('div', { class: 'add-tools' }, [scanButton(), photoButton()]), cards.herbs, cards.drugs])
     ]));
     checkBar.bar = el('div', { class: 'check-bar' }, [
       el('div', { class: 'check-bar-inner' }, [notice, status, button])
@@ -779,6 +779,41 @@
     renderStatus();
     renderWarning();
     updateCheckBar();
+  }
+
+  /* ---------- Pack scanner (js/scan.js): adds an item only after the person confirms ---------- */
+
+  var barcodeData = null;
+  function scanButton() {
+    if (!window.HerbBridgeScan || sharedView) return null;
+    var words = window.HerbBridgeScan.words(state.lang);
+    return el('button', { type: 'button', class: 'btn btn-secondary btn-scan', 'data-key': 'scan', 'aria-haspopup': 'dialog', onclick: openScanner }, [el('span', { text: words.scan_button })]);
+  }
+  function openScanner() {
+    var start = function () {
+      window.HerbBridgeScan.open({
+        db: db, lang: state.lang, el: el, search: L.search, barcodes: barcodeData,
+        inList: function (kind, id) { return state[kind].indexOf(id) !== -1; },
+        onAdd: function (kind, id) { if (state[kind].indexOf(id) === -1) addOrRemove(kind, id, null); }
+      });
+    };
+    if (barcodeData) return start();
+    fetch('data/barcodes.json', { cache: 'no-cache' })
+      .then(function (res) { return res.ok ? res.json() : { entries: [] }; })
+      .catch(function () { return { entries: [] }; })
+      .then(function (data) { barcodeData = data; start(); });
+  }
+
+  /* Identify from a photo (js/photo-id.js): reads the box text on this device; adds only after confirming. */
+  function photoButton() {
+    if (!window.HerbBridgePhotoId || sharedView) return null;
+    return el('button', { type: 'button', class: 'btn btn-secondary btn-scan', 'data-key': 'photo', 'aria-haspopup': 'dialog', onclick: function () {
+      window.HerbBridgePhotoId.open({
+        db: db, lang: state.lang, el: el, search: L.search,
+        inList: function (kind, id) { return state[kind].indexOf(id) !== -1; },
+        onAdd: function (kind, id) { if (state[kind].indexOf(id) === -1) addOrRemove(kind, id, null); }
+      });
+    } }, [el('span', { text: window.HerbBridgePhotoId.words(state.lang).photo_button })]);
   }
 
   /* ---------- Results screen: grouped by level, each card opens for details ---------- */
