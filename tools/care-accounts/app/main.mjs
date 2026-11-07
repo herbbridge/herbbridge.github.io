@@ -1,4 +1,6 @@
 import {createClient} from '@supabase/supabase-js';
+// Clickjacking guard: GitHub Pages cannot send frame-ancestors, so refuse to run inside another site's frame.
+if(window.top!==window.self){document.documentElement.textContent='';throw new Error('HerbBridge accounts cannot run inside a frame.');}
 import {createAuthService,createTabStorage,readEmailChallenge} from './auth-service.mjs';
 import {createRoomUI,ROOM_WORDS,roomErrorKey} from './room-ui.mjs';
 import {createChecker,CHECK_WORDS} from './checker.mjs';
