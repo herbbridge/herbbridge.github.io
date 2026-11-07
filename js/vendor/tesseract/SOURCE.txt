@@ -1,0 +1,4 @@
+tesseract.js 7.0.0 (Apache-2.0) dist/tesseract.min.js, dist/worker.min.js
+tesseract.js-core 7.0.0 (Apache-2.0) LSTM-only builds: tesseract-core-lstm / -simd-lstm / -relaxedsimd-lstm .wasm.js
+@tesseract.js-data/eng 1.0.0 and @tesseract.js-data/chi_tra 1.0.0 (package MIT; Tesseract tessdata_best_int models, Apache-2.0): 4.0.0_best_int/*.traineddata.gz
+All copied unmodified from npm. Loaded only when someone uses "Identify from a photo"; never from a CDN.
