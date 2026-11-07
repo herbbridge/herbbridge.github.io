@@ -3,14 +3,14 @@ const {chromium}=require('playwright');const path=require('path');
 const uid='40000000-0000-4000-8000-000000000001',doctor='40000000-0000-4000-8000-000000000002';
 let checks=0;const check=(ok,label)=>{if(!ok)throw Error('FAIL '+label);checks++;console.log('PASS '+label);};
 const OUT=path.resolve(__dirname,'../../chatgpt update/evidence');
-(async()=>{const browser=await chromium.launch({executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'});try{
+(async()=>{const chrome=process.env.HB_CHROME||(process.platform==='darwin'?'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome':'');const browser=await chromium.launch(chrome?{executablePath:chrome}:{});try{
 for(const role of ['patient','practitioner']){
  const context=await browser.newContext({viewport:{width:1280,height:1000}}),page=await context.newPage(),errors=[],calls=[];
  let conflict=false,failAccess=false,denied=false,room={id:'fictional-room',patient_id:uid,patient_name:'Fictional patient',version:0,is_owner:role==='patient',can_edit:role==='patient',items:[],members:[{id:doctor,name:'Fictional practitioner',category:'chinese_medicine',is_demo:true,approval_status:'approved',access_level:'view'}],history:[]};
  const user={id:role==='patient'?uid:doctor,aud:'authenticated',role:'authenticated',email:'fictional@example.test',email_confirmed_at:new Date().toISOString(),user_metadata:{}};
  const enc=x=>Buffer.from(JSON.stringify(x)).toString('base64url');const access=enc({alg:'HS256',typ:'JWT'})+'.'+enc({sub:user.id,aud:'authenticated',exp:Math.floor(Date.now()/1000)+3600})+'.ZmFrZQ';
  const session={access_token:access,refresh_token:'fictional',token_type:'bearer',expires_in:3600,expires_at:Math.floor(Date.now()/1000)+3600,user};
- page.on('pageerror',e=>errors.push(e.message));
+ page.on('pageerror',e=>errors.push(e.message));const foreign=[];page.on('request',r=>{const u=new URL(r.url());if(u.origin!=='http://127.0.0.1:8012'&&u.hostname!=='ugmmxboczyblmzxmfrni.supabase.co')foreign.push(u.origin);});
  await context.route('https://ugmmxboczyblmzxmfrni.supabase.co/**',async route=>{
   const req=route.request(),url=new URL(req.url()),body=req.postDataJSON();calls.push({name:url.pathname.split('/').at(-1),body});
   const json=data=>route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(data)});
@@ -54,6 +54,7 @@ for(const role of ['patient','practitioner']){
  await page.fill('#medicine-search','warfarin');check(await page.locator('.medicine-option:not([hidden])').count()===1,'Search filters medicine catalogue');await page.fill('#medicine-search','');
  await click('Save changes');await heading(role==='patient'?'My medicines':'Care room');
  check((await page.locator('.medicine-list').innerText()).includes('Ginkgo'),role+' saved list displayed');
+ await page.getByText('Add at least one Chinese herb and one Western medicine',{exact:false}).waitFor();check(true,role+' interaction check asks for both a herb and a Western medicine');
  const saved=calls.find(x=>x.name==='save_care_room_list');check(saved.body.expected_version===0&&JSON.stringify(saved.body.selected_items)==='[{"kind":"herb","id":"ginkgo"}]','Save sends version and catalogue identifiers only');
  await page.getByRole('navigation').getByRole('button',{name:'Change history',exact:true}).click();await heading('Change history');check((await page.locator('.room-event').innerText()).includes(role==='patient'?'Fictional patient':'Fictional practitioner'),'History identifies author');
  await page.getByRole('navigation').getByRole('button',{name:role==='patient'?'My medicines':'Care room',exact:true}).click();
@@ -75,13 +76,30 @@ for(const role of ['patient','practitioner']){
   await page.check('#room-consent');await click('Agree and connect');await page.getByText('You already have 3 connected practitioners. Remove a connection in Care team before adding another.',{exact:true}).waitFor();check((await page.locator('#notice').innerText()).includes('You already have 3'),'Patient quota addresses user as you');
   await click('Cancel');await heading('Care team');await click('Remove connection');check(await page.getByRole('button',{name:'Confirm removal',exact:true}).count()===1,'Removal requires confirmation');await click('Keep connection');check(room.members.length===1,'Keeping connection preserves membership');
  }
+ if(role==='patient'){
+  room.items=[];room.can_edit=true;await page.getByRole('navigation').getByRole('button',{name:'My medicines',exact:true}).click();await heading('My medicines');
+  await page.evaluate(()=>localStorage.setItem('herbsafe.v1',JSON.stringify({herbs:['ginkgo','not_a_real_id'],drugs:['warfarin','warfarin'],lang:'en'})));
+  const before=calls.filter(x=>x.name==='save_care_room_list').length;
+  await click('Import my list from this device');await heading('Import list from this device');
+  const preview=await page.locator('#main').innerText();check(preview.includes('Ginkgo')&&preview.includes('Warfarin'),'Import previews the device list before saving');
+  check(calls.filter(x=>x.name==='save_care_room_list').length===before,'Opening import uploads nothing');
+  await click('Save to my care room');await page.getByText('List imported into your care room.',{exact:true}).waitFor();
+  const imp=calls.filter(x=>x.name==='save_care_room_list').at(-1);check(JSON.stringify(imp.body.selected_items)==='[{"kind":"herb","id":"ginkgo"},{"kind":"drug","id":"warfarin"}]','Import saves only known, de-duplicated catalogue IDs after explicit confirmation');
+  await page.evaluate(()=>localStorage.removeItem('herbsafe.v1'));await click('Import my list from this device');check((await page.locator('#main').innerText()).includes('No saved checker list'),'Import explains when no device list exists');await click('Back to room');
+ }
+ room.items=[{kind:'herb',id:'ginkgo'},{kind:'drug',id:'warfarin'}];room.version++;await page.reload();await heading(role==='patient'?'My medicines':'My patients');if(role==='practitioner'){await click('Open care room');await heading('Care room');}
+ await page.locator('.check-row').first().waitFor();const rowText=await page.locator('.check-list').innerText();check(rowText.includes('Ginkgo')&&rowText.includes('Warfarin')&&/risk|caution/i.test(rowText),role+' interaction check shows the herb × medicine pair with a rating label');
+ const href=await page.getByRole('link',{name:'Open full results and doctor summary'}).getAttribute('href');const enc2=href.split('#/summary?l=')[1];const decoded=JSON.parse(Buffer.from(enc2,'base64url').toString());check(href.startsWith('../#/summary?l=')&&JSON.stringify(decoded)==='{"v":1,"h":["ginkgo"],"d":["warfarin"]}','Summary link carries medicine IDs only, in the guest checker share format');
+ check(await page.getByRole('link',{name:'Open full results and doctor summary'}).getAttribute('rel')==='noopener noreferrer','Summary link opens without referrer');
+ check((await page.locator('#main').innerText()).includes('not medical advice'),'Interaction check shows the medical-advice disclaimer');
+ if(process.env.HB_SHOT)await page.locator('.check-list').locator('xpath=..').screenshot({path:process.env.HB_SHOT+'-'+role+'.png'});
  for(const lang of ['en','zh']){
   if(lang==='zh')await page.click('#language');
   for(const width of [320,390,1280]){await page.setViewportSize({width,height:900});check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),role+' '+lang+' '+width+'px fits');}
  }
  await page.click('#language');await page.setViewportSize({width:390,height:844});await page.click('#bigger');check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),role+' bigger text fits');check(!(await page.locator('#main').innerText()).split('\n').some(line=>line==='null'||line==='undefined'),'No empty placeholder text rendered');await page.screenshot({path:path.join(OUT,'account-room-'+role+'-phone.png'),fullPage:true});
  await click('Sign out');await heading('Sign in');check(!(await page.locator('#main').innerText()).includes('Fictional patient'),'Sign-out removes shared patient context');
- check(errors.length===0,'No '+role+' script errors: '+errors.join('; '));await context.close();
+ check(errors.length===0,'No '+role+' script errors: '+errors.join('; '));check(foreign.length===0,'No requests to other sites: '+foreign.join(', '));await context.close();
 }
 console.log(`${checks}/${checks} checks passed. All Supabase traffic mocked.`);
 }finally{await browser.close();}})().catch(e=>{console.error(e);process.exitCode=1;});
