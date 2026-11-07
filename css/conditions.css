@@ -1,0 +1,8 @@
+/* About-me conditions (js/conditions.js) */
+.conditions:empty { display: none; }
+.condition-box { border-left: 4px solid var(--official); }
+.condition-item { font-size: 1rem; margin: 0.75rem 0 0.25rem; }
+.condition-match { border-top: 1px solid var(--line); margin-top: 0.75rem; padding-top: 0.25rem; }
+.condition-tell { font-weight: 700; margin: 0.75rem 0 0; }
+.conditions-editor .btn { margin-top: 0.25rem; }
+@media print { .condition-box { border: 1pt solid #000; border-left-width: 3pt; } }
