@@ -93,6 +93,10 @@ for(const role of ['patient','practitioner']){
  check(await page.getByRole('link',{name:'Open full results and doctor summary'}).getAttribute('rel')==='noopener noreferrer','Summary link opens without referrer');
  check((await page.locator('#main').innerText()).includes('not medical advice'),'Interaction check shows the medical-advice disclaimer');
  if(process.env.HB_SHOT)await page.locator('.check-list').locator('xpath=..').screenshot({path:process.env.HB_SHOT+'-'+role+'.png'});
+ if(role==='practitioner'){
+  denied=true;await heading('Room access is unavailable');const txt=await page.locator('#main').innerText();check(!txt.includes('Warfarin')&&!/saved\./.test(await page.locator('body').innerText()),'Lost access clears the list and any earlier success message');
+  await click('Back to my patients');await heading('My patients');check(true,'Practitioner can leave the denied screen back to My patients');denied=false;await click('Open care room');await heading('Care room');
+ }
  for(const lang of ['en','zh']){
   if(lang==='zh')await page.click('#language');
   for(const width of [320,390,1280]){await page.setViewportSize({width,height:900});check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),role+' '+lang+' '+width+'px fits');}
