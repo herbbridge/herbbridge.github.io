@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "about": "General reminders shown with results. Each quote is copied word for word from the named source; never reword, shorten or merge them. Shown only when the list has at least one Chinese herb and one Western medicine.",
+  "about": "General reminders and food hints shown with results. Each quote is copied word for word from the named source; never reword, shorten or merge them. 'herb_and_drug' reminders show when the list has a Chinese herb and a Western medicine; 'drug' food hints show when that medicine is on the list.",
   "reminders": [
     {
       "id": "gap_ha_haslink132",
@@ -21,6 +21,48 @@
       },
       "team_checked": true,
       "checked_by": "Ayden (project owner) approved publication after the source was shown, 2026-11-08"
+    },
+    {
+      "id": "food_simvastatin_grapefruit",
+      "applies": "drug",
+      "kind": "drugs",
+      "id_item": "simvastatin",
+      "type": "food",
+      "quote_en": "Grapefruit juice can raise the plasma levels of simvastatin and may increase the risk of myopathy and rhabdomyolysis. Intervention: Avoid grapefruit juice when taking simvastatin.",
+      "quote_zh": null,
+      "source": {
+        "publisher_en": "US FDA-approved prescribing label (for doctors), via DailyMed",
+        "publisher_zh": "美國食品及藥物管理局核准嘅處方標籤（俾醫生睇），經 DailyMed",
+        "title_en": "SIMVASTATIN tablet, film coated — 7 Drug Interactions (Grapefruit Juice)",
+        "title_zh": "SIMVASTATIN tablet, film coated — 7 Drug Interactions (Grapefruit Juice)",
+        "publication": "DailyMed",
+        "url_en": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=871251c0-36a1-4a32-9eab-ff6c1e925ca9",
+        "url_zh": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=871251c0-36a1-4a32-9eab-ff6c1e925ca9",
+        "retrieved": "2026-11-08"
+      },
+      "team_checked": true,
+      "checked_by": "Ayden (project owner) approved publication after the sources were shown, 2026-11-08"
+    },
+    {
+      "id": "food_atorvastatin_grapefruit",
+      "applies": "drug",
+      "kind": "drugs",
+      "id_item": "atorvastatin",
+      "type": "food",
+      "quote_en": "Grapefruit juice consumption, especially excessive consumption, more than 1.2 liters/daily, can raise the plasma levels of atorvastatin and may increase the risk of myopathy and rhabdomyolysis. Intervention: Avoid intake of large quantities of grapefruit juice, more than 1.2 liters daily, when taking atorvastatin calcium tablets.",
+      "quote_zh": null,
+      "source": {
+        "publisher_en": "US FDA-approved prescribing label (for doctors), via DailyMed",
+        "publisher_zh": "美國食品及藥物管理局核准嘅處方標籤（俾醫生睇），經 DailyMed",
+        "title_en": "ATORVASTATIN CALCIUM tablet, film coated — 7 Drug Interactions (Grapefruit Juice)",
+        "title_zh": "ATORVASTATIN CALCIUM tablet, film coated — 7 Drug Interactions (Grapefruit Juice)",
+        "publication": "DailyMed",
+        "url_en": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=4e06b20d-cc5d-46eb-991b-5972248de3af",
+        "url_zh": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=4e06b20d-cc5d-46eb-991b-5972248de3af",
+        "retrieved": "2026-11-08"
+      },
+      "team_checked": true,
+      "checked_by": "Ayden (project owner) approved publication after the sources were shown, 2026-11-08"
     }
   ]
 }

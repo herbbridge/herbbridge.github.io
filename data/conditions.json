@@ -1,0 +1,103 @@
+{
+  "version": 1,
+  "about": "Cautions shown when a person records a condition on their own device. Quotes are copied word for word from the named sources; never reword, shorten or merge them. Items not listed here have NOT been checked for that condition, and the site says so.",
+  "conditions": {
+    "g6pd": {
+      "name_en": "G6PD deficiency",
+      "name_zh": "G6PD 缺乏症（蠶豆症）",
+      "general": {
+        "quote_en": "People with G6PD Deficiency should remember to avoid the following things for their whole life: Firstly, avoid the following Chinese herbal medicines such as Rhizoma Coptidis(Huang Lien), Calculus Bovis (Neu Huang), Flos Chimonanthi Praecocis (Leh Mei Hua), Flos Lonicerae (Kam Ngan Fa) and Margaritas. Secondly, Western medicine such as certain antibiotics and Antimalarials, Aspirin group Antipyretics if used in high dose should be avoided as well. To make it simple, all medicines should be prescribed by doctors in order to avoid taking those drugs which can trigger red blood cell damage.",
+        "quote_zh": "G6PD缺乏症的患者其實一生都要緊記以下的事項：第一，要避免服用以下的中藥，例如黃蓮、牛黃、臘梅花、金銀花和珍珠末；第二，西藥包括某些抗生素、抗瘧疾用藥；某些含有亞士匹靈的止痛退燒藥類如果用的劑量過高，亦都會引發溶血症的，所以不可以隨便服用藥物。所有藥物最好由醫生處方，以免誤服可引致溶血的藥物；",
+        "source": {
+          "publisher_en": "Department of Health, Family Health Service",
+          "publisher_zh": "衞生署家庭健康服務",
+          "title_en": "Glucose-6-Phosphate Dehydrogenase Deficiency (G6PD Deficiency), video transcript",
+          "title_zh": "葡萄糖六磷酸去氫酵素缺乏症（G6PD 缺乏症）影片文字稿",
+          "url_en": "https://www.fhs.gov.hk/english/mulit_med/000018.html",
+          "url_zh": "https://www.fhs.gov.hk/tc_chi/mulit_med/000018.html",
+          "retrieved": "2026-11-08"
+        }
+      },
+      "items": [
+        {
+          "kind": "drugs",
+          "id": "aspirin",
+          "uses": "general",
+          "note_en": "The Department of Health lists the aspirin group in high dose. Ask your doctor whether your aspirin dose matters for G6PD deficiency.",
+          "note_zh": "衞生署提到高劑量嘅亞士匹靈類藥物。請問你嘅醫生，你服用嘅亞士匹靈劑量對 G6PD 缺乏症有冇影響。"
+        }
+      ],
+      "team_checked": true,
+      "checked_by": "Ayden (project owner) approved publication after the sources were shown, 2026-11-08"
+    },
+    "pregnancy": {
+      "name_en": "Pregnancy",
+      "name_zh": "懷孕",
+      "general": null,
+      "items": [
+        {
+          "kind": "drugs",
+          "id": "losartan",
+          "quote_en": "WARNING: FETAL TOXICITY When pregnancy is detected, discontinue losartan potassium as soon as possible. Drugs that act directly on the renin-angiotensin system can cause injury and death to the developing fetus",
+          "source": {
+            "publisher_en": "US FDA-approved prescribing label (for doctors), via DailyMed",
+            "publisher_zh": "美國食品及藥物管理局核准嘅處方標籤（俾醫生睇），經 DailyMed",
+            "title_en": "LOSARTAN POTASSIUM tablet, film coated — boxed warning",
+            "url_en": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=31366b4b-dfd6-4fda-babe-2cb3d2c14a2b",
+            "retrieved": "2026-11-08"
+          }
+        },
+        {
+          "kind": "drugs",
+          "id": "valsartan",
+          "quote_en": "WARNING: FETAL TOXICITY When pregnancy is detected, discontinue valsartan tablets as soon as possible. Drugs that act directly on the renin-angiotensin system can cause injury and death to the developing fetus.",
+          "source": {
+            "publisher_en": "US FDA-approved prescribing label (for doctors), via DailyMed",
+            "publisher_zh": "美國食品及藥物管理局核准嘅處方標籤（俾醫生睇），經 DailyMed",
+            "title_en": "VALSARTAN tablet — boxed warning",
+            "url_en": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=9f5a400f-9cfc-4d25-a677-73cbb14375e2",
+            "retrieved": "2026-11-08"
+          }
+        },
+        {
+          "kind": "drugs",
+          "id": "enalapril",
+          "quote_en": "WARNING: FETAL TOXICITY When pregnancy is detected, discontinue enalapril maleate tablets as soon as possible. Drugs that act directly on the renin-angiotensin system can cause injury and death to the developing fetus.",
+          "source": {
+            "publisher_en": "US FDA-approved prescribing label (for doctors), via DailyMed",
+            "publisher_zh": "美國食品及藥物管理局核准嘅處方標籤（俾醫生睇），經 DailyMed",
+            "title_en": "ENALAPRIL MALEATE tablet — boxed warning",
+            "url_en": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=0c829189-fba2-48f8-a23f-d5471a0345f6",
+            "retrieved": "2026-11-08"
+          }
+        },
+        {
+          "kind": "drugs",
+          "id": "perindopril",
+          "quote_en": "WARNING: FETAL TOXICITY When pregnancy is detected, discontinue perindopril erbumine as soon as possible. Drugs that act directly on the renin-angiotensin system can cause injury and death to the developing fetus",
+          "source": {
+            "publisher_en": "US FDA-approved prescribing label (for doctors), via DailyMed",
+            "publisher_zh": "美國食品及藥物管理局核准嘅處方標籤（俾醫生睇），經 DailyMed",
+            "title_en": "PERINDOPRIL ERBUMINE tablet — boxed warning",
+            "url_en": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=87768fbf-7c63-47da-8925-0316f343d6ef",
+            "retrieved": "2026-11-08"
+          }
+        },
+        {
+          "kind": "drugs",
+          "id": "warfarin",
+          "quote_en": "Warfarin sodium tablets, USP are contraindicated in women who are pregnant except in pregnant women with mechanical heart valves, who are at high risk of thromboembolism",
+          "source": {
+            "publisher_en": "US FDA-approved prescribing label (for doctors), via DailyMed",
+            "publisher_zh": "美國食品及藥物管理局核准嘅處方標籤（俾醫生睇），經 DailyMed",
+            "title_en": "WARFARIN SODIUM tablet — 4 Contraindications",
+            "url_en": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=8ad881e0-ca41-42ad-9d7d-eb85b3a30af0",
+            "retrieved": "2026-11-08"
+          }
+        }
+      ],
+      "team_checked": true,
+      "checked_by": "Ayden (project owner) approved publication after the sources were shown, 2026-11-08"
+    }
+  }
+}
