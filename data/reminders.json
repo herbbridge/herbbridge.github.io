@@ -63,6 +63,52 @@
       },
       "team_checked": true,
       "checked_by": "Ayden (project owner) approved publication after the sources were shown, 2026-11-08"
+    },
+    {
+      "id": "food_simvastatin_pomelo",
+      "applies": "drug",
+      "kind": "drugs",
+      "id_item": "simvastatin",
+      "type": "food",
+      "quote_en": "Seville oranges, (often used in marmalades), limes and pomelos also produce this interaction.",
+      "quote_zh": null,
+      "note_en": "This sentence comes from a review about grapefruit and medicines (\"this interaction\" means the grapefruit interaction). Pomelo (柚子) is not named on this medicine's own label. Ask your pharmacist whether pomelo is OK for you.",
+      "note_zh": "呢句來自一篇關於西柚同藥物嘅綜述（「this interaction」即係西柚引起嘅相互作用）。呢隻藥自己嘅標籤冇提到柚子。請問你嘅藥劑師食柚子有冇問題。",
+      "source": {
+        "publisher_en": "CMAJ (Canadian Medical Association Journal), peer-reviewed review",
+        "publisher_zh": "《加拿大醫學會雜誌》（CMAJ），經同行評審嘅綜述",
+        "title_en": "Bailey DG, Dresser G, Arnold JMO. Grapefruit–medication interactions: Forbidden fruit or avoidable consequences? CMAJ 2013;185(4):309–316. doi:10.1503/cmaj.120951",
+        "title_zh": "Bailey DG, Dresser G, Arnold JMO. Grapefruit–medication interactions: Forbidden fruit or avoidable consequences? CMAJ 2013;185(4):309–316",
+        "publication": "CMAJ",
+        "url_en": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3589309/",
+        "url_zh": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3589309/",
+        "retrieved": "2026-11-08"
+      },
+      "team_checked": true,
+      "checked_by": "Ayden (project owner) approved publication after the sources were shown, 2026-11-08"
+    },
+    {
+      "id": "food_atorvastatin_pomelo",
+      "applies": "drug",
+      "kind": "drugs",
+      "id_item": "atorvastatin",
+      "type": "food",
+      "quote_en": "Seville oranges, (often used in marmalades), limes and pomelos also produce this interaction.",
+      "quote_zh": null,
+      "note_en": "This sentence comes from a review about grapefruit and medicines (\"this interaction\" means the grapefruit interaction). Pomelo (柚子) is not named on this medicine's own label. Ask your pharmacist whether pomelo is OK for you.",
+      "note_zh": "呢句來自一篇關於西柚同藥物嘅綜述（「this interaction」即係西柚引起嘅相互作用）。呢隻藥自己嘅標籤冇提到柚子。請問你嘅藥劑師食柚子有冇問題。",
+      "source": {
+        "publisher_en": "CMAJ (Canadian Medical Association Journal), peer-reviewed review",
+        "publisher_zh": "《加拿大醫學會雜誌》（CMAJ），經同行評審嘅綜述",
+        "title_en": "Bailey DG, Dresser G, Arnold JMO. Grapefruit–medication interactions: Forbidden fruit or avoidable consequences? CMAJ 2013;185(4):309–316. doi:10.1503/cmaj.120951",
+        "title_zh": "Bailey DG, Dresser G, Arnold JMO. Grapefruit–medication interactions: Forbidden fruit or avoidable consequences? CMAJ 2013;185(4):309–316",
+        "publication": "CMAJ",
+        "url_en": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3589309/",
+        "url_zh": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3589309/",
+        "retrieved": "2026-11-08"
+      },
+      "team_checked": true,
+      "checked_by": "Ayden (project owner) approved publication after the sources were shown, 2026-11-08"
     }
   ]
 }

@@ -94,6 +94,118 @@
             "url_en": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=8ad881e0-ca41-42ad-9d7d-eb85b3a30af0",
             "retrieved": "2026-11-08"
           }
+        },
+        {
+          "kind": "herbs",
+          "id": "ginkgo",
+          "audience": "public",
+          "quote_en": "Ginkgo may be unsafe for use during pregnancy. It might cause early labor or extra bleeding during delivery if used near that time.",
+          "translation_zh": "銀杏喺懷孕期間使用可能唔安全。如果喺臨盆前後使用，可能會引致早產，或者分娩時出血較多。",
+          "source": {
+            "publisher_en": "US National Center for Complementary and Integrative Health (NCCIH, part of the National Institutes of Health)",
+            "publisher_zh": "美國國家輔助及綜合衞生中心（NCCIH，美國國家衞生研究院轄下）",
+            "title_en": "Ginkgo: Usefulness and Safety (last updated February 2025)",
+            "url_en": "https://www.nccih.nih.gov/health/ginkgo",
+            "retrieved": "2026-11-08"
+          },
+          "team_checked": true,
+          "checked_by": "Ayden (project owner) approved publication after the sources were shown, 2026-11-08"
+        },
+        {
+          "kind": "herbs",
+          "id": "asian_ginseng",
+          "audience": "public",
+          "quote_en": "Some studies of Asian ginseng suggest it may be unsafe when taken orally during pregnancy. One of the chemicals in it has been found to cause birth defects in animals. If you’re considering using Asian ginseng while pregnant, consult your health care provider.",
+          "translation_zh": "有啲研究提示，懷孕期間口服人參可能唔安全。人參入面其中一種化學物喺動物研究中被發現會引致先天缺陷。如果你懷孕期間考慮服用人參，請先問你嘅醫護人員。",
+          "source": {
+            "publisher_en": "US National Center for Complementary and Integrative Health (NCCIH, part of the National Institutes of Health)",
+            "publisher_zh": "美國國家輔助及綜合衞生中心（NCCIH，美國國家衞生研究院轄下）",
+            "title_en": "Asian Ginseng: Usefulness and Safety (last updated February 2025)",
+            "url_en": "https://www.nccih.nih.gov/health/asian-ginseng",
+            "retrieved": "2026-11-08"
+          },
+          "team_checked": true,
+          "checked_by": "Ayden (project owner) approved publication after the sources were shown, 2026-11-08"
+        },
+        {
+          "kind": "herbs",
+          "id": "liquorice",
+          "audience": "public",
+          "quote_en": "Consuming oral licorice extract in large amounts (about 250 grams of licorice per week) during pregnancy is unsafe and can increase the risk of delivery before gestational age of 38 weeks.",
+          "translation_zh": "懷孕期間大量口服甘草提取物（每星期大約250克甘草）並不安全，可能增加38週前分娩嘅風險。",
+          "source": {
+            "publisher_en": "US National Center for Complementary and Integrative Health (NCCIH, part of the National Institutes of Health)",
+            "publisher_zh": "美國國家輔助及綜合衞生中心（NCCIH，美國國家衞生研究院轄下）",
+            "title_en": "Licorice Root: Usefulness and Safety (last updated April 2025)",
+            "url_en": "https://www.nccih.nih.gov/health/licorice-root",
+            "retrieved": "2026-11-08"
+          },
+          "team_checked": true,
+          "checked_by": "Ayden (project owner) approved publication after the sources were shown, 2026-11-08"
+        },
+        {
+          "kind": "herbs",
+          "id": "red_yeast_rice",
+          "audience": "public",
+          "quote_en": "There are no studies on the safety of red yeast rice products during pregnancy or while breastfeeding. Red yeast rice products are not recommended for those who are pregnant or lactating.",
+          "translation_zh": "暫時未有研究證明紅麴產品喺懷孕或者餵哺母乳期間係安全嘅。懷孕或者餵哺母乳嘅人不建議使用紅麴產品。",
+          "source": {
+            "publisher_en": "US National Center for Complementary and Integrative Health (NCCIH, part of the National Institutes of Health)",
+            "publisher_zh": "美國國家輔助及綜合衞生中心（NCCIH，美國國家衞生研究院轄下）",
+            "title_en": "Red Yeast Rice: Usefulness and Safety (last updated November 2022)",
+            "url_en": "https://www.nccih.nih.gov/health/red-yeast-rice",
+            "retrieved": "2026-11-08"
+          },
+          "team_checked": true,
+          "checked_by": "Ayden (project owner) approved publication after the sources were shown, 2026-11-08"
+        },
+        {
+          "kind": "herbs",
+          "id": "astragalus",
+          "audience": "public",
+          "quote_en": "Little is known about whether it’s safe to use astragalus during pregnancy or while breastfeeding. Some research in animals suggests that during pregnancy, astragalus can be toxic to the fetus.",
+          "translation_zh": "黃芪喺懷孕或者餵哺母乳期間使用係咪安全，暫時所知好少。有啲動物研究提示，懷孕期間黃芪可能對胎兒有毒性。",
+          "source": {
+            "publisher_en": "US National Center for Complementary and Integrative Health (NCCIH, part of the National Institutes of Health)",
+            "publisher_zh": "美國國家輔助及綜合衞生中心（NCCIH，美國國家衞生研究院轄下）",
+            "title_en": "Astragalus: Usefulness and Safety (last updated May 2025)",
+            "url_en": "https://www.nccih.nih.gov/health/astragalus",
+            "retrieved": "2026-11-08"
+          },
+          "team_checked": true,
+          "checked_by": "Ayden (project owner) approved publication after the sources were shown, 2026-11-08"
+        },
+        {
+          "kind": "herbs",
+          "id": "hawthorn",
+          "audience": "public",
+          "quote_en": "Little is known about whether it’s safe to use hawthorn during pregnancy or while breastfeeding.",
+          "translation_zh": "山楂喺懷孕或者餵哺母乳期間使用係咪安全，暫時所知好少。",
+          "source": {
+            "publisher_en": "US National Center for Complementary and Integrative Health (NCCIH, part of the National Institutes of Health)",
+            "publisher_zh": "美國國家輔助及綜合衞生中心（NCCIH，美國國家衞生研究院轄下）",
+            "title_en": "Hawthorn: Usefulness and Safety (last updated April 2025)",
+            "url_en": "https://www.nccih.nih.gov/health/hawthorn",
+            "retrieved": "2026-11-08"
+          },
+          "team_checked": true,
+          "checked_by": "Ayden (project owner) approved publication after the sources were shown, 2026-11-08"
+        },
+        {
+          "kind": "herbs",
+          "id": "dong_quai",
+          "audience": "public",
+          "quote_en": "Do not use if you are pregnant.",
+          "translation_zh": "懷孕人士請勿使用。",
+          "source": {
+            "publisher_en": "Health Canada (natural health product monograph)",
+            "publisher_zh": "加拿大衞生部（天然保健產品專論）",
+            "title_en": "Dong quai – Angelica sinensis monograph, contraindications (dated 29 May 2026)",
+            "url_en": "https://webprod.hc-sc.gc.ca/nhpid-bdipsn/dbImages/mono_dong-quai--angelica-sinensis_english.pdf",
+            "retrieved": "2026-11-08"
+          },
+          "team_checked": true,
+          "checked_by": "Ayden (project owner) approved publication after the sources were shown, 2026-11-08"
         }
       ],
       "team_checked": true,
