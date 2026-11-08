@@ -221,3 +221,14 @@ and already-confirmed resend behaviour, duplicate signup, and identity isolation
 They also reproduce and guard two UI fixes: typed email now survives navigation
 to recovery/confirmation; an unconfirmed sign-in opens confirmation/resend directly.
 These checks do not establish live provider delivery or real inbox receipt.
+
+## Optional robot check (CAPTCHA), added 8 Nov 2026 — currently OFF
+
+Sign-up, sign-in and recovery emails can show a Cloudflare Turnstile check. It stays off (nothing loads from Cloudflare) until all three steps are done:
+
+1. In Cloudflare (Ayden's account) → Turnstile → add a widget for `herbbridge.org` and `127.0.0.1`. Copy the **site key** (public).
+2. Build with it: `HERBBRIDGE_CAPTCHA_SITE_KEY=<site key>` in `.env.local`, then `tools/prepare-review.mjs`, then publish `03_App_Code/accounts/`. The build adds `https://challenges.cloudflare.com` to the page's Content-Security-Policy only when a key is set.
+3. Ayden pastes the **secret key** into Supabase → Authentication → Attack Protection → Enable Captcha (Turnstile). Never put the secret in `.env.local`, the repo or chat.
+
+Do step 3 last: once Supabase requires CAPTCHA, an app built without the site key can't sign anyone in.
+Tested 8 Nov with Cloudflare's always-pass test key: widget shows, token reaches Supabase; with no key the page is unchanged (74/74 room checks, 93/93 backend tests).
