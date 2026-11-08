@@ -1,6 +1,6 @@
 /* General reminders (js/reminders.js) */
 .reminders:empty { display: none; }
-.reminder { background: var(--surface); border-radius: var(--radius-sm); box-shadow: inset 0 0 0 1.5px var(--line); padding: 1rem 1.125rem; margin: 1.25rem 0; }
+.reminder { background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.125rem var(--pad); margin: 1.25rem 0; }
 .reminder-title { font-size: 1.125rem; margin: 0 0 0.25rem; }
 .reminder-from { margin: 0 0 0.5rem; color: var(--ink-2); font-size: 0.9444rem; }
 .reminder-quote { margin: 0 0 0.5rem; padding: 0 0 0 0.875rem; border-left: 3px solid var(--line-strong); }

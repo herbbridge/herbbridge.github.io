@@ -1,6 +1,6 @@
 /* About-me conditions (js/conditions.js) */
 .conditions:empty { display: none; }
-.condition-box { border-left: 4px solid var(--official); }
+.condition-box .reminder-title::before { content: ""; display: inline-block; width: 0.625rem; height: 0.625rem; border-radius: 50%; background: var(--official); margin-right: 0.5rem; vertical-align: 0.1em; }
 .condition-item { font-size: 1rem; margin: 0.75rem 0 0.25rem; }
 .condition-match { border-top: 1px solid var(--line); margin-top: 0.75rem; padding-top: 0.25rem; }
 .condition-tell { font-weight: 700; margin: 0.75rem 0 0; }
