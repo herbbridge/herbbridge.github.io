@@ -87,7 +87,8 @@
       photo_loading: 'Getting the text reader ready (first time only)…',
       photo_failed: 'The words could not be read. Try a sharper photo with more light, or search by name.',
       photo_found_title: 'Which one is on your box?',
-      photo_found_help: 'Matched from words read on the box. Pick the one that matches, then confirm.',
+      photo_found_help: 'Matched from words read on the box. Tap the one that matches your box. You will confirm on the next screen.',
+      photo_choose: 'Choose this one',
       photo_words: 'Words found:',
       photo_none_title: 'No match found',
       photo_none_help: 'HerbBridge could not match the words on this box to a medicine or herb it covers. Search by name instead.',
@@ -114,7 +115,8 @@
       photo_loading: '準備緊文字讀取（只係第一次需要）…',
       photo_failed: '讀唔到相入面嘅字。試下喺光啲嘅地方影清楚啲，或者用名稱搜尋。',
       photo_found_title: '你嘅藥盒係邊一隻？',
-      photo_found_help: '根據藥盒上讀到嘅字配對。揀啱嗰隻，再確認。',
+      photo_found_help: '根據藥盒上讀到嘅字配對。撳一下同你藥盒相符嗰隻，下一步再確認。',
+      photo_choose: '揀呢隻',
       photo_words: '讀到嘅字：',
       photo_none_title: '搵唔到相符嘅藥',
       photo_none_help: '中西通配對唔到呢個藥盒上嘅字。請改用名稱搜尋。',
@@ -271,7 +273,9 @@
         ul.appendChild(el('li', null, [el('button', { type: 'button', class: 'option scan-option', 'data-key': c.kind + ':' + c.id, onclick: function () { confirm(c.kind, c.id, function () { showCandidates(list, text); }); } }, [
           el('span', { class: 'scan-option-name', text: names(c.item) }),
           el('span', { class: 'scan-kind', text: t('kind_' + c.kind) }),
-          c.words.length ? el('span', { class: 'photo-words', text: t('photo_words') + ' ' + c.words.join(', ') }) : null
+          c.words.length ? el('span', { class: 'photo-words', text: t('photo_words') + ' ' + c.words.join(', ') }) : null,
+          // A visible action, so the card clearly leads to the confirm step.
+          el('span', { class: 'scan-choose', 'aria-hidden': 'true', text: t('photo_choose') + ' →' })
         ])]));
       });
       body.appendChild(ul);
