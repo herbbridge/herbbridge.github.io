@@ -50,3 +50,13 @@ test('email callback accepts only confirmation and recovery and keeps legacy PKC
  for(const tail of ['#token_hash=&type=email','#token_hash=fictional&type=invite','#token_hash=fictional'])assert.deepEqual(readEmailChallenge(origin+'/'+tail),{invalid:true});
  assert.equal(readEmailChallenge(origin+'/?code=legacy-code'),null);
 });
+
+test('robot-check token is passed only when CAPTCHA is on',async()=>{
+ const seen={};const client={auth:{signUp:async i=>{seen.signup=i;return {data:{session:null,user:null},error:null};},signInWithPassword:async i=>{seen.signin=i;return {data:{},error:null};},resend:async i=>{seen.resend=i;return {};},resetPasswordForEmail:async(e,o)=>{seen.recover=o;return {};}}};
+ const api=createAuthService(client,origin);
+ await api.signup({email:'a@example.test',password:'Fictional-Password',role:'patient',name:'A'});await api.signin('a@example.test','Fictional-Password');await api.resend('a@example.test');await api.recover('a@example.test');
+ assert.equal(seen.signup.options.captchaToken,undefined);assert.equal(seen.signin.options,undefined);assert.equal(seen.resend.options.captchaToken,undefined);assert.equal(seen.recover.captchaToken,undefined);
+ await api.signup({email:'a@example.test',password:'Fictional-Password',role:'patient',name:'A',captchaToken:'tok1'});await api.signin('a@example.test','Fictional-Password','tok2');await api.resend('a@example.test','tok3');await api.recover('a@example.test','tok4');
+ assert.equal(seen.signup.options.captchaToken,'tok1');assert.equal(seen.signin.options.captchaToken,'tok2');assert.equal(seen.resend.options.captchaToken,'tok3');assert.equal(seen.recover.captchaToken,'tok4');
+ assert.equal(seen.recover.redirectTo,origin+'/');
+});
