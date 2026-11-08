@@ -1,16 +1,20 @@
 // Copies an explicit public allowlist only; never environment files or patient records.
 import {pathToFileURL} from 'node:url';import {resolve} from 'node:path';
 import {build} from 'esbuild';import {readFile,writeFile,mkdir,copyFile,readdir} from 'node:fs/promises';import {validateConfig} from '../client.mjs';
+import {validSiteKey} from '../app/captcha.mjs';
 const root=new URL('../',import.meta.url),site=process.env.HERBBRIDGE_SITE_ROOT?pathToFileURL(resolve(process.env.HERBBRIDGE_SITE_ROOT)+'/'):new URL('../03_App_Code/',root),output=new URL('accounts/',site),source=new URL('tools/care-accounts/',site);
 const config={url:process.env.SUPABASE_URL,publishableKey:process.env.SUPABASE_PUBLISHABLE_KEY};validateConfig(config);
+// Optional robot check: only the public Turnstile site key belongs here, never the secret.
+const captchaKey=process.env.HERBBRIDGE_CAPTCHA_SITE_KEY||'';if(captchaKey){if(!validSiteKey(captchaKey))throw new Error('HERBBRIDGE_CAPTCHA_SITE_KEY is not a valid site key.');config.captchaSiteKey=captchaKey;}
+const turnstile=captchaKey?' https://challenges.cloudflare.com':'';
 if(process.env.HERBBRIDGE_ENV!=='development'||new URL(config.url).hostname!==`${process.env.SUPABASE_EXPECTED_PROJECT_REF}.supabase.co`)throw Error('Matching development project required');
 await mkdir(output,{recursive:true});
 await build({entryPoints:[new URL('app/main.mjs',root).pathname],outfile:new URL('app.js',output).pathname,bundle:true,format:'esm',platform:'browser',target:['es2022'],define:{__HERBBRIDGE_CONFIG__:JSON.stringify(config)},minify:true,sourcemap:false,alias:{'herbbridge-lookup':new URL('js/lookup.js',site).pathname}});
-const policy=`default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self' ${config.url} wss://${new URL(config.url).host}; img-src 'self' data:; base-uri 'none'; form-action 'self'`;
+const policy=`default-src 'none'; script-src 'self'${turnstile}; style-src 'self'; connect-src 'self'${turnstile} ${config.url} wss://${new URL(config.url).host}; img-src 'self' data:;${captchaKey?' frame-src https://challenges.cloudflare.com;':''} base-uri 'none'; form-action 'self'`;
 const html=(await readFile(new URL('app/index.html',root),'utf8')).replace('<meta charset="utf-8">',`<meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="${policy}"><meta name="robots" content="noindex,nofollow">`);
 await writeFile(new URL('index.html',output),html);await copyFile(new URL('app/styles.css',root),new URL('styles.css',output));
 await mkdir(new URL('design/',output),{recursive:true});await copyFile(new URL('../chatgpt update/prototype/index.html',root),new URL('design/index.html',output));
-const files=['app/checker.mjs','package.json','package-lock.json','client.mjs','.env.example','.gitignore','README.md','app/index.html','app/main.mjs','app/room-ui.mjs','app/auth-service.mjs','app/styles.css','tools/dev.mjs','tools/check-account-ui.cjs','tools/check-room-ui.cjs','tools/check-email-flows.cjs','tools/prepare-review.mjs','tools/catalog.mjs','tools/check-hosted-verifier.mjs','tools/verify-rooms.sql','tools/check-concurrency.mjs','supabase/config.toml'];
+const files=['app/checker.mjs','package.json','package-lock.json','client.mjs','.env.example','.gitignore','README.md','app/index.html','app/main.mjs','app/room-ui.mjs','app/auth-service.mjs','app/captcha.mjs','app/styles.css','tools/dev.mjs','tools/check-account-ui.cjs','tools/check-room-ui.cjs','tools/check-email-flows.cjs','tools/prepare-review.mjs','tools/catalog.mjs','tools/check-hosted-verifier.mjs','tools/verify-rooms.sql','tools/check-concurrency.mjs','supabase/config.toml'];
 for(const file of await readdir(new URL('supabase/email-templates/',root)))if(file.endsWith('.html'))files.push('supabase/email-templates/'+file);
 for(const dir of ['tests/','supabase/migrations/'])for(const file of await readdir(new URL(dir,root)))if(/\.(mjs|sql)$/.test(file))files.push(dir+file);
 for(const file of files){const target=new URL(file,source);await mkdir(new URL('./',target),{recursive:true});await copyFile(new URL(file,root),target);}
