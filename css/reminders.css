@@ -7,3 +7,6 @@
 .reminder-quote p { margin: 0; }
 .reminder-source, .reminder-general { margin: 0.375rem 0 0; font-size: 0.9444rem; color: var(--ink-2); overflow-wrap: anywhere; }
 @media print { .reminder { box-shadow: none; border: 1pt solid #000; padding: 4pt 6pt; } .reminder-source a::after { content: ' (' attr(href) ')'; } }
+
+/* Our own explanation under a quoted food hint */
+.reminder-note { margin: 0.5rem 0; }

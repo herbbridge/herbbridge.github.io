@@ -6,3 +6,6 @@
 .condition-tell { font-weight: 700; margin: 0.75rem 0 0; }
 .conditions-editor .btn { margin-top: 0.25rem; }
 @media print { .condition-box { border: 1pt solid #000; border-left-width: 3pt; } }
+
+/* Labelled Chinese translation of an English public-health quote */
+.condition-translation { margin: 0.25rem 0 0.5rem; color: var(--ink-2, #33373E); }
