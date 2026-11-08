@@ -1,19 +1,21 @@
 // UI operations depend on the official Supabase Auth client. No fake account state.
+// A robot-check token is only sent when the optional CAPTCHA is turned on.
+const cap=token=>token?{captchaToken:token}:{};
 export function createAuthService(client,origin){
  const redirectTo=new URL('./',origin).href;
  return Object.freeze({
   session:async()=>{const {data,error}=await client.auth.getSession();if(error)throw error;return data.session;},
   user:async()=>{const {data,error}=await client.auth.getUser();if(error)throw error;return data.user;},
-  signup:async({email,password,role,name,category})=>{
-   const {data,error}=await client.auth.signUp({email:email.trim(),password,options:{emailRedirectTo:redirectTo,data:{registration_role:role,display_name:name.trim(),professional_category:role==='practitioner'?category:null}}});
+  signup:async({email,password,role,name,category,captchaToken})=>{
+   const {data,error}=await client.auth.signUp({email:email.trim(),password,options:{emailRedirectTo:redirectTo,...cap(captchaToken),data:{registration_role:role,display_name:name.trim(),professional_category:role==='practitioner'?category:null}}});
    if(error){if(['user_already_exists','email_exists'].includes(error.code))return {user:null,session:null};throw error;}
    // The development project requires confirmation. Never enrol from unverified metadata.
    if(data.session){await client.auth.signOut({scope:'local'});throw new Error('confirmation_configuration');}
    return data;
   },
-  signin:async(email,password)=>{const {data,error}=await client.auth.signInWithPassword({email:email.trim(),password});if(error)throw error;return data;},
-  resend:async email=>{const {error}=await client.auth.resend({type:'signup',email:email.trim(),options:{emailRedirectTo:redirectTo}});if(error&&!['user_not_found','email_not_found','email_already_confirmed'].includes(error.code))throw error;},
-  recover:async email=>{const {error}=await client.auth.resetPasswordForEmail(email.trim(),{redirectTo});if(error&&!['user_not_found','email_not_found'].includes(error.code))throw error;},
+  signin:async(email,password,captchaToken)=>{const {data,error}=await client.auth.signInWithPassword({email:email.trim(),password,...(captchaToken?{options:{captchaToken}}:{})});if(error)throw error;return data;},
+  resend:async(email,captchaToken)=>{const {error}=await client.auth.resend({type:'signup',email:email.trim(),options:{emailRedirectTo:redirectTo,...cap(captchaToken)}});if(error&&!['user_not_found','email_not_found','email_already_confirmed'].includes(error.code))throw error;},
+  recover:async(email,captchaToken)=>{const {error}=await client.auth.resetPasswordForEmail(email.trim(),{redirectTo,...cap(captchaToken)});if(error&&!['user_not_found','email_not_found'].includes(error.code))throw error;},
   verify:async({email,token,token_hash,type})=>{
    if(!['email','recovery'].includes(type))throw new Error('invalid_confirmation');
    const payload=token_hash?{token_hash,type}:{email:email.trim(),token:token.trim(),type};
