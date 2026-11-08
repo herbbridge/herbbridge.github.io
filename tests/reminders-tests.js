@@ -9,7 +9,7 @@ function check(ok, name) { if (ok) { passed++; console.log('PASS ' + name); } el
 check(R.applicable(data, { herbs: ['danshen'], drugs: ['warfarin'] }).length === 1, 'Reminder shown when the list has a herb and a medicine');
 check(R.applicable(data, { herbs: [], drugs: ['warfarin'] }).length === 0, 'Not shown for Western medicines only');
 check(R.applicable(data, { herbs: ['danshen'], drugs: [] }).length === 0, 'Not shown for herbs only');
-check(R.applicable(data, { herbs: [], drugs: ['simvastatin'] }).map(function (r) { return r.id; }).join() === 'food_simvastatin_grapefruit', 'Simvastatin food hint shown only when simvastatin is listed');
+check(R.applicable(data, { herbs: [], drugs: ['simvastatin'] }).map(function (r) { return r.id; }).join() === 'food_simvastatin_grapefruit,food_simvastatin_pomelo', 'Simvastatin food hints shown only when simvastatin is listed');
 check(R.applicable(data, { herbs: [], drugs: ['amlodipine'] }).length === 0, 'No food hint for a medicine without a sourced hint (amlodipine)');
 data.reminders.filter(function (r) { return r.applies === 'herb_and_drug'; }).forEach(function (r) {
   check(r.source && /^https:\/\/www3\.ha\.org\.hk\//.test(r.source.url_en) && /^https:\/\/www3\.ha\.org\.hk\//.test(r.source.url_zh), r.id + ': links point to the Hospital Authority site');
@@ -18,7 +18,8 @@ data.reminders.filter(function (r) { return r.applies === 'herb_and_drug'; }).fo
   check(typeof r.team_checked === 'boolean', r.id + ': team check status recorded');
 });
 data.reminders.filter(function (r) { return r.applies === 'drug'; }).forEach(function (r) {
-  check(/^https:\/\/dailymed\.nlm\.nih\.gov\//.test(r.source.url_en) && /grapefruit juice/i.test(r.quote_en), r.id + ': grapefruit quote links to a DailyMed label');
+  if (/_pomelo$/.test(r.id)) check(r.source.url_en === 'https://pmc.ncbi.nlm.nih.gov/articles/PMC3589309/' && /pomelos/.test(r.quote_en) && !!r.note_en && !!r.note_zh, r.id + ': pomelo quote links to the CMAJ review and explains itself');
+  else check(/^https:\/\/dailymed\.nlm\.nih\.gov\//.test(r.source.url_en) && /grapefruit juice/i.test(r.quote_en), r.id + ': grapefruit quote links to a DailyMed label');
 });
 ['en', 'zh'].forEach(function (l) { check(!/\bsafe\b|安全|cure|diagnos|prevent/i.test(JSON.stringify(R.WORDS[l])), l + ' reminder wording avoids safety claims'); });
 console.log(passed + ' passed, ' + failed + ' failed');

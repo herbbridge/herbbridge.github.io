@@ -15,7 +15,9 @@ Object.keys(data.conditions).forEach(function (cid) {
   (c.items || []).forEach(function (it) {
     var byId = it.kind === 'drugs' ? db.drugById : db.herbById;
     check(!!byId[it.id], cid + ': ' + it.id + ' is a real catalogue item');
-    if (it.quote_en) check(/^https:\/\/dailymed\.nlm\.nih\.gov\/dailymed\/drugInfo\.cfm\?setid=[0-9a-f-]{36}$/.test(it.source.url_en), cid + ': ' + it.id + ' quote links to a DailyMed label');
+    if (it.quote_en && it.kind === 'drugs') check(/^https:\/\/dailymed\.nlm\.nih\.gov\/dailymed\/drugInfo\.cfm\?setid=[0-9a-f-]{36}$/.test(it.source.url_en), cid + ': ' + it.id + ' quote links to a DailyMed label');
+    // Herb cautions come from public health agencies (NCCIH or Health Canada), are marked as public pages and carry a labelled translation.
+    if (it.quote_en && it.kind === 'herbs') check(/^https:\/\/(www\.nccih\.nih\.gov\/health\/[a-z-]+|webprod\.hc-sc\.gc\.ca\/nhpid-bdipsn\/dbImages\/[\w.-]+\.pdf)$/.test(it.source.url_en) && it.audience === 'public' && !!it.translation_zh && typeof it.team_checked === 'boolean', cid + ': ' + it.id + ' herb quote links to NCCIH or Health Canada, public, translated');
     check(!!(it.quote_en || it.uses === 'general'), cid + ': ' + it.id + ' has its own quote or points to the general source quote');
   });
   if (c.general) check(/^https:\/\/www\.fhs\.gov\.hk\//.test(c.general.source.url_en) && /^https:\/\/www\.fhs\.gov\.hk\//.test(c.general.source.url_zh), cid + ': general quote links to the Department of Health');
