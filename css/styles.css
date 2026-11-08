@@ -1107,6 +1107,12 @@ html { scroll-padding-top: calc(var(--header-h, 12rem) + 1rem); }
 }
 /* A zoomed or very short viewport must still leave room to read the page. */
 @media (max-height: 34em) { .site-header { position: static; } }
+/* Phones: the full header (brand, display mode, language, menu) is too tall to stay pinned.
+   It sits at the top of each page and scrolls away, so warnings and results get the whole screen. */
+@media (max-width: 47.99rem) {
+  .site-header { position: static; }
+  html { scroll-padding-top: 1rem; }
+}
 
 /* Results and warnings never move or fade, including their disclosure chevrons. */
 html:is([data-route="results"], [data-route="pair"], [data-route="summary"]) #app,
