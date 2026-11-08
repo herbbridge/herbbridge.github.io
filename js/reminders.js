@@ -45,6 +45,7 @@
           zh && !quoteZh && w.original ? el('p', { class: 'reminder-general', text: w.original }) : null,
           el('blockquote', { class: 'reminder-quote', lang: quoteZh ? 'zh-HK' : 'en', cite: url }, [el('p', { text: quote })]),
           el('p', { class: 'reminder-source' }, [w.source + ': ', el('a', { href: url, target: '_blank', rel: 'noopener noreferrer', text: (zh ? s.title_zh : s.title_en) + ' · ' + s.publication })]),
+          (zh ? r.note_zh : r.note_en) ? el('p', { class: 'reminder-note', text: zh ? r.note_zh : r.note_en }) : null,
           el('p', { class: 'reminder-general', text: food ? w.food_general : w.general })
         ]));
       });

@@ -57,6 +57,8 @@
       general_from: 'From the {publisher}',
       label_for: 'For {name}:',
       for_doctors: 'This is from a prescribing label written for doctors.',
+      public_from: 'From {publisher}, in its own words:',
+      translation: '',
       unchecked: 'HerbBridge has not yet checked these items for {name}: {items}.',
       tell_doctor: 'Tell your doctor and pharmacist about this. Do not stop or change a medicine on your own.',
       source: 'Source',
@@ -75,6 +77,8 @@
       general_from: '來自{publisher}',
       label_for: '關於{name}：',
       for_doctors: '以下內容來自寫俾醫生睇嘅處方標籤（英文原文）。',
+      public_from: '以下係{publisher}嘅英文原文：',
+      translation: '中文翻譯（以英文原文為準）：',
       unchecked: '中西通暫時未檢查以下項目同{name}嘅關係：{items}。',
       tell_doctor: '請話俾你嘅醫生同藥劑師知。唔好自己停藥或者改藥。',
       source: '資料來源',
@@ -143,8 +147,10 @@
           var e = m.entry, rows = [el('h3', { class: 'condition-item', text: fill(w.label_for, { name: nm }) })];
           if (e.note_en) rows.push(el('p', { text: zh ? e.note_zh : e.note_en }));
           if (e.quote_en) {
-            rows.push(el('p', { class: 'muted', text: w.for_doctors }));
+            // Prescribing labels are written for doctors; public health pages (audience "public") are not.
+            rows.push(el('p', { class: 'muted', text: e.audience === 'public' ? fill(w.public_from, { publisher: zh ? e.source.publisher_zh : e.source.publisher_en }) : w.for_doctors }));
             rows.push(el('blockquote', { class: 'reminder-quote', lang: 'en', cite: e.source.url_en }, [el('p', { text: e.quote_en })]));
+            if (zh && e.translation_zh) rows.push(el('p', { class: 'condition-translation', lang: 'zh-HK', text: w.translation + e.translation_zh }));
             rows.push(el('p', { class: 'reminder-source' }, [w.source + ': ', el('a', { href: e.source.url_en, target: '_blank', rel: 'noopener noreferrer', text: (zh ? e.source.publisher_zh : e.source.publisher_en) + ' · ' + e.source.title_en })]));
           }
           parts.push(el('div', { class: 'condition-match' }, rows));
