@@ -35,3 +35,8 @@
 .photo-words { flex-basis: 100%; font-size: 0.8889rem; color: var(--ink-2); }
 .photo-text { margin: 1rem 0; font-size: 0.8889rem; color: var(--ink-2); }
 .photo-text p { margin: 0.5rem 0 0; overflow-wrap: anywhere; }
+
+/* Photo matches: a clear "Choose this one" action on each card */
+.photo-candidates .scan-option { padding-bottom: 0.875rem; }
+.scan-choose { flex: 1 0 100%; display: inline-flex; justify-content: center; align-items: center; min-height: 2.75rem; margin-top: 0.5rem; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 700; }
+.option.scan-option:focus-visible .scan-choose { outline: 2px solid #fff; outline-offset: -4px; }
