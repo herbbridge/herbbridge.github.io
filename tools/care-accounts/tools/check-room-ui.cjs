@@ -6,7 +6,7 @@ const OUT=path.resolve(__dirname,'../../chatgpt update/evidence');
 (async()=>{const chrome=process.env.HB_CHROME||(process.platform==='darwin'?'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome':'');const browser=await chromium.launch(chrome?{executablePath:chrome}:{});try{
 for(const role of ['patient','practitioner']){
  const context=await browser.newContext({viewport:{width:1280,height:1000}}),page=await context.newPage(),errors=[],calls=[];
- let conflict=false,failAccess=false,denied=false,room={id:'fictional-room',patient_id:uid,patient_name:'Fictional patient',version:0,is_owner:role==='patient',can_edit:role==='patient',items:[],members:[{id:doctor,name:'Fictional practitioner',category:'chinese_medicine',is_demo:true,approval_status:'approved',access_level:'view'}],history:[]};
+ let tags=[],twoRooms=false,conflict=false,failAccess=false,denied=false,room={id:'fictional-room',patient_id:uid,patient_name:'Fictional patient',version:0,is_owner:role==='patient',can_edit:role==='patient',items:[],members:[{id:doctor,name:'Fictional practitioner',category:'chinese_medicine',is_demo:true,approval_status:'approved',access_level:'view'}],history:[]};
  const user={id:role==='patient'?uid:doctor,aud:'authenticated',role:'authenticated',email:'fictional@example.test',email_confirmed_at:new Date().toISOString(),user_metadata:{}};
  const enc=x=>Buffer.from(JSON.stringify(x)).toString('base64url');const access=enc({alg:'HS256',typ:'JWT'})+'.'+enc({sub:user.id,aud:'authenticated',exp:Math.floor(Date.now()/1000)+3600})+'.ZmFrZQ';
  const session={access_token:access,refresh_token:'fictional',token_type:'bearer',expires_in:3600,expires_at:Math.floor(Date.now()/1000)+3600,user};
@@ -24,7 +24,8 @@ for(const role of ['patient','practitioner']){
   const name=url.pathname.split('/').at(-1);
   if(name==='ensure_care_room')return json({id:room.id});
   if(name==='read_care_room')return denied?error('42501','room_access_denied'):json(room);
-  if(name==='list_connected_rooms')return json([{id:room.id,patient_name:room.patient_name}]);
+  if(name==='list_connected_rooms')return json([{id:room.id,patient_name:room.patient_name,tags},...(twoRooms?[{id:'fictional-room-2',patient_name:'Second fictional patient',tags:[]}]:[])]);
+  if(name==='set_room_tags'){if(body.tags.length>8||body.tags.some(x=>x.length>24))return error('22023','invalid_tags');tags=[...body.tags].sort((a,b)=>a.toLowerCase().localeCompare(b.toLowerCase()));return json({tags:body.tags});}
   if(name==='save_care_room_list'){
    if(conflict){conflict=false;room.version++;room.items=[{kind:'drug',id:'warfarin'}];return error('40001','list_conflict');}
    const before=room.items;room.items=body.selected_items;room.version++;room.history.unshift({event_type:'list_saved',actor_name:role==='patient'?'Fictional patient':'Fictional practitioner',recorded_at:new Date().toISOString(),details:{before,after:room.items}});return json({version:room.version,changed:true});
@@ -45,6 +46,16 @@ for(const role of ['patient','practitioner']){
   await click('Create invitation');await heading('New practitioner invitation');check((await page.inputValue('#issued-code')).length===64,'Opaque invitation code shown');
   check((await page.locator('#main').innerText()).includes('24 hours'),'Invitation expiry and single-use explained');
   await click('Cancel invitation');await heading('My patients');
+  // Private practitioner tags (goal 9).
+  twoRooms=true;await page.reload();await heading('My patients');check((await page.locator('#main').innerText()).includes('No tags'),'Patients start with no tags');
+  await page.getByRole('button',{name:'Edit tags',exact:true}).first().click();check((await page.locator('#main').innerText()).includes('Only you can see these tags'),'Tag editor says tags are private to the practitioner');
+  await page.locator('input[id^="tags-"]').fill('x'.repeat(25));await click('Save tags');await page.getByRole('alert').waitFor();check((await page.locator('#notice').innerText()).includes('Use up to 8 tags'),'Too-long tag is refused with an explanation');
+  await page.locator('input[id^="tags-"]').fill('Warfarin, Demo patient，follow up');await click('Save tags');await page.getByText('Tags saved.',{exact:true}).waitFor();
+  check(JSON.stringify(calls.filter(x=>x.name==='set_room_tags').at(-1).body.tags)==='["Warfarin","Demo patient","follow up"]','Tags split on English and Chinese commas and sent trimmed');
+  check(await page.locator('.tag').count()===3,'Saved tags shown on the patient card');
+  await page.locator('.tag-filter').getByRole('button',{name:'Warfarin',exact:true}).click();const filtered=await page.locator('#main').innerText();check(filtered.includes('Fictional patient')&&!filtered.includes('Second fictional patient'),'Filtering by a tag shows only tagged patients');
+  await click('All patients');check((await page.locator('#main').innerText()).includes('Second fictional patient'),'All patients shows everyone again');
+  twoRooms=false;await page.reload();await heading('My patients');
   await click('Open care room');await heading('Care room');check(!(await page.getByRole('button',{name:'Edit list',exact:true}).isEnabled()),'View-only practitioner cannot open editor');
   check((await page.locator('#main').innerText()).includes('patient must grant'),'Practitioner told who controls editing');
   room.can_edit=true;room.members[0].access_level='edit';

@@ -7,6 +7,8 @@ const root=new URL('../',import.meta.url),output=new URL('dev-dist/',root);
 const config={url:process.env.SUPABASE_URL,publishableKey:process.env.SUPABASE_PUBLISHABLE_KEY};validateConfig(config);
 // Optional robot check: only the public Turnstile site key belongs here, never the secret.
 const captchaKey=process.env.HERBBRIDGE_CAPTCHA_SITE_KEY||'';if(captchaKey){if(!validSiteKey(captchaKey))throw new Error('HERBBRIDGE_CAPTCHA_SITE_KEY is not a valid site key.');config.captchaSiteKey=captchaKey;}
+// Helper accounts (goal 16) stay hidden unless HERBBRIDGE_HELPERS=on. Turn on only after the helpers migration is applied.
+if(process.env.HERBBRIDGE_HELPERS==='on')config.helpers=true;
 const turnstile=captchaKey?' https://challenges.cloudflare.com':'';
 if(process.env.HERBBRIDGE_ENV!=='development'||new URL(config.url).hostname!==`${process.env.SUPABASE_EXPECTED_PROJECT_REF}.supabase.co`)throw new Error('Explicit matching development project required.');
 await mkdir(output,{recursive:true});
