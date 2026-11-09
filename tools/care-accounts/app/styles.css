@@ -5,3 +5,6 @@
 /* Optional robot check (only shown when a Turnstile site key is built in). */
 .captcha:empty{display:none}
 .captcha{margin:.75rem 0;min-height:65px}
+.section-title{margin-top:44px}
+.room-nav .button{flex:1 1 auto;white-space:nowrap;overflow-wrap:normal}
+.card>h3:first-child{margin-top:0}

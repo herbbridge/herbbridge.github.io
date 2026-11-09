@@ -42,8 +42,11 @@ Object.assign(words.zh,{
  enterCode:'輸入確認電郵驗證碼',confirmLink:'確認並繼續',linkConfirm:'確認你嘅電郵',linkRecovery:'繼續重設密碼',linkBody:'只喺你曾經提出要求嘅情況下繼續。呢個瀏覽器會登入電郵所屬嘅帳戶，並取代而家開緊嘅帳戶。',cancelLink:'取消並返回登入'
 });
 Object.assign(words.en,{reviewDesign:'Review the design without signing in'});Object.assign(words.zh,{reviewDesign:'唔登入都可以查看設計'});
+Object.assign(words.en,{helper:'Family member or carer (helper)',helperSignupHelp:'Helpers help a patient keep their medicine list, using a code from that patient. Helpers are not checked professionals and cannot connect with practitioners.'});
+Object.assign(words.zh,{helper:'家人或照顧者（協助者）',helperSignupHelp:'協助者用病人提供嘅邀請碼，幫病人管理藥物清單。協助者唔係經核實嘅醫護，亦唔可以連結醫護。'});
 Object.assign(words.en,CHECK_WORDS.en,ROOM_WORDS.en);Object.assign(words.zh,CHECK_WORDS.zh,ROOM_WORDS.zh);
-const rooms=createRoomUI({client,getProfile:()=>state.profile,getLang:()=>state.lang,run,renderRoot:render,notify:showNotice,clearNotice:()=>{state.notice=null;},isBusy:()=>state.busy,checker:createChecker()});
+const helpersOn=config.helpers===true;
+const rooms=createRoomUI({helpersOn,client,getProfile:()=>state.profile,getLang:()=>state.lang,run,renderRoot:render,notify:showNotice,clearNotice:()=>{state.notice=null;},isBusy:()=>state.busy,checker:createChecker()});
 const t=k=>words[state.lang][k]||k;
 function el(tag,attrs={},children=[]){const node=document.createElement(tag);for(const[k,v]of Object.entries(attrs)){if(k==='text')node.textContent=v;else if(k==='on')node.onclick=v;else if(v!==false&&v!=null)node.setAttribute(k,v===true?'':v);}for(const child of [].concat(children))if(child!=null)node.append(child instanceof Node?child:document.createTextNode(child));return node;}
 const p=(key,cls='')=>el('p',{text:t(key),class:cls});
@@ -78,9 +81,10 @@ async function run(work,success,fallback='failed'){
  finally{state.busy=false;main.setAttribute('aria-busy','false');controls.forEach(([n,disabled])=>{n.disabled=disabled;});if(operationGeneration!==generation)render();}
 }
 function identityFields(setup=false){
- const role=el('select',{id:'account-role',name:'account-role'},['patient','practitioner'].map(k=>el('option',{value:k,selected:state.hint.role===k,text:t(k)})));
+ const role=el('select',{id:'account-role',name:'account-role'},(helpersOn?['patient','helper','practitioner']:['patient','practitioner']).map(k=>el('option',{value:k,selected:state.hint.role===k,text:t(k)})));
  role.onchange=()=>{state.hint.role=role.value;const name=document.querySelector('#display-name');if(name)state.hint.name=name.value;preservedRender();document.querySelector('#account-role').value=state.hint.role;};
  const fields=[el('div',{class:'field'},[el('label',{for:'account-role',text:t('role')}),role]),field('name','display-name','text',state.hint.name,{autocomplete:'nickname',maxlength:120})];
+ if(state.hint.role==='helper')fields.push(p('helperSignupHelp','small muted'));
  if(state.hint.role==='practitioner')fields.push(el('div',{class:'field'},[el('label',{for:'category',text:t('category')}),el('select',{id:'category',name:'category'},['chinese_medicine','western_medicine'].map(k=>el('option',{value:k,selected:state.hint.category===k,text:t(k)})))]));
  if(setup&&state.hint.role==='practitioner')fields.push(field('registration','registration-reference','text','',{maxlength:160}));
  return fields;
@@ -153,9 +157,9 @@ async function refreshAccount(){
   const profile=await service.profile(user);if(ticket!==generation)return;state.profile=profile;
   if(state.recovery)state.screen='reset';
   else if(profile)state.screen='account';
-  else{const meta=user.user_metadata||{};state.hint={role:meta.registration_role==='practitioner'?'practitioner':'patient',name:typeof meta.display_name==='string'?meta.display_name.slice(0,120):'',category:meta.professional_category==='western_medicine'?'western_medicine':'chinese_medicine'};state.screen='finish';}
+  else{const meta=user.user_metadata||{};state.hint={role:(helpersOn?['practitioner','helper']:['practitioner']).includes(meta.registration_role)?meta.registration_role:'patient',name:typeof meta.display_name==='string'?meta.display_name.slice(0,120):'',category:meta.professional_category==='western_medicine'?'western_medicine':'chinese_medicine'};state.screen='finish';}
   callbackPending=false;history.replaceState({},'',location.pathname);render();
-  if(state.screen==='account'&&(profile.account_role==='patient'||profile.approval_status==='approved')){await rooms.start(profile);if(ticket!==generation)return;}
+  if(state.screen==='account'&&(profile.account_role==='patient'||(helpersOn&&profile.account_role==='helper')||profile.approval_status==='approved')){await rooms.start(profile);if(ticket!==generation)return;}
  }catch(error){if(ticket!==generation)return;state.screen=callbackPending?'signin':'loadError';state.profile=null;state.notice={key:callbackPending?'expired':failure(error,'loadFailed'),error:true};if(callbackPending){callbackPending=false;history.replaceState({},'',location.pathname);}render();}
 }
 function eraseLocalSession(){sessionStorage.removeItem(storageKey);sessionStorage.removeItem(storageKey+'-user');for(const key of Object.keys(localStorage))if(key.startsWith(storageKey)&&key.endsWith('-code-verifier'))localStorage.removeItem(key);}
