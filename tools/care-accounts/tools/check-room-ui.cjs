@@ -65,9 +65,16 @@ for(const role of ['patient','practitioner']){
  await page.fill('#medicine-search','warfarin');check(await page.locator('.medicine-option:not([hidden])').count()===1,'Search filters medicine catalogue');await page.fill('#medicine-search','');
  await click('Save changes');await heading(role==='patient'?'My medicines':'Care room');
  check((await page.locator('.medicine-list').innerText()).includes('Ginkgo'),role+' saved list displayed');
- await page.getByText('Add at least one Chinese herb and one Western medicine',{exact:false}).waitFor();check(true,role+' interaction check asks for both a herb and a Western medicine');
+ await page.getByText('You can keep a list with only Chinese herbs or only Western medicines',{exact:false}).waitFor();check(true,role+' list with one kind is allowed; interaction check asks for both a herb and a Western medicine');
  const saved=calls.find(x=>x.name==='save_care_room_list');check(saved.body.expected_version===0&&JSON.stringify(saved.body.selected_items)==='[{"kind":"herb","id":"ginkgo"}]','Save sends version and catalogue identifiers only');
  await page.getByRole('navigation').getByRole('button',{name:'Change history',exact:true}).click();await heading('Change history');check((await page.locator('.room-event').innerText()).includes(role==='patient'?'Fictional patient':'Fictional practitioner'),'History identifies author');
+ check((await page.locator('.history-change').first().innerText()).includes('Added Ginkgo'),role+' history row says what changed in one line');
+ check(await page.locator('details.history-lists').first().evaluate(d=>!d.open),role+' full before/after lists are hidden until asked for');
+ check(await page.locator('.history-day').count()>=1,role+' history is grouped by day');
+ room.history.push(...Array.from({length:11},(_,i)=>({event_type:'access_changed',actor_name:'Fictional patient',actor_relation:'patient',recorded_at:new Date(Date.now()-86400000*(i+2)).toISOString(),details:{access_level:'view'}})));
+ await page.getByRole('button',{name:'Show older changes',exact:true}).waitFor({timeout:15000});check(await page.locator('.history-row').count()===10,role+' history shows the latest 10 changes first');
+ await page.getByRole('button',{name:'Show older changes',exact:true}).click();check(await page.locator('.history-row').count()===12,role+' Show older changes reveals the rest');
+ room.history.splice(1);
  await page.getByRole('navigation').getByRole('button',{name:role==='patient'?'My medicines':'Care room',exact:true}).click();
  await click('Edit list');await page.getByText('Warfarin',{exact:true}).click();
  if(role==='patient'){
@@ -112,7 +119,7 @@ for(const role of ['patient','practitioner']){
   if(lang==='zh')await page.click('#language');
   for(const width of [320,390,1280]){await page.setViewportSize({width,height:900});check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),role+' '+lang+' '+width+'px fits');}
  }
- await page.click('#language');await page.setViewportSize({width:390,height:844});await page.click('#bigger');check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),role+' bigger text fits');check(!(await page.locator('#main').innerText()).split('\n').some(line=>line==='null'||line==='undefined'),'No empty placeholder text rendered');await page.screenshot({path:path.join(OUT,'account-room-'+role+'-phone.png'),fullPage:true});
+ await page.click('#language');await page.setViewportSize({width:390,height:844});check((await page.textContent('#bigger')).includes('Bigger'),role+' text button offers Bigger text first');await page.click('#bigger');check((await page.textContent('#bigger')).includes('Smaller text'),role+' after pressing, the button offers Smaller text');check(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),role+' bigger text fits');check(!(await page.locator('#main').innerText()).split('\n').some(line=>line==='null'||line==='undefined'),'No empty placeholder text rendered');await page.screenshot({path:path.join(OUT,'account-room-'+role+'-phone.png'),fullPage:true});
  await click('Sign out');await heading('Sign in');check(!(await page.locator('#main').innerText()).includes('Fictional patient'),'Sign-out removes shared patient context');
  check(errors.length===0,'No '+role+' script errors: '+errors.join('; '));check(foreign.length===0,'No requests to other sites: '+foreign.join(', '));await context.close();
 }
