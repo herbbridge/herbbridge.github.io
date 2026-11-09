@@ -121,7 +121,7 @@ test('room owners must have patient accounts and each patient has one room',asyn
 test('all application tables have RLS enabled and clients cannot insert/update/delete',async()=>{
  const tables=await rows(`select n.nspname schema,c.relname name,c.relrowsecurity rls from pg_class c join pg_namespace n on n.oid=c.relnamespace
  where n.nspname in ('public','herbbridge_private') and c.relkind='r'`);
- assert.equal(tables.length,17);
+ assert.equal(tables.length,18);
  for(const table of tables){assert.equal(table.rls,true,table.name);for(const permission of ['INSERT','UPDATE','DELETE']) {
  const [result]=await rows('select has_table_privilege($1,$2,$3) allowed',['authenticated',`${table.schema}.${table.name}`,permission]);assert.equal(result.allowed,false,`${table.name} ${permission}`);
  }}
