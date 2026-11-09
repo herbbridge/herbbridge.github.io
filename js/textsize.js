@@ -7,7 +7,13 @@
   function apply() {
     document.documentElement.setAttribute('data-textsize', large ? 'large' : 'normal');
     var button = document.getElementById('textsize-toggle');
-    if (button) button.setAttribute('aria-pressed', String(large));
+    if (button) {
+      button.setAttribute('aria-pressed', String(large));
+      // The label says what the next press does: bigger when normal, smaller when already big.
+      var label = large ? 'smaller_text' : 'bigger_text';
+      button.setAttribute('data-i18n', label);
+      if (window.HerbBridgeI18n) button.textContent = window.HerbBridgeI18n.t(label);
+    }
   }
   apply();
   document.addEventListener('DOMContentLoaded', function () {

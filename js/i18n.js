@@ -13,6 +13,7 @@
     en: {
       loading: 'Loading…',
       bigger_text: 'A+ Bigger text',
+      smaller_text: 'A− Smaller text',
       nav_check: 'My cabinet',
       nav_log: 'Health log',
       nav_summary: 'Doctor summary',
@@ -27,7 +28,7 @@
       used_for: 'Commonly taken for: {x}',
       cabinet_lede: 'Saved only on this device. Add what you take, and HerbBridge warns you straight away if anything clashes.',
       cabinet_empty: 'Your cabinet is empty. Add the Chinese herbs and Western medicines you take below.',
-      cabinet_need_both: 'Add at least one Chinese herb and one Western medicine to check for clashes.',
+      cabinet_need_both: 'You can keep a list with only Chinese herbs or only Western medicines. The clash check starts once the list has at least one of each.',
       cabinet_clashes_one: '1 combination to discuss with your doctor',
       cabinet_clashes_other: '{n} combinations to discuss with your doctor',
       cabinet_no_rated: 'None of your combinations has a rating in our database.',
@@ -290,6 +291,7 @@
     zh: {
       loading: '載入中…',
       bigger_text: 'A+ 放大字體',
+      smaller_text: 'A− 縮小字體',
       nav_check: '我嘅藥箱',
       nav_log: '健康記錄',
       nav_summary: '醫生摘要',
@@ -304,7 +306,7 @@
       used_for: '常見用途：{x}',
       cabinet_lede: '只會儲存喺呢部裝置。加入你食緊嘅藥，如果有相沖，中西通會即刻提你。',
       cabinet_empty: '你嘅藥箱仲係空嘅。請喺下面加入你食緊嘅中藥同西藥。',
-      cabinet_need_both: '最少加入一種中藥同一種西藥，先可以檢查有冇相沖。',
+      cabinet_need_both: '清單可以只有中藥或者只有西藥。加入最少一種中藥同一種西藥之後，就會開始檢查有冇相沖。',
       cabinet_clashes: '有 {n} 個配搭要同醫生傾',
       cabinet_no_rated: '你嘅配搭喺我哋嘅資料庫入面都冇評級。',
       cabinet_unknown: '資料庫未有記錄：{n} 個配搭。咁唔代表安全。請問你嘅藥劑師或者醫生。',
