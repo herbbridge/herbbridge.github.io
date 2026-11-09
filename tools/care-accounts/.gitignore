@@ -7,3 +7,5 @@ supabase/.temp/
 supabase/.branches/
 coverage/
 dev-dist/
+.helper-build-on/
+sim/

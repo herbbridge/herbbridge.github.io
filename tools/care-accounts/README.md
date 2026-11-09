@@ -232,3 +232,25 @@ Sign-up, sign-in and recovery emails can show a Cloudflare Turnstile check. It s
 
 Do step 3 last: once Supabase requires CAPTCHA, an app built without the site key can't sign anyone in.
 Tested 8 Nov with Cloudflare's always-pass test key: widget shows, token reaches Supabase; with no key the page is unchanged (74/74 room checks, 93/93 backend tests).
+
+## Helper accounts (goal 16) — built and tested locally, NOT applied, NOT published (9 Nov 2026)
+
+A patient can invite a family member or carer (姑娘) to help keep their medicine list. Helpers are not checked professionals.
+
+- Database change: `drafts/20261109010000_helpers.sql`. Kept out of `supabase/migrations/` on purpose. Apply only after the Grand Final, when Ayden says so.
+- Tests: `node --test tests/helpers.test.mjs` (39 checks, PGlite; loads the applied migrations plus the draft). `npm test` runs it with everything else.
+- Screens: `app/main.mjs` and `app/room-ui.mjs`. Hidden unless the build sets `HERBBRIDGE_HELPERS=on`, so a normal rebuild of the accounts app does not show them.
+- UI checks (local build on 127.0.0.1:8012, Supabase fully mocked): `tools/check-helper-ui.cjs` (helpers on, 70 checks) and `tools/check-helpers-off.cjs` (helpers off, 5 checks).
+- End-to-end: `tools/check-helper-e2e.cjs` (helpers-on build; real screens + real SQL in PGlite, 22 checks). Needs `@electric-sql/pglite` and Playwright.
+
+What the database enforces:
+- Patient creates a one-time code (24 hours) choosing View only or View and edit; the helper reviews whose list it is (no medicines shown) and must tick consent.
+- Up to 3 helpers per patient, 10 patients per helper. Practitioners and the patient themself can never be helpers (trigger, also blocks privileged writes).
+- Helpers never see practitioners: no member list, practitioner names hidden in history, and direct reads of events, list versions, tools, consents and memberships return nothing. Practitioners never see the helper list or helper add/change/remove events, but do see when a helper saved the list (marked "helper").
+- Helpers cannot invite anyone, change access, set tags, or connect practitioners. The patient can switch a helper between view and edit or remove them; a helper can leave. Access ends at once.
+- A patient account can also be a helper for someone else (e.g. a spouse).
+
+To turn it on after the final:
+1. Copy the draft into `supabase/migrations/` and update the table count in `tests/foundation.test.mjs` (17 → 18). Run `npm test`.
+2. Apply in the Supabase SQL editor (herbbridge-dev), register it in `supabase_migrations.schema_migrations`, record it in `deployments/development.json`, then check the Security Advisor.
+3. Build with `HERBBRIDGE_HELPERS=on` (plus the Turnstile site key) using `tools/prepare-review.mjs`, test live with fictional accounts, then publish when Ayden says "publish".
