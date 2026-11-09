@@ -8,3 +8,9 @@
 .section-title{margin-top:44px}
 .room-nav .button{flex:1 1 auto;white-space:nowrap;overflow-wrap:normal}
 .card>h3:first-child{margin-top:0}
+.history-day{font-size:.85rem;font-weight:700;color:#505660;margin:22px 0 4px;letter-spacing:.01em}.card>.history-day:first-child{margin-top:0}
+.history-list{list-style:none;margin:0;padding:0}.history-row{padding:10px 0;border-top:1px solid #e6e4de}.history-row:first-child{border-top:0}
+.history-head{display:flex;flex-wrap:wrap;gap:2px 10px;align-items:baseline}.history-title{font-weight:650}.history-change{font-size:.9rem;color:#2f3540}
+.history-meta{font-size:.78rem;color:#505660;margin:2px 0 0}.history-lists{margin-top:4px;font-size:.85rem}.history-lists summary{cursor:pointer;min-height:44px;display:flex;align-items:center;text-decoration:underline;text-underline-offset:3px}.history-lists h3{font-size:.85rem;margin:8px 0 4px}
+.history-row.room-event{padding:10px 0;border-bottom:0}.history-row.room-event:first-child{border-top:0}
+.history-row.room-event:not(:first-child){border-top:1px solid #e6e4de}

@@ -41,7 +41,7 @@ Object.assign(words.zh,{
  emailCode:'電郵驗證碼',verifyCode:'用驗證碼確認電郵',recoverCode:'用驗證碼繼續重設',codeHelp:'請只用最新電郵。連結同驗證碼係同一次確認嘅兩種方法，只可以用一次，請勿分享。',
  enterCode:'輸入確認電郵驗證碼',confirmLink:'確認並繼續',linkConfirm:'確認你嘅電郵',linkRecovery:'繼續重設密碼',linkBody:'只喺你曾經提出要求嘅情況下繼續。呢個瀏覽器會登入電郵所屬嘅帳戶，並取代而家開緊嘅帳戶。',cancelLink:'取消並返回登入'
 });
-Object.assign(words.en,{reviewDesign:'Review the design without signing in'});Object.assign(words.zh,{reviewDesign:'唔登入都可以查看設計'});
+Object.assign(words.en,{reviewDesign:'Review the design without signing in',smaller:'A− Smaller text'});Object.assign(words.zh,{reviewDesign:'唔登入都可以查看設計',smaller:'A− 縮小字體'});
 Object.assign(words.en,{helper:'Family member or carer (helper)',helperSignupHelp:'Helpers help a patient keep their medicine list, using a code from that patient. Helpers are not checked professionals and cannot connect with practitioners.'});
 Object.assign(words.zh,{helper:'家人或照顧者（協助者）',helperSignupHelp:'協助者用病人提供嘅邀請碼，幫病人管理藥物清單。協助者唔係經核實嘅醫護，亦唔可以連結醫護。'});
 Object.assign(words.en,CHECK_WORDS.en,ROOM_WORDS.en);Object.assign(words.zh,CHECK_WORDS.zh,ROOM_WORDS.zh);
@@ -140,7 +140,7 @@ function account(){
 }
 function render(){
  document.documentElement.lang=state.lang==='zh'?'zh-HK':'en-GB';document.documentElement.classList.toggle('large',state.large);
- document.querySelector('#development').textContent=t('development');document.querySelector('#footer').textContent=t('footer');document.querySelector('#bigger').textContent=t('bigger');document.querySelector('#bigger').setAttribute('aria-pressed',String(state.large));document.querySelector('#language').textContent=state.lang==='en'?'繁體中文':'English';document.querySelector('#language').disabled=state.busy;document.querySelector('#bigger').disabled=state.busy;
+ document.querySelector('#development').textContent=t('development');document.querySelector('#footer').textContent=t('footer');document.querySelector('#bigger').textContent=t(state.large?'smaller':'bigger');document.querySelector('#bigger').setAttribute('aria-pressed',String(state.large));document.querySelector('#language').textContent=state.lang==='en'?'繁體中文':'English';document.querySelector('#language').disabled=state.busy;document.querySelector('#bigger').disabled=state.busy;
  let title=state.screen==='emailLink'?(emailChallenge?.type==='recovery'?'linkRecovery':'linkConfirm'):state.screen;
  if(title==='account'){const status=state.profile?.approval_status;title=['pending','rejected','suspended'].includes(status)?status:'ready';}
  const view={signin,signup,emailLink,verify:()=>emailForm('verify'),recovery:()=>emailForm('recovery'),finish,reset:resetPassword,account,loading:()=>[p('loading')],loadError:()=>[p('loadFailed'),actions(button('retry',()=>refreshAccount()),button('signout',signout))]};
