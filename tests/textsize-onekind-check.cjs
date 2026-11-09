@@ -1,0 +1,14 @@
+const {chromium}=require('playwright');const fs=require('fs');const U=process.argv[2],OUT=process.argv[3];
+(async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:390,height:844},serviceWorkers:'block'});let n=0;const ck=(ok,l)=>{if(!ok)throw Error('FAIL '+l);n++;console.log('PASS '+l);};
+for(const f of ['js/i18n.js','js/textsize.js'])await ctx.route('https://herbbridge.org/'+f+'*',r=>r.fulfill({status:200,contentType:'text/javascript',body:fs.readFileSync(U+'/03_App_Code/'+f)}));
+const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
+await p.goto('https://herbbridge.org/');await p.waitForSelector('#textsize-toggle');
+const lab=()=>p.textContent('#textsize-toggle');
+ck((await lab()).includes('Bigger'),'starts as Bigger text');await p.click('#textsize-toggle');ck((await lab()).includes('Smaller'),'after pressing: Smaller text');
+await p.reload();await p.waitForSelector('#textsize-toggle');ck((await lab()).includes('Smaller'),'remembers after reload');
+const zh=p.getByRole('button',{name:/繁體中文|中文/}).first();await zh.click();await p.waitForTimeout(400);ck((await lab()).includes('縮小字體'),'Chinese: 縮小字體');
+await p.click('#textsize-toggle');ck((await lab()).includes('放大字體'),'Chinese back to 放大字體');
+await p.evaluate(()=>{localStorage.setItem('herbsafe.v1',JSON.stringify({herbs:['ginkgo'],drugs:[],lang:'en'}));localStorage.setItem('herbsafe.textsize','normal');});
+await p.goto('https://herbbridge.org/#/summary');await p.reload();await p.waitForTimeout(1500);const txt=await p.locator('body').innerText();
+ck(txt.includes('清單可以只有中藥')||txt.includes('only Chinese herbs or only Western medicines'),'one-kind list message uses the new wording');
+await p.screenshot({path:OUT+'/public-one-kind.png',fullPage:false});ck(errs.length===0,'no page errors '+errs.join(';'));console.log(n+'/'+n+' public checks passed');await b.close();})().catch(e=>{console.error(e.message);process.exit(1);});
