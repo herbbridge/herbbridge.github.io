@@ -604,7 +604,13 @@
       });
       check('Languages', 'the required disclaimer and "not in database" wording are exact in English', function () {
         return S.en.card_disclaimer === 'HerbBridge gives information, not medical advice. Never stop or change a medicine without talking to your doctor or pharmacist.' &&
-          S.en.not_in_db_text === 'We have no record of this combination. This does not mean it is safe. Please ask your pharmacist or doctor.';
+          S.en.not_in_db_text === 'We have no record of this combination, so we don’t know if it causes problems. Please ask your pharmacist or doctor.';
+      });
+      check('Languages', 'no screen text uses the word "safe" (English) or 安全 (Chinese), not even as "not safe"', function () {
+        var bad = [];
+        Object.keys(S.en).forEach(function (k) { if (typeof S.en[k] === 'string' && /\bsafe(ly)?\b/i.test(S.en[k])) bad.push('en.' + k); });
+        Object.keys(S.zh).forEach(function (k) { if (typeof S.zh[k] === 'string' && S.zh[k].indexOf('安全') !== -1) bad.push('zh.' + k); });
+        return { pass: bad.length === 0, detail: bad.join(', ') };
       });
     }
 
