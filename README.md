@@ -64,7 +64,7 @@ python3 -m http.server
 Then open <http://localhost:8000>. (Opening `index.html` by double-click shows a message
 explaining this.)
 
-No build step, no frameworks, no backend. Plain HTML, CSS and JavaScript.
+No build step, no frameworks. The checker is plain HTML, CSS and JavaScript with no backend; the optional care accounts in `accounts/` use a Supabase development database.
 
 ## Install it on a phone
 
@@ -204,8 +204,8 @@ HANDOVER.md           decisions made so far and what still needs checking
 
 ## Privacy
 
-No accounts and no tracking. A person's list is saved only in their own browser
-(localStorage) and never leaves the device. The app makes no outside requests: the fonts are
+The checker needs no account and has no tracking. A person's list is saved only in their own browser
+(localStorage) and leaves the device only if they share it or save it to a care account. The checker makes no outside requests: the fonts are
 stored in `fonts/` (Inter, and Noto Sans TC cut down to the characters HerbBridge uses).
 
 ## Medical disclaimer
@@ -225,7 +225,6 @@ practitioner view/edit access; limits are three practitioners per patient and
 twenty patients per practitioner. Private lists have authored history and reject
 stale saves. Practitioner approval is separate from email confirmation.
 
-Development email delivery remains restricted. Real two-account/two-device checks,
-production readiness, guest-checker integration and actual notifications remain
-unfinished. The design walkthrough simulates features and creates no accounts.
+Development email delivery remains restricted. A live two-account test passed on 7 November 2026.
+Production readiness and actual notifications remain unfinished. The design walkthrough simulates features and creates no accounts.
 See [review limits](accounts/REVIEW.md) and [source](tools/care-accounts/README.md).
