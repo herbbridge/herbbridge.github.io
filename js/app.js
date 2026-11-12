@@ -1789,16 +1789,19 @@
     });
     page.appendChild(section('about_sources_title', [
       el('p', { text: t('about_sources_intro') }),
-      list,
-      docs.length ? el('h3', { class: 'about-subhead', text: t('about_official_sources_title') }) : null,
-      docs.length ? official : null,
-      el('h3', { class: 'about-subhead', text: t('about_background_title') }),
-      background,
+      el('details', { class: 'pro about-refs' }, [
+        el('summary', { text: t('about_sources_show') }),
+        list,
+        docs.length ? el('h3', { class: 'about-subhead', text: t('about_official_sources_title') }) : null,
+        docs.length ? official : null,
+        el('h3', { class: 'about-subhead', text: t('about_background_title') }),
+        background
+      ]),
       db.lastUpdated ? el('p', { class: 'muted', text: t('about_updated', { date: formatDate(new Date(db.lastUpdated + 'T00:00:00')) }) }) : null
     ]));
 
     var next = el('ul', { class: 'about-next' });
-    ['about_next_1', 'about_next_2', 'about_next_3', 'about_next_4'].forEach(function (k) { next.appendChild(el('li', { text: t(k) })); });
+    ['about_next_1', 'about_next_2'].forEach(function (k) { next.appendChild(el('li', { text: t(k) })); });
     page.appendChild(section('about_next_title', [next]));
   }
 
@@ -1850,8 +1853,8 @@
   function renderLog() {
     app.textContent = '';
     if (!window.HerbBridgeLog) { renderCheck(); return; }
-    window.HerbBridgeLog.render(app, { el: el, lang: state.lang, db: db, list: { herbs: state.herbs.slice(), drugs: state.drugs.slice() } });
-    if (window.HerbBridgeConditions) app.appendChild(window.HerbBridgeConditions.editor(el, state.lang));
+    var about = window.HerbBridgeConditions ? window.HerbBridgeConditions.editor(el, state.lang) : null;
+    window.HerbBridgeLog.render(app, { el: el, lang: state.lang, db: db, after: about, list: { herbs: state.herbs.slice(), drugs: state.drugs.slice() } });
   }
 
   /* ---------- error screen ---------- */
@@ -1958,7 +1961,6 @@
     else if (route === 'about') renderAbout();
     else if (route === 'log') renderLog();
     else renderCheck();
-    app.insertBefore(modeStrip(), app.firstChild);
     keepEndTogether(app);
     chooseMainAction();
     if (focus) {

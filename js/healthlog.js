@@ -275,6 +275,7 @@
       charts.appendChild(block || el('p', { class: 'muted', text: w.chart_none }));
       page.appendChild(charts);
       page.appendChild(history(entries));
+      if (ctx.after) page.appendChild(ctx.after);
       page.appendChild(el('p', { class: 'where-tip', text: w.doctor_tip }));
       page.appendChild(el('p', { class: 'disclaimer-box', text: w.disclaimer }));
       if (first !== true && notice) { var n = page.querySelector('.log-notice'); if (n) n.focus(); }
