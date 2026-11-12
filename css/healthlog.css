@@ -50,3 +50,4 @@
   .log-table { font-size: 8.5pt; }
   .log-table th, .log-table td { border-bottom: 0.5pt solid #999; padding: 2pt 4pt; }
 }
+.health-log .disclaimer-box { max-width: none; }
